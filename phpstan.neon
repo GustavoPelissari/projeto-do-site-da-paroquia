@@ -1,0 +1,33 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 5
+    paths:
+        - app/
+        - routes/
+    reportUnmatchedIgnoredErrors: false
+    
+    # Ignorar alguns erros comuns do Laravel
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
+        - '#PHPDoc tag @var#'
+        - '#Method.*has no return type specified#'
+        - '#Property.*has no type specified#'
+        - '#Call to an undefined method.*wherePivot#'
+        - '#Instanceof between.*and.*will always evaluate to (true|false)#'
+        - '#Strict comparison using.*will always evaluate to (true|false)#'
+        - '#Left side of && is always true#'
+        - '#Unreachable statement - code above always terminates#'
+        - '#Cannot call method.*on string#'
+        - '#Relation.*is not found in.*model#'
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given#'
+        - '#Offset.*on.*always exists and is not nullable#'
+        - '#treatPhpDocTypesAsCertain#'
+    
+    # Arquivos a serem ignorados
+    excludePaths:
+        - vendor/
+        - storage/
+        - bootstrap/cache/
+        - public/build/

@@ -1,0 +1,663 @@
+/* Paroquia Sao Paulo Apostolo - Design Profissional */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Compatibilidade com Tailwind CSS */
+:root {
+    --sp-dourado-principal: #DAA520;
+    --sp-dourado-claro: #F0E68C;
+    --sp-dourado-escuro: #B8860B;
+    --sp-vermelho-manto: #8B1538;
+    --sp-vermelho-bordô: #722F37;
+    --sp-verde-tunica: #2E8B57;
+    --sp-verde-esperanca: #3CB371;
+    --sp-azul-manto: #1F4E79;
+    --sp-azul-celestial: #4682B4;
+    --sp-pergaminho: #F5F5DC;
+    --sp-marfim: #FDF5E6;
+    --sp-terra: #8B7355;
+    --sp-cinza-pedra: #696969;
+    --sp-branco-liturgico: #FFFFFF;
+    
+    /* Gradientes */
+    --gradiente-dourado: linear-gradient(135deg, var(--sp-dourado-principal) 0%, var(--sp-dourado-escuro) 100%);
+    --gradiente-vermelho: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);
+    --gradiente-verde: linear-gradient(135deg, var(--sp-verde-tunica) 0%, var(--sp-verde-esperanca) 100%);
+    --gradiente-azul: linear-gradient(135deg, var(--sp-azul-manto) 0%, var(--sp-azul-celestial) 100%);
+    --gradiente-pergaminho: linear-gradient(135deg, var(--sp-pergaminho) 0%, var(--sp-marfim) 100%);
+    
+    /* Sombras */
+    --sombra-suave: 0 2px 8px rgba(139, 21, 56, 0.08);
+    --sombra-media: 0 4px 16px rgba(139, 21, 56, 0.12);
+    --sombra-forte: 0 8px 40px rgba(139, 21, 56, 0.16);
+    --sombra-dourada: 0 4px 16px rgba(218, 165, 32, 0.15);
+    
+    /* Transições */
+    --transicao-suave: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transicao-rapida: all 0.2s ease;
+}
+
+/* Reset Moderno e Base */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: #ffffff;
+    min-height: 100vh;
+    padding-top: 85px;
+}
+
+/* ========================================== */
+/*              NAVEGAÇÃO                     */
+/* ========================================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(139, 21, 56, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: var(--transicao-suave);
+    padding: 1rem 0;
+}
+
+/* Regras responsivas para navbar */
+.navbar-expand-lg .navbar-collapse {
+    display: none !important;
+}
+
+.navbar-expand-lg .navbar-collapse.show,
+.navbar-expand-lg .navbar-collapse.d-lg-flex {
+    display: flex !important;
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+    
+    .navbar-expand-lg .navbar-toggler {
+        display: none !important;
+    }
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: var(--transicao-suave);
+}
+
+.navbar-brand:hover {
+    transform: translateY(-1px);
+}
+
+.logo-paroquia {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--sp-dourado-principal);
+    background: white;
+    padding: 4px;
+    box-shadow: var(--sombra-dourada);
+}
+
+.brand-text {
+    margin-left: 1rem;
+}
+
+.brand-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--sp-vermelho-manto);
+    display: block;
+    line-height: 1.2;
+}
+
+.brand-subtitulo {
+    font-size: 0.8rem;
+    color: #718096;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.navbar-toggler {
+    border: 1px solid var(--sp-vermelho-manto);
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 21, 56, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%28139, 21, 56%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #4a5568;
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: var(--transicao-suave);
+    position: relative;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    background: rgba(139, 21, 56, 0.08);
+    color: var(--sp-vermelho-manto);
+    transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: 600;
+    background: rgba(139, 21, 56, 0.12);
+}
+
+.navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--sp-vermelho-manto);
+    border-radius: 2px;
+}
+
+.navbar-nav .nav-link i {
+    color: var(--sp-vermelho-manto);
+    margin-right: 0.5rem;
+}
+
+/* ========================================== */
+/*              TIPOGRAFIA                    */
+/* ========================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: var(--sp-vermelho-manto);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+}
+
+.text-dourado {
+    color: var(--sp-dourado-principal);
+}
+
+.text-azul {
+    color: var(--sp-azul-manto);
+}
+
+.text-celestial {
+    color: var(--sp-azul-celestial);
+}
+
+.text-vermelho {
+    color: var(--sp-vermelho-manto);
+}
+
+.text-verde {
+    color: var(--sp-verde-tunica);
+}
+
+.text-pergaminho {
+    color: var(--sp-pergaminho);
+}
+
+/* ========================================== */
+/*              HERO SECTION                  */
+/* ========================================== */
+
+.hero-paroquia {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: 
+        linear-gradient(
+            135deg,
+            rgba(139, 21, 56, 0.9) 0%,
+            rgba(139, 21, 56, 0.8) 100%
+        ),
+        url('/images/igreja-bg.jpg') center/cover;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-paroquia::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(139, 21, 56, 0.1);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem 0;
+}
+
+.hero-paroquia h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-paroquia .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-paroquia p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+/* ========================================== */
+/*              BOTÕES                        */
+/* ========================================== */
+
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: var(--transicao-suave);
+    border: 2px solid transparent;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-hero-primary {
+    background: var(--sp-vermelho-manto);
+    color: white;
+    border-color: var(--sp-vermelho-manto);
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 21, 56, 0.3);
+    color: white;
+    background: var(--sp-vermelho-bordô);
+}
+
+.btn-hero-outline {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.btn-hero-outline:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* ========================================== */
+/*              CARDS E SEÇÕES               */
+/* ========================================== */
+
+.section-paroquia {
+    padding: 6rem 0;
+    position: relative;
+    background: #ffffff;
+}
+
+.section-paroquia::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.card-paroquia {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transicao-suave);
+    overflow: hidden;
+    position: relative;
+}
+
+.card-paroquia::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--sp-vermelho-manto);
+}
+
+.card-paroquia:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(139, 21, 56, 0.1);
+}
+
+.card-header-paroquia {
+    background: rgba(139, 21, 56, 0.03);
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid rgba(139, 21, 56, 0.1);
+    text-align: center;
+}
+
+.card-header-paroquia h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--sp-vermelho-manto);
+}
+
+.icon-lg {
+    font-size: 2rem;
+    color: var(--sp-vermelho-manto);
+    opacity: 0.8;
+}
+
+/* ========================================== */
+/*              COMPONENTES BOOTSTRAP         */
+/* ========================================== */
+
+.btn-success {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-success:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+}
+
+.btn-danger {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-danger:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+}
+
+.btn-warning {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: white;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-warning:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+    color: white;
+}
+
+.btn-primary {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-primary:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--sp-vermelho-manto);
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+}
+
+.btn-outline-light:hover {
+    background: var(--sp-vermelho-manto);
+    border-color: var(--sp-vermelho-manto);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ========================================== */
+/*              ALERTAS                       */
+/* ========================================== */
+
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 1.5rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+}
+
+.alert-success {
+    border-left: 4px solid #10b981;
+    color: #065f46;
+}
+
+.alert-danger {
+    border-left: 4px solid var(--sp-vermelho-manto);
+    color: var(--sp-vermelho-manto);
+}
+
+.alert-warning {
+    border-left: 4px solid #f59e0b;
+    color: #92400e;
+}
+
+.alert-info {
+    border-left: 4px solid #3b82f6;
+    color: #1e40af;
+}
+
+/* ========================================== */
+/*              FOOTER                        */
+/* ========================================== */
+
+footer {
+    background: var(--sp-vermelho-manto);
+    color: white;
+    margin-top: 4rem;
+}
+
+.logo-footer {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: var(--transicao-suave);
+}
+
+footer a:hover {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
+
+/* ========================================== */
+/*              ANIMAÇÕES                     */
+/* ========================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transicao-suave);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================== */
+/*              RESPONSIVIDADE                */
+/* ========================================== */
+
+@media (max-width: 768px) {
+    .hero-paroquia {
+        min-height: 80vh;
+    }
+    
+    .section-paroquia {
+        padding: 4rem 0;
+    }
+    
+    .card-header-paroquia {
+        padding: 2rem 1.5rem;
+    }
+    
+    .btn-hero {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .brand-titulo {
+        font-size: 1.2rem;
+    }
+    
+    .brand-subtitulo {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 70px;
+    }
+    
+    .navbar {
+        padding: 0.75rem 0;
+    }
+    
+    .logo-paroquia {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .hero-paroquia h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-paroquia .lead {
+        font-size: 1.3rem;
+    }
+    
+    .btn-hero {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}

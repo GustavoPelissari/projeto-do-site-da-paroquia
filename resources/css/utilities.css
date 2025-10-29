@@ -1,0 +1,438 @@
+/* ==========================================
+   UTILITÁRIOS PARÓQUIA SÃO PAULO APÓSTOLO
+   ========================================== */
+
+/* ==========================================
+   CLASSES DE COR UTILITÁRIAS
+   ========================================== */
+.text-dourado { color: var(--cor-dourado) !important; }
+.text-dourado-escuro { color: var(--cor-dourado-escuro) !important; }
+.text-vinho { color: var(--cor-vinho) !important; }
+.text-vinho-escuro { color: var(--cor-vinho-escuro) !important; }
+.text-marrom { color: var(--cor-marrom) !important; }
+.text-marrom-claro { color: var(--cor-marrom-claro) !important; }
+.text-bege { color: var(--cor-bege) !important; }
+.text-cinza-claro { color: var(--cor-cinza-claro) !important; }
+.text-cinza-medio { color: var(--cor-cinza-medio) !important; }
+.text-cinza-escuro { color: var(--cor-cinza-escuro) !important; }
+.text-preto-suave { color: var(--cor-preto-suave) !important; }
+
+.bg-dourado { background-color: var(--cor-dourado) !important; }
+.bg-dourado-escuro { background-color: var(--cor-dourado-escuro) !important; }
+.bg-vinho { background-color: var(--cor-vinho) !important; }
+.bg-vinho-escuro { background-color: var(--cor-vinho-escuro) !important; }
+.bg-marrom { background-color: var(--cor-marrom) !important; }
+.bg-marrom-claro { background-color: var(--cor-marrom-claro) !important; }
+.bg-bege { background-color: var(--cor-bege) !important; }
+.bg-bege-escuro { background-color: var(--cor-bege-escuro) !important; }
+.bg-cinza-claro { background-color: var(--cor-cinza-claro) !important; }
+
+.bg-gradiente-dourado { background: var(--gradiente-dourado) !important; }
+.bg-gradiente-vinho { background: var(--gradiente-vinho) !important; }
+.bg-gradiente-celestial { background: var(--gradiente-celestial) !important; }
+
+/* ==========================================
+   BORDAS UTILITÁRIAS
+   ========================================== */
+.border-dourado { border-color: var(--cor-dourado) !important; }
+.border-vinho { border-color: var(--cor-vinho) !important; }
+.border-marrom { border-color: var(--cor-marrom) !important; }
+.border-bege { border-color: var(--cor-bege) !important; }
+
+.border-top-dourado { border-top: 3px solid var(--cor-dourado) !important; }
+.border-top-vinho { border-top: 3px solid var(--cor-vinho) !important; }
+.border-left-dourado { border-left: 4px solid var(--cor-dourado) !important; }
+.border-left-vinho { border-left: 4px solid var(--cor-vinho) !important; }
+
+.rounded-paroquia { border-radius: var(--borda-radius) !important; }
+.rounded-suave { border-radius: var(--borda-radius-suave) !important; }
+
+/* ==========================================
+   SOMBRAS UTILITÁRIAS
+   ========================================== */
+.shadow-suave { box-shadow: var(--sombra-suave) !important; }
+.shadow-media { box-shadow: var(--sombra-media) !important; }
+.shadow-forte { box-shadow: var(--sombra-forte) !important; }
+.shadow-none { box-shadow: none !important; }
+
+/* ==========================================
+   TIPOGRAFIA UTILITÁRIA
+   ========================================== */
+.font-titulo { font-family: var(--fonte-titulo) !important; }
+.font-corpo { font-family: var(--fonte-corpo) !important; }
+
+.fw-light { font-weight: 300 !important; }
+.fw-normal { font-weight: 400 !important; }
+.fw-medium { font-weight: 500 !important; }
+.fw-semibold { font-weight: 600 !important; }
+.fw-bold { font-weight: 700 !important; }
+
+.fs-xs { font-size: 0.75rem !important; }
+.fs-sm { font-size: 0.875rem !important; }
+.fs-base { font-size: 1rem !important; }
+.fs-lg { font-size: 1.125rem !important; }
+.fs-xl { font-size: 1.25rem !important; }
+.fs-2xl { font-size: 1.5rem !important; }
+.fs-3xl { font-size: 1.875rem !important; }
+.fs-4xl { font-size: 2.25rem !important; }
+
+.lh-tight { line-height: 1.2 !important; }
+.lh-normal { line-height: 1.5 !important; }
+.lh-relaxed { line-height: 1.7 !important; }
+
+/* ==========================================
+   ÍCONES UTILITÁRIOS
+   ========================================== */
+.icon-xs { width: 12px; height: 12px; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-base { width: 20px; height: 20px; }
+.icon-lg { width: 24px; height: 24px; }
+.icon-xl { width: 32px; height: 32px; }
+.icon-2xl { width: 48px; height: 48px; }
+.icon-3xl { width: 64px; height: 64px; }
+
+.icon-dourado { color: var(--cor-dourado); }
+.icon-vinho { color: var(--cor-vinho); }
+.icon-marrom { color: var(--cor-marrom); }
+
+/* ==========================================
+   ESPAÇAMENTOS CUSTOMIZADOS
+   ========================================== */
+.p-section { padding: 5rem 0 !important; }
+.py-section { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+.pt-section { padding-top: 5rem !important; }
+.pb-section { padding-bottom: 5rem !important; }
+
+.m-section { margin: 5rem 0 !important; }
+.my-section { margin-top: 5rem !important; margin-bottom: 5rem !important; }
+.mt-section { margin-top: 5rem !important; }
+.mb-section { margin-bottom: 5rem !important; }
+
+.p-card { padding: 2rem !important; }
+.p-card-sm { padding: 1.5rem !important; }
+.p-card-lg { padding: 2.5rem !important; }
+
+/* ==========================================
+   ESTADOS E INTERAÇÕES
+   ========================================== */
+.hover-elevate {
+    transition: var(--transicao-suave);
+}
+
+.hover-elevate:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-forte);
+}
+
+.hover-scale {
+    transition: var(--transicao-suave);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-dourado {
+    transition: var(--transicao-suave);
+}
+
+.hover-dourado:hover {
+    color: var(--cor-dourado) !important;
+}
+
+.hover-vinho {
+    transition: var(--transicao-suave);
+}
+
+.hover-vinho:hover {
+    color: var(--cor-vinho) !important;
+}
+
+/* ==========================================
+   ANIMAÇÕES UTILITÁRIAS
+   ========================================== */
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.fade-in-delay-1 {
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.fade-in-delay-2 {
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
+}
+
+.fade-in-delay-3 {
+    animation-delay: 0.6s;
+    animation-fill-mode: both;
+}
+
+.pulse-slow {
+    animation: pulse 3s infinite;
+}
+
+.rotate-slow {
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================
+   LAYOUT UTILITÁRIOS
+   ========================================== */
+.h-screen { height: 100vh !important; }
+.h-screen-75 { height: 75vh !important; }
+.h-screen-50 { height: 50vh !important; }
+
+.w-fit { width: fit-content !important; }
+.w-full { width: 100% !important; }
+
+.aspect-square {
+    aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+    aspect-ratio: 16 / 9;
+}
+
+.aspect-photo {
+    aspect-ratio: 4 / 3;
+}
+
+/* ==========================================
+   GRID PERSONALIZADO
+   ========================================== */
+.grid-1 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+.grid-auto-sm { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.grid-auto-lg { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+
+.gap-xs { gap: 0.5rem; }
+.gap-sm { gap: 0.75rem; }
+.gap-base { gap: 1rem; }
+.gap-lg { gap: 1.5rem; }
+.gap-xl { gap: 2rem; }
+.gap-2xl { gap: 3rem; }
+
+/* ==========================================
+   FLEXBOX UTILITÁRIOS
+   ========================================== */
+.flex { display: flex !important; }
+.flex-col { flex-direction: column !important; }
+.flex-row { flex-direction: row !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+
+.items-start { align-items: flex-start !important; }
+.items-center { align-items: center !important; }
+.items-end { align-items: flex-end !important; }
+.items-stretch { align-items: stretch !important; }
+
+.justify-start { justify-content: flex-start !important; }
+.justify-center { justify-content: center !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+.justify-evenly { justify-content: space-evenly !important; }
+
+.flex-1 { flex: 1 1 0% !important; }
+.flex-auto { flex: 1 1 auto !important; }
+.flex-none { flex: none !important; }
+
+/* ==========================================
+   POSICIONAMENTO
+   ========================================== */
+.relative { position: relative !important; }
+.absolute { position: absolute !important; }
+.fixed { position: fixed !important; }
+.sticky { position: sticky !important; }
+
+.top-0 { top: 0 !important; }
+.right-0 { right: 0 !important; }
+.bottom-0 { bottom: 0 !important; }
+.left-0 { left: 0 !important; }
+
+.z-10 { z-index: 10 !important; }
+.z-20 { z-index: 20 !important; }
+.z-30 { z-index: 30 !important; }
+.z-40 { z-index: 40 !important; }
+.z-50 { z-index: 50 !important; }
+
+/* ==========================================
+   OVERFLOW
+   ========================================== */
+.overflow-hidden { overflow: hidden !important; }
+.overflow-auto { overflow: auto !important; }
+.overflow-scroll { overflow: scroll !important; }
+.overflow-visible { overflow: visible !important; }
+
+.overflow-x-hidden { overflow-x: hidden !important; }
+.overflow-y-hidden { overflow-y: hidden !important; }
+.overflow-x-auto { overflow-x: auto !important; }
+.overflow-y-auto { overflow-y: auto !important; }
+
+/* ==========================================
+   TRANSIÇÕES
+   ========================================== */
+.transition-none { transition: none !important; }
+.transition-all { transition: var(--transicao-suave) !important; }
+.transition-fast { transition: var(--transicao-rapida) !important; }
+
+.duration-100 { transition-duration: 100ms !important; }
+.duration-200 { transition-duration: 200ms !important; }
+.duration-300 { transition-duration: 300ms !important; }
+.duration-500 { transition-duration: 500ms !important; }
+.duration-700 { transition-duration: 700ms !important; }
+
+/* ==========================================
+   RESPONSIVIDADE ESPECÍFICA
+   ========================================== */
+@media (max-width: 575.98px) {
+    .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .p-section {
+        padding: 3rem 0 !important;
+    }
+    
+    .text-xs-center { text-align: center !important; }
+    .text-xs-left { text-align: left !important; }
+    
+    .flex-xs-col { flex-direction: column !important; }
+    .justify-xs-center { justify-content: center !important; }
+}
+
+@media (max-width: 767.98px) {
+    .grid-3, .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .text-sm-center { text-align: center !important; }
+    .text-sm-left { text-align: left !important; }
+    
+    .flex-sm-col { flex-direction: column !important; }
+    .justify-sm-center { justify-content: center !important; }
+}
+
+@media (max-width: 991.98px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .text-md-center { text-align: center !important; }
+    .text-md-left { text-align: left !important; }
+    
+    .flex-md-col { flex-direction: column !important; }
+    .justify-md-center { justify-content: center !important; }
+}
+
+/* ==========================================
+   CLASSES DE AJUDA
+   ========================================== */
+.cursor-pointer { cursor: pointer !important; }
+.cursor-not-allowed { cursor: not-allowed !important; }
+.cursor-grab { cursor: grab !important; }
+.cursor-grabbing { cursor: grabbing !important; }
+
+.select-none { user-select: none !important; }
+.select-text { user-select: text !important; }
+.select-all { user-select: all !important; }
+
+.pointer-events-none { pointer-events: none !important; }
+.pointer-events-auto { pointer-events: auto !important; }
+
+/* ==========================================
+   SCROLL PERSONALIZADO
+   ========================================== */
+.scroll-smooth {
+    scroll-behavior: smooth !important;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+    background: var(--cor-bege);
+    border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+    background: var(--cor-dourado);
+    border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: var(--cor-dourado-escuro);
+}
+
+/* ==========================================
+   ESTADO DE CARREGAMENTO
+   ========================================== */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--cor-bege);
+    border-top: 2px solid var(--cor-dourado);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================
+   CLASSES DE VISIBILIDADE
+   ========================================== */
+.visible { opacity: 1 !important; visibility: visible !important; }
+.invisible { opacity: 0 !important; visibility: hidden !important; }
+.opacity-0 { opacity: 0 !important; }
+.opacity-25 { opacity: 0.25 !important; }
+.opacity-50 { opacity: 0.5 !important; }
+.opacity-75 { opacity: 0.75 !important; }
+.opacity-100 { opacity: 1 !important; }
+
+/* ==========================================
+   PRINT UTILITIES
+   ========================================== */
+@media print {
+    .print-hidden { display: none !important; }
+    .print-visible { display: block !important; }
+}
