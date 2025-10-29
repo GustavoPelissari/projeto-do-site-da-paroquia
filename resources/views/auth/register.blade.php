@@ -106,5 +106,3 @@
         }
     </style>
 </x-guest-layout>
-    </form>
-</x-guest-layout>
