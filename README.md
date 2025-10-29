@@ -1,61 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏛️ Sistema da Paróquia São Paulo Apóstolo
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema completo de gerenciamento para a Paróquia São Paulo Apóstolo da Diocese de Umuarama, desenvolvido em Laravel 11 com design responsivo e moderno.
 
-## About Laravel
+## ✨ Funcionalidades
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🌐 **Site Público**
+- **Página inicial** com informações da paróquia
+- **Horários de missa** organizados por dia da semana
+- **Pastorais e grupos** com descrições e contatos
+- **Eventos** com calendário e detalhes
+- **Notícias** da paróquia com sistema de modal
+- **Contato** e informações gerais
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔐 **Sistema Administrativo**
+- **Dashboard personalizado** por nível de acesso
+- **Gestão de usuários** com diferentes perfis
+- **Gerenciamento de conteúdo** (notícias, eventos, missas)
+- **Sistema de escalas** para ministérios
+- **Solicitações de grupos** com aprovação
+- **Logs de auditoria** para rastreabilidade
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 👥 **Níveis de Acesso**
+- **Administrador Global**: Acesso total ao sistema
+- **Administrativo**: Gestão de conteúdo e eventos
+- **Coordenador**: Gestão de grupos específicos
+- **Membro**: Visualização e solicitações
 
-## Learning Laravel
+## 🎨 **Design e Interface**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### **Identidade Visual**
+- Cores baseadas na iconografia de São Paulo Apóstolo
+- Vermelho principal: `#8B1538` (manto de São Paulo)
+- Dourado de destaque: `#B8860B` (detalhes litúrgicos)
+- Design limpo com fundo branco e acentos vermelhos
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### **Responsividade**
+- Layout adaptável para desktop, tablet e mobile
+- Navbar com menu hamburger em dispositivos móveis
+- Cards responsivos com grid flexível
+- Tipografia otimizada para legibilidade
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ **Tecnologias Utilizadas**
 
-## Laravel Sponsors
+- **Framework**: Laravel 11
+- **Frontend**: Blade Templates, Bootstrap 5, Tailwind CSS
+- **Database**: MySQL/MariaDB
+- **Build**: Vite 7.1.12
+- **Icons**: Bootstrap Icons, Lucide Icons
+- **Fonts**: Playfair Display (títulos), Poppins (corpo)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📦 **Instalação**
 
-### Premium Partners
+### **Pré-requisitos**
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- MySQL/MariaDB
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### **Configuração**
+```bash
+# Clone o repositório
+git clone https://github.com/GustavoPelissari/projeto-do-site-da-paroquia.git
+cd projeto-do-site-da-paroquia
 
-## Contributing
+# Instale as dependências PHP
+composer install
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Instale as dependências Node.js
+npm install
 
-## Code of Conduct
+# Configure o ambiente
+cp .env.example .env
+php artisan key:generate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Configure o banco de dados no .env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=paroquia_sistema
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
 
-## Security Vulnerabilities
+# Execute as migrações
+php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Compile os assets
+npm run build
 
-## License
+# Inicie o servidor
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🗄️ **Estrutura do Banco**
+
+### **Tabelas Principais**
+- `users` - Usuários do sistema
+- `groups` - Pastorais e ministérios
+- `events` - Eventos da paróquia
+- `news` - Notícias e comunicados
+- `masses` - Horários de missas
+- `schedules` - Escalas de ministérios
+- `group_requests` - Solicitações de participação
+
+## 🚀 **Deploy**
+
+Para produção, execute:
+```bash
+# Otimize para produção
+composer install --optimize-autoloader --no-dev
+npm run build
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+## 🤝 **Contribuição**
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
+
+## 📄 **Licença**
+
+Este projeto é propriedade da Paróquia São Paulo Apóstolo - Diocese de Umuarama.
+
+## 📞 **Contato**
+
+**Paróquia São Paulo Apóstolo**
+- Diocese de Umuarama
+- Website: [Em desenvolvimento]
+- Email: [contato@paroquiasaoapostolo.org.br]
+
+---
+
+Desenvolvido com ❤️ para a comunidade católica de São Paulo Apóstolo
+
