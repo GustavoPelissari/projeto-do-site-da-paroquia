@@ -428,7 +428,7 @@ img[loading="lazy"].loaded {
 @endif
 
 <!-- Call to Action -->
-<section class="section-paroquia animate-on-scroll cta-paroquia">
+<section class="section-paroquia cta-paroquia">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">

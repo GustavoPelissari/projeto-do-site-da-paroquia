@@ -300,6 +300,40 @@ h6 { font-size: 1.125rem; }
 }
 
 /* ================================
+   FIX: Bootstrap Navbar Responsiveness
+================================ */
+/* Garantir que o menu apareça em desktop (lg = 992px+) */
+@media (min-width: 992px) {
+    /* Sobrescrever o comportamento do collapse do Bootstrap */
+    .navbar-expand-lg .navbar-collapse.collapse {
+        display: flex !important;
+        flex-basis: auto;
+        visibility: visible !important;
+    }
+    
+    .navbar-expand-lg .navbar-toggler {
+        display: none;
+    }
+}
+
+/* Em mobile, o menu fica escondido até clicar no toggler */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        display: none;
+    }
+    
+    .navbar-collapse.show {
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .navbar-collapse.collapsing {
+        display: block;
+        visibility: visible !important;
+    }
+}
+
+/* ================================
    COMPONENTES ESPECÍFICOS
 ================================ */
 .proxima-missa-card {
@@ -692,4 +726,340 @@ a:hover i.bi {
 h1 i.bi, h2 i.bi, h3 i.bi, h4 i.bi, h5 i.bi, h6 i.bi {
     margin-right: 0.5rem;
     color: inherit !important;
+}
+
+/* ================================
+   GRIDS DE CONTEÚDO
+================================ */
+/* Grid de Pastorais */
+.pastorais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.pastoral-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(139, 30, 63, 0.1);
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.pastoral-card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--brand-vinho), var(--accent-dourado));
+}
+
+.pastoral-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--brand-vinho);
+}
+
+.pastoral-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.pastoral-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+}
+
+.pastoral-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--brand-vinho);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.pastoral-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pastoral-description {
+    color: var(--text-primary);
+    opacity: 0.8;
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 1.5rem;
+}
+
+.pastoral-action {
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Grid de Notícias */
+.noticias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.noticia-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(139, 30, 63, 0.1);
+    transition: var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.noticia-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.noticia-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--bg-rose), var(--bg-light));
+}
+
+.noticia-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-vinho);
+}
+
+.noticia-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.noticia-meta {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.noticia-title {
+    margin-bottom: 1rem;
+}
+
+.noticia-title a {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+    transition: var(--transition-fast);
+}
+
+.noticia-title a:hover {
+    color: var(--brand-vinho-dark) !important;
+}
+
+.noticia-excerpt {
+    color: var(--text-primary);
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+/* Grid de Eventos */
+.eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.evento-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid rgba(139, 30, 63, 0.1);
+    transition: var(--transition-base);
+    position: relative;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.evento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--brand-vinho);
+}
+
+.evento-date {
+    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
+    color: white;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.evento-date .dia {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: var(--font-serif);
+    line-height: 1;
+}
+
+.evento-date .mes {
+    display: block;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+    opacity: 0.9;
+}
+
+.evento-content {
+    flex: 1;
+}
+
+.evento-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--brand-vinho);
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.evento-meta {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.evento-description {
+    color: var(--text-primary);
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Call to Action Section */
+.cta-paroquia {
+    background: linear-gradient(135deg, var(--brand-vinho) 0%, var(--brand-vinho-dark) 100%) !important;
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0 !important;
+    opacity: 1 !important; /* Garantir visibilidade sem depender de JavaScript */
+    transform: translateY(0) !important; /* Garantir posição correta */
+}
+
+.cta-paroquia:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
+    opacity: 0.3;
+}
+
+.cta-paroquia * {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-white {
+    background: white;
+    color: var(--brand-vinho);
+    border: 2px solid white;
+    font-weight: 600;
+    transition: var(--transition-base);
+}
+
+.btn-white:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+}
+
+.btn-outline-light {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    font-weight: 600;
+    transition: var(--transition-base);
+}
+
+.btn-outline-light:hover {
+    background: white;
+    color: var(--brand-vinho);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+}
+
+.btn-outline-vinho {
+    background: transparent;
+    color: var(--brand-vinho);
+    border: 2px solid var(--brand-vinho);
+    font-weight: 500;
+    transition: var(--transition-base);
+}
+
+.btn-outline-vinho:hover {
+    background: var(--brand-vinho);
+    color: white;
+    border-color: var(--brand-vinho);
+}
+
+.btn-vinho {
+    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
+    color: white;
+    border: none;
+    font-weight: 600;
+    transition: var(--transition-base);
+}
+
+.btn-vinho:hover {
+    background: linear-gradient(135deg, var(--brand-vinho-dark), var(--brand-vinho));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Responsividade para grids */
+@media (max-width: 768px) {
+    .pastorais-grid,
+    .noticias-grid,
+    .eventos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .evento-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .evento-date {
+        margin-bottom: 1rem;
+    }
 }
