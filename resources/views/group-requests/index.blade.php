@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layout')
 
 @section('title', 'Gerenciar Solicitações - Paróquia São Paulo Apóstolo')
 
@@ -7,7 +7,7 @@
         {{-- Hero Section --}}
         <section class="section-paroquia">
             <div class="section-header">
-                <h1>📥 Gerenciar Solicitações</h1>
+                <h1><i class="bi bi-inbox"></i> Gerenciar Solicitações</h1>
                 <p class="lead">
                     Analise e responda às solicitações de entrada no seu grupo ou pastoral
                 </p>
@@ -16,8 +16,8 @@
 
         {{-- Alerts --}}
         @if (session('success'))
-            <div class="alert alert-success d-flex align-items-center mb-4">
-                <div class="me-3">✅</div>
+            <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
+                <div class="me-3"><i class="bi bi-check-circle"></i></div>
                 <div>
                     <strong>Sucesso!</strong> {{ session('success') }}
                 </div>
@@ -25,8 +25,8 @@
         @endif
 
         @if (session('error'))
-            <div class="alert alert-danger d-flex align-items-center mb-4">
-                <div class="me-3">❌</div>
+            <div class="alert alert-danger d-flex align-items-center mb-4" role="alert">
+                <div class="me-3"><i class="bi bi-exclamation-triangle"></i></div>
                 <div>
                     <strong>Erro!</strong> {{ session('error') }}
                 </div>
@@ -35,32 +35,38 @@
 
         {{-- Main Content --}}
         <section class="section-paroquia">
-            <div class="container">
-                @forelse($requests as $request)
-                    <div class="card-paroquia mb-4" style="border-left: 4px solid {{ $request->status === 'pending' ? 'var(--sp-dourado-principal)' : ($request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)') }};">
-                        
-                        {{-- Header --}}
-                        <div class="card-header-paroquia">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h3 class="h5 mb-0">👤 {{ $request->user->name }}</h3>
-                                        <span class="badge bg-secondary ms-3">
+            @forelse($requests as $request)
+                <div class="card-paroquia mb-4 status-{{ $request->status }}">
+                    
+                    {{-- Header --}}
+                    <div class="card-header-paroquia">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <h3 class="h5 mb-0">
+                                        <i class="bi bi-person" aria-hidden="true"></i> 
+                                        {{ $request->user?->name ?? 'Usuário não encontrado' }}
+                                    </h3>
+                                    @if($request->user?->email)
+                                        <span class="badge bg-secondary ms-3" aria-label="Email do candidato">
                                             {{ $request->user->email }}
                                         </span>
-                                    </div>
-                                    <p class="text-muted small">
-                                        📅 Solicitado em {{ $request->created_at->format('d/m/Y \à\s H:i') }}
-                                    </p>
+                                    @endif
                                 </div>
-                                
-                                <span class="badge bg-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'danger') }}">
+                                <p class="text-muted small" aria-label="Data da solicitação">
+                                    <i class="bi bi-calendar" aria-hidden="true"></i>
+                                    Solicitado em
+                                    <time datetime="{{ $request->created_at?->toISOString() }}">
+                                        {{ $request->created_at?->format('d/m/Y \à\s H:i') ?? 'Data não disponível' }}
+                                    </time>
+                                </p>
+                            </div>                                <span class="badge bg-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'danger') }}">
                                     @if($request->status === 'pending')
-                                        ⏳ Aguardando Análise
+                                        <i class="bi bi-clock"></i> Aguardando Análise
                                     @elseif($request->status === 'approved')
-                                        ✅ Aprovada
+                                        <i class="bi bi-check-circle"></i> Aprovada
                                     @else
-                                        ❌ Rejeitada
+                                        <i class="bi bi-x-circle"></i> Rejeitada
                                     @endif
                                 </span>
                             </div>
@@ -71,23 +77,27 @@
                             
                             {{-- Mensagem do Candidato --}}
                             @if($request->message)
-                                <div class="card mb-3" style="background: var(--sp-pergaminho); border: 1px solid rgba(200, 134, 13, 0.2);">
+                                <div class="card mb-3 candidate-message">
                                     <div class="card-header py-2">
-                                        <h6 class="mb-0 fw-semibold text-dourado">💬 Mensagem do Candidato</h6>
+                                        <h6 class="mb-0 fw-semibold text-brand-vinho">
+                                            <i class="bi bi-chat-text" aria-hidden="true"></i> Mensagem do Candidato
+                                        </h6>
                                     </div>
                                     <div class="card-body py-2">
-                                        <p class="small fst-italic text-muted mb-0">
-                                            "{{ $request->message }}"
-                                        </p>
+                                        <blockquote class="small fst-italic text-muted mb-0">
+                                            {{ $request->message }}
+                                        </blockquote>
                                     </div>
                                 </div>
                             @endif
 
                             {{-- Disponibilidade (se houver) --}}
                             @if($request->availability)
-                                <div class="card mb-3" style="background: var(--sp-marfim); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                <div class="card mb-3 availability-info">
                                     <div class="card-header py-2">
-                                        <h6 class="mb-0 fw-semibold text-celestial">📅 Disponibilidade Informada</h6>
+                                        <h6 class="mb-0 fw-semibold text-primary">
+                                            <i class="bi bi-calendar-check" aria-hidden="true"></i> Disponibilidade Informada
+                                        </h6>
                                     </div>
                                     <div class="card-body py-2">
                                         <p class="small text-muted mb-0">
@@ -99,72 +109,95 @@
 
                             {{-- Ações para Solicitações Pendentes --}}
                             @if($request->status === 'pending')
-                                <div class="card" style="background: var(--sp-marfim); border: 1px solid rgba(107, 114, 128, 0.2);">
+                                <div class="card action-panel">
                                     <div class="card-header">
-                                        <h5 class="mb-0 fw-semibold text-azul">🎯 Tomar Decisão</h5>
+                                        <h5 class="mb-0 fw-semibold text-primary">
+                                            <i class="bi bi-gear" aria-hidden="true"></i> Tomar Decisão
+                                        </h5>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('group-requests.approve', $request) }}" method="POST" id="approve-form-{{ $request->id }}" class="d-none">
+                                        {{-- Forms para envio via JS --}}
+                                        <form action="{{ route('group-requests.approve', $request) }}" method="POST" 
+                                              id="approve-form-{{ $request->id }}" class="d-none" aria-hidden="true">
                                             @csrf
                                             <input type="hidden" name="response_message" id="approve-message-{{ $request->id }}">
                                         </form>
                                         
-                                        <form action="{{ route('group-requests.reject', $request) }}" method="POST" id="reject-form-{{ $request->id }}" class="d-none">
+                                        <form action="{{ route('group-requests.reject', $request) }}" method="POST" 
+                                              id="reject-form-{{ $request->id }}" class="d-none" aria-hidden="true">
                                             @csrf
                                             <input type="hidden" name="response_message" id="reject-message-{{ $request->id }}">
                                         </form>
 
                                         <div class="mb-3">
                                             <label for="response_message_{{ $request->id }}" class="form-label fw-semibold">
-                                                💌 Mensagem de Resposta (opcional)
+                                                <i class="bi bi-envelope" aria-hidden="true"></i> Mensagem de Resposta (opcional)
                                             </label>
                                             <textarea 
                                                 id="response_message_{{ $request->id }}" 
                                                 rows="3" 
                                                 placeholder="Deixe uma mensagem para o candidato explicando sua decisão..."
                                                 class="form-control"
+                                                aria-describedby="responseHelp_{{ $request->id }}"
+                                                maxlength="500"
                                             ></textarea>
-                                            <div class="form-text">
-                                                💡 Uma mensagem personalizada ajuda o candidato a entender sua decisão.
+                                            <div id="responseHelp_{{ $request->id }}" class="form-text">
+                                                <i class="bi bi-lightbulb" aria-hidden="true"></i> 
+                                                Uma mensagem personalizada ajuda o candidato a entender sua decisão.
                                             </div>
                                         </div>
                                         
                                         <div class="d-flex gap-3">
                                             <button 
                                                 type="button"
-                                                onclick="approveRequest({{ $request->id }})"
-                                                class="btn btn-success btn-lg"
+                                                data-request-id="{{ $request->id }}"
+                                                class="btn btn-success btn-lg approve-btn"
+                                                aria-describedby="approveHelp_{{ $request->id }}"
                                             >
-                                                ✅ Aprovar Solicitação
+                                                <i class="bi bi-check-circle" aria-hidden="true"></i> Aprovar Solicitação
                                             </button>
                                             <button 
                                                 type="button"
-                                                onclick="rejectRequest({{ $request->id }})"
-                                                class="btn btn-danger btn-lg"
+                                                data-request-id="{{ $request->id }}"
+                                                class="btn btn-danger btn-lg reject-btn"
+                                                aria-describedby="rejectHelp_{{ $request->id }}"
                                             >
-                                                ❌ Rejeitar Solicitação
+                                                <i class="bi bi-x-circle" aria-hidden="true"></i> Rejeitar Solicitação
                                             </button>
+                                        </div>
+                                        <div id="approveHelp_{{ $request->id }}" class="visually-hidden">
+                                            Aprovar permitirá que o candidato faça parte do grupo
+                                        </div>
+                                        <div id="rejectHelp_{{ $request->id }}" class="visually-hidden">
+                                            Rejeitar negará a entrada do candidato no grupo
                                         </div>
                                     </div>
                                 </div>
                             @else
                                 {{-- Informações da Resposta Dada --}}
-                                <div class="card" style="background: {{ $request->status === 'approved' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(185, 28, 28, 0.1)' }}; border: 1px solid {{ $request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)' }};">
+                                <div class="card response-card response-{{ $request->status }}">
                                     <div class="card-header">
-                                        <h5 class="mb-0 fw-semibold" style="color: {{ $request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)' }};">
+                                        <h5 class="mb-0 fw-semibold response-title-{{ $request->status }}">
                                             @if($request->status === 'approved')
-                                                ✅ Solicitação Aprovada
+                                                <i class="bi bi-check-circle" aria-hidden="true"></i> Solicitação Aprovada
                                             @else
-                                                ❌ Solicitação Rejeitada
+                                                <i class="bi bi-x-circle" aria-hidden="true"></i> Solicitação Rejeitada
                                             @endif
                                         </h5>
                                     </div>
                                     <div class="card-body">
                                         <p class="small text-muted mb-2">
-                                            Respondido em {{ ($request->approved_at ?? $request->rejected_at)->format('d/m/Y \à\s H:i') }}
+                                            Respondido em
+                                            <time datetime="{{ ($request->approved_at ?? $request->rejected_at)?->toISOString() }}">
+                                                {{
+                                                    $request->approved_at?->format('d/m/Y \à\s H:i') ??
+                                                    $request->rejected_at?->format('d/m/Y \à\s H:i') ??
+                                                    'Data não disponível'
+                                                }}
+                                            </time>
                                         </p>
                                         @if($request->response_message)
-                                            <div class="card" style="background: white; border: 1px solid rgba(107, 114, 128, 0.2);">
+                                            <div class="card response-message">
                                                 <div class="card-body py-2">
                                                     <p class="small mb-0">
                                                         <strong>Sua resposta:</strong> {{ $request->response_message }}
@@ -178,49 +211,79 @@
                         </div>
                     </div>
                 @empty
-                    <div class="card-paroquia text-center">
+                    <div class="card-paroquia text-center empty-state">
                         <div class="card-body py-5">
-                            <div class="mb-4" style="font-size: 4rem; color: var(--sp-cinza-pedra);">📥</div>
+                            <div class="mb-4 empty-icon" aria-hidden="true">
+                                <i class="bi bi-inbox"></i>
+                            </div>
                             <h3 class="h4 mb-3">Nenhuma solicitação encontrada</h3>
                             <p class="text-muted mb-4">
                                 Não há solicitações para o seu grupo no momento. Quando alguém solicitar entrada, aparecerá aqui.
                             </p>
-                            <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-outline-primary btn-lg">
-                                📊 Voltar ao Dashboard
+                            <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
+                               class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-speedometer2" aria-hidden="true"></i> Voltar ao Dashboard
                             </a>
                         </div>
                     </div>
                 @endforelse
-            </div>
         </section>
 
         {{-- Guidelines Section --}}
         <section class="section-paroquia">
-            <div class="container">
-                <div class="card-paroquia" style="background: var(--sp-pergaminho); border-left: 4px solid var(--sp-dourado-principal);">
-                    <div class="card-header-paroquia">
-                        <h3 class="text-azul">💡 Orientações para Coordenadores</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5 class="fw-semibold mb-3 text-azul">Ao aprovar:</h5>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2">✓ Certifique-se de que o candidato tem disponibilidade</li>
-                                    <li class="mb-2">✓ Verifique se entendeu bem a motivação</li>
-                                    <li class="mb-2">✓ Deixe uma mensagem acolhedora</li>
-                                    <li class="mb-2">✓ Explique os próximos passos</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="fw-semibold mb-3 text-azul">Ao rejeitar:</h5>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2">✓ Seja respeitoso e construtivo</li>
-                                    <li class="mb-2">✓ Explique os motivos da decisão</li>
-                                    <li class="mb-2">✓ Sugira outras formas de participação</li>
-                                    <li class="mb-2">✓ Mantenha a porta aberta para o futuro</li>
-                                </ul>
-                            </div>
+            <div class="card-paroquia guidelines-card">
+                <div class="card-header-paroquia">
+                    <h3 class="text-brand-vinho">
+                        <i class="bi bi-lightbulb" aria-hidden="true"></i> Orientações para Coordenadores
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold mb-3 text-success">
+                                <i class="bi bi-check-square" aria-hidden="true"></i> Ao aprovar:
+                            </h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-success" aria-hidden="true"></i> 
+                                    Certifique-se de que o candidato tem disponibilidade
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-success" aria-hidden="true"></i> 
+                                    Verifique se entendeu bem a motivação
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-success" aria-hidden="true"></i> 
+                                    Deixe uma mensagem acolhedora
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-success" aria-hidden="true"></i> 
+                                    Explique os próximos passos
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold mb-3 text-warning">
+                                <i class="bi bi-exclamation-triangle" aria-hidden="true"></i> Ao rejeitar:
+                            </h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-warning" aria-hidden="true"></i> 
+                                    Seja respeitoso e construtivo
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-warning" aria-hidden="true"></i> 
+                                    Explique os motivos da decisão
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-warning" aria-hidden="true"></i> 
+                                    Sugira outras formas de participação
+                                </li>
+                                <li class="mb-2">
+                                    <i class="bi bi-check text-warning" aria-hidden="true"></i> 
+                                    Mantenha a porta aberta para o futuro
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -230,20 +293,180 @@
 
     {{-- JavaScript para as ações --}}
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listeners para botões de aprovar
+            document.querySelectorAll('.approve-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const requestId = this.getAttribute('data-request-id');
+                    approveRequest(requestId);
+                });
+            });
+
+            // Event listeners para botões de rejeitar
+            document.querySelectorAll('.reject-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const requestId = this.getAttribute('data-request-id');
+                    rejectRequest(requestId);
+                });
+            });
+        });
+
+        // Função para aprovar solicitação
         function approveRequest(requestId) {
-            if (confirm('🤝 Tem certeza que deseja APROVAR esta solicitação?\n\nO candidato será notificado e poderá participar do grupo.')) {
-                const message = document.getElementById(`response_message_${requestId}`).value;
-                document.getElementById(`approve-message-${requestId}`).value = message;
-                document.getElementById(`approve-form-${requestId}`).submit();
+            if (!confirm('🤝 Tem certeza que deseja APROVAR esta solicitação?\n\nO candidato será notificado e poderá participar do grupo.')) {
+                return;
+            }
+
+            const textarea = document.getElementById(`response_message_${requestId}`);
+            const message = textarea ? textarea.value.trim() : '';
+
+            // Validação básica
+            if (message.length > 500) {
+                alert('A mensagem de resposta deve ter no máximo 500 caracteres.');
+                textarea.focus();
+                return;
+            }
+
+            const hidden = document.getElementById(`approve-message-${requestId}`);
+            if (hidden) {
+                hidden.value = message;
+            }
+
+            const form = document.getElementById(`approve-form-${requestId}`);
+            if (form) {
+                disableActionButtons(form);
+                form.submit();
             }
         }
 
+        // Função para rejeitar solicitação
         function rejectRequest(requestId) {
-            if (confirm('❌ Tem certeza que deseja REJEITAR esta solicitação?\n\nO candidato será notificado da decisão.')) {
-                const message = document.getElementById(`response_message_${requestId}`).value;
-                document.getElementById(`reject-message-${requestId}`).value = message;
-                document.getElementById(`reject-form-${requestId}`).submit();
+            if (!confirm('❌ Tem certeza que deseja REJEITAR esta solicitação?\n\nO candidato será notificado da decisão.')) {
+                return;
+            }
+
+            const textarea = document.getElementById(`response_message_${requestId}`);
+            const message = textarea ? textarea.value.trim() : '';
+
+            // Validação básica
+            if (message.length > 500) {
+                alert('A mensagem de resposta deve ter no máximo 500 caracteres.');
+                textarea.focus();
+                return;
+            }
+
+            const hidden = document.getElementById(`reject-message-${requestId}`);
+            if (hidden) {
+                hidden.value = message;
+            }
+
+            const form = document.getElementById(`reject-form-${requestId}`);
+            if (form) {
+                disableActionButtons(form);
+                form.submit();
             }
         }
+
+        // Função para desabilitar botões e prevenir cliques múltiplos
+        function disableActionButtons(formElement) {
+            const card = formElement.closest('.card') || document;
+            const buttons = card.querySelectorAll('button[data-request-id]');
+            buttons.forEach(function(btn) {
+                btn.disabled = true;
+                btn.setAttribute('aria-disabled', 'true');
+                
+                // Adiciona spinner visual
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    icon.className = 'bi bi-arrow-repeat spin';
+                }
+                
+                // Adiciona texto de loading
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="bi bi-arrow-repeat spin" aria-hidden="true"></i> Processando...';
+            });
+        }
     </script>
+
+    {{-- CSS adicional para os estilos customizados --}}
+    <style>
+        .status-pending {
+            border-left: 4px solid #FFD66B;
+        }
+        
+        .status-approved {
+            border-left: 4px solid #28a745;
+        }
+        
+        .status-rejected {
+            border-left: 4px solid #dc3545;
+        }
+        
+        .candidate-message {
+            background: var(--bg-light, #f8f9fa);
+            border: 1px solid rgba(139, 30, 63, 0.2);
+        }
+        
+        .availability-info {
+            background: var(--bg-light, #f8f9fa);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .action-panel {
+            background: var(--bg-light, #f8f9fa);
+            border: 1px solid rgba(107, 114, 128, 0.2);
+        }
+        
+        .response-card.response-approved {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid #28a745;
+        }
+        
+        .response-card.response-rejected {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+        }
+        
+        .response-title-approved {
+            color: #28a745;
+        }
+        
+        .response-title-rejected {
+            color: #dc3545;
+        }
+        
+        .response-message {
+            background: white;
+            border: 1px solid rgba(107, 114, 128, 0.2);
+        }
+        
+        .empty-state .empty-icon {
+            font-size: 4rem;
+            color: var(--gray-400, #9ca3af);
+        }
+        
+        .guidelines-card {
+            background: var(--bg-light, #f8f9fa);
+            border-left: 4px solid var(--brand-vinho, #8b1e3f);
+        }
+        
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .d-flex.gap-3 {
+                flex-direction: column;
+            }
+            
+            .d-flex.gap-3 > * {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
 @endsection

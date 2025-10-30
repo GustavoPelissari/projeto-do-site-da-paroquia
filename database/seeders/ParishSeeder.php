@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
-use App\Models\News;
-use App\Models\Mass;
-use App\Models\Group;
 use App\Models\Event;
+use App\Models\Group;
+use App\Models\Mass;
+use App\Models\News;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class ParishSeeder extends Seeder
@@ -29,7 +29,7 @@ class ParishSeeder extends Seeder
             'day_of_week' => 'sunday',
             'time' => '08:00',
             'location' => 'Igreja Principal',
-            'description' => 'Missa solene dominical com coro'
+            'description' => 'Missa solene dominical com coro',
         ]);
 
         Mass::create([
@@ -37,7 +37,7 @@ class ParishSeeder extends Seeder
             'day_of_week' => 'sunday',
             'time' => '19:00',
             'location' => 'Igreja Principal',
-            'description' => 'Missa vespertina'
+            'description' => 'Missa vespertina',
         ]);
 
         Mass::create([
@@ -45,7 +45,7 @@ class ParishSeeder extends Seeder
             'day_of_week' => 'saturday',
             'time' => '19:00',
             'location' => 'Igreja Principal',
-            'description' => 'Missa vespertina de sábado'
+            'description' => 'Missa vespertina de sábado',
         ]);
 
         Mass::create([
@@ -53,7 +53,7 @@ class ParishSeeder extends Seeder
             'day_of_week' => 'wednesday',
             'time' => '19:30',
             'location' => 'Capela',
-            'description' => 'Missa de meio de semana'
+            'description' => 'Missa de meio de semana',
         ]);
 
         // Create sample groups
@@ -64,7 +64,7 @@ class ParishSeeder extends Seeder
             'coordinator_name' => 'Maria Silva',
             'coordinator_phone' => '(11) 99999-1111',
             'coordinator_email' => 'coral@paroquia.com',
-            'meeting_info' => 'Ensaios toda quinta-feira às 20h na sacristia'
+            'meeting_info' => 'Ensaios toda quinta-feira às 20h na sacristia',
         ]);
 
         Group::create([
@@ -74,7 +74,7 @@ class ParishSeeder extends Seeder
             'coordinator_name' => 'João Santos',
             'coordinator_phone' => '(11) 99999-2222',
             'coordinator_email' => 'pj@paroquia.com',
-            'meeting_info' => 'Encontros aos domingos às 15h no salão paroquial'
+            'meeting_info' => 'Encontros aos domingos às 15h no salão paroquial',
         ]);
 
         Group::create([
@@ -84,7 +84,7 @@ class ParishSeeder extends Seeder
             'coordinator_name' => 'Ana Costa',
             'coordinator_phone' => '(11) 99999-3333',
             'coordinator_email' => 'catequese@paroquia.com',
-            'meeting_info' => 'Aulas aos sábados das 14h às 16h'
+            'meeting_info' => 'Aulas aos sábados das 14h às 16h',
         ]);
 
         Group::create([
@@ -94,7 +94,7 @@ class ParishSeeder extends Seeder
             'coordinator_name' => 'Carlos e Lucia Oliveira',
             'coordinator_phone' => '(11) 99999-4444',
             'coordinator_email' => 'familia@paroquia.com',
-            'meeting_info' => 'Encontros mensais no primeiro sábado do mês às 19h'
+            'meeting_info' => 'Encontros mensais no primeiro sábado do mês às 19h',
         ]);
 
         // Create sample news
@@ -105,7 +105,7 @@ class ParishSeeder extends Seeder
             'status' => 'published',
             'featured' => true,
             'user_id' => $admin->id,
-            'published_at' => now()
+            'published_at' => now(),
         ]);
 
         News::create([
@@ -115,7 +115,7 @@ class ParishSeeder extends Seeder
             'status' => 'published',
             'featured' => true,
             'user_id' => $admin->id,
-            'published_at' => now()->subDays(2)
+            'published_at' => now()->subDays(2),
         ]);
 
         News::create([
@@ -125,7 +125,7 @@ class ParishSeeder extends Seeder
             'status' => 'published',
             'featured' => false,
             'user_id' => $admin->id,
-            'published_at' => now()->subDays(5)
+            'published_at' => now()->subDays(5),
         ]);
 
         // Create sample events
@@ -138,7 +138,7 @@ class ParishSeeder extends Seeder
             'status' => 'scheduled',
             'max_participants' => 200,
             'requirements' => 'Trazer RG para verificação da idade (maiores de 18 anos)',
-            'user_id' => $admin->id
+            'user_id' => $admin->id,
         ]);
 
         Event::create([
@@ -149,7 +149,7 @@ class ParishSeeder extends Seeder
             'end_date' => now()->addDays(10)->setTime(22, 0),
             'status' => 'scheduled',
             'max_participants' => 30,
-            'user_id' => $admin->id
+            'user_id' => $admin->id,
         ]);
 
         Event::create([
@@ -159,7 +159,7 @@ class ParishSeeder extends Seeder
             'start_date' => now()->addMonth()->setTime(19, 0),
             'end_date' => now()->addMonth()->setTime(21, 0),
             'status' => 'scheduled',
-            'user_id' => $admin->id
+            'user_id' => $admin->id,
         ]);
     }
 }

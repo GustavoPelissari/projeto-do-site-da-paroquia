@@ -12,7 +12,7 @@ enum UserRole: string
 
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => 'Administrador Global',
             self::ADMINISTRATIVO => 'Administrativo',
             self::COORDENADOR_PASTORAL => 'Coordenador de Pastoral',
@@ -23,7 +23,7 @@ enum UserRole: string
 
     public function canManageUsers(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             default => false,
         };
@@ -31,7 +31,7 @@ enum UserRole: string
 
     public function canManageMasses(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             self::ADMINISTRATIVO => true,
             default => false,
@@ -40,7 +40,7 @@ enum UserRole: string
 
     public function canCreateNews(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             self::ADMINISTRATIVO => true,
             self::COORDENADOR_PASTORAL => true,
@@ -50,7 +50,7 @@ enum UserRole: string
 
     public function canManageGroups(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             default => false,
         };
@@ -58,7 +58,7 @@ enum UserRole: string
 
     public function canManageOwnGroup(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             self::COORDENADOR_PASTORAL => true,
             default => false,
@@ -67,7 +67,7 @@ enum UserRole: string
 
     public function canManageSchedules(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             self::COORDENADOR_PASTORAL => true,
             default => false,
@@ -76,7 +76,7 @@ enum UserRole: string
 
     public function canApproveRequests(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             self::COORDENADOR_PASTORAL => true,
             default => false,
@@ -85,7 +85,7 @@ enum UserRole: string
 
     public function canDeleteGroups(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             default => false,
         };
@@ -93,7 +93,7 @@ enum UserRole: string
 
     public function canChangeSystemSettings(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             default => false,
         };
@@ -101,7 +101,7 @@ enum UserRole: string
 
     public function canAccessAuditLogs(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::ADMIN_GLOBAL => true,
             default => false,
         };

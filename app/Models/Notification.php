@@ -32,12 +32,19 @@ class Notification extends Model
 
     // Notification types
     const TYPE_REQUEST_APPROVED = 'request_approved';
+
     const TYPE_REQUEST_REJECTED = 'request_rejected';
+
     const TYPE_NEW_SCHEDULE = 'new_schedule';
+
     const TYPE_NEW_POST = 'new_post';
+
     const TYPE_NEW_COMMENT = 'new_comment';
+
     const TYPE_SCHEDULE_UPDATED = 'schedule_updated';
+
     const TYPE_GROUP_ANNOUNCEMENT = 'group_announcement';
+
     const TYPE_SYSTEM_ALERT = 'system_alert';
 
     public static function getTypes(): array
@@ -61,7 +68,7 @@ class Notification extends Model
 
     public function markAsRead(): void
     {
-        if (!$this->isRead()) {
+        if (! $this->isRead()) {
             $this->update(['read_at' => now()]);
         }
     }
@@ -73,8 +80,8 @@ class Notification extends Model
 
     public function shouldSendEmail(): bool
     {
-        return $this->user->email_notifications_enabled && 
-               !$this->email_sent &&
+        return $this->user->email_notifications_enabled &&
+               ! $this->email_sent &&
                in_array($this->type, [
                    self::TYPE_REQUEST_APPROVED,
                    self::TYPE_REQUEST_REJECTED,
@@ -92,7 +99,7 @@ class Notification extends Model
 
     public function getIcon(): string
     {
-        return match($this->type) {
+        return match ($this->type) {
             self::TYPE_REQUEST_APPROVED => '✅',
             self::TYPE_REQUEST_REJECTED => '❌',
             self::TYPE_NEW_SCHEDULE => '📅',
@@ -107,7 +114,7 @@ class Notification extends Model
 
     public function getColor(): string
     {
-        return match($this->type) {
+        return match ($this->type) {
             self::TYPE_REQUEST_APPROVED => 'green',
             self::TYPE_REQUEST_REJECTED => 'red',
             self::TYPE_NEW_SCHEDULE => 'blue',
@@ -167,7 +174,7 @@ class Notification extends Model
     public static function createForGroup(Group $group, string $type, string $title, string $message, array $data = []): void
     {
         $users = User::where('parish_group_id', $group->id)->get();
-        
+
         foreach ($users as $user) {
             self::createForUser($user, $type, $title, $message, $data);
         }

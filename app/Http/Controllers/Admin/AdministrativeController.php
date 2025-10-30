@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\News;
 use App\Models\Event;
 use App\Models\Mass;
-use App\Enums\UserRole;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +20,7 @@ class AdministrativeController extends Controller
         // Apenas administrativos podem acessar
         $userRole = Auth::user()->role;
         $roleValue = $userRole instanceof \App\Enums\UserRole ? $userRole->value : $userRole;
-        
+
         if ($roleValue !== 'administrativo') {
             abort(403, 'Acesso negado.');
         }
@@ -44,9 +42,9 @@ class AdministrativeController extends Controller
      */
     public function newsIndex()
     {
-        $news = News::where(function($query) {
+        $news = News::where(function ($query) {
             $query->where('created_by', Auth::id())
-                  ->orWhere('scope', '!=', 'global');
+                ->orWhere('scope', '!=', 'global');
         })->latest()->paginate(10);
 
         return view('admin.administrativo.news.index', compact('news'));
@@ -162,9 +160,9 @@ class AdministrativeController extends Controller
      */
     public function eventsIndex()
     {
-        $events = Event::where(function($query) {
+        $events = Event::where(function ($query) {
             $query->where('created_by', Auth::id())
-                  ->orWhere('category', '!=', 'global');
+                ->orWhere('category', '!=', 'global');
         })->latest()->paginate(10);
 
         return view('admin.administrativo.events.index', compact('events'));
@@ -260,6 +258,7 @@ class AdministrativeController extends Controller
     public function massesIndex()
     {
         $masses = Mass::latest()->paginate(10);
+
         return view('admin.administrativo.masses.index', compact('masses'));
     }
 

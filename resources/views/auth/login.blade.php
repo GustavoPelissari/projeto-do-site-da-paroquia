@@ -1,117 +1,99 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="sp-mb-4" :status="session('status')" />
+@extends('layout')
 
-    <div class="sp-auth-title">
-        <h2>Entrar na Paróquia</h2>
-        <p>Acesse sua conta para participar da nossa comunidade</p>
-    </div>
+@section('title', 'Entrar - Paróquia São Paulo Apóstolo')
 
-    <form method="POST" action="{{ route('login') }}" class="sp-auth-form-content">
-        @csrf
+@section('content')
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo" class="mb-3" style="height: 60px;">
+                        <h2 class="h4 text-brand-vinho mb-2">Entrar na Paróquia</h2>
+                        <p class="text-muted">Acesse sua conta para participar da nossa comunidade</p>
+                    </div>
 
-        <!-- Email Address -->
-        <div class="sp-form-group">
-            <label for="email" class="sp-label">📧 Email</label>
-            <input id="email" 
-                   class="sp-input" 
-                   type="email" 
-                   name="email" 
-                   value="{{ old('email') }}" 
-                   required 
-                   autofocus 
-                   autocomplete="username" 
-                   placeholder="seu.email@exemplo.com" />
-            <x-input-error :messages="$errors->get('email')" class="sp-form-error" />
-        </div>
+                    @if (session('status'))
+                        <div class="alert alert-success mb-4">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-        <!-- Password -->
-        <div class="sp-form-group">
-            <label for="password" class="sp-label">🔒 Senha</label>
-            <input id="password" 
-                   class="sp-input"
-                   type="password"
-                   name="password"
-                   required 
-                   autocomplete="current-password"
-                   placeholder="Digite sua senha" />
-            <x-input-error :messages="$errors->get('password')" class="sp-form-error" />
-        </div>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-        <!-- Remember Me -->
-        <div class="sp-form-group">
-            <label for="remember_me" class="sp-flex sp-items-center">
-                <input id="remember_me" 
-                       type="checkbox" 
-                       class="sp-checkbox" 
-                       name="remember"
-                       style="margin-right: var(--space-2);">
-                <span class="sp-text-sm sp-text-muted">Lembrar de mim</span>
-            </label>
-        </div>
+                        <!-- Email Address -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                <i class="bi bi-envelope"></i> Email
+                            </label>
+                            <input id="email" 
+                                   class="form-control @error('email') is-invalid @enderror"
+                                   type="email" 
+                                   name="email"
+                                   value="{{ old('email') }}"
+                                   required
+                                   autofocus 
+                                   autocomplete="username" 
+                                   placeholder="seu.email@exemplo.com" />
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-        <div class="sp-auth-actions">
-            <button type="submit" class="sp-btn sp-btn-gold sp-btn-full sp-btn-lg">
-                🔑 Entrar na Paróquia
-            </button>
-            
-            @if (Route::has('password.request'))
-                <a class="sp-link sp-text-center sp-text-sm" href="{{ route('password.request') }}">
-                    Esqueceu sua senha?
-                </a>
-            @endif
-            
-            @if (Route::has('register'))
-                <div class="sp-text-center" style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--sp-gray-200);">
-                    <p class="sp-text-sm sp-text-muted">Ainda não é membro da nossa paróquia?</p>
-                    <a href="{{ route('register') }}" class="sp-btn sp-btn-outline sp-btn-full" style="margin-top: var(--space-2);">
-                        ✨ Cadastrar-se Agora
-                    </a>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                <i class="bi bi-lock"></i> Senha
+                            </label>
+                            <input id="password"
+                                   class="form-control @error('password') is-invalid @enderror"
+                                   type="password"
+                                   name="password"
+                                   required 
+                                   autocomplete="current-password"
+                                   placeholder="Sua senha" />
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+                                <label for="remember_me" class="form-check-label">
+                                    Lembrar de mim
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            @if (Route::has('password.request'))
+                                <a class="text-decoration-none" href="{{ route('password.request') }}">
+                                    Esqueceu sua senha?
+                                </a>
+                            @endif
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn-primary-paroquia">
+                                <i class="bi bi-box-arrow-in-right"></i> Entrar
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="mb-0">Não tem uma conta?
+                                <a href="{{ route('register') }}" class="text-decoration-none">
+                                    Cadastre-se aqui
+                                </a>
+                            </p>
+                        </div>
+                    </form>
                 </div>
-            @endif
+            </div>
         </div>
-    </form>
-    
-    <style>
-        .sp-auth-title {
-            text-align: center;
-            margin-bottom: var(--space-6);
-        }
-        
-        .sp-auth-title h2 {
-            color: var(--sp-red);
-            font-size: var(--text-2xl);
-            font-weight: var(--font-bold);
-            margin-bottom: var(--space-2);
-        }
-        
-        .sp-auth-title p {
-            color: var(--sp-gray-600);
-            font-size: var(--text-sm);
-            margin: 0;
-        }
-        
-        .sp-auth-form-content {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-4);
-        }
-        
-        .sp-auth-actions {
-            margin-top: var(--space-6);
-        }
-        
-        .sp-checkbox {
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--sp-gray-300);
-            border-radius: var(--radius-sm);
-            accent-color: var(--sp-red);
-        }
-        
-        .sp-checkbox:checked {
-            background-color: var(--sp-red);
-            border-color: var(--sp-red);
-        }
-    </style>
-</x-guest-layout>
+    </div>
+</div>
+@endsection

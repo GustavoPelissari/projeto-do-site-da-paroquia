@@ -1,7 +1,6 @@
-@extends('layouts.public')
+@extends('layout')
 
 @section('title', 'Notícias - Paróquia São Paulo Apóstolo')
-@section('description', 'Acompanhe as últimas notícias e novidades da Paróquia São Paulo Apóstolo em Umuarama - PR.')
 
 @section('content')
 <!-- Hero Section -->

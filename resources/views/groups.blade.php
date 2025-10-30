@@ -1,7 +1,6 @@
-@extends('layouts.public')
+@extends('layout')
 
 @section('title', 'Pastorais e Movimentos - Paróquia São Paulo Apóstolo')
-@section('description', 'Conheça as pastorais e movimentos da Paróquia São Paulo Apóstolo em Umuarama. Encontre seu lugar de serviço e crescimento espiritual em nossa comunidade de fé.')
 
 @section('content')
 <!-- Hero Section -->
@@ -336,10 +335,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
             @else
                 <a href="{{ route('group-requests.create') }}" class="sp-btn sp-btn-gold sp-btn-lg">
-                    ✋ Solicitar Participação
+                    <i class="bi bi-person-raised-hand"></i> Solicitar Participação
                 </a>
                 <a href="{{ route('group-requests.my-requests') }}" class="sp-btn sp-btn-outline sp-btn-lg" style="border-color: var(--sp-white); color: var(--sp-white);">
-                    📋 Minhas Solicitações
+                    <i class="bi bi-list-check"></i> Minhas Solicitações
                 </a>
             @endguest
         </div>

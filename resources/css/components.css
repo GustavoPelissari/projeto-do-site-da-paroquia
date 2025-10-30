@@ -285,7 +285,7 @@
 
 .form-contato .btn-enviar {
     background: var(--gradiente-vinho);
-    color: var(--cor-branco);
+    color: white !important;
     border: none;
     padding: 1rem 2.5rem;
     font-weight: 600;
@@ -298,6 +298,7 @@
     background: var(--cor-vinho-escuro);
     transform: translateY(-2px);
     box-shadow: var(--sombra-media);
+    color: white !important;
     color: var(--cor-branco);
 }
 

@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\User;
+use Illuminate\Console\Command;
 
 class ListTestUsers extends Command
 {
@@ -31,14 +31,15 @@ class ListTestUsers extends Command
 
         $testUsers = User::whereIn('email', [
             'admin@paroquia.test',
-            'coord.coroinhas@paroquia.test', 
+            'coord.coroinhas@paroquia.test',
             'administrativo@paroquia.test',
-            'maria@paroquia.test'
+            'maria@paroquia.test',
         ])->get();
 
         if ($testUsers->isEmpty()) {
             $this->warn('❌ Nenhum usuário de teste encontrado.');
             $this->info('Execute: php artisan db:seed --class=DevSeeder');
+
             return Command::FAILURE;
         }
 
@@ -46,14 +47,14 @@ class ListTestUsers extends Command
             $this->line('');
             $this->info("👤 {$user->name}");
             $this->line("   📧 Email: {$user->email}");
-            $this->line("   🔐 Senha: " . $this->getPasswordForUser($user->email));
-            $this->line("   👑 Papel: " . $this->getRoleDescription($user->role));
-            $this->line("   📋 Responsabilidades: " . $this->getResponsibilities($user->role));
-            
+            $this->line('   🔐 Senha: '.$this->getPasswordForUser($user->email));
+            $this->line('   👑 Papel: '.$this->getRoleDescription($user->role));
+            $this->line('   📋 Responsabilidades: '.$this->getResponsibilities($user->role));
+
             if ($user->email_verified_at) {
-                $this->line("   ✅ Email verificado");
+                $this->line('   ✅ Email verificado');
             } else {
-                $this->line("   ⚠️  Email não verificado");
+                $this->line('   ⚠️  Email não verificado');
             }
         }
 
@@ -65,7 +66,7 @@ class ListTestUsers extends Command
         $this->line('2. Use qualquer email e senha acima para fazer login');
         $this->line('3. Teste diferentes funcionalidades baseadas no papel do usuário');
         $this->line('');
-        
+
         $this->warn('⚠️  IMPORTANTE: Estes usuários são apenas para DESENVOLVIMENTO!');
         $this->warn('   Não use em produção - as senhas são simples e conhecidas.');
 
@@ -103,7 +104,7 @@ class ListTestUsers extends Command
     private function getResponsibilities($role)
     {
         $roleValue = $role instanceof \App\Enums\UserRole ? $role->value : $role;
-        
+
         $responsibilities = [
             'admin_global' => 'Gerenciamento total (usuários, pastorais, escalas, publicações)',
             'coordenador_de_pastoral' => 'Gerir coroinhas, escalas e solicitações de entrada',

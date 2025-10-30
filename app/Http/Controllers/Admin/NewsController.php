@@ -26,14 +26,14 @@ class NewsController extends Controller
 
         // Search in title and content
         if ($request->filled('search')) {
-            $query->where(function($q) use ($request) {
-                $q->where('title', 'like', '%' . $request->search . '%')
-                  ->orWhere('content', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%'.$request->search.'%')
+                    ->orWhere('content', 'like', '%'.$request->search.'%');
             });
         }
 
         $news = $query->latest()->paginate(10);
-        
+
         return view('admin.news.index', compact('news'));
     }
 
@@ -62,13 +62,13 @@ class NewsController extends Controller
         }
 
         // Set published_at if publishing
-        if ($validated['status'] === 'published' && !$validated['published_at']) {
+        if ($validated['status'] === 'published' && ! $validated['published_at']) {
             $validated['published_at'] = now();
         }
 
         $validated['user_id'] = request()->user()->id;
         $validated['featured'] = $request->has('featured');
-        
+
         // Generate slug if not provided
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
@@ -106,7 +106,7 @@ class NewsController extends Controller
             'featured' => 'boolean',
             'status' => 'required|in:draft,published',
             'published_at' => 'nullable|date',
-            'slug' => 'nullable|string|unique:news,slug,' . $news->id,
+            'slug' => 'nullable|string|unique:news,slug,'.$news->id,
             'meta_description' => 'nullable|string|max:160',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'remove_image' => 'boolean',
@@ -118,12 +118,12 @@ class NewsController extends Controller
         }
 
         // Set published_at if publishing for the first time
-        if ($validated['status'] === 'published' && !$news->published_at && !$validated['published_at']) {
+        if ($validated['status'] === 'published' && ! $news->published_at && ! $validated['published_at']) {
             $validated['published_at'] = now();
         }
 
         $validated['featured'] = $request->has('featured');
-        
+
         // Generate slug if not provided
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);

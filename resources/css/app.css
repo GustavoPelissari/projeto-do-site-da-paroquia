@@ -1,4 +1,4 @@
-/* Paroquia Sao Paulo Apostolo - Design Profissional */
+/* Paroquia São Paulo Apóstolo - Design Moderno */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
@@ -6,265 +6,100 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Compatibilidade com Tailwind CSS */
+/* ================================
+   VARIÁVEIS CSS MODERNAS
+================================ */
 :root {
-    --sp-dourado-principal: #DAA520;
-    --sp-dourado-claro: #F0E68C;
-    --sp-dourado-escuro: #B8860B;
-    --sp-vermelho-manto: #8B1538;
-    --sp-vermelho-bordô: #722F37;
-    --sp-verde-tunica: #2E8B57;
-    --sp-verde-esperanca: #3CB371;
-    --sp-azul-manto: #1F4E79;
-    --sp-azul-celestial: #4682B4;
-    --sp-pergaminho: #F5F5DC;
-    --sp-marfim: #FDF5E6;
-    --sp-terra: #8B7355;
-    --sp-cinza-pedra: #696969;
-    --sp-branco-liturgico: #FFFFFF;
+    /* Paleta principal */
+    --brand-vinho: #8B1E3F;
+    --brand-vinho-dark: #6E1530;
+    --brand-rose: #F4E9E1;
+    --accent-dourado: #FFD66B;
+    --text-primary: #2C2C2C;
+    --bg-light: #FBF7F6;
+    --bg-rose: #F4E9E1;
     
-    /* Gradientes */
-    --gradiente-dourado: linear-gradient(135deg, var(--sp-dourado-principal) 0%, var(--sp-dourado-escuro) 100%);
-    --gradiente-vermelho: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);
-    --gradiente-verde: linear-gradient(135deg, var(--sp-verde-tunica) 0%, var(--sp-verde-esperanca) 100%);
-    --gradiente-azul: linear-gradient(135deg, var(--sp-azul-manto) 0%, var(--sp-azul-celestial) 100%);
-    --gradiente-pergaminho: linear-gradient(135deg, var(--sp-pergaminho) 0%, var(--sp-marfim) 100%);
+    /* Compatibilidade com código antigo */
+    --sp-dourado-principal: #FFD66B;
+    --sp-azul-celestial: #28a745;
+    --sp-vermelho-sangue: #dc3545;
+    
+    /* Tipografia */
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Poppins', 'Segoe UI', sans-serif;
     
     /* Sombras */
-    --sombra-suave: 0 2px 8px rgba(139, 21, 56, 0.08);
-    --sombra-media: 0 4px 16px rgba(139, 21, 56, 0.12);
-    --sombra-forte: 0 8px 40px rgba(139, 21, 56, 0.16);
-    --sombra-dourada: 0 4px 16px rgba(218, 165, 32, 0.15);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     
     /* Transições */
-    --transicao-suave: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transicao-rapida: all 0.2s ease;
+    --transition-base: all 0.25s ease;
+    --transition-fast: all 0.15s ease;
 }
 
-/* Reset Moderno e Base */
+/* ================================
+   RESET E BASE STYLES
+================================ */
 * {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-sans);
+    font-weight: 400;
     line-height: 1.6;
-    color: #2d3748;
-    background: #ffffff;
-    min-height: 100vh;
-    padding-top: 85px;
+    color: var(--text-primary);
+    background-color: var(--bg-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========================================== */
-/*              NAVEGAÇÃO                     */
-/* ========================================== */
-
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1030;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(139, 21, 56, 0.1);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    transition: var(--transicao-suave);
-    padding: 1rem 0;
-}
-
-/* Regras responsivas para navbar */
-.navbar-expand-lg .navbar-collapse {
-    display: none !important;
-}
-
-.navbar-expand-lg .navbar-collapse.show,
-.navbar-expand-lg .navbar-collapse.d-lg-flex {
-    display: flex !important;
-}
-
-@media (min-width: 992px) {
-    .navbar-expand-lg .navbar-collapse {
-        display: flex !important;
-        flex-basis: auto;
-    }
-    
-    .navbar-expand-lg .navbar-toggler {
-        display: none !important;
-    }
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    transition: var(--transicao-suave);
-}
-
-.navbar-brand:hover {
-    transform: translateY(-1px);
-}
-
-.logo-paroquia {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid var(--sp-dourado-principal);
-    background: white;
-    padding: 4px;
-    box-shadow: var(--sombra-dourada);
-}
-
-.brand-text {
-    margin-left: 1rem;
-}
-
-.brand-titulo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--sp-vermelho-manto);
-    display: block;
-    line-height: 1.2;
-}
-
-.brand-subtitulo {
-    font-size: 0.8rem;
-    color: #718096;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.navbar-toggler {
-    border: 1px solid var(--sp-vermelho-manto);
-    padding: 0.4rem 0.6rem;
-    border-radius: 8px;
-}
-
-.navbar-toggler:focus {
-    box-shadow: 0 0 0 0.2rem rgba(139, 21, 56, 0.25);
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%28139, 21, 56%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    width: 1.2em;
-    height: 1.2em;
-}
-
-.navbar-nav {
-    align-items: center;
-}
-
-.navbar-nav .nav-link {
-    font-weight: 500;
-    color: #4a5568;
-    margin: 0 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    transition: var(--transicao-suave);
-    position: relative;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    background: rgba(139, 21, 56, 0.08);
-    color: var(--sp-vermelho-manto);
-    transform: translateY(-1px);
-}
-
-.navbar-nav .nav-link.active {
-    font-weight: 600;
-    background: rgba(139, 21, 56, 0.12);
-}
-
-.navbar-nav .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 2px;
-    background: var(--sp-vermelho-manto);
-    border-radius: 2px;
-}
-
-.navbar-nav .nav-link i {
-    color: var(--sp-vermelho-manto);
-    margin-right: 0.5rem;
-}
-
-/* ========================================== */
-/*              TIPOGRAFIA                    */
-/* ========================================== */
-
+/* ================================
+   TIPOGRAFIA MODERNA
+================================ */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
-    color: var(--sp-vermelho-manto);
+    font-family: var(--font-serif);
+    font-weight: 600;
     line-height: 1.2;
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
-h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 1.875rem); }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1.125rem; }
+
+.lead {
+    font-size: 1.125rem;
+    font-weight: 400;
+    opacity: 0.9;
 }
 
-h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 600;
-}
-
-h3 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 600;
-}
-
-.text-dourado {
-    color: var(--sp-dourado-principal);
-}
-
-.text-azul {
-    color: var(--sp-azul-manto);
-}
-
-.text-celestial {
-    color: var(--sp-azul-celestial);
-}
-
-.text-vermelho {
-    color: var(--sp-vermelho-manto);
-}
-
-.text-verde {
-    color: var(--sp-verde-tunica);
-}
-
-.text-pergaminho {
-    color: var(--sp-pergaminho);
-}
-
-/* ========================================== */
-/*              HERO SECTION                  */
-/* ========================================== */
-
+/* ================================
+   HERO SECTION MODERNA
+================================ */
 .hero-paroquia {
-    position: relative;
-    min-height: 100vh;
+    min-height: 70vh;
+    background: linear-gradient(
+        135deg,
+        rgba(139, 30, 63, 0.8) 0%,
+        rgba(110, 21, 48, 0.9) 50%,
+        rgba(139, 30, 63, 0.7) 100%
+    ),
+    url('/images/igreja-bg.jpg') center/cover no-repeat;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
-    background: 
-        linear-gradient(
-            135deg,
-            rgba(139, 21, 56, 0.9) 0%,
-            rgba(139, 21, 56, 0.8) 100%
-        ),
-        url('/images/igreja-bg.jpg') center/cover;
-    color: white;
-    text-align: center;
+    position: relative;
     overflow: hidden;
 }
 
@@ -275,312 +110,308 @@ h3 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(139, 21, 56, 0.1);
+    background: linear-gradient(
+        180deg,
+        rgba(139, 30, 63, 0.6) 0%,
+        rgba(139, 30, 63, 0.4) 50%,
+        rgba(139, 30, 63, 0.8) 100%
+    );
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 2rem 0;
+    width: 100%;
+    padding: 4rem 0;
 }
 
 .hero-paroquia h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-serif);
     font-weight: 700;
     color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 2rem;
-    animation: fadeInUp 1s ease-out;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
 }
 
 .hero-paroquia .lead {
-    font-size: 1.5rem;
-    font-weight: 300;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
     margin-bottom: 2rem;
-    opacity: 0.95;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    animation: fadeInUp 1s ease-out 0.2s both;
-}
-
-.hero-paroquia p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    animation: fadeInUp 1s ease-out 0.4s both;
 }
 
-/* ========================================== */
-/*              BOTÕES                        */
-/* ========================================== */
-
+/* ================================
+   BOTÕES MODERNOS
+================================ */
 .btn-hero {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
+    font-family: var(--font-sans);
     font-weight: 600;
-    text-decoration: none;
-    border-radius: 50px;
-    transition: var(--transicao-suave);
-    border: 2px solid transparent;
     font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 50px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-md);
+    transform: translateY(0);
+    white-space: nowrap;
+}
+
+.btn-hero:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+    text-decoration: none;
 }
 
 .btn-hero-primary {
-    background: var(--sp-vermelho-manto);
+    background: var(--brand-vinho);
     color: white;
-    border-color: var(--sp-vermelho-manto);
+    border-color: var(--brand-vinho);
 }
 
 .btn-hero-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(139, 21, 56, 0.3);
+    background: var(--brand-vinho-dark);
+    border-color: var(--brand-vinho-dark);
     color: white;
-    background: var(--sp-vermelho-bordô);
 }
 
 .btn-hero-outline {
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(244, 233, 225, 0.95);
+    color: var(--brand-vinho);
+    border-color: var(--brand-rose);
     backdrop-filter: blur(10px);
 }
 
 .btn-hero-outline:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-    color: white;
+    background: var(--brand-rose);
+    color: var(--brand-vinho-dark);
+    border-color: var(--brand-vinho);
 }
 
-/* ========================================== */
-/*              CARDS E SEÇÕES               */
-/* ========================================== */
-
-.section-paroquia {
-    padding: 6rem 0;
-    position: relative;
-    background: #ffffff;
-}
-
-.section-paroquia::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: transparent;
-    pointer-events: none;
-    z-index: -1;
-}
-
+/* ================================
+   CARDS MODERNOS
+================================ */
 .card-paroquia {
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: var(--transicao-suave);
+    background: white;
+    border-radius: 24px;
+    border: none;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-base);
     overflow: hidden;
     position: relative;
 }
 
-.card-paroquia::before {
+.card-paroquia:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.card-header-paroquia {
+    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
+    color: white;
+    padding: 1.5rem 2rem 1rem;
+    margin: -1.5rem -1.5rem 1.5rem;
+    border-radius: 24px 24px 0 0;
+}
+
+.card-header-paroquia h3 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================================
+   SEÇÕES E ESPAÇAMENTOS
+================================ */
+.section-paroquia {
+    padding: 4rem 0;
+    position: relative;
+}
+
+.section-paroquia:nth-child(even) {
+    background: white;
+}
+
+.section-paroquia:nth-child(odd) {
+    background: var(--bg-light);
+}
+
+/* ================================
+   NAVEGAÇÃO MODERNA
+================================ */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(139, 30, 63, 0.1);
+    padding: 1rem 0;
+    transition: var(--transition-base);
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--brand-vinho) !important;
+    text-decoration: none;
+}
+
+.nav-link {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--text-primary) !important;
+    transition: var(--transition-base);
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-vinho) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--brand-vinho);
+    transition: var(--transition-base);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* ================================
+   COMPONENTES ESPECÍFICOS
+================================ */
+.proxima-missa-card {
+    background: linear-gradient(135deg, white 0%, var(--bg-light) 100%);
+    border: 1px solid rgba(139, 30, 63, 0.1);
+}
+
+.proxima-missa-card .row > div {
+    position: relative;
+}
+
+.proxima-missa-card .row > div:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    height: 60%;
+    width: 1px;
+    background: rgba(139, 30, 63, 0.2);
+    transform: translateY(-50%);
+}
+
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.horario-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(139, 30, 63, 0.1);
+    transition: var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.horario-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--sp-vermelho-manto);
+    background: linear-gradient(90deg, var(--brand-vinho), var(--accent-dourado));
 }
 
-.card-paroquia:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    border-color: rgba(139, 21, 56, 0.1);
+.horario-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
-.card-header-paroquia {
-    background: rgba(139, 21, 56, 0.03);
-    padding: 2.5rem 2rem;
-    border-bottom: 1px solid rgba(139, 21, 56, 0.1);
-    text-align: center;
-}
-
-.card-header-paroquia h3 {
-    margin: 0;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--sp-vermelho-manto);
-}
-
+/* ================================
+   ÍCONES E ELEMENTOS VISUAIS
+================================ */
 .icon-lg {
-    font-size: 2rem;
-    color: var(--sp-vermelho-manto);
-    opacity: 0.8;
+    width: 2rem;
+    height: 2rem;
 }
 
-/* ========================================== */
-/*              COMPONENTES BOOTSTRAP         */
-/* ========================================== */
+.text-dourado {
+    color: var(--accent-dourado) !important;
+}
 
-.btn-success {
-    background: var(--sp-vermelho-manto);
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem 1.5rem;
+.text-vinho {
+    color: var(--brand-vinho) !important;
+}
+
+.bg-vinho {
+    background-color: var(--brand-vinho) !important;
+    color: white !important;
+}
+
+.bg-vinho * {
+    color: white !important;
+}
+
+.bg-rose {
+    background-color: var(--brand-rose) !important;
+}
+
+/* Logo da paróquia */
+.logo-paroquia {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-text {
+    line-height: 1.2;
+}
+
+.brand-titulo {
+    font-family: var(--font-serif);
     font-weight: 600;
-    transition: var(--transicao-suave);
-    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+    font-size: 1.1rem;
+    color: var(--brand-vinho);
+    display: block;
 }
 
-.btn-success:hover {
-    background: var(--sp-vermelho-bordô);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+.brand-subtitulo {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    opacity: 0.7;
 }
 
-.btn-danger {
-    background: var(--sp-vermelho-manto);
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    transition: var(--transicao-suave);
-    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
-}
-
-.btn-danger:hover {
-    background: var(--sp-vermelho-bordô);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
-}
-
-.btn-warning {
-    background: var(--sp-vermelho-manto);
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    color: white;
-    transition: var(--transicao-suave);
-    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
-}
-
-.btn-warning:hover {
-    background: var(--sp-vermelho-bordô);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
-    color: white;
-}
-
-.btn-primary {
-    background: var(--sp-vermelho-manto);
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    transition: var(--transicao-suave);
-    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
-}
-
-.btn-primary:hover {
-    background: var(--sp-vermelho-bordô);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
-}
-
-.btn-outline-light {
-    border-color: rgba(255, 255, 255, 0.3);
-    color: var(--sp-vermelho-manto);
-    border-radius: 10px;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    transition: var(--transicao-suave);
-}
-
-.btn-outline-light:hover {
-    background: var(--sp-vermelho-manto);
-    border-color: var(--sp-vermelho-manto);
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* ========================================== */
-/*              ALERTAS                       */
-/* ========================================== */
-
-.alert {
-    border-radius: 12px;
-    border: none;
-    padding: 1.5rem;
-    font-weight: 500;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    background: #ffffff;
-}
-
-.alert-success {
-    border-left: 4px solid #10b981;
-    color: #065f46;
-}
-
-.alert-danger {
-    border-left: 4px solid var(--sp-vermelho-manto);
-    color: var(--sp-vermelho-manto);
-}
-
-.alert-warning {
-    border-left: 4px solid #f59e0b;
-    color: #92400e;
-}
-
-.alert-info {
-    border-left: 4px solid #3b82f6;
-    color: #1e40af;
-}
-
-/* ========================================== */
-/*              FOOTER                        */
-/* ========================================== */
-
-footer {
-    background: var(--sp-vermelho-manto);
-    color: white;
-    margin-top: 4rem;
-}
-
-.logo-footer {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 4px;
-}
-
-footer a {
-    color: rgba(255, 255, 255, 0.8);
-    transition: var(--transicao-suave);
-}
-
-footer a:hover {
-    color: rgba(255, 255, 255, 1);
-    text-decoration: none;
-}
-
-/* ========================================== */
-/*              ANIMAÇÕES                     */
-/* ========================================== */
-
+/* ================================
+   ANIMAÇÕES E MICROINTERAÇÕES
+================================ */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -595,69 +426,270 @@ footer a:hover {
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
-    transition: var(--transicao-suave);
+    transition: all 0.6s ease;
 }
 
-.animate-on-scroll.visible {
+.animate-on-scroll.animated {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* ========================================== */
-/*              RESPONSIVIDADE                */
-/* ========================================== */
-
+/* ================================
+   RESPONSIVIDADE
+================================ */
 @media (max-width: 768px) {
     .hero-paroquia {
-        min-height: 80vh;
+        min-height: 60vh;
+        background-attachment: scroll;
     }
     
-    .section-paroquia {
-        padding: 4rem 0;
-    }
-    
-    .card-header-paroquia {
-        padding: 2rem 1.5rem;
-    }
-    
-    .btn-hero {
-        padding: 0.875rem 1.5rem;
-        font-size: 0.9rem;
-    }
-    
-    .brand-titulo {
-        font-size: 1.2rem;
-    }
-    
-    .brand-subtitulo {
-        font-size: 0.75rem;
-    }
-}
-
-@media (max-width: 576px) {
-    body {
-        padding-top: 70px;
-    }
-    
-    .navbar {
-        padding: 0.75rem 0;
-    }
-    
-    .logo-paroquia {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .hero-paroquia h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero-paroquia .lead {
-        font-size: 1.3rem;
+    .hero-content {
+        padding: 2rem 0;
     }
     
     .btn-hero {
         width: 100%;
+        justify-content: center;
         margin-bottom: 1rem;
     }
+    
+    .section-paroquia {
+        padding: 2rem 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-paroquia {
+        min-height: 50vh;
+    }
+    
+    .card-paroquia {
+        border-radius: 16px;
+        margin: 0 1rem;
+    }
+    
+    .card-header-paroquia {
+        border-radius: 16px 16px 0 0;
+        padding: 1rem 1.5rem 0.75rem;
+    }
+}
+
+/* ================================
+   MELHORIAS DE ACESSIBILIDADE
+================================ */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+:focus-visible {
+    outline: 2px solid var(--brand-vinho);
+    outline-offset: 2px;
+}
+
+/* ================================
+   FORMULÁRIOS DE AUTENTICAÇÃO
+================================ */
+.btn-primary-paroquia {
+    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    transition: var(--transition-base);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary-paroquia:hover {
+    background: linear-gradient(135deg, var(--brand-vinho-dark), var(--brand-vinho));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: white;
+}
+
+.btn-primary-paroquia:focus {
+    box-shadow: 0 0 0 3px rgba(139, 30, 63, 0.3);
+    color: white;
+}
+
+.text-brand-vinho {
+    color: var(--brand-vinho) !important;
+}
+
+/* Estilos para o footer */
+.footer-paroquia {
+    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer-title {
+    color: var(--accent-dourado);
+    font-family: var(--font-serif);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+}
+
+.footer-verse {
+    color: var(--accent-dourado);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--accent-dourado);
+}
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact li {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.footer-contact a {
+    color: var(--accent-dourado);
+    text-decoration: none;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+.footer-bottom .footer-verse {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* ================================
+   CORREÇÕES DE LEGIBILIDADE 
+================================ */
+/* Garantir texto branco em todos os elementos com fundo vinho */
+[class*="bg-vinho"],
+[class*="btn-primary"],
+.btn-primary-paroquia,
+.card-header-paroquia,
+.navbar.bg-vinho,
+.footer-paroquia {
+    color: white !important;
+}
+
+[class*="bg-vinho"] *,
+[class*="btn-primary"] *,
+.btn-primary-paroquia *,
+.card-header-paroquia *,
+.navbar.bg-vinho *,
+.footer-paroquia * {
+    color: white !important;
+}
+
+/* Específico para links e botões em fundos escuros */
+[class*="bg-vinho"] a,
+[class*="btn-primary"] a,
+.btn-primary-paroquia a,
+.card-header-paroquia a,
+.footer-paroquia a {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+[class*="bg-vinho"] a:hover,
+[class*="btn-primary"] a:hover,
+.btn-primary-paroquia a:hover,
+.card-header-paroquia a:hover,
+.footer-paroquia a:hover {
+    color: white !important;
+}
+
+/* ================================
+   ÍCONES CONSISTENTES
+================================ */
+/* Garantir que os ícones tenham a mesma cor do texto */
+i.bi, .bi {
+    color: inherit !important;
+    font-size: inherit;
+    vertical-align: baseline;
+    margin-right: 0.5rem;
+    display: inline-block;
+    font-family: "Bootstrap Icons" !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ícones em links mantêm a cor do link */
+a i.bi {
+    color: inherit !important;
+}
+
+/* Ícones em botões mantêm a cor do botão */
+.btn i.bi,
+.btn-primary-paroquia i.bi,
+button i.bi {
+    color: inherit !important;
+}
+
+/* Ícones no footer */
+.footer-links i.bi,
+.footer-contact i.bi {
+    color: inherit !important;
+    margin-right: 0.5rem;
+    width: 1.2em;
+    display: inline-block;
+}
+
+/* Hover states para links com ícones */
+.footer-links a:hover i.bi,
+.footer-contact a:hover i.bi,
+a:hover i.bi {
+    color: inherit !important;
+}
+
+/* Ícones em headers */
+h1 i.bi, h2 i.bi, h3 i.bi, h4 i.bi, h5 i.bi, h6 i.bi {
+    margin-right: 0.5rem;
+    color: inherit !important;
 }

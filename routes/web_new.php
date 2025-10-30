@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminGlobalController;
-use App\Http\Controllers\Admin\CoordinatorController;
 use App\Http\Controllers\Admin\AdministrativeController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CoordinatorController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +23,13 @@ Route::get('/dashboard', function () {
     if (Auth::check()) {
         $user = Auth::user();
         $userRole = $user->role;
-        
+
         // Convert enum to string value
         $roleValue = $userRole instanceof \App\Enums\UserRole ? $userRole->value : $userRole;
-        
+
         // Log para debug
-        Log::info('Dashboard redirect - User: ' . $user->email . ', Role: ' . $roleValue);
-        
+        Log::info('Dashboard redirect - User: '.$user->email.', Role: '.$roleValue);
+
         // Redirect to appropriate admin area
         switch ($roleValue) {
             case 'admin_global':
@@ -42,6 +42,7 @@ Route::get('/dashboard', function () {
                 return redirect()->route('login')->with('error', 'Você não tem permissão para acessar a área administrativa.');
         }
     }
+
     return redirect()->route('login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -59,17 +60,17 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.global.')->middleware(['auth', 'admin.role:admin_global'])->group(function () {
     // Dashboard
     Route::get('/', [AdminGlobalController::class, 'dashboard'])->name('dashboard');
-    
+
     // User Management
     Route::get('/users', [AdminGlobalController::class, 'manageUsers'])->name('users');
     Route::post('/users/{user}/role', [AdminGlobalController::class, 'updateUserRole'])->name('users.updateRole');
-    
+
     // Parish Statistics
     Route::get('/stats', [AdminGlobalController::class, 'parishStats'])->name('stats');
-    
+
     // System Overview
     Route::get('/system', [AdminGlobalController::class, 'systemOverview'])->name('system');
-    
+
     // News Management
     Route::prefix('news')->name('news.')->group(function () {
         Route::get('/', [AdminGlobalController::class, 'newsIndex'])->name('index');
@@ -80,7 +81,7 @@ Route::prefix('admin')->name('admin.global.')->middleware(['auth', 'admin.role:a
         Route::put('/{news}', [AdminGlobalController::class, 'newsUpdate'])->name('update');
         Route::delete('/{news}', [AdminGlobalController::class, 'newsDestroy'])->name('destroy');
     });
-    
+
     // Events Management
     Route::prefix('events')->name('events.')->group(function () {
         Route::get('/', [AdminGlobalController::class, 'eventsIndex'])->name('index');
@@ -91,7 +92,7 @@ Route::prefix('admin')->name('admin.global.')->middleware(['auth', 'admin.role:a
         Route::put('/{event}', [AdminGlobalController::class, 'eventsUpdate'])->name('update');
         Route::delete('/{event}', [AdminGlobalController::class, 'eventsDestroy'])->name('destroy');
     });
-    
+
     // Groups Management
     Route::prefix('groups')->name('groups.')->group(function () {
         Route::get('/', [AdminGlobalController::class, 'groupsIndex'])->name('index');
@@ -102,7 +103,7 @@ Route::prefix('admin')->name('admin.global.')->middleware(['auth', 'admin.role:a
         Route::put('/{group}', [AdminGlobalController::class, 'groupsUpdate'])->name('update');
         Route::delete('/{group}', [AdminGlobalController::class, 'groupsDestroy'])->name('destroy');
     });
-    
+
     // Masses Management
     Route::prefix('masses')->name('masses.')->group(function () {
         Route::get('/', [AdminGlobalController::class, 'massesIndex'])->name('index');
@@ -123,7 +124,7 @@ Route::prefix('admin')->name('admin.global.')->middleware(['auth', 'admin.role:a
 Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['auth', 'admin.role:coordenador_de_pastoral'])->group(function () {
     // Dashboard
     Route::get('/', [CoordinatorController::class, 'dashboard'])->name('dashboard');
-    
+
     // Restricted News Management (own group only)
     Route::prefix('news')->name('news.')->group(function () {
         Route::get('/', [CoordinatorController::class, 'newsIndex'])->name('index');
@@ -134,7 +135,7 @@ Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['aut
         Route::put('/{news}', [CoordinatorController::class, 'newsUpdate'])->name('update');
         Route::delete('/{news}', [CoordinatorController::class, 'newsDestroy'])->name('destroy');
     });
-    
+
     // Restricted Events Management (own group only)
     Route::prefix('events')->name('events.')->group(function () {
         Route::get('/', [CoordinatorController::class, 'eventsIndex'])->name('index');
@@ -145,14 +146,14 @@ Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['aut
         Route::put('/{event}', [CoordinatorController::class, 'eventsUpdate'])->name('update');
         Route::delete('/{event}', [CoordinatorController::class, 'eventsDestroy'])->name('destroy');
     });
-    
+
     // Group Requests Management
     Route::prefix('requests')->name('requests.')->group(function () {
         Route::get('/', [CoordinatorController::class, 'requestsIndex'])->name('index');
         Route::post('/{request}/approve', [CoordinatorController::class, 'approveRequest'])->name('approve');
         Route::post('/{request}/reject', [CoordinatorController::class, 'rejectRequest'])->name('reject');
     });
-    
+
     // Schedule Management
     Route::prefix('schedules')->name('schedules.')->group(function () {
         Route::get('/', [CoordinatorController::class, 'schedulesIndex'])->name('index');
@@ -162,13 +163,13 @@ Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['aut
         Route::put('/{schedule}', [CoordinatorController::class, 'schedulesUpdate'])->name('update');
         Route::delete('/{schedule}', [CoordinatorController::class, 'schedulesDestroy'])->name('destroy');
     });
-    
+
     // Mass Management (restricted)
     Route::prefix('masses')->name('masses.')->group(function () {
         Route::get('/', [CoordinatorController::class, 'massesIndex'])->name('index');
         Route::get('/{mass}', [CoordinatorController::class, 'massesShow'])->name('show');
     });
-    
+
     // PDF Scales Management
     Route::prefix('scales')->name('scales.')->group(function () {
         Route::get('/', [CoordinatorController::class, 'scalesIndex'])->name('index');
@@ -186,7 +187,7 @@ Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['aut
 Route::prefix('admin/administrativo')->name('admin.administrativo.')->middleware(['auth', 'admin.role:administrativo'])->group(function () {
     // Dashboard
     Route::get('/', [AdministrativeController::class, 'dashboard'])->name('dashboard');
-    
+
     // Limited News Management (can't create global news)
     Route::prefix('news')->name('news.')->group(function () {
         Route::get('/', [AdministrativeController::class, 'newsIndex'])->name('index');
@@ -197,7 +198,7 @@ Route::prefix('admin/administrativo')->name('admin.administrativo.')->middleware
         Route::put('/{news}', [AdministrativeController::class, 'newsUpdate'])->name('update');
         Route::delete('/{news}', [AdministrativeController::class, 'newsDestroy'])->name('destroy');
     });
-    
+
     // Limited Events Management
     Route::prefix('events')->name('events.')->group(function () {
         Route::get('/', [AdministrativeController::class, 'eventsIndex'])->name('index');
@@ -208,7 +209,7 @@ Route::prefix('admin/administrativo')->name('admin.administrativo.')->middleware
         Route::put('/{event}', [AdministrativeController::class, 'eventsUpdate'])->name('update');
         Route::delete('/{event}', [AdministrativeController::class, 'eventsDestroy'])->name('destroy');
     });
-    
+
     // Mass Management (view only)
     Route::prefix('masses')->name('masses.')->group(function () {
         Route::get('/', [AdministrativeController::class, 'massesIndex'])->name('index');

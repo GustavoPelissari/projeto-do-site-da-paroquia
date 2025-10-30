@@ -1,7 +1,6 @@
-@extends('layouts.public')
+@extends('layout')
 
 @section('title', 'Eventos - Paróquia São Paulo Apóstolo')
-@section('description', 'Participe dos eventos e atividades da Paróquia São Paulo Apóstolo em Umuarama - PR.')
 
 @section('content')
 <!-- Hero Section -->

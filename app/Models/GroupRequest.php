@@ -31,7 +31,9 @@ class GroupRequest extends Model
 
     // Status constants
     const STATUS_PENDING = 'pending';
+
     const STATUS_APPROVED = 'approved';
+
     const STATUS_REJECTED = 'rejected';
 
     public static function getStatuses(): array
@@ -57,18 +59,18 @@ class GroupRequest extends Model
     {
         return $this->status === self::STATUS_REJECTED;
     }
-    
+
     // Scopes
     public function scopePending($query)
     {
         return $query->where('status', self::STATUS_PENDING);
     }
-    
+
     public function scopeApproved($query)
     {
         return $query->where('status', self::STATUS_APPROVED);
     }
-    
+
     public function scopeRejected($query)
     {
         return $query->where('status', self::STATUS_REJECTED);
@@ -85,7 +87,7 @@ class GroupRequest extends Model
 
         // Adicionar usuário ao grupo
         $this->user->update([
-            'parish_group_id' => $this->group_id
+            'parish_group_id' => $this->group_id,
         ]);
 
         // Criar notificação para o usuário
@@ -98,7 +100,7 @@ class GroupRequest extends Model
                 'group_id' => $this->group_id,
                 'group_name' => $this->group->name,
                 'approved_by' => $approver->name,
-            ]
+            ],
         ]);
 
         // Log de auditoria
@@ -132,7 +134,7 @@ class GroupRequest extends Model
                 'group_name' => $this->group->name,
                 'rejected_by' => $rejector->name,
                 'reason' => $message,
-            ]
+            ],
         ]);
 
         // Log de auditoria

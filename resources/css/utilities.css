@@ -19,8 +19,8 @@
 
 .bg-dourado { background-color: var(--cor-dourado) !important; }
 .bg-dourado-escuro { background-color: var(--cor-dourado-escuro) !important; }
-.bg-vinho { background-color: var(--cor-vinho) !important; }
-.bg-vinho-escuro { background-color: var(--cor-vinho-escuro) !important; }
+.bg-vinho { background-color: var(--cor-vinho) !important; color: white !important; }
+.bg-vinho-escuro { background-color: var(--cor-vinho-escuro) !important; color: white !important; }
 .bg-marrom { background-color: var(--cor-marrom) !important; }
 .bg-marrom-claro { background-color: var(--cor-marrom-claro) !important; }
 .bg-bege { background-color: var(--cor-bege) !important; }
@@ -28,7 +28,7 @@
 .bg-cinza-claro { background-color: var(--cor-cinza-claro) !important; }
 
 .bg-gradiente-dourado { background: var(--gradiente-dourado) !important; }
-.bg-gradiente-vinho { background: var(--gradiente-vinho) !important; }
+.bg-gradiente-vinho { background: var(--gradiente-vinho) !important; color: white !important; }
 .bg-gradiente-celestial { background: var(--gradiente-celestial) !important; }
 
 /* ==========================================

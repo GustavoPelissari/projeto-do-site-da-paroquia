@@ -1,7 +1,6 @@
-@extends('layouts.public')
+@extends('layout')
 
 @section('title', 'Horários de Missas - Paróquia São Paulo Apóstolo')
-@section('description', 'Confira os horários das celebrações eucarísticas na Paróquia São Paulo Apóstolo em Umuarama - PR. Missas aos domingos, quartas, sábados e celebrações especiais.')
 
 @section('content')
 <!-- Hero Section -->
