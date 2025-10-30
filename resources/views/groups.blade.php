@@ -296,25 +296,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endpush
-                                    ✋ Participar
-                                </a>
-                            @endauth
-                        </div>
-                    </article>
-                @endforeach
-            </div>
-        @else
-            <div class="sp-text-center sp-fade-in" style="padding: var(--space-3xl) 0;">
-                <div style="font-size: 4rem; margin-bottom: var(--space-lg); color: var(--sp-teal);">🏗️</div>
-                <h3 class="sp-text-red" style="margin-bottom: var(--space-lg); font-size: var(--text-2xl);">Grupos em Organização</h3>
-                <p class="sp-text-muted" style="font-size: var(--text-lg); max-width: 500px; margin: 0 auto;">
-                    Estamos estruturando nossos grupos paroquiais com muito cuidado e oração. 
-                    Em breve você poderá se inscrever e participar ativamente de nossa missão evangelizadora!
-                </p>
-            </div>
-        @endif
-    </div>
-</section>
 
 <!-- Call to Action Section -->
 <section style="background: var(--gradient-sacred); padding: var(--space-3xl) 0;">
