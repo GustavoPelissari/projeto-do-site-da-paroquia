@@ -2,217 +2,167 @@
 
 @section('title', 'Minhas Notícias - Coordenador')
 
-@push('styles')
-<style>
-    .news-header {
-        background: linear-gradient(135deg, var(--sp-teal-dark) 0%, var(--sp-teal) 100%);
-        color: var(--sp-white);
-        padding: var(--space-xl);
-        border-radius: var(--radius-xl);
-        margin: var(--space-6);
-        text-align: center;
-    }
-    
-    .news-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: var(--space-6);
-        gap: var(--space-4);
-    }
-    
-    .btn {
-        padding: var(--space-3) var(--space-4);
-        border-radius: var(--radius-md);
-        text-decoration: none;
-        font-size: var(--text-sm);
-        font-weight: var(--font-medium);
-        border: none;
-        cursor: pointer;
-        transition: all var(--duration-200) ease;
-    }
-    
-    .btn-primary {
-        background: var(--sp-teal);
-        color: var(--sp-white);
-    }
-    
-    .btn-primary:hover {
-        background: var(--sp-teal-dark);
-        text-decoration: none;
-        color: var(--sp-white);
-    }
-    
-    .news-grid {
-        margin: var(--space-6);
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-4);
-    }
-    
-    .news-card {
-        background: var(--sp-white);
-        border: 1px solid var(--sp-gray-200);
-        border-radius: var(--radius-lg);
-        padding: var(--space-5);
-        box-shadow: var(--shadow-md);
-        transition: all var(--duration-300) ease;
-    }
-    
-    .news-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .news-header-card {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
-        margin-bottom: var(--space-3);
-    }
-    
-    .news-title {
-        font-size: var(--text-lg);
-        font-weight: var(--font-semibold);
-        color: var(--sp-teal-dark);
-        margin: 0;
-    }
-    
-    .news-status {
-        padding: var(--space-1) var(--space-2);
-        border-radius: var(--radius-sm);
-        font-size: var(--text-xs);
-        font-weight: var(--font-medium);
-    }
-    
-    .status-published {
-        background: var(--sp-green-50);
-        color: var(--sp-green-dark);
-        border: 1px solid var(--sp-green);
-    }
-    
-    .status-draft {
-        background: var(--sp-gold-50);
-        color: var(--sp-gold-dark);
-        border: 1px solid var(--sp-gold);
-    }
-    
-    .news-meta {
-        display: flex;
-        gap: var(--space-4);
-        margin-bottom: var(--space-3);
-        font-size: var(--text-sm);
-        color: var(--sp-gray-600);
-    }
-    
-    .news-excerpt {
-        color: var(--sp-gray-700);
-        line-height: var(--leading-relaxed);
-        margin-bottom: var(--space-4);
-    }
-    
-    .news-actions-card {
-        display: flex;
-        gap: var(--space-2);
-    }
-    
-    .btn-secondary {
-        background: var(--sp-gray-100);
-        color: var(--sp-gray-700);
-    }
-    
-    .btn-secondary:hover {
-        background: var(--sp-gray-200);
-        text-decoration: none;
-        color: var(--sp-gray-700);
-    }
-    
-    .empty-state {
-        text-align: center;
-        padding: var(--space-8);
-        background: var(--sp-white);
-        border-radius: var(--radius-xl);
-        margin: var(--space-6);
-        box-shadow: var(--shadow-md);
-    }
-    
-    .empty-icon {
-        font-size: var(--text-6xl);
-        margin-bottom: var(--space-4);
-    }
-    
-    .pagination-wrapper {
-        margin: var(--space-6);
-        display: flex;
-        justify-content: center;
-    }
-</style>
-@endpush
-
 @section('content')
-<div class="news-header">
-    <h1>📰 Minhas Notícias</h1>
-    <p>Gerencie as notícias que você criou</p>
-</div>
-
-<div class="news-actions">
-    <h2 style="margin: 0; color: var(--sp-teal-dark);">Lista de Notícias</h2>
-    <a href="{{ route('admin.coordinator.news.create') }}" class="btn btn-primary">
-        ➕ Nova Notícia
-    </a>
-</div>
-
-<div class="news-grid">
-    @forelse($news as $item)
-        <div class="news-card">
-            <div class="news-header-card">
-                <h3 class="news-title">{{ $item->title }}</h3>
-                <span class="news-status {{ $item->status === 'published' ? 'status-published' : 'status-draft' }}">
-                    {{ $item->status === 'published' ? '✅ Publicada' : '📝 Rascunho' }}
-                </span>
-            </div>
-            
-            <div class="news-meta">
-                <span>📅 {{ $item->created_at->format('d/m/Y H:i') }}</span>
-                @if($item->published_at)
-                    <span>🌐 Publicada em {{ $item->published_at->format('d/m/Y') }}</span>
-                @endif
-            </div>
-            
-            <div class="news-excerpt">
-                {{ $item->excerpt ?: Str::limit($item->content, 200) }}
-            </div>
-            
-            <div class="news-actions-card">
-                <a href="{{ route('admin.coordinator.news.edit', $item) }}" class="btn btn-secondary">
-                    ✏️ Editar
+<div class="container-fluid px-4 py-4">
+    <!-- Header -->
+    <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #8B1538 0%, #6E1530 50%, #8B1538 100%); border-radius: 15px;">
+        <div class="card-body text-white py-4 px-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h1 class="h2 fw-bold mb-2" style="color: #FFFFFF;">
+                        <i class="bi bi-newspaper"></i> Minhas Notícias
+                    </h1>
+                    <p class="mb-0" style="color: #FFD66B;">Gerencie as notícias que você criou</p>
+                </div>
+                <a href="{{ route('admin.coordenador.news.create') }}" class="btn btn-light btn-lg">
+                    <i class="bi bi-plus-circle"></i> Nova Notícia
                 </a>
-                @if($item->status === 'published')
-                    <span class="btn btn-secondary" style="opacity: 0.6; cursor: not-allowed;">
-                        👁️ Publicada
-                    </span>
-                @else
-                    <span class="btn btn-secondary" style="opacity: 0.6; cursor: not-allowed;">
-                        📝 Rascunho
-                    </span>
-                @endif
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-search"></i> Buscar
+                    </label>
+                    <input type="text" name="search" class="form-control" 
+                           placeholder="Título ou conteúdo..." 
+                           value="{{ request('search') }}">
+                </div>
+                
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-funnel"></i> Status
+                    </label>
+                    <select name="status" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Rascunho</option>
+                        <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Publicado</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-3">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-calendar"></i> Período
+                    </label>
+                    <select name="period" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="today" {{ request('period') == 'today' ? 'selected' : '' }}>Hoje</option>
+                        <option value="week" {{ request('period') == 'week' ? 'selected' : '' }}>Esta Semana</option>
+                        <option value="month" {{ request('period') == 'month' ? 'selected' : '' }}>Este Mês</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Filtrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lista de Notícias -->
+    @forelse($news as $item)
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <!-- Imagem -->
+                    <div class="col-md-2">
+                        @if($item->featured_image)
+                            <img src="{{ asset('storage/' . $item->featured_image) }}" 
+                                 class="img-fluid rounded" 
+                                 alt="{{ $item->title }}"
+                                 style="max-height: 100px; object-fit: cover; width: 100%;">
+                        @else
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center" 
+                                 style="height: 100px;">
+                                <i class="bi bi-image text-muted" style="font-size: 2rem;"></i>
+                            </div>
+                        @endif
+                    </div>
+                    
+                    <!-- Conteúdo -->
+                    <div class="col-md-7">
+                        <h5 class="fw-bold mb-2">{{ $item->title }}</h5>
+                        <p class="text-muted mb-2">
+                            {{ Str::limit(strip_tags($item->content), 120) }}
+                        </p>
+                        <div class="d-flex gap-3 align-items-center">
+                            <small class="text-muted">
+                                <i class="bi bi-calendar3"></i>
+                                {{ $item->created_at->format('d/m/Y H:i') }}
+                            </small>
+                            <small class="text-muted">
+                                <i class="bi bi-eye"></i>
+                                {{ $item->views ?? 0 }} visualizações
+                            </small>
+                            @if($item->parish_group_id)
+                                <span class="badge" style="background-color: #8B1538;">
+                                    <i class="bi bi-tag-fill"></i>
+                                    {{ $item->parishGroup->name ?? 'Grupo' }}
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    
+                    <!-- Status e Ações -->
+                    <div class="col-md-3 text-end">
+                        @if($item->status === 'published')
+                            <span class="badge bg-success mb-2 d-block">
+                                <i class="bi bi-check-circle"></i> Publicado
+                            </span>
+                        @else
+                            <span class="badge bg-warning mb-2 d-block">
+                                <i class="bi bi-pencil"></i> Rascunho
+                            </span>
+                        @endif
+                        
+                        <div class="btn-group">
+                            <a href="{{ route('admin.coordenador.news.edit', $item) }}" 
+                               class="btn btn-sm btn-outline-primary" 
+                               title="Editar">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <form action="{{ route('admin.coordenador.news.destroy', $item) }}" 
+                                  method="POST" 
+                                  class="d-inline"
+                                  onsubmit="return confirm('Tem certeza que deseja excluir esta notícia?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     @empty
-        <div class="empty-state">
-            <div class="empty-icon">📰</div>
-            <h3>Nenhuma notícia encontrada</h3>
-            <p>Você ainda não criou nenhuma notícia. Clique no botão acima para criar sua primeira notícia!</p>
-            <a href="{{ route('admin.coordinator.news.create') }}" class="btn btn-primary" style="margin-top: var(--space-4);">
-                ➕ Criar Primeira Notícia
-            </a>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <i class="bi bi-newspaper" style="font-size: 4rem; color: #dee2e6;"></i>
+                </div>
+                <h3 class="fw-bold text-muted mb-3">Nenhuma notícia encontrada</h3>
+                <p class="text-muted mb-4">Você ainda não criou nenhuma notícia. Clique no botão abaixo para criar sua primeira notícia!</p>
+                <a href="{{ route('admin.coordenador.news.create') }}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-plus-circle"></i> Criar Primeira Notícia
+                </a>
+            </div>
         </div>
     @endforelse
-</div>
 
-@if($news->hasPages())
-    <div class="pagination-wrapper">
-        {{ $news->links() }}
-    </div>
-@endif
+    <!-- Paginação -->
+    @if($news->hasPages())
+        <div class="d-flex justify-content-center mt-4">
+            {{ $news->links() }}
+        </div>
+    @endif
+</div>
 @endsection

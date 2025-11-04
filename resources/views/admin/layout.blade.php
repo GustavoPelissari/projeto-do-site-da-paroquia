@@ -87,6 +87,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.coordenador.scales.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.scales.index') }}">
+                                    <i class="bi bi-calendar3"></i> Escalas
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.coordenador.requests.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.requests.index') }}">
                                     <i class="bi bi-envelope"></i> Solicitações
                                 </a>
@@ -225,26 +230,36 @@
         </div>
     </nav>
 
+    <!-- Alertas - SEMPRE ACIMA DO CONTEÚDO -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show m-0 rounded-0 border-0" role="alert" style="margin-top: 72px !important; position: fixed; top: 0; left: 0; right: 0; z-index: 1040;">
+            <div class="container">
+                <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show m-0 rounded-0 border-0" role="alert" style="margin-top: 72px !important; position: fixed; top: 0; left: 0; right: 0; z-index: 1040;">
+            <div class="container">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    @endif
+
+    @if(session('warning'))
+        <div class="alert alert-warning alert-dismissible fade show m-0 rounded-0 border-0" role="alert" style="margin-top: 72px !important; position: fixed; top: 0; left: 0; right: 0; z-index: 1040;">
+            <div class="container">
+                <i class="bi bi-exclamation-circle-fill me-2"></i>{{ session('warning') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    @endif
+
     <!-- Main Content -->
-    <main style="margin-top: 80px;">
-        @if(session('success'))
-            <div class="container mt-3">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="bi bi-check-circle"></i> {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="container mt-3">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-triangle"></i> {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            </div>
-        @endif
-
+    <main style="margin-top: @if(session('success') || session('error') || session('warning')) 140px @else 80px @endif; transition: margin-top 0.3s;">
         @yield('content')
     </main>
 

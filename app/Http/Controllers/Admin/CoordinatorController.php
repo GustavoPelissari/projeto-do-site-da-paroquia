@@ -39,11 +39,15 @@ class CoordinatorController extends Controller
                 'solicitacoes_pendentes' => 0,
             ];
 
-            return view('admin.coordenador.dashboard', compact('stats'))
+            $recent_news = collect();
+            $upcoming_events = collect();
+            $scales = collect();
+
+            return view('admin.coordenador.dashboard', compact('stats', 'recent_news', 'upcoming_events', 'scales'))
                 ->with('warning', 'Você precisa estar associado a um grupo para acessar todos os recursos. Entre em contato com o administrador.');
         }
 
-        $userGroup = $user->group;
+        $userGroup = $user->parishGroup;
 
         // Estatísticas específicas para o grupo do coordenador
         $stats = [
@@ -68,7 +72,13 @@ class CoordinatorController extends Controller
             ->take(5)
             ->get();
 
-        return view('admin.coordenador.dashboard', compact('stats', 'recent_news', 'upcoming_events'));
+        // Escalas do grupo
+        $scales = Scale::where('group_id', $user->parish_group_id)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('admin.coordenador.dashboard', compact('stats', 'recent_news', 'upcoming_events', 'scales'));
     }
 
     /**
@@ -79,11 +89,12 @@ class CoordinatorController extends Controller
         $user = Auth::user();
 
         if (! $user->parish_group_id) {
-            return redirect()->route('admin.coordenador.dashboard')
-                ->with('error', 'Você precisa estar associado a um grupo para gerenciar notícias.');
+            $news = collect(); // Coleção vazia
+            return view('admin.coordenador.news.index', compact('news'))
+                ->with('warning', 'Você precisa estar associado a um grupo para acessar esta área.');
         }
 
-        $news = News::where('group_id', $user->parish_group_id)
+        $news = News::where('parish_group_id', $user->parish_group_id)
             ->latest()
             ->paginate(10);
 
@@ -340,35 +351,26 @@ class CoordinatorController extends Controller
     }
 
     /**
-     * Solicitações de coroinhas
+     * Solicitações de ingresso no grupo
      */
-    public function requests()
+    public function requestsIndex()
     {
-        // Solicitações de novos usuários para ser coroinha
-        $new_requests = GroupRequest::pending()
-            ->whereHas('group', function ($query) {
-                $query->where('name', 'LIKE', '%coroinha%');
-            })
-            ->whereHas('user', function ($query) {
-                $query->where('created_at', '>=', now()->subDays(30)); // Novos usuários
-            })
-            ->with(['user', 'group'])
-            ->latest()
-            ->get();
+        $user = Auth::user();
 
-        // Solicitações de usuários existentes
-        $existing_requests = GroupRequest::pending()
-            ->whereHas('group', function ($query) {
-                $query->where('name', 'LIKE', '%coroinha%');
-            })
-            ->whereHas('user', function ($query) {
-                $query->where('created_at', '<', now()->subDays(30)); // Usuários antigos
-            })
-            ->with(['user', 'group'])
-            ->latest()
-            ->get();
+        if (! $user->parish_group_id) {
+            return view('admin.coordenador.requests.index')
+                ->with('warning', 'Você precisa estar associado a um grupo para gerenciar solicitações.')
+                ->with('requests', collect());
+        }
 
-        return view('admin.coordenador.requests', compact('new_requests', 'existing_requests'));
+        // Solicitações pendentes para o grupo do coordenador
+        $requests = GroupRequest::where('parish_group_id', $user->parish_group_id)
+            ->where('status', 'pending')
+            ->with(['user'])
+            ->latest()
+            ->paginate(10);
+
+        return view('admin.coordenador.requests.index', compact('requests'));
     }
 
     /**
@@ -488,14 +490,14 @@ class CoordinatorController extends Controller
                 ->with('error', 'Você precisa estar associado a um grupo para gerenciar escalas.');
         }
 
-        $group = $user->group;
+        $group = $user->parishGroup;
 
-        if (! $group->requires_scale) {
+        if (!$group || !$group->requires_scale) {
             return redirect()->route('admin.coordenador.dashboard')
                 ->with('warning', 'Seu grupo não possui sistema de escalas habilitado.');
         }
 
-        $scales = Scale::where('parish_group_id', $user->parish_group_id)
+        $scales = Scale::where('group_id', $user->parish_group_id)
             ->with(['uploader'])
             ->latest()
             ->paginate(10);
@@ -512,9 +514,9 @@ class CoordinatorController extends Controller
                 ->with('error', 'Você precisa estar associado a um grupo para enviar escalas.');
         }
 
-        $group = $user->group;
+        $group = $user->parishGroup;
 
-        if (! $group->requires_scale) {
+        if (! $group || ! $group->requires_scale) {
             return redirect()->route('admin.coordenador.dashboard')
                 ->with('warning', 'Seu grupo não possui sistema de escalas habilitado.');
         }
@@ -532,7 +534,7 @@ class CoordinatorController extends Controller
 
         Scale::create([
             'title' => $validated['title'],
-            'parish_group_id' => $user->parish_group_id,
+            'group_id' => $user->parish_group_id,
             'file_path' => $path,
             'original_filename' => $file->getClientOriginalName(),
             'file_size' => $file->getSize(),

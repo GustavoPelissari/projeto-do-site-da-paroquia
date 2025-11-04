@@ -142,11 +142,15 @@ class DevSeeder extends Seeder
         ];
 
         foreach ($groups as $groupData) {
-            $group = Group::firstOrCreate(
-                ['name' => $groupData['name']],
-                $groupData
-            );
-            $this->command->line("  ✅ Grupo: {$group->name}");
+            $group = Group::create($groupData);
+            $this->command->line("  ✅ Grupo criado: {$group->name}");
+        }
+
+        // Associar coordenador ao grupo Coroinhas
+        $grupoCoroinhas = Group::where('name', 'Coroinhas')->first();
+        if ($grupoCoroinhas && $coordenador) {
+            $coordenador->update(['parish_group_id' => $grupoCoroinhas->id]);
+            $this->command->line("  ✅ Coordenador associado ao grupo Coroinhas");
         }
     }
 

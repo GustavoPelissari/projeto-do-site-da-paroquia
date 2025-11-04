@@ -20,8 +20,7 @@ class News extends Model
         'status',
         'featured',
         'user_id',
-        'group_id',
-        'created_by',
+        'parish_group_id',
         'published_at',
     ];
 
@@ -55,14 +54,9 @@ class News extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function group(): BelongsTo
+    public function parishGroup(): BelongsTo
     {
-        return $this->belongsTo(Group::class);
-    }
-
-    public function creator(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(Group::class, 'parish_group_id');
     }
 
     // Helpers

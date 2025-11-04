@@ -179,18 +179,22 @@ Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['aut
         Route::delete('/{schedule}', [CoordinatorController::class, 'schedulesDestroy'])->name('destroy');
     });
 
-    // Mass Management (restricted)
+    // Scales Management (Escalas)
+    Route::prefix('scales')->name('scales.')->group(function () {
+        Route::get('/', [CoordinatorController::class, 'scalesIndex'])->name('index');
+        Route::get('/create', [CoordinatorController::class, 'scalesCreate'])->name('create');
+        Route::post('/', [CoordinatorController::class, 'scalesStore'])->name('store');
+        Route::post('/upload', [CoordinatorController::class, 'scalesUpload'])->name('upload');
+        Route::get('/{scale}/download', [CoordinatorController::class, 'scalesDownload'])->name('download');
+        Route::get('/{scale}/edit', [CoordinatorController::class, 'scalesEdit'])->name('edit');
+        Route::put('/{scale}', [CoordinatorController::class, 'scalesUpdate'])->name('update');
+        Route::delete('/{scale}', [CoordinatorController::class, 'scalesDestroy'])->name('destroy');
+    });
+
+    // Mass Management (restricted - view only)
     Route::prefix('masses')->name('masses.')->group(function () {
         Route::get('/', [CoordinatorController::class, 'massesIndex'])->name('index');
         Route::get('/{mass}', [CoordinatorController::class, 'massesShow'])->name('show');
-    });
-
-    // PDF Scales Management
-    Route::prefix('scales')->name('scales.')->group(function () {
-        Route::get('/', [CoordinatorController::class, 'scalesIndex'])->name('index');
-        Route::post('/upload', [CoordinatorController::class, 'scalesUpload'])->name('upload');
-        Route::get('/{scale}/download', [CoordinatorController::class, 'scalesDownload'])->name('download');
-        Route::delete('/{scale}', [CoordinatorController::class, 'scalesDestroy'])->name('destroy');
     });
 });
 
