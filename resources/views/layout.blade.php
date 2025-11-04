@@ -41,21 +41,106 @@
             <!-- Navigation Menu -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('groups') }}">Grupos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('masses') }}">Missas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('events') }}">Eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('news') }}">Notícias</a>
-                    </li>
+                    @auth
+                        @if(Auth::user()->role->value === 'admin_global')
+                            <!-- Menu Admin Global -->
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.global.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.dashboard') }}">
+                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.global.news.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.news.index') }}">
+                                    <i class="bi bi-newspaper"></i> Gerenciar Notícias
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.global.events.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.events.index') }}">
+                                    <i class="bi bi-calendar-event"></i> Gerenciar Eventos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.global.groups.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.groups.index') }}">
+                                    <i class="bi bi-people"></i> Gerenciar Grupos
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.global.masses.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.masses.index') }}">
+                                    <i class="bi bi-peace"></i> Gerenciar Missas
+                                </a>
+                            </li>
+                        @elseif(Auth::user()->role->value === 'coordenador_de_pastoral')
+                            <!-- Menu Coordenador -->
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.coordenador.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.dashboard') }}">
+                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">
+                                    <i class="bi bi-house-door"></i> Início
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('groups') }}">Grupos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                            </li>
+                        @elseif(Auth::user()->role->value === 'administrativo')
+                            <!-- Menu Administrativo -->
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.administrativo.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.dashboard') }}">
+                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">
+                                    <i class="bi bi-house-door"></i> Início
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('news') }}">Notícias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                            </li>
+                        @else
+                            <!-- Menu Usuário Padrão -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('home') }}">Início</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('groups') }}">Grupos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('events') }}">Eventos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('news') }}">Notícias</a>
+                            </li>
+                        @endif
+                    @else
+                        <!-- Menu não autenticado -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('groups') }}">Grupos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('events') }}">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('news') }}">Notícias</a>
+                        </li>
+                    @endauth
                 </ul>
 
                 <!-- User Menu -->

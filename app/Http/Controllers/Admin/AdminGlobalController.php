@@ -114,7 +114,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
 
-        $users = User::with(['groups'])
+        $users = User::with(['parishGroup'])
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
@@ -147,8 +147,8 @@ class AdminGlobalController extends Controller
                 'total_news' => News::whereYear('created_at', now()->year)->count(),
                 'groups_created' => Group::whereYear('created_at', now()->year)->count(),
             ],
-            'top_groups' => Group::withCount('users')
-                ->orderBy('users_count', 'desc')
+            'top_groups' => Group::withCount('members')
+                ->orderBy('members_count', 'desc')
                 ->take(5)
                 ->get(),
         ];
