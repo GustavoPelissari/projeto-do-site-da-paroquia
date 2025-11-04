@@ -4,24 +4,12 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-paroquia">
-    <div class="hero-content">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h1 class="mb-4">Pastorais e Movimentos</h1>
-                    <p class="lead mb-4">
-                        Conheça nossos grupos paroquiais e encontre seu lugar na nossa comunidade de fé
-                    </p>
-                    <p class="mb-0" style="opacity: 0.9;">
-                        Seguindo o exemplo missionário de São Paulo Apóstolo, cada pastoral tem sua missão 
-                        especial na construção do Reino de Deus.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<x-hero title="Pastorais e Movimentos" subtitle="Conheça nossos grupos paroquiais e encontre seu lugar na nossa comunidade de fé">
+    <p class="mb-0" style="opacity: 0.9;">
+        Seguindo o exemplo missionário de São Paulo Apóstolo, cada pastoral tem sua missão
+        especial na construção do Reino de Deus.
+    </p>
+</x-hero>
 
 <!-- Breadcrumbs -->
 <div class="container mt-4">

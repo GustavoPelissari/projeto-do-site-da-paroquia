@@ -4,24 +4,12 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-paroquia">
-    <div class="hero-content">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h1 class="mb-4">Horários de Missas</h1>
-                    <p class="lead mb-4">
-                        Confira os horários das nossas celebrações eucarísticas
-                    </p>
-                    <p class="mb-0" style="opacity: 0.9;">
-                        "Fazei isto em memória de mim" - Venha participar da mesa eucarística 
-                        e fortalecer sua fé em comunidade.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<x-hero title="Horários de Missas" subtitle="Confira os horários das nossas celebrações eucarísticas">
+    <p class="mb-0" style="opacity: 0.9;">
+        "Fazei isto em memória de mim" - Venha participar da mesa eucarística 
+        e fortalecer sua fé em comunidade.
+    </p>
+</x-hero>
 
 <!-- Breadcrumbs -->
 <div class="container mt-4">

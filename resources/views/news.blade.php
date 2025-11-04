@@ -4,22 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-paroquia" style="min-height: 40vh;">
-    <div class="hero-content">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h1 class="mb-4" style="font-size: 2.5rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
-                        Notícias da Paróquia
-                    </h1>
-                    <p class="lead mb-4" style="font-size: 1.1rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-                        Mantenha-se informado sobre tudo que acontece em nossa comunidade
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<x-hero title="Notícias da Paróquia" subtitle="Mantenha-se informado sobre tudo que acontece em nossa comunidade" minHeight="40vh" />
 
 <!-- Breadcrumbs -->
 <div class="container mt-4">
@@ -41,9 +26,7 @@
                                 <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top w-100" style="height: 220px; object-fit: cover;">
                             </div>
                         @else
-                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 220px; background: #f5f5f5;">
-                                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Paróquia São Paulo Apóstolo" style="max-width: 140px; max-height: 140px; opacity: 0.85;">
-                            </div>
+                            <x-card.placeholder height="220px" />
                         @endif
                         
                         <div class="card-body">

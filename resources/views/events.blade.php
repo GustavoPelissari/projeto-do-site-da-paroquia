@@ -4,22 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-paroquia animate-on-scroll">
-    <div class="hero-content">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h1 class="mb-4" style="font-size: 3rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
-                        Eventos da Paróquia
-                    </h1>
-                    <p class="lead mb-4" style="font-size: 1.25rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
-                        Participe das atividades da nossa comunidade de fé
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<x-hero title="Eventos da Paróquia" subtitle="Participe das atividades da nossa comunidade de fé" animate="true" titleSize="3rem" subtitleSize="1.25rem" />
 
 <!-- Breadcrumbs -->
 <div class="container mt-4">
@@ -39,9 +24,7 @@
                         @if($event->image)
                             <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
                         @else
-                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);">
-                                <i class="bi bi-calendar-event text-white" style="font-size: 3rem;"></i>
-                            </div>
+                            <x-card.placeholder height="200px" bg="linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%)" icon="bi bi-calendar-event" iconClass="text-white" />
                         @endif
                         
                         <div class="card-body d-flex flex-column">
