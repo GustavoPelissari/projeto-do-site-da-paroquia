@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<x-hero title="Eventos da Paróquia" subtitle="Participe das atividades da nossa comunidade de fé" animate="true" titleSize="3rem" subtitleSize="1.25rem" />
+<x-hero title="Eventos da Paróquia" subtitle="Participe das atividades da nossa comunidade de fé" titleSize="3rem" subtitleSize="1.25rem" />
 
 <!-- Breadcrumbs -->
 <div class="container mt-4">
@@ -14,7 +14,7 @@
 </div>
 
 <!-- Eventos -->
-<section class="section-paroquia animate-on-scroll">
+<section class="section-paroquia">
     <div class="container">
         @if($events->count() > 0)
             <div class="row g-4">
@@ -208,4 +208,3 @@
 }
 </style>
 @endpush
-@endsection

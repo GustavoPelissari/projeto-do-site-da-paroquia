@@ -75,6 +75,7 @@ class UserDashboardController extends Controller
             return back()->with('error', 'Arquivo não encontrado.');
         }
 
-        return response()->download($filePath, $scale->file_name);
+        $downloadName = $scale->original_filename ?? basename($scale->file_path ?? '') ?: 'arquivo.pdf';
+        return response()->download($filePath, $downloadName);
     }
 }

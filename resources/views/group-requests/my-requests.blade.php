@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('title', 'Minhas Solicitações - Paróquia São Paulo Apóstolo')
 
@@ -54,7 +54,7 @@
         <section class="sp-section">
             <div class="sp-content-wrapper">
                 @forelse($requests as $request)
-                    <div class="sp-card sp-mb-6" style="border-left: 4px solid {{ $request->status === 'pending' ? 'var(--sp-gold)' : ($request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)') }};">
+                    <div class="sp-card sp-mb-6 status-{{ $request->status }}">
                         
                         {{-- Header --}}
                         <div class="sp-card-header">
@@ -62,7 +62,7 @@
                                 <div>
                                     <h3 class="sp-card-title">🏛️ {{ $request->group->name }}</h3>
                                     <p class="sp-text-sm sp-text-muted">
-                                        Solicitado em {{ $request->created_at->format('d/m/Y \à\s H:i') }}
+                                        Solicitado em {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
                                     </p>
                                 </div>
                                 
@@ -89,7 +89,7 @@
                                     <div class="sp-timeline-content">
                                         <h4 class="sp-font-semibold sp-text-blue-900">📝 Solicitação Enviada</h4>
                                         <p class="sp-text-sm sp-text-muted">
-                                            {{ $request->created_at->format('d/m/Y \à\s H:i') }}
+                                            {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
                                         </p>
                                         @if($request->message)
                                             <div class="sp-card sp-mt-3" style="background: var(--sp-gray-50); border: 1px solid var(--sp-gray-200);">
@@ -105,10 +105,11 @@
 
                                 {{-- Resposta (se houver) --}}
                                 @if($request->approved_at || $request->rejected_at)
+                                    @php $statusAt = $request->approved_at ?? $request->rejected_at; @endphp
                                     <div class="sp-timeline-item">
                                         <div class="sp-timeline-marker sp-timeline-marker-{{ $request->status === 'approved' ? 'green' : 'red' }}"></div>
                                         <div class="sp-timeline-content">
-                                            <h4 class="sp-font-semibold" style="color: {{ $request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)' }};">
+                                            <h4 class="sp-font-semibold status-title-{{ $request->status }}">
                                                 @if($request->status === 'approved')
                                                     ✅ Solicitação Aprovada
                                                 @else
@@ -116,15 +117,17 @@
                                                 @endif
                                             </h4>
                                             <p class="sp-text-sm sp-text-muted">
-                                                {{ ($request->approved_at ?? $request->rejected_at)->format('d/m/Y \à\s H:i') }}
+                                                @if($statusAt)
+                                                    {{ $statusAt->format('d/m/Y') }} às {{ $statusAt->format('H:i') }}
+                                                @endif
                                                 @if($request->approver)
                                                     por {{ $request->approver->name }}
                                                 @endif
                                             </p>
                                             @if($request->response_message)
-                                                <div class="sp-card sp-mt-3" style="background: {{ $request->status === 'approved' ? 'var(--sp-teal-50)' : 'var(--sp-red-50)' }}; border: 1px solid {{ $request->status === 'approved' ? 'var(--sp-teal-200)' : 'var(--sp-red-200)' }};">
-                                                    <div class="sp-card-content" style="padding: var(--space-3);">
-                                                        <p class="sp-text-sm" style="color: {{ $request->status === 'approved' ? 'var(--sp-teal-700)' : 'var(--sp-red-700)' }};">
+                                                <div class="sp-card sp-mt-3 response-chip response-{{ $request->status }}">
+                                                    <div class="sp-card-content response-chip-content">
+                                                        <p class="sp-text-sm response-chip-text response-chip-text-{{ $request->status }}">
                                                             <strong>Resposta:</strong> {{ $request->response_message }}
                                                         </p>
                                                     </div>
@@ -145,7 +148,7 @@
                                         <div class="sp-flex sp-items-center sp-mb-2">
                                             <span class="sp-icon">🏷️</span>
                                             <span class="sp-text-sm">
-                                                <strong>Categoria:</strong> {{ $request->group->getCategoryName() }}
+                                                <strong>Categoria:</strong> {{ $request->group->category_name }}
                                             </span>
                                         </div>
                                         
@@ -239,6 +242,22 @@
 
     {{-- Custom Styles para Timeline --}}
     <style>
+        /* Status border colors for each request card */
+        .status-pending { border-left: 4px solid var(--sp-gold); }
+        .status-approved { border-left: 4px solid var(--sp-teal); }
+        .status-rejected { border-left: 4px solid var(--sp-red); }
+
+        /* Titles per status */
+        .status-title-approved { color: var(--sp-teal); }
+        .status-title-rejected { color: var(--sp-red); }
+
+        /* Response chip styles */
+        .response-chip { border: 1px solid transparent; }
+        .response-chip-content { padding: var(--space-3); }
+        .response-chip.response-approved { background: var(--sp-teal-50); border-color: var(--sp-teal-200); }
+        .response-chip.response-rejected { background: var(--sp-red-50); border-color: var(--sp-red-200); }
+        .response-chip-text-approved { color: var(--sp-teal-700); }
+        .response-chip-text-rejected { color: var(--sp-red-700); }
         .sp-timeline {
             position: relative;
             margin-left: 1rem;
@@ -288,120 +307,3 @@
         }
     </style>
 @endsection
-                                    </div>
-
-                                    <!-- Timeline -->
-                                    <div class="border-l-2 border-gray-200 pl-4 ml-2">
-                                        <!-- Data da solicitação -->
-                                        <div class="mb-4">
-                                            <div class="flex items-center mb-1">
-                                                <div class="w-3 h-3 bg-blue-400 rounded-full -ml-6 mr-3"></div>
-                                                <span class="text-sm font-medium text-gray-900">Solicitação enviada</span>
-                                            </div>
-                                            <p class="text-sm text-gray-600">
-                                                {{ $request->created_at->format('d/m/Y \à\s H:i') }}
-                                            </p>
-                                            @if($request->message)
-                                                <div class="mt-2 bg-gray-50 rounded p-3">
-                                                    <p class="text-sm text-gray-700 italic">
-                                                        "{{ $request->message }}"
-                                                    </p>
-                                                </div>
-                                            @endif
-                                        </div>
-
-                                        <!-- Resposta (se houver) -->
-                                        @if($request->approved_at || $request->rejected_at)
-                                            <div class="mb-4">
-                                                <div class="flex items-center mb-1">
-                                                    @if($request->status === 'approved')
-                                                        <div class="w-3 h-3 bg-green-400 rounded-full -ml-6 mr-3"></div>
-                                                        <span class="text-sm font-medium text-green-700">Solicitação aprovada</span>
-                                                    @else
-                                                        <div class="w-3 h-3 bg-red-400 rounded-full -ml-6 mr-3"></div>
-                                                        <span class="text-sm font-medium text-red-700">Solicitação rejeitada</span>
-                                                    @endif
-                                                </div>
-                                                <p class="text-sm text-gray-600">
-                                                    {{ ($request->approved_at ?? $request->rejected_at)->format('d/m/Y \à\s H:i') }}
-                                                    @if($request->approver)
-                                                        por {{ $request->approver->name }}
-                                                    @endif
-                                                </p>
-                                                @if($request->response_message)
-                                                    <div class="mt-2 bg-{{ $request->status === 'approved' ? 'green' : 'red' }}-50 rounded p-3">
-                                                        <p class="text-sm text-{{ $request->status === 'approved' ? 'green' : 'red' }}-700">
-                                                            <span class="font-medium">Resposta:</span> {{ $request->response_message }}
-                                                        </p>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <!-- Informações do grupo -->
-                                    <div class="mt-4 pt-4 border-t border-gray-200">
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                                            <div>
-                                                <span class="font-medium text-gray-700">Categoria:</span>
-                                                <span class="text-gray-600">{{ $request->group->category_name }}</span>
-                                            </div>
-                                            @if($request->group->requires_scale)
-                                                <div>
-                                                    <span class="font-medium text-gray-700">Tipo:</span>
-                                                    <span class="text-gray-600">Grupo com escala</span>
-                                                </div>
-                                            @endif
-                                            @if($request->group->coordinator_name)
-                                                <div>
-                                                    <span class="font-medium text-gray-700">Coordenador:</span>
-                                                    <span class="text-gray-600">{{ $request->group->coordinator_name }}</span>
-                                                </div>
-                                            @endif
-                                            @if($request->group->coordinator_phone)
-                                                <div>
-                                                    <span class="font-medium text-gray-700">Contato:</span>
-                                                    <span class="text-gray-600">{{ $request->group->coordinator_phone }}</span>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <!-- Ações para solicitações aprovadas -->
-                                    @if($request->status === 'approved')
-                                        <div class="mt-4 pt-4 border-t border-gray-200">
-                                            <div class="bg-green-50 border border-green-200 rounded p-3">
-                                                <p class="text-sm text-green-800">
-                                                    🎉 <span class="font-medium">Parabéns!</span> Você agora faz parte do grupo <strong>{{ $request->group->name }}</strong>.
-                                                    @if($request->group->requires_scale)
-                                                        Fique atento às escalas que serão publicadas.
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <!-- Paginação -->
-                        <div class="mt-6">
-                            {{ $requests->links() }}
-                        </div>
-                    @else
-                        <div class="text-center py-12">
-                            <div class="text-gray-400 text-6xl mb-4">📝</div>
-                            <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhuma solicitação encontrada</h3>
-                            <p class="text-gray-600 mb-6">Você ainda não fez nenhuma solicitação de entrada em grupos.</p>
-                            
-                            <a href="{{ route('group-requests.create') }}" 
-                               class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-                                Solicitar Entrada em Grupo
-                            </a>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>

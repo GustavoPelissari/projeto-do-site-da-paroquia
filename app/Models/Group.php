@@ -54,14 +54,19 @@ class Group extends Model
     {
         $categories = [
             'liturgy' => 'Liturgia',
+            'liturgia' => 'Liturgia',
             'pastoral' => 'Pastoral',
             'service' => 'Serviço',
+            'caridade' => 'Caridade',
             'formation' => 'Formação',
+            'catequese' => 'Catequese',
             'youth' => 'Juventude',
+            'jovens' => 'Juventude',
             'family' => 'Família',
+            'geral' => 'Geral',
         ];
 
-        return $categories[$this->category] ?? $this->category;
+        return $categories[$this->category] ?? ucfirst($this->category);
     }
 
     public function hasCoordinator(): bool
