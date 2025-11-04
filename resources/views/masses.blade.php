@@ -23,6 +23,13 @@
     </div>
 </section>
 
+<!-- Breadcrumbs -->
+<div class="container mt-4">
+    <x-breadcrumbs :items="[
+        ['label' => 'Horários de Missas', 'icon' => 'calendar-week']
+    ]" />
+</div>
+
 <!-- Horários Principais -->
 <section class="section-paroquia">
     <div class="container">

@@ -28,8 +28,8 @@
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo" class="me-2" style="height: 40px;">
                 <div>
-                    <div class="fw-bold text-brand-vinho">São Paulo Apóstolo</div>
-                    <small class="text-muted">Paróquia</small>
+                    <div class="fw-bold text-brand-vinho">Paróquia São Paulo Apóstolo</div>
+                    <small class="text-muted">Diocese de Umuarama</small>
                 </div>
             </a>
 
@@ -51,22 +51,32 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.news.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.news.index') }}">
-                                    <i class="bi bi-newspaper"></i> Gerenciar Notícias
+                                    <i class="bi bi-newspaper"></i> Notícias
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.events.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.events.index') }}">
-                                    <i class="bi bi-calendar-event"></i> Gerenciar Eventos
+                                    <i class="bi bi-calendar-event"></i> Eventos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.groups.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.groups.index') }}">
-                                    <i class="bi bi-people"></i> Gerenciar Grupos
+                                    <i class="bi bi-people"></i> Grupos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.masses.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.masses.index') }}">
-                                    <i class="bi bi-peace"></i> Gerenciar Missas
+                                    <i class="bi bi-peace"></i> Missas
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.global.users') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.users') }}">
+                                    <i class="bi bi-person-gear"></i> Usuários
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('home') || request()->routeIs('groups') || request()->routeIs('masses') || request()->routeIs('events') || request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
+                                    <i class="bi bi-globe"></i> Site Público
                                 </a>
                             </li>
                         @elseif(Auth::user()->role->value === 'coordenador_de_pastoral')
@@ -77,15 +87,24 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">
-                                    <i class="bi bi-house-door"></i> Início
+                                <a class="nav-link {{ request()->routeIs('admin.coordenador.news.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.news.index') }}">
+                                    <i class="bi bi-newspaper"></i> Notícias
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('groups') }}">Grupos</a>
+                                <a class="nav-link {{ request()->routeIs('admin.coordenador.scales.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.scales.index') }}">
+                                    <i class="bi bi-calendar3"></i> Escalas
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                                <a class="nav-link {{ request()->routeIs('admin.coordenador.requests.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.requests.index') }}">
+                                    <i class="bi bi-envelope"></i> Solicitações
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('home') || request()->routeIs('groups') || request()->routeIs('masses') || request()->routeIs('events') || request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
+                                    <i class="bi bi-globe"></i> Site Público
+                                </a>
                             </li>
                         @elseif(Auth::user()->role->value === 'administrativo')
                             <!-- Menu Administrativo -->
@@ -95,50 +114,87 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">
-                                    <i class="bi bi-house-door"></i> Início
+                                <a class="nav-link {{ request()->routeIs('admin.administrativo.news.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.news.index') }}">
+                                    <i class="bi bi-newspaper"></i> Notícias
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('news') }}">Notícias</a>
+                                <a class="nav-link {{ request()->routeIs('admin.administrativo.masses.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.masses.index') }}">
+                                    <i class="bi bi-peace"></i> Missas
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                                <a class="nav-link {{ request()->routeIs('home') || request()->routeIs('groups') || request()->routeIs('masses') || request()->routeIs('events') || request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
+                                    <i class="bi bi-globe"></i> Site Público
+                                </a>
                             </li>
                         @else
                             <!-- Menu Usuário Padrão -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">Início</a>
+                                <a class="nav-link {{ request()->routeIs('user.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('user.dashboard') }}">
+                                    <i class="bi bi-house-heart"></i> Minha Área
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('groups') }}">Grupos</a>
+                                <a class="nav-link {{ request()->routeIs('home') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
+                                    <i class="bi bi-globe"></i> Início
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                                <a class="nav-link {{ request()->routeIs('groups') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('groups') }}">
+                                    <i class="bi bi-people"></i> Grupos
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('events') }}">Eventos</a>
+                                <a class="nav-link {{ request()->routeIs('masses') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('masses') }}">
+                                    <i class="bi bi-calendar-week"></i> Missas
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('news') }}">Notícias</a>
+                                <a class="nav-link {{ request()->routeIs('events') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('events') }}">
+                                    <i class="bi bi-calendar-event"></i> Eventos
+                                </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('news') }}">
+                                    <i class="bi bi-newspaper"></i> Notícias
+                                </a>
+                            </li>
+                            @if(Auth::user()->parishGroup && Auth::user()->parishGroup->id == 5)
+                                <!-- Menu especial para Coroinhas -->
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('user.scales.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('user.scales.index') }}">
+                                        <i class="bi bi-calendar3"></i> Escalas
+                                    </a>
+                                </li>
+                            @endif
                         @endif
                     @else
                         <!-- Menu não autenticado -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">Início</a>
+                            <a class="nav-link {{ request()->routeIs('home') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
+                                <i class="bi bi-house-door"></i> Início
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('groups') }}">Grupos</a>
+                            <a class="nav-link {{ request()->routeIs('groups') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('groups') }}">
+                                <i class="bi bi-people"></i> Grupos
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('masses') }}">Missas</a>
+                            <a class="nav-link {{ request()->routeIs('masses') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('masses') }}">
+                                <i class="bi bi-calendar-week"></i> Missas
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('events') }}">Eventos</a>
+                            <a class="nav-link {{ request()->routeIs('events') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('events') }}">
+                                <i class="bi bi-calendar-event"></i> Eventos
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('news') }}">Notícias</a>
+                            <a class="nav-link {{ request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('news') }}">
+                                <i class="bi bi-newspaper"></i> Notícias
+                            </a>
                         </li>
                     @endauth
                 </ul>
@@ -150,49 +206,108 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                    <i class="bi bi-person"></i> Perfil
-                                </a></li>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <!-- Perfil (sempre visível) -->
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                        <i class="bi bi-person"></i> Meu Perfil
+                                    </a>
+                                </li>
                                 
-                                @if(Auth::user()->role === 'usuario_padrao')
-                                    <li><a class="dropdown-item" href="{{ route('group-requests.create') }}">
-                                        <i class="bi bi-pencil-square"></i> Solicitar Entrada em Grupo
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="{{ route('group-requests.index') }}">
-                                        <i class="bi bi-list-check"></i> Minhas Solicitações
-                                    </a></li>
-                                @endif
-
-                                @if(Auth::user()->role === 'coordenador_de_pastoral')
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.coordenador.dashboard') }}">
-                                        <i class="bi bi-speedometer2"></i> Painel Coordenador
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.coordenador.requests.index') }}">
-                                        <i class="bi bi-envelope"></i> Solicitações Pendentes
-                                    </a></li>
-                                @endif
+                                <li><hr class="dropdown-divider"></li>
                                 
-                                @if(Auth::user()->role === 'administrativo')
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.administrativo.dashboard') }}">
-                                        <i class="bi bi-speedometer2"></i> Painel Administrativo
-                                    </a></li>
-                                @endif
-
-                                @if(Auth::user()->role === 'admin_global')
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.global.dashboard') }}">
-                                        <i class="bi bi-gear"></i> Admin Global
-                                    </a></li>
+                                <!-- Links específicos por role -->
+                                @if(Auth::user()->role->value === 'admin_global')
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.global.dashboard') }}">
+                                            <i class="bi bi-speedometer2"></i> Dashboard Admin
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.global.users') }}">
+                                            <i class="bi bi-person-gear"></i> Gerenciar Usuários
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            <i class="bi bi-globe"></i> Ver Site Público
+                                        </a>
+                                    </li>
+                                @elseif(Auth::user()->role->value === 'coordenador_de_pastoral')
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.coordenador.dashboard') }}">
+                                            <i class="bi bi-speedometer2"></i> Meu Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.coordenador.requests.index') }}">
+                                            <i class="bi bi-envelope"></i> Solicitações Pendentes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.coordenador.scales.index') }}">
+                                            <i class="bi bi-calendar3"></i> Minhas Escalas
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            <i class="bi bi-globe"></i> Ver Site Público
+                                        </a>
+                                    </li>
+                                @elseif(Auth::user()->role->value === 'administrativo')
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.administrativo.dashboard') }}">
+                                            <i class="bi bi-speedometer2"></i> Meu Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.administrativo.news.index') }}">
+                                            <i class="bi bi-newspaper"></i> Gerenciar Notícias
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('admin.administrativo.masses.index') }}">
+                                            <i class="bi bi-peace"></i> Gerenciar Missas
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            <i class="bi bi-globe"></i> Ver Site Público
+                                        </a>
+                                    </li>
+                                @else
+                                    <!-- Usuário Padrão -->
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('user.dashboard') }}">
+                                            <i class="bi bi-house-heart"></i> Minha Área
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('group-requests.create') }}">
+                                            <i class="bi bi-pencil-square"></i> Solicitar Entrada em Grupo
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('group-requests.index') }}">
+                                            <i class="bi bi-list-check"></i> Minhas Solicitações
+                                        </a>
+                                    </li>
+                                    @if(Auth::user()->parishGroup && Auth::user()->parishGroup->id == 5)
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('user.scales.index') }}">
+                                                <i class="bi bi-calendar3"></i> Minhas Escalas
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endif
                                 
                                 <li><hr class="dropdown-divider"></li>
+                                
+                                <!-- Logout (sempre visível) -->
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">
+                                        <button type="submit" class="dropdown-item text-danger">
                                             <i class="bi bi-box-arrow-right"></i> Sair
                                         </button>
                                     </form>
@@ -201,10 +316,14 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Entrar</a>
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <i class="bi bi-box-arrow-in-right"></i> Entrar
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-primary-paroquia" href="{{ route('register') }}">Cadastrar</a>
+                            <a class="nav-link btn-primary-paroquia text-white px-3 py-2 rounded" href="{{ route('register') }}">
+                                <i class="bi bi-person-plus"></i> Cadastrar
+                            </a>
                         </li>
                     @endauth
                 </ul>

@@ -96,6 +96,18 @@ class DevSeeder extends Seeder
             ]
         );
         $this->command->line("  ✅ Usuário padrão: {$usuario->email}");
+
+        // Usuário Coroinha (para testar visualização de escalas)
+        $coroinha = User::firstOrCreate(
+            ['email' => 'pedro.coroinha@paroquia.test'],
+            [
+                'name' => 'Pedro Coroinha',
+                'email_verified_at' => now(),
+                'password' => Hash::make('User123!'),
+                'role' => 'usuario_padrao',
+            ]
+        );
+        $this->command->line("  ✅ Usuário Coroinha: {$coroinha->email}");
     }
 
     private function createGroups(): void
@@ -151,6 +163,13 @@ class DevSeeder extends Seeder
         if ($grupoCoroinhas && $coordenador) {
             $coordenador->update(['parish_group_id' => $grupoCoroinhas->id]);
             $this->command->line("  ✅ Coordenador associado ao grupo Coroinhas");
+        }
+
+        // Associar usuário Pedro ao grupo Coroinhas
+        $coroinha = User::where('email', 'pedro.coroinha@paroquia.test')->first();
+        if ($grupoCoroinhas && $coroinha) {
+            $coroinha->update(['parish_group_id' => $grupoCoroinhas->id]);
+            $this->command->line("  ✅ Usuário Pedro associado ao grupo Coroinhas");
         }
     }
 

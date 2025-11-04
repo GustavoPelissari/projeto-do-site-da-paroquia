@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CoordinatorController;
 use App\Http\Controllers\GroupRequestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ Route::get('/groups', [HomeController::class, 'groups'])->name('groups');
 Route::get('/masses', [HomeController::class, 'masses'])->name('masses');
 Route::get('/events', [HomeController::class, 'events'])->name('events');
 Route::get('/news', [HomeController::class, 'news'])->name('news');
+Route::get('/news-test', function() {
+    $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
+    return view('news-test', compact('news'));
+});
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Group requests routes (for authenticated users)
@@ -53,8 +58,10 @@ Route::get('/dashboard', function () {
                 return redirect()->route('admin.coordenador.dashboard');
             case 'administrativo':
                 return redirect()->route('admin.administrativo.dashboard');
+            case 'usuario_padrao':
+                return redirect()->route('user.dashboard');
             default:
-                return redirect()->route('login')->with('error', 'Você não tem permissão para acessar a área administrativa.');
+                return redirect()->route('home');
         }
     }
 
@@ -65,6 +72,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| User Dashboard (usuario_padrao role)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [UserDashboardController::class, 'dashboard'])->name('dashboard');
+    
+    // Scales (apenas visualização para usuários do grupo Coroinhas)
+    Route::prefix('scales')->name('scales.')->group(function () {
+        Route::get('/', [UserDashboardController::class, 'scalesIndex'])->name('index');
+        Route::get('/{scale}/download', [UserDashboardController::class, 'scalesDownload'])->name('download');
+    });
 });
 
 /*

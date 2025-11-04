@@ -102,6 +102,17 @@ class Group extends Model
             ->get();
     }
 
+    public function isFull(): bool
+    {
+        // Se não tem limite de membros, nunca está cheio
+        if (!isset($this->max_members) || $this->max_members === null) {
+            return false;
+        }
+
+        // Verifica se o número de membros atingiu o limite
+        return $this->getMembersCount() >= $this->max_members;
+    }
+
     // Relationships
     public function coordinator(): BelongsTo
     {

@@ -28,8 +28,8 @@
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo" class="me-2" style="height: 40px;">
                 <div>
-                    <div class="fw-bold text-brand-vinho">São Paulo Apóstolo</div>
-                    <small class="text-muted">Paróquia</small>
+                    <div class="fw-bold text-brand-vinho">Paróquia São Paulo Apóstolo</div>
+                    <small class="text-muted">Diocese de Umuarama</small>
                 </div>
             </a>
 

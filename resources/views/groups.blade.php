@@ -23,6 +23,13 @@
     </div>
 </section>
 
+<!-- Breadcrumbs -->
+<div class="container mt-4">
+    <x-breadcrumbs :items="[
+        ['label' => 'Grupos e Pastorais', 'icon' => 'people']
+    ]" />
+</div>
+
 <!-- Filtros de Categoria -->
 <section class="py-4" style="background: var(--bege-claro);">
     <div class="container">

@@ -21,6 +21,13 @@
     </div>
 </section>
 
+<!-- Breadcrumbs -->
+<div class="container mt-4">
+    <x-breadcrumbs :items="[
+        ['label' => 'Eventos', 'icon' => 'calendar-event']
+    ]" />
+</div>
+
 <!-- Eventos -->
 <section class="section-paroquia animate-on-scroll">
     <div class="container">
@@ -218,73 +225,4 @@
 }
 </style>
 @endpush
-                            <span class="mx-2">•</span>
-                            <span>{{ $event->start_date->format('H:i') }}</span>
-                        </div>
-                        
-                        <span class="px-3 py-1 text-xs rounded 
-                            @switch($event->status)
-                                @case('confirmed') bg-green-100 text-green-800 @break
-                                @case('scheduled') bg-blue-100 text-blue-800 @break
-                                @case('cancelled') bg-red-100 text-red-800 @break
-                                @default bg-yellow-100 text-yellow-800
-                            @endswitch">
-                            @switch($event->status)
-                                @case('confirmed') Confirmado @break
-                                @case('scheduled') Agendado @break
-                                @case('cancelled') Cancelado @break
-                                @default {{ ucfirst($event->status) }}
-                            @endswitch
-                        </span>
-                    </div>
-                    
-                    <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ $event->title }}</h3>
-                    
-                    @if($event->location)
-                        <div class="flex items-center text-sm text-gray-600 mb-3">
-                            <span>📍</span>
-                            <span class="ml-2">{{ $event->location }}</span>
-                        </div>
-                    @endif
-                    
-                    <p class="text-gray-600 mb-4">{{ Str::limit($event->description, 120) }}</p>
-                    
-                    @if($event->end_date)
-                        <div class="text-sm text-gray-500 mb-4">
-                            <strong>Término:</strong> {{ $event->end_date->format('d/m/Y H:i') }}
-                        </div>
-                    @endif
-                    
-                    <div class="flex justify-between items-center">
-                        @if($event->max_participants)
-                            <span class="text-sm text-gray-500">
-                                Máx: {{ $event->max_participants }} pessoas
-                            </span>
-                        @else
-                            <span class="text-sm text-gray-500">Sem limite de participantes</span>
-                        @endif
-                        
-                        @if($event->requirements)
-                            <span class="text-xs text-blue-600 cursor-help" title="{{ $event->requirements }}">
-                                ℹ️ Requisitos
-                            </span>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <!-- Pagination -->
-        <div class="mt-12">
-            {{ $events->links() }}
-        </div>
-    @else
-        <div class="text-center py-12">
-            <div class="text-gray-400 text-6xl mb-4">📅</div>
-            <h3 class="text-2xl font-medium text-gray-900 mb-2">Nenhum evento programado</h3>
-            <p class="text-gray-600">Volte em breve para conferir os próximos eventos da nossa paróquia.</p>
-        </div>
-    @endif
-</div>
 @endsection

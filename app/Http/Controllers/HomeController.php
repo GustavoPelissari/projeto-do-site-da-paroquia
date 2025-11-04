@@ -53,7 +53,10 @@ class HomeController extends Controller
 
     public function news()
     {
-        $news = News::latest()->paginate(10);
+        $news = News::where('status', 'published')
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->paginate(12);
 
         return view('news', compact('news'));
     }

@@ -30,6 +30,15 @@
   - Visualizar conteúdos
   - Solicitar ingresso em grupos
 
+### 💚 **USUÁRIO COROINHA**
+- **Email:** `pedro.coroinha@paroquia.test`
+- **Senha:** `User123!`
+- **Grupo:** Coroinhas
+- **Permissões:**
+  - Visualizar conteúdos
+  - Visualizar escalas do grupo (apenas leitura)
+  - Baixar PDFs das escalas
+
 ---
 
 ## Estrutura de Permissões

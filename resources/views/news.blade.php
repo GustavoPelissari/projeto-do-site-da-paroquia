@@ -4,15 +4,15 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-paroquia animate-on-scroll">
+<section class="hero-paroquia animate-on-scroll" style="min-height: 40vh;">
     <div class="hero-content">
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
-                    <h1 class="mb-4" style="font-size: 3rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+                    <h1 class="mb-4" style="font-size: 2.5rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
                         Notícias da Paróquia
                     </h1>
-                    <p class="lead mb-4" style="font-size: 1.25rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+                    <p class="lead mb-4" style="font-size: 1.1rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
                         Mantenha-se informado sobre tudo que acontece em nossa comunidade
                     </p>
                 </div>
@@ -21,16 +21,23 @@
     </div>
 </section>
 
+<!-- Breadcrumbs -->
+<div class="container mt-4">
+    <x-breadcrumbs :items="[
+        ['label' => 'Notícias', 'icon' => 'newspaper']
+    ]" />
+</div>
+
 <!-- Notícias -->
 <section class="section-paroquia animate-on-scroll">
     <div class="container">
-        @if($news->count() > 0)
+        @if($news->total() > 0)
             <div class="row g-4">
                 @foreach($news as $item)
                 <div class="col-lg-6 col-xl-4">
                     <div class="card-paroquia h-100">
-                        @if($item->image)
-                            <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        @if($item->featured_image)
+                            <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
                         @else
                             <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);">
                                 <i class="bi bi-newspaper text-white" style="font-size: 3rem;"></i>
@@ -40,16 +47,18 @@
                         <div class="card-body d-flex flex-column">
                             <div class="d-flex align-items-center mb-3 text-muted">
                                 <i class="bi bi-calendar3 me-2"></i>
-                                <small>{{ $item->created_at->format('d/m/Y') }}</small>
-                                @if($item->category)
-                                    <span class="badge bg-secondary ms-auto">{{ $item->category }}</span>
+                                <small>{{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}</small>
+                                @if($item->parishGroup)
+                                    <span class="badge bg-success ms-auto">
+                                        <i class="bi bi-people"></i> {{ $item->parishGroup->name }}
+                                    </span>
                                 @endif
                             </div>
                             
                             <h5 class="card-title text-vermelho">{{ $item->title }}</h5>
                             
-                            @if($item->summary)
-                                <p class="card-text flex-grow-1">{{ Str::limit($item->summary, 150) }}</p>
+                            @if($item->excerpt)
+                                <p class="card-text flex-grow-1">{{ Str::limit($item->excerpt, 150) }}</p>
                             @else
                                 <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($item->content), 150) }}</p>
                             @endif
@@ -72,15 +81,17 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                @if($item->image)
-                                    <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title }}" class="img-fluid rounded mb-3">
+                                @if($item->featured_image)
+                                    <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="img-fluid rounded mb-3">
                                 @endif
                                 
                                 <div class="d-flex align-items-center mb-3 text-muted">
                                     <i class="bi bi-calendar3 me-2"></i>
-                                    <small>{{ $item->created_at->format('d/m/Y \à\s H:i') }}</small>
-                                    @if($item->category)
-                                        <span class="badge bg-secondary ms-auto">{{ $item->category }}</span>
+                                    <small>{{ $item->published_at ? $item->published_at->format('d/m/Y \à\s H:i') : $item->created_at->format('d/m/Y \à\s H:i') }}</small>
+                                    @if($item->parishGroup)
+                                        <span class="badge bg-success ms-auto">
+                                            <i class="bi bi-people"></i> {{ $item->parishGroup->name }}
+                                        </span>
                                     @endif
                                 </div>
                                 
