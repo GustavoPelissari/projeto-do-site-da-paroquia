@@ -19,6 +19,16 @@
     
     <!-- Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <style>
+        .main-content {
+            margin-top: 80px;
+            transition: margin-top 0.3s;
+        }
+        .main-content.has-alert {
+            margin-top: 140px;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -259,7 +269,7 @@
     @endif
 
     <!-- Main Content -->
-    <main style="margin-top: @if(session('success') || session('error') || session('warning')) 140px @else 80px @endif; transition: margin-top 0.3s;">
+    <main class="main-content {{ (session('success') || session('error') || session('warning')) ? 'has-alert' : '' }}">
         @yield('content')
     </main>
 

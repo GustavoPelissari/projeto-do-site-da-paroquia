@@ -28,17 +28,9 @@
     <div class="row g-4">
         @forelse($users as $user)
             <div class="col-md-6 col-lg-4">
-                <div class="card border-0 shadow-sm h-100" style="border-radius: 15px; overflow: hidden; transition: all 0.3s ease;">
+                <div class="card border-0 shadow-sm h-100 user-card">
                     <!-- Card Header com cor baseada no role -->
-                    @php
-                        $headerColor = match($user->role->value) {
-                            'admin_global' => 'linear-gradient(135deg, #8B1538, #6E1530)',
-                            'coordenador_de_pastoral' => 'linear-gradient(135deg, #2C5F2D, #1E4620)',
-                            'administrativo' => 'linear-gradient(135deg, #1E3A8A, #1E293B)',
-                            default => 'linear-gradient(135deg, #6B7280, #4B5563)'
-                        };
-                    @endphp
-                    <div class="card-header border-0 text-white py-3" style="background: {{ $headerColor }};">
+                    <div class="card-header border-0 text-white py-3 card-header-{{ $user->role->value }}">
                         <div class="d-flex align-items-center">
                             <div class="bg-white bg-opacity-20 p-2 rounded-circle me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
                                 <span class="fw-bold" style="font-size: 1.2rem; color: #FFFFFF;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
@@ -103,12 +95,14 @@
                     <!-- Card Footer -->
                     <div class="card-footer bg-light border-0">
                         <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline-primary flex-fill" onclick="alert('Funcionalidade em desenvolvimento')">
+                            <button class="btn btn-sm btn-outline-primary flex-fill btn-edit-user">
                                 <i class="bi bi-pencil"></i> Editar
                             </button>
                             @if($user->role->value !== 'admin_global')
-                                <button class="btn btn-sm btn-outline-secondary flex-fill" 
-                                        onclick="showChangeRoleModal({{ $user->id }}, '{{ $user->name }}', '{{ $user->role->value }}')">
+                                <button class="btn btn-sm btn-outline-secondary flex-fill btn-change-role" 
+                                        data-user-id="{{ $user->id }}" 
+                                        data-user-name="{{ $user->name }}" 
+                                        data-user-role="{{ $user->role->value }}">
                                     <i class="bi bi-arrow-repeat"></i> Função
                                 </button>
                             @endif
@@ -178,20 +172,58 @@
 </div>
 
 <script>
-function showChangeRoleModal(userId, userName, currentRole) {
-    document.getElementById('userName').textContent = userName;
-    document.getElementById('changeRoleForm').action = `/admin/users/${userId}/role`;
-    document.querySelector('#changeRoleModal select[name="role"]').value = currentRole;
+// Event listener para botões de edição
+document.addEventListener('DOMContentLoaded', function() {
+    // Botões de editar
+    document.querySelectorAll('.btn-edit-user').forEach(btn => {
+        btn.addEventListener('click', () => alert('Funcionalidade em desenvolvimento'));
+    });
     
-    const modal = new bootstrap.Modal(document.getElementById('changeRoleModal'));
-    modal.show();
-}
+    // Botões de alterar função
+    document.querySelectorAll('.btn-change-role').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const userId = this.dataset.userId;
+            const userName = this.dataset.userName;
+            const currentRole = this.dataset.userRole;
+            
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('changeRoleForm').action = `/admin/users/${userId}/role`;
+            document.querySelector('#changeRoleModal select[name="role"]').value = currentRole;
+            
+            const modal = new bootstrap.Modal(document.getElementById('changeRoleModal'));
+            modal.show();
+        });
+    });
+});
 </script>
 
 <style>
-.card:hover {
+.user-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.user-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(139, 21, 56, 0.15) !important;
+}
+
+/* Cores dos headers por role */
+.card-header-admin_global {
+    background: linear-gradient(135deg, #8B1538, #6E1530);
+}
+
+.card-header-coordenador_de_pastoral {
+    background: linear-gradient(135deg, #2C5F2D, #1E4620);
+}
+
+.card-header-administrativo {
+    background: linear-gradient(135deg, #1E3A8A, #1E293B);
+}
+
+.card-header-usuario_padrao {
+    background: linear-gradient(135deg, #6B7280, #4B5563);
 }
 
 .bg-brand-vinho {
