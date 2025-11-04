@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-paroquia animate-on-scroll" style="min-height: 40vh;">
+<section class="hero-paroquia" style="min-height: 40vh;">
     <div class="hero-content">
         <div class="container">
             <div class="row justify-content-center text-center">
@@ -29,43 +29,45 @@
 </div>
 
 <!-- Notícias -->
-<section class="section-paroquia animate-on-scroll">
+<section class="section-paroquia">
     <div class="container">
         @if($news->total() > 0)
             <div class="row g-4">
                 @foreach($news as $item)
-                <div class="col-lg-6 col-xl-4">
-                    <div class="card-paroquia h-100">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-paroquia">
                         @if($item->featured_image)
-                            <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <div style="overflow: hidden; height: 220px;">
+                                <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top w-100" style="height: 220px; object-fit: cover;">
+                            </div>
                         @else
-                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);">
-                                <i class="bi bi-newspaper text-white" style="font-size: 3rem;"></i>
+                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 220px; background: #f5f5f5;">
+                                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Paróquia São Paulo Apóstolo" style="max-width: 140px; max-height: 140px; opacity: 0.85;">
                             </div>
                         @endif
                         
-                        <div class="card-body d-flex flex-column">
-                            <div class="d-flex align-items-center mb-3 text-muted">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3" style="font-size: 0.85rem; color: #888;">
                                 <i class="bi bi-calendar3 me-2"></i>
-                                <small>{{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}</small>
+                                <span>{{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}</span>
                                 @if($item->parishGroup)
                                     <span class="badge bg-success ms-auto">
-                                        <i class="bi bi-people"></i> {{ $item->parishGroup->name }}
+                                        <i class="bi bi-people me-1"></i>{{ $item->parishGroup->name }}
                                     </span>
                                 @endif
                             </div>
                             
-                            <h5 class="card-title text-vermelho">{{ $item->title }}</h5>
+                            <h5 class="card-title">{{ $item->title }}</h5>
                             
                             @if($item->excerpt)
-                                <p class="card-text flex-grow-1">{{ Str::limit($item->excerpt, 150) }}</p>
+                                <p class="card-text flex-grow-1">{{ Str::limit($item->excerpt, 120) }}</p>
                             @else
-                                <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($item->content), 150) }}</p>
+                                <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($item->content), 120) }}</p>
                             @endif
                             
-                            <div class="mt-auto">
-                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">
-                                    <i class="bi bi-eye me-1"></i>Ler Completa
+                            <div class="mt-auto pt-3">
+                                <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">
+                                    <i class="bi bi-book-half me-2"></i>Ler Notícia Completa
                                 </button>
                             </div>
                         </div>

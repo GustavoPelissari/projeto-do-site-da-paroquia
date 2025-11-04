@@ -200,17 +200,59 @@ h6 { font-size: 1.125rem; }
 ================================ */
 .card-paroquia {
     background: white;
-    border-radius: 24px;
-    border: none;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition-base);
+    border-radius: 16px;
+    border: 1px solid rgba(139, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
     overflow: hidden;
     position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-paroquia:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(139, 0, 0, 0.15);
+    border-color: rgba(139, 0, 0, 0.2);
+}
+
+.card-paroquia .card-img-top {
+    border-radius: 0;
+    transition: transform 0.3s ease;
+}
+
+.card-paroquia:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-paroquia .card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-paroquia .card-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: var(--brand-vinho);
+}
+
+.card-paroquia .card-text {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.card-paroquia .badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    font-weight: 500;
 }
 
 .card-header-paroquia {
