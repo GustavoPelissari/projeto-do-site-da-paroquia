@@ -66,93 +66,72 @@
             
             <div class="row g-4" id="groups-container">
                 @foreach($groups as $group)
-                <div class="col-lg-4 col-md-6 group-card-item animate-on-scroll" 
+                <div class="col-lg-4 col-md-6 group-card-item" 
                      data-category="{{ $group->category ?? 'geral' }}">
-                    <div class="card-paroquia h-100">
+                    <div class="card-paroquia h-100 d-flex flex-column">
                         <div class="card-header-paroquia text-center">
                             <div class="mb-3">
                                 @switch($group->category ?? 'geral')
                                     @case('catequese')
+                                    @case('formation')
                                         <i data-lucide="graduation-cap" class="icon-lg text-vermelho"></i>
                                         @break
                                     @case('liturgia')
+                                    @case('liturgy')
                                         <i data-lucide="church" class="icon-lg text-vermelho"></i>
                                         @break
                                     @case('caridade')
+                                    @case('service')
                                         <i data-lucide="heart-handshake" class="icon-lg text-vermelho"></i>
                                         @break
                                     @case('jovens')
+                                    @case('youth')
                                         <i data-lucide="zap" class="icon-lg text-vermelho"></i>
+                                        @break
+                                    @case('family')
+                                        <i data-lucide="home" class="icon-lg text-vermelho"></i>
+                                        @break
+                                    @case('pastoral')
+                                        <i data-lucide="users" class="icon-lg text-vermelho"></i>
                                         @break
                                     @default
                                         <i data-lucide="users" class="icon-lg text-vermelho"></i>
                                 @endswitch
-
-                                <!-- Hero Section -->
-                                ...existing code...
-                                <!-- Call to Action Section -->
-                                <section ...> ... </section>
-                                <!-- Information Section -->
-                                <section ...> ... </section>
-                                <!-- Contact Section -->
-                                <section ...> ... </section>
-                                ...existing code...
-                                @endsection
-
-                                @push('scripts')
-                                <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    // Filtro de categorias
-                                    const categoryFilters = document.querySelectorAll('[data-category]');
-                                    const groupCards = document.querySelectorAll('.group-card-item');
-                                    categoryFilters.forEach(filter => {
-                                        filter.addEventListener('click', function() {
-                                            const category = this.dataset.category;
-                                            // Atualizar botões ativos
-                                            categoryFilters.forEach(btn => btn.classList.remove('active'));
-                                            this.classList.add('active');
-                                            // Filtrar cards
-                                            groupCards.forEach(card => {
-                                                const cardCategory = card.dataset.category;
-                                                if (category === 'all' || cardCategory === category) {
-                                                    card.style.display = 'block';
-                                                    card.classList.add('animate-fade-in');
-                                                } else {
-                                                    card.style.display = 'none';
-                                                }
-                                            });
-                                        });
-                                    });
-                                    // Inicializar Lucide icons
-                                    if (typeof lucide !== 'undefined') {
-                                        lucide.createIcons();
-                                    }
-                                });
-                                </script>
-                                @endpush
-@auth
-    @if($group->isFull())
-        <button class="btn-paroquia btn-secondary-paroquia w-100" disabled>
-            <i data-lucide="user-x" class="icon-paroquia"></i>
-            Grupo Completo
-        </button>
-    @else
-        <a href="{{ route('group-requests.create', ['group' => $group->id]) }}" 
-           class="btn-paroquia btn-primary-paroquia w-100">
-            <i data-lucide="user-plus" class="icon-paroquia"></i>
-            Participar
-        </a>
-    @endif
-@endauth
-@guest
-    <a href="{{ route('login') }}" 
-       class="btn-paroquia btn-outline-paroquia w-100">
-        <i data-lucide="log-in" class="icon-paroquia"></i>
-        Entrar para Participar
-    </a>
-@endguest
-                                </div>
                             </div>
+                            <h5 class="card-title-paroquia mb-2">{{ $group->name }}</h5>
+                            <span class="badge rounded-pill bg-light text-dark">{{ $group->category_name ?? ($group->category ?? 'Geral') }}</span>
+                        </div>
+                        <div class="card-body-paroquia flex-grow-1">
+                            <p class="text-muted mb-3">{{ \Illuminate\Support\Str::limit($group->description, 140) }}</p>
+                            @if(!empty($group->meeting_info))
+                                <div class="small text-muted d-flex align-items-center gap-2">
+                                    <i data-lucide="calendar"></i>
+                                    <span>{{ $group->meeting_info }}</span>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="card-footer bg-transparent border-0 mt-auto">
+                            @auth
+                                @if($group->isFull())
+                                    <button class="btn-paroquia btn-secondary-paroquia w-100" disabled>
+                                        <i data-lucide="user-x" class="icon-paroquia"></i>
+                                        Grupo Completo
+                                    </button>
+                                @else
+                                    <a href="{{ route('group-requests.create', ['group' => $group->id]) }}" 
+                                       class="btn-paroquia btn-primary-paroquia w-100">
+                                        <i data-lucide="user-plus" class="icon-paroquia"></i>
+                                        Participar
+                                    </a>
+                                @endif
+                            @endauth
+                            @guest
+                                <a href="{{ route('login') }}" 
+                                   class="btn-paroquia btn-outline-paroquia w-100">
+                                    <i data-lucide="log-in" class="icon-paroquia"></i>
+                                    Entrar para Participar
+                                </a>
+                            @endguest
                         </div>
                     </div>
                 </div>
@@ -208,7 +187,7 @@
                                         </div>
                                         <div>
                                             <h6 class="mb-1">Solicite Participação</h6>
-                                            <small class="text-muted">Clique em "Participar" após fazer login</small>
+                                            <small class="text-muted">Clique em \"Participar\" após fazer login</small>
                                         </div>
                                     </div>
                                 </div>
@@ -293,130 +272,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 @endpush
-
-<!-- Call to Action Section -->
-<section style="background: var(--gradient-sacred); padding: var(--space-3xl) 0;">
-    <div class="sp-container sp-text-center" style="color: var(--sp-white);">
-        <h2 style="color: var(--sp-white); margin-bottom: var(--space-lg); font-size: var(--text-3xl);">Quer Fazer Parte?</h2>
-        <p style="color: var(--sp-gold-light); font-size: var(--text-xl); margin-bottom: var(--space-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">
-            Junte-se à nossa comunidade paroquial! Como São Paulo nos ensinou, cada um tem seus dons únicos 
-            para servir no Corpo de Cristo.
-        </p>
-        
-        <div class="sp-flex sp-flex-center" style="gap: var(--space-lg); flex-wrap: wrap;">
-            @guest
-                <a href="{{ route('register') }}" class="sp-btn sp-btn-gold sp-btn-lg">
-                    🚀 Cadastre-se na Paróquia
-                </a>
-                <a href="{{ route('login') }}" class="sp-btn sp-btn-outline sp-btn-lg" style="border-color: var(--sp-white); color: var(--sp-white);">
-                    🔑 Já sou Cadastrado
-                </a>
-            @else
-                <a href="{{ route('group-requests.create') }}" class="sp-btn sp-btn-gold sp-btn-lg">
-                    <i class="bi bi-person-raised-hand"></i> Solicitar Participação
-                </a>
-                <a href="{{ route('group-requests.my-requests') }}" class="sp-btn sp-btn-outline sp-btn-lg" style="border-color: var(--sp-white); color: var(--sp-white);">
-                    <i class="bi bi-list-check"></i> Minhas Solicitações
-                </a>
-            @endguest
-        </div>
-    </div>
-</section>
-
-<!-- Information Section -->
-<section style="background: var(--sp-white); padding: var(--space-3xl) 0;">
-    <div class="sp-container">
-        <div class="sp-grid sp-grid-2" style="align-items: center; gap: var(--space-2xl);">
-            <div>
-                <h3 class="sp-text-red" style="margin-bottom: var(--space-lg); font-size: var(--text-2xl);">Como Participar</h3>
-                <div style="margin-bottom: var(--space-lg);">
-                    <h4 class="sp-text-teal" style="margin-bottom: var(--space-sm); font-size: var(--text-lg);">1. Cadastre-se no Sistema</h4>
-                    <p class="sp-text-muted">
-                        Faça seu cadastro em nosso sistema paroquial com seus dados pessoais.
-                    </p>
-                </div>
-                
-                <div style="margin-bottom: var(--space-lg);">
-                    <h4 class="sp-text-teal" style="margin-bottom: var(--space-sm); font-size: var(--text-lg);">2. Escolha seu Grupo</h4>
-                    <p class="sp-text-muted">
-                        Conheça nossos grupos e pastorais para encontrar aquele que mais se alinha com seu carisma.
-                    </p>
-                </div>
-                
-                <div style="margin-bottom: var(--space-lg);">
-                    <h4 class="sp-text-teal" style="margin-bottom: var(--space-sm); font-size: var(--text-lg);">3. Solicite Participação</h4>
-                    <p class="sp-text-muted">
-                        Envie sua solicitação através do sistema e aguarde o contato do coordenador do grupo.
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 class="sp-text-teal" style="margin-bottom: var(--space-sm); font-size: var(--text-lg);">4. Participe e Sirva</h4>
-                    <p class="sp-text-muted">
-                        Integre-se às atividades do grupo e contribua com seus dons para a missão evangelizadora.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="sp-text-center">
-                <div style="width: 180px; height: 180px; background: var(--gradient-gold); border-radius: 50%; margin: 0 auto var(--space-lg); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--sp-white); box-shadow: var(--shadow-gold);">
-                    ⛪
-                </div>
-                <blockquote class="sp-quote-sacred">
-                    "Há diversidade de carismas, mas o Espírito é o mesmo"<br>
-                    <cite style="font-size: var(--text-sm); color: var(--sp-gray-500);">1 Coríntios 12:4</cite>
-                </blockquote>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section style="background: var(--sp-ivory); padding: var(--space-3xl) 0;">
-    <div class="sp-container">
-        <h2 class="sp-text-center sp-text-red" style="margin-bottom: var(--space-lg); font-size: var(--text-3xl);">Dúvidas sobre os Grupos?</h2>
-        <p class="sp-text-center sp-text-muted" style="max-width: 600px; margin: 0 auto var(--space-2xl);">
-            Nossa equipe pastoral está pronta para ajudar você a encontrar o grupo ideal para sua caminhada de fé.
-        </p>
-        
-        <div class="sp-grid sp-grid-responsive" style="gap: var(--space-xl);">
-            <div class="sp-card sp-text-center">
-                <div style="font-size: 3rem; margin-bottom: var(--space-md);">📧</div>
-                <h3 class="sp-card-title">Email dos Grupos</h3>
-                <p class="sp-card-content">
-                    <a href="mailto:grupos@saopauloapostolo.com" class="sp-link" style="color: var(--sp-red);">
-                        grupos@saopauloapostolo.com
-                    </a>
-                </p>
-            </div>
-            
-            <div class="sp-card sp-text-center">
-                <div style="font-size: 3rem; margin-bottom: var(--space-md);">📱</div>
-                <h3 class="sp-card-title">WhatsApp</h3>
-                <p class="sp-card-content">
-                    <a href="https://wa.me/5511999999999" class="sp-link" style="color: var(--sp-red);">
-                        (11) 99999-9999
-                    </a>
-                </p>
-            </div>
-            
-            <div class="sp-card sp-text-center">
-                <div style="font-size: 3rem; margin-bottom: var(--space-md);">⏰</div>
-                <h3 class="sp-card-title">Horário de Atendimento</h3>
-                <p class="sp-card-content">
-                    Segunda a Sexta<br>
-                    8h às 17h<br>
-                    Sábado: 8h às 12h
-                </p>
-            </div>
-        </div>
-        
-        <div class="sp-text-center" style="margin-top: var(--space-2xl);">
-            <p class="sp-text-teal" style="font-style: italic; font-size: var(--text-lg);">
-                "Cada um ponha a serviço dos outros o carisma que recebeu" - 1 Pedro 4:10
-            </p>
-        </div>
-    </div>
-</section>
-
-@endsection
