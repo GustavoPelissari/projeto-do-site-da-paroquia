@@ -99,7 +99,7 @@
                                 @endswitch
                             </div>
                             <h5 class="card-title-paroquia mb-2">{{ $group->name }}</h5>
-                            <span class="badge rounded-pill bg-light text-dark">{{ $group->category_name ?? ($group->category ?? 'Geral') }}</span>
+                            <span class="badge rounded-pill" style="background-color: var(--dourado-suave); color: var(--vermelho-profundo); font-weight: 600;">{{ $group->category_name ?? ($group->category ?? 'Geral') }}</span>
                         </div>
                         <div class="card-body-paroquia flex-grow-1">
                             <p class="text-muted mb-3">{{ \Illuminate\Support\Str::limit($group->description, 140) }}</p>
