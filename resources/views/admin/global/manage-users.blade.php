@@ -30,12 +30,15 @@
             <div class="col-md-6 col-lg-4">
                 <div class="card border-0 shadow-sm h-100" style="border-radius: 15px; overflow: hidden; transition: all 0.3s ease;">
                     <!-- Card Header com cor baseada no role -->
-                    <div class="card-header border-0 text-white py-3" style="
-                        background: {{ $user->role->value === 'admin_global' ? 'linear-gradient(135deg, #8B1538, #6E1530)' : 
-                                       ($user->role->value === 'coordenador_de_pastoral' ? 'linear-gradient(135deg, #2C5F2D, #1E4620)' : 
-                                       ($user->role->value === 'administrativo' ? 'linear-gradient(135deg, #1E3A8A, #1E293B)' : 
-                                       'linear-gradient(135deg, #6B7280, #4B5563)')) }};
-                    ">
+                    @php
+                        $headerColor = match($user->role->value) {
+                            'admin_global' => 'linear-gradient(135deg, #8B1538, #6E1530)',
+                            'coordenador_de_pastoral' => 'linear-gradient(135deg, #2C5F2D, #1E4620)',
+                            'administrativo' => 'linear-gradient(135deg, #1E3A8A, #1E293B)',
+                            default => 'linear-gradient(135deg, #6B7280, #4B5563)'
+                        };
+                    @endphp
+                    <div class="card-header border-0 text-white py-3" style="background: {{ $headerColor }};">
                         <div class="d-flex align-items-center">
                             <div class="bg-white bg-opacity-20 p-2 rounded-circle me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
                                 <span class="fw-bold" style="font-size: 1.2rem; color: #FFFFFF;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
