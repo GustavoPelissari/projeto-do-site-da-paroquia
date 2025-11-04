@@ -92,68 +92,70 @@
                                     @default
                                         <i data-lucide="users" class="icon-lg text-vermelho"></i>
                                 @endswitch
-                            </div>
-                            <h4 class="mb-0">{{ $group->name }}</h4>
-                            <small class="text-muted text-uppercase">
-                                {{ ucfirst($group->category ?? 'Pastoral') }}
-                            </small>
-                        </div>
-                        
-                        <div class="card-body d-flex flex-column">
-                            @if($group->description)
-                                <p class="text-muted flex-grow-1">{{ $group->description }}</p>
-                            @endif
-                            
-                            <div class="mt-auto">
-                                @if($group->coordinator_id)
-                                    <div class="mb-3 p-3 rounded" style="background: var(--bege-claro);">
-                                        <small class="text-muted d-block">Coordenador(a):</small>
-                                        <strong>{{ $group->coordinator->name ?? 'A definir' }}</strong>
-                                    </div>
-                                @endif
-                                
-                                @if($group->meeting_day || $group->meeting_time)
-                                    <div class="mb-3 d-flex align-items-center gap-2 text-muted">
-                                        <i data-lucide="calendar-clock" class="icon-paroquia"></i>
-                                        <small>
-                                            @if($group->meeting_day)
-                                                {{ ucfirst($group->meeting_day) }}s
-                                            @endif
-                                            @if($group->meeting_time)
-                                                às {{ $group->meeting_time }}
-                                            @endif
-                                        </small>
-                                    </div>
-                                @endif
-                                
-                                @if($group->users_count > 0)
-                                    <div class="mb-3 d-flex align-items-center gap-2 text-muted">
-                                        <i data-lucide="users" class="icon-paroquia"></i>
-                                        <small>{{ $group->users_count }} membros ativos</small>
-                                    </div>
-                                @endif
-                                
-                                <div class="d-flex gap-2">
-                                    @auth
-                                        @if($group->max_members && $group->users_count >= $group->max_members)
-                                            <button class="btn-paroquia btn-secondary-paroquia w-100" disabled>
-                                                <i data-lucide="user-x" class="icon-paroquia"></i>
-                                                Grupo Completo
-                                            </button>
-                                        @else
-                                            <a href="{{ route('group-requests.create', ['group' => $group->id]) }}" 
-                                               class="btn-paroquia btn-primary-paroquia w-100">
-                                                <i data-lucide="user-plus" class="icon-paroquia"></i>
-                                                Participar
-                                            </a>
-                                        @endif
-                                    @else
-                                        <a href="{{ route('login') }}" 
-                                           class="btn-paroquia btn-outline-paroquia w-100">
-                                            <i data-lucide="log-in" class="icon-paroquia"></i>
-                                            Entrar para Participar
-                                        </a>
-                                    @endauth
+
+                                <!-- Hero Section -->
+                                ...existing code...
+                                <!-- Call to Action Section -->
+                                <section ...> ... </section>
+                                <!-- Information Section -->
+                                <section ...> ... </section>
+                                <!-- Contact Section -->
+                                <section ...> ... </section>
+                                ...existing code...
+                                @endsection
+
+                                @push('scripts')
+                                <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Filtro de categorias
+                                    const categoryFilters = document.querySelectorAll('[data-category]');
+                                    const groupCards = document.querySelectorAll('.group-card-item');
+                                    categoryFilters.forEach(filter => {
+                                        filter.addEventListener('click', function() {
+                                            const category = this.dataset.category;
+                                            // Atualizar botões ativos
+                                            categoryFilters.forEach(btn => btn.classList.remove('active'));
+                                            this.classList.add('active');
+                                            // Filtrar cards
+                                            groupCards.forEach(card => {
+                                                const cardCategory = card.dataset.category;
+                                                if (category === 'all' || cardCategory === category) {
+                                                    card.style.display = 'block';
+                                                    card.classList.add('animate-fade-in');
+                                                } else {
+                                                    card.style.display = 'none';
+                                                }
+                                            });
+                                        });
+                                    });
+                                    // Inicializar Lucide icons
+                                    if (typeof lucide !== 'undefined') {
+                                        lucide.createIcons();
+                                    }
+                                });
+                                </script>
+                                @endpush
+@auth
+    @if($group->isFull())
+        <button class="btn-paroquia btn-secondary-paroquia w-100" disabled>
+            <i data-lucide="user-x" class="icon-paroquia"></i>
+            Grupo Completo
+        </button>
+    @else
+        <a href="{{ route('group-requests.create', ['group' => $group->id]) }}" 
+           class="btn-paroquia btn-primary-paroquia w-100">
+            <i data-lucide="user-plus" class="icon-paroquia"></i>
+            Participar
+        </a>
+    @endif
+@endauth
+@guest
+    <a href="{{ route('login') }}" 
+       class="btn-paroquia btn-outline-paroquia w-100">
+        <i data-lucide="log-in" class="icon-paroquia"></i>
+        Entrar para Participar
+    </a>
+@endguest
                                 </div>
                             </div>
                         </div>

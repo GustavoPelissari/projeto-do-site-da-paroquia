@@ -1,22 +1,8 @@
 <?php
-
-use App\Http\Controllers\Admin\AdminGlobalController;
-use App\Http\Controllers\Admin\AdministrativeController;
-use App\Http\Controllers\Admin\CoordinatorController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
+// DEPRECATED FILE
+// This file is not loaded by Laravel. The canonical routes live in routes/web.php.
+// Left intentionally minimal to avoid confusion.
+return;
 
 // Auth routes that redirect to admin
 Route::get('/dashboard', function () {

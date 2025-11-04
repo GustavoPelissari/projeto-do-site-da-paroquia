@@ -1,0 +1,991 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="jVeEV1e16yopm8SDe487hR8SOuelJkhFNKrhByvq">
+    <title>Paróquia São Paulo Apóstolo - Diocese de Umuarama</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Vite Assets -->
+    <link rel="preload" as="style" href="http://127.0.0.1:8000/build/assets/app-i6D_Zdi1.css" /><link rel="modulepreload" as="script" href="http://127.0.0.1:8000/build/assets/app-BJJtjn1h.js" /><link rel="stylesheet" href="http://127.0.0.1:8000/build/assets/app-i6D_Zdi1.css" /><script type="module" src="http://127.0.0.1:8000/build/assets/app-BJJtjn1h.js"></script></head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" href="http://127.0.0.1:8000/home">
+                <img src="http://127.0.0.1:8000/images/sao-paulo-logo.png" alt="São Paulo Apóstolo" class="me-2" style="height: 40px;">
+                <div>
+                    <div class="fw-bold text-brand-vinho">São Paulo Apóstolo</div>
+                    <small class="text-muted">Paróquia</small>
+                </div>
+            </a>
+
+            <!-- Toggle button for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/groups">Grupos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/masses">Missas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/events">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/news">Notícias</a>
+                    </li>
+                </ul>
+
+                <!-- User Menu -->
+                <ul class="navbar-nav">
+                                            <li class="nav-item">
+                            <a class="nav-link" href="http://127.0.0.1:8000/login">Entrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-primary-paroquia" href="http://127.0.0.1:8000/register">Cadastrar</a>
+                        </li>
+                                    </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="margin-top: 80px;">
+        
+        
+        <!-- Hero Section Moderno -->
+<header class="hero-paroquia">
+    <div class="hero-content">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10">
+                    <h1 class="display-4 fw-bold mb-4">Bem-vindos à nossa paróquia</h1>
+                    <p class="lead mb-4">Onde a fé encontra acolhimento e a esperança se renova</p>
+                    <p class="mb-5" style="font-size: 1.1rem; opacity: 0.9; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); max-width: 600px; margin: 0 auto;">
+                        Somos uma comunidade católica inspirada no exemplo de São Paulo Apóstolo, 
+                        dedicada a evangelizar, acolher e servir com amor e esperança.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                        <a href="http://127.0.0.1:8000/masses" class="btn-hero btn-hero-primary">
+                            <i data-lucide="clock" style="width: 20px; height: 20px;"></i>
+                            Participar da próxima celebração
+                        </a>
+                        <a href="#proxima-missa" class="btn-hero btn-hero-outline">
+                            <i data-lucide="calendar-check" style="width: 20px; height: 20px;"></i>
+                            Ver todos os horários
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Próxima Missa - Card Moderno -->
+<section id="proxima-missa" class="section-paroquia animate-on-scroll">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card-paroquia text-center p-4 proxima-missa-card">
+                    <div class="card-header-paroquia mb-4">
+                        <h3 class="mb-0">
+                            <i data-lucide="church" class="icon-lg text-white me-2" style="width: 32px; height: 32px;"></i>
+                            Próxima Missa
+                        </h3>
+                    </div>
+                    
+                                                                    
+                        <div class="row text-center align-items-center">
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="d-flex flex-column">
+                                    <small class="text-muted mb-1">Hoje</small>
+                                    <h5 class="mb-0 text-vinho fw-bold">31/10/2025</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3 mb-md-0">
+                                <div class="d-flex flex-column">
+                                    <small class="text-muted mb-1">Horário</small>
+                                    <h4 class="mb-0 text-vinho fw-bold">19:30</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex flex-column">
+                                    <small class="text-muted mb-1">Local</small>
+                                    <h5 class="mb-0 text-vinho fw-bold">Igreja Matriz</h5>
+                                </div>
+                            </div>
+                        </div>
+                                        
+                    <div class="mt-4">
+                        <a href="http://127.0.0.1:8000/masses" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
+                            <i data-lucide="calendar" class="me-2" style="width: 16px; height: 16px;"></i>
+                            Ver todos os horários
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Horários de Missa -->
+<section class="section-paroquia animate-on-scroll" style="background: white;">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <h2 class="text-vinho mb-3">Horários das Celebrações</h2>
+                <p class="lead text-muted">
+                    Participe das nossas celebrações semanais e fortaleça sua fé em comunidade
+                </p>
+            </div>
+        </div>
+        
+                    <div class="horarios-grid">
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Sexta-feira</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:30</h4>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa de sexta-feira</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Sábado</h5>
+                                <p class="text-muted mb-0 small">Igreja Principal</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:00</h4>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa vespertina de sábado</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Sábado</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:00</h4>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa de sábado à noite</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Sábado</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:00</h4>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa de sábado à noite</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Domingo</h5>
+                                <p class="text-muted mb-0 small">Igreja Principal</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">08:00</h4>
+                                                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa solene dominical com coro</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Domingo</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">08:00</h4>
+                                                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa dominical para famílias</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Domingo</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">08:00</h4>
+                                                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa dominical para famílias</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Domingo</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">09:00</h4>
+                                                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa principal de domingo</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Domingo</h5>
+                                <p class="text-muted mb-0 small">Igreja Principal</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:00</h4>
+                                                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa vespertina</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Domingo</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:00</h4>
+                                                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa dominical principal</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Domingo</h5>
+                                <p class="text-muted mb-0 small">Igreja Matriz</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:00</h4>
+                                                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa dominical principal</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                                                        <div class="horario-card animate-on-scroll">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="text-vinho fw-bold mb-1">Quarta-feira</h5>
+                                <p class="text-muted mb-0 small">Capela</p>
+                            </div>
+                            <div class="text-end">
+                                <h4 class="text-vinho fw-bold mb-0">19:30</h4>
+                                                            </div>
+                        </div>
+                        
+                                                    <p class="text-muted small mb-3">Missa de meio de semana</p>
+                                                
+                        <div class="d-flex align-items-center text-muted small">
+                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <span>Chegue 15 minutos antes do início</span>
+                        </div>
+                    </div>
+                            </div>
+            </div>
+</section>
+
+<!-- Quem Somos -->
+<section class="section-paroquia animate-on-scroll" style="background: var(--bg-rose);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="pe-lg-4">
+                    <h2 class="text-vinho mb-4">Nossa Comunidade</h2>
+                    <p class="lead text-muted mb-4">
+                        Somos uma paróquia católica dedicada a seguir os ensinamentos de Jesus Cristo, 
+                        inspirados no exemplo missionário de São Paulo Apóstolo.
+                    </p>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="icon-feature me-3">
+                            <i data-lucide="heart" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-vinho fw-semibold mb-2">Amor e Acolhimento</h5>
+                            <p class="text-muted mb-0">Recebemos a todos com carinho e respeito, construindo uma família de fé unida.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="icon-feature me-3">
+                            <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-vinho fw-semibold mb-2">Comunidade Ativa</h5>
+                            <p class="text-muted mb-0">Participamos ativamente da vida comunitária através de pastorais e grupos de oração.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-feature me-3">
+                            <i data-lucide="book-open" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-vinho fw-semibold mb-2">Formação e Fé</h5>
+                            <p class="text-muted mb-0">Oferecemos formação cristã para todas as idades, fortalecendo nossa caminhada espiritual.</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                        <i data-lucide="arrow-right" class="me-2" style="width: 16px; height: 16px;"></i>
+                        Conheça nossa história
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <div class="image-card-paroquia">
+                        <img src="http://127.0.0.1:8000/images/igreja-matriz.jpg" 
+                             alt="Igreja Matriz São Paulo Apóstolo" 
+                             class="img-fluid rounded-3 shadow-lg"
+                             loading="lazy">
+                        <div class="image-overlay">
+                            <div class="text-center text-white p-4">
+                                <h4 class="fw-bold mb-2">Igreja Matriz</h4>
+                                <p class="mb-0">São Paulo Apóstolo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pastorais em Destaque -->
+<section class="section-paroquia animate-on-scroll" style="background: white;">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <h2 class="text-vinho mb-3">Pastorais e Movimentos</h2>
+                <p class="lead text-muted">
+                    Encontre seu lugar de serviço e crescimento espiritual em nossa comunidade
+                </p>
+            </div>
+        </div>
+        
+        <div class="pastorais-grid">
+                            <div class="pastoral-card animate-on-scroll">
+                    <div class="pastoral-header">
+                        <div class="pastoral-icon">
+                            <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                        </div>
+                        <h4 class="pastoral-title">Coral Paroquial</h4>
+                    </div>
+                    
+                    <div class="pastoral-content">
+                        <p class="pastoral-description">
+                            Grupo responsável pela música litúrgica das missas e celebrações especiais.
+                        </p>
+                        
+                        <div class="pastoral-action">
+                                                            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                                    <i data-lucide="log-in" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    Entrar para Participar
+                                </a>
+                                                    </div>
+                    </div>
+                </div>
+                            <div class="pastoral-card animate-on-scroll">
+                    <div class="pastoral-header">
+                        <div class="pastoral-icon">
+                            <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                        </div>
+                        <h4 class="pastoral-title">Pastoral da Juventude</h4>
+                    </div>
+                    
+                    <div class="pastoral-content">
+                        <p class="pastoral-description">
+                            Grupo voltado para jovens entre 15 e 30 anos, promovendo encontros, retiros e ações sociais.
+                        </p>
+                        
+                        <div class="pastoral-action">
+                                                            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                                    <i data-lucide="log-in" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    Entrar para Participar
+                                </a>
+                                                    </div>
+                    </div>
+                </div>
+                            <div class="pastoral-card animate-on-scroll">
+                    <div class="pastoral-header">
+                        <div class="pastoral-icon">
+                            <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                        </div>
+                        <h4 class="pastoral-title">Catequese Infantil</h4>
+                    </div>
+                    
+                    <div class="pastoral-content">
+                        <p class="pastoral-description">
+                            Preparação das crianças para receber os sacramentos da Primeira Comunhão.
+                        </p>
+                        
+                        <div class="pastoral-action">
+                                                            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                                    <i data-lucide="log-in" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    Entrar para Participar
+                                </a>
+                                                    </div>
+                    </div>
+                </div>
+                            <div class="pastoral-card animate-on-scroll">
+                    <div class="pastoral-header">
+                        <div class="pastoral-icon">
+                            <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                        </div>
+                        <h4 class="pastoral-title">Pastoral da Família</h4>
+                    </div>
+                    
+                    <div class="pastoral-content">
+                        <p class="pastoral-description">
+                            Acompanhamento e apoio às famílias da paróquia através de encontros e orientações.
+                        </p>
+                        
+                        <div class="pastoral-action">
+                                                            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                                    <i data-lucide="log-in" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    Entrar para Participar
+                                </a>
+                                                    </div>
+                    </div>
+                </div>
+                            <div class="pastoral-card animate-on-scroll">
+                    <div class="pastoral-header">
+                        <div class="pastoral-icon">
+                            <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                        </div>
+                        <h4 class="pastoral-title">Coroinhas</h4>
+                    </div>
+                    
+                    <div class="pastoral-content">
+                        <p class="pastoral-description">
+                            Pastoral dos Coroinhas da Paróquia São Paulo Apóstolo
+                        </p>
+                        
+                        <div class="pastoral-action">
+                                                            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                                    <i data-lucide="log-in" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    Entrar para Participar
+                                </a>
+                                                    </div>
+                    </div>
+                </div>
+                            <div class="pastoral-card animate-on-scroll">
+                    <div class="pastoral-header">
+                        <div class="pastoral-icon">
+                            <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                        </div>
+                        <h4 class="pastoral-title">Vicentinos</h4>
+                    </div>
+                    
+                    <div class="pastoral-content">
+                        <p class="pastoral-description">
+                            Sociedade São Vicente de Paulo - dedicada ao serviço dos mais necessitados através de visitas, doações e apoio espiritua...
+                        </p>
+                        
+                        <div class="pastoral-action">
+                                                            <a href="http://127.0.0.1:8000/login" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                                    <i data-lucide="log-in" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    Entrar para Participar
+                                </a>
+                                                    </div>
+                    </div>
+                </div>
+                    </div>
+        
+        <div class="text-center mt-5">
+            <a href="http://127.0.0.1:8000/groups" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
+                <i data-lucide="arrow-right" class="me-2" style="width: 16px; height: 16px;"></i>
+                Ver Todas as Pastorais
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Notícias -->
+<section class="section-paroquia animate-on-scroll" style="background: var(--bg-rose);">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <h2 class="text-vinho mb-3">Últimas Notícias</h2>
+                <p class="lead text-muted">
+                    Fique por dentro das atividades e eventos da nossa comunidade paroquial
+                </p>
+            </div>
+        </div>
+        
+        <div class="noticias-grid">
+                            <article class="noticia-card animate-on-scroll">
+                                            <div class="noticia-image noticia-placeholder">
+                            <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.3;"></i>
+                        </div>
+                                        
+                    <div class="noticia-content">
+                        <div class="noticia-meta">
+                            <time class="text-muted">
+                                <i data-lucide="calendar" class="me-1" style="width: 14px; height: 14px;"></i>
+                                29/10/2025
+                            </time>
+                        </div>
+                        
+                        <h4 class="noticia-title">
+                            <a href="#" class="text-decoration-none text-vinho">Nova Pastoral da Juventude</a>
+                        </h4>
+                        
+                        <p class="noticia-excerpt">
+                            A paróquia está formando uma nova Pastoral da Juventude para atender aos jovens de 15 a 25 anos. As inscrições estão abe...
+                        </p>
+                        
+                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill">
+                            Ler mais
+                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                        </a>
+                    </div>
+                </article>
+                            <article class="noticia-card animate-on-scroll">
+                                            <div class="noticia-image noticia-placeholder">
+                            <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.3;"></i>
+                        </div>
+                                        
+                    <div class="noticia-content">
+                        <div class="noticia-meta">
+                            <time class="text-muted">
+                                <i data-lucide="calendar" class="me-1" style="width: 14px; height: 14px;"></i>
+                                29/10/2025
+                            </time>
+                        </div>
+                        
+                        <h4 class="noticia-title">
+                            <a href="#" class="text-decoration-none text-vinho">Campanha do Agasalho</a>
+                        </h4>
+                        
+                        <p class="noticia-excerpt">
+                            Iniciamos nossa campanha anual do agasalho. Doe roupas de inverno em bom estado para ajudar famílias necessitadas.
+                        </p>
+                        
+                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill">
+                            Ler mais
+                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                        </a>
+                    </div>
+                </article>
+                            <article class="noticia-card animate-on-scroll">
+                                            <div class="noticia-image noticia-placeholder">
+                            <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.3;"></i>
+                        </div>
+                                        
+                    <div class="noticia-content">
+                        <div class="noticia-meta">
+                            <time class="text-muted">
+                                <i data-lucide="calendar" class="me-1" style="width: 14px; height: 14px;"></i>
+                                29/10/2025
+                            </time>
+                        </div>
+                        
+                        <h4 class="noticia-title">
+                            <a href="#" class="text-decoration-none text-vinho">Bem-vindos à Paróquia São Paulo Apóstolo</a>
+                        </h4>
+                        
+                        <p class="noticia-excerpt">
+                            Nossa paróquia está de portas abertas para receber você e sua família. Venha participar de nossa comunidade de fé e desc...
+                        </p>
+                        
+                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill">
+                            Ler mais
+                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                        </a>
+                    </div>
+                </article>
+                    </div>
+        
+        <div class="text-center mt-5">
+            <a href="http://127.0.0.1:8000/news" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
+                <i data-lucide="newspaper" class="me-2" style="width: 16px; height: 16px;"></i>
+                Ver todas as notícias
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Eventos -->
+<section class="section-paroquia animate-on-scroll" style="background: white;">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <h2 class="text-vinho mb-3">Próximos Eventos</h2>
+                <p class="lead text-muted">
+                    Participe dos eventos e atividades da nossa comunidade paroquial
+                </p>
+            </div>
+        </div>
+        
+        <div class="eventos-grid">
+                            <div class="evento-card animate-on-scroll">
+                    <div class="evento-date">
+                        <span class="dia">07</span>
+                        <span class="mes">Nov</span>
+                    </div>
+                    
+                    <div class="evento-content">
+                        <h4 class="evento-title">Encontro de Casais</h4>
+                        <div class="evento-meta">
+                            <div class="d-flex align-items-center text-muted mb-2">
+                                <i data-lucide="clock" class="me-2" style="width: 16px; height: 16px;"></i>
+                                <span>19:30</span>
+                            </div>
+                                                            <div class="d-flex align-items-center text-muted">
+                                    <i data-lucide="map-pin" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    <span>Centro Pastoral</span>
+                                </div>
+                                                    </div>
+                        
+                                                    <p class="evento-description">
+                                Encontro mensal para casais da paróquia com reflexões sobre matrimônio e vida familiar.
+                            </p>
+                                                
+                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill mt-3">
+                            Saiba mais
+                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                        </a>
+                    </div>
+                </div>
+                            <div class="evento-card animate-on-scroll">
+                    <div class="evento-date">
+                        <span class="dia">11</span>
+                        <span class="mes">Nov</span>
+                    </div>
+                    
+                    <div class="evento-content">
+                        <h4 class="evento-title">Bingo Beneficente</h4>
+                        <div class="evento-meta">
+                            <div class="d-flex align-items-center text-muted mb-2">
+                                <i data-lucide="clock" class="me-2" style="width: 16px; height: 16px;"></i>
+                                <span>19:00</span>
+                            </div>
+                                                            <div class="d-flex align-items-center text-muted">
+                                    <i data-lucide="map-pin" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    <span>Salão Paroquial</span>
+                                </div>
+                                                    </div>
+                        
+                                                    <p class="evento-description">
+                                Bingo para arrecadar fundos para a reforma do telhado da igreja. Diversos prêmios e muita diversão g...
+                            </p>
+                                                
+                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill mt-3">
+                            Saiba mais
+                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                        </a>
+                    </div>
+                </div>
+                            <div class="evento-card animate-on-scroll">
+                    <div class="evento-date">
+                        <span class="dia">15</span>
+                        <span class="mes">Nov</span>
+                    </div>
+                    
+                    <div class="evento-content">
+                        <h4 class="evento-title">Festa Junina da Paróquia</h4>
+                        <div class="evento-meta">
+                            <div class="d-flex align-items-center text-muted mb-2">
+                                <i data-lucide="clock" class="me-2" style="width: 16px; height: 16px;"></i>
+                                <span>19:00</span>
+                            </div>
+                                                            <div class="d-flex align-items-center text-muted">
+                                    <i data-lucide="map-pin" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    <span>Salão Paroquial</span>
+                                </div>
+                                                    </div>
+                        
+                                                    <p class="evento-description">
+                                Grande festa junina com comidas típicas, quadrilha e muita diversão para toda a família.
+                            </p>
+                                                
+                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill mt-3">
+                            Saiba mais
+                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                        </a>
+                    </div>
+                </div>
+                    </div>
+        
+        <div class="text-center mt-5">
+            <a href="http://127.0.0.1:8000/events" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
+                <i data-lucide="calendar-days" class="me-2" style="width: 16px; height: 16px;"></i>
+                Ver todos os eventos
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section-paroquia animate-on-scroll cta-paroquia">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="text-white mb-4">Venha fazer parte da nossa família</h2>
+                <p class="lead text-white mb-5" style="opacity: 0.9;">
+                    Nossa paróquia está de portas abertas para acolher você e sua família. 
+                    Juntos, construímos uma comunidade de fé, esperança e amor.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a href="#" class="btn btn-white rounded-pill px-5 py-3 fw-semibold">
+                        <i data-lucide="phone" class="me-2" style="width: 20px; height: 20px;"></i>
+                        Entre em contato
+                    </a>
+                    <a href="http://127.0.0.1:8000/masses" class="btn btn-outline-light rounded-pill px-5 py-3 fw-semibold">
+                        <i data-lucide="map-pin" class="me-2" style="width: 20px; height: 20px;"></i>
+                        Como chegar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-paroquia">
+        <div class="container">
+            <div class="row">
+                <!-- About Section -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">Paróquia São Paulo Apóstolo</h5>
+                    <p class="footer-text">
+                        Uma comunidade de fé inspirada no exemplo missionário de São Paulo Apóstolo, 
+                        levando o Evangelho a todos os corações.
+                    </p>
+                    <p class="footer-verse">
+                        <em>"Ai de mim se não evangelizar!" - 1 Cor 9:16</em>
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">Links Rápidos</h5>
+                    <ul class="footer-links">
+                        <li><a href="http://127.0.0.1:8000/home"><i class="bi bi-house-door"></i> Início</a></li>
+                        <li><a href="http://127.0.0.1:8000/groups"><i class="bi bi-people"></i> Grupos e Pastorais</a></li>
+                        <li><a href="http://127.0.0.1:8000/masses"><i class="bi bi-peace"></i> Missas</a></li>
+                        <li><a href="http://127.0.0.1:8000/events"><i class="bi bi-calendar-event"></i> Eventos</a></li>
+                        <li><a href="http://127.0.0.1:8000/news"><i class="bi bi-newspaper"></i> Notícias</a></li>
+                                                    <li><a href="http://127.0.0.1:8000/register"><i class="bi bi-person-add"></i> Cadastre-se</a></li>
+                            <li><a href="http://127.0.0.1:8000/login"><i class="bi bi-box-arrow-in-right"></i> Entrar</a></li>
+                                            </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="bi bi-geo-alt"></i> Rua São Paulo Apóstolo, 123<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bairro Centro - São Paulo/SP</li>
+                        <li><i class="bi bi-telephone"></i> <a href="tel:+5511999999999">(11) 99999-9999</a></li>
+                        <li><i class="bi bi-envelope"></i> <a href="mailto:contato@saopauloapostolo.com">contato@saopauloapostolo.com</a></li>
+                        <li><i class="bi bi-clock"></i> Seg-Sex: 8h-17h | Sáb: 8h-12h</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p>&copy; 2025 Paróquia São Paulo Apóstolo. Todos os direitos reservados.</p>
+                        <p class="footer-verse">
+                            "Graça e paz da parte de Deus nosso Pai e do Senhor Jesus Cristo" - Ef 1:2
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Debug Script para ícones -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verifica se Bootstrap Icons está carregado
+            const testIcon = document.createElement('i');
+            testIcon.className = 'bi bi-house-door';
+            document.body.appendChild(testIcon);
+            
+            const computedStyle = window.getComputedStyle(testIcon, '::before');
+            const content = computedStyle.getPropertyValue('content');
+            
+            if (content && content !== 'none' && content !== '""') {
+                console.log('✅ Bootstrap Icons carregado corretamente');
+            } else {
+                console.error('❌ Bootstrap Icons não carregou');
+                console.log('Tentando carregar Bootstrap Icons como fallback...');
+                
+                // Fallback: carregar Bootstrap Icons novamente
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css';
+                document.head.appendChild(link);
+            }
+            
+            document.body.removeChild(testIcon);
+        });
+    </script>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Lazy loading de imagens
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+    
+    // Animações on scroll
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        scrollObserver.observe(el);
+    });
+    
+    // Smooth scroll para âncoras
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

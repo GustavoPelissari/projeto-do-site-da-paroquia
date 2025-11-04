@@ -2,12 +2,7 @@
 
 ## Credenciais para Login
 
-### 🔴 **ADMINISTRADOR GLOBAL** (Acesso Total)
-- **Email:** `admin@paroquia.com`
-- **Senha:** `admin123`
-- **Permissões:** Todas as funcionalidades do sistema
-
-### 🔴 **ADMINISTRADOR GLOBAL** (Teste)
+### 🔴 **ADMINISTRADOR GLOBAL** (Padre Admin)
 - **Email:** `admin@paroquia.test`
 - **Senha:** `Admin123!`
 - **Permissões:** Todas as funcionalidades do sistema

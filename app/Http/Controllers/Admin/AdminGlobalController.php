@@ -349,7 +349,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
 
-        $groups = Group::withCount('users')->latest()->paginate(10);
+    $groups = Group::withCount('members')->latest()->paginate(10);
 
         return view('admin.global.groups.index', compact('groups'));
     }
@@ -377,8 +377,6 @@ class AdminGlobalController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        $validated['created_by'] = Auth::id();
-
         $group = Group::create($validated);
 
         return redirect()->route('admin.global.groups.index')
@@ -391,7 +389,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
 
-        $group->load(['users', 'requests']);
+    $group->load(['members', 'groupRequests']);
 
         return view('admin.global.groups.show', compact('group'));
     }
@@ -465,10 +463,11 @@ class AdminGlobalController extends Controller
         }
 
         $validated = $request->validate([
-            'day_of_week' => 'required|string|max:50',
+            'name' => 'required|string|max:255',
+            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
             'time' => 'required|date_format:H:i',
-            'location' => 'required|string|max:255',
-            'type' => 'required|string|max:100',
+            'location' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'is_active' => 'boolean',
         ]);
 
@@ -503,10 +502,11 @@ class AdminGlobalController extends Controller
         }
 
         $validated = $request->validate([
-            'day_of_week' => 'required|string|max:50',
+            'name' => 'required|string|max:255',
+            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
             'time' => 'required|date_format:H:i',
-            'location' => 'required|string|max:255',
-            'type' => 'required|string|max:100',
+            'location' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'is_active' => 'boolean',
         ]);
 
