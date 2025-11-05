@@ -36,7 +36,7 @@ class UserDashboardController extends Controller
     }
 
     /**
-     * Listar escalas do grupo (apenas visualização)
+     * Listar escalas do grupo do usuário
      */
     public function scalesIndex()
     {
@@ -48,8 +48,9 @@ class UserDashboardController extends Controller
                 ->with('error', 'Você não tem acesso a esta seção.');
         }
 
-        // Buscar escalas do grupo Coroinhas
+        // Buscar apenas escalas ATIVAS do grupo Coroinhas para usuários comuns
         $scales = Scale::where('group_id', 5)
+            ->where('is_active', true)
             ->latest()
             ->paginate(10);
 
@@ -69,7 +70,13 @@ class UserDashboardController extends Controller
                 ->with('error', 'Você não tem acesso a este arquivo.');
         }
 
-        $filePath = storage_path('app/' . $scale->file_path);
+        // Usuários comuns só podem baixar escalas ativas
+        if (!$scale->is_active) {
+            return redirect()->route('user.scales.index')
+                ->with('error', 'Esta escala não está mais disponível.');
+        }
+
+        $filePath = storage_path('app/public/' . $scale->file_path);
 
         if (!file_exists($filePath)) {
             return back()->with('error', 'Arquivo não encontrado.');
