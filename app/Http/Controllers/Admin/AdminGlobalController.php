@@ -198,6 +198,11 @@ class AdminGlobalController extends Controller
             abort(403, 'Você não tem permissão para criar notícias.');
         }
 
+        Log::info('=== INICIO DO UPLOAD DE NOTÍCIA ===');
+        Log::info('Usuário: ' . $user->email);
+        Log::info('Arquivos no request: ' . json_encode($request->allFiles()));
+        Log::info('Tem arquivo featured_image? ' . ($request->hasFile('featured_image') ? 'SIM' : 'NÃO'));
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
@@ -209,13 +214,21 @@ class AdminGlobalController extends Controller
 
         // Processar upload da imagem se houver
         if ($request->hasFile('featured_image')) {
-            $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
+            $file = $request->file('featured_image');
+            Log::info('Arquivo detectado: ' . $file->getClientOriginalName() . ' - Tamanho: ' . $file->getSize() . ' bytes');
+            
+            $validated['featured_image'] = $file->store('news', 'public');
             Log::info('Imagem salva em: ' . $validated['featured_image']);
         } else {
             Log::info('Nenhuma imagem foi enviada no request');
         }
 
+        Log::info('Dados validados: ' . json_encode($validated));
+        
         $news = News::create($validated);
+        
+        Log::info('Notícia criada com ID: ' . $news->id);
+        Log::info('=== FIM DO UPLOAD DE NOTÍCIA ===');
 
         return redirect()->route('admin.global.news.index')
             ->with('success', 'Notícia criada com sucesso!');
