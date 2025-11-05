@@ -102,6 +102,7 @@ Route::prefix('admin')->name('admin.global.')->middleware(['auth', 'admin.area:a
     // User Management
     Route::get('/users', [AdminGlobalController::class, 'manageUsers'])->name('users');
     Route::post('/users/{user}/role', [AdminGlobalController::class, 'updateUserRole'])->name('users.updateRole');
+    Route::delete('/users/{user}', [AdminGlobalController::class, 'deleteUser'])->name('users.destroy');
 
     // Parish Statistics
     Route::get('/stats', [AdminGlobalController::class, 'parishStats'])->name('stats');

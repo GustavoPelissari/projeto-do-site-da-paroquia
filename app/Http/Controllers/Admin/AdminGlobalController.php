@@ -124,6 +124,47 @@ class AdminGlobalController extends Controller
     }
 
     /**
+     * Update user role
+     */
+    public function updateUserRole(Request $request, User $user)
+    {
+        if (Auth::user()->role->value !== 'admin_global') {
+            abort(403, 'Acesso negado.');
+        }
+
+        $validated = $request->validate([
+            'role' => 'required|in:admin_global,coordenador_de_pastoral,administrativo,usuario_padrao',
+        ]);
+
+        $user->update(['role' => $validated['role']]);
+
+        return redirect()->route('admin.global.users')
+            ->with('success', 'Função do usuário atualizada com sucesso!');
+    }
+
+    /**
+     * Delete user
+     */
+    public function deleteUser(User $user)
+    {
+        if (Auth::user()->role->value !== 'admin_global') {
+            abort(403, 'Acesso negado.');
+        }
+
+        // Prevent admin from deleting themselves
+        if ($user->id === Auth::id()) {
+            return redirect()->route('admin.global.users')
+                ->with('error', 'Você não pode excluir sua própria conta.');
+        }
+
+        $userName = $user->name;
+        $user->delete();
+
+        return redirect()->route('admin.global.users')
+            ->with('success', "Usuário '{$userName}' excluído com sucesso!");
+    }
+
+    /**
      * Show parish statistics
      */
     public function parishStats()

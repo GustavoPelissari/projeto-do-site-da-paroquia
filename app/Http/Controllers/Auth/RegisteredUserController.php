@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\EmailVerificationService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+    public function __construct(private EmailVerificationService $verificationService) {}
+
     /**
      * Display the registration view.
      */
@@ -43,8 +46,13 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        // Login the user temporarily to allow verification flow
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Send numeric code for email verification instead of link
+        $this->verificationService->sendCode($user);
+
+        return redirect()->route('verification.notice')
+            ->with('status', 'Enviamos um código de verificação para seu e-mail.');
     }
 }

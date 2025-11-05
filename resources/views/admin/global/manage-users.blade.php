@@ -95,10 +95,14 @@
                     <!-- Card Footer -->
                     <div class="card-footer bg-light border-0">
                         <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline-primary flex-fill btn-edit-user">
-                                <i class="bi bi-pencil"></i> Editar
-                            </button>
-                            @if($user->role->value !== 'admin_global')
+                            @if($user->id !== auth()->id())
+                                <button class="btn btn-sm btn-outline-danger btn-delete-user" 
+                                        data-user-id="{{ $user->id }}" 
+                                        data-user-name="{{ $user->name }}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            @endif
+                            @if($user->role->value !== 'admin_global' || $user->id !== auth()->id())
                                 <button class="btn btn-sm btn-outline-secondary flex-fill btn-change-role" 
                                         data-user-id="{{ $user->id }}" 
                                         data-user-name="{{ $user->name }}" 
@@ -171,14 +175,39 @@
     </div>
 </div>
 
+<!-- Modal para Confirmar Exclusão -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill"></i> Confirmar Exclusão</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="deleteUserForm">
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <strong>ATENÇÃO:</strong> Esta ação não pode ser desfeita!
+                    </div>
+                    <p class="mb-0">Tem certeza que deseja excluir o usuário <strong id="deleteUserName"></strong>?</p>
+                    <p class="text-muted small mt-2">Todos os dados relacionados a este usuário serão removidos permanentemente.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash-fill"></i> Excluir Usuário
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
 // Event listener para botões de edição
 document.addEventListener('DOMContentLoaded', function() {
-    // Botões de editar
-    document.querySelectorAll('.btn-edit-user').forEach(btn => {
-        btn.addEventListener('click', () => alert('Funcionalidade em desenvolvimento'));
-    });
-    
     // Botões de alterar função
     document.querySelectorAll('.btn-change-role').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -191,6 +220,20 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('#changeRoleModal select[name="role"]').value = currentRole;
             
             const modal = new bootstrap.Modal(document.getElementById('changeRoleModal'));
+            modal.show();
+        });
+    });
+
+    // Botões de deletar usuário
+    document.querySelectorAll('.btn-delete-user').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const userId = this.dataset.userId;
+            const userName = this.dataset.userName;
+            
+            document.getElementById('deleteUserName').textContent = userName;
+            document.getElementById('deleteUserForm').action = `/admin/users/${userId}`;
+            
+            const modal = new bootstrap.Modal(document.getElementById('deleteUserModal'));
             modal.show();
         });
     });
