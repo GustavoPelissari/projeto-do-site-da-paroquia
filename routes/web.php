@@ -24,6 +24,7 @@ Route::get('/groups', [HomeController::class, 'groups'])->name('groups');
 Route::get('/masses', [HomeController::class, 'masses'])->name('masses');
 Route::get('/events', [HomeController::class, 'events'])->name('events');
 Route::get('/news', [HomeController::class, 'news'])->name('news');
+Route::get('/sobre', [HomeController::class, 'about'])->name('about');
 Route::get('/news-test', function() {
     $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
     return view('news-test', compact('news'));

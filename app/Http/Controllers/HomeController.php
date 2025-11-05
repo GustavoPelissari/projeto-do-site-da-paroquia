@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chapel;
+use App\Models\Clergy;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\Mass;
@@ -38,8 +40,9 @@ class HomeController extends Controller
     public function masses()
     {
         $masses = Mass::orderBy('day_of_week')->orderBy('time')->get();
+        $chapels = Chapel::active()->get();
 
-        return view('masses', compact('masses'));
+        return view('masses', compact('masses', 'chapels'));
     }
 
     public function events()
@@ -59,5 +62,13 @@ class HomeController extends Controller
             ->paginate(12);
 
         return view('news', compact('news'));
+    }
+
+    public function about()
+    {
+        $clergy = Clergy::active()->orderBy('order')->get();
+        $chapels = Chapel::active()->get();
+        
+        return view('about', compact('clergy', 'chapels'));
     }
 }

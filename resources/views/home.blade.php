@@ -220,9 +220,9 @@ img[loading="lazy"].loaded {
                             <p class="text-muted mb-0">Oferecemos formação cristã para todas as idades, fortalecendo nossa caminhada espiritual.</p>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-outline-vinho rounded-pill px-4 py-2">
+                    <a href="{{ route('about') }}" class="btn btn-outline-vinho rounded-pill px-4 py-2">
                         <i data-lucide="arrow-right" class="me-2" style="width: 16px; height: 16px;"></i>
-                        Conheça nossa história
+                        Conheça Nossa Paróquia
                     </a>
                 </div>
             </div>

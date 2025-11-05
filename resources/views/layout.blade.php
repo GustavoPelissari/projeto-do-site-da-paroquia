@@ -196,6 +196,11 @@
                                 <i class="bi bi-newspaper"></i> Notícias
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('about') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('about') }}">
+                                <i class="bi bi-info-circle"></i> Sobre
+                            </a>
+                        </li>
                     @endauth
                 </ul>
 
