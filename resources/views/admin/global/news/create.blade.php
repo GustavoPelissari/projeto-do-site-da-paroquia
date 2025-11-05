@@ -68,7 +68,10 @@
                 <div class="card shadow-sm mb-3">
                     <div class="card-body">
                         <h6 class="card-title mb-3">Imagem de Destaque</h6>
-                        <input type="file" name="featured_image" id="featured_image" accept="image/*" class="form-control">
+                        <input type="file" name="featured_image" id="featured_image" accept="image/*" class="form-control mb-2">
+                        <div id="imagePreview" class="mt-3" style="display: none;">
+                            <img id="preview" src="" alt="Preview" class="img-fluid rounded" style="max-height: 200px;">
+                        </div>
                     </div>
                 </div>
 
@@ -104,6 +107,20 @@ document.getElementById('title').addEventListener('input', function() {
     const title = this.value;
     const slug = title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim('-');
     document.getElementById('slug').value = slug;
+});
+
+// Preview da imagem
+document.getElementById('featured_image').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+            document.getElementById('imagePreview').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+        console.log('Imagem selecionada:', file.name, 'Tamanho:', file.size, 'bytes');
+    }
 });
 </script>
 @endsection
