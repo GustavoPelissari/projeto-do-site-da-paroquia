@@ -227,18 +227,15 @@ img[loading="lazy"].loaded {
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="position-relative">
-                    <div class="image-card-paroquia">
-                        <img src="{{ asset('images/igreja-matriz.jpg') }}" 
-                             alt="Igreja Matriz São Paulo Apóstolo" 
-                             class="img-fluid rounded-3 shadow-lg"
-                             loading="lazy">
-                        <div class="image-overlay">
-                            <div class="text-center text-white p-4">
-                                <h4 class="fw-bold mb-2">Igreja Matriz</h4>
-                                <p class="mb-0">São Paulo Apóstolo</p>
-                            </div>
-                        </div>
+                <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                    <img src="{{ asset('images/Imagem_da_paroquia.png') }}" 
+                         alt="Igreja Matriz São Paulo Apóstolo" 
+                         class="img-fluid rounded-3 igreja-matriz-img"
+                         style="max-height: 450px; width: auto; border-radius: 1rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transition: transform 0.4s ease, box-shadow 0.4s ease;"
+                         loading="lazy">
+                    <div class="mt-4 text-center">
+                        <h4 class="fw-bold mb-2 text-vinho">Igreja Matriz</h4>
+                        <p class="mb-0 text-secondary">São Paulo Apóstolo - Diocese de Umuarama</p>
                     </div>
                 </div>
             </div>
