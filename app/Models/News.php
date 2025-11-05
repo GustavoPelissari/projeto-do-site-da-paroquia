@@ -17,6 +17,7 @@ class News extends Model
         'excerpt',
         'content',
         'image',
+        'featured_image', // Adicionado para compatibilidade
         'status',
         'featured',
         'user_id',

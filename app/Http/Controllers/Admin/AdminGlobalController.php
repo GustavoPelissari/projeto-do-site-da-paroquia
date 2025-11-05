@@ -11,6 +11,7 @@ use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminGlobalController extends Controller
 {
@@ -192,6 +193,11 @@ class AdminGlobalController extends Controller
 
         $validated['user_id'] = Auth::id();
 
+        // Processar upload da imagem se houver
+        if ($request->hasFile('featured_image')) {
+            $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
+        }
+
         $news = News::create($validated);
 
         return redirect()->route('admin.global.news.index')
@@ -209,8 +215,12 @@ class AdminGlobalController extends Controller
 
     public function newsEdit(News $news)
     {
-        if (Auth::user()->role->value !== 'admin_global') {
-            abort(403, 'Acesso negado.');
+        $user = Auth::user();
+        
+        // Admin global pode editar qualquer notícia
+        // Coordenadores podem editar apenas suas próprias notícias
+        if ($user->role->value !== 'admin_global' && $news->user_id !== $user->id) {
+            abort(403, 'Você não tem permissão para editar esta notícia.');
         }
 
         return view('admin.global.news.edit', compact('news'));
@@ -218,8 +228,12 @@ class AdminGlobalController extends Controller
 
     public function newsUpdate(Request $request, News $news)
     {
-        if (Auth::user()->role->value !== 'admin_global') {
-            abort(403, 'Acesso negado.');
+        $user = Auth::user();
+        
+        // Admin global pode atualizar qualquer notícia
+        // Coordenadores podem atualizar apenas suas próprias notícias
+        if ($user->role->value !== 'admin_global' && $news->user_id !== $user->id) {
+            abort(403, 'Você não tem permissão para editar esta notícia.');
         }
 
         $validated = $request->validate([
@@ -229,6 +243,16 @@ class AdminGlobalController extends Controller
             'featured_image' => 'nullable|image|max:2048',
         ]);
 
+        // Processar upload da imagem se houver
+        if ($request->hasFile('featured_image')) {
+            // Deletar imagem antiga se existir
+            if ($news->featured_image && Storage::disk('public')->exists($news->featured_image)) {
+                Storage::disk('public')->delete($news->featured_image);
+            }
+            
+            $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
+        }
+
         $news->update($validated);
 
         return redirect()->route('admin.global.news.index')
@@ -237,8 +261,17 @@ class AdminGlobalController extends Controller
 
     public function newsDestroy(News $news)
     {
-        if (Auth::user()->role->value !== 'admin_global') {
-            abort(403, 'Acesso negado.');
+        $user = Auth::user();
+        
+        // Admin global pode deletar qualquer notícia
+        // Coordenadores podem deletar apenas suas próprias notícias
+        if ($user->role->value !== 'admin_global' && $news->user_id !== $user->id) {
+            abort(403, 'Você não tem permissão para excluir esta notícia.');
+        }
+
+        // Deletar imagem se existir
+        if ($news->featured_image && Storage::disk('public')->exists($news->featured_image)) {
+            Storage::disk('public')->delete($news->featured_image);
         }
 
         $news->delete();
