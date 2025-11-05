@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Solicitar Entrada em Grupo - Par�quia S�o Paulo Ap�stolo')
+@section('title', 'Solicitar Entrada em Grupo - Paróquia São Paulo Apóstolo')
 
 @section('content')
-<x-hero title="Participar da Nossa Comunidade" subtitle="Envie uma solicita��o para se juntar a um dos nossos grupos e pastorais">
+<x-hero title="Participar da Nossa Comunidade" subtitle="Envie uma solicitação para se juntar a um dos nossos grupos e pastorais">
     <p class="mb-0" style="opacity: 0.9;">
-         Seja bem-vindo! Preencha o formul�rio abaixo para solicitar sua participa��o.
+         Seja bem-vindo! Preencha o formulário abaixo para solicitar sua participação.
     </p>
 </x-hero>
 
@@ -21,7 +21,7 @@
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <i data-lucide="alert-circle" class="me-2"></i>
-            <strong>Aten��o!</strong> Corrija os erros abaixo:
+            <strong>Atenção!</strong> Corrija os erros abaixo:
             <ul class="mt-2 mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -37,7 +37,7 @@
                 <div class="card-header-paroquia">
                     <h2 class="card-title-paroquia mb-0">
                         <i data-lucide="file-text" class="me-2"></i>
-                        Formul�rio de Solicita��o
+                        Formulário de Solicitação
                     </h2>
                 </div>
                 
@@ -75,7 +75,7 @@
                             name="message" 
                             rows="5" 
                             required
-                            placeholder="Explique por que deseja participar deste grupo e como pode contribuir para a nossa miss�o..."
+                            placeholder="Explique por que deseja participar deste grupo e como pode contribuir para a nossa missão..."
                             class="form-control"
                         >{{ old('message') }}</textarea>
                         @error('message')
@@ -83,31 +83,14 @@
                         @enderror
                         <div class="form-text">
                             <i data-lucide="info" class="icon-paroquia"></i>
-                            M�nimo de 10 caracteres. Seja claro sobre suas motiva��es e como deseja servir.
+                            Mínimo de 10 caracteres. Seja claro sobre suas motivações e como deseja servir.
                         </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="availability" class="form-label fw-bold">
-                            <i data-lucide="calendar" class="icon-paroquia"></i>
-                            Disponibilidade
-                        </label>
-                        <textarea 
-                            id="availability" 
-                            name="availability" 
-                            rows="3"
-                            placeholder="Descreva sua disponibilidade: dias da semana, hor�rios..."
-                            class="form-control"
-                        >{{ old('availability') }}</textarea>
-                        @error('availability')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
                     </div>
 
                     <div class="d-flex gap-3 mt-4">
                         <button type="submit" class="btn-paroquia btn-primary-paroquia">
                             <i data-lucide="send" class="icon-paroquia"></i>
-                            Enviar Solicita��o
+                            Enviar Solicitação
                         </button>
                         <a href="{{ route('groups') }}" class="btn-paroquia btn-outline-paroquia">
                             <i data-lucide="arrow-left" class="icon-paroquia"></i>
@@ -123,7 +106,7 @@
                 <div class="card-header-paroquia">
                     <h3 class="card-title-paroquia mb-0">
                         <i data-lucide="users" class="me-2"></i>
-                        Grupos Dispon�veis
+                        Grupos Disponíveis
                     </h3>
                 </div>
                 <div class="card-body-paroquia">
@@ -160,7 +143,7 @@
                     @empty
                         <div class="text-center py-4">
                             <i data-lucide="users-2" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
-                            <p class="text-muted mb-0">Nenhum grupo dispon�vel no momento.</p>
+                            <p class="text-muted mb-0">Nenhum grupo disponível no momento.</p>
                         </div>
                     @endforelse
                 </div>
@@ -176,7 +159,7 @@
                         <div class="card-header-paroquia">
                             <h3 class="card-title-paroquia mb-0">
                                 <i data-lucide="info" class="me-2"></i>
-                                Orienta��es Importantes
+                                Orientações Importantes
                             </h3>
                         </div>
                         <div class="card-body-paroquia">
@@ -189,7 +172,7 @@
                                     <ul class="list-unstyled">
                                         <li class="mb-2">
                                             <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Leia atentamente a descri��o de cada grupo
+                                            Leia atentamente a descrição de cada grupo
                                         </li>
                                         <li class="mb-2">
                                             <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
@@ -201,27 +184,27 @@
                                         </li>
                                         <li class="mb-2">
                                             <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Seja sincero em sua motiva��o
+                                            Seja sincero em sua motivação
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-md-6">
                                     <h4 class="h6 fw-bold mb-3" style="color: var(--vermelho-profundo);">
                                         <i data-lucide="clock" class="icon-paroquia"></i>
-                                        Ap�s enviar:
+                                        Após enviar:
                                     </h4>
                                     <ul class="list-unstyled">
                                         <li class="mb-2">
                                             <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Sua solicita��o ser� analisada pelo coordenador
+                                            Sua solicitação será analisada pelo coordenador
                                         </li>
                                         <li class="mb-2">
                                             <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Voc� receber� uma resposta em at� 7 dias
+                                            Você receberá uma resposta em até 7 dias
                                         </li>
                                         <li class="mb-2">
                                             <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Pode acompanhar o status na �rea "Minhas Solicita��es"
+                                            Pode acompanhar o status na área "Minhas Solicitações"
                                         </li>
                                         <li class="mb-2">
                                             <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>

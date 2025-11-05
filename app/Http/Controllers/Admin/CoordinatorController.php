@@ -55,7 +55,7 @@ class CoordinatorController extends Controller
             'membros_grupo' => $userGroup ? User::where('parish_group_id', $user->parish_group_id)->count() : 0,
             'noticias_grupo' => News::where('group_id', $user->parish_group_id)->count(),
             'eventos_grupo' => Event::where('group_id', $user->parish_group_id)->count(),
-            'solicitacoes_pendentes' => GroupRequest::where('parish_group_id', $user->parish_group_id)
+            'solicitacoes_pendentes' => GroupRequest::where('group_id', $user->parish_group_id)
                 ->where('status', 'pending')->count(),
         ];
 
@@ -388,7 +388,7 @@ class CoordinatorController extends Controller
         }
 
         // Solicitações pendentes para o grupo do coordenador
-        $requests = GroupRequest::where('parish_group_id', $user->parish_group_id)
+        $requests = GroupRequest::where('group_id', $user->parish_group_id)
             ->where('status', 'pending')
             ->with(['user'])
             ->latest()

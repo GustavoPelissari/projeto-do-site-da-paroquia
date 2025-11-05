@@ -109,6 +109,14 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.coordenador.requests.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.requests.index') }}">
                                     <i class="bi bi-envelope"></i> Solicitações
+                                    @php
+                                        $pendingCount = \App\Models\GroupRequest::where('group_id', Auth::user()->parish_group_id)
+                                            ->where('status', 'pending')
+                                            ->count();
+                                    @endphp
+                                    @if($pendingCount > 0)
+                                        <span class="badge bg-warning text-dark ms-1">{{ $pendingCount }}</span>
+                                    @endif
                                 </a>
                             </li>
                             <li class="nav-item">
