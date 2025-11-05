@@ -163,9 +163,9 @@ class CoordinatorController extends Controller
     {
         $user = Auth::user();
 
-        // Verificar se a notícia pertence ao grupo do coordenador
-        if ($news->group_id !== $user->parish_group_id) {
-            abort(403, 'Você só pode editar notícias do seu grupo.');
+        // Verificar se a notícia pertence ao grupo do coordenador OU foi criada por ele
+        if ($news->parish_group_id !== $user->parish_group_id && $news->user_id !== $user->id) {
+            abort(403, 'Você só pode editar notícias do seu grupo ou criadas por você.');
         }
 
         return view('admin.coordenador.news.edit', compact('news'));
@@ -178,9 +178,9 @@ class CoordinatorController extends Controller
     {
         $user = Auth::user();
 
-        // Verificar se a notícia pertence ao grupo do coordenador
-        if ($news->group_id !== $user->parish_group_id) {
-            abort(403, 'Você só pode editar notícias do seu grupo.');
+        // Verificar se a notícia pertence ao grupo do coordenador OU foi criada por ele
+        if ($news->parish_group_id !== $user->parish_group_id && $news->user_id !== $user->id) {
+            abort(403, 'Você só pode editar notícias do seu grupo ou criadas por você.');
         }
 
         $validated = $request->validate([
@@ -221,9 +221,14 @@ class CoordinatorController extends Controller
     {
         $user = Auth::user();
 
-        // Verificar se a notícia pertence ao grupo do coordenador
-        if ($news->group_id !== $user->parish_group_id) {
-            abort(403, 'Você só pode excluir notícias do seu grupo.');
+        // Verificar se a notícia pertence ao grupo do coordenador OU foi criada por ele
+        if ($news->parish_group_id !== $user->parish_group_id && $news->user_id !== $user->id) {
+            abort(403, 'Você só pode excluir notícias do seu grupo ou criadas por você.');
+        }
+
+        // Deletar imagem se existir
+        if ($news->featured_image && Storage::disk('public')->exists($news->featured_image)) {
+            Storage::disk('public')->delete($news->featured_image);
         }
 
         $news->delete();
