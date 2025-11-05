@@ -11,6 +11,7 @@ use App\Models\News;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class AdminGlobalController extends Controller
@@ -160,18 +161,29 @@ class AdminGlobalController extends Controller
     // News Management Methods
     public function newsIndex()
     {
-        if (Auth::user()->role->value !== 'admin_global') {
+        $user = Auth::user();
+        
+        // Permite admin_global e coordenadores acessarem
+        if (!in_array($user->role->value, ['admin_global', 'coordenador_de_pastoral'])) {
             abort(403, 'Acesso negado.');
         }
 
-        $news = News::with('user')->latest()->paginate(10);
+        // Admin global vê todas as notícias, coordenadores veem apenas as suas
+        if ($user->role->value === 'admin_global') {
+            $news = News::with('user')->latest()->paginate(10);
+        } else {
+            $news = News::with('user')->where('user_id', $user->id)->latest()->paginate(10);
+        }
 
         return view('admin.global.news.index', compact('news'));
     }
 
     public function newsCreate()
     {
-        if (Auth::user()->role->value !== 'admin_global') {
+        $user = Auth::user();
+        
+        // Permite admin_global e coordenadores criarem notícias
+        if (!in_array($user->role->value, ['admin_global', 'coordenador_de_pastoral'])) {
             abort(403, 'Acesso negado.');
         }
 
@@ -180,8 +192,10 @@ class AdminGlobalController extends Controller
 
     public function newsStore(Request $request)
     {
-        if (Auth::user()->role->value !== 'admin_global') {
-            abort(403, 'Acesso negado.');
+        // Permite admin_global e coordenadores criarem notícias
+        $user = Auth::user();
+        if (!in_array($user->role->value, ['admin_global', 'coordenador_de_pastoral'])) {
+            abort(403, 'Você não tem permissão para criar notícias.');
         }
 
         $validated = $request->validate([
@@ -196,6 +210,9 @@ class AdminGlobalController extends Controller
         // Processar upload da imagem se houver
         if ($request->hasFile('featured_image')) {
             $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
+            Log::info('Imagem salva em: ' . $validated['featured_image']);
+        } else {
+            Log::info('Nenhuma imagem foi enviada no request');
         }
 
         $news = News::create($validated);
