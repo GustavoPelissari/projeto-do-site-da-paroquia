@@ -128,21 +128,28 @@ class CoordinatorController extends Controller
                 ->with('error', 'Você precisa estar associado a um grupo para criar notícias.');
         }
 
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
             'status' => 'required|in:published,draft',
+            'featured_image' => 'nullable|image|max:2048',
         ]);
 
+        // Processar upload da imagem se houver
+        if ($request->hasFile('featured_image')) {
+            $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
+        }
+
         News::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'excerpt' => $request->excerpt,
-            'status' => $request->status,
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'excerpt' => $validated['excerpt'] ?? null,
+            'featured_image' => $validated['featured_image'] ?? null,
+            'status' => $validated['status'],
             'user_id' => Auth::id(),
             'parish_group_id' => $user->parish_group_id, // Associar ao grupo do coordenador
-            'published_at' => $request->status === 'published' ? now() : null,
+            'published_at' => $validated['status'] === 'published' ? now() : null,
         ]);
 
         return redirect()->route('admin.coordenador.news.index')
@@ -176,19 +183,31 @@ class CoordinatorController extends Controller
             abort(403, 'Você só pode editar notícias do seu grupo.');
         }
 
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'excerpt' => 'nullable|string|max:500',
             'status' => 'required|in:published,draft',
+            'featured_image' => 'nullable|image|max:2048',
         ]);
 
+        // Processar upload da imagem se houver
+        if ($request->hasFile('featured_image')) {
+            // Deletar imagem antiga se existir
+            if ($news->featured_image && Storage::disk('public')->exists($news->featured_image)) {
+                Storage::disk('public')->delete($news->featured_image);
+            }
+            
+            $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
+        }
+
         $news->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'excerpt' => $request->excerpt,
-            'status' => $request->status,
-            'published_at' => $request->status === 'published' ? ($news->published_at ?? now()) : null,
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'excerpt' => $validated['excerpt'] ?? null,
+            'featured_image' => $validated['featured_image'] ?? $news->featured_image,
+            'status' => $validated['status'],
+            'published_at' => $validated['status'] === 'published' ? ($news->published_at ?? now()) : null,
         ]);
 
         return redirect()->route('admin.coordenador.news.index')
