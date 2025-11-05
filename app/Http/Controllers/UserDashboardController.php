@@ -49,9 +49,11 @@ class UserDashboardController extends Controller
         }
 
         // Buscar apenas escalas ATIVAS do grupo Coroinhas para usuários comuns
+        // Ordenar por data de criação (mais recente primeiro)
         $scales = Scale::where('group_id', 5)
             ->where('is_active', true)
-            ->latest()
+            ->orderBy('created_at', 'desc')
+            ->orderBy('valid_from', 'desc')
             ->paginate(10);
 
         return view('user.scales.index', compact('scales', 'user'));
