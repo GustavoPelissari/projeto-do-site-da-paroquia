@@ -1,16 +1,14 @@
 @extends('admin.layout')
 
-@section('title', $mass->name)
+@section('title', 'Missa - ' . $mass->day_name . ' às ' . $mass->time->format('H:i'))
 
 @section('content')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-start mb-3">
         <div>
-            <h1 class="h4 mb-1">{{ $mass->name }}</h1>
+            <h1 class="h4 mb-1">{{ $mass->day_name }} - {{ $mass->time->format('H:i') }}</h1>
             <div class="text-muted small d-flex align-items-center gap-2 flex-wrap">
-                <span>{{ $mass->day_name }}</span>
-                <span>•</span>
-                <span>{{ $mass->time ? $mass->time->format('H:i') : '' }}</span>
+                <span>{{ $mass->location }}</span>
                 <span>•</span>
                 <span class="badge {{ $mass->is_active ? 'bg-success' : 'bg-danger' }}">{{ $mass->is_active ? 'Ativo' : 'Inativo' }}</span>
             </div>

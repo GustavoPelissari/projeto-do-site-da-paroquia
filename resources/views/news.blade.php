@@ -48,9 +48,12 @@
                                 <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($item->content), 120) }}</p>
                             @endif
                             
-                            <div class="mt-auto pt-3">
-                                <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">
-                                    <i class="bi bi-book-half me-2"></i>Ler Notícia Completa
+                            <div class="mt-auto pt-3 d-flex gap-2">
+                                <a href="{{ route('news.show', $item) }}" class="btn btn-success flex-fill">
+                                    <i class="bi bi-book-half me-2"></i>Ler Completa
+                                </a>
+                                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">
+                                    <i class="bi bi-info-circle"></i>
                                 </button>
                             </div>
                         </div>

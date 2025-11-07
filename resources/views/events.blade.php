@@ -54,9 +54,12 @@
                                 <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($event->description), 150) }}</p>
                             @endif
                             
-                            <div class="mt-auto">
-                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->id }}">
+                            <div class="mt-auto d-flex gap-2">
+                                <a href="{{ route('events.show', $event) }}" class="btn btn-success btn-sm">
                                     <i class="bi bi-eye me-1"></i>Ver Detalhes
+                                </a>
+                                <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->id }}">
+                                    <i class="bi bi-info-circle me-1"></i>Resumo
                                 </button>
                             </div>
                         </div>

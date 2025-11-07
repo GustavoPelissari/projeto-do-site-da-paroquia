@@ -62,10 +62,10 @@
                 <table class="w-full table-auto">
                     <thead>
                         <tr class="border-b bg-gray-50">
-                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Nome</th>
                             <th class="text-left py-3 px-4 font-semibold text-gray-700">Dia da Semana</th>
                             <th class="text-left py-3 px-4 font-semibold text-gray-700">Horário</th>
                             <th class="text-left py-3 px-4 font-semibold text-gray-700">Local</th>
+                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Descrição</th>
                             <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
                             <th class="text-left py-3 px-4 font-semibold text-gray-700">Ações</th>
                         </tr>
@@ -74,16 +74,17 @@
                         @foreach($masses as $mass)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="py-3 px-4">
-                                <div>
-                                    <h4 class="font-medium text-gray-900">{{ $mass->name }}</h4>
-                                    @if($mass->description)
-                                        <p class="text-sm text-gray-500">{{ Str::limit($mass->description, 50) }}</p>
-                                    @endif
-                                </div>
+                                <h4 class="font-medium text-gray-900">{{ $mass->day_name }}</h4>
                             </td>
-                            <td class="py-3 px-4 text-gray-700">{{ $mass->day_name }}</td>
                             <td class="py-3 px-4 text-gray-700">{{ $mass->time->format('H:i') }}</td>
                             <td class="py-3 px-4 text-gray-700">{{ $mass->location }}</td>
+                            <td class="py-3 px-4">
+                                @if($mass->description)
+                                    <p class="text-sm text-gray-500">{{ Str::limit($mass->description, 50) }}</p>
+                                @else
+                                    <span class="text-gray-400">-</span>
+                                @endif
+                            </td>
                             <td class="py-3 px-4">
                                 <span class="px-2 py-1 text-xs rounded {{ $mass->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                     {{ $mass->is_active ? 'Ativo' : 'Inativo' }}

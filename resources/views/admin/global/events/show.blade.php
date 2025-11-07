@@ -10,28 +10,19 @@
             <div class="text-muted small d-flex align-items-center gap-2 flex-wrap">
                 <span>Por {{ $event->user->name }}</span>
                 <span>•</span>
-                <span>{{ $event->start_date->format('d/m/Y H:i') }}</span>
+                <span>{{ $event->created_at->format('d/m/Y H:i') }}</span>
                 <span>•</span>
-                <span class="badge 
-                    @switch($event->status)
-                        @case('confirmed') bg-success @break
-                        @case('scheduled') bg-primary @break
-                        @case('cancelled') bg-danger @break
-                        @case('completed') bg-secondary @break
-                        @default bg-warning text-dark
-                    @endswitch">
-                    @switch($event->status)
-                        @case('confirmed') Confirmado @break
-                        @case('scheduled') Agendado @break
-                        @case('cancelled') Cancelado @break
-                        @case('completed') Concluído @break
-                        @default {{ ucfirst($event->status) }}
-                    @endswitch
-                </span>
+                @if($event->status === 'confirmed')
+                    <span class="badge bg-success">Confirmado</span>
+                @elseif($event->status === 'scheduled')
+                    <span class="badge bg-info">Agendado</span>
+                @else
+                    <span class="badge bg-danger">Cancelado</span>
+                @endif
             </div>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-success">Editar</a>
+            <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-primary">Editar</a>
             <a href="{{ route('admin.global.events.index') }}" class="btn btn-outline-secondary">Voltar</a>
         </div>
     </div>
@@ -47,69 +38,28 @@
                     <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top object-fit-cover" style="max-height: 340px;">
                 @endif
                 <div class="card-body">
-                    <div class="mb-4">
-                        <h6 class="mb-2">Descrição</h6>
-                        <div class="mb-0">{!! nl2br(e($event->description)) !!}</div>
+                    <div class="mb-0">
+                        {!! nl2br(e($event->description)) !!}
                     </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <h6 class="mb-2">📅 Data e Horário</h6>
-                            <div class="small text-muted">
-                                <div><span class="fw-semibold">Início:</span> {{ $event->start_date->format('d/m/Y H:i') }}</div>
-                                @if($event->end_date)
-                                    <div><span class="fw-semibold">Término:</span> {{ $event->end_date->format('d/m/Y H:i') }}</div>
-                                @endif
-                            </div>
-                        </div>
-                        @if($event->location)
-                        <div class="col-md-6">
-                            <h6 class="mb-2">📍 Local</h6>
-                            <div class="text-muted">{{ $event->location }}</div>
-                        </div>
-                        @endif
-                    </div>
+
                     @if($event->requirements)
-                        <div>
-                            <h6 class="mb-2">📋 Requisitos</h6>
-                            <div class="text-muted">{!! nl2br(e($event->requirements)) !!}</div>
+                        <div class="mt-4 pt-3 border-top">
+                            <h6 class="mb-2">Requisitos/Observações</h6>
+                            <p class="mb-0 text-muted">{{ $event->requirements }}</p>
                         </div>
                     @endif
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-4">
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
                     <h6 class="card-title mb-3">Ações Rápidas</h6>
                     <div class="d-grid gap-2">
-                        <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-success">✏️ Editar Evento</a>
-                        @if($event->status !== 'confirmed')
-                            <form method="POST" action="{{ route('admin.global.events.update', $event) }}">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="confirmed">
-                                <input type="hidden" name="title" value="{{ $event->title }}">
-                                <input type="hidden" name="description" value="{{ $event->description }}">
-                                <input type="hidden" name="start_date" value="{{ $event->start_date }}">
-                                <button type="submit" class="btn btn-primary">✅ Confirmar Evento</button>
-                            </form>
-                        @endif
-                        @if($event->status !== 'cancelled')
-                            <form method="POST" action="{{ route('admin.global.events.update', $event) }}">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="cancelled">
-                                <input type="hidden" name="title" value="{{ $event->title }}">
-                                <input type="hidden" name="description" value="{{ $event->description }}">
-                                <input type="hidden" name="start_date" value="{{ $event->start_date }}">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja cancelar este evento?')">❌ Cancelar Evento</button>
-                            </form>
-                        @endif
+                        <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-primary">✏️ Editar Evento</a>
                         <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" onsubmit="return confirm('Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-secondary">🗑️ Excluir Evento</button>
+                            <button type="submit" class="btn btn-danger w-100">🗑️ Excluir Evento</button>
                         </form>
                     </div>
                 </div>
@@ -119,41 +69,46 @@
                 <div class="card-body">
                     <h6 class="card-title mb-3">Informações do Evento</h6>
                     <div class="small text-muted">
-                        <div class="mb-2"><span class="fw-semibold">Status:</span> <span class="badge 
-                            @switch($event->status)
-                                @case('confirmed') bg-success @break
-                                @case('scheduled') bg-primary @break
-                                @case('cancelled') bg-danger @break
-                                @case('completed') bg-secondary @break
-                                @default bg-warning text-dark
-                            @endswitch">@switch($event->status)
-                                @case('confirmed') Confirmado @break
-                                @case('scheduled') Agendado @break
-                                @case('cancelled') Cancelado @break
-                                @case('completed') Concluído @break
-                                @default {{ ucfirst($event->status) }}
-                            @endswitch</span></div>
-                        @if($event->category)
-                            <div class="mb-2"><span class="fw-semibold">Categoria:</span> 
-                                @switch($event->category)
-                                    @case('liturgy') Liturgia @break
-                                    @case('formation') Formação @break
-                                    @case('social') Social @break
-                                    @case('youth') Juventude @break
-                                    @case('family') Família @break
-                                    @default {{ ucfirst($event->category) }}
-                                @endswitch
-                            </div>
+                        <div class="mb-2">
+                            <span class="fw-semibold">Status:</span> 
+                            @if($event->status === 'confirmed')
+                                <span class="badge bg-success">Confirmado</span>
+                            @elseif($event->status === 'scheduled')
+                                <span class="badge bg-info">Agendado</span>
+                            @else
+                                <span class="badge bg-danger">Cancelado</span>
+                            @endif
+                        </div>
+                        <div class="mb-2"><span class="fw-semibold">Responsável:</span> {{ $event->user->name }}</div>
+                        <div class="mb-2"><span class="fw-semibold">Data/Hora Início:</span> {{ $event->start_date->format('d/m/Y H:i') }}</div>
+                        @if($event->end_date)
+                            <div class="mb-2"><span class="fw-semibold">Data/Hora Término:</span> {{ $event->end_date->format('d/m/Y H:i') }}</div>
                         @endif
-                        <div class="mb-2"><span class="fw-semibold">Criado por:</span> {{ $event->user->name }}</div>
+                        @if($event->location)
+                            <div class="mb-2"><span class="fw-semibold">Local:</span> {{ $event->location }}</div>
+                        @endif
+                        <div class="mb-2">
+                            <span class="fw-semibold">Categoria:</span> 
+                            @if($event->category === 'liturgy')
+                                Liturgia
+                            @elseif($event->category === 'formation')
+                                Formação
+                            @elseif($event->category === 'social')
+                                Social
+                            @elseif($event->category === 'youth')
+                                Juventude
+                            @elseif($event->category === 'family')
+                                Família
+                            @else
+                                {{ ucfirst($event->category) }}
+                            @endif
+                        </div>
+                        @if($event->max_participants)
+                            <div class="mb-2"><span class="fw-semibold">Máx. Participantes:</span> {{ $event->max_participants }}</div>
+                        @endif
                         <div class="mb-2"><span class="fw-semibold">Criado em:</span> {{ $event->created_at->format('d/m/Y H:i') }}</div>
                         @if($event->updated_at != $event->created_at)
-                            <div class="mb-2"><span class="fw-semibold">Atualizado em:</span> {{ $event->updated_at->format('d/m/Y H:i') }}</div>
-                        @endif
-                        @if($event->max_participants)
-                            <div class="mb-0"><span class="fw-semibold">Máx. Participantes:</span> {{ $event->max_participants }}</div>
-                        @else
-                            <div class="mb-0"><span class="fw-semibold">Participantes:</span> Sem limite</div>
+                            <div class="mb-0"><span class="fw-semibold">Atualizado em:</span> {{ $event->updated_at->format('d/m/Y H:i') }}</div>
                         @endif
                     </div>
                 </div>

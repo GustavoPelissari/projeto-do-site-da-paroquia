@@ -26,10 +26,6 @@
             <div class="col-lg-8">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nome *</label>
-                            <input type="text" name="name" id="name" value="{{ old('name', $mass->name) }}" class="form-control" required>
-                        </div>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="day_of_week" class="form-label">Dia da Semana *</label>

@@ -54,6 +54,11 @@ class HomeController extends Controller
         return view('events', compact('events'));
     }
 
+    public function showEvent(Event $event)
+    {
+        return view('event-show', compact('event'));
+    }
+
     public function news()
     {
         $news = News::where('status', 'published')
@@ -62,6 +67,16 @@ class HomeController extends Controller
             ->paginate(12);
 
         return view('news', compact('news'));
+    }
+
+    public function showNews(News $news)
+    {
+        // Só mostra notícias publicadas
+        if ($news->status !== 'published') {
+            abort(404);
+        }
+
+        return view('news-show', compact('news'));
     }
 
     public function about()

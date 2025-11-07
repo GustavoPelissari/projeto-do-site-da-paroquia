@@ -385,9 +385,18 @@ class AdminGlobalController extends Controller
             'end_date' => 'nullable|date|after_or_equal:start_date',
             'location' => 'nullable|string|max:255',
             'category' => 'required|string|max:100',
+            'status' => 'required|in:scheduled,confirmed,cancelled',
+            'max_participants' => 'nullable|integer|min:1',
+            'requirements' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
         ]);
 
         $validated['user_id'] = Auth::id();
+
+        // Upload de imagem
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('events', 'public');
+        }
 
         $event = Event::create($validated);
 
@@ -426,7 +435,29 @@ class AdminGlobalController extends Controller
             'end_date' => 'nullable|date|after_or_equal:start_date',
             'location' => 'nullable|string|max:255',
             'category' => 'required|string|max:100',
+            'status' => 'required|in:scheduled,confirmed,cancelled',
+            'max_participants' => 'nullable|integer|min:1',
+            'requirements' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
+            'remove_image' => 'nullable|boolean',
         ]);
+
+        // Remover imagem se solicitado
+        if ($request->has('remove_image') && $request->remove_image) {
+            if ($event->image) {
+                Storage::disk('public')->delete($event->image);
+                $validated['image'] = null;
+            }
+        }
+
+        // Upload de nova imagem
+        if ($request->hasFile('image')) {
+            // Remove imagem antiga se existir
+            if ($event->image) {
+                Storage::disk('public')->delete($event->image);
+            }
+            $validated['image'] = $request->file('image')->store('events', 'public');
+        }
 
         $event->update($validated);
 
@@ -517,9 +548,31 @@ class AdminGlobalController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'category' => 'required|string|max:100',
-            'max_members' => 'nullable|integer|min:1',
+            'coordinator_name' => 'nullable|string|max:255',
+            'coordinator_phone' => 'nullable|string|max:20',
+            'coordinator_email' => 'nullable|email|max:255',
+            'meeting_info' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'remove_image' => 'nullable|boolean',
             'is_active' => 'boolean',
         ]);
+
+        // Remover imagem se solicitado
+        if ($request->has('remove_image') && $request->remove_image) {
+            if ($group->image) {
+                Storage::disk('public')->delete($group->image);
+                $validated['image'] = null;
+            }
+        }
+
+        // Upload de nova imagem
+        if ($request->hasFile('image')) {
+            // Remover imagem antiga se existir
+            if ($group->image) {
+                Storage::disk('public')->delete($group->image);
+            }
+            $validated['image'] = $request->file('image')->store('groups', 'public');
+        }
 
         $group->update($validated);
 
@@ -567,10 +620,9 @@ class AdminGlobalController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
             'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
             'time' => 'required|date_format:H:i',
-            'location' => 'nullable|string|max:255',
+            'location' => 'required|string|max:255',
             'description' => 'nullable|string',
             'is_active' => 'boolean',
         ]);
@@ -606,10 +658,9 @@ class AdminGlobalController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
             'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
             'time' => 'required|date_format:H:i',
-            'location' => 'nullable|string|max:255',
+            'location' => 'required|string|max:255',
             'description' => 'nullable|string',
             'is_active' => 'boolean',
         ]);

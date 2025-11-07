@@ -71,41 +71,63 @@
                     <div class="card-paroquia h-100 d-flex flex-column">
                         <div class="card-header-paroquia text-center">
                             <div class="mb-3">
-                                @switch($group->category ?? 'geral')
-                                    @case('catequese')
-                                    @case('formation')
-                                        <i data-lucide="graduation-cap" class="icon-lg text-vermelho"></i>
-                                        @break
-                                    @case('liturgia')
-                                    @case('liturgy')
-                                        <i data-lucide="church" class="icon-lg text-vermelho"></i>
-                                        @break
-                                    @case('caridade')
-                                    @case('service')
-                                        <i data-lucide="heart-handshake" class="icon-lg text-vermelho"></i>
-                                        @break
-                                    @case('jovens')
-                                    @case('youth')
-                                        <i data-lucide="zap" class="icon-lg text-vermelho"></i>
-                                        @break
-                                    @case('family')
-                                        <i data-lucide="home" class="icon-lg text-vermelho"></i>
-                                        @break
-                                    @case('pastoral')
-                                        <i data-lucide="users" class="icon-lg text-vermelho"></i>
-                                        @break
-                                    @default
-                                        <i data-lucide="users" class="icon-lg text-vermelho"></i>
-                                @endswitch
+                                @if($group->image)
+                                    <img src="{{ asset('storage/' . $group->image) }}" 
+                                         alt="{{ $group->name }}" 
+                                         class="rounded-circle"
+                                         style="width: 80px; height: 80px; object-fit: cover; border: 3px solid var(--vermelho-profundo);">
+                                @else
+                                    @switch($group->category ?? 'geral')
+                                        @case('catequese')
+                                        @case('formation')
+                                            <i data-lucide="graduation-cap" class="icon-lg text-vermelho"></i>
+                                            @break
+                                        @case('liturgia')
+                                        @case('liturgy')
+                                            <i data-lucide="church" class="icon-lg text-vermelho"></i>
+                                            @break
+                                        @case('caridade')
+                                        @case('service')
+                                            <i data-lucide="heart-handshake" class="icon-lg text-vermelho"></i>
+                                            @break
+                                        @case('jovens')
+                                        @case('youth')
+                                            <i data-lucide="zap" class="icon-lg text-vermelho"></i>
+                                            @break
+                                        @case('family')
+                                            <i data-lucide="home" class="icon-lg text-vermelho"></i>
+                                            @break
+                                        @case('pastoral')
+                                            <i data-lucide="users" class="icon-lg text-vermelho"></i>
+                                            @break
+                                        @default
+                                            <i data-lucide="users" class="icon-lg text-vermelho"></i>
+                                    @endswitch
+                                @endif
                             </div>
                             <h5 class="card-title-paroquia mb-2">{{ $group->name }}</h5>
                             <span class="badge rounded-pill" style="background-color: var(--dourado-suave); color: var(--vermelho-profundo); font-weight: 600;">{{ $group->category_name ?? ($group->category ?? 'Geral') }}</span>
                         </div>
                         <div class="card-body-paroquia flex-grow-1">
                             <p class="text-muted mb-3">{{ \Illuminate\Support\Str::limit($group->description, 140) }}</p>
+                            
+                            @if($group->coordinator_name)
+                                <div class="mb-2 small">
+                                    <i data-lucide="user" style="width: 14px; height: 14px;"></i>
+                                    <strong>Coordenador:</strong> {{ $group->coordinator_name }}
+                                </div>
+                            @endif
+                            
+                            @if($group->coordinator_phone)
+                                <div class="mb-2 small">
+                                    <i data-lucide="phone" style="width: 14px; height: 14px;"></i>
+                                    <a href="tel:{{ $group->coordinator_phone }}" class="text-decoration-none">{{ $group->coordinator_phone }}</a>
+                                </div>
+                            @endif
+                            
                             @if(!empty($group->meeting_info))
-                                <div class="small text-muted d-flex align-items-center gap-2">
-                                    <i data-lucide="calendar"></i>
+                                <div class="small text-muted d-flex align-items-start gap-2 mt-3 pt-3 border-top">
+                                    <i data-lucide="calendar" style="width: 14px; height: 14px; margin-top: 2px;"></i>
                                     <span>{{ $group->meeting_info }}</span>
                                 </div>
                             @endif

@@ -53,10 +53,10 @@
                     <table class="table align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Nome</th>
                                 <th>Dia da Semana</th>
                                 <th>Horário</th>
                                 <th>Local</th>
+                                <th>Descrição</th>
                                 <th>Status</th>
                                 <th class="text-end">Ações</th>
                             </tr>
@@ -64,15 +64,16 @@
                         <tbody>
                             @foreach($masses as $mass)
                             <tr>
-                                <td>
-                                    <div class="fw-semibold">{{ $mass->name }}</div>
-                                    @if($mass->description)
-                                        <div class="text-muted small">{{ Str::limit($mass->description, 50) }}</div>
-                                    @endif
-                                </td>
-                                <td>{{ $mass->day_name }}</td>
+                                <td class="fw-semibold">{{ $mass->day_name }}</td>
                                 <td>{{ $mass->time->format('H:i') }}</td>
                                 <td>{{ $mass->location }}</td>
+                                <td>
+                                    @if($mass->description)
+                                        <div class="text-muted small">{{ Str::limit($mass->description, 50) }}</div>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <span class="badge {{ $mass->is_active ? 'bg-success' : 'bg-danger' }}">{{ $mass->is_active ? 'Ativo' : 'Inativo' }}</span>
                                 </td>

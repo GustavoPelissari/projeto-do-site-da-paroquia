@@ -261,9 +261,22 @@ img[loading="lazy"].loaded {
                 <div class="pastoral-card animate-on-scroll">
                     <div class="pastoral-header">
                         <div class="pastoral-icon">
-                            <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                            @if($group->image)
+                                <img src="{{ asset('storage/' . $group->image) }}" 
+                                     alt="{{ $group->name }}" 
+                                     class="rounded-circle"
+                                     style="width: 64px; height: 64px; object-fit: cover;">
+                            @else
+                                <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                            @endif
                         </div>
                         <h4 class="pastoral-title">{{ $group->name }}</h4>
+                        @if($group->coordinator_name)
+                            <p class="text-muted small mb-0">
+                                <i data-lucide="user" style="width: 14px; height: 14px;"></i>
+                                {{ $group->coordinator_name }}
+                            </p>
+                        @endif
                     </div>
                     
                     <div class="pastoral-content">
@@ -316,9 +329,9 @@ img[loading="lazy"].loaded {
         <div class="noticias-grid">
             @foreach($news->take(3) as $noticia)
                 <article class="noticia-card animate-on-scroll">
-                    @if($noticia->image)
+                    @if($noticia->featured_image)
                         <div class="noticia-image">
-                            <img src="{{ asset('storage/' . $noticia->image) }}" 
+                            <img src="{{ asset('storage/' . $noticia->featured_image) }}" 
                                  alt="{{ $noticia->title }}"
                                  loading="lazy">
                         </div>

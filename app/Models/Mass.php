@@ -11,7 +11,6 @@ class Mass extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'day_of_week',
         'time',
         'location',

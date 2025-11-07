@@ -29,6 +29,18 @@
 
     <div class="row g-4">
         <div class="col-lg-8">
+            @if($group->image)
+            <div class="card shadow-sm mb-3">
+                <div class="card-body text-center">
+                    <h6 class="mb-3">Logo do Grupo</h6>
+                    <img src="{{ asset('storage/' . $group->image) }}" 
+                         alt="{{ $group->name }}" 
+                         class="img-thumbnail"
+                         style="max-height: 200px;">
+                </div>
+            </div>
+            @endif
+
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
                     <h6 class="mb-2">Sobre o Grupo</h6>
@@ -38,24 +50,27 @@
 
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h6 class="mb-3">Informações</h6>
+                    <h6 class="mb-3">Informações do Coordenador</h6>
                     <div class="row g-3 small text-muted">
-                        @if($group->coordinator_name)
                         <div class="col-md-6">
-                            <div><span class="fw-semibold">Coordenador:</span> {{ $group->coordinator_name }}</div>
-                            @if($group->coordinator_email)
-                                <div><span class="fw-semibold">E-mail:</span> {{ $group->coordinator_email }}</div>
+                            @if($group->coordinator_name)
+                                <div class="mb-2"><span class="fw-semibold">Nome:</span> {{ $group->coordinator_name }}</div>
+                            @else
+                                <div class="text-muted fst-italic">Nenhum coordenador cadastrado</div>
                             @endif
                             @if($group->coordinator_phone)
-                                <div><span class="fw-semibold">Telefone:</span> {{ $group->coordinator_phone }}</div>
+                                <div class="mb-2"><span class="fw-semibold">Telefone:</span> {{ $group->coordinator_phone }}</div>
+                            @endif
+                            @if($group->coordinator_email)
+                                <div class="mb-2"><span class="fw-semibold">E-mail:</span> {{ $group->coordinator_email }}</div>
                             @endif
                         </div>
-                        @endif
-                        @if($group->meeting_info)
                         <div class="col-md-6">
-                            <div><span class="fw-semibold">Encontros:</span> {{ $group->meeting_info }}</div>
+                            @if($group->meeting_info)
+                                <div><span class="fw-semibold">Informações de Reunião:</span></div>
+                                <div class="mt-1">{{ $group->meeting_info }}</div>
+                            @endif
                         </div>
-                        @endif
                     </div>
                 </div>
             </div>

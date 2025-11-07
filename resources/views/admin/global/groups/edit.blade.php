@@ -20,11 +20,29 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.global.groups.update', $group) }}" class="card shadow-sm">
+    <form method="POST" action="{{ route('admin.global.groups.update', $group) }}" enctype="multipart/form-data" class="card shadow-sm">
         @csrf
         @method('PUT')
         <div class="card-body">
             <div class="row g-3">
+                <!-- Imagem/Logo -->
+                <div class="col-12">
+                    <label class="form-label">Logo do Grupo</label>
+                    @if($group->image)
+                        <div class="mb-2">
+                            <img src="{{ asset('storage/' . $group->image) }}" alt="Logo atual" class="img-thumbnail" style="max-height: 150px;">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" name="remove_image" id="remove_image" value="1">
+                                <label class="form-check-label" for="remove_image">
+                                    Remover imagem atual
+                                </label>
+                            </div>
+                        </div>
+                    @endif
+                    <input type="file" name="image" class="form-control" accept="image/*">
+                    <small class="text-muted">Formatos aceitos: JPG, PNG, GIF. Tamanho máximo: 2MB</small>
+                </div>
+
                 <div class="col-md-6">
                     <label class="form-label">Nome do Grupo <span class="text-danger">*</span></label>
                     <input type="text" name="name" value="{{ old('name', $group->name) }}" class="form-control" required>
@@ -44,6 +62,33 @@
                     <label class="form-label">Descrição <span class="text-danger">*</span></label>
                     <textarea name="description" rows="5" class="form-control" required>{{ old('description', $group->description) }}</textarea>
                 </div>
+
+                <!-- Informações do Coordenador -->
+                <div class="col-12">
+                    <h6 class="border-bottom pb-2 mb-3">Informações do Coordenador</h6>
+                </div>
+                
+                <div class="col-md-4">
+                    <label class="form-label">Nome do Coordenador</label>
+                    <input type="text" name="coordinator_name" value="{{ old('coordinator_name', $group->coordinator_name) }}" class="form-control">
+                </div>
+                
+                <div class="col-md-4">
+                    <label class="form-label">Telefone do Coordenador</label>
+                    <input type="text" name="coordinator_phone" value="{{ old('coordinator_phone', $group->coordinator_phone) }}" class="form-control" placeholder="(00) 00000-0000">
+                </div>
+                
+                <div class="col-md-4">
+                    <label class="form-label">E-mail do Coordenador</label>
+                    <input type="email" name="coordinator_email" value="{{ old('coordinator_email', $group->coordinator_email) }}" class="form-control">
+                </div>
+
+                <!-- Informações de Reunião -->
+                <div class="col-12">
+                    <label class="form-label">Informações de Reunião</label>
+                    <textarea name="meeting_info" rows="2" class="form-control" placeholder="Ex: Todos os sábados às 14h na sala de reuniões">{{ old('meeting_info', $group->meeting_info) }}</textarea>
+                </div>
+
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="form-check form-switch mt-4">
                         <input class="form-check-input" type="checkbox" name="is_active" id="is_active" value="1" {{ old('is_active', $group->is_active) ? 'checked' : '' }}>
