@@ -30,4 +30,4 @@ parameters:
         - vendor/
         - storage/
         - bootstrap/cache/
-        - public/build/
+        - public/build (?)
