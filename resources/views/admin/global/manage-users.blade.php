@@ -29,9 +29,16 @@
                 <div class="card border-0 shadow-sm h-100 user-card">
                     <div class="card-header border-0 text-white py-3 card-header-{{ $user->role->value }}">
                         <div class="d-flex align-items-center">
-                            <div class="bg-white bg-opacity-20 p-2 rounded-circle me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
-                                <span class="fw-bold" style="font-size: 1.2rem; color: #FFFFFF;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
-                            </div>
+                            @if($user->profile_photo_path)
+                                <img src="{{ asset('storage/' . $user->profile_photo_path) }}" 
+                                     alt="{{ $user->name }}" 
+                                     class="rounded-circle me-3" 
+                                     style="width: 50px; height: 50px; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.3);">
+                            @else
+                                <div class="bg-white bg-opacity-20 p-2 rounded-circle me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                    <span class="fw-bold" style="font-size: 1.2rem; color: #FFFFFF;">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
+                                </div>
+                            @endif
                             <div class="flex-grow-1">
                                 <h6 class="mb-0 fw-bold" style="color: #FFFFFF;">{{ Str::limit($user->name, 20) }}</h6>
                                 <small style="opacity: 0.9; color: #FFFFFF;">
