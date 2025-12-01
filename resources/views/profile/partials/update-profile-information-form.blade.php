@@ -13,9 +13,36 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        <!-- Foto de Perfil -->
+        <div>
+            <x-input-label for="profile_photo" value="Foto de Perfil" />
+            <div class="mt-2 flex items-center gap-4">
+                @if($user->profile_photo_path)
+                    <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="Foto de perfil" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                @else
+                    <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 80px; height: 80px; font-size: 32px;">
+                        {{ substr($user->name, 0, 1) }}
+                    </div>
+                @endif
+                <div class="flex-grow-1">
+                    <input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/jpg,image/png,image/webp" class="form-control">
+                    <p class="text-sm text-gray-600 mt-1">JPEG, PNG ou WEBP. Máximo 2MB.</p>
+                    @if($user->profile_photo_path)
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="remove_photo" name="remove_photo" value="1">
+                            <label class="form-check-label text-sm" for="remove_photo">
+                                Remover foto atual
+                            </label>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
