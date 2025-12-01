@@ -4,24 +4,6 @@
 
 @section('content')
 <div class="container-fluid px-4 py-4">
-    <!-- Indicador Visual - Você está em "Minha Área" -->
-    <x-alert type="info" class="border-0 shadow-sm mb-4" style="background: linear-gradient(90deg, #0dcaf0 0%, #0aa2c0 100%); border-radius: 15px;">
-        <div class="d-flex align-items-center">
-            <i class="bi bi-house-heart-fill me-3" style="font-size: 2rem; color: white;"></i>
-            <div class="flex-grow-1">
-                <h5 class="mb-1 text-white fw-bold">
-                    <i class="bi bi-check-circle-fill me-2"></i>Você está em: MINHA ÁREA
-                </h5>
-                <p class="mb-0 text-white" style="opacity: 0.95;">
-                    Este é seu painel personalizado com informações da paróquia
-                </p>
-            </div>
-            <a href="{{ route('home') }}" class="btn btn-light btn-sm">
-                <i class="bi bi-globe me-1"></i> Ver Site Público
-            </a>
-        </div>
-    </x-alert>
-
     <!-- Page Header -->
     <div class="card border-0 shadow-lg mb-4" style="background: linear-gradient(135deg, #6B7280 0%, #4B5563 50%, #6B7280 100%); border-radius: 20px;">
         <div class="card-body text-white py-4 px-4">
@@ -34,8 +16,21 @@
                         Acompanhe as novidades e eventos da Paróquia São Paulo Apóstolo
                     </p>
                 </div>
-                <div class="text-end">
-                    <i class="bi bi-person-circle" style="font-size: 4rem; color: #FFD66B; opacity: 0.8;"></i>
+                <div class="text-end d-flex align-items-center gap-3">
+                    @if(Auth::user()->profile_photo_path)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}" 
+                             alt="{{ Auth::user()->name }}" 
+                             class="rounded-circle" 
+                             style="width: 80px; height: 80px; object-fit: cover; border: 3px solid #FFD66B;">
+                    @else
+                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" 
+                             style="width: 80px; height: 80px; border: 3px solid #FFD66B;">
+                            <span class="display-4 text-dark">{{ substr($user->name, 0, 1) }}</span>
+                        </div>
+                    @endif
+                    <a href="{{ route('home') }}" class="btn btn-light btn-sm">
+                        <i class="bi bi-globe me-1"></i> Ver Site Público
+                    </a>
                 </div>
             </div>
         </div>
