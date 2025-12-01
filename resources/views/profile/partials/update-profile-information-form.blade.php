@@ -1,26 +1,20 @@
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
+    <p class="text-muted mb-4">
+        Atualize as informações de perfil e endereço de e-mail da sua conta.
+    </p>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
         <!-- Foto de Perfil -->
-        <div>
-            <x-input-label for="profile_photo" value="Foto de Perfil" />
-            <div class="mt-2 flex items-center gap-4">
+        <div class="mb-4">
+            <label class="form-label">Foto de Perfil</label>
+            <div class="d-flex align-items-center gap-3">
                 @if($user->profile_photo_path)
                     <img src="{{ asset('storage/' . $user->profile_photo_path) }}" alt="Foto de perfil" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
                 @else
@@ -29,58 +23,79 @@
                     </div>
                 @endif
                 <div class="flex-grow-1">
-                    <input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/jpg,image/png,image/webp" class="form-control">
-                    <p class="text-sm text-gray-600 mt-1">JPEG, PNG ou WEBP. Máximo 2MB.</p>
+                    <input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/jpg,image/png,image/webp" class="form-control @error('profile_photo') is-invalid @enderror">
+                    <small class="text-muted">JPEG, PNG ou WEBP. Máximo 2MB.</small>
+                    @error('profile_photo')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                     @if($user->profile_photo_path)
                         <div class="form-check mt-2">
                             <input class="form-check-input" type="checkbox" id="remove_photo" name="remove_photo" value="1">
-                            <label class="form-check-label text-sm" for="remove_photo">
+                            <label class="form-check-label small" for="remove_photo">
                                 Remover foto atual
                             </label>
                         </div>
                     @endif
                 </div>
             </div>
-            <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
         </div>
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" 
+                   id="name" 
+                   name="name" 
+                   value="{{ old('name', $user->name) }}" 
+                   class="form-control @error('name') is-invalid @enderror" 
+                   required 
+                   autofocus 
+                   autocomplete="name">
+            @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" 
+                   id="email" 
+                   name="email" 
+                   value="{{ old('email', $user->email) }}" 
+                   class="form-control @error('email') is-invalid @enderror" 
+                   required 
+                   autocomplete="username">
+            @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+                <div class="mt-2">
+                    <p class="text-muted small">
+                        Seu endereço de e-mail não está verificado.
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
+                        <button form="send-verification" class="btn btn-link p-0 text-decoration-none">
+                            Clique aqui para reenviar o e-mail de verificação.
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
-                        <x-alert type="success">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </x-alert>
+                        <div class="alert alert-success alert-sm">
+                            Um novo link de verificação foi enviado para seu e-mail.
+                        </div>
                     @endif
                 </div>
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div class="d-flex align-items-center gap-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> Salvar
+            </button>
 
             @if (session('status') === 'profile-updated')
-                <x-alert type="success">
-                    {{ __('Saved.') }}
-                </x-alert>
+                <span class="text-success">
+                    <i class="bi bi-check-circle-fill"></i> Perfil atualizado!
+                </span>
             @endif
         </div>
     </form>
