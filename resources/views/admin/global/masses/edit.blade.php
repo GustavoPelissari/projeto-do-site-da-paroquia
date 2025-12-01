@@ -10,13 +10,13 @@
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <x-alert type="danger">
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
+        </x-alert>
     @endif
 
     <form method="POST" action="{{ route('admin.global.masses.update', $mass) }}">

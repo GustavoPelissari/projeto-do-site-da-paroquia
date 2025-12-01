@@ -22,7 +22,7 @@
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <x-alert type="danger" class="alert-dismissible fade show">
             <h5 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Erro ao salvar</h5>
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
@@ -30,7 +30,7 @@
                 @endforeach
             </ul>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+        </x-alert>
     @endif
 
     <form method="POST" action="{{ route('admin.coordenador.news.store') }}" enctype="multipart/form-data">
@@ -180,9 +180,10 @@
 
                 <!-- Info sobre TAG -->
                 <div class="alert alert-info mt-3" role="alert">
-                    <h6 class="alert-heading"><i class="bi bi-tag-fill"></i> Identificação Automática</h6>
-                    <p class="mb-0 small">Esta notícia será automaticamente marcada como pertencente a <strong>{{ Auth::user()->parishGroup->name ?? 'seu grupo' }}</strong>.</p>
-                </div>
+                    <x-alert type="info" class="mt-3">
+                        <h6 class="alert-heading"><i class="bi bi-tag-fill"></i> Identificação Automática</h6>
+                        <p class="mb-0 small">Esta notícia será automaticamente marcada como pertencente a <strong>{{ Auth::user()->parishGroup->name ?? 'seu grupo' }}</strong>.</p>
+                    </x-alert>
             </div>
         </div>
 

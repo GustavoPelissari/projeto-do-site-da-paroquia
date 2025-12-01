@@ -15,9 +15,9 @@
                     </div>
 
                     @if (session('status'))
-                        <div class="alert alert-success mb-4">
+                        <x-alert type="success" class="mb-4">
                             {{ session('status') }}
-                        </div>
+                        </x-alert>
                     @endif
 
                     <form method="POST" action="{{ route('login') }}">

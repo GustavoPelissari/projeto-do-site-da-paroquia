@@ -10,13 +10,11 @@
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
+        <x-alert type="error"> <ul class="mb-0 list-disc list-inside text-sm"> @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
+        </x-alert>
     @endif
 
     <form method="POST" action="{{ route('admin.global.news.store') }}" enctype="multipart/form-data">

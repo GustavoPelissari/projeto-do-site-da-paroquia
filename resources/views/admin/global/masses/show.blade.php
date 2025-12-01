@@ -20,7 +20,7 @@
     </div>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <x-alert type="success">{{ session('success') }}</x-alert>
     @endif
 
     <div class="row g-4">

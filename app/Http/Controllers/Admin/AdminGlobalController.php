@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\StoreNewsRequest;
+use App\Http\Requests\UpdateEventRequest;
+use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\GroupRequest;
@@ -231,7 +235,7 @@ class AdminGlobalController extends Controller
         return view('admin.global.news.create');
     }
 
-    public function newsStore(Request $request)
+    public function newsStore(StoreNewsRequest $request)
     {
         // Permite admin_global e coordenadores criarem notícias
         $user = Auth::user();
@@ -244,12 +248,7 @@ class AdminGlobalController extends Controller
         Log::info('Arquivos no request: ' . json_encode($request->allFiles()));
         Log::info('Tem arquivo featured_image? ' . ($request->hasFile('featured_image') ? 'SIM' : 'NÃO'));
 
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'status' => 'required|in:published,draft',
-            'featured_image' => 'nullable|image|max:2048',
-        ]);
+        $validated = $request->validated();
 
         $validated['user_id'] = Auth::id();
 
@@ -297,7 +296,7 @@ class AdminGlobalController extends Controller
         return view('admin.global.news.edit', compact('news'));
     }
 
-    public function newsUpdate(Request $request, News $news)
+    public function newsUpdate(UpdateNewsRequest $request, News $news)
     {
         $user = Auth::user();
         
@@ -307,12 +306,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Você não tem permissão para editar esta notícia.');
         }
 
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'status' => 'required|in:published,draft',
-            'featured_image' => 'nullable|image|max:2048',
-        ]);
+        $validated = $request->validated();
 
         // Processar upload da imagem se houver
         if ($request->hasFile('featured_image')) {
@@ -372,24 +366,13 @@ class AdminGlobalController extends Controller
         return view('admin.global.events.create');
     }
 
-    public function eventsStore(Request $request)
+    public function eventsStore(StoreEventRequest $request)
     {
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
 
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-            'location' => 'nullable|string|max:255',
-            'category' => 'required|string|max:100',
-            'status' => 'required|in:scheduled,confirmed,cancelled',
-            'max_participants' => 'nullable|integer|min:1',
-            'requirements' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
-        ]);
+        $validated = $request->validated();
 
         $validated['user_id'] = Auth::id();
 
@@ -422,25 +405,13 @@ class AdminGlobalController extends Controller
         return view('admin.global.events.edit', compact('event'));
     }
 
-    public function eventsUpdate(Request $request, Event $event)
+    public function eventsUpdate(UpdateEventRequest $request, Event $event)
     {
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
 
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-            'location' => 'nullable|string|max:255',
-            'category' => 'required|string|max:100',
-            'status' => 'required|in:scheduled,confirmed,cancelled',
-            'max_participants' => 'nullable|integer|min:1',
-            'requirements' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
-            'remove_image' => 'nullable|boolean',
-        ]);
+        $validated = $request->validated();
 
         // Remover imagem se solicitado
         if ($request->has('remove_image') && $request->remove_image) {

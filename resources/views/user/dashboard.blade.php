@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid px-4 py-4">
     <!-- Indicador Visual - Você está em "Minha Área" -->
-    <div class="alert alert-info border-0 shadow-sm mb-4" style="background: linear-gradient(90deg, #0dcaf0 0%, #0aa2c0 100%); border-radius: 15px;">
+    <x-alert type="info" class="border-0 shadow-sm mb-4" style="background: linear-gradient(90deg, #0dcaf0 0%, #0aa2c0 100%); border-radius: 15px;">
         <div class="d-flex align-items-center">
             <i class="bi bi-house-heart-fill me-3" style="font-size: 2rem; color: white;"></i>
             <div class="flex-grow-1">
@@ -20,7 +20,7 @@
                 <i class="bi bi-globe me-1"></i> Ver Site Público
             </a>
         </div>
-    </div>
+    </x-alert>
 
     <!-- Page Header -->
     <div class="card border-0 shadow-lg mb-4" style="background: linear-gradient(135deg, #6B7280 0%, #4B5563 50%, #6B7280 100%); border-radius: 20px;">

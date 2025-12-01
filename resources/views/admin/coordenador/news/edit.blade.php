@@ -22,7 +22,7 @@
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <x-alert type="danger" class="alert-dismissible fade show">
             <h5 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Erro ao salvar</h5>
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
@@ -30,7 +30,7 @@
                 @endforeach
             </ul>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+        </x-alert>
     @endif
 
     <form method="POST" action="{{ route('admin.coordenador.news.update', $news) }}" enctype="multipart/form-data">

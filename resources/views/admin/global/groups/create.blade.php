@@ -9,15 +9,16 @@
         <a href="{{ route('admin.global.groups.index') }}" class="btn btn-outline-secondary">Voltar</a>
     </div>
 
+    <!-- Bloco de Erros Padronizado -->
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <div class="fw-semibold mb-1">Verifique os erros abaixo:</div>
-            <ul class="mb-0 small">
+        <x-alert type="error">
+            <strong>Verifique os erros abaixo:</strong>
+            <ul class="mb-0 list-disc list-inside text-sm"> <!-- Classes da lista atualizadas -->
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
+        </x-alert>
     @endif
 
     <form method="POST" action="{{ route('admin.global.groups.store') }}" class="card shadow-sm">

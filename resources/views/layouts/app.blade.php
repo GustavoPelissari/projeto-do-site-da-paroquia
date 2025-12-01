@@ -6,25 +6,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Paróquia São Paulo Apóstolo')</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
-    <!-- Vite Assets -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
-            <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo" class="me-2" style="height: 40px;">
                 <div>
@@ -33,17 +27,14 @@
                 </div>
             </a>
 
-            <!-- Toggle button for mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navigation Menu -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     @auth
                         @if(Auth::user()->role->value === 'admin_global')
-                            <!-- Menu Admin Global -->
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.dashboard') }}">
                                     <i class="bi bi-speedometer2"></i> Dashboard
@@ -70,7 +61,6 @@
                                 </a>
                             </li>
                         @elseif(Auth::user()->role->value === 'coordenador_de_pastoral')
-                            <!-- Menu Coordenador -->
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.coordenador.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.dashboard') }}">
                                     <i class="bi bi-speedometer2"></i> Dashboard
@@ -88,7 +78,6 @@
                                 <a class="nav-link" href="{{ route('masses') }}">Missas</a>
                             </li>
                         @elseif(Auth::user()->role->value === 'administrativo')
-                            <!-- Menu Administrativo -->
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.administrativo.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.dashboard') }}">
                                     <i class="bi bi-speedometer2"></i> Dashboard
@@ -106,7 +95,6 @@
                                 <a class="nav-link" href="{{ route('masses') }}">Missas</a>
                             </li>
                         @else
-                            <!-- Menu Usuário Padrão -->
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('home') }}">Início</a>
                             </li>
@@ -124,7 +112,6 @@
                             </li>
                         @endif
                     @else
-                        <!-- Menu não autenticado -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Início</a>
                         </li>
@@ -143,7 +130,6 @@
                     @endauth
                 </ul>
 
-                <!-- User Menu -->
                 <ul class="navbar-nav">
                     @auth
                         <li class="nav-item dropdown">
@@ -212,34 +198,39 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main style="margin-top: 80px;">
-        @if(session('success'))
-            <div class="container mt-3">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="bi bi-check-circle"></i> {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            </div>
-        @endif
+        <div class="container mt-3">
+            @if(session('success'))
+                <x-alert type="success">
+                    {{ session('success') }}
+                </x-alert>
+            @endif
+            
+            @if(session('error'))
+                <x-alert type="error">
+                    {{ session('error') }}
+                </x-alert>
+            @endif
 
-        @if(session('error'))
-            <div class="container mt-3">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-triangle"></i> {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            </div>
-        @endif
+            @if(session('warning'))
+                <x-alert type="warning">
+                    {{ session('warning') }}
+                </x-alert>
+            @endif
+
+            @if(session('info'))
+                <x-alert type="info">
+                    {{ session('info') }}
+                </x-alert>
+            @endif
+        </div>
 
         @yield('content')
     </main>
 
-    <!-- Footer -->
     <footer class="footer-paroquia">
         <div class="container">
             <div class="row">
-                <!-- About Section -->
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Paróquia São Paulo Apóstolo</h5>
                     <p class="footer-text">
@@ -251,7 +242,6 @@
                     </p>
                 </div>
 
-                <!-- Quick Links -->
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Links Rápidos</h5>
                     <ul class="footer-links">
@@ -271,7 +261,6 @@
                     </ul>
                 </div>
 
-                <!-- Contact -->
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Contato</h5>
                     <ul class="footer-contact">
@@ -297,10 +286,8 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Debug Script para ícones -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Verifica se Bootstrap Icons está carregado

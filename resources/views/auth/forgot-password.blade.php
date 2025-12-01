@@ -15,17 +15,17 @@
                     </div>
 
                     <div class="mb-4">
-                        <div class="alert alert-info">
+                        <x-alert type="info">
                             <i class="bi bi-info-circle"></i> 
                             Esqueceu sua senha? Sem problemas. Digite seu email e enviaremos um link para redefinir sua senha.
-                        </div>
+                        </x-alert>
                     </div>
 
                     <!-- Session Status -->
                     @if (session('status'))
-                        <div class="alert alert-success mb-4">
+                        <x-alert type="success" class="mb-4">
                             <i class="bi bi-check-circle"></i> {{ session('status') }}
-                        </div>
+                        </x-alert>
                     @endif
 
                     <form method="POST" action="{{ route('password.email') }}">

@@ -27,7 +27,7 @@
     </div>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <x-alert type="success">{{ session('success') }}</x-alert>
     @endif
 
     <div class="row g-4">
@@ -38,9 +38,9 @@
                 @endif
                 <div class="card-body">
                     @if($news->summary)
-                        <div class="alert alert-primary" role="alert">
+                        <x-alert type="primary">
                             {{ $news->summary }}
-                        </div>
+                        </x-alert>
                     @endif
 
                     <div class="mb-0">
@@ -57,9 +57,9 @@
             </div>
 
             @if($news->status === 'draft')
-                <div class="alert alert-warning mt-3" role="alert">
+                <x-alert type="warning" class="mt-3">
                     Esta notícia está em rascunho e não será exibida no site público até ser publicada.
-                </div>
+                </x-alert>
             @endif
         </div>
 

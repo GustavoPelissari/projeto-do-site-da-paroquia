@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container-fluid px-4 py-4">
-    <!-- Page Header -->
     <div class="card border-0 shadow-lg mb-4" style="background: linear-gradient(135deg, #8B1538 0%, #6E1530 50%, #8B1538 100%); border-radius: 20px;">
         <div class="card-body text-white py-4 px-4">
             <div class="d-flex align-items-center justify-content-between">
@@ -24,12 +23,10 @@
         </div>
     </div>
 
-    <!-- Users List -->
     <div class="row g-4">
         @forelse($users as $user)
             <div class="col-md-6 col-lg-4">
                 <div class="card border-0 shadow-sm h-100 user-card">
-                    <!-- Card Header com cor baseada no role -->
                     <div class="card-header border-0 text-white py-3 card-header-{{ $user->role->value }}">
                         <div class="d-flex align-items-center">
                             <div class="bg-white bg-opacity-20 p-2 rounded-circle me-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
@@ -56,7 +53,6 @@
                         </div>
                     </div>
 
-                    <!-- Card Body -->
                     <div class="card-body">
                         <div class="mb-3">
                             <small class="text-muted d-block mb-1"><i class="bi bi-envelope"></i> Email</small>
@@ -92,7 +88,6 @@
                         @endif
                     </div>
 
-                    <!-- Card Footer -->
                     <div class="card-footer bg-light border-0">
                         <div class="d-flex gap-2">
                             @if($user->id !== auth()->id())
@@ -127,7 +122,6 @@
         @endforelse
     </div>
 
-    <!-- Pagination -->
     @if($users->hasPages())
         <div class="d-flex justify-content-center mt-4">
             {{ $users->links() }}
@@ -135,7 +129,6 @@
     @endif
 </div>
 
-<!-- Modal para Alterar Função -->
 <div class="modal fade" id="changeRoleModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -159,10 +152,9 @@
                         </select>
                     </div>
 
-                    <div class="alert alert-warning">
-                        <i class="bi bi-exclamation-triangle"></i>
+                    <x-alert type="warning">
                         <strong>Atenção:</strong> Alterar a função do usuário modificará suas permissões no sistema.
-                    </div>
+                    </x-alert>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -175,7 +167,6 @@
     </div>
 </div>
 
-<!-- Modal para Confirmar Exclusão -->
 <div class="modal fade" id="deleteUserModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -187,10 +178,10 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    <div class="alert alert-danger">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
+                    <x-alert type="error">
                         <strong>ATENÇÃO:</strong> Esta ação não pode ser desfeita!
-                    </div>
+                    </x-alert>
+
                     <p class="mb-0">Tem certeza que deseja excluir o usuário <strong id="deleteUserName"></strong>?</p>
                     <p class="text-muted small mt-2">Todos os dados relacionados a este usuário serão removidos permanentemente.</p>
                 </div>

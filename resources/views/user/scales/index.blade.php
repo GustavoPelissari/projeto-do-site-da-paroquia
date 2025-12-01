@@ -24,13 +24,13 @@
     </div>
 
     <!-- Info Alert -->
-    <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+    <x-alert type="info" class="d-flex align-items-center mb-4">
         <i class="bi bi-info-circle-fill me-2" style="font-size: 1.5rem;"></i>
         <div>
             <strong>Visualização apenas!</strong> Esta seção permite que você visualize e baixe as escalas do grupo.
             Somente coordenadores podem criar, editar ou excluir escalas.
         </div>
-    </div>
+    </x-alert>
 
     <!-- Escalas Table -->
     <div class="card border-0 shadow-sm">

@@ -5,30 +5,26 @@
 @section('content')
 <x-hero title="Participar da Nossa Comunidade" subtitle="Envie uma solicitação para se juntar a um dos nossos grupos e pastorais">
     <p class="mb-0" style="opacity: 0.9;">
-         Seja bem-vindo! Preencha o formulário abaixo para solicitar sua participação.
+        Seja bem-vindo! Preencha o formulário abaixo para solicitar sua participação.
     </p>
 </x-hero>
 
 <div class="container my-5">
     @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i data-lucide="check-circle" class="me-2"></i>
+        <x-alert type="success">
             <strong>Sucesso!</strong> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        </x-alert>
     @endif
 
     @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i data-lucide="alert-circle" class="me-2"></i>
+        <x-alert type="error">
             <strong>Atenção!</strong> Corrija os erros abaixo:
-            <ul class="mt-2 mb-0">
+            <ul class="mt-2 mb-0 list-disc list-inside text-sm">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        </x-alert>
     @endif
 
     <div class="row g-4">

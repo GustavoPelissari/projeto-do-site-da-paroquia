@@ -16,21 +16,15 @@
 
         {{-- Alerts --}}
         @if (session('success'))
-            <div class="sp-alert sp-alert-success sp-mb-6">
-                <div class="sp-alert-icon">✅</div>
-                <div class="sp-alert-content">
-                    <strong>Sucesso!</strong> {{ session('success') }}
-                </div>
-            </div>
+            <x-alert type="success">
+                ✅ <strong>Sucesso!</strong> {{ session('success') }}
+            </x-alert>
         @endif
 
         @if (session('error'))
-            <div class="sp-alert sp-alert-error sp-mb-6">
-                <div class="sp-alert-icon">❌</div>
-                <div class="sp-alert-content">
-                    <strong>Atenção!</strong> {{ session('error') }}
-                </div>
-            </div>
+            <x-alert type="error">
+                ❌ <strong>Atenção!</strong> {{ session('error') }}
+            </x-alert>
         @endif
 
         {{-- Actions Section --}}

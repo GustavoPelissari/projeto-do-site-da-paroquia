@@ -79,14 +79,15 @@
     </div>
 
     <div class="alert alert-info mt-4" role="alert">
-        <h5 class="alert-heading"><i class="bi bi-info-circle"></i> Sobre as Escalas PDF</h5>
-        <hr>
-        <ul class="mb-0">
-            <li>Apenas arquivos PDF são aceitos (máximo 10MB)</li>
-            <li>Você pode definir um período de validade para cada escala</li>
-            <li>Escalas ativas são marcadas com badge verde</li>
-            <li>Apenas coordenadores do grupo podem gerenciar as escalas</li>
-        </ul>
-    </div>
+        <x-alert type="info" class="mt-4">
+            <h5 class="alert-heading"><i class="bi bi-info-circle"></i> Sobre as Escalas PDF</h5>
+            <hr>
+            <ul class="mb-0">
+                <li>Apenas arquivos PDF são aceitos (máximo 10MB)</li>
+                <li>Você pode definir um período de validade para cada escala</li>
+                <li>Escalas ativas são marcadas com badge verde</li>
+                <li>Apenas coordenadores do grupo podem gerenciar as escalas</li>
+            </ul>
+        </x-alert>
 </div>
 @endsection

@@ -16,21 +16,15 @@
 
         {{-- Alerts --}}
         @if (session('success'))
-            <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
-                <div class="me-3"><i class="bi bi-check-circle"></i></div>
-                <div>
-                    <strong>Sucesso!</strong> {{ session('success') }}
-                </div>
-            </div>
+            <x-alert type="success">
+                <i class="bi bi-check-circle"></i> <strong>Sucesso!</strong> {{ session('success') }}
+            </x-alert>
         @endif
 
         @if (session('error'))
-            <div class="alert alert-danger d-flex align-items-center mb-4" role="alert">
-                <div class="me-3"><i class="bi bi-exclamation-triangle"></i></div>
-                <div>
-                    <strong>Erro!</strong> {{ session('error') }}
-                </div>
-            </div>
+            <x-alert type="error">
+                <i class="bi bi-exclamation-triangle"></i> <strong>Erro!</strong> {{ session('error') }}
+            </x-alert>
         @endif
 
         {{-- Main Content --}}

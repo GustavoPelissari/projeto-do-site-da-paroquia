@@ -10,14 +10,14 @@
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <x-alert type="error">
             <div class="fw-semibold mb-1">Verifique os erros abaixo:</div>
             <ul class="mb-0 small">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
+        </x-alert>
     @endif
 
     <form method="POST" action="{{ route('admin.global.groups.update', $group) }}" enctype="multipart/form-data" class="card shadow-sm">

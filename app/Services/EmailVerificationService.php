@@ -35,9 +35,6 @@ class EmailVerificationService
         $code = $this->generateCode();
         $hash = Hash::make($code);
 
-        // Log temporário para desenvolvimento (REMOVER EM PRODUÇÃO)
-        Log::info("🔐 Código de verificação para {$user->email}: {$code}");
-
         // Upsert transactional to avoid race conditions
         DB::transaction(function () use ($user, $record, $hash) {
             $record->fill([

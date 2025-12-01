@@ -7,17 +7,19 @@
     <p class="mb-4">Enviamos um código de 6 dígitos para o seu e-mail. Insira-o abaixo para confirmar sua conta.</p>
 
     @if ($status)
-        <div class="mb-4 p-3 text-sm text-green-800 bg-green-100 border border-green-200 rounded">{{ $status }}</div>
+        <x-alert type="success">
+            {{ $status }}
+        </x-alert>
     @endif
 
     @if ($errors->any())
-        <div class="mb-4 p-3 text-sm text-red-800 bg-red-100 border border-red-200 rounded">
-            <ul class="list-disc list-inside">
+        <x-alert type="error">
+            <ul class="list-disc list-inside text-sm">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
+        </x-alert>
     @endif
 
     <form method="POST" action="{{ route('verification.verify') }}" class="space-y-4" id="verifyForm">

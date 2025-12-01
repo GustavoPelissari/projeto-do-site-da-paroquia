@@ -10,17 +10,17 @@
     </div>
 
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <x-alert type="danger">
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        </div>
+        </x-alert>
     @endif
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <x-alert type="success">{{ session('success') }}</x-alert>
     @endif
 
     <form method="POST" action="{{ route('admin.global.events.update', $event) }}" enctype="multipart/form-data">
