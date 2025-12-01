@@ -46,8 +46,14 @@
                             </div>
                         </div>
                         <div class="mt-3">
-                            <label for="location" class="form-label">Local *</r
-                            ><input type="text" name="location" id="location" value="{{ old('location', $mass->location) }}" class="form-control" required>
+                            <label for="location" class="form-label">Local *</label>
+                            <select name="location" id="location" class="form-select" required>
+                                @php $location = old('location', $mass->location); @endphp
+                                <option value="">Selecione o local</option>
+                                <option value="Paróquia São Paulo Apóstolo" {{ $location === 'Paróquia São Paulo Apóstolo' ? 'selected' : '' }}>Paróquia São Paulo Apóstolo</option>
+                                <option value="Capela Santo Antônio" {{ $location === 'Capela Santo Antônio' ? 'selected' : '' }}>Capela Santo Antônio</option>
+                                <option value="Capela Nossa Senhora de Fátima" {{ $location === 'Capela Nossa Senhora de Fátima' ? 'selected' : '' }}>Capela Nossa Senhora de Fátima</option>
+                            </select>
                         </div>
                         <div class="mt-3">
                             <label for="description" class="form-label">Descrição</label>

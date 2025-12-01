@@ -24,10 +24,6 @@
             <div class="col-lg-8">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nome *</label>
-                            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required>
-                        </div>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="day_of_week" class="form-label">Dia da Semana *</label>
@@ -49,7 +45,12 @@
                         </div>
                         <div class="mt-3">
                             <label for="location" class="form-label">Local *</label>
-                            <input type="text" name="location" id="location" value="{{ old('location') }}" class="form-control" required>
+                            <select name="location" id="location" class="form-select" required>
+                                <option value="">Selecione o local</option>
+                                <option value="Paróquia São Paulo Apóstolo" {{ old('location') === 'Paróquia São Paulo Apóstolo' ? 'selected' : '' }}>Paróquia São Paulo Apóstolo</option>
+                                <option value="Capela Santo Antônio" {{ old('location') === 'Capela Santo Antônio' ? 'selected' : '' }}>Capela Santo Antônio</option>
+                                <option value="Capela Nossa Senhora de Fátima" {{ old('location') === 'Capela Nossa Senhora de Fátima' ? 'selected' : '' }}>Capela Nossa Senhora de Fátima</option>
+                            </select>
                         </div>
                         <div class="mt-3">
                             <label for="description" class="form-label">Descrição</label>

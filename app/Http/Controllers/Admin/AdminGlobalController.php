@@ -593,7 +593,7 @@ class AdminGlobalController extends Controller
         $validated = $request->validate([
             'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
             'time' => 'required|date_format:H:i',
-            'location' => 'required|string|max:255',
+            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
             'description' => 'nullable|string',
             'is_active' => 'boolean',
         ]);
@@ -631,7 +631,7 @@ class AdminGlobalController extends Controller
         $validated = $request->validate([
             'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
             'time' => 'required|date_format:H:i',
-            'location' => 'required|string|max:255',
+            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
             'description' => 'nullable|string',
             'is_active' => 'boolean',
         ]);
