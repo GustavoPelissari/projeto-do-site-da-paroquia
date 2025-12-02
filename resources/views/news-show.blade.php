@@ -28,6 +28,12 @@
     .news-content p {
         margin-bottom: 1.5rem;
     }
+    
+    /* Garantir espaço suficiente antes do footer */
+    .section-paroquia {
+        min-height: auto;
+        padding-bottom: 14rem;
+    }
 </style>
 @endpush
 
@@ -49,7 +55,7 @@
 </div>
 
 <!-- Conteúdo da Notícia -->
-<section class="section-paroquia mb-5" style="padding-bottom: 5rem;">
+<section class="section-paroquia">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -117,55 +123,55 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        <!-- Notícias relacionadas -->
+                        @php
+                            $relatedNews = \App\Models\News::where('status', 'published')
+                                ->where('id', '!=', $news->id)
+                                ->when($news->parishGroup, function($query) use ($news) {
+                                    return $query->where('parish_group_id', $news->parish_group_id);
+                                })
+                                ->latest('published_at')
+                                ->take(3)
+                                ->get();
+                        @endphp
+                        
+                        @if($relatedNews->count() > 0)
+                            <div class="mt-5 pt-4 mb-5">
+                                <h3 class="mb-4 text-center">Outras Notícias</h3>
+                                <div class="row g-4">
+                                    @foreach($relatedNews as $item)
+                                        <div class="col-md-4">
+                                            <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+                                                @if($item->featured_image)
+                                                    <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+                                                @else
+                                                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                                                        <i class="bi bi-image text-muted" style="font-size: 2.5rem;"></i>
+                                                    </div>
+                                                @endif
+                                                <div class="card-body d-flex flex-column p-3">
+                                                    <h6 class="card-title mb-2" style="font-size: 0.95rem; line-height: 1.4;">
+                                                        <a href="{{ route('news.show', $item) }}" class="text-decoration-none text-dark hover-text-primary">
+                                                            {{ Str::limit($item->title, 55) }}
+                                                        </a>
+                                                    </h6>
+                                                    <small class="text-muted d-block mb-3" style="font-size: 0.8rem;">
+                                                        <i class="bi bi-calendar3 me-1"></i>
+                                                        {{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}
+                                                    </small>
+                                                    <a href="{{ route('news.show', $item) }}" class="btn btn-sm btn-outline-success mt-auto">
+                                                        Ler mais <i class="bi bi-arrow-right ms-1"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </article>
-                
-                <!-- Notícias relacionadas -->
-                @php
-                    $relatedNews = \App\Models\News::where('status', 'published')
-                        ->where('id', '!=', $news->id)
-                        ->when($news->parishGroup, function($query) use ($news) {
-                            return $query->where('parish_group_id', $news->parish_group_id);
-                        })
-                        ->latest('published_at')
-                        ->take(3)
-                        ->get();
-                @endphp
-                
-                @if($relatedNews->count() > 0)
-                    <div class="mt-5 pt-4 mb-5">
-                        <h3 class="mb-4 text-center">Outras Notícias</h3>
-                        <div class="row g-4 mb-5">
-                            @foreach($relatedNews as $item)
-                                <div class="col-md-4">
-                                    <div class="card h-100 border-0 shadow-sm hover-shadow transition">
-                                        @if($item->featured_image)
-                                            <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 180px; object-fit: cover;">
-                                        @else
-                                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
-                                                <i class="bi bi-image text-muted" style="font-size: 2.5rem;"></i>
-                                            </div>
-                                        @endif
-                                        <div class="card-body d-flex flex-column p-3">
-                                            <h6 class="card-title mb-2" style="font-size: 0.95rem; line-height: 1.4;">
-                                                <a href="{{ route('news.show', $item) }}" class="text-decoration-none text-dark hover-text-primary">
-                                                    {{ Str::limit($item->title, 55) }}
-                                                </a>
-                                            </h6>
-                                            <small class="text-muted d-block mb-3" style="font-size: 0.8rem;">
-                                                <i class="bi bi-calendar3 me-1"></i>
-                                                {{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}
-                                            </small>
-                                            <a href="{{ route('news.show', $item) }}" class="btn btn-sm btn-outline-success mt-auto">
-                                                Ler mais <i class="bi bi-arrow-right ms-1"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
             </div>
         </div>
     </div>
