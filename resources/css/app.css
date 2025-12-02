@@ -353,6 +353,22 @@ section:first-of-type, .section:first-of-type {
     text-decoration: none;
 }
 
+/* Responsivo - Navbar brand menor no mobile */
+@media (max-width: 768px) {
+    .navbar-brand img {
+        height: 32px !important;
+    }
+    
+    .navbar-brand .fw-bold {
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+    
+    .navbar-brand small {
+        font-size: 0.65rem;
+    }
+}
+
 .nav-link {
     font-family: var(--font-sans);
     font-weight: 500;
@@ -553,9 +569,10 @@ section:first-of-type, .section:first-of-type {
 }
 
 /* ================================
-   RESPONSIVIDADE
+   RESPONSIVIDADE MOBILE - GLOBAL
 ================================ */
 @media (max-width: 768px) {
+    /* HERO SECTIONS */
     .hero-paroquia {
         min-height: 60vh;
         background-attachment: scroll;
@@ -565,39 +582,223 @@ section:first-of-type, .section:first-of-type {
         padding: 2rem 0;
     }
     
+    /* BOTÕES */
     .btn-hero {
         width: 100%;
         justify-content: center;
         margin-bottom: 1rem;
     }
     
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-group .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* SEÇÕES */
     .section-paroquia {
         padding: 2rem 0;
     }
     
-    /* Mobile: garantir espaçamento */
+    /* CONTAINERS - garantir espaçamento */
     .container, .container-fluid {
         padding-right: 1rem;
         padding-left: 1rem;
     }
+    
+    /* TABELAS RESPONSIVAS */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+        font-size: 0.875rem;
+    }
+    
+    table th,
+    table td {
+        padding: 0.5rem !important;
+        white-space: nowrap;
+    }
+    
+    /* FORMULÁRIOS */
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control,
+    .form-select {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    
+    /* CARDS */
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    .card-header {
+        padding: 0.75rem 1rem !important;
+    }
+    
+    /* BADGES E LABELS */
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    /* MODAIS */
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .modal-content {
+        border-radius: 1rem;
+    }
+    
+    /* NAVEGAÇÃO ADMIN */
+    .navbar-nav {
+        padding: 1rem 0;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 0 !important;
+    }
+    
+    /* TÍTULOS */
+    h1, .h1 { font-size: 1.75rem !important; }
+    h2, .h2 { font-size: 1.5rem !important; }
+    h3, .h3 { font-size: 1.25rem !important; }
+    h4, .h4 { font-size: 1.1rem !important; }
+    h5, .h5 { font-size: 1rem !important; }
+    h6, .h6 { font-size: 0.9rem !important; }
+    
+    /* FILTROS E BUSCAS */
+    .row.g-3 > [class*="col-"] {
+        margin-bottom: 0.75rem;
+    }
+    
+    /* ACTIONS E BOTÕES EM LINHA */
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .d-flex.justify-content-between > * {
+        width: 100%;
+    }
+    
+    /* ALERTAS */
+    .alert {
+        font-size: 0.9rem;
+        padding: 0.75rem;
+    }
+    
+    /* BREADCRUMBS */
+    .breadcrumb {
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+    
+    /* IMAGENS */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* GRID LAYOUTS */
+    .pastorais-grid,
+    .noticias-grid,
+    .eventos-grid,
+    .horarios-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+    
+    /* COLUNAS ROW */
+    .row.g-4 {
+        gap: 1rem !important;
+    }
+    
+    .row.g-5 {
+        gap: 1.5rem !important;
+    }
+    
+    /* ESPAÇAMENTOS UTILITÁRIOS */
+    .py-5 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+    .px-5 { padding-left: 1rem !important; padding-right: 1rem !important; }
+    .my-5 { margin-top: 2rem !important; margin-bottom: 2rem !important; }
+    .mx-5 { margin-left: 1rem !important; margin-right: 1rem !important; }
+    
+    /* DASHBOARD CARDS */
+    .dashboard-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* EVENTOS CARD */
+    .evento-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .evento-date {
+        margin-bottom: 1rem;
+    }
+    
+    /* NOTÍCIAS */
+    .noticia-image {
+        height: 200px !important;
+    }
+    
+    /* TEXTO RESPONSIVO */
+    .lead {
+        font-size: 1rem !important;
+    }
+    
+    p, li, span {
+        font-size: 0.95rem;
+    }
+    
+    /* TABELAS ADMIN - Scroll horizontal */
+    .table-responsive table {
+        min-width: 600px;
+    }
 }
 
+/* MOBILE PEQUENO - Otimização adicional */
 @media (max-width: 576px) {
+    /* HERO EXTRA COMPACTO */
     .hero-paroquia {
         min-height: 50vh;
     }
     
+    /* CARDS AINDA MAIS COMPACTOS */
     .card-paroquia {
-        border-radius: 16px;
-        margin: 0 0.5rem 1.5rem 0.5rem;
+        border-radius: 12px;
+        margin: 0 0.25rem 1rem 0.25rem;
     }
     
     .card-header-paroquia {
-        border-radius: 16px 16px 0 0;
-        padding: 1rem 1.5rem 0.75rem;
+        border-radius: 12px 12px 0 0;
+        padding: 0.75rem 1rem 0.5rem;
     }
     
-    /* Mobile: mais compacto */
+    .card-body {
+        padding: 0.75rem !important;
+    }
+    
+    /* SEÇÕES MAIS COMPACTAS */
     .section-paroquia {
         padding: 1.5rem 0;
     }
@@ -605,6 +806,76 @@ section:first-of-type, .section:first-of-type {
     section, .section {
         padding-top: 1rem;
         padding-bottom: 1rem;
+    }
+    
+    /* CONTAINERS MAIS COMPACTOS */
+    .container, .container-fluid {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+    
+    /* TÍTULOS MENORES */
+    h1, .h1 { font-size: 1.5rem !important; }
+    h2, .h2 { font-size: 1.35rem !important; }
+    h3, .h3 { font-size: 1.15rem !important; }
+    
+    /* BOTÕES MENORES */
+    .btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.65rem 1.25rem;
+    }
+    
+    .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.75rem;
+    }
+    
+    /* MODAIS FULLSCREEN */
+    .modal-dialog {
+        margin: 0;
+        max-width: 100%;
+        height: 100%;
+    }
+    
+    .modal-content {
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    /* TABELAS - fonte menor */
+    table {
+        font-size: 0.8rem;
+    }
+    
+    table th,
+    table td {
+        padding: 0.35rem !important;
+    }
+    
+    /* ESPAÇAMENTOS REDUZIDOS */
+    .py-5 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+    .py-4 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+    .my-5 { margin-top: 1.5rem !important; margin-bottom: 1.5rem !important; }
+    .my-4 { margin-top: 1rem !important; margin-bottom: 1rem !important; }
+}
+
+/* LANDSCAPE MOBILE - Ajuste específico */
+@media (max-width: 896px) and (orientation: landscape) {
+    .hero-paroquia {
+        min-height: 40vh;
+    }
+    
+    .hero-content {
+        padding: 1rem 0;
+    }
+    
+    .section-paroquia {
+        padding: 1.5rem 0;
     }
 }
 
@@ -682,9 +953,43 @@ form .container-fluid,
 .footer-paroquia {
     background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
     color: white;
-    padding: 3rem 0 1rem;
-    margin-top: 4rem;
+    padding: 2rem 0 1rem;
+    margin-top: 3rem;
     flex-shrink: 0;
+}
+
+/* Responsivo - Footer mais compacto no mobile */
+@media (max-width: 768px) {
+    .footer-paroquia {
+        padding: 1.5rem 0 0.5rem;
+        margin-top: 2rem;
+    }
+    
+    .footer-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .footer-text {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .footer-links li,
+    .footer-contact li {
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+    }
+    
+    .footer-bottom {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+    }
+    
+    .footer-bottom p {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
 }
 
 /* Garantir espaço antes do footer */

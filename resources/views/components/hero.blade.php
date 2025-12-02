@@ -45,4 +45,26 @@
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
+
+/* Responsivo - Hero mais compacto no mobile */
+@media (max-width: 768px) {
+    .hero-paroquia {
+        min-height: 35vh;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem !important;
+        line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .hero-content {
+        padding: 1rem 0;
+    }
+}
 </style>

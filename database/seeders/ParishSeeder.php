@@ -17,9 +17,45 @@ class ParishSeeder extends Seeder
         // Create admin user
         $admin = User::create([
             'name' => 'Administrador',
-            'email' => 'admin@paroquia.com',
-            'password' => Hash::make('admin123'),
+            'email' => 'admin@paroquia.test',
+            'password' => Hash::make('Admin123!'),
             'role' => 'admin_global',
+            'email_verified_at' => now(),
+        ]);
+
+        // Create coordenador user
+        User::create([
+            'name' => 'Coordenador Coroinhas',
+            'email' => 'coord.coroinhas@paroquia.test',
+            'password' => Hash::make('Coord123!'),
+            'role' => 'coordenador_de_pastoral',
+            'email_verified_at' => now(),
+        ]);
+
+        // Create administrativo user
+        User::create([
+            'name' => 'Administrativo',
+            'email' => 'administrativo@paroquia.test',
+            'password' => Hash::make('Adm123!'),
+            'role' => 'administrativo',
+            'email_verified_at' => now(),
+        ]);
+
+        // Create usuario padrão
+        User::create([
+            'name' => 'Maria Silva',
+            'email' => 'maria@paroquia.test',
+            'password' => Hash::make('User123!'),
+            'role' => 'usuario_padrao',
+            'email_verified_at' => now(),
+        ]);
+
+        // Create coroinha user (usuario_padrao membro do grupo Coroinhas)
+        User::create([
+            'name' => 'Pedro Coroinha',
+            'email' => 'pedro.coroinha@paroquia.test',
+            'password' => Hash::make('User123!'),
+            'role' => 'usuario_padrao',
             'email_verified_at' => now(),
         ]);
 

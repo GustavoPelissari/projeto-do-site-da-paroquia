@@ -1,8 +1,19 @@
 @props(['type' => 'info', 'dismissible' => true])
 
+@php
+    $colorMap = [
+        'success' => '#198754',
+        'error' => '#dc3545',
+        'danger' => '#dc3545',
+        'warning' => '#ffc107',
+        'info' => '#0dcaf0'
+    ];
+    $borderColor = $colorMap[$type] ?? '#0dcaf0';
+@endphp
+
 <div class="alert alert-{{ $type }} {{ $dismissible ? 'alert-dismissible' : '' }} fade show d-flex align-items-start border-start border-4 shadow-sm" 
      role="alert"
-     style="border-left-color: var(--bs-{{ $type }}) !important;">
+     style="border-left-color: {{ $borderColor }} !important;">
 
     <div class="me-3">
         @if($type === 'success')

@@ -33,7 +33,7 @@
 ### 💚 **USUÁRIO COROINHA**
 - **Email:** `pedro.coroinha@paroquia.test`
 - **Senha:** `User123!`
-- **Grupo:** Coroinhas
+- **Grupo:** Coroinhas (usuario_padrao)
 - **Permissões:**
   - Visualizar conteúdos
   - Visualizar escalas do grupo (apenas leitura)
