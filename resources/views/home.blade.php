@@ -350,14 +350,14 @@ img[loading="lazy"].loaded {
                         </div>
                         
                         <h4 class="noticia-title">
-                            <a href="#" class="text-decoration-none text-vinho">{{ $noticia->title }}</a>
+                            <a href="{{ route('news.show', $noticia->id) }}" class="text-decoration-none text-vinho">{{ $noticia->title }}</a>
                         </h4>
                         
                         <p class="noticia-excerpt">
                             {{ Str::limit(strip_tags($noticia->content), 120) }}
                         </p>
                         
-                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill">
+                        <a href="{{ route('news.show', $noticia->id) }}" class="btn btn-sm btn-outline-vinho rounded-pill">
                             Ler mais
                             <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
                         </a>
@@ -418,7 +418,7 @@ img[loading="lazy"].loaded {
                             </p>
                         @endif
                         
-                        <a href="#" class="btn btn-sm btn-outline-vinho rounded-pill mt-3">
+                        <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-outline-vinho rounded-pill mt-3">
                             Saiba mais
                             <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
                         </a>
