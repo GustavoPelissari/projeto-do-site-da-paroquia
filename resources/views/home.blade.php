@@ -30,10 +30,6 @@ img[loading="lazy"].loaded {
                         dedicada a evangelizar, acolher e servir com amor e esperança.
                     </p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                        <a href="{{ route('masses') }}" class="btn-hero btn-hero-primary">
-                            <i data-lucide="clock" style="width: 20px; height: 20px;"></i>
-                            Participar da próxima celebração
-                        </a>
                         <a href="#proxima-missa" class="btn-hero btn-hero-outline">
                             <i data-lucide="calendar-check" style="width: 20px; height: 20px;"></i>
                             Ver todos os horários

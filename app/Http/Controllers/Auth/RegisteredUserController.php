@@ -46,13 +46,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        // Login the user temporarily to allow verification flow
         Auth::login($user);
 
-        // Send numeric code for email verification instead of link
-        $this->verificationService->sendCode($user);
-
-        return redirect()->route('verification.notice')
-            ->with('status', 'Enviamos um código de verificação para seu e-mail.');
+        return redirect()->route('verification.notice');
     }
 }

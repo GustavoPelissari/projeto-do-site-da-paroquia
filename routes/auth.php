@@ -36,16 +36,16 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    // Email verification with numeric code (replaced Breeze's link-based verification)
-    Route::get('verify-email', [\App\Http\Controllers\Auth\EmailVerificationController::class, 'showForm'])
+    // Breeze default: link-based email verification
+    Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
-    Route::post('verify-email', [\App\Http\Controllers\Auth\EmailVerificationController::class, 'verify'])
-        ->middleware('throttle:5,1')
+    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+        ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
 
-    Route::post('verify-email/resend', [\App\Http\Controllers\Auth\EmailVerificationController::class, 'resend'])
-        ->middleware('throttle:3,2')
+    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+        ->middleware('throttle:6,1')
         ->name('verification.send');
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])

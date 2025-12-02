@@ -17,24 +17,26 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', [HomeController::class, 'index']);
+// Site navegado apenas por usuários autenticados e verificados
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Public routes
-Route::get('/groups', [HomeController::class, 'groups'])->name('groups');
-Route::get('/masses', [HomeController::class, 'masses'])->name('masses');
-Route::get('/events', [HomeController::class, 'events'])->name('events');
-Route::get('/events/{event}', [HomeController::class, 'showEvent'])->name('events.show');
-Route::get('/news', [HomeController::class, 'news'])->name('news');
-Route::get('/news/{news}', [HomeController::class, 'showNews'])->name('news.show');
-Route::get('/sobre', [HomeController::class, 'about'])->name('about');
-Route::get('/news-test', function() {
-    $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
-    return view('news-test', compact('news'));
+    Route::get('/groups', [HomeController::class, 'groups'])->name('groups');
+    Route::get('/masses', [HomeController::class, 'masses'])->name('masses');
+    Route::get('/events', [HomeController::class, 'events'])->name('events');
+    Route::get('/events/{event}', [HomeController::class, 'showEvent'])->name('events.show');
+    Route::get('/news', [HomeController::class, 'news'])->name('news');
+    Route::get('/news/{news}', [HomeController::class, 'showNews'])->name('news.show');
+    Route::get('/sobre', [HomeController::class, 'about'])->name('about');
+    Route::get('/news-test', function() {
+        $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
+        return view('news-test', compact('news'));
+    });
 });
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Group requests routes (for authenticated users)
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/group-requests/create', [GroupRequestController::class, 'create'])->name('group-requests.create');
     Route::post('/group-requests', [GroupRequestController::class, 'store'])->name('group-requests.store');
     Route::get('/group-requests', [GroupRequestController::class, 'index'])->name('group-requests.index');
@@ -71,7 +73,7 @@ Route::get('/dashboard', function () {
     return redirect()->route('login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
