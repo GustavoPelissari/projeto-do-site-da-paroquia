@@ -222,28 +222,6 @@
                                     </p>
                                 </div>
                             </div>
-                            
-                            <div class="d-flex align-items-start gap-3 mb-4">
-                                <i data-lucide="car" class="icon-paroquia text-vermelho mt-1"></i>
-                                <div>
-                                    <h6 class="mb-1">Estacionamento</h6>
-                                    <p class="text-muted mb-0">
-                                        Vagas disponíveis no pátio da paróquia<br>
-                                        <small>Entrada pela Av. Mascarenhas de Morais</small>
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex align-items-start gap-3 mb-4">
-                                <i data-lucide="accessibility" class="icon-paroquia text-vermelho mt-1"></i>
-                                <div>
-                                    <h6 class="mb-1">Acessibilidade</h6>
-                                    <p class="text-muted mb-0">
-                                        Igreja com acesso para cadeirantes<br>
-                                        <small>Rampas e banheiro adaptado</small>
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                         
                         <div class="col-lg-6">
