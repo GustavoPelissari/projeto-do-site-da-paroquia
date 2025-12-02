@@ -52,7 +52,7 @@
             flex: 1 0 auto;
             margin-top: 80px;
             margin-bottom: 2rem;
-            min-height: calc(100vh - 80px - 300px); /* Viewport - header - footer aproximado */
+            min-height: calc(100vh - 80px - 300px);
         }
         
         /* Footer fixo no final */
@@ -74,6 +74,97 @@
             right: 0;
             z-index: 1025;
             padding: 0.5rem;
+        }
+        
+        /* Mobile navbar improvements */
+        @media (max-width: 768px) {
+            .main-content {
+                margin-top: 70px;
+            }
+            
+            .navbar {
+                padding: 0.5rem 0;
+            }
+            
+            .navbar-brand {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .navbar-brand img {
+                height: 36px;
+            }
+            
+            .navbar-brand > div {
+                display: flex;
+                flex-direction: column;
+                line-height: 1.2;
+            }
+            
+            .navbar-brand .fw-bold {
+                font-size: 0.9rem;
+            }
+            
+            .navbar-brand small {
+                font-size: 0.7rem;
+            }
+            
+            .navbar-toggler {
+                padding: 0.5rem;
+                font-size: 1.125rem;
+            }
+            
+            .navbar-collapse {
+                max-height: 70vh;
+                overflow-y: auto;
+                margin-top: 0.5rem;
+            }
+            
+            .navbar-nav {
+                padding: 0.5rem 0;
+            }
+            
+            .nav-item {
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            
+            .nav-item:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-link {
+                padding: 0.875rem 0.5rem !important;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .dropdown-menu {
+                border: none;
+                box-shadow: none;
+                background-color: #f8f9fa;
+                padding: 0;
+            }
+            
+            .dropdown-item {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-content {
+                margin-top: 65px;
+            }
+            
+            .navbar-brand .fw-bold {
+                font-size: 0.8rem;
+            }
+            
+            .navbar-brand small {
+                font-size: 0.65rem;
+            }
         }
     </style>
 </head>
