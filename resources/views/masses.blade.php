@@ -258,18 +258,12 @@
                                 </iframe>
                             </div>
                             <div class="mt-3">
-                                <div class="d-grid gap-2">
+                                <div class="d-grid">
                                     <a href="https://maps.app.goo.gl/RoEbuP19YY1AtxDk7" 
                                        target="_blank" 
                                        class="btn-paroquia btn-primary-paroquia">
                                         <i data-lucide="map" class="icon-paroquia"></i>
                                         Abrir no Google Maps
-                                    </a>
-                                    <a href="https://waze.com/ul?q=Av.+General+Mascarenhas+de+Morais,+4969,+Umuarama,+PR" 
-                                       target="_blank" 
-                                       class="btn-paroquia btn-outline-paroquia">
-                                        <i data-lucide="navigation-2" class="icon-paroquia"></i>
-                                        Abrir no Waze
                                     </a>
                                 </div>
                             </div>
