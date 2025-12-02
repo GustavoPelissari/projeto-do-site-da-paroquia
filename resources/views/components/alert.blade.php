@@ -9,12 +9,11 @@
         'info' => '#0dcaf0'
     ];
     $borderColor = $colorMap[$type] ?? '#0dcaf0';
-    $borderStyle = "border-left-color: {$borderColor} !important;";
 @endphp
 
 <div class="alert alert-{{ $type }} {{ $dismissible ? 'alert-dismissible' : '' }} fade show d-flex align-items-start border-start border-4 shadow-sm" 
      role="alert"
-     style="{{ $borderStyle }}">
+     style="border-left-color: {{ $borderColor }} !important;">
 
     <div class="me-3">
         @if($type === 'success')
