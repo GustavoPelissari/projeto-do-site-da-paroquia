@@ -2,6 +2,35 @@
 
 @section('title', $news->title . ' - Paróquia São Paulo Apóstolo')
 
+@push('styles')
+<style>
+    .hover-shadow {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .hover-text-primary:hover {
+        color: var(--bs-success) !important;
+    }
+    
+    .transition {
+        transition: all 0.3s ease;
+    }
+    
+    .news-content {
+        line-height: 1.8;
+    }
+    
+    .news-content p {
+        margin-bottom: 1.5rem;
+    }
+</style>
+@endpush
+
 @section('content')
 <!-- Hero Section -->
 <x-hero 
@@ -104,31 +133,40 @@
                 @endphp
                 
                 @if($relatedNews->count() > 0)
-                    <div class="mt-5">
-                        <h4 class="mb-4">Outras Notícias</h4>
-                        <div class="row g-3">
+                    <section class="mt-5 pt-4">
+                        <h3 class="mb-4 text-center">Outras Notícias</h3>
+                        <div class="row g-4">
                             @foreach($relatedNews as $item)
                                 <div class="col-md-4">
-                                    <div class="card h-100 border-0 shadow-sm">
+                                    <div class="card h-100 border-0 shadow-sm hover-shadow transition">
                                         @if($item->featured_image)
-                                            <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                            <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                                        @else
+                                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                                <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                                            </div>
                                         @endif
-                                        <div class="card-body">
-                                            <h6 class="card-title mb-2">
-                                                <a href="{{ route('news.show', $item) }}" class="text-decoration-none text-dark">
+                                        <div class="card-body d-flex flex-column">
+                                            <h6 class="card-title mb-3">
+                                                <a href="{{ route('news.show', $item) }}" class="text-decoration-none text-dark hover-text-primary">
                                                     {{ Str::limit($item->title, 60) }}
                                                 </a>
                                             </h6>
-                                            <small class="text-muted">
-                                                <i class="bi bi-calendar3 me-1"></i>
-                                                {{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}
-                                            </small>
+                                            <div class="mt-auto">
+                                                <small class="text-muted d-block mb-2">
+                                                    <i class="bi bi-calendar3 me-1"></i>
+                                                    {{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}
+                                                </small>
+                                                <a href="{{ route('news.show', $item) }}" class="btn btn-sm btn-outline-success">
+                                                    Ler mais <i class="bi bi-arrow-right ms-1"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                    </div>
+                    </section>
                 @endif
             </div>
         </div>
