@@ -448,11 +448,11 @@ img[loading="lazy"].loaded {
                     Juntos, construímos uma comunidade de fé, esperança e amor.
                 </p>
                 <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                    <a href="#" class="btn btn-white rounded-pill px-5 py-3 fw-semibold">
+                    <a href="https://wa.me/554430554464?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20a%20paróquia" target="_blank" class="btn btn-white rounded-pill px-5 py-3 fw-semibold">
                         <i data-lucide="phone" class="me-2" style="width: 20px; height: 20px;"></i>
                         Entre em contato
                     </a>
-                    <a href="{{ route('masses') }}" class="btn btn-outline-light rounded-pill px-5 py-3 fw-semibold">
+                    <a href="https://maps.app.goo.gl/RoEbuP19YY1AtxDk7" target="_blank" class="btn btn-outline-light rounded-pill px-5 py-3 fw-semibold">
                         <i data-lucide="map-pin" class="me-2" style="width: 20px; height: 20px;"></i>
                         Como chegar
                     </a>

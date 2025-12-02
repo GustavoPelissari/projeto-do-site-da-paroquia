@@ -247,13 +247,19 @@
                         </div>
                         
                         <div class="col-lg-6">
-                            <div class="bg-light rounded p-4 text-center">
-                                <div class="mb-3">
-                                    <i data-lucide="navigation" class="icon-lg text-vermelho"></i>
-                                </div>
-                                <h5 class="mb-3">Vá até a Paróquia</h5>
+                            <div class="rounded overflow-hidden" style="height: 100%; min-height: 350px;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14548.62969641595!2d-53.2972824!3d-23.7590074!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f0f18d19ab85cd%3A0xd94e5f80df8017ab!2zUGFyw7NxdWlhIFNhbnRhIEplYW5lIGQnQXJj!5e0!3m2!1spt-BR!2sbr!4v1737564043558!5m2!1spt-BR!2sbr" 
+                                        width="100%" 
+                                        height="100%" 
+                                        style="border:0; min-height: 350px;" 
+                                        allowfullscreen="" 
+                                        loading="lazy" 
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <div class="mt-3">
                                 <div class="d-grid gap-2">
-                                    <a href="https://www.google.com/maps/dir//Av.+General+Mascarenhas+de+Morais,+4969+-+Umuarama+-+PR" 
+                                    <a href="https://maps.app.goo.gl/RoEbuP19YY1AtxDk7" 
                                        target="_blank" 
                                        class="btn-paroquia btn-primary-paroquia">
                                         <i data-lucide="map" class="icon-paroquia"></i>
@@ -330,9 +336,9 @@
                         <p class="text-muted">Sábado: 8h00 às 11h30</p>
                     </div>
                     
-                    <a href="tel:+554430554464" class="btn-paroquia btn-outline-paroquia">
-                        <i data-lucide="phone-call" class="icon-paroquia"></i>
-                        Ligar Agora
+                    <a href="https://wa.me/554430554464?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20a%20paróquia" target="_blank" class="btn-paroquia btn-outline-paroquia">
+                        <i data-lucide="message-circle" class="icon-paroquia"></i>
+                        Falar no WhatsApp
                     </a>
                 </div>
             </div>

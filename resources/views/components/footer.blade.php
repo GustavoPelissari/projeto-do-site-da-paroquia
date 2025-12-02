@@ -15,7 +15,7 @@
                     
                     <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
                         <span>📞</span>
-                        <a href="tel:+5511999999999">(11) 99999-9999</a>
+                        <a href="https://wa.me/554430554464" target="_blank">(44) 3055-4464</a>
                     </div>
                     
                     <div style="display: flex; align-items: center; gap: var(--space-sm);">

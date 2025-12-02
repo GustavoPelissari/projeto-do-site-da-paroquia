@@ -558,7 +558,7 @@
                     <ul class="footer-contact">
                         <li><i class="bi bi-geo-alt"></i> Av. General Mascarenhas de Morais, 4969<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zona V - Umuarama/PR - CEP 87504-090</li>
-                        <li><i class="bi bi-telephone"></i> <a href="tel:+554430554464">(44) 3055-4464</a></li>
+                        <li><i class="bi bi-telephone"></i> <a href="https://wa.me/554430554464" target="_blank">(44) 3055-4464</a></li>
                         <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria_pspaulo@hotmail.com">secretaria_pspaulo@hotmail.com</a></li>
                         <li><i class="bi bi-clock"></i> Secretaria:<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seg: 8h-12h / 14h-17h30<br>
