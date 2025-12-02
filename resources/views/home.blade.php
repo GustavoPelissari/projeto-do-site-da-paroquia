@@ -394,7 +394,7 @@ img[loading="lazy"].loaded {
                 <div class="evento-card animate-on-scroll">
                     <div class="evento-date">
                         <span class="dia">{{ $event->start_date ? $event->start_date->format('d') : '--' }}</span>
-                        <span class="mes">{{ $event->start_date ? $event->start_date->format('M') : '--' }}</span>
+                        <span class="mes">{{ $event->start_date ? $event->start_date->translatedFormat('M') : '--' }}</span>
                     </div>
                     
                     <div class="evento-content">
