@@ -53,7 +53,7 @@ img[loading="lazy"].loaded {
                 <div class="card-paroquia text-center p-4 proxima-missa-card">
                     <div class="card-header-paroquia mb-4">
                         <h3 class="mb-0">
-                            <i data-lucide="church" class="icon-lg text-white me-2" style="width: 32px; height: 32px;"></i>
+                            <i data-lucide="clock" class="icon-lg text-white me-2" style="width: 32px; height: 32px;"></i>
                             Próxima Missa
                         </h3>
                     </div>

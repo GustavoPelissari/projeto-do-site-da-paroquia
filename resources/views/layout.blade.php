@@ -331,7 +331,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('masses') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('masses') }}">
-                                <i class="bi bi-calendar-week"></i> Missas
+                                <i class="bi bi-clock"></i> Missas
                             </a>
                         </li>
                         <li class="nav-item">
@@ -420,7 +420,7 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.administrativo.masses.index') }}">
-                                            <i class="bi bi-peace"></i> Gerenciar Missas
+                                            <i class="bi bi-clock"></i> Gerenciar Missas
                                         </a>
                                     </li>
                                     <li>
@@ -538,7 +538,7 @@
                     <ul class="footer-links">
                         <li><a href="{{ route('home') }}"><i class="bi bi-house-door"></i> Início</a></li>
                         <li><a href="{{ route('groups') }}"><i class="bi bi-people"></i> Grupos e Pastorais</a></li>
-                        <li><a href="{{ route('masses') }}"><i class="bi bi-peace"></i> Missas</a></li>
+                        <li><a href="{{ route('masses') }}"><i class="bi bi-clock"></i> Missas</a></li>
                         <li><a href="{{ route('events') }}"><i class="bi bi-calendar-event"></i> Eventos</a></li>
                         <li><a href="{{ route('news') }}"><i class="bi bi-newspaper"></i> Notícias</a></li>
                         @auth

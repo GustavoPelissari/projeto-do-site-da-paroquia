@@ -54,7 +54,7 @@
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
                             <div class="rounded-circle bg-danger bg-opacity-10 p-3">
-                                <i class="bi bi-peace fs-4 text-danger"></i>
+                                <i class="bi bi-clock fs-4 text-danger"></i>
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3">

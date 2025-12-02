@@ -111,7 +111,7 @@
             <div class="col-lg-8">
                 <div class="card-paroquia text-center p-5">
                     <div class="mb-4">
-                        <i data-lucide="church" class="icon-lg text-vermelho" style="width: 64px; height: 64px;"></i>
+                        <i data-lucide="clock" class="icon-lg text-vermelho" style="width: 64px; height: 64px;"></i>
                     </div>
                     <h3 class="mb-4">Próxima Celebração</h3>
                     
