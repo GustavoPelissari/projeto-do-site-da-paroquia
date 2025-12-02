@@ -49,10 +49,10 @@
 </div>
 
 <!-- Conteúdo da Notícia -->
-<section class="section-paroquia" style="padding-bottom: 4rem;">
+<section class="section-paroquia mb-5" style="padding-bottom: 5rem;">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
                 <article class="card-paroquia mb-5">
                     @if($news->featured_image)
                         <img src="{{ asset('storage/' . $news->featured_image) }}" alt="{{ $news->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;">
@@ -133,9 +133,9 @@
                 @endphp
                 
                 @if($relatedNews->count() > 0)
-                    <div class="mb-5 pb-4">
-                        <h3 class="mb-4">Outras Notícias</h3>
-                        <div class="row g-4">
+                    <div class="mt-5 pt-4 mb-5">
+                        <h3 class="mb-4 text-center">Outras Notícias</h3>
+                        <div class="row g-4 mb-5">
                             @foreach($relatedNews as $item)
                                 <div class="col-md-4">
                                     <div class="card h-100 border-0 shadow-sm hover-shadow transition">
