@@ -30,106 +30,77 @@
             </div>
         </div>
         
+        @if($masses && $masses->count() > 0)
+        @php
+            $massesByDay = $masses->groupBy('day_of_week');
+            $daysOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            $dayNames = [
+                'sunday' => 'Domingo',
+                'monday' => 'Segunda-feira',
+                'tuesday' => 'Terça-feira',
+                'wednesday' => 'Quarta-feira',
+                'thursday' => 'Quinta-feira',
+                'friday' => 'Sexta-feira',
+                'saturday' => 'Sábado'
+            ];
+            $dayIcons = [
+                'sunday' => 'sun',
+                'monday' => 'calendar',
+                'tuesday' => 'calendar',
+                'wednesday' => 'moon',
+                'thursday' => 'calendar',
+                'friday' => 'calendar',
+                'saturday' => 'star'
+            ];
+        @endphp
+        
         <div class="row g-4">
-            <!-- Domingo Manhã -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card-paroquia h-100 text-center">
-                    <div class="card-header-paroquia">
-                        <div class="mb-3">
-                            <i data-lucide="sun" class="icon-lg text-dourado"></i>
+            @foreach($daysOrder as $day)
+                @if(isset($massesByDay[$day]) && $massesByDay[$day]->count() > 0)
+                <div class="col-lg-4 col-md-6">
+                    <div class="card-paroquia h-100">
+                        <div class="card-header-paroquia text-center">
+                            <div class="mb-3">
+                                <i data-lucide="{{ $dayIcons[$day] }}" class="icon-lg text-dourado"></i>
+                            </div>
+                            <h3 class="mb-0">{{ $dayNames[$day] }}</h3>
+                            @if($day == 'sunday')
+                                <small class="text-muted">Dia do Senhor</small>
+                            @elseif($day == 'saturday')
+                                <small class="text-muted">Véspera Dominical</small>
+                            @endif
                         </div>
-                        <h3 class="mb-0">Domingo</h3>
-                        <small class="text-muted">Dia do Senhor</small>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <div class="mb-4">
-                            <div class="row g-3">
-                                <div class="col-6">
-                                    <div class="p-3 rounded" style="background: var(--bege-claro);">
-                                        <h4 class="text-vermelho mb-1">09:30</h4>
-                                        <small class="text-muted">Missa Matutina</small>
+                        <div class="card-body">
+                            @foreach($massesByDay[$day] as $mass)
+                            <div class="mb-3">
+                                <div class="p-3 rounded" style="background: var(--bege-claro);">
+                                    <h4 class="text-vermelho mb-2 text-center">{{ \Carbon\Carbon::parse($mass->time)->format('H:i') }}</h4>
+                                    <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
+                                        <i data-lucide="map-pin" class="icon-paroquia text-verde"></i>
+                                        <small class="text-muted fw-bold">{{ $mass->location }}</small>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="p-3 rounded" style="background: var(--bege-claro);">
-                                        <h4 class="text-vermelho mb-1">18:00</h4>
-                                        <small class="text-muted">Missa Vespertina</small>
-                                    </div>
+                                    @if($mass->description)
+                                    <p class="text-muted small mb-0 text-center">{{ $mass->description }}</p>
+                                    @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
-                                <i data-lucide="users" class="icon-paroquia text-verde"></i>
-                                <small class="text-muted">Maior participação da comunidade</small>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Quarta-feira -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card-paroquia h-100 text-center">
-                    <div class="card-header-paroquia">
-                        <div class="mb-3">
-                            <i data-lucide="moon" class="icon-lg text-dourado"></i>
-                        </div>
-                        <h3 class="mb-0">Quarta-feira</h3>
-                        <small class="text-muted">Meio da Semana</small>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <div class="mb-4">
-                            <div class="p-4 rounded" style="background: var(--bege-claro);">
-                                <h4 class="text-vermelho mb-1">20:00</h4>
-                                <small class="text-muted">Missa Noturna</small>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
-                                <i data-lucide="heart" class="icon-paroquia text-verde"></i>
-                                <small class="text-muted">Encontro íntimo com Deus</small>
-                            </div>
-                            <div class="btn-paroquia btn-secondary-paroquia" style="cursor: default;">
-                                <i data-lucide="clock" class="icon-paroquia"></i>
-                                Todas as Quartas
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Sábado -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card-paroquia h-100 text-center">
-                    <div class="card-header-paroquia">
-                        <div class="mb-3">
-                            <i data-lucide="star" class="icon-lg text-dourado"></i>
-                        </div>
-                        <h3 class="mb-0">Sábado</h3>
-                        <small class="text-muted">Véspera Dominical</small>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <div class="mb-4">
-                            <div class="p-4 rounded" style="background: var(--bege-claro);">
-                                <h4 class="text-vermelho mb-1">19:30</h4>
-                                <small class="text-muted">Missa Vespertina</small>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
-                                <i data-lucide="calendar-check" class="icon-paroquia text-verde"></i>
-                                <small class="text-muted">Antecipa o domingo</small>
-                            </div>
-                            <div class="btn-paroquia btn-secondary-paroquia" style="cursor: default;">
-                                <i data-lucide="calendar" class="icon-paroquia"></i>
-                                Todos os Sábados
-                            </div>
-                        </div>
-                    </div>
+                @endif
+            @endforeach
+        </div>
+        @else
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="alert alert-warning text-center">
+                    <i data-lucide="alert-circle" class="icon-paroquia"></i>
+                    <p class="mb-0">Nenhum horário de missa cadastrado no momento.</p>
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </section>
 

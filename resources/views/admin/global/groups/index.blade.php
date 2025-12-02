@@ -10,7 +10,7 @@
     </div>
 
     @if(session('success'))
-        <x-alert type="success">
+        <x-alert type="success" dismissible="true">
             {{ session('success') }}
         </x-alert>
     @endif

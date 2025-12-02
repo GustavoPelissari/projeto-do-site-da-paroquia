@@ -1,44 +1,26 @@
-@props(['type' => 'info'])
+@props(['type' => 'info', 'dismissible' => true])
 
-<div x-data="{ show: true }"
-     x-show="show"
-     x-init="setTimeout(() => show = false, 4000)"
-     
-     x-transition:enter="transition-all duration-500"
-     x-transition:enter-start="opacity-0 scale-95"
-     x-transition:enter-end="opacity-100 scale-100"
-     x-transition:leave="transition-all duration-400"
-     x-transition:leave-start="opacity-100 scale-100"
-     x-transition:leave-end="opacity-0 scale-95"
+<div class="alert alert-{{ $type }} {{ $dismissible ? 'alert-dismissible' : '' }} fade show d-flex align-items-start border-start border-4 shadow-sm" 
+     role="alert"
+     style="border-left-color: var(--bs-{{ $type }}) !important;">
 
-     @class([
-         'shadow rounded-lg position-relative mb-4 d-flex align-items-start px-5 py-3 border border-start-0',
-         'border-success bg-success-subtle' => $type === 'success',
-         'border-danger bg-danger-subtle' => $type === 'error',
-         'border-warning bg-warning-subtle' => $type === 'warning',
-         'border-info bg-info-subtle' => $type === 'info',
-     ])
-     
-     style="border-left-width: 4px !important;"
-     role="alert">
-
-    <div class="pt-1 me-3">
+    <div class="me-3">
         @if($type === 'success')
-            <svg class="h-5 w-5 text-success" style="width: 20px; height: 20px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-        @elseif($type === 'error')
-            <svg class="h-5 w-5 text-danger" style="width: 20px; height: 20px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 1.25rem;"></i>
+        @elseif($type === 'error' || $type === 'danger')
+            <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 1.25rem;"></i>
         @elseif($type === 'warning')
-            <svg class="h-5 w-5 text-warning" style="width: 20px; height: 20px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12A9 9 0 11 3 12a9 9 0 0118 0z" /></svg>
+            <i class="bi bi-exclamation-circle-fill text-warning" style="font-size: 1.25rem;"></i>
         @else
-            <svg class="h-5 w-5 text-info" style="width: 20px; height: 20px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <i class="bi bi-info-circle-fill text-info" style="font-size: 1.25rem;"></i>
         @endif
     </div>
 
-    <div class="flex-grow-1 text-sm font-normal leading-relaxed">
+    <div class="flex-grow-1">
         {{ $slot }}
     </div>
 
-    <button type="button" class="position-absolute top-0 end-0 mt-2 me-2 rounded p-1 transition border-0 bg-transparent" @click="show = false" style="opacity: 0.6;">
-        <svg class="h-4 w-4 text-secondary" style="width: 16px; height: 16px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-    </button>
+    @if($dismissible)
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    @endif
 </div>

@@ -20,30 +20,34 @@
 
         <div class="row g-4 justify-content-center">
             @forelse($clergy as $member)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card-paroquia h-100 text-center">
-                        <div class="card-body-paroquia">
+                <div class="col-lg-5 col-md-6">
+                    <div class="card-paroquia h-100 overflow-hidden">
+                        <div style="position: relative; background: white;">
                             @if($member->photo)
-                                <img src="{{ asset('storage/' . $member->photo) }}" 
+                                <img src="{{ asset($member->photo) }}" 
                                      alt="{{ $member->name }}" 
-                                     class="rounded-circle mb-4"
-                                     style="width: 180px; height: 180px; object-fit: cover; border: 4px solid var(--dourado-suave);">
+                                     class="w-100"
+                                     style="height: 450px; object-fit: contain;">
                             @else
-                                <div class="rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center"
-                                     style="width: 180px; height: 180px; background: linear-gradient(135deg, var(--vermelho-profundo) 0%, var(--dourado-suave) 100%); border: 4px solid var(--dourado-suave);">
-                                    <i data-lucide="user" style="width: 80px; height: 80px; color: white;"></i>
+                                <div class="w-100 d-flex align-items-center justify-content-center"
+                                     style="height: 400px; background: linear-gradient(135deg, var(--vermelho) 0%, var(--vermelho-profundo) 100%);">
+                                    <i data-lucide="user" style="width: 120px; height: 120px; color: white;"></i>
                                 </div>
                             @endif
-
-                            <h3 class="h4 fw-bold mb-2" style="color: var(--vermelho-profundo);">
-                                {{ $member->name }}
-                            </h3>
-                            <p class="badge mb-3" style="background-color: var(--dourado-suave); color: var(--vermelho-profundo); font-size: 0.9rem;">
-                                {{ $member->role_name }}
-                            </p>
-
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(139, 28, 35, 0.95), transparent); padding: 60px 20px 20px;">
+                                <h3 class="h4 fw-bold mb-2 text-white text-center">
+                                    {{ $member->name }}
+                                </h3>
+                                <div class="text-center">
+                                    <span class="badge" style="background-color: var(--dourado); color: white; font-size: 0.95rem; padding: 6px 16px; font-weight: 600;">
+                                        {{ $member->role_name }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body-paroquia" style="padding: 25px;">
                             @if($member->bio)
-                                <p class="text-muted mb-3">{{ $member->bio }}</p>
+                                <p class="text-muted mb-3" style="line-height: 1.6;">{{ $member->bio }}</p>
                             @endif
 
                             @if($member->email || $member->phone)
@@ -85,19 +89,18 @@
         <div class="row g-4">
             @forelse($chapels as $chapel)
                 <div class="col-lg-6">
-                    <div class="card-paroquia h-100">
+                    <div class="card-paroquia h-100 overflow-hidden">
                         @if($chapel->image)
-                            <img src="{{ asset($chapel->image) }}?v={{ time() }}" 
-                                 alt="{{ $chapel->name }}" 
-                                 class="card-img-top"
-                                 style="width: 100%; height: auto; object-fit: contain; border-radius: 15px 15px 0 0; max-height: 400px; background: #f8f9fa;">
+                            <div style="position: relative;">
+                                <img src="{{ asset($chapel->image) }}?v={{ time() }}" 
+                                     alt="{{ $chapel->name }}" 
+                                     class="w-100"
+                                     style="height: 300px; object-fit: cover;">
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--vermelho); padding: 20px;">
+                                    <h3 class="mb-0 text-white text-center">{{ $chapel->name }}</h3>
+                                </div>
+                            </div>
                         @endif
-                        <div class="card-header-paroquia">
-                            <h3 class="card-title-paroquia mb-0">
-                                <i data-lucide="church" class="me-2"></i>
-                                {{ $chapel->name }}
-                            </h3>
-                        </div>
                         <div class="card-body-paroquia">
                             <div class="mb-3">
                                 <div class="d-flex align-items-start gap-2 mb-2">
@@ -114,12 +117,23 @@
                             </div>
 
                             @if($chapel->description)
-                                <div class="d-flex align-items-start gap-2">
+                                <div class="d-flex align-items-start gap-2 mb-3">
                                     <i data-lucide="clock" class="icon-paroquia text-verde mt-1"></i>
                                     <div>
                                         <strong>Horário:</strong><br>
                                         {{ $chapel->description }}
                                     </div>
+                                </div>
+                            @endif
+
+                            @if($chapel->map_link)
+                                <div class="mt-3">
+                                    <a href="{{ $chapel->map_link }}" 
+                                       target="_blank" 
+                                       class="btn-paroquia btn-primary-paroquia w-100">
+                                        <i data-lucide="map" class="icon-paroquia"></i>
+                                        Ver no Mapa
+                                    </a>
                                 </div>
                             @endif
                         </div>

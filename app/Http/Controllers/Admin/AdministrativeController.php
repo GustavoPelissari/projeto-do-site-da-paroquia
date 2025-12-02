@@ -253,7 +253,7 @@ class AdministrativeController extends Controller
     }
 
     /**
-     * Masses Management - View Only
+     * Masses Management
      */
     public function massesIndex()
     {
@@ -262,8 +262,58 @@ class AdministrativeController extends Controller
         return view('admin.administrativo.masses.index', compact('masses'));
     }
 
+    public function massesCreate()
+    {
+        return view('admin.administrativo.masses.create');
+    }
+
+    public function massesStore(Request $request)
+    {
+        $validated = $request->validate([
+            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
+            'time' => 'required|date_format:H:i',
+            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
+            'description' => 'nullable|string',
+            'is_active' => 'boolean',
+        ]);
+
+        Mass::create($validated);
+
+        return redirect()->route('admin.administrativo.masses.index')
+            ->with('success', 'Horário de missa criado com sucesso!');
+    }
+
     public function massesShow(Mass $mass)
     {
         return view('admin.administrativo.masses.show', compact('mass'));
+    }
+
+    public function massesEdit(Mass $mass)
+    {
+        return view('admin.administrativo.masses.edit', compact('mass'));
+    }
+
+    public function massesUpdate(Request $request, Mass $mass)
+    {
+        $validated = $request->validate([
+            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
+            'time' => 'required|date_format:H:i',
+            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
+            'description' => 'nullable|string',
+            'is_active' => 'boolean',
+        ]);
+
+        $mass->update($validated);
+
+        return redirect()->route('admin.administrativo.masses.index')
+            ->with('success', 'Horário de missa atualizado com sucesso!');
+    }
+
+    public function massesDestroy(Mass $mass)
+    {
+        $mass->delete();
+
+        return redirect()->route('admin.administrativo.masses.index')
+            ->with('success', 'Horário de missa excluído com sucesso!');
     }
 }

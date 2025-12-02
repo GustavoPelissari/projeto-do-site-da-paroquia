@@ -15,20 +15,24 @@ class ChapelsSeeder extends Seeder
         $chapels = [
             [
                 'name' => 'Capela Nossa Senhora de Fátima',
-                'address' => 'Rua (a definir)',
+                'address' => 'R. Alfredo Bernardo, 4808-4860 - Umuarama, PR, 87509-190',
                 'neighborhood' => 'Primeiro de Maio',
                 'city' => 'Umuarama',
                 'state' => 'PR',
-                'description' => 'Missa aos sábados, às 06h00',
+                'description' => 'Missa aos sábados, às 18h00',
+                'image' => 'images/Capela Nossa Senhora de Fatima.png',
+                'map_link' => 'https://maps.app.goo.gl/vKJM51mUMWB19T5j8',
                 'is_active' => true,
             ],
             [
                 'name' => 'Capela Santo Antônio',
-                'address' => 'Endereço a ser definido',
-                'neighborhood' => 'A definir',
+                'address' => 'R. Santa Madalena - Jardim Shangrila, Umuarama - PR, 87509-090',
+                'neighborhood' => 'Jardim Shangrila',
                 'city' => 'Umuarama',
                 'state' => 'PR',
                 'description' => 'Missa aos domingos, às 08h00',
+                'image' => 'images/capela-santo-antonio.png',
+                'map_link' => 'https://maps.app.goo.gl/TJ2TWHbRfUEvW37C9',
                 'is_active' => true,
             ],
         ];

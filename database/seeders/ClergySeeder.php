@@ -14,20 +14,20 @@ class ClergySeeder extends Seeder
     {
         $clergy = [
             [
-                'name' => 'Pe. [Nome do Pároco]',
+                'name' => 'Pe. Valdenir Pereira dos Santos',
                 'role' => 'paroco',
-                'photo' => null, // Adicionar foto depois
-                'bio' => 'Pároco da Paróquia São Paulo Apóstolo',
+                'photo' => 'images/valdenir-pereira.png',
+                'bio' => 'Pároco da Paróquia São Paulo Apóstolo. Nascido em 26/12/1976, foi ordenado sacerdote em 22/04/2006.',
                 'email' => null,
                 'phone' => null,
                 'order' => 1,
                 'is_active' => true,
             ],
             [
-                'name' => 'Pe. [Nome do Vigário]',
+                'name' => 'Pe. Wagner Pereira de Oliveira',
                 'role' => 'vigario',
-                'photo' => null, // Adicionar foto depois
-                'bio' => 'Vigário Paroquial da Paróquia São Paulo Apóstolo',
+                'photo' => 'images/wagner-pereira.png',
+                'bio' => 'Vigário Paroquial da Paróquia São Paulo Apóstolo. Nascido em 29/05/1994, foi ordenado sacerdote em 02/12/2022.',
                 'email' => null,
                 'phone' => null,
                 'order' => 2,

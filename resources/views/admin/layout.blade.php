@@ -25,12 +25,55 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <style>
-        .main-content {
-            margin-top: 80px;
-            transition: margin-top 0.3s;
+        /* Garantir que o body ocupe toda a altura */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
         }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header fixo no topo */
+        .navbar.fixed-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+        
+        /* Main content com espaçamento correto */
+        .main-content {
+            flex: 1 0 auto;
+            margin-top: 80px;
+            margin-bottom: 2rem;
+            min-height: calc(100vh - 80px - 300px); /* Viewport - header - footer aproximado */
+        }
+        
+        /* Footer fixo no final */
+        .footer-paroquia {
+            flex-shrink: 0;
+            margin-top: auto;
+        }
+        
+        /* Ajuste quando há alertas */
         .main-content.has-alert {
             margin-top: 140px;
+        }
+        
+        /* Alertas fixos abaixo do header */
+        .alert-container {
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            z-index: 1025;
+            padding: 0.5rem;
         }
     </style>
 </head>
@@ -358,39 +401,35 @@
         </div>
     </nav>
 
-    <!-- Alertas - SEMPRE ACIMA DO CONTEÚDO -->
-    @if(session('success'))
-        <div style="margin-top: 72px !important; position: fixed; top: 0; left: 0; right: 0; z-index: 1040;">
-            <div class="container">
-                <x-alert type="success">
-                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
-                </x-alert>
-            </div>
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div style="margin-top: 72px !important; position: fixed; top: 0; left: 0; right: 0; z-index: 1040;">
-            <div class="container">
-                <x-alert type="error">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}
-                </x-alert>
-            </div>
-        </div>
-    @endif
-
-    @if(session('warning'))
-        <div style="margin-top: 72px !important; position: fixed; top: 0; left: 0; right: 0; z-index: 1040;">
-            <div class="container">
-                <x-alert type="warning">
-                    <i class="bi bi-exclamation-circle-fill me-2"></i>{{ session('warning') }}
-                </x-alert>
-            </div>
-        </div>
-    @endif
-
     <!-- Main Content -->
     <main class="main-content {{ (session('success') || session('error') || session('warning')) ? 'has-alert' : '' }}">
+        @if(session('success'))
+            <div class="container mt-3">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="container mt-3">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </div>
+        @endif
+
+        @if(session('warning'))
+            <div class="container mt-3">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle-fill me-2"></i>{{ session('warning') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            </div>
+        @endif
+
         @yield('content')
     </main>
 
@@ -434,12 +473,26 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Contato</h5>
                     <ul class="footer-contact">
-                        <li><i class="bi bi-geo-alt"></i> Rua São Paulo Apóstolo, 123<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bairro Centro - São Paulo/SP</li>
-                        <li><i class="bi bi-telephone"></i> <a href="tel:+5511999999999">(11) 99999-9999</a></li>
-                        <li><i class="bi bi-envelope"></i> <a href="mailto:contato@saopauloapostolo.com">contato@saopauloapostolo.com</a></li>
-                        <li><i class="bi bi-clock"></i> Seg-Sex: 8h-17h | Sáb: 8h-12h</li>
+                        <li><i class="bi bi-geo-alt"></i> Av. General Mascarenhas de Morais, 4969<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zona V - Umuarama/PR - CEP 87504-090</li>
+                        <li><i class="bi bi-telephone"></i> <a href="tel:+554430554464">(44) 3055-4464</a></li>
+                        <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria_pspaulo@hotmail.com">secretaria_pspaulo@hotmail.com</a></li>
+                        <li><i class="bi bi-clock"></i> Secretaria:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seg: 8h-12h / 14h-17h30<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qua-Sex: 8h-12h / 14h-17h30<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sáb: 8h-12h</li>
+                        <li class="mt-2">
+                            <a href="https://www.instagram.com/paroquiasaopauloumu" target="_blank" class="text-white me-3" title="Instagram">
+                                <i class="bi bi-instagram"></i> @paroquiasaopauloumu
+                            </a><br>
+                            <a href="https://www.facebook.com/paroquiasaopauloumu" target="_blank" class="text-white" title="Facebook">
+                                <i class="bi bi-facebook"></i> Facebook
+                            </a>
+                        </li>
                     </ul>
+                    <p class="footer-text mt-2">
+                        <small>Diocese de Umuarama</small>
+                    </p>
                 </div>
             </div>
 
@@ -484,6 +537,15 @@
             }
             
             document.body.removeChild(testIcon);
+            
+            // Auto-dismiss alerts after 5 seconds
+            const alerts = document.querySelectorAll('.alert-dismissible');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 5000);
+            });
         });
     </script>
     

@@ -10,7 +10,7 @@
     </div>
 
     @if(session('success'))
-    <x-alert type="success">{{ session('success') }}</x-alert>
+    <x-alert type="success" dismissible="true">{{ session('success') }}</x-alert>
     @endif
 
     <div class="card shadow-sm mb-4">

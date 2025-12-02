@@ -258,7 +258,12 @@ Route::prefix('admin/administrativo')->name('admin.administrativo.')->middleware
     // Mass Management (view only)
     Route::prefix('masses')->name('masses.')->group(function () {
         Route::get('/', [AdministrativeController::class, 'massesIndex'])->name('index');
+        Route::get('/create', [AdministrativeController::class, 'massesCreate'])->name('create');
+        Route::post('/', [AdministrativeController::class, 'massesStore'])->name('store');
         Route::get('/{mass}', [AdministrativeController::class, 'massesShow'])->name('show');
+        Route::get('/{mass}/edit', [AdministrativeController::class, 'massesEdit'])->name('edit');
+        Route::put('/{mass}', [AdministrativeController::class, 'massesUpdate'])->name('update');
+        Route::delete('/{mass}', [AdministrativeController::class, 'massesDestroy'])->name('destroy');
     });
 });
 

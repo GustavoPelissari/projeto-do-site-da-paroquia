@@ -23,37 +23,75 @@ class ParishSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        // Create sample masses
+        // Create masses - Horários reais da Paróquia São Paulo Apóstolo - Umuarama/PR
         Mass::create([
-            'name' => 'Missa Dominical - Manhã',
             'day_of_week' => 'sunday',
             'time' => '08:00',
-            'location' => 'Igreja Principal',
-            'description' => 'Missa solene dominical com coro',
+            'location' => 'Capela Santo Antônio',
+            'description' => 'Missa dominical matutina',
         ]);
 
         Mass::create([
-            'name' => 'Missa Dominical - Noite',
             'day_of_week' => 'sunday',
-            'time' => '19:00',
-            'location' => 'Igreja Principal',
+            'time' => '09:30',
+            'location' => 'Igreja Matriz',
+            'description' => 'Missa dominical com celebração solene',
+        ]);
+
+        Mass::create([
+            'day_of_week' => 'sunday',
+            'time' => '18:00',
+            'location' => 'Igreja Matriz',
+            'description' => 'Missa dominical vespertina',
+        ]);
+
+        Mass::create([
+            'day_of_week' => 'monday',
+            'time' => '06:30',
+            'location' => 'Igreja Matriz',
+            'description' => 'Missa matutina',
+        ]);
+
+        Mass::create([
+            'day_of_week' => 'tuesday',
+            'time' => '06:30',
+            'location' => 'Igreja Matriz',
+            'description' => 'Missa matutina',
+        ]);
+
+        Mass::create([
+            'day_of_week' => 'wednesday',
+            'time' => '20:00',
+            'location' => 'Igreja Matriz',
             'description' => 'Missa vespertina',
         ]);
 
         Mass::create([
-            'name' => 'Missa de Sábado',
-            'day_of_week' => 'saturday',
-            'time' => '19:00',
-            'location' => 'Igreja Principal',
-            'description' => 'Missa vespertina de sábado',
+            'day_of_week' => 'thursday',
+            'time' => '18:30',
+            'location' => 'Igreja Matriz',
+            'description' => 'Missa vespertina',
         ]);
 
         Mass::create([
-            'name' => 'Missa da Semana',
-            'day_of_week' => 'wednesday',
+            'day_of_week' => 'friday',
+            'time' => '06:30',
+            'location' => 'Igreja Matriz',
+            'description' => 'Missa matutina',
+        ]);
+
+        Mass::create([
+            'day_of_week' => 'saturday',
+            'time' => '18:00',
+            'location' => 'Capela Nossa Senhora de Fátima',
+            'description' => 'Missa vespertina - antecipa Domingo',
+        ]);
+
+        Mass::create([
+            'day_of_week' => 'saturday',
             'time' => '19:30',
-            'location' => 'Capela',
-            'description' => 'Missa de meio de semana',
+            'location' => 'Igreja Matriz',
+            'description' => 'Missa vespertina - antecipa Domingo',
         ]);
 
         // Create sample groups

@@ -14,14 +14,19 @@
             </div>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('admin.global.masses.edit', $mass) }}" class="btn btn-primary">Editar</a>
-            <a href="{{ route('admin.global.masses.index') }}" class="btn btn-outline-secondary">Voltar</a>
+            <a href="{{ route('admin.administrativo.masses.edit', $mass) }}" class="btn btn-primary">Editar</a>
+            <a href="{{ route('admin.administrativo.masses.index') }}" class="btn btn-outline-secondary">Voltar</a>
         </div>
     </div>
 
     @if(session('success'))
-        <x-alert type="success" dismissible="true">{{ session('success') }}</x-alert>
-    @endif    <div class="row g-4">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    <div class="row g-4">
         <div class="col-lg-8">
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -47,11 +52,11 @@
                 <div class="card-body">
                     <h6 class="card-title mb-3">Ações</h6>
                     <div class="d-grid gap-2">
-                        <a href="{{ route('admin.global.masses.edit', $mass) }}" class="btn btn-primary">✏️ Editar</a>
-                        <form method="POST" action="{{ route('admin.global.masses.destroy', $mass) }}" onsubmit="return confirm('Tem certeza que deseja excluir este horário? Esta ação não pode ser desfeita.')">
+                        <a href="{{ route('admin.administrativo.masses.edit', $mass) }}" class="btn btn-primary">✏️ Editar</a>
+                        <form method="POST" action="{{ route('admin.administrativo.masses.destroy', $mass) }}" onsubmit="return confirm('Tem certeza que deseja excluir este horário? Esta ação não pode ser desfeita.')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">🗑️ Excluir</button>
+                            <button type="submit" class="btn btn-danger w-100">🗑️ Excluir</button>
                         </form>
                     </div>
                 </div>
@@ -60,8 +65,8 @@
                 <div class="card-body">
                     <h6 class="card-title mb-3">Navegação</h6>
                     <div class="d-grid gap-2">
-                        <a href="{{ route('admin.global.masses.index') }}" class="btn btn-link text-start">← Todos os Horários</a>
-                        <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-link text-start">🏠 Dashboard</a>
+                        <a href="{{ route('admin.administrativo.masses.index') }}" class="btn btn-link text-start">← Todos os Horários</a>
+                        <a href="{{ route('admin.administrativo.dashboard') }}" class="btn btn-link text-start">🏠 Dashboard</a>
                     </div>
                 </div>
             </div>

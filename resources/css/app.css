@@ -296,6 +296,40 @@ h6 { font-size: 1.125rem; }
     background: var(--bg-light);
 }
 
+/* Garantir espaçamento mínimo em todas as seções */
+section, .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+section:first-of-type, .section:first-of-type {
+    padding-top: 0;
+}
+
+/* Container com padding padrão */
+.container, .container-fluid {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+@media (min-width: 576px) {
+    .container, .container-fluid {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+    }
+}
+
+/* Cards sempre com espaçamento interno adequado */
+.card-paroquia .card-body,
+.card .card-body {
+    padding: 1.5rem;
+}
+
+.card-paroquia,
+.card {
+    margin-bottom: 1.5rem;
+}
+
 /* ================================
    NAVEGAÇÃO MODERNA
 ================================ */
@@ -540,6 +574,12 @@ h6 { font-size: 1.125rem; }
     .section-paroquia {
         padding: 2rem 0;
     }
+    
+    /* Mobile: garantir espaçamento */
+    .container, .container-fluid {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -549,12 +589,22 @@ h6 { font-size: 1.125rem; }
     
     .card-paroquia {
         border-radius: 16px;
-        margin: 0 1rem;
+        margin: 0 0.5rem 1.5rem 0.5rem;
     }
     
     .card-header-paroquia {
         border-radius: 16px 16px 0 0;
         padding: 1rem 1.5rem 0.75rem;
+    }
+    
+    /* Mobile: mais compacto */
+    .section-paroquia {
+        padding: 1.5rem 0;
+    }
+    
+    section, .section {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
 }
 
@@ -578,6 +628,22 @@ h6 { font-size: 1.125rem; }
 /* ================================
    FORMULÁRIOS DE AUTENTICAÇÃO
 ================================ */
+/* Formulários sempre com padding adequado */
+form .container,
+form .container-fluid,
+.auth-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Páginas de formulário */
+.form-page {
+    min-height: calc(100vh - 80px - 300px);
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+}
+
 .btn-primary-paroquia {
     background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
     border: none;
@@ -618,6 +684,14 @@ h6 { font-size: 1.125rem; }
     color: white;
     padding: 3rem 0 1rem;
     margin-top: 4rem;
+    flex-shrink: 0;
+}
+
+/* Garantir espaço antes do footer */
+main:last-of-type,
+.main-content:last-of-type {
+    padding-bottom: 2rem;
+    margin-bottom: 0;
 }
 
 .footer-title {
