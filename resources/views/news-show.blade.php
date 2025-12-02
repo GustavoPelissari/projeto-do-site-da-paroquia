@@ -49,11 +49,11 @@
 </div>
 
 <!-- Conteúdo da Notícia -->
-<section class="section-paroquia">
+<section class="section-paroquia" style="padding-bottom: 4rem;">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <article class="card-paroquia">
+                <article class="card-paroquia mb-5">
                     @if($news->featured_image)
                         <img src="{{ asset('storage/' . $news->featured_image) }}" alt="{{ $news->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;">
                     @endif
@@ -133,40 +133,38 @@
                 @endphp
                 
                 @if($relatedNews->count() > 0)
-                    <section class="mt-5 pt-4">
-                        <h3 class="mb-4 text-center">Outras Notícias</h3>
+                    <div class="mb-5 pb-4">
+                        <h3 class="mb-4">Outras Notícias</h3>
                         <div class="row g-4">
                             @foreach($relatedNews as $item)
                                 <div class="col-md-4">
                                     <div class="card h-100 border-0 shadow-sm hover-shadow transition">
                                         @if($item->featured_image)
-                                            <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                                            <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 180px; object-fit: cover;">
                                         @else
-                                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
-                                                <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                                                <i class="bi bi-image text-muted" style="font-size: 2.5rem;"></i>
                                             </div>
                                         @endif
-                                        <div class="card-body d-flex flex-column">
-                                            <h6 class="card-title mb-3">
+                                        <div class="card-body d-flex flex-column p-3">
+                                            <h6 class="card-title mb-2" style="font-size: 0.95rem; line-height: 1.4;">
                                                 <a href="{{ route('news.show', $item) }}" class="text-decoration-none text-dark hover-text-primary">
-                                                    {{ Str::limit($item->title, 60) }}
+                                                    {{ Str::limit($item->title, 55) }}
                                                 </a>
                                             </h6>
-                                            <div class="mt-auto">
-                                                <small class="text-muted d-block mb-2">
-                                                    <i class="bi bi-calendar3 me-1"></i>
-                                                    {{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}
-                                                </small>
-                                                <a href="{{ route('news.show', $item) }}" class="btn btn-sm btn-outline-success">
-                                                    Ler mais <i class="bi bi-arrow-right ms-1"></i>
-                                                </a>
-                                            </div>
+                                            <small class="text-muted d-block mb-3" style="font-size: 0.8rem;">
+                                                <i class="bi bi-calendar3 me-1"></i>
+                                                {{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}
+                                            </small>
+                                            <a href="{{ route('news.show', $item) }}" class="btn btn-sm btn-outline-success mt-auto">
+                                                Ler mais <i class="bi bi-arrow-right ms-1"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
-                    </section>
+                    </div>
                 @endif
             </div>
         </div>
