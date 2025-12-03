@@ -41,6 +41,18 @@
 * {
     box-sizing: border-box;
 }
+/* Utility: ensure icons are perfectly centered inside circles */
+.circle-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.circle-center .bi,
+.circle-center i.bi {
+    margin: 0;
+    line-height: 1;
+    vertical-align: middle;
+}
 
 html {
     scroll-behavior: smooth;

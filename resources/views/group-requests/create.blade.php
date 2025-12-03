@@ -123,7 +123,7 @@
                             <i class="bi bi-send-fill me-2"></i>
                             Enviar Solicitação
                         </button>
-                        <a href="{{ route('groups') }}" class="btn btn-outline-secondary px-4" style="border: 2px solid var(--brand-vinho); color: var(--brand-vinho); text-decoration: none;">
+                        <a href="{{ route('groups') }}" class="btn btn-outline-secondary px-4 d-flex align-items-center justify-content-center" style="border: 2px solid var(--brand-vinho); color: var(--brand-vinho); text-decoration: none;">
                             <i class="bi bi-arrow-left me-2"></i>
                             Voltar aos Grupos
                         </a>
@@ -203,9 +203,9 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-md-6 col-lg-3">
                     <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia">
+                        <div class="card-body-paroquia pt-5">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center;">
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
                                 <i class="bi bi-book" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Leia a Descrição</h5>
@@ -218,9 +218,9 @@
 
                 <div class="col-md-6 col-lg-3">
                     <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia">
+                        <div class="card-body-paroquia pt-5">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center;">
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
                                 <i class="bi bi-clock" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Disponibilidade</h5>
@@ -233,9 +233,9 @@
 
                 <div class="col-md-6 col-lg-3">
                     <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia">
+                        <div class="card-body-paroquia pt-5">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center;">
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
                                 <i class="bi bi-heart-fill" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Motivação</h5>
@@ -248,9 +248,9 @@
 
                 <div class="col-md-6 col-lg-3">
                     <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia">
+                        <div class="card-body-paroquia pt-5">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center;">
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
                                 <i class="bi bi-calendar-check-fill" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Resposta em 7 dias</h5>

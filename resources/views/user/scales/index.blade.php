@@ -24,13 +24,21 @@
     </div>
 
     <!-- Info Alert -->
-    <x-alert type="info" class="d-flex align-items-center mb-4">
-        <i class="bi bi-info-circle-fill me-2" style="font-size: 1.5rem;"></i>
-        <div>
-            <strong>Visualização apenas!</strong> Esta seção permite que você visualize e baixe as escalas do grupo.
-            Somente coordenadores podem criar, editar ou excluir escalas.
+    <div class="alert alert-info d-flex align-items-center mb-4 shadow-sm"
+         style="background: #E8F4FF; border: 1px solid #B8E1FF; color: #084C8A; border-radius: 12px;">
+        <div class="d-flex align-items-start">
+            <div class="me-3 d-flex align-items-center justify-content-center"
+                 style="width: 40px; height: 40px; background: #B8E1FF; border-radius: 50%;">
+                <i class="bi bi-info-circle-fill" style="font-size: 1.25rem; color: #084C8A !important;"></i>
+            </div>
+            <div>
+                <div class="fw-bold" style="color: #084C8A;">Visualização apenas</div>
+                <div class="small" style="color: #0B5EAC;">
+                    Você pode visualizar e baixar as escalas do seu grupo. Somente coordenadores podem criar, editar ou excluir escalas.
+                </div>
+            </div>
         </div>
-    </x-alert>
+    </div>
 
     <!-- Escalas Table -->
     <div class="card border-0 shadow-sm">
