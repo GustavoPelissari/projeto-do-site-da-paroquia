@@ -123,7 +123,7 @@
                             <i data-lucide="send" class="icon-paroquia"></i>
                             Enviar Solicitação
                         </button>
-                        <a href="{{ route('groups') }}" class="btn-paroquia btn-outline-paroquia px-4">
+                        <a href="{{ route('groups') }}" class="btn btn-outline-secondary px-4" style="border: 2px solid var(--brand-vinho); color: var(--brand-vinho); text-decoration: none;">
                             <i data-lucide="arrow-left" class="icon-paroquia"></i>
                             Voltar aos Grupos
                         </a>
