@@ -27,7 +27,7 @@
     <div class="alert alert-info d-flex align-items-center mb-4 shadow-sm"
          style="background: #E8F4FF; border: 1px solid #B8E1FF; color: #084C8A; border-radius: 12px;">
         <div class="d-flex align-items-start">
-            <div class="me-3 d-flex align-items-center justify-content-center"
+            <div class="me-3 circle-center"
                  style="width: 40px; height: 40px; background: #B8E1FF; border-radius: 50%;">
                 <i class="bi bi-info-circle-fill" style="font-size: 1.25rem; color: #084C8A !important;"></i>
             </div>
