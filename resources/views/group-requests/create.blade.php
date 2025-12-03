@@ -64,7 +64,7 @@
                         <label for="group_id" class="form-label fw-bold d-flex align-items-center mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose);">
-                                <i data-lucide="users" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
+                                <i data-lucide="users-2" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Grupo Desejado <span class="text-danger">*</span></span>
                         </label>
@@ -93,7 +93,7 @@
                         <label for="message" class="form-label fw-bold d-flex align-items-center mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose);">
-                                <i data-lucide="message-square" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
+                                <i data-lucide="pen-line" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Mensagem <span class="text-danger">*</span></span>
                         </label>
