@@ -89,6 +89,12 @@
                                         </small>
                                     </td>
                                     <td class="text-center">
+                                        <button type="button" 
+                                                class="btn btn-sm btn-success me-1" 
+                                                onclick="viewPDF('{{ asset('storage/' . $scale->file_path) }}', '{{ $scale->title }}')"
+                                                title="Visualizar PDF">
+                                            <i class="bi bi-eye"></i> Visualizar
+                                        </button>
                                         <a href="{{ route('user.scales.download', $scale) }}" 
                                            class="btn btn-sm btn-primary" 
                                            title="Baixar PDF">
@@ -119,6 +125,32 @@
     </div>
 </div>
 
+<!-- Modal de Visualização de PDF -->
+<div class="modal fade" id="pdfViewerModal" tabindex="-1" aria-labelledby="pdfViewerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="pdfViewerModalLabel">
+                    <i class="bi bi-file-earmark-pdf me-2"></i>
+                    <span id="pdfTitle">Visualizar Escala</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body p-0" style="height: 80vh;">
+                <iframe id="pdfIframe" 
+                        style="width: 100%; height: 100%; border: none;" 
+                        src="">
+                </iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
 .header-coroinhas {
     background: linear-gradient(135deg, #2C5F2D 0%, #1E4620 50%, #2C5F2D 100%);
@@ -129,4 +161,19 @@
     background-color: rgba(44, 95, 45, 0.05);
 }
 </style>
+
+<script>
+function viewPDF(pdfUrl, title) {
+    document.getElementById('pdfTitle').textContent = title;
+    document.getElementById('pdfIframe').src = pdfUrl;
+    
+    const modal = new bootstrap.Modal(document.getElementById('pdfViewerModal'));
+    modal.show();
+}
+
+// Limpar iframe ao fechar modal
+document.getElementById('pdfViewerModal').addEventListener('hidden.bs.modal', function () {
+    document.getElementById('pdfIframe').src = '';
+});
+</script>
 @endsection

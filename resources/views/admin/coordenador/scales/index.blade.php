@@ -61,7 +61,7 @@
                                     <td>@if($scale->valid_from || $scale->valid_until)@if($scale->valid_from)<div><small class="text-muted">De:</small> {{ $scale->valid_from->format('d/m/Y') }}</div>@endif @if($scale->valid_until)<div><small class="text-muted">Até:</small> {{ $scale->valid_until->format('d/m/Y') }}</div>@endif @else <span class="badge bg-secondary">Indefinido</span>@endif</td>
                                     <td class="text-center">@if($scale->isValid())<span class="badge bg-success"><i class="bi bi-check-circle"></i> Ativo</span>@else<span class="badge bg-warning"><i class="bi bi-pause-circle"></i> Inativo</span>@endif</td>
                                     <td><div>{{ $scale->created_at->format('d/m/Y H:i') }}</div><small class="text-muted">por {{ $scale->uploader->name }}</small></td>
-                                    <td class="text-center"><div class="btn-group"><a href="{{ route('admin.coordenador.scales.download', $scale) }}" class="btn btn-sm btn-outline-primary" title="Baixar PDF"><i class="bi bi-download"></i></a><form action="{{ route('admin.coordenador.scales.destroy', $scale) }}" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja remover esta escala?')">@csrf @method('DELETE')<button type="submit" class="btn btn-sm btn-outline-danger" title="Remover"><i class="bi bi-trash"></i></button></form></div></td>
+                                    <td class="text-center"><div class="btn-group"><button type="button" class="btn btn-sm btn-outline-success" onclick="viewPDF('{{ asset('storage/' . $scale->file_path) }}', '{{ $scale->title }}')" title="Visualizar PDF"><i class="bi bi-eye"></i></button><a href="{{ route('admin.coordenador.scales.download', $scale) }}" class="btn btn-sm btn-outline-primary" title="Baixar PDF"><i class="bi bi-download"></i></a><form action="{{ route('admin.coordenador.scales.destroy', $scale) }}" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja remover esta escala?')">@csrf @method('DELETE')<button type="submit" class="btn btn-sm btn-outline-danger" title="Remover"><i class="bi bi-trash"></i></button></form></div></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -90,4 +90,45 @@
             </ul>
         </x-alert>
 </div>
+
+<!-- Modal de Visualização de PDF -->
+<div class="modal fade" id="pdfViewerModal" tabindex="-1" aria-labelledby="pdfViewerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #8B1538 0%, #6E1530 100%);">
+                <h5 class="modal-title text-white" id="pdfViewerModalLabel">
+                    <i class="bi bi-file-earmark-pdf me-2"></i>
+                    <span id="pdfTitle">Visualizar Escala</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body p-0" style="height: 80vh;">
+                <iframe id="pdfIframe" 
+                        style="width: 100%; height: 100%; border: none;" 
+                        src="">
+                </iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function viewPDF(pdfUrl, title) {
+    document.getElementById('pdfTitle').textContent = title;
+    document.getElementById('pdfIframe').src = pdfUrl;
+    
+    const modal = new bootstrap.Modal(document.getElementById('pdfViewerModal'));
+    modal.show();
+}
+
+// Limpar iframe ao fechar modal
+document.getElementById('pdfViewerModal').addEventListener('hidden.bs.modal', function () {
+    document.getElementById('pdfIframe').src = '';
+});
+</script>
 @endsection
