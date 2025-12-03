@@ -269,7 +269,23 @@
 
 @push('scripts')
 <script>
+// Garantir que os ícones Lucide sejam renderizados
 document.addEventListener('DOMContentLoaded', function() {
+    // Tentar imediatamente
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+    
+    // Tentar novamente após um pequeno delay para garantir
+    setTimeout(function() {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }, 100);
+});
+
+// Também tentar quando a janela carregar completamente
+window.addEventListener('load', function() {
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
