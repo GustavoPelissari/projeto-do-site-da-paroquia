@@ -3,14 +3,12 @@
 @section('title', 'Minhas Solicitações - Paróquia São Paulo Apóstolo')
 
 @section('content')
-    <div class="sp-container sp-py-large">
-        {{-- Hero Section --}}
-        <section class="sp-hero">
-            <div class="sp-hero-content">
-                <h1 class="sp-hero-title">📋 Minhas Solicitações</h1>
-                <p class="sp-hero-subtitle">
-                    Acompanhe o status das suas solicitações de entrada em grupos e pastorais
-                </p>
+    <div class="container py-5">
+        {{-- Header Section --}}
+        <section class="section-paroquia">
+            <div class="section-header">
+                <h1><i class="bi bi-clipboard-check me-2"></i> Minhas Solicitações</h1>
+                <p class="lead">Acompanhe o status das suas solicitações de entrada em grupos e pastorais</p>
             </div>
         </section>
 
@@ -29,15 +27,15 @@
 
         {{-- Actions Section --}}
         @if(!auth()->user()->parish_group_id)
-            <section class="sp-section">
-                <div class="sp-content-wrapper sp-text-center">
-                    <div class="sp-cta">
-                        <h3 class="sp-cta-title">Quer participar de mais grupos?</h3>
-                        <p class="sp-cta-text">
-                            Envie uma nova solicitação para se juntar a outros grupos da nossa paróquia.
-                        </p>
-                        <a href="{{ route('group-requests.create') }}" class="sp-btn sp-btn-gold sp-btn-lg">
-                            ➕ Nova Solicitação
+            <section class="section-paroquia">
+                <div class="card-paroquia text-center">
+                    <div class="card-body py-4">
+                        <h3 class="fw-semibold mb-2" style="color: var(--brand-vinho);">
+                            <i class="bi bi-people me-2"></i> Quer participar de mais grupos?
+                        </h3>
+                        <p class="text-muted mb-3">Envie uma nova solicitação para se juntar a outros grupos da nossa paróquia.</p>
+                        <a href="{{ route('group-requests.create') }}" class="btn-paroquia btn-primary-paroquia btn-lg">
+                            <i class="bi bi-plus-circle me-2"></i> Nova Solicitação
                         </a>
                     </div>
                 </div>
@@ -45,35 +43,35 @@
         @endif
 
         {{-- Main Content --}}
-        <section class="sp-section">
-            <div class="sp-content-wrapper">
+        <section class="section-paroquia">
+            <div class="section-content">
                 @forelse($requests as $request)
-                    <div class="sp-card sp-mb-6 status-{{ $request->status }}">
+                    <div class="card-paroquia mb-4 status-{{ $request->status }}">
                         
                         {{-- Header --}}
-                        <div class="sp-card-header">
-                            <div class="sp-flex sp-justify-between sp-items-start">
+                        <div class="card-header-paroquia">
+                            <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <h3 class="sp-card-title">🏛️ {{ $request->group->name }}</h3>
-                                    <p class="sp-text-sm sp-text-muted">
+                                    <h3 class="h5 mb-1"><i class="bi bi-bank me-2"></i>{{ $request->group->name }}</h3>
+                                    <p class="text-muted small mb-0">
+                                        <i class="bi bi-calendar me-1"></i>
                                         Solicitado em {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
                                     </p>
                                 </div>
-                                
-                                <div class="sp-badge sp-badge-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'error') }}">
+                                <span class="badge bg-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'danger') }}">
                                     @if($request->status === 'pending')
-                                        ⏳ Pendente
+                                        <i class="bi bi-clock"></i> Pendente
                                     @elseif($request->status === 'approved')
-                                        ✅ Aprovada
+                                        <i class="bi bi-check-circle"></i> Aprovada
                                     @else
-                                        ❌ Rejeitada
+                                        <i class="bi bi-x-circle"></i> Rejeitada
                                     @endif
-                                </div>
+                                </span>
                             </div>
                         </div>
 
                         {{-- Content --}}
-                        <div class="sp-card-content">
+                        <div class="card-body">
                             
                             {{-- Timeline --}}
                             <div class="sp-timeline">
@@ -81,16 +79,14 @@
                                 <div class="sp-timeline-item">
                                     <div class="sp-timeline-marker sp-timeline-marker-blue"></div>
                                     <div class="sp-timeline-content">
-                                        <h4 class="sp-font-semibold sp-text-blue-900">📝 Solicitação Enviada</h4>
-                                        <p class="sp-text-sm sp-text-muted">
+                                        <h6 class="fw-semibold text-primary"><i class="bi bi-envelope me-2"></i> Solicitação Enviada</h6>
+                                        <p class="small text-muted">
                                             {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
                                         </p>
                                         @if($request->message)
-                                            <div class="sp-card sp-mt-3" style="background: var(--sp-gray-50); border: 1px solid var(--sp-gray-200);">
-                                                <div class="sp-card-content" style="padding: var(--space-3);">
-                                                    <p class="sp-text-sm sp-italic" style="color: var(--sp-gray-700);">
-                                                        "{{ $request->message }}"
-                                                    </p>
+                                            <div class="card mb-3" style="background: #f8fafc; border: 1px solid #e5e7eb;">
+                                                <div class="card-body py-2">
+                                                    <p class="small fst-italic text-muted mb-0">"{{ $request->message }}"</p>
                                                 </div>
                                             </div>
                                         @endif
@@ -103,14 +99,14 @@
                                     <div class="sp-timeline-item">
                                         <div class="sp-timeline-marker sp-timeline-marker-{{ $request->status === 'approved' ? 'green' : 'red' }}"></div>
                                         <div class="sp-timeline-content">
-                                            <h4 class="sp-font-semibold status-title-{{ $request->status }}">
+                                            <h6 class="fw-semibold status-title-{{ $request->status }}">
                                                 @if($request->status === 'approved')
-                                                    ✅ Solicitação Aprovada
+                                                    <i class="bi bi-check-circle me-2"></i> Solicitação Aprovada
                                                 @else
-                                                    ❌ Solicitação Rejeitada
+                                                    <i class="bi bi-x-circle me-2"></i> Solicitação Rejeitada
                                                 @endif
-                                            </h4>
-                                            <p class="sp-text-sm sp-text-muted">
+                                            </h6>
+                                            <p class="small text-muted">
                                                 @if($statusAt)
                                                     {{ $statusAt->format('d/m/Y') }} às {{ $statusAt->format('H:i') }}
                                                 @endif
@@ -119,9 +115,9 @@
                                                 @endif
                                             </p>
                                             @if($request->response_message)
-                                                <div class="sp-card sp-mt-3 response-chip response-{{ $request->status }}">
-                                                    <div class="sp-card-content response-chip-content">
-                                                        <p class="sp-text-sm response-chip-text response-chip-text-{{ $request->status }}">
+                                                <div class="card mb-3 response-card response-{{ $request->status }}">
+                                                    <div class="card-body py-2">
+                                                        <p class="small mb-0 response-text-{{ $request->status }}">
                                                             <strong>Resposta:</strong> {{ $request->response_message }}
                                                         </p>
                                                     </div>
@@ -133,54 +129,42 @@
                             </div>
 
                             {{-- Informações do Grupo --}}
-                            <div class="sp-card sp-mt-4" style="background: var(--sp-ivory); border: 1px solid var(--sp-gray-200);">
-                                <div class="sp-card-header">
-                                    <h4 class="sp-text-lg sp-font-semibold" style="color: var(--sp-red);">📖 Informações do Grupo</h4>
+                            <div class="card mt-3" style="background: var(--bg-rose); border: 1px solid rgba(139, 30, 63, 0.2);">
+                                <div class="card-header py-2">
+                                    <h6 class="mb-0 fw-semibold" style="color: var(--brand-vinho);">
+                                        <i class="bi bi-book me-2"></i> Informações do Grupo
+                                    </h6>
                                 </div>
-                                <div class="sp-card-content">
-                                    <div class="sp-grid sp-grid-2">
-                                        <div class="sp-flex sp-items-center sp-mb-2">
-                                            <span class="sp-icon">🏷️</span>
-                                            <span class="sp-text-sm">
-                                                <strong>Categoria:</strong> {{ $request->group->category_name }}
-                                            </span>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2 small">
+                                            <i class="bi bi-tag me-2" style="color: var(--brand-vinho);"></i>
+                                            <strong>Categoria:</strong> {{ $request->group->category_name }}
                                         </div>
-                                        
                                         @if($request->group->requires_scale)
-                                            <div class="sp-flex sp-items-center sp-mb-2">
-                                                <span class="sp-icon">📅</span>
-                                                <span class="sp-text-sm">
-                                                    <strong>Tipo:</strong> Grupo com escala
-                                                </span>
-                                            </div>
+                                        <div class="col-md-6 mb-2 small">
+                                            <i class="bi bi-calendar-event me-2" style="color: var(--brand-vinho);"></i>
+                                            <strong>Tipo:</strong> Grupo com escala
+                                        </div>
                                         @endif
-                                        
                                         @if($request->group->coordinator_name)
-                                            <div class="sp-flex sp-items-center sp-mb-2">
-                                                <span class="sp-icon">👤</span>
-                                                <span class="sp-text-sm">
-                                                    <strong>Coordenador:</strong> {{ $request->group->coordinator_name }}
-                                                </span>
-                                            </div>
+                                        <div class="col-md-6 mb-2 small">
+                                            <i class="bi bi-person-fill me-2" style="color: var(--brand-vinho);"></i>
+                                            <strong>Coordenador:</strong> {{ $request->group->coordinator_name }}
+                                        </div>
                                         @endif
-                                        
                                         @if($request->group->coordinator_phone)
-                                            <div class="sp-flex sp-items-center sp-mb-2">
-                                                <span class="sp-icon">📞</span>
-                                                <span class="sp-text-sm">
-                                                    <strong>Contato:</strong> {{ $request->group->coordinator_phone }}
-                                                </span>
-                                            </div>
+                                        <div class="col-md-6 mb-2 small">
+                                            <i class="bi bi-telephone me-2" style="color: var(--brand-vinho);"></i>
+                                            <strong>Contato:</strong> {{ $request->group->coordinator_phone }}
+                                        </div>
                                         @endif
                                     </div>
-
                                     @if($request->group->meeting_info)
-                                        <div class="sp-flex sp-items-center sp-mt-3 sp-pt-3" style="border-top: 1px solid var(--sp-gray-200);">
-                                            <span class="sp-icon">📅</span>
-                                            <span class="sp-text-sm">
-                                                <strong>Reuniões:</strong> {{ $request->group->meeting_info }}
-                                            </span>
-                                        </div>
+                                    <div class="small mt-2 pt-2 border-top">
+                                        <i class="bi bi-calendar-check me-2" style="color: var(--brand-vinho);"></i>
+                                        <strong>Reuniões:</strong> {{ $request->group->meeting_info }}
+                                    </div>
                                     @endif
                                 </div>
                             </div>
@@ -219,15 +203,15 @@
         </section>
 
         {{-- Call to Action --}}
-        <section class="sp-section">
-            <div class="sp-content-wrapper sp-text-center">
-                <div class="sp-cta">
-                    <h3 class="sp-cta-title">Precisa de ajuda?</h3>
-                    <p class="sp-cta-text">
-                        Se tiver dúvidas sobre suas solicitações, entre em contato com os coordenadores.
-                    </p>
-                    <a href="{{ route('groups') }}" class="sp-btn sp-btn-outline sp-btn-lg">
-                        📖 Ver Todos os Grupos
+        <section class="section-paroquia">
+            <div class="card-paroquia text-center">
+                <div class="card-body py-4">
+                    <h3 class="fw-semibold mb-2" style="color: var(--brand-vinho);">
+                        <i class="bi bi-question-circle me-2"></i> Precisa de ajuda?
+                    </h3>
+                    <p class="text-muted mb-3">Se tiver dúvidas sobre suas solicitações, entre em contato com os coordenadores.</p>
+                    <a href="{{ route('groups') }}" class="btn btn-outline-secondary px-4" style="border: 2px solid var(--brand-vinho); color: var(--brand-vinho);">
+                        <i class="bi bi-book me-2"></i> Ver Todos os Grupos
                     </a>
                 </div>
             </div>
@@ -237,21 +221,19 @@
     {{-- Custom Styles para Timeline --}}
     <style>
         /* Status border colors for each request card */
-        .status-pending { border-left: 4px solid var(--sp-gold); }
-        .status-approved { border-left: 4px solid var(--sp-teal); }
-        .status-rejected { border-left: 4px solid var(--sp-red); }
+        .status-pending { border-left: 4px solid #FFD66B; }
+        .status-approved { border-left: 4px solid #28a745; }
+        .status-rejected { border-left: 4px solid #dc3545; }
 
         /* Titles per status */
-        .status-title-approved { color: var(--sp-teal); }
-        .status-title-rejected { color: var(--sp-red); }
+        .status-title-approved { color: #28a745; }
+        .status-title-rejected { color: #dc3545; }
 
         /* Response chip styles */
-        .response-chip { border: 1px solid transparent; }
-        .response-chip-content { padding: var(--space-3); }
-        .response-chip.response-approved { background: var(--sp-teal-50); border-color: var(--sp-teal-200); }
-        .response-chip.response-rejected { background: var(--sp-red-50); border-color: var(--sp-red-200); }
-        .response-chip-text-approved { color: var(--sp-teal-700); }
-        .response-chip-text-rejected { color: var(--sp-red-700); }
+        .response-card.response-approved { background: rgba(40, 167, 69, 0.08); border: 1px solid #28a745; }
+        .response-card.response-rejected { background: rgba(220, 53, 69, 0.08); border: 1px solid #dc3545; }
+        .response-text-approved { color: #1f7a35; }
+        .response-text-rejected { color: #a3202f; }
         .sp-timeline {
             position: relative;
             margin-left: 1rem;
@@ -264,7 +246,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: var(--sp-gray-300);
+            background: #e5e7eb;
         }
         
         .sp-timeline-item {
@@ -280,20 +262,20 @@
             width: 0.75rem;
             height: 0.75rem;
             border-radius: 50%;
-            border: 2px solid var(--sp-white);
-            box-shadow: 0 0 0 2px var(--sp-gray-300);
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #e5e7eb;
         }
         
         .sp-timeline-marker-blue {
-            background: var(--sp-blue);
+            background: #0d6efd;
         }
         
         .sp-timeline-marker-green {
-            background: var(--sp-teal);
+            background: #28a745;
         }
         
         .sp-timeline-marker-red {
-            background: var(--sp-red);
+            background: #dc3545;
         }
         
         .sp-timeline-content {
