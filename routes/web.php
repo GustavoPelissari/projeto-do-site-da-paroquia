@@ -10,6 +10,7 @@ use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/group-requests', [GroupRequestController::class, 'store'])->name('group-requests.store');
     Route::get('/group-requests', [GroupRequestController::class, 'index'])->name('group-requests.index');
     Route::get('/minhas-solicitacoes', [GroupRequestController::class, 'myRequests'])->name('group-requests.my-requests');
+
+    // Notifications
+    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationsController::class, 'markAsRead'])->name('notifications.read');
 });
 
 // Auth routes that redirect to admin

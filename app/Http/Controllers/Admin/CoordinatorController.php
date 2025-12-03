@@ -9,6 +9,7 @@ use App\Models\Mass;
 use App\Models\News;
 use App\Models\Scale;
 use App\Models\User;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -405,6 +406,9 @@ class CoordinatorController extends Controller
         $approver = Auth::user();
         $request->approve($approver, 'Aprovado pelo coordenador dos coroinhas');
 
+        // Notificar o candidato
+        NotificationService::groupRequestStatusChanged($request, 'approved');
+
         return back()->with('success', 'Solicitação aprovada com sucesso!');
     }
 
@@ -418,6 +422,9 @@ class CoordinatorController extends Controller
         ]);
 
         $request->reject(Auth::user(), $httpRequest->message ?? 'Solicitação rejeitada pelo coordenador');
+
+        // Notificar o candidato
+        NotificationService::groupRequestStatusChanged($request, 'rejected');
 
         return back()->with('success', 'Solicitação rejeitada.');
     }
@@ -556,7 +563,7 @@ class CoordinatorController extends Controller
         $file = $request->file('file');
         $path = $file->store('scales', 'public');
 
-        Scale::create([
+        $scale = Scale::create([
             'title' => $validated['title'],
             'group_id' => $user->parish_group_id,
             'file_path' => $path,
@@ -567,6 +574,9 @@ class CoordinatorController extends Controller
             'valid_until' => $validated['valid_until'] ? \Carbon\Carbon::parse($validated['valid_until']) : null,
             'description' => $validated['description'],
         ]);
+
+        // Notificar membros do grupo sobre a nova escala
+        NotificationService::scalePublished($scale);
 
         return redirect()->route('admin.coordenador.scales.index')
             ->with('success', 'Escala PDF enviada com sucesso!');

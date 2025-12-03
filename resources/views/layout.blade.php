@@ -355,6 +355,72 @@
                 <!-- User Menu -->
                 <ul class="navbar-nav">
                     @auth
+                        <!-- Notifications Bell -->
+                        <li class="nav-item dropdown me-2">
+                            @php
+                                $unreadCount = Auth::user()->notifications()->whereNull('read_at')->count();
+                            @endphp
+                            <a class="nav-link position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-bell" style="font-size: 1.2rem;"></i>
+                                @if($unreadCount > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                                        {{ $unreadCount > 9 ? '9+' : $unreadCount }}
+                                    </span>
+                                @endif
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" style="min-width: 320px;">
+                                <li class="dropdown-header d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold">Notificações</span>
+                                    @if($unreadCount > 0)
+                                        <span class="badge bg-danger">{{ $unreadCount }}</span>
+                                    @endif
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                @php
+                                    $recentNotifications = Auth::user()->notifications()->latest()->limit(5)->get();
+                                @endphp
+                                @forelse($recentNotifications as $notif)
+                                    <li>
+                                        <div class="dropdown-item-text small {{ $notif->read_at ? 'text-muted' : '' }}" style="white-space: normal;">
+                                            <div class="d-flex align-items-start">
+                                                <div class="rounded-circle circle-center me-2" style="width: 30px; height: 30px; min-width: 30px; background: var(--bg-rose);">
+                                                    @php
+                                                        $icon = 'bi-bell';
+                                                        if ($notif->type === 'news_published') $icon = 'bi-newspaper';
+                                                        elseif ($notif->type === 'event_published') $icon = 'bi-calendar-event';
+                                                        elseif ($notif->type === 'scale_published') $icon = 'bi-file-earmark-pdf';
+                                                        elseif ($notif->type === 'group_request_status_changed') $icon = 'bi-clipboard-check';
+                                                    @endphp
+                                                    <i class="bi {{ $icon }}" style="color: var(--brand-vinho) !important; font-size: 0.85rem;"></i>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <div class="fw-semibold" style="font-size: 0.85rem;">{{ $notif->title }}</div>
+                                                    <div class="text-muted" style="font-size: 0.75rem;">{{ Str::limit($notif->message, 60) }}</div>
+                                                    <div class="text-muted" style="font-size: 0.7rem;">{{ $notif->created_at->diffForHumans() }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @if(!$loop->last)
+                                        <li><hr class="dropdown-divider"></li>
+                                    @endif
+                                @empty
+                                    <li class="dropdown-item-text text-center text-muted small py-3">
+                                        <i class="bi bi-bell-slash d-block mb-1" style="font-size: 1.5rem;"></i>
+                                        Nenhuma notificação
+                                    </li>
+                                @endforelse
+                                @if($recentNotifications->isNotEmpty())
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item text-center small fw-semibold" href="{{ route('notifications.index') }}" style="color: var(--brand-vinho);">
+                                            Ver todas as notificações
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}

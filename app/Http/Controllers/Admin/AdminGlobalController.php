@@ -13,6 +13,7 @@ use App\Models\GroupRequest;
 use App\Models\Mass;
 use App\Models\News;
 use App\Models\User;
+use App\Services\NotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -270,6 +271,16 @@ class AdminGlobalController extends Controller
         Log::info('Notícia criada com ID: ' . $news->id);
         Log::info('=== FIM DO UPLOAD DE NOTÍCIA ===');
 
+        // Notificar todos os usuários se a notícia foi publicada
+        if ($news->status === 'published') {
+            NotificationService::notifyUsers(
+                User::where('id', '!=', Auth::id())->get(),
+                'news_published',
+                'Nova Notícia: ' . $news->title,
+                'Uma nova notícia foi publicada. Confira agora!'
+            );
+        }
+
         return redirect()->route('admin.global.news.index')
             ->with('success', 'Notícia criada com sucesso!');
     }
@@ -318,7 +329,18 @@ class AdminGlobalController extends Controller
             $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
         }
 
+        $wasPublished = $news->status === 'published';
         $news->update($validated);
+
+        // Notificar todos os usuários se a notícia foi recém publicada
+        if (!$wasPublished && $news->status === 'published') {
+            NotificationService::notifyUsers(
+                User::where('id', '!=', Auth::id())->get(),
+                'news_published',
+                'Nova Notícia: ' . $news->title,
+                'Uma nova notícia foi publicada. Confira agora!'
+            );
+        }
 
         return redirect()->route('admin.global.news.index')
             ->with('success', 'Notícia atualizada com sucesso!');
@@ -383,6 +405,16 @@ class AdminGlobalController extends Controller
 
         $event = Event::create($validated);
 
+        // Notificar todos os usuários se o evento foi publicado
+        if ($event->status === 'published') {
+            NotificationService::notifyUsers(
+                User::where('id', '!=', Auth::id())->get(),
+                'event_published',
+                'Novo Evento: ' . $event->title,
+                'Um novo evento foi publicado. Confira os detalhes!'
+            );
+        }
+
         return redirect()->route('admin.global.events.index')
             ->with('success', 'Evento criado com sucesso!');
     }
@@ -430,7 +462,18 @@ class AdminGlobalController extends Controller
             $validated['image'] = $request->file('image')->store('events', 'public');
         }
 
+        $wasPublished = $event->status === 'published';
         $event->update($validated);
+
+        // Notificar todos os usuários se o evento foi recém publicado
+        if (!$wasPublished && $event->status === 'published') {
+            NotificationService::notifyUsers(
+                User::where('id', '!=', Auth::id())->get(),
+                'event_published',
+                'Novo Evento: ' . $event->title,
+                'Um novo evento foi publicado. Confira os detalhes!'
+            );
+        }
 
         return redirect()->route('admin.global.events.index')
             ->with('success', 'Evento atualizado com sucesso!');
