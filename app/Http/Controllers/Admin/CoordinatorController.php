@@ -584,7 +584,13 @@ class CoordinatorController extends Controller
         ]);
 
         // Notificar membros do grupo sobre a nova escala
-        NotificationService::scalePublished($scale);
+        $groupMembers = User::where('parish_group_id', $user->parish_group_id)
+            ->where('id', '!=', Auth::id()) // Não notificar quem fez upload
+            ->get();
+        
+        if ($groupMembers->isNotEmpty()) {
+            NotificationService::scalePublished($groupMembers, $group->name, $validated['title']);
+        }
 
         return redirect()->route('admin.coordenador.scales.index')
             ->with('success', 'Escala PDF enviada com sucesso!');

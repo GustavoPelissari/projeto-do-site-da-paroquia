@@ -15,6 +15,18 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @property-read Group|null $group
  * @property-read Group|null $parishGroup
+ * @method bool isAdminGlobal()
+ * @method bool isAdministrativo()
+ * @method bool isCoordenador()
+ * @method bool isUsuarioPadrao()
+ * @method bool canManageUsers()
+ * @method bool canManageMasses()
+ * @method bool canCreateNews()
+ * @method bool canManageGroups()
+ * @method bool canManageOwnGroup()
+ * @method bool canManageSchedules()
+ * @method bool canApproveRequests()
+ * @method bool canDeleteGroups()
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

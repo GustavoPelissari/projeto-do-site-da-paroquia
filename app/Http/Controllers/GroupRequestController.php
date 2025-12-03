@@ -19,6 +19,7 @@ class GroupRequestController extends Controller
      */
     public function create()
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         // Buscar grupos ativos que o usuário pode solicitar entrada
@@ -47,6 +48,7 @@ class GroupRequestController extends Controller
      */
     public function store(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         $request->validate([
@@ -107,6 +109,7 @@ class GroupRequestController extends Controller
      */
     public function index(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         // Verificar permissões
@@ -147,6 +150,7 @@ class GroupRequestController extends Controller
      */
     public function show(GroupRequest $groupRequest)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         // Verificar permissões
@@ -169,6 +173,7 @@ class GroupRequestController extends Controller
      */
     public function approve(Request $request, GroupRequest $groupRequest)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         // Verificar permissões
@@ -202,6 +207,7 @@ class GroupRequestController extends Controller
      */
     public function reject(Request $request, GroupRequest $groupRequest)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         // Verificar permissões
@@ -235,6 +241,7 @@ class GroupRequestController extends Controller
      */
     public function myRequests()
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         $requests = GroupRequest::where('user_id', $user->id)
