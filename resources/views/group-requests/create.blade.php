@@ -3,9 +3,9 @@
 @section('title', 'Solicitar Entrada em Grupo - Paróquia São Paulo Apóstolo')
 
 @section('content')
-<x-hero title="Participar da Nossa Comunidade" subtitle="Envie uma solicitação para se juntar a um dos nossos grupos e pastorais">
+<x-hero title="Participar da Nossa Comunidade" subtitle="Junte-se aos nossos grupos e pastorais">
     <p class="mb-0" style="opacity: 0.9;">
-        Seja bem-vindo! Preencha o formulário abaixo para solicitar sua participação.
+        Preencha o formulário abaixo para solicitar sua participação em um grupo paroquial
     </p>
 </x-hero>
 
@@ -29,20 +29,18 @@
 
     @if(isset($currentGroup))
         {{-- Alerta informativo sobre grupo atual --}}
-        <div class="alert mb-4 p-4" style="background: linear-gradient(135deg, var(--bg-rose) 0%, #FFF5F0 100%); border: 2px solid var(--dourado-suave); border-radius: 12px;">
-            <div class="d-flex align-items-start">
+        <div class="alert mb-4" style="background: linear-gradient(135deg, #FFF5F0 0%, #FFEEE5 100%); border-left: 4px solid var(--brand-vinho); border-radius: 10px; box-shadow: 0 2px 8px rgba(139, 30, 63, 0.1);">
+            <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
-                     style="width: 50px; height: 50px; background-color: white; border: 2px solid var(--dourado-suave);">
-                    <i data-lucide="info" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
+                     style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
+                    <i data-lucide="check-circle" style="width: 24px; height: 24px; color: white;"></i>
                 </div>
                 <div class="flex-grow-1">
-                    <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">
-                        <i data-lucide="check-circle" class="icon-paroquia"></i>
-                        Você já é membro do grupo: {{ $currentGroup->name }}
-                    </h5>
-                    <p class="mb-0 text-muted">
-                        Você pode solicitar participação em <strong>outros grupos</strong> para ampliar seu serviço na paróquia. 
-                        Selecione um grupo diferente abaixo para enviar sua solicitação.
+                    <h6 class="fw-bold mb-1" style="color: var(--brand-vinho);">
+                        Você já participa do grupo: {{ $currentGroup->name }}
+                    </h6>
+                    <p class="mb-0 small text-muted">
+                        Você pode solicitar participação em outros grupos para ampliar seu serviço na paróquia.
                     </p>
                 </div>
             </div>
@@ -50,24 +48,27 @@
     @endif
 
     <div class="row g-4">
-        <div class="col-lg-8">
-            <div class="card-paroquia">
-                <div class="card-header-paroquia">
-                    <h2 class="card-title-paroquia mb-0">
+        <div class="col-lg-7">
+            <div class="card-paroquia shadow-sm">
+                <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
+                    <h2 class="card-title-paroquia mb-0 text-white">
                         <i data-lucide="file-text" class="me-2"></i>
                         Formulário de Solicitação
                     </h2>
                 </div>
                 
-                <form action="{{ route('group-requests.store') }}" method="POST" class="card-body-paroquia">
+                <form action="{{ route('group-requests.store') }}" method="POST" class="card-body-paroquia p-4">
                     @csrf
                     
                     <div class="mb-4">
-                        <label for="group_id" class="form-label fw-bold">
-                            <i data-lucide="users" class="icon-paroquia"></i>
-                            Grupo Desejado <span class="text-danger">*</span>
+                        <label for="group_id" class="form-label fw-bold d-flex align-items-center mb-3">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
+                                 style="width: 32px; height: 32px; background-color: var(--bg-rose);">
+                                <i data-lucide="users" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
+                            </div>
+                            <span style="color: var(--brand-vinho);">Grupo Desejado <span class="text-danger">*</span></span>
                         </label>
-                        <select id="group_id" name="group_id" required class="form-select form-select-lg">
+                        <select id="group_id" name="group_id" required class="form-select form-select-lg" style="border: 2px solid var(--bg-rose); border-radius: 8px;">
                             <option value="">Selecione um grupo...</option>
                             @foreach($groups as $group)
                                 @if(!isset($currentGroup) || $currentGroup->id !== $group->id)
@@ -81,38 +82,48 @@
                             @endforeach
                         </select>
                         @error('group_id')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
+                            <div class="text-danger small mt-2">
+                                <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i>
+                                {{ $message }}
+                            </div>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label for="message" class="form-label fw-bold">
-                            <i data-lucide="message-square" class="icon-paroquia"></i>
-                            Mensagem <span class="text-danger">*</span>
+                        <label for="message" class="form-label fw-bold d-flex align-items-center mb-3">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
+                                 style="width: 32px; height: 32px; background-color: var(--bg-rose);">
+                                <i data-lucide="message-square" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
+                            </div>
+                            <span style="color: var(--brand-vinho);">Mensagem <span class="text-danger">*</span></span>
                         </label>
                         <textarea 
                             id="message" 
                             name="message" 
-                            rows="5" 
+                            rows="6" 
                             required
                             placeholder="Explique por que deseja participar deste grupo e como pode contribuir para a nossa missão..."
                             class="form-control"
+                            style="border: 2px solid var(--bg-rose); border-radius: 8px; resize: vertical;"
                         >{{ old('message') }}</textarea>
                         @error('message')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
+                            <div class="text-danger small mt-2">
+                                <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i>
+                                {{ $message }}
+                            </div>
                         @enderror
-                        <div class="form-text">
+                        <div class="form-text mt-2">
                             <i data-lucide="info" class="icon-paroquia"></i>
-                            Mínimo de 10 caracteres. Seja claro sobre suas motivações e como deseja servir.
+                            Mínimo de 10 caracteres. Seja claro sobre suas motivações e disponibilidade.
                         </div>
                     </div>
 
-                    <div class="d-flex gap-3 mt-4">
-                        <button type="submit" class="btn-paroquia btn-primary-paroquia">
+                    <div class="d-flex gap-3 mt-4 flex-wrap">
+                        <button type="submit" class="btn-paroquia btn-primary-paroquia px-4">
                             <i data-lucide="send" class="icon-paroquia"></i>
                             Enviar Solicitação
                         </button>
-                        <a href="{{ route('groups') }}" class="btn-paroquia btn-outline-paroquia">
+                        <a href="{{ route('groups') }}" class="btn-paroquia btn-outline-paroquia px-4">
                             <i data-lucide="arrow-left" class="icon-paroquia"></i>
                             Voltar aos Grupos
                         </a>
@@ -121,50 +132,57 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
-            <div class="card-paroquia">
-                <div class="card-header-paroquia">
-                    <h3 class="card-title-paroquia mb-0">
+        <div class="col-lg-5">
+            <div class="card-paroquia shadow-sm">
+                <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
+                    <h3 class="card-title-paroquia mb-0 text-white">
                         <i data-lucide="users" class="me-2"></i>
                         Grupos Disponíveis
                     </h3>
                 </div>
-                <div class="card-body-paroquia">
-                    @forelse($groups as $group)
-                        @if(!isset($currentGroup) || $currentGroup->id !== $group->id)
-                            <div class="mb-3 pb-3 border-bottom">
-                                <h5 class="fw-bold mb-2" style="color: var(--vermelho-profundo);">
-                                    {{ $group->name }}
-                                </h5>
-                                
-                                @if($group->description)
-                                    <p class="small text-muted mb-2">
-                                        {{ Str::limit($group->description, 100) }}
-                                    </p>
-                                @endif
+                <div class="card-body-paroquia p-3" style="max-height: 600px; overflow-y: auto;">
+                    @php
+                        $availableGroups = $groups->filter(function($group) use ($currentGroup) {
+                            return !isset($currentGroup) || $currentGroup->id !== $group->id;
+                        });
+                    @endphp
+                    
+                    @forelse($availableGroups as $group)
+                        <div class="mb-3 p-3 border-bottom" style="border-color: var(--bg-rose) !important;">
+                            <h5 class="fw-bold mb-2 d-flex align-items-center" style="color: var(--brand-vinho);">
+                                <i data-lucide="circle" style="width: 8px; height: 8px; fill: var(--brand-vinho);" class="me-2"></i>
+                                {{ $group->name }}
+                            </h5>
+                            
+                            @if($group->description)
+                                <p class="small text-muted mb-2" style="line-height: 1.5;">
+                                    {{ Str::limit($group->description, 100) }}
+                                </p>
+                            @endif
 
+                            <div class="d-flex flex-column gap-1 mt-2">
                                 @if($group->coordinator_name)
-                                    <div class="d-flex align-items-center small text-muted mb-1">
-                                        <i data-lucide="user" style="width: 14px; height: 14px;" class="me-1"></i>
-                                        <span>Coord.: {{ $group->coordinator_name }}</span>
+                                    <div class="d-flex align-items-center small text-muted">
+                                        <i data-lucide="user" style="width: 14px; height: 14px; color: var(--brand-vinho);" class="me-2"></i>
+                                        <span><strong>Coord.:</strong> {{ $group->coordinator_name }}</span>
                                     </div>
                                 @endif
 
                                 @if($group->meeting_info)
                                     <div class="d-flex align-items-center small text-muted">
-                                        <i data-lucide="calendar" style="width: 14px; height: 14px;" class="me-1"></i>
+                                        <i data-lucide="calendar" style="width: 14px; height: 14px; color: var(--brand-vinho);" class="me-2"></i>
                                         <span>{{ $group->meeting_info }}</span>
                                     </div>
                                 @endif
-
-                                <span class="badge mt-2" style="background-color: var(--dourado-suave); color: var(--vermelho-profundo);">
-                                    {{ $group->category_name }}
-                                </span>
                             </div>
-                        @endif
+
+                            <span class="badge mt-2" style="background-color: var(--dourado-suave); color: var(--brand-vinho); font-size: 0.75rem;">
+                                {{ $group->category_name }}
+                            </span>
+                        </div>
                     @empty
-                        <div class="text-center py-4">
-                            <i data-lucide="users-2" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
+                        <div class="text-center py-5">
+                            <i data-lucide="users-2" class="text-muted mb-3" style="width: 64px; height: 64px; opacity: 0.3;"></i>
                             <p class="text-muted mb-0">Nenhum grupo disponível no momento.</p>
                         </div>
                     @endforelse
@@ -175,66 +193,70 @@
 
     <section class="section-paroquia section-bg-bege mt-5">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="card-paroquia" style="border-left: 4px solid var(--dourado-suave);">
-                        <div class="card-header-paroquia">
-                            <h3 class="card-title-paroquia mb-0">
-                                <i data-lucide="info" class="me-2"></i>
-                                Orientações Importantes
-                            </h3>
-                        </div>
+            <div class="text-center mb-4">
+                <h3 class="fw-bold" style="color: var(--brand-vinho);">
+                    <i data-lucide="info" class="me-2"></i>
+                    Orientações Importantes
+                </h3>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
                         <div class="card-body-paroquia">
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <h4 class="h6 fw-bold mb-3" style="color: var(--vermelho-profundo);">
-                                        <i data-lucide="check-square" class="icon-paroquia"></i>
-                                        Antes de solicitar:
-                                    </h4>
-                                    <ul class="list-unstyled">
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Leia atentamente a descrição de cada grupo
-                                        </li>
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Considere sua disponibilidade real
-                                        </li>
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Pense em como pode contribuir
-                                        </li>
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Seja sincero em sua motivação
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <h4 class="h6 fw-bold mb-3" style="color: var(--vermelho-profundo);">
-                                        <i data-lucide="clock" class="icon-paroquia"></i>
-                                        Após enviar:
-                                    </h4>
-                                    <ul class="list-unstyled">
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Sua solicitação será analisada pelo coordenador
-                                        </li>
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Você receberá uma resposta em até 7 dias
-                                        </li>
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Pode acompanhar o status na área "Minhas Solicitações"
-                                        </li>
-                                        <li class="mb-2">
-                                            <i data-lucide="chevron-right" class="icon-paroquia text-vermelho"></i>
-                                            Aguarde o contato do coordenador
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
+                                <i data-lucide="book-open" style="width: 28px; height: 28px; color: white;"></i>
                             </div>
+                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Leia a Descrição</h5>
+                            <p class="small text-muted mb-0">
+                                Conheça bem o grupo antes de solicitar participação
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
+                        <div class="card-body-paroquia">
+                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
+                                <i data-lucide="clock" style="width: 28px; height: 28px; color: white;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Disponibilidade</h5>
+                            <p class="small text-muted mb-0">
+                                Considere seu tempo e compromisso com o grupo
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
+                        <div class="card-body-paroquia">
+                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
+                                <i data-lucide="heart" style="width: 28px; height: 28px; color: white;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Motivação</h5>
+                            <p class="small text-muted mb-0">
+                                Seja sincero sobre como deseja contribuir
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
+                        <div class="card-body-paroquia">
+                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
+                                <i data-lucide="calendar-check" style="width: 28px; height: 28px; color: white;"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Resposta em 7 dias</h5>
+                            <p class="small text-muted mb-0">
+                                O coordenador analisará sua solicitação
+                            </p>
                         </div>
                     </div>
                 </div>
