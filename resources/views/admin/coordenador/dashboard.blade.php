@@ -11,6 +11,21 @@
     .list-group-item-action:hover {
         background-color: #f8f9fa;
     }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+    }
+
+    .pulse-animation {
+        animation: pulse 2s infinite;
+    }
 </style>
 @endpush
 
@@ -111,18 +126,38 @@
         </div>
 
         <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-warning bg-opacity-10 p-3 rounded-3">
-                            <i class="bi bi-clipboard-check text-warning" style="font-size: 2rem;"></i>
+            <a href="{{ route('admin.coordenador.requests.index') }}" class="text-decoration-none">
+                <div class="card border-0 shadow-sm h-100 {{ $stats['solicitacoes_pendentes'] > 0 ? 'border-warning border-2' : '' }}" 
+                     style="{{ $stats['solicitacoes_pendentes'] > 0 ? 'background: linear-gradient(135deg, #FFF3CD 0%, #FFFAEE 100%); border: 2px solid #FFC107 !important;' : '' }}">
+                    <div class="card-body position-relative">
+                        @if($stats['solicitacoes_pendentes'] > 0)
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge bg-danger pulse-animation" style="font-size: 0.7rem; animation: pulse 2s infinite;">
+                                    <i class="bi bi-exclamation-circle me-1"></i>NOVO
+                                </span>
+                            </div>
+                        @endif
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="p-3 rounded-3" style="background: {{ $stats['solicitacoes_pendentes'] > 0 ? 'linear-gradient(135deg, #FFC107 0%, #FFB300 100%)' : 'rgba(255, 193, 7, 0.1)' }};">
+                                <i class="bi bi-clipboard-check" style="font-size: 2rem; color: {{ $stats['solicitacoes_pendentes'] > 0 ? '#FFFFFF' : '#FFC107' }};"></i>
+                            </div>
                         </div>
+                        <h3 class="fw-bold mb-2" style="color: {{ $stats['solicitacoes_pendentes'] > 0 ? '#D97706' : 'var(--brand-vinho)' }};">
+                            {{ $stats['solicitacoes_pendentes'] ?? 0 }}
+                        </h3>
+                        <p class="mb-0 fw-semibold" style="color: {{ $stats['solicitacoes_pendentes'] > 0 ? '#92400E' : '#6c757d' }};">
+                            Solicitações Pendentes
+                        </p>
+                        <small class="text-muted">
+                            @if($stats['solicitacoes_pendentes'] > 0)
+                                <i class="bi bi-clock-history me-1"></i>Aguardando aprovação
+                            @else
+                                Nenhuma solicitação
+                            @endif
+                        </small>
                     </div>
-                    <h3 class="fw-bold text-brand-vinho mb-2">{{ $stats['solicitacoes_pendentes'] ?? 0 }}</h3>
-                    <p class="text-muted mb-0">Solicitações Pendentes</p>
-                    <small class="text-muted">Aguardando aprovação</small>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
