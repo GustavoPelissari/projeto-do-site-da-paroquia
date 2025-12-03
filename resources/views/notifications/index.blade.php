@@ -5,20 +5,22 @@
 @section('content')
 <div class="container py-5">
     <section class="section-paroquia">
-        <div class="section-header d-flex justify-content-between align-items-center">
+        <div class="section-header d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h1><i class="bi bi-bell me-2"></i> Minhas Notificações</h1>
-                <p class="lead">Acompanhe atualizações de notícias, eventos, escalas e solicitações</p>
+                <p class="lead mb-0">Acompanhe atualizações de notícias, eventos, escalas e solicitações</p>
             </div>
-            <span class="badge bg-primary">Não lidas: {{ $unreadCount }}</span>
+            @if($unreadCount > 0)
+                <span class="badge bg-danger fs-5 px-3 py-2">
+                    {{ $unreadCount }} não {{ $unreadCount === 1 ? 'lida' : 'lidas' }}
+                </span>
+            @else
+                <span class="badge bg-success fs-6 px-3 py-2">
+                    <i class="bi bi-check-circle me-1"></i> Tudo em dia!
+                </span>
+            @endif
         </div>
     </section>
-
-    @if (session('success'))
-        <x-alert type="success">
-            <i class="bi bi-check-circle"></i> {{ session('success') }}
-        </x-alert>
-    @endif
 
     <section class="section-paroquia">
         @forelse($notifications as $n)
