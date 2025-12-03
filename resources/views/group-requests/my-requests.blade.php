@@ -238,13 +238,7 @@
         }
         
         .sp-timeline::before {
-            content: '';
-            position: absolute;
-            left: 1rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #e5e7eb;
+            display: none; /* remover a linha vertical de fundo */
         }
         
         .sp-timeline-item {
