@@ -33,7 +33,7 @@
             <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
                      style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                    <i class="bi bi-check-circle-fill" style="font-size: 24px; color: white;"></i>
+                    <i class="bi bi-check-circle-fill" style="font-size: 24px; color: white; display: flex; align-items: center; justify-content: center;"></i>
                 </div>
                 <div class="flex-grow-1">
                     <h6 class="fw-bold mb-1" style="color: var(--brand-vinho);">
@@ -64,7 +64,7 @@
                         <label for="group_id" class="form-label fw-bold d-flex align-items-center mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose);">
-                                <i class="bi bi-people-fill" style="font-size: 18px; color: var(--brand-vinho);"></i>
+                                <i class="bi bi-people-fill" style="font-size: 16px; color: var(--brand-vinho); line-height: 1;"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Grupo Desejado <span class="text-danger">*</span></span>
                         </label>
@@ -93,7 +93,7 @@
                         <label for="message" class="form-label fw-bold d-flex align-items-center mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose);">
-                                <i class="bi bi-pencil-fill" style="font-size: 18px; color: var(--brand-vinho);"></i>
+                                <i class="bi bi-pencil-fill" style="font-size: 16px; color: var(--brand-vinho); line-height: 1;"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Mensagem <span class="text-danger">*</span></span>
                         </label>
@@ -206,7 +206,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i class="bi bi-book" style="font-size: 28px; color: white;"></i>
+                                <i class="bi bi-book" style="font-size: 28px; color: white; line-height: 1;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Leia a Descrição</h5>
                             <p class="small text-muted mb-0">
@@ -221,7 +221,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i class="bi bi-clock" style="font-size: 28px; color: white;"></i>
+                                <i class="bi bi-clock" style="font-size: 28px; color: white; line-height: 1;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Disponibilidade</h5>
                             <p class="small text-muted mb-0">
@@ -236,7 +236,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i class="bi bi-heart-fill" style="font-size: 28px; color: white;"></i>
+                                <i class="bi bi-heart-fill" style="font-size: 28px; color: white; line-height: 1;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Motivação</h5>
                             <p class="small text-muted mb-0">
@@ -251,7 +251,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i class="bi bi-calendar-check-fill" style="font-size: 28px; color: white;"></i>
+                                <i class="bi bi-calendar-check-fill" style="font-size: 28px; color: white; line-height: 1;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Resposta em 7 dias</h5>
                             <p class="small text-muted mb-0">
