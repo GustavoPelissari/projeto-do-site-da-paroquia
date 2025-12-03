@@ -131,6 +131,16 @@ php artisan migrate
 # Executar seeders de desenvolvimento
 php artisan db:seed --class=DevSeeder
 
-# Resetar banco e recriar dados
+# Resetar banco e recriar dados (⚠️ APAGA TUDO!)
 php artisan migrate:fresh --seed
 ```
+
+## 🗄️ Gerenciar Banco de Dados via phpMyAdmin
+
+Acesse: **http://localhost/phpmyadmin**
+
+- Usuário: `root`
+- Senha: *(vazio)*
+- Banco: `paroquia_sistema`
+
+**Dica:** Use o phpMyAdmin para visualizar dados, fazer backups ou executar consultas SQL manuais.

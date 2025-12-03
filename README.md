@@ -44,52 +44,62 @@ Sistema completo de gerenciamento para a Paróquia São Paulo Apóstolo da Dioce
 
 - **Framework**: Laravel 11
 - **Frontend**: Blade Templates, Bootstrap 5, Tailwind CSS
-- **Database**: MySQL/MariaDB
-- **Build**: Vite 7.1.12
-- **Icons**: Bootstrap Icons, Lucide Icons
+- **Database**: MySQL (via XAMPP)
+- **Build**: Vite
+- **Icons**: Bootstrap Icons
 - **Fonts**: Playfair Display (títulos), Poppins (corpo)
+- **Ambiente**: XAMPP (PHP 8.2+, MySQL, Apache)
 
 ## 📦 **Instalação**
 
 ### **Pré-requisitos**
-- PHP 8.2+
-- Composer
-- Node.js 18+
-- MySQL/MariaDB
+- **XAMPP** (inclui PHP 8.2+, MySQL e Apache)
+- **Composer**
+- **Node.js 18+**
+- **Git**
 
 ### **Configuração**
 ```bash
-# Clone o repositório
+# 1. Certifique-se de que XAMPP está rodando (Apache e MySQL)
+
+# 2. Clone o repositório
 git clone https://github.com/GustavoPelissari/projeto-do-site-da-paroquia.git
 cd projeto-do-site-da-paroquia
 
-# Instale as dependências PHP
+# 3. Instale as dependências
 composer install
-
-# Instale as dependências Node.js
 npm install
 
-# Configure o ambiente
+# 4. Configure o ambiente
 cp .env.example .env
 php artisan key:generate
 
-# Configure o banco de dados no .env
+# 5. Crie o banco no phpMyAdmin (http://localhost/phpmyadmin)
+#    Nome: paroquia_sistema
+#    Collation: utf8mb4_unicode_ci
+
+# 6. Configure o .env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=paroquia_sistema
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
+DB_USERNAME=root
+DB_PASSWORD=
 
-# Execute as migrações
-php artisan migrate
+# 7. Execute as migrações e seeders
+php artisan migrate --seed
 
-# Compile os assets
+# 8. Configure storage
+php artisan storage:link
+
+# 9. Compile os assets
 npm run build
 
-# Inicie o servidor
+# 10. Inicie o servidor
 php artisan serve
 ```
+
+📖 **Para instruções detalhadas, consulte:** [docs/GUIA_INSTALACAO.md](docs/GUIA_INSTALACAO.md)
 
 ## 🗄️ **Estrutura do Banco**
 

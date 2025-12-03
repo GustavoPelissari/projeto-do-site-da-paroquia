@@ -71,6 +71,8 @@
 - **Bootstrap Icons** - Ícones padronizados
 - **Vite** - Build tool
 - **PHPStan** - Análise estática
+- **XAMPP** - Ambiente de desenvolvimento (PHP, MySQL, Apache)
+- **MySQL** - Banco de dados (via XAMPP)
 
 ## 📝 Observações Finais
 
