@@ -58,11 +58,18 @@
                                         Solicitado em {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
                                     </p>
                                 </div>
-                                <span class="badge bg-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'danger') }} rounded-pill px-3 py-2 align-self-start">
+                                <span class="badge rounded-pill px-3 py-2 align-self-start
+                                    @if($request->status === 'pending') bg-warning text-dark
+                                    @elseif($request->status === 'approved') bg-success
+                                    @elseif($request->status === 'in_formation') bg-info
+                                    @else bg-danger
+                                    @endif">
                                     @if($request->status === 'pending')
                                         <i class="bi bi-clock"></i> Pendente
                                     @elseif($request->status === 'approved')
                                         <i class="bi bi-check-circle"></i> Aprovada
+                                    @elseif($request->status === 'in_formation')
+                                        <i class="bi bi-book"></i> Em Formação
                                     @else
                                         <i class="bi bi-x-circle"></i> Rejeitada
                                     @endif

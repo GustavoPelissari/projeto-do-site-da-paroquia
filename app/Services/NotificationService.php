@@ -36,13 +36,33 @@ class NotificationService
     }
 
     // Specific helpers
-    public static function groupRequestStatusChanged(User $candidate, string $groupName, string $status, ?string $approverName = null, ?string $responseMessage = null): void
+    public static function groupRequestStatusChanged($groupRequestOrCandidate, string $status, ?string $groupName = null, ?string $approverName = null, ?string $responseMessage = null): void
     {
-        $title = 'Status da Solicitação Alterado';
-        $message = "Sua solicitação para {$groupName} foi {$status}.";
-        if ($responseMessage) {
-            $message .= " Resposta: " . $responseMessage;
+        // Se receber um GroupRequest
+        if (is_object($groupRequestOrCandidate) && method_exists($groupRequestOrCandidate, 'user')) {
+            $candidate = $groupRequestOrCandidate->user;
+            $groupName = $groupRequestOrCandidate->group->name ?? $groupName;
+        } else {
+            $candidate = $groupRequestOrCandidate;
         }
+
+        $statusLabels = [
+            'approved' => 'aprovada',
+            'rejected' => 'rejeitada',
+            'in_formation' => 'marcada como "Em Formação"',
+        ];
+        
+        $title = 'Status da Solicitação Alterado';
+        $message = "Sua solicitação para {$groupName} foi {$statusLabels[$status]}.";
+        
+        if ($status === 'in_formation') {
+            $message .= " Você será contatado(a) quando houver disponibilidade de formação.";
+        }
+        
+        if ($responseMessage) {
+            $message .= " Mensagem: " . $responseMessage;
+        }
+        
         self::notifyUser($candidate, 'group_request_status_changed', $title, $message, [
             'group_name' => $groupName,
             'status' => $status,

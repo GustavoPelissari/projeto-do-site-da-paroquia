@@ -80,17 +80,28 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
+                                        <!-- Aprovar -->
                                         <form action="{{ route('admin.coordenador.requests.approve', $request) }}" method="POST" class="d-inline">
                                             @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="btn btn-success btn-sm" title="Aprovar solicitação">
+                                            <button type="submit" class="btn btn-success btn-sm" title="Aprovar e adicionar ao grupo imediatamente">
                                                 <i class="bi bi-check-circle-fill"></i>
                                                 Aprovar
                                             </button>
                                         </form>
+
+                                        <!-- Formação -->
+                                        <button type="button" 
+                                                class="btn btn-warning btn-sm" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#formationModal{{ $request->id }}"
+                                                title="Marcar como 'Em Formação'">
+                                            <i class="bi bi-book-fill"></i>
+                                            Formação
+                                        </button>
+
+                                        <!-- Rejeitar -->
                                         <form action="{{ route('admin.coordenador.requests.reject', $request) }}" method="POST" class="d-inline">
                                             @csrf
-                                            @method('PATCH')
                                             <button type="submit" 
                                                     class="btn btn-danger btn-sm" 
                                                     onclick="return confirm('Tem certeza que deseja rejeitar esta solicitação?')" 
@@ -99,6 +110,53 @@
                                                 Rejeitar
                                             </button>
                                         </form>
+                                    </div>
+
+                                    <!-- Modal de Formação -->
+                                    <div class="modal fade" id="formationModal{{ $request->id }}" tabindex="-1" aria-labelledby="formationModalLabel{{ $request->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);">
+                                                    <h5 class="modal-title text-white" id="formationModalLabel{{ $request->id }}">
+                                                        <i class="bi bi-book-fill me-2"></i>Marcar como "Em Formação"
+                                                    </h5>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                                </div>
+                                                <form action="{{ route('admin.coordenador.requests.formation', $request) }}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <div class="alert alert-info">
+                                                            <i class="bi bi-info-circle me-2"></i>
+                                                            O candidato receberá uma mensagem informando que precisa realizar formação antes de ser aprovado.
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="message{{ $request->id }}" class="form-label fw-semibold">Mensagem para o Candidato</label>
+                                                            <textarea 
+                                                                class="form-control" 
+                                                                id="message{{ $request->id }}" 
+                                                                name="message" 
+                                                                rows="8"
+                                                                placeholder="Você pode editar a mensagem padrão ou mantê-la">Olá {{ $request->user->name }}!
+
+Para fazer parte da pastoral {{ Auth::user()->parishGroup->name }}, é necessário realizar uma formação. Como já sei que você tem interesse, vou deixar marcado para assim que tiver a formação, eu entro em contato com você.
+
+Fique atento(a) às próximas comunicações!
+
+Coordenador(a): {{ Auth::user()->name }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                                                        </button>
+                                                        <button type="submit" class="btn btn-warning">
+                                                            <i class="bi bi-check-circle me-1"></i>Marcar como Em Formação
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

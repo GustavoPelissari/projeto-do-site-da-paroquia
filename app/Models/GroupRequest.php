@@ -22,11 +22,13 @@ class GroupRequest extends Model
         'approved_by',
         'approved_at',
         'rejected_at',
+        'in_formation_at',
     ];
 
     protected $casts = [
         'approved_at' => 'datetime',
         'rejected_at' => 'datetime',
+        'in_formation_at' => 'datetime',
     ];
 
     // Status constants
@@ -36,12 +38,15 @@ class GroupRequest extends Model
 
     const STATUS_REJECTED = 'rejected';
 
+    const STATUS_IN_FORMATION = 'in_formation';
+
     public static function getStatuses(): array
     {
         return [
             self::STATUS_PENDING => 'Pendente',
             self::STATUS_APPROVED => 'Aprovada',
             self::STATUS_REJECTED => 'Rejeitada',
+            self::STATUS_IN_FORMATION => 'Em Formação',
         ];
     }
 
@@ -144,6 +149,48 @@ class GroupRequest extends Model
             'resource_type' => 'GroupRequest',
             'resource_id' => $this->id,
             'description' => "Rejeitou solicitação de {$this->user->name} para {$this->group->name}",
+            'ip_address' => request()->ip(),
+        ]);
+    }
+
+    /**
+     * Marcar solicitação como "em formação"
+     */
+    public function markAsInFormation(User $coordinator, string $message = null)
+    {
+        $defaultMessage = "Olá {$this->user->name}!\n\n" .
+            "Para fazer parte da pastoral {$this->group->name}, é necessário realizar uma formação. " .
+            "Como já sei que você tem interesse, vou deixar marcado para assim que tiver a formação, eu entro em contato com você.\n\n" .
+            "Fique atento(a) às próximas comunicações!\n\n" .
+            "Coordenador(a): {$coordinator->name}";
+
+        $this->update([
+            'status' => self::STATUS_IN_FORMATION,
+            'response_message' => $message ?? $defaultMessage,
+            'approved_by' => $coordinator->id,
+            'in_formation_at' => now(),
+        ]);
+
+        // Criar notificação para o usuário
+        Notification::create([
+            'user_id' => $this->user_id,
+            'type' => 'request_in_formation',
+            'title' => 'Aguardando Formação',
+            'message' => "Sua solicitação para {$this->group->name} foi marcada como 'Em Formação'. Aguarde contato do coordenador.",
+            'data' => [
+                'group_id' => $this->group_id,
+                'group_name' => $this->group->name,
+                'coordinator' => $coordinator->name,
+            ],
+        ]);
+
+        // Log de auditoria
+        AuditLog::create([
+            'user_id' => $coordinator->id,
+            'action' => 'mark_formation_group_request',
+            'resource_type' => 'GroupRequest',
+            'resource_id' => $this->id,
+            'description' => "Marcou solicitação de {$this->user->name} para {$this->group->name} como 'Em Formação'",
             'ip_address' => request()->ip(),
         ]);
     }

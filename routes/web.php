@@ -200,6 +200,7 @@ Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['aut
         Route::get('/', [CoordinatorController::class, 'requestsIndex'])->name('index');
         Route::post('/{request}/approve', [CoordinatorController::class, 'approveRequest'])->name('approve');
         Route::post('/{request}/reject', [CoordinatorController::class, 'rejectRequest'])->name('reject');
+        Route::post('/{request}/formation', [CoordinatorController::class, 'markAsFormation'])->name('formation');
     });
 
     // Schedule Management

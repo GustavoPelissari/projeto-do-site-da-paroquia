@@ -430,6 +430,23 @@ class CoordinatorController extends Controller
     }
 
     /**
+     * Marcar solicitação como "em formação"
+     */
+    public function markAsFormation(Request $httpRequest, GroupRequest $request)
+    {
+        $httpRequest->validate([
+            'message' => 'nullable|string|max:1000',
+        ]);
+
+        $request->markAsInFormation(Auth::user(), $httpRequest->message);
+
+        // Notificar o candidato
+        NotificationService::groupRequestStatusChanged($request, 'in_formation');
+
+        return back()->with('success', 'Candidato marcado como "Em Formação" com sucesso!');
+    }
+
+    /**
      * Escalas de coroinhas
      */
     public function schedules()
