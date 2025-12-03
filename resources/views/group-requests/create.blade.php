@@ -10,11 +10,7 @@
 </x-hero>
 
 <div class="container my-5">
-    @if (session('success'))
-        <x-alert type="success">
-            <strong>Sucesso!</strong> {{ session('success') }}
-        </x-alert>
-    @endif
+    {{-- Removido alerta local de sucesso para evitar duplicidade (layout já exibe) --}}
 
     @if ($errors->any())
         <x-alert type="error">
