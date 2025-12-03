@@ -11,17 +11,20 @@
 - **Email:** `coord.coroinhas@paroquia.test`
 - **Senha:** `Coord123!`
 - **Permissões:** 
-  - Gerenciar seu próprio grupo
-  - Criar notícias
-  - Gerenciar escalas
-  - Aprovar solicitações
+  - Gerenciar notícias e eventos do próprio grupo
+  - Editar informações do próprio grupo
+  - Gerenciar escalas do grupo
+  - Gerenciar agendamentos
+  - Aprovar/rejeitar solicitações de participação
 
 ### 🟠 **ADMINISTRATIVO**
 - **Email:** `administrativo@paroquia.test`
 - **Senha:** `Adm123!`
 - **Permissões:**
-  - Gerenciar missas
-  - Criar notícias
+  - Criar/editar/deletar missas
+  - Criar notícias e eventos (não globais)
+  - Criar e gerenciar grupos
+  - Editar e deletar grupos
 
 ### 🟢 **USUÁRIO PADRÃO**
 - **Email:** `maria@paroquia.test`
@@ -44,35 +47,43 @@
 ## Estrutura de Permissões
 
 ### Admin Global
-- ✅ Gerenciar usuários
-- ✅ Gerenciar missas
-- ✅ Criar/editar notícias
-- ✅ Gerenciar grupos
+- ✅ Gerenciar usuários e funções
+- ✅ Criar/editar/deletar missas
+- ✅ Criar/editar notícias (incluindo globais)
+- ✅ Criar/editar eventos
+- ✅ Criar novos grupos
+- ✅ Editar todos os grupos
+- ✅ Deletar grupos
 - ✅ Gerenciar escalas
 - ✅ Aprovar solicitações
-- ✅ Deletar grupos
 - ✅ Configurações do sistema
 - ✅ Logs de auditoria
+- ✅ Estatísticas da paróquia
 
 ### Coordenador de Pastoral
 - ❌ Gerenciar usuários
-- ❌ Gerenciar missas
-- ✅ Criar/editar notícias
-- ✅ Gerenciar próprio grupo
-- ✅ Gerenciar escalas
-- ✅ Aprovar solicitações
+- ❌ Gerenciar missas (apenas visualização)
+- ✅ Criar/editar notícias (do próprio grupo)
+- ✅ Criar/editar eventos (do próprio grupo)
+- ✅ Editar informações do próprio grupo
+- ✅ Gerenciar escalas (do próprio grupo)
+- ✅ Gerenciar agendamentos (do próprio grupo)
+- ✅ Aprovar/rejeitar solicitações (do próprio grupo)
+- ❌ Criar novos grupos
 - ❌ Deletar grupos
 - ❌ Configurações do sistema
 - ❌ Logs de auditoria
 
 ### Administrativo
 - ❌ Gerenciar usuários
-- ✅ Gerenciar missas
-- ✅ Criar/editar notícias
-- ❌ Gerenciar grupos
+- ✅ Criar/editar/deletar missas
+- ✅ Criar/editar notícias (não pode criar notícias globais)
+- ✅ Criar/editar eventos
+- ✅ Criar novos grupos
+- ✅ Editar todos os grupos
+- ✅ Deletar grupos
 - ❌ Gerenciar escalas
 - ❌ Aprovar solicitações
-- ❌ Deletar grupos
 - ❌ Configurações do sistema
 - ❌ Logs de auditoria
 
