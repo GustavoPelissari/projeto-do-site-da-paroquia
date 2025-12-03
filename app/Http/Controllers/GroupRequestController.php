@@ -21,14 +21,8 @@ class GroupRequestController extends Controller
     {
         $user = Auth::user();
 
-        // Verificar se usuário já está em um grupo
-        if ($user->parish_group_id) {
-            return view('group-requests.already-member', [
-                'currentGroup' => $user->parishGroup
-            ]);
-        }
-
         // Buscar grupos ativos que o usuário pode solicitar entrada
+        // Excluir grupos onde usuário já é membro ou tem solicitação pendente
         $groups = Group::active()
             ->whereDoesntHave('groupRequests', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
@@ -42,7 +36,10 @@ class GroupRequestController extends Controller
             ->with('group')
             ->get();
 
-        return view('group-requests.create', compact('groups', 'pendingRequests'));
+        // Grupo atual do usuário (se tiver)
+        $currentGroup = $user->parishGroup;
+
+        return view('group-requests.create', compact('groups', 'pendingRequests', 'currentGroup'));
     }
 
     /**
@@ -57,10 +54,10 @@ class GroupRequestController extends Controller
             'message' => 'nullable|string|max:500',
         ]);
 
-        // Verificar se usuário já está em um grupo
-        if ($user->parish_group_id) {
+        // Verificar se usuário já é membro do grupo que está solicitando
+        if ($user->parish_group_id == $request->group_id) {
             return redirect()->back()
-                ->with('error', 'Você já faz parte de um grupo.');
+                ->with('error', 'Você já é membro deste grupo.');
         }
 
         // Verificar se já existe solicitação pendente para este grupo

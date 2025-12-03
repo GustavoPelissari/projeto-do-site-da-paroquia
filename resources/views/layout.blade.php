@@ -437,24 +437,22 @@
                                     </li>
                                     
                                     @if(Auth::user()->parish_group_id)
-                                        {{-- Usuário já está em um grupo --}}
+                                        {{-- Usuário está em um grupo --}}
                                         <li>
-                                            <a class="dropdown-item d-flex align-items-start" href="{{ route('group-requests.create') }}" style="white-space: normal;">
+                                            <a class="dropdown-item d-flex align-items-start" style="white-space: normal; cursor: default;" onclick="return false;">
                                                 <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
                                                 <div>
-                                                    <strong>Meu Grupo</strong>
+                                                    <strong>Meu Grupo Principal</strong>
                                                     <small class="d-block text-muted">{{ Auth::user()->parishGroup->name }}</small>
                                                 </div>
                                             </a>
                                         </li>
-                                    @else
-                                        {{-- Usuário não está em nenhum grupo --}}
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('group-requests.create') }}">
-                                                <i class="bi bi-pencil-square"></i> Solicitar Entrada em Grupo
-                                            </a>
-                                        </li>
                                     @endif
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('group-requests.create') }}">
+                                            <i class="bi bi-pencil-square"></i> Solicitar Entrada em Grupo
+                                        </a>
+                                    </li>
                                     
                                     <li>
                                         <a class="dropdown-item" href="{{ route('group-requests.my-requests') }}">

@@ -27,6 +27,28 @@
         </x-alert>
     @endif
 
+    @if(isset($currentGroup))
+        {{-- Alerta informativo sobre grupo atual --}}
+        <div class="alert mb-4 p-4" style="background: linear-gradient(135deg, var(--bg-rose) 0%, #FFF5F0 100%); border: 2px solid var(--dourado-suave); border-radius: 12px;">
+            <div class="d-flex align-items-start">
+                <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
+                     style="width: 50px; height: 50px; background-color: white; border: 2px solid var(--dourado-suave);">
+                    <i data-lucide="info" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">
+                        <i data-lucide="check-circle" class="icon-paroquia"></i>
+                        Você já é membro do grupo: {{ $currentGroup->name }}
+                    </h5>
+                    <p class="mb-0 text-muted">
+                        Você pode solicitar participação em <strong>outros grupos</strong> para ampliar seu serviço na paróquia. 
+                        Selecione um grupo diferente abaixo para enviar sua solicitação.
+                    </p>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row g-4">
         <div class="col-lg-8">
             <div class="card-paroquia">
@@ -48,12 +70,14 @@
                         <select id="group_id" name="group_id" required class="form-select form-select-lg">
                             <option value="">Selecione um grupo...</option>
                             @foreach($groups as $group)
-                                <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                    {{ $group->name }}
-                                    @if($group->description)
-                                        - {{ Str::limit($group->description, 50) }}
-                                    @endif
-                                </option>
+                                @if(!isset($currentGroup) || $currentGroup->id !== $group->id)
+                                    <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                        {{ $group->name }}
+                                        @if($group->description)
+                                            - {{ Str::limit($group->description, 50) }}
+                                        @endif
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
                         @error('group_id')
@@ -107,35 +131,37 @@
                 </div>
                 <div class="card-body-paroquia">
                     @forelse($groups as $group)
-                        <div class="mb-3 pb-3 border-bottom">
-                            <h5 class="fw-bold mb-2" style="color: var(--vermelho-profundo);">
-                                {{ $group->name }}
-                            </h5>
-                            
-                            @if($group->description)
-                                <p class="small text-muted mb-2">
-                                    {{ Str::limit($group->description, 100) }}
-                                </p>
-                            @endif
+                        @if(!isset($currentGroup) || $currentGroup->id !== $group->id)
+                            <div class="mb-3 pb-3 border-bottom">
+                                <h5 class="fw-bold mb-2" style="color: var(--vermelho-profundo);">
+                                    {{ $group->name }}
+                                </h5>
+                                
+                                @if($group->description)
+                                    <p class="small text-muted mb-2">
+                                        {{ Str::limit($group->description, 100) }}
+                                    </p>
+                                @endif
 
-                            @if($group->coordinator_name)
-                                <div class="d-flex align-items-center small text-muted mb-1">
-                                    <i data-lucide="user" style="width: 14px; height: 14px;" class="me-1"></i>
-                                    <span>Coord.: {{ $group->coordinator_name }}</span>
-                                </div>
-                            @endif
+                                @if($group->coordinator_name)
+                                    <div class="d-flex align-items-center small text-muted mb-1">
+                                        <i data-lucide="user" style="width: 14px; height: 14px;" class="me-1"></i>
+                                        <span>Coord.: {{ $group->coordinator_name }}</span>
+                                    </div>
+                                @endif
 
-                            @if($group->meeting_info)
-                                <div class="d-flex align-items-center small text-muted">
-                                    <i data-lucide="calendar" style="width: 14px; height: 14px;" class="me-1"></i>
-                                    <span>{{ $group->meeting_info }}</span>
-                                </div>
-                            @endif
+                                @if($group->meeting_info)
+                                    <div class="d-flex align-items-center small text-muted">
+                                        <i data-lucide="calendar" style="width: 14px; height: 14px;" class="me-1"></i>
+                                        <span>{{ $group->meeting_info }}</span>
+                                    </div>
+                                @endif
 
-                            <span class="badge mt-2" style="background-color: var(--dourado-suave); color: var(--vermelho-profundo);">
-                                {{ $group->category_name }}
-                            </span>
-                        </div>
+                                <span class="badge mt-2" style="background-color: var(--dourado-suave); color: var(--vermelho-profundo);">
+                                    {{ $group->category_name }}
+                                </span>
+                            </div>
+                        @endif
                     @empty
                         <div class="text-center py-4">
                             <i data-lucide="users-2" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
