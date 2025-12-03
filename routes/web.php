@@ -224,6 +224,12 @@ Route::prefix('admin/coordenador')->name('admin.coordenador.')->middleware(['aut
         Route::get('/', [CoordinatorController::class, 'massesIndex'])->name('index');
         Route::get('/{mass}', [CoordinatorController::class, 'massesShow'])->name('show');
     });
+
+    // Group Management (own group only)
+    Route::prefix('group')->name('group.')->group(function () {
+        Route::get('/edit', [CoordinatorController::class, 'groupEdit'])->name('edit');
+        Route::put('/update', [CoordinatorController::class, 'groupUpdate'])->name('update');
+    });
 });
 
 /*
@@ -266,6 +272,17 @@ Route::prefix('admin/administrativo')->name('admin.administrativo.')->middleware
         Route::get('/{mass}/edit', [AdministrativeController::class, 'massesEdit'])->name('edit');
         Route::put('/{mass}', [AdministrativeController::class, 'massesUpdate'])->name('update');
         Route::delete('/{mass}', [AdministrativeController::class, 'massesDestroy'])->name('destroy');
+    });
+
+    // Groups Management (can create and edit)
+    Route::prefix('groups')->name('groups.')->group(function () {
+        Route::get('/', [AdministrativeController::class, 'groupsIndex'])->name('index');
+        Route::get('/create', [AdministrativeController::class, 'groupsCreate'])->name('create');
+        Route::post('/', [AdministrativeController::class, 'groupsStore'])->name('store');
+        Route::get('/{group}', [AdministrativeController::class, 'groupsShow'])->name('show');
+        Route::get('/{group}/edit', [AdministrativeController::class, 'groupsEdit'])->name('edit');
+        Route::put('/{group}', [AdministrativeController::class, 'groupsUpdate'])->name('update');
+        Route::delete('/{group}', [AdministrativeController::class, 'groupsDestroy'])->name('destroy');
     });
 });
 

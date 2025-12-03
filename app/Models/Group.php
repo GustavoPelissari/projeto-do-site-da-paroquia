@@ -23,6 +23,7 @@ class Group extends Model
         'image',
         'is_active',
         'requires_scale',
+        'max_members',
         'coordinator_id',
         'created_by',
     ];

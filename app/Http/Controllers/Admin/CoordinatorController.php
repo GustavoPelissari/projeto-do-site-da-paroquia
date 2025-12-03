@@ -605,4 +605,59 @@ class CoordinatorController extends Controller
         return redirect()->route('admin.coordenador.scales.index')
             ->with('success', 'Escala removida com sucesso!');
     }
+
+    /**
+     * Show form to edit own group
+     */
+    public function groupEdit()
+    {
+        $user = Auth::user();
+        
+        if (!$user->parish_group_id) {
+            return redirect()->route('admin.coordenador.dashboard')
+                ->with('error', 'Você não está associado a nenhum grupo.');
+        }
+
+        $group = $user->parishGroup;
+
+        return view('admin.coordenador.group-edit', compact('group'));
+    }
+
+    /**
+     * Update own group information
+     */
+    public function groupUpdate(Request $request)
+    {
+        $user = Auth::user();
+        
+        if (!$user->parish_group_id) {
+            return redirect()->route('admin.coordenador.dashboard')
+                ->with('error', 'Você não está associado a nenhum grupo.');
+        }
+
+        $group = $user->parishGroup;
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'coordinator_name' => 'nullable|string|max:255',
+            'coordinator_phone' => 'nullable|string|max:20',
+            'meeting_info' => 'nullable|string|max:255',
+            'category' => 'nullable|string|in:catequese,liturgia,familia,juventude,geral',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($group->image) {
+                Storage::disk('public')->delete($group->image);
+            }
+            $validated['image'] = $request->file('image')->store('groups', 'public');
+        }
+
+        $group->update($validated);
+
+        return redirect()->route('admin.coordenador.dashboard')
+            ->with('success', 'Informações do grupo atualizadas com sucesso!');
+    }
 }

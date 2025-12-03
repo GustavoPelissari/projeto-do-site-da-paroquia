@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Group;
 use App\Models\Mass;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -315,5 +316,96 @@ class AdministrativeController extends Controller
 
         return redirect()->route('admin.administrativo.masses.index')
             ->with('success', 'Horário de missa excluído com sucesso!');
+    }
+
+    /**
+     * Groups Management - Full CRUD
+     */
+    public function groupsIndex()
+    {
+        $groups = Group::orderBy('name')->paginate(10);
+        return view('admin.administrativo.groups.index', compact('groups'));
+    }
+
+    public function groupsCreate()
+    {
+        return view('admin.administrativo.groups.create');
+    }
+
+    public function groupsStore(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'coordinator_name' => 'nullable|string|max:255',
+            'coordinator_phone' => 'nullable|string|max:20',
+            'meeting_info' => 'nullable|string|max:255',
+            'category' => 'nullable|string|in:catequese,liturgia,familia,juventude,geral',
+            'max_members' => 'nullable|integer|min:1',
+            'is_active' => 'boolean',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('groups', 'public');
+        }
+
+        $validated['is_active'] = $request->has('is_active');
+
+        Group::create($validated);
+
+        return redirect()->route('admin.administrativo.groups.index')
+            ->with('success', 'Grupo criado com sucesso!');
+    }
+
+    public function groupsShow(Group $group)
+    {
+        return view('admin.administrativo.groups.show', compact('group'));
+    }
+
+    public function groupsEdit(Group $group)
+    {
+        return view('admin.administrativo.groups.edit', compact('group'));
+    }
+
+    public function groupsUpdate(Request $request, Group $group)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'coordinator_name' => 'nullable|string|max:255',
+            'coordinator_phone' => 'nullable|string|max:20',
+            'meeting_info' => 'nullable|string|max:255',
+            'category' => 'nullable|string|in:catequese,liturgia,familia,juventude,geral',
+            'max_members' => 'nullable|integer|min:1',
+            'is_active' => 'boolean',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($group->image) {
+                Storage::disk('public')->delete($group->image);
+            }
+            $validated['image'] = $request->file('image')->store('groups', 'public');
+        }
+
+        $validated['is_active'] = $request->has('is_active');
+
+        $group->update($validated);
+
+        return redirect()->route('admin.administrativo.groups.index')
+            ->with('success', 'Grupo atualizado com sucesso!');
+    }
+
+    public function groupsDestroy(Group $group)
+    {
+        if ($group->image) {
+            Storage::disk('public')->delete($group->image);
+        }
+
+        $group->delete();
+
+        return redirect()->route('admin.administrativo.groups.index')
+            ->with('success', 'Grupo excluído com sucesso!');
     }
 }
