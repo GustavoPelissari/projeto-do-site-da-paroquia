@@ -91,11 +91,11 @@
 
                                         <!-- Formação -->
                                         <button type="button" 
-                                                class="btn btn-warning btn-sm" 
+                                                class="btn btn-warning btn-sm text-white" 
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#formationModal{{ $request->id }}"
                                                 title="Marcar como 'Em Formação'">
-                                            <i class="bi bi-book-fill"></i>
+                                            <i class="bi bi-book-fill text-white"></i>
                                             Formação
                                         </button>
 
