@@ -406,9 +406,6 @@ class CoordinatorController extends Controller
         $approver = Auth::user();
         $request->approve($approver, 'Aprovado pelo coordenador dos coroinhas');
 
-        // Notificar o candidato
-        NotificationService::groupRequestStatusChanged($request, 'approved');
-
         return back()->with('success', 'Solicitação aprovada com sucesso!');
     }
 
@@ -423,9 +420,6 @@ class CoordinatorController extends Controller
 
         $request->reject(Auth::user(), $httpRequest->message ?? 'Solicitação rejeitada pelo coordenador');
 
-        // Notificar o candidato
-        NotificationService::groupRequestStatusChanged($request, 'rejected');
-
         return back()->with('success', 'Solicitação rejeitada.');
     }
 
@@ -439,9 +433,6 @@ class CoordinatorController extends Controller
         ]);
 
         $request->markAsInFormation(Auth::user(), $httpRequest->message);
-
-        // Notificar o candidato
-        NotificationService::groupRequestStatusChanged($request, 'in_formation');
 
         return back()->with('success', 'Candidato marcado como "Em Formação" com sucesso!');
     }
