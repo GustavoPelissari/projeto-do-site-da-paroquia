@@ -358,7 +358,12 @@
                         <!-- Notifications Bell -->
                         <li class="nav-item dropdown me-2">
                             @php
-                                $unreadCount = Auth::user()->notifications()->whereNull('read_at')->count();
+                                try {
+                                    $unreadCount = Auth::user()->notifications()->whereNull('read_at')->count();
+                                } catch (\Exception $e) {
+                                    $unreadCount = 0;
+                                    \Log::error('Erro ao carregar notificações: ' . $e->getMessage());
+                                }
                             @endphp
                             <a class="nav-link position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-bell" style="font-size: 1.2rem;"></i>
@@ -377,7 +382,12 @@
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 @php
-                                    $recentNotifications = Auth::user()->notifications()->latest()->limit(5)->get();
+                                    try {
+                                        $recentNotifications = Auth::user()->notifications()->latest()->limit(5)->get();
+                                    } catch (\Exception $e) {
+                                        $recentNotifications = collect([]);
+                                        \Log::error('Erro ao carregar notificações recentes: ' . $e->getMessage());
+                                    }
                                 @endphp
                                 @forelse($recentNotifications as $notif)
                                     <li>
