@@ -46,19 +46,19 @@
         <section class="section-paroquia">
             <div class="section-content">
                 @forelse($requests as $request)
-                    <div class="card-paroquia mb-4 status-{{ $request->status }}">
+                    <div class="card-paroquia mb-4 status-{{ $request->status }} shadow-sm" style="border-radius: 16px; overflow: hidden;">
                         
                         {{-- Header --}}
-                        <div class="card-header-paroquia">
+                        <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); color: #fff;">
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
-                                    <h3 class="h5 mb-1"><i class="bi bi-bank me-2"></i>{{ $request->group->name }}</h3>
-                                    <p class="text-muted small mb-0">
+                                    <h3 class="h5 mb-1 text-white"><i class="bi bi-bank me-2"></i>{{ $request->group->name }}</h3>
+                                    <p class="small mb-0" style="color: #FFD66B;">
                                         <i class="bi bi-calendar me-1"></i>
                                         Solicitado em {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
                                     </p>
                                 </div>
-                                <span class="badge bg-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'danger') }}">
+                                <span class="badge bg-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'danger') }} rounded-pill px-3 py-2 align-self-start">
                                     @if($request->status === 'pending')
                                         <i class="bi bi-clock"></i> Pendente
                                     @elseif($request->status === 'approved')
@@ -71,21 +71,21 @@
                         </div>
 
                         {{-- Content --}}
-                        <div class="card-body">
+                        <div class="card-body p-4">
                             
                             {{-- Timeline --}}
-                            <div class="sp-timeline">
+                            <div class="sp-timeline" style="margin-left: 1.25rem;">
                                 {{-- Solicitação Enviada --}}
                                 <div class="sp-timeline-item">
                                     <div class="sp-timeline-marker sp-timeline-marker-blue"></div>
                                     <div class="sp-timeline-content">
-                                        <h6 class="fw-semibold text-primary"><i class="bi bi-envelope me-2"></i> Solicitação Enviada</h6>
-                                        <p class="small text-muted">
+                                        <h6 class="fw-semibold" style="color: var(--brand-vinho);"><i class="bi bi-envelope me-2"></i> Solicitação Enviada</h6>
+                                        <p class="small text-muted mb-2">
                                             {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
                                         </p>
                                         @if($request->message)
-                                            <div class="card mb-3" style="background: #f8fafc; border: 1px solid #e5e7eb;">
-                                                <div class="card-body py-2">
+                                            <div class="card mb-3" style="background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px;">
+                                                <div class="card-body py-2 px-3">
                                                     <p class="small fst-italic text-muted mb-0">"{{ $request->message }}"</p>
                                                 </div>
                                             </div>
@@ -99,14 +99,14 @@
                                     <div class="sp-timeline-item">
                                         <div class="sp-timeline-marker sp-timeline-marker-{{ $request->status === 'approved' ? 'green' : 'red' }}"></div>
                                         <div class="sp-timeline-content">
-                                            <h6 class="fw-semibold status-title-{{ $request->status }}">
+                                            <h6 class="fw-semibold status-title-{{ $request->status }} mb-1">
                                                 @if($request->status === 'approved')
                                                     <i class="bi bi-check-circle me-2"></i> Solicitação Aprovada
                                                 @else
                                                     <i class="bi bi-x-circle me-2"></i> Solicitação Rejeitada
                                                 @endif
                                             </h6>
-                                            <p class="small text-muted">
+                                            <p class="small text-muted mb-2">
                                                 @if($statusAt)
                                                     {{ $statusAt->format('d/m/Y') }} às {{ $statusAt->format('H:i') }}
                                                 @endif
@@ -115,8 +115,8 @@
                                                 @endif
                                             </p>
                                             @if($request->response_message)
-                                                <div class="card mb-3 response-card response-{{ $request->status }}">
-                                                    <div class="card-body py-2">
+                                                <div class="card mb-3 response-card response-{{ $request->status }}" style="border-radius: 10px;">
+                                                    <div class="card-body py-2 px-3">
                                                         <p class="small mb-0 response-text-{{ $request->status }}">
                                                             <strong>Resposta:</strong> {{ $request->response_message }}
                                                         </p>
@@ -129,13 +129,13 @@
                             </div>
 
                             {{-- Informações do Grupo --}}
-                            <div class="card mt-3" style="background: var(--bg-rose); border: 1px solid rgba(139, 30, 63, 0.2);">
-                                <div class="card-header py-2">
+                            <div class="card mt-3" style="background: var(--bg-rose); border: 1px solid rgba(139, 30, 63, 0.2); border-radius: 12px;">
+                                <div class="card-header py-2" style="background: rgba(139, 30, 63, 0.06);">
                                     <h6 class="mb-0 fw-semibold" style="color: var(--brand-vinho);">
                                         <i class="bi bi-book me-2"></i> Informações do Grupo
                                     </h6>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body px-3">
                                     <div class="row">
                                         <div class="col-md-6 mb-2 small">
                                             <i class="bi bi-tag me-2" style="color: var(--brand-vinho);"></i>
@@ -171,14 +171,12 @@
 
                             {{-- Ações para solicitações aprovadas --}}
                             @if($request->status === 'approved')
-                                <div class="sp-alert sp-alert-success sp-mt-4">
-                                    <div class="sp-alert-icon">🎉</div>
-                                    <div class="sp-alert-content">
-                                        <strong>Parabéns!</strong> Você agora faz parte do grupo <strong>{{ $request->group->name }}</strong>.
-                                        @if($request->group->requires_scale)
-                                            Fique atento às escalas que serão publicadas pelo coordenador.
-                                        @endif
-                                    </div>
+                                <div class="alert alert-success mt-3" style="border-radius: 12px;">
+                                    <i class="bi bi-emoji-smile me-2"></i>
+                                    <strong>Parabéns!</strong> Você agora faz parte do grupo <strong>{{ $request->group->name }}</strong>.
+                                    @if($request->group->requires_scale)
+                                        Fique atento às escalas que serão publicadas pelo coordenador.
+                                    @endif
                                 </div>
                             @endif
                         </div>
