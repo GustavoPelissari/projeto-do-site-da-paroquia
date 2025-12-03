@@ -95,7 +95,21 @@
                         </div>
                         <div class="card-footer bg-transparent border-0 mt-auto p-3">
                             @auth
-                                @if($group->isFull())
+                                @if(Auth::user()->parish_group_id)
+                                    @if(Auth::user()->parish_group_id === $group->id)
+                                        <div class="alert mb-0 p-3" style="background-color: var(--bg-rose); border: 1px solid var(--dourado-suave); border-radius: 8px;">
+                                            <div class="d-flex align-items-center">
+                                                <i data-lucide="check-circle" class="me-2" style="color: var(--brand-vinho); width: 20px; height: 20px;"></i>
+                                                <span class="fw-bold" style="color: var(--brand-vinho); font-size: 0.9rem;">Você é membro deste grupo!</span>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <button class="btn btn-secondary w-100" disabled title="Você já participa de outro grupo">
+                                            <i data-lucide="users" class="icon-paroquia"></i>
+                                            Já está em um grupo
+                                        </button>
+                                    @endif
+                                @elseif($group->isFull())
                                     <button class="btn btn-secondary w-100" disabled>
                                         <i data-lucide="user-x" class="icon-paroquia"></i>
                                         Grupo Completo

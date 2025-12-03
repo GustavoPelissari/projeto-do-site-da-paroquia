@@ -435,17 +435,34 @@
                                             <i class="bi bi-house-heart"></i> Minha Área
                                         </a>
                                     </li>
+                                    
+                                    @if(Auth::user()->parish_group_id)
+                                        {{-- Usuário já está em um grupo --}}
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-start" href="{{ route('group-requests.create') }}" style="white-space: normal;">
+                                                <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                                                <div>
+                                                    <strong>Meu Grupo</strong>
+                                                    <small class="d-block text-muted">{{ Auth::user()->parishGroup->name }}</small>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @else
+                                        {{-- Usuário não está em nenhum grupo --}}
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('group-requests.create') }}">
+                                                <i class="bi bi-pencil-square"></i> Solicitar Entrada em Grupo
+                                            </a>
+                                        </li>
+                                    @endif
+                                    
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('group-requests.create') }}">
-                                            <i class="bi bi-pencil-square"></i> Solicitar Entrada em Grupo
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('group-requests.index') }}">
+                                        <a class="dropdown-item" href="{{ route('group-requests.my-requests') }}">
                                             <i class="bi bi-list-check"></i> Minhas Solicitações
                                         </a>
                                     </li>
-                                    @if(Auth::user()->parishGroup && Auth::user()->parishGroup->id == 5)
+                                    
+                                    @if(Auth::user()->parishGroup && Auth::user()->parishGroup->requires_scale)
                                         <li>
                                             <a class="dropdown-item" href="{{ route('user.scales.index') }}">
                                                 <i class="bi bi-calendar3"></i> Minhas Escalas

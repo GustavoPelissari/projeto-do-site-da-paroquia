@@ -23,8 +23,9 @@ class GroupRequestController extends Controller
 
         // Verificar se usuário já está em um grupo
         if ($user->parish_group_id) {
-            return redirect()->route('dashboard')
-                ->with('error', 'Você já faz parte de um grupo: '.$user->parishGroup->name);
+            return view('group-requests.already-member', [
+                'currentGroup' => $user->parishGroup
+            ]);
         }
 
         // Buscar grupos ativos que o usuário pode solicitar entrada
