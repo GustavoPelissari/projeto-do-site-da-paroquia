@@ -79,9 +79,9 @@
                                     </small>
                                 </td>
                                 <td class="text-center">
-                                    <div class="btn-group" role="group">
+                                    <div class="d-flex gap-2 justify-content-center">
                                         <!-- Aprovar -->
-                                        <form action="{{ route('admin.coordenador.requests.approve', $request) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.coordenador.requests.approve', $request) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="btn btn-success btn-sm" title="Aprovar e adicionar ao grupo imediatamente">
                                                 <i class="bi bi-check-circle-fill"></i>
@@ -100,7 +100,7 @@
                                         </button>
 
                                         <!-- Rejeitar -->
-                                        <form action="{{ route('admin.coordenador.requests.reject', $request) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.coordenador.requests.reject', $request) }}" method="POST">
                                             @csrf
                                             <button type="submit" 
                                                     class="btn btn-danger btn-sm" 
