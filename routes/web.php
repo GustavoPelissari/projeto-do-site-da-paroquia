@@ -17,22 +17,22 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-// Site navegado apenas por usuários autenticados e verificados
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Rotas públicas - acessíveis sem autenticação
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
 
-    Route::get('/groups', [HomeController::class, 'groups'])->name('groups');
-    Route::get('/masses', [HomeController::class, 'masses'])->name('masses');
-    Route::get('/events', [HomeController::class, 'events'])->name('events');
-    Route::get('/events/{event}', [HomeController::class, 'showEvent'])->name('events.show');
-    Route::get('/news', [HomeController::class, 'news'])->name('news');
-    Route::get('/news/{news}', [HomeController::class, 'showNews'])->name('news.show');
-    Route::get('/sobre', [HomeController::class, 'about'])->name('about');
-    Route::get('/news-test', function() {
-        $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
-        return view('news-test', compact('news'));
-    });
+Route::get('/groups', [HomeController::class, 'groups'])->name('groups');
+Route::get('/masses', [HomeController::class, 'masses'])->name('masses');
+Route::get('/events', [HomeController::class, 'events'])->name('events');
+Route::get('/events/{event}', [HomeController::class, 'showEvent'])->name('events.show');
+Route::get('/news', [HomeController::class, 'news'])->name('news');
+Route::get('/news/{news}', [HomeController::class, 'showNews'])->name('news.show');
+Route::get('/sobre', [HomeController::class, 'about'])->name('about');
+
+// Rota de teste (pode remover em produção)
+Route::get('/news-test', function() {
+    $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
+    return view('news-test', compact('news'));
 });
 
 // Group requests routes (for authenticated users)
