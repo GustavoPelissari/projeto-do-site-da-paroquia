@@ -19,12 +19,15 @@
 </div>
 
 <!-- Filtros de Categoria -->
-<section class="py-5" style="background: linear-gradient(135deg, var(--bege-claro) 0%, #faf8f5 100%);">
-    <div class="container">
+<section class="py-5" style="background: var(--vermelho-profundo); position: relative; overflow: hidden;">
+    <!-- Padrão decorativo de fundo -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.1; background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px); background-size: 30px 30px;"></div>
+    
+    <div class="container" style="position: relative; z-index: 1;">
         <div class="row justify-content-center mb-4">
             <div class="col-lg-6 text-center">
-                <h3 class="mb-2">Explore por Categoria</h3>
-                <p class="text-muted">Encontre a pastoral que combina com seu chamado</p>
+                <h3 class="mb-2" style="color: white; font-weight: 700;">Explore por Categoria</h3>
+                <p style="color: rgba(255,255,255,0.9);">Encontre a pastoral que combina com seu chamado</p>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -75,7 +78,7 @@
 .category-filter-btn {
     position: relative;
     background: white;
-    border: 2px solid #e8e3dd;
+    border: 3px solid rgba(255,255,255,0.3);
     border-radius: 16px;
     padding: 20px 28px;
     cursor: pointer;
@@ -85,21 +88,21 @@
     align-items: center;
     gap: 8px;
     min-width: 140px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .category-filter-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(138, 28, 28, 0.15);
-    border-color: var(--vermelho-profundo);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+    border-color: var(--dourado-suave);
 }
 
 .category-filter-btn.active {
-    background: linear-gradient(135deg, var(--vermelho-profundo) 0%, #a91d1d 100%);
-    border-color: var(--vermelho-profundo);
-    color: white;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(138, 28, 28, 0.25);
+    background: var(--dourado-suave);
+    border-color: var(--dourado-suave);
+    color: var(--vermelho-profundo);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.5);
 }
 
 .category-icon {
@@ -113,8 +116,13 @@
     transition: all 0.3s ease;
 }
 
+.category-filter-btn:hover .category-icon {
+    background: var(--dourado-suave);
+    transform: scale(1.1);
+}
+
 .category-filter-btn.active .category-icon {
-    background: rgba(255,255,255,0.2);
+    background: var(--vermelho-profundo);
 }
 
 .category-icon i {
@@ -134,36 +142,41 @@
 
 .category-count {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    background: var(--dourado-suave);
-    color: var(--vermelho-profundo);
-    width: 28px;
-    height: 28px;
+    top: -12px;
+    right: -12px;
+    background: var(--vermelho-profundo);
+    color: white;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    border: 3px solid white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 4px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .category-filter-btn.active .category-count {
     background: white;
     color: var(--vermelho-profundo);
+    border-color: var(--dourado-suave);
 }
 </style>
 
 <!-- Groups Section -->
-<section class="section-paroquia">
+<section class="section-paroquia" style="background: var(--bege-claro); padding: 80px 0;">
     <div class="container">
         @if($groups->count() > 0)
             <div class="row justify-content-center text-center mb-5">
                 <div class="col-lg-8">
-                    <h2 class="mb-4">Nossos Grupos Ativos</h2>
-                    <p class="lead text-muted">
+                    <div style="display: inline-block; background: var(--vermelho-profundo); color: white; padding: 8px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; margin-bottom: 20px;">
+                        <i data-lucide="sparkles" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                        Comunidade Ativa
+                    </div>
+                    <h2 class="mb-4" style="color: var(--vermelho-profundo); font-weight: 700;">Nossos Grupos Paroquiais</h2>
+                    <p class="lead" style="color: #555;">
                         Cada grupo tem sua missão especial na construção do Reino de Deus. 
                         Encontre aquele que mais se alinha com seu carisma e chamado.
                     </p>
@@ -302,11 +315,13 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    border: 2px solid var(--bege-claro);
 }
 
 .modern-group-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 40px rgba(138, 28, 28, 0.2);
+    border-color: var(--dourado-suave);
 }
 
 .group-card-header {
@@ -378,7 +393,7 @@
     position: absolute;
     top: 16px;
     right: 16px;
-    background: white;
+    background: var(--dourado-suave);
     color: var(--vermelho-profundo);
     padding: 8px 16px;
     border-radius: 100px;
@@ -425,16 +440,19 @@
     background: var(--bege-claro);
     border-radius: 12px;
     transition: all 0.3s ease;
+    border-left: 3px solid var(--dourado-suave);
 }
 
 .info-item:hover {
     background: #f0ebe5;
+    transform: translateX(3px);
+    border-left-color: var(--vermelho-profundo);
 }
 
 .info-icon {
     width: 36px;
     height: 36px;
-    background: white;
+    background: var(--vermelho-profundo);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -445,7 +463,7 @@
 .info-icon i {
     width: 18px;
     height: 18px;
-    color: var(--vermelho-profundo);
+    color: white;
 }
 
 .info-content {
@@ -467,8 +485,8 @@
 
 .group-card-footer {
     padding: 20px 24px;
-    background: #fafafa;
-    border-top: 1px solid #f0f0f0;
+    background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
+    border-top: 2px solid #e0e0e0;
 }
 
 .btn-group-action {
@@ -492,13 +510,14 @@
 }
 
 .btn-group-action.primary {
-    background: linear-gradient(135deg, var(--vermelho-profundo) 0%, #a91d1d 100%);
+    background: var(--vermelho-profundo);
     color: white;
 }
 
 .btn-group-action.primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(138, 28, 28, 0.3);
+    background: #6d1616;
 }
 
 .btn-group-action.outline {
@@ -549,11 +568,15 @@
 </section>
 
 <!-- Como Participar -->
-<section class="section-paroquia" style="background: linear-gradient(180deg, white 0%, var(--bege-claro) 100%); padding: 80px 0;">
+<section class="section-paroquia section-bg-bege">
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-lg-8 text-center">
-                <h2 class="mb-3">Como Participar?</h2>
+                <div style="display: inline-block; background: var(--dourado-suave); color: var(--vermelho-profundo); padding: 8px 20px; border-radius: 50px; font-size: 14px; font-weight: 600; margin-bottom: 20px;">
+                    <i data-lucide="info" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle;"></i>
+                    Guia de Participação
+                </div>
+                <h2 class="mb-3" style="color: var(--vermelho-profundo);">Como Participar?</h2>
                 <p class="lead text-muted">É simples e rápido! Siga estes passos para fazer parte da nossa comunidade</p>
             </div>
         </div>
