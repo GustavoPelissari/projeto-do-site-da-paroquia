@@ -33,7 +33,7 @@
             <div class="d-flex align-items-center">
                 <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
                      style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                    <i data-lucide="check-circle" style="width: 24px; height: 24px; color: white;"></i>
+                    <i class="bi bi-check-circle-fill" style="font-size: 24px; color: white;"></i>
                 </div>
                 <div class="flex-grow-1">
                     <h6 class="fw-bold mb-1" style="color: var(--brand-vinho);">
@@ -52,7 +52,7 @@
             <div class="card-paroquia shadow-sm">
                 <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
                     <h2 class="card-title-paroquia mb-0 text-white">
-                        <i data-lucide="file-text" class="me-2"></i>
+                        <i class="bi bi-file-text me-2"></i>
                         Formulário de Solicitação
                     </h2>
                 </div>
@@ -64,7 +64,7 @@
                         <label for="group_id" class="form-label fw-bold d-flex align-items-center mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose);">
-                                <i data-lucide="users-2" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
+                                <i class="bi bi-people-fill" style="font-size: 18px; color: var(--brand-vinho);"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Grupo Desejado <span class="text-danger">*</span></span>
                         </label>
@@ -83,7 +83,7 @@
                         </select>
                         @error('group_id')
                             <div class="text-danger small mt-2">
-                                <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i>
+                                <i class="bi bi-exclamation-circle"></i>
                                 {{ $message }}
                             </div>
                         @enderror
@@ -93,7 +93,7 @@
                         <label for="message" class="form-label fw-bold d-flex align-items-center mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose);">
-                                <i data-lucide="pen-line" style="width: 18px; height: 18px; color: var(--brand-vinho);"></i>
+                                <i class="bi bi-pencil-fill" style="font-size: 18px; color: var(--brand-vinho);"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Mensagem <span class="text-danger">*</span></span>
                         </label>
@@ -108,23 +108,23 @@
                         >{{ old('message') }}</textarea>
                         @error('message')
                             <div class="text-danger small mt-2">
-                                <i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i>
+                                <i class="bi bi-exclamation-circle"></i>
                                 {{ $message }}
                             </div>
                         @enderror
                         <div class="form-text mt-2">
-                            <i data-lucide="info" class="icon-paroquia"></i>
+                            <i class="bi bi-info-circle"></i>
                             Mínimo de 10 caracteres. Seja claro sobre suas motivações e disponibilidade.
                         </div>
                     </div>
 
                     <div class="d-flex gap-3 mt-4 flex-wrap">
                         <button type="submit" class="btn-paroquia btn-primary-paroquia px-4">
-                            <i data-lucide="send" class="icon-paroquia"></i>
+                            <i class="bi bi-send-fill me-2"></i>
                             Enviar Solicitação
                         </button>
                         <a href="{{ route('groups') }}" class="btn btn-outline-secondary px-4" style="border: 2px solid var(--brand-vinho); color: var(--brand-vinho); text-decoration: none;">
-                            <i data-lucide="arrow-left" class="icon-paroquia"></i>
+                            <i class="bi bi-arrow-left me-2"></i>
                             Voltar aos Grupos
                         </a>
                     </div>
@@ -136,7 +136,7 @@
             <div class="card-paroquia shadow-sm">
                 <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
                     <h3 class="card-title-paroquia mb-0 text-white">
-                        <i data-lucide="users" class="me-2"></i>
+                        <i class="bi bi-list-ul me-2"></i>
                         Grupos Disponíveis
                     </h3>
                 </div>
@@ -150,7 +150,7 @@
                     @forelse($availableGroups as $group)
                         <div class="mb-3 p-3 border-bottom" style="border-color: var(--bg-rose) !important;">
                             <h5 class="fw-bold mb-2 d-flex align-items-center" style="color: var(--brand-vinho);">
-                                <i data-lucide="circle" style="width: 8px; height: 8px; fill: var(--brand-vinho);" class="me-2"></i>
+                                <i class="bi bi-circle-fill me-2" style="font-size: 8px;"></i>
                                 {{ $group->name }}
                             </h5>
                             
@@ -163,14 +163,14 @@
                             <div class="d-flex flex-column gap-1 mt-2">
                                 @if($group->coordinator_name)
                                     <div class="d-flex align-items-center small text-muted">
-                                        <i data-lucide="user" style="width: 14px; height: 14px; color: var(--brand-vinho);" class="me-2"></i>
+                                        <i class="bi bi-person-fill me-2" style="font-size: 14px; color: var(--brand-vinho);"></i>
                                         <span><strong>Coord.:</strong> {{ $group->coordinator_name }}</span>
                                     </div>
                                 @endif
 
                                 @if($group->meeting_info)
                                     <div class="d-flex align-items-center small text-muted">
-                                        <i data-lucide="calendar" style="width: 14px; height: 14px; color: var(--brand-vinho);" class="me-2"></i>
+                                        <i class="bi bi-calendar-event me-2" style="font-size: 14px; color: var(--brand-vinho);"></i>
                                         <span>{{ $group->meeting_info }}</span>
                                     </div>
                                 @endif
@@ -182,8 +182,8 @@
                         </div>
                     @empty
                         <div class="text-center py-5">
-                            <i data-lucide="users-2" class="text-muted mb-3" style="width: 64px; height: 64px; opacity: 0.3;"></i>
-                            <p class="text-muted mb-0">Nenhum grupo disponível no momento.</p>
+                            <i class="bi bi-people" style="font-size: 64px; opacity: 0.3; color: #6c757d;"></i>
+                            <p class="text-muted mb-0 mt-3">Nenhum grupo disponível no momento.</p>
                         </div>
                     @endforelse
                 </div>
@@ -195,7 +195,7 @@
         <div class="container">
             <div class="text-center mb-4">
                 <h3 class="fw-bold" style="color: var(--brand-vinho);">
-                    <i data-lucide="info" class="me-2"></i>
+                    <i class="bi bi-info-circle me-2"></i>
                     Orientações Importantes
                 </h3>
             </div>
@@ -206,7 +206,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i data-lucide="book-open" style="width: 28px; height: 28px; color: white;"></i>
+                                <i class="bi bi-book" style="font-size: 28px; color: white;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Leia a Descrição</h5>
                             <p class="small text-muted mb-0">
@@ -221,7 +221,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i data-lucide="clock" style="width: 28px; height: 28px; color: white;"></i>
+                                <i class="bi bi-clock" style="font-size: 28px; color: white;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Disponibilidade</h5>
                             <p class="small text-muted mb-0">
@@ -236,7 +236,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i data-lucide="heart" style="width: 28px; height: 28px; color: white;"></i>
+                                <i class="bi bi-heart-fill" style="font-size: 28px; color: white;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Motivação</h5>
                             <p class="small text-muted mb-0">
@@ -251,7 +251,7 @@
                         <div class="card-body-paroquia">
                             <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
                                  style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                                <i data-lucide="calendar-check" style="width: 28px; height: 28px; color: white;"></i>
+                                <i class="bi bi-calendar-check-fill" style="font-size: 28px; color: white;"></i>
                             </div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Resposta em 7 dias</h5>
                             <p class="small text-muted mb-0">
@@ -266,29 +266,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-<script>
-// Garantir que os ícones Lucide sejam renderizados
-document.addEventListener('DOMContentLoaded', function() {
-    // Tentar imediatamente
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-    
-    // Tentar novamente após um pequeno delay para garantir
-    setTimeout(function() {
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-    }, 100);
-});
-
-// Também tentar quando a janela carregar completamente
-window.addEventListener('load', function() {
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-});
-</script>
-@endpush
