@@ -2358,3 +2358,170 @@ html {
         scroll-behavior: auto !important;
     }
 }
+
+/* ================================
+   CORREÇÕES DE ALINHAMENTO - DESKTOP E MOBILE
+   Garantir consistência visual em todo o projeto
+================================ */
+
+/* BOTÕES - Centralização perfeita vertical e horizontal (todas as telas) */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-primary-paroquia,
+.btn-paroquia,
+.btn-hero,
+.btn-vinho,
+.btn-outline-vinho,
+.btn-outline-paroquia,
+button[type="submit"],
+button[type="button"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5;
+}
+
+/* Ícones dentro de botões - alinhamento perfeito (todas as telas) */
+.btn i,
+.btn svg,
+.btn .bi,
+.btn-primary-paroquia i,
+.btn-paroquia i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+/* BADGES - Alinhamento consistente (todas as telas) */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.badge i,
+.badge .bi {
+    margin: 0;
+    line-height: 1;
+}
+
+/* ALERTAS - Alinhamento de ícones (todas as telas) */
+.alert {
+    display: flex;
+    align-items: center;
+}
+
+.alert i,
+.alert .bi {
+    flex-shrink: 0;
+    margin-right: 0.75rem;
+}
+
+/* DROPDOWN - Alinhamento de ícones (todas as telas) */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item i,
+.dropdown-item .bi {
+    width: 1.25rem;
+    margin-right: 0.625rem;
+    flex-shrink: 0;
+}
+
+/* NAV LINKS - Alinhamento (todas as telas) */
+.nav-link {
+    display: flex;
+    align-items: center;
+}
+
+/* BREADCRUMBS - Alinhamento (todas as telas) */
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+/* PAGINAÇÃO - Centralização (todas as telas) */
+.pagination .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CORREÇÃO: Evitar quebra indesejada em textos com ícones (todas as telas) */
+.d-flex.align-items-center i,
+.d-flex.align-items-center .bi,
+.d-inline-flex.align-items-center i,
+.d-inline-flex.align-items-center .bi {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* CORREÇÃO: Links como botões sem decoração (todas as telas) */
+a.btn {
+    text-decoration: none;
+}
+
+/* CORREÇÃO: Botões em grupos sem margem extra (todas as telas) */
+.btn-group .btn {
+    margin: 0;
+}
+
+/* CORREÇÃO: Modal footer - botões alinhados (todas as telas) */
+.modal-footer {
+    gap: 0.75rem;
+}
+
+.modal-footer .btn {
+    margin: 0;
+}
+
+/* CORREÇÃO: Form check alinhamento (todas as telas) */
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input {
+    margin-top: 0;
+}
+
+/* CORREÇÃO: Tabelas - alinhamento vertical (todas as telas) */
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+/* CORREÇÃO: Input groups - botões alinhados (todas as telas) */
+.input-group .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================================
+   CORREÇÕES ESPECÍFICAS DESKTOP (acima de 768px)
+================================ */
+@media (min-width: 769px) {
+    /* Espaçamento entre botões em desktop */
+    .btn + .btn:not(.btn-group .btn) {
+        margin-left: 0.5rem;
+    }
+    
+    /* Botões em linha no desktop */
+    .d-flex .btn + .btn {
+        margin-left: 0.5rem;
+    }
+}
