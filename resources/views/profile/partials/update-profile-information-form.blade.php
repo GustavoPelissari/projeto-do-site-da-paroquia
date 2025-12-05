@@ -87,15 +87,15 @@
             @endif
         </div>
 
-        <div class="d-flex align-items-center gap-3">
+        <div class="mt-3">
             <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save"></i> Salvar
+                <i class="bi bi-save me-1"></i> Salvar Alterações
             </button>
 
             @if (session('status') === 'profile-updated')
-                <span class="text-success">
-                    <i class="bi bi-check-circle-fill"></i> Perfil atualizado!
-                </span>
+                <div class="alert alert-success mt-3 mb-0">
+                    <i class="bi bi-check-circle-fill me-2"></i>Perfil atualizado com sucesso!
+                </div>
             @endif
         </div>
     </form>

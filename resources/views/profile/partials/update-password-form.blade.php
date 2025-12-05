@@ -43,15 +43,15 @@
             @enderror
         </div>
 
-        <div class="d-flex align-items-center gap-3">
+        <div class="mt-3">
             <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save"></i> Salvar
+                <i class="bi bi-shield-check me-1"></i> Atualizar Senha
             </button>
 
             @if (session('status') === 'password-updated')
-                <span class="text-success">
-                    <i class="bi bi-check-circle-fill"></i> Senha atualizada!
-                </span>
+                <div class="alert alert-success mt-3 mb-0">
+                    <i class="bi bi-check-circle-fill me-2"></i>Senha atualizada com sucesso!
+                </div>
             @endif
         </div>
     </form>
