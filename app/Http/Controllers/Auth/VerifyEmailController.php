@@ -3,25 +3,41 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class VerifyEmailController extends Controller
 {
-    /**
-     * Mark the authenticated user's email address as verified.
-     */
-    public function __invoke(EmailVerificationRequest $request): RedirectResponse
+    public function __invoke(Request $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
-        }
+        try {
+            $userId = $request->route('id');
+            $user = User::findOrFail($userId);
+            
+            // Check if already verified
+            if ($user->hasVerifiedEmail()) {
+                Auth::login($user);
+                return redirect()->route('profile.edit')
+                    ->with('success', 'Seu e-mail já está verificado!');
+            }
+            
+            // Mark as verified
+            $user->email_verified_at = now();
+            $user->save();
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
-        }
+            event(new Verified($user));
+            Auth::login($user);
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+            return redirect()->route('profile.edit')
+                ->with('success', '✓ E-mail verificado com sucesso! Agora você pode participar de grupos.');
+            
+        } catch (\Exception $e) {
+            return redirect()->route('login')
+                ->with('error', 'Erro ao verificar e-mail: ' . $e->getMessage());
+        }
     }
 }

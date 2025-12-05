@@ -9,6 +9,9 @@
     </p>
 </x-hero>
 
+<!-- Botão de Voltar (Mobile) -->
+<x-back-button />
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">

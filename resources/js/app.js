@@ -24,24 +24,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Animate on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // Animate on scroll - DESABILITAR NO MOBILE
+    const isMobile = window.innerWidth <= 768;
     
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    if (!isMobile) {
+        // Apenas aplicar animação em desktop
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animate-on-scroll elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
         });
-    }, observerOptions);
-    
-    // Observe all animate-on-scroll elements
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-        observer.observe(el);
-    });
+    } else {
+        // Mobile: remover animação de scroll, deixar tudo estático
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            el.classList.remove('animate-on-scroll');
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+        
+        // Remover animação dos cards
+        document.querySelectorAll('.card-paroquia').forEach(el => {
+            el.style.animation = 'none';
+            el.style.opacity = '1';
+        });
+    }
     
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

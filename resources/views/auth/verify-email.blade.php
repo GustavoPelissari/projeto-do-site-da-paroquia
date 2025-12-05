@@ -14,22 +14,22 @@
                         </div>
                         <h1 class="h4 fw-bold text-vinho mb-2">Verifique seu E-mail</h1>
                         <p class="text-muted small">
-                            Obrigado por se cadastrar! Antes de começar, você poderia verificar seu endereço de e-mail clicando no link que acabamos de enviar para você?
+                            Para participar de grupos paroquiais, você precisa verificar seu endereço de e-mail.
                         </p>
                     </div>
 
                     @if (session('status') == 'verification-link-sent')
-                        <x-alert type="success" class="mb-3">
+                        <div class="alert alert-success mb-3">
                             <i class="bi bi-check-circle me-2"></i>
-                            Um novo link de verificação foi enviado para o endereço de e-mail que você forneceu durante o registro.
-                        </x-alert>
+                            Um novo link de verificação foi enviado para seu e-mail!
+                        </div>
                     @endif
 
                     <div class="alert alert-info d-flex align-items-start mb-4" role="alert">
                         <i class="bi bi-info-circle me-2 mt-1"></i>
                         <div>
-                            <strong>Não recebeu o e-mail?</strong>
-                            <p class="mb-0 small mt-1">Verifique sua caixa de spam ou solicite um novo link abaixo.</p>
+                            <strong>E-mail: {{ Auth::user()->email }}</strong>
+                            <p class="mb-0 small mt-1">Clique no link enviado para seu e-mail. Se não recebeu, verifique a caixa de spam ou solicite um novo envio abaixo.</p>
                         </div>
                     </div>
 
@@ -44,14 +44,11 @@
 
                     <hr class="my-3">
 
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">
-                                <i class="bi bi-box-arrow-left me-1"></i>Sair
-                            </button>
-                        </div>
-                    </form>
+                    <div class="text-center">
+                        <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Voltar ao Dashboard
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

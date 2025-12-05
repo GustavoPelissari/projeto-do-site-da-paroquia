@@ -1,7 +1,7 @@
 @props(['items'])
 
 @if(isset($items) && count($items) > 0)
-<nav aria-label="breadcrumb" class="mb-4">
+<nav aria-label="breadcrumb" class="mb-4 d-none d-sm-block">
     <ol class="breadcrumb bg-light p-3 rounded shadow-sm">
         <li class="breadcrumb-item">
             <a href="{{ route('home') }}" class="text-decoration-none text-brand-vinho">

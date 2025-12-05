@@ -36,14 +36,16 @@ Route::get('/news-test', function() {
     return view('news-test', compact('news'));
 });
 
-// Group requests routes (for authenticated users)
+// Group requests routes (require email verification)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/group-requests/create', [GroupRequestController::class, 'create'])->name('group-requests.create');
     Route::post('/group-requests', [GroupRequestController::class, 'store'])->name('group-requests.store');
     Route::get('/group-requests', [GroupRequestController::class, 'index'])->name('group-requests.index');
     Route::get('/minhas-solicitacoes', [GroupRequestController::class, 'myRequests'])->name('group-requests.my-requests');
+});
 
-    // Notifications
+// Notifications (auth only, no verification required)
+Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/{notification}/read', [NotificationsController::class, 'markAsRead'])->name('notifications.read');
 });
@@ -76,9 +78,9 @@ Route::get('/dashboard', function () {
     }
 
     return redirect()->route('login');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -89,7 +91,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 | User Dashboard (usuario_padrao role)
 |--------------------------------------------------------------------------
 */
-Route::prefix('user')->name('user.')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('user')->name('user.')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'dashboard'])->name('dashboard');
     
     // Scales (apenas visualização para usuários do grupo Coroinhas)

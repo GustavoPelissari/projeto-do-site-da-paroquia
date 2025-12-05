@@ -6,6 +6,9 @@
 <!-- Hero Section -->
 <x-hero title="Notícias da Paróquia" subtitle="Mantenha-se informado sobre tudo que acontece em nossa comunidade" minHeight="40vh" />
 
+<!-- Botão de Voltar (Mobile) -->
+<x-back-button />
+
 <!-- Breadcrumbs -->
 <div class="container mt-4">
     <x-breadcrumbs :items="[

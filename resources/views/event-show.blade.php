@@ -11,6 +11,9 @@
     subtitleSize="1.1rem" 
 />
 
+<!-- Botão de Voltar (Mobile) -->
+<x-back-button />
+
 <!-- Breadcrumbs -->
 <div class="container mt-4">
     <x-breadcrumbs :items="[

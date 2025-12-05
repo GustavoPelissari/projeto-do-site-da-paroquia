@@ -10,6 +10,9 @@
     </p>
 </x-hero>
 
+<!-- Botão de Voltar (Mobile) -->
+<x-back-button />
+
 <!-- Clero -->
 <section class="section-paroquia bg-white">
     <div class="container">

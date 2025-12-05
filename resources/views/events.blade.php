@@ -6,6 +6,9 @@
 <!-- Hero Section -->
 <x-hero title="Eventos da Paróquia" subtitle="Participe das atividades da nossa comunidade de fé" titleSize="3rem" subtitleSize="1.25rem" />
 
+<!-- Botão de Voltar (Mobile) -->
+<x-back-button />
+
 <!-- Breadcrumbs -->
 <div class="container mt-4">
     <x-breadcrumbs :items="[

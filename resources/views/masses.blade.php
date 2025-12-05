@@ -11,6 +11,9 @@
     </p>
 </x-hero>
 
+<!-- Botão de Voltar (Mobile) -->
+<x-back-button />
+
 <!-- Breadcrumbs -->
 <div class="container mt-4">
     <x-breadcrumbs :items="[

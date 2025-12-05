@@ -9,7 +9,37 @@
     </p>
 </x-hero>
 
+<!-- Botão de Voltar (Mobile) -->
+<x-back-button />
+
 <div class="container my-5">
+    {{-- Alert para email não verificado --}}
+    @if(!Auth::user()->hasVerifiedEmail())
+        <div class="alert alert-warning mb-4" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-left: 4px solid #FF9800; border-radius: 10px; box-shadow: 0 2px 8px rgba(255, 152, 0, 0.1);">
+            <div class="d-flex align-items-start">
+                <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
+                     style="width: 48px; height: 48px; background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
+                    <i class="bi bi-exclamation-triangle-fill" style="font-size: 24px; color: white;"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-bold mb-2" style="color: #E65100;">
+                        <i class="bi bi-envelope-x me-1"></i> E-mail não verificado
+                    </h6>
+                    <p class="mb-2 small">
+                        Para solicitar participação em um grupo, você precisa verificar seu e-mail primeiro.
+                        Isso garante que possamos enviar notificações importantes sobre sua solicitação.
+                    </p>
+                    <form method="POST" action="{{ route('verification.send') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-warning">
+                            <i class="bi bi-envelope-check me-1"></i> Enviar E-mail de Verificação
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+
     {{-- Removido alerta local de sucesso para evitar duplicidade (layout já exibe) --}}
 
     @if ($errors->any())
