@@ -42,97 +42,56 @@
         </div>
     </div>
 
-    <!-- Estatísticas Rápidas -->
+    <!-- Atalhos Rápidos -->
     <div class="row g-2 g-md-3 mb-3 mb-md-4">
-        <div class="col-6 col-md-3">
-            <div class="card border-0 shadow-sm h-100 hover-card">
-                <div class="card-body text-center p-2 p-md-3">
-                    <div class="text-primary mb-1 mb-md-2">
-                        <i class="bi bi-newspaper" style="font-size: 2rem;"></i>
-                    </div>
-                    <h4 class="mb-0 fw-bold h5">{{ $recentNews->count() }}</h4>
-                    <small class="text-muted" style="font-size: 0.7rem;">Notícias</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card border-0 shadow-sm h-100 hover-card">
-                <div class="card-body text-center p-2 p-md-3">
-                    <div class="text-success mb-1 mb-md-2">
-                        <i class="bi bi-calendar-event" style="font-size: 2rem;"></i>
-                    </div>
-                    <h4 class="mb-0 fw-bold h5">{{ $upcomingEvents->count() }}</h4>
-                    <small class="text-muted" style="font-size: 0.7rem;">Eventos</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card border-0 shadow-sm h-100 hover-card">
-                <div class="card-body text-center p-2 p-md-3">
-                    <div class="text-warning mb-1 mb-md-2">
-                        <i class="bi bi-clock" style="font-size: 2rem;"></i>
-                    </div>
-                    <h4 class="mb-0 fw-bold h5">{{ $masses->count() }}</h4>
-                    <small class="text-muted" style="font-size: 0.7rem;">Missas</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card border-0 shadow-sm h-100 hover-card">
-                <div class="card-body text-center p-2 p-md-3">
-                    <div class="text-info mb-1 mb-md-2">
-                        <i class="bi bi-people" style="font-size: 2rem;"></i>
-                    </div>
-                    <h4 class="mb-0 fw-bold h5">{{ $user->parishGroup ? '1' : '0' }}</h4>
-                    <small class="text-muted" style="font-size: 0.7rem;">{{ $user->parishGroup ? 'Pastoral' : 'S/ Pastoral' }}</small>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row g-2 g-md-4 mb-3 mb-md-4">
         <div class="col-6 col-md-3">
             <a href="{{ route('news') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm h-100 hover-card">
-                    <div class="card-body text-center py-3 py-md-4">
-                        <i class="bi bi-newspaper" style="font-size: 2rem; color: #8B1538;"></i>
-                        <h6 class="mt-2 mt-md-3 mb-0">Notícias</h6>ias</h6>
-                        <p class="text-muted small mb-0 d-none d-md-block">Veja as últimas novidades</p>
+                    <div class="card-body text-center p-2 p-md-3">
+                        <div class="text-primary mb-1 mb-md-2">
+                            <i class="bi bi-newspaper" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="mb-0 fw-bold h5">{{ $recentNews->count() }}</h4>
+                        <small class="text-muted" style="font-size: 0.7rem;">Notícias</small>
                     </div>
                 </div>
             </a>
         </div>
-
         <div class="col-6 col-md-3">
             <a href="{{ route('events') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm h-100 hover-card">
-                    <div class="card-body text-center py-3 py-md-4">
-                        <i class="bi bi-calendar-event" style="font-size: 2rem; color: #8B1538;"></i>
-                        <h6 class="mt-2 mt-md-3 mb-0">Eventos</h6>
-                        <p class="text-muted small mb-0 d-none d-md-block">Confira a programação</p>
+                    <div class="card-body text-center p-2 p-md-3">
+                        <div class="text-success mb-1 mb-md-2">
+                            <i class="bi bi-calendar-event" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="mb-0 fw-bold h5">{{ $upcomingEvents->count() }}</h4>
+                        <small class="text-muted" style="font-size: 0.7rem;">Eventos</small>
                     </div>
                 </div>
             </a>
         </div>
-
         <div class="col-6 col-md-3">
             <a href="{{ route('masses') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm h-100 hover-card">
-                    <div class="card-body text-center py-3 py-md-4">
-                        <i class="bi bi-calendar-week" style="font-size: 2rem; color: #8B1538;"></i>
-                        <h6 class="mt-2 mt-md-3 mb-0">Missas</h6>
-                        <p class="text-muted small mb-0 d-none d-md-block">Horários das celebrações</p>
+                    <div class="card-body text-center p-2 p-md-3">
+                        <div class="text-warning mb-1 mb-md-2">
+                            <i class="bi bi-clock" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="mb-0 fw-bold h5">{{ $masses->count() }}</h4>
+                        <small class="text-muted" style="font-size: 0.7rem;">Missas</small>
                     </div>
                 </div>
             </a>
         </div>
-
         <div class="col-6 col-md-3">
             <a href="{{ route('groups') }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm h-100 hover-card">
-                    <div class="card-body text-center py-3 py-md-4">
-                        <i class="bi bi-people-fill" style="font-size: 2rem; color: #8B1538;"></i>
-                        <h6 class="mt-2 mt-md-3 mb-0">Pastorais</h6>
-                        <p class="text-muted small mb-0 d-none d-md-block">Conheça os grupos</p>
+                    <div class="card-body text-center p-2 p-md-3">
+                        <div class="text-info mb-1 mb-md-2">
+                            <i class="bi bi-people" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="mb-0 fw-bold h5">{{ $user->parishGroup ? '1' : '0' }}</h4>
+                        <small class="text-muted" style="font-size: 0.7rem;">Pastorais</small>
                     </div>
                 </div>
             </a>
