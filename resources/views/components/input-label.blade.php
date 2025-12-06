@@ -1,5 +1,4 @@
-@props(['value'])
-
-<label {{ $attributes->merge(['class' => 'block font-medium text-sm text-gray-700']) }}>
-    {{ $value ?? $slot }}
-</label>
+@php
+    $component = 'input-label';
+@endphp
+@include('components._device-resolver')

@@ -1,7 +1,4 @@
-@props(['status'])
-
-@if ($status)
-    <x-alert type="success">
-        {{ $status }}
-    </x-alert>
-@endif
+@php
+    $component = 'auth-session-status';
+@endphp
+@include('components._device-resolver')
