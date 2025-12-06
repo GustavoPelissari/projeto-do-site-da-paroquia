@@ -32,7 +32,10 @@ class UserDashboardController extends Controller
             ->orderBy('time')
             ->get();
 
-        return view('user.dashboard', compact('user', 'recentNews', 'upcomingEvents', 'masses'));
+        // Pegar total de grupos/pastorais disponíveis
+        $totalGroups = \App\Models\Group::count();
+
+        return view('user.dashboard', compact('user', 'recentNews', 'upcomingEvents', 'masses', 'totalGroups'));
     }
 
     /**

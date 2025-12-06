@@ -90,7 +90,7 @@
                         <div class="text-info mb-1 mb-md-2">
                             <i class="bi bi-people" style="font-size: 2rem;"></i>
                         </div>
-                        <h4 class="mb-0 fw-bold h5">{{ $user->parishGroup ? '1' : '0' }}</h4>
+                        <h4 class="mb-0 fw-bold h5">{{ $totalGroups }}</h4>
                         <small class="text-muted" style="font-size: 0.7rem;">Pastorais</small>
                     </div>
                 </div>
