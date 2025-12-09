@@ -17,6 +17,12 @@ class VerifyEmailController extends Controller
         try {
             $userId = $request->route('id');
             $user = User::findOrFail($userId);
+
+            // Validate signed URL and ensure the hash matches the user's email
+            if (! $request->hasValidSignature() || ! hash_equals((string) $request->route('hash'), sha1($user->email))) {
+                return redirect()->route('login')
+                    ->with('error', 'Link de verificação inválido ou expirado.');
+            }
             
             // Check if already verified
             if ($user->hasVerifiedEmail()) {
