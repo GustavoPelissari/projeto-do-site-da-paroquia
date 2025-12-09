@@ -78,13 +78,13 @@
                                     <span class="badge {{ $mass->is_active ? 'bg-success' : 'bg-danger' }}">{{ $mass->is_active ? 'Ativo' : 'Inativo' }}</span>
                                 </td>
                                 <td class="text-end">
-                                    <div class="btn-group" role="group">
-                                        <a href="{{ route('admin.global.masses.show', $mass) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                                        <a href="{{ route('admin.global.masses.edit', $mass) }}" class="btn btn-sm btn-outline-success">Editar</a>
+                                    <div class="d-flex gap-2 justify-content-end">
+                                        <a href="{{ route('admin.global.masses.show', $mass) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye me-1"></i>Ver</a>
+                                        <a href="{{ route('admin.global.masses.edit', $mass) }}" class="btn btn-sm btn-outline-success"><i class="bi bi-pencil me-1"></i>Editar</a>
                                         <form method="POST" action="{{ route('admin.global.masses.destroy', $mass) }}" onsubmit="return confirm('Tem certeza que deseja excluir este horário?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash me-1"></i>Excluir</button>
                                         </form>
                                     </div>
                                 </td>

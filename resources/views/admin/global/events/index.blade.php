@@ -112,13 +112,13 @@
                                 @endif
                             </td>
                             <td class="text-end">
-                                <div class="btn-group" role="group">
-                                    <a href="{{ route('admin.global.events.show', $event) }}" class="btn btn-outline-secondary btn-sm" title="Ver"><i class="bi bi-eye"></i></a>
-                                    <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-secondary btn-sm" title="Editar"><i class="bi bi-pencil"></i></a>
+                                <div class="d-flex gap-2 justify-content-end">
+                                    <a href="{{ route('admin.global.events.show', $event) }}" class="btn btn-outline-secondary btn-sm" title="Ver"><i class="bi bi-eye me-1"></i>Ver</a>
+                                    <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-secondary btn-sm" title="Editar"><i class="bi bi-pencil me-1"></i>Editar</a>
                                     <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" onsubmit="return confirm('Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash me-1"></i>Excluir</button>
                                     </form>
                                 </div>
                             </td>

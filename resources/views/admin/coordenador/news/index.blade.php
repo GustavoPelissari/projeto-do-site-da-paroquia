@@ -122,11 +122,11 @@
                             </span>
                         @endif
                         
-                        <div class="btn-group">
+                        <div class="d-flex gap-2 align-items-center">
                             <a href="{{ route('admin.coordenador.news.edit', $item) }}" 
                                class="btn btn-sm btn-outline-primary" 
                                title="Editar">
-                                <i class="bi bi-pencil-square"></i>
+                                <i class="bi bi-pencil-square me-1"></i>Editar
                             </a>
                             <form action="{{ route('admin.coordenador.news.destroy', $item) }}" 
                                   method="POST" 
@@ -135,7 +135,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="bi bi-trash me-1"></i>Excluir
                                 </button>
                             </form>
                         </div>

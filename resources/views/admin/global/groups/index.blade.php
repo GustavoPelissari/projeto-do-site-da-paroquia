@@ -73,15 +73,15 @@
                                         <span>Coord: {{ $group->coordinator_name }}</span>
                                     @endif
                                 </div>
-                                <div class="mt-auto d-flex justify-content-between align-items-center">
-                                    <div class="btn-group" role="group">
-                                        <a href="{{ route('admin.global.groups.show', $group) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                                        <a href="{{ route('admin.global.groups.edit', $group) }}" class="btn btn-sm btn-outline-success">Editar</a>
+                                <div class="mt-auto d-flex justify-content-between align-items-center gap-2">
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('admin.global.groups.show', $group) }}" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye me-1"></i>Ver</a>
+                                        <a href="{{ route('admin.global.groups.edit', $group) }}" class="btn btn-sm btn-outline-success"><i class="bi bi-pencil me-1"></i>Editar</a>
                                     </div>
                                     <form method="POST" action="{{ route('admin.global.groups.destroy', $group) }}" onsubmit="return confirm('Tem certeza que deseja excluir este grupo?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash me-1"></i>Excluir</button>
                                     </form>
                                 </div>
                             </div>

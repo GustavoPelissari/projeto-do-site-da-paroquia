@@ -112,21 +112,21 @@
                                     @endif
                                 </td>
                                 <td class="text-end">
-                                    <div class="btn-group btn-group-sm" role="group">
+                                    <div class="d-flex gap-2 justify-content-end">
                                         <a href="{{ route('admin.administrativo.events.show', $event) }}" 
-                                           class="btn btn-outline-primary" title="Ver">
-                                            <i class="bi bi-eye"></i>
+                                           class="btn btn-sm btn-outline-primary" title="Ver">
+                                            <i class="bi bi-eye me-1"></i>Ver
                                         </a>
                                         <a href="{{ route('admin.administrativo.events.edit', $event) }}" 
-                                           class="btn btn-outline-secondary" title="Editar">
-                                            <i class="bi bi-pencil"></i>
+                                           class="btn btn-sm btn-outline-secondary" title="Editar">
+                                            <i class="bi bi-pencil me-1"></i>Editar
                                         </a>
                                         <form method="POST" action="{{ route('admin.administrativo.events.destroy', $event) }}" 
                                               class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este evento?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger" title="Excluir">
-                                                <i class="bi bi-trash"></i>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
+                                                <i class="bi bi-trash me-1"></i>Excluir
                                             </button>
                                         </form>
                                     </div>

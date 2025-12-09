@@ -214,7 +214,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.masses.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.masses.index') }}">
-                                    <i class="bi bi-peace"></i> Missas
+                                    <i class="bi bi-clock"></i> Missas
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -268,7 +268,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.administrativo.masses.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.masses.index') }}">
-                                    <i class="bi bi-peace"></i> Missas
+                                    <i class="bi bi-clock"></i> Missas
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -295,7 +295,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('masses') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('masses') }}">
-                                    <i class="bi bi-calendar-week"></i> Missas
+                                    <i class="bi bi-clock"></i> Missas
                                 </a>
                             </li>
                             <li class="nav-item">
