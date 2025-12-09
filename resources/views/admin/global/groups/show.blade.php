@@ -18,8 +18,8 @@
             </div>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('admin.global.groups.edit', $group) }}" class="btn btn-primary">Editar</a>
-            <a href="{{ route('admin.global.groups.index') }}" class="btn btn-outline-secondary">Voltar</a>
+            <a href="{{ route('admin.global.groups.edit', $group) }}" class="btn btn-primary"><i class="bi bi-pencil me-2"></i>Editar</a>
+            <a href="{{ route('admin.global.groups.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-2"></i>Voltar</a>
         </div>
     </div>
 
@@ -82,11 +82,11 @@
                 <div class="card-body">
                     <h6 class="card-title mb-3">Ações</h6>
                     <div class="d-grid gap-2">
-                        <a href="{{ route('admin.global.groups.edit', $group) }}" class="btn btn-primary">✏️ Editar</a>
+                        <a href="{{ route('admin.global.groups.edit', $group) }}" class="btn btn-primary"><i class="bi bi-pencil me-2"></i>Editar</a>
                         <form method="POST" action="{{ route('admin.global.groups.destroy', $group) }}" onsubmit="return confirm('Tem certeza que deseja excluir este grupo? Esta ação não pode ser desfeita.')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">🗑️ Excluir</button>
+                            <button type="submit" class="btn btn-danger w-100"><i class="bi bi-trash me-2"></i>Excluir</button>
                         </form>
                     </div>
                 </div>

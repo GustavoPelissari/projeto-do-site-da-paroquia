@@ -101,7 +101,7 @@
                     <div class="display-6 text-muted mb-2">⛪</div>
                     <h2 class="h6">Nenhum horário encontrado</h2>
                     <p class="text-muted">Comece criando o primeiro horário de missa.</p>
-                    <a href="{{ route('admin.global.masses.create') }}" class="btn btn-primary">Criar Primeiro Horário</a>
+                    <a href="{{ route('admin.global.masses.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-2"></i>Novo Horário</a>
                 </div>
             @endif
         </div>

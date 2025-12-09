@@ -3,7 +3,7 @@
 @if($showOnMobile)
 <div class="back-button-container d-none d-sm-block">
     <button onclick="history.back()" class="btn btn-outline-danger btn-sm">
-        <i class="bi bi-chevron-left"></i> Voltar
+        <i class="bi bi-chevron-left me-2"></i>Voltar
     </button>
 </div>
 @endif

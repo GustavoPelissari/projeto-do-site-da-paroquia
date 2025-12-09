@@ -5,8 +5,8 @@
 @section('content')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="h4 mb-0">Cadastrar Grupo</h1>
-        <a href="{{ route('admin.global.groups.index') }}" class="btn btn-outline-secondary">Voltar</a>
+        <h1 class="h4 mb-0">Criar Novo Grupo</h1>
+        <a href="{{ route('admin.global.groups.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-2"></i>Voltar</a>
     </div>
 
     <!-- Bloco de Erros Padronizado -->
@@ -55,8 +55,8 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-end gap-2">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ route('admin.global.groups.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-2"></i>Salvar</button>
+            <a href="{{ route('admin.global.groups.index') }}" class="btn btn-outline-secondary"><i class="bi bi-x-circle me-2"></i>Cancelar</a>
         </div>
     </form>
 </div>

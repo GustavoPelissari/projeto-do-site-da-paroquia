@@ -6,7 +6,7 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4 mb-0">Gerenciar Grupos</h1>
-        <a href="{{ route('admin.global.groups.create') }}" class="btn btn-primary">Novo Grupo</a>
+        <a href="{{ route('admin.global.groups.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-2"></i>Novo Grupo</a>
     </div>
 
     @if(session('success'))
@@ -97,7 +97,7 @@
                     <div class="display-6 text-muted mb-2">👥</div>
                     <h2 class="h6">Nenhum grupo encontrado</h2>
                     <p class="text-muted">Comece criando seu primeiro grupo.</p>
-                    <a href="{{ route('admin.global.groups.create') }}" class="btn btn-primary">Criar Primeiro Grupo</a>
+                    <a href="{{ route('admin.global.groups.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-2"></i>Novo Grupo</a>
                 </div>
             @endif
         </div>

@@ -41,7 +41,7 @@
                     <label for="description" class="form-label fw-semibold"><i class="bi bi-text-paragraph"></i> Descrição (Opcional)</label>
                     <textarea id="description" name="description" class="form-control" rows="3" placeholder="Informações adicionais sobre a escala..."></textarea>
                 </div>
-                <div class="text-end"><button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cloud-upload"></i> Enviar Escala</button></div>
+                <div class="text-end"><button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cloud-upload me-2"></i>Enviar Escala</button></div>
             </form>
         </div>
     </div>

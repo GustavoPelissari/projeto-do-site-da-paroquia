@@ -106,11 +106,11 @@
         <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
             <div class="d-flex gap-2">
                 <a href="{{ route('admin.global.news.index') }}" class="btn btn-link">Cancelar</a>
-                <a href="{{ route('admin.global.news.show', $news) }}" class="btn btn-outline-secondary">Visualizar</a>
+                <a href="{{ route('admin.global.news.show', $news) }}" class="btn btn-outline-secondary"><i class="bi bi-eye me-2"></i>Visualizar</a>
             </div>
             <div class="d-flex gap-2">
-                <button type="submit" name="action" value="draft" class="btn btn-secondary">Salvar como Rascunho</button>
-                <button type="submit" name="action" value="publish" class="btn btn-primary">Atualizar e Publicar</button>
+                <button type="submit" name="action" value="draft" class="btn btn-secondary"><i class="bi bi-save me-2"></i>Salvar como Rascunho</button>
+                <button type="submit" name="action" value="publish" class="btn btn-primary"><i class="bi bi-send me-2"></i>Atualizar e Publicar</button>
             </div>
         </div>
     </form>

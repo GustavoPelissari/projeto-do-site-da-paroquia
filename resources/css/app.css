@@ -2525,3 +2525,42 @@ a.btn {
         margin-left: 0.5rem;
     }
 }
+/* ================================
+   PADRONIZAÇÃO DE BOTÕES - RESPONSIVIDADE
+================================ */
+/* Garantir espaçamento entre ícone e texto em todos os botões */
+.btn i.bi,
+.btn .bi {
+    line-height: 1;
+    vertical-align: middle;
+}
+
+/* Espaçamento padrão entre ícone e texto */
+.btn i.me-1 { margin-right: 0.25rem !important; }
+.btn i.me-2 { margin-right: 0.5rem !important; }
+.btn i.ms-1 { margin-left: 0.25rem !important; }
+.btn i.ms-2 { margin-left: 0.5rem !important; }
+
+/* Garantir que botões em flex containers tenham gap */
+.d-flex:has(.btn):not(.gap-1):not(.gap-2):not(.gap-3):not(.gap-4):not(.gap-5) {
+    gap: 0.5rem;
+}
+
+/* Botões em grupos de ação - melhorar responsividade */
+@media (max-width: 768px) {
+    /* Em mobile, botões ocupam largura total se estiverem empilhados */
+    .card-footer .d-flex {
+        flex-direction: column;
+    }
+    
+    .card-footer .btn {
+        width: 100%;
+    }
+    
+    /* Reduzir padding em botões grandes no mobile */
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+

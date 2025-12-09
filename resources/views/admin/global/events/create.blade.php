@@ -125,8 +125,8 @@
         <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
             <a href="{{ route('admin.global.events.index') }}" class="btn btn-link">Cancelar</a>
             <div class="d-flex gap-2">
-                <button type="submit" name="action" value="draft" class="btn btn-secondary">Salvar como Rascunho</button>
-                <button type="submit" name="action" value="publish" class="btn btn-success">Criar Evento</button>
+                <button type="submit" name="action" value="draft" class="btn btn-secondary"><i class="bi bi-save me-2"></i>Salvar como Rascunho</button>
+                <button type="submit" name="action" value="publish" class="btn btn-success"><i class="bi bi-send me-2"></i>Criar Evento</button>
             </div>
         </div>
     </form>

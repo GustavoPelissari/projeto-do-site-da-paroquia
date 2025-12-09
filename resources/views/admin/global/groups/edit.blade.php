@@ -98,8 +98,8 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-end gap-2">
-            <button type="submit" class="btn btn-primary">Salvar alterações</button>
-            <a href="{{ route('admin.global.groups.show', $group) }}" class="btn btn-outline-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-2"></i>Salvar Alterações</button>
+            <a href="{{ route('admin.global.groups.show', $group) }}" class="btn btn-outline-secondary"><i class="bi bi-x-circle me-2"></i>Cancelar</a>
         </div>
     </form>
 </div>
