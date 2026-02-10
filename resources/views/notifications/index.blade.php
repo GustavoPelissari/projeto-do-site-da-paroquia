@@ -7,7 +7,7 @@
     <section class="section-paroquia">
         <div class="section-header d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h1><i class="bi bi-bell me-2"></i> Minhas Notificações</h1>
+                <h1><i class="bi bi-bell me-2" aria-hidden="true"></i> Minhas Notificações</h1>
                 <p class="lead mb-0">Acompanhe atualizações de notícias, eventos, escalas e solicitações</p>
             </div>
             @if($unreadCount > 0)
@@ -16,7 +16,7 @@
                 </span>
             @else
                 <span class="badge bg-success fs-6 px-3 py-2">
-                    <i class="bi bi-check-circle me-1"></i> Tudo em dia!
+                    <i class="bi bi-check-circle me-1" aria-hidden="true"></i> Tudo em dia!
                 </span>
             @endif
         </div>
@@ -40,14 +40,14 @@
                         <div>
                             <h5 class="mb-1" style="color: var(--brand-vinho);">{{ $n->title }}</h5>
                             <p class="text-muted mb-1 small">{{ $n->message }}</p>
-                            <p class="text-muted small mb-0"><i class="bi bi-clock me-1"></i>{{ $n->created_at->diffForHumans() }}</p>
+                            <p class="text-muted small mb-0"><i class="bi bi-clock me-1" aria-hidden="true"></i>{{ $n->created_at->diffForHumans() }}</p>
                         </div>
                     </div>
                     @if(!$n->read_at)
                         <form action="{{ route('notifications.read', $n) }}" method="POST">
                             @csrf
                             <button class="btn btn-sm btn-outline-secondary" style="border-color: var(--brand-vinho); color: var(--brand-vinho);">
-                                <i class="bi bi-check2-circle me-1"></i> Marcar como lida
+                                <i class="bi bi-check2-circle me-1" aria-hidden="true"></i> Marcar como lida
                             </button>
                         </form>
                     @else
@@ -58,7 +58,7 @@
         @empty
             <div class="card-paroquia text-center">
                 <div class="card-body py-5">
-                    <div class="mb-3" style="font-size: 3rem; color: #9ca3af;"><i class="bi bi-bell"></i></div>
+                    <div class="mb-3" style="font-size: 3rem; color: #9ca3af;"><i class="bi bi-bell" aria-hidden="true"></i></div>
                     <h3 class="h4 mb-2">Nenhuma notificação</h3>
                     <p class="text-muted mb-0">Você verá aqui todas as novidades e atualizações do sistema.</p>
                 </div>

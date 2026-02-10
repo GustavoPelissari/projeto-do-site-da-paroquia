@@ -10,18 +10,18 @@
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <h1 class="h3 h2-md fw-bold mb-2">
-                        <i class="bi bi-house-heart-fill me-2"></i>Bem-vindo, {{ $user->name }}!
+                        <i class="bi bi-house-heart-fill me-2" aria-hidden="true"></i>Bem-vindo, {{ $user->name }}!
                     </h1>
                     <p class="mb-2 opacity-90 small d-none d-md-block" style="font-size: 1.1rem;">
                         Acompanhe as novidades e eventos da Paróquia São Paulo Apóstolo
                     </p>
                     @if($user->email_verified_at)
                         <small class="opacity-75">
-                            <i class="bi bi-check-circle-fill me-1"></i> E-mail verificado
+                            <i class="bi bi-check-circle-fill me-1" aria-hidden="true"></i> E-mail verificado
                         </small>
                     @else
                         <small class="bg-warning text-dark px-2 py-1 rounded">
-                            <i class="bi bi-exclamation-triangle me-1"></i> E-mail não verificado
+                            <i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i> E-mail não verificado
                         </small>
                     @endif
                 </div>
@@ -49,7 +49,7 @@
                 <div class="card border-0 shadow-sm h-100 hover-card">
                     <div class="card-body text-center p-2 p-md-3">
                         <div class="text-primary mb-1 mb-md-2">
-                            <i class="bi bi-newspaper" style="font-size: 2rem;"></i>
+                            <i class="bi bi-newspaper" style="font-size: 2rem;" aria-hidden="true"></i>
                         </div>
                         <h4 class="mb-0 fw-bold h5">{{ $recentNews->count() }}</h4>
                         <small class="text-muted" style="font-size: 0.7rem;">Notícias</small>
@@ -62,7 +62,7 @@
                 <div class="card border-0 shadow-sm h-100 hover-card">
                     <div class="card-body text-center p-2 p-md-3">
                         <div class="text-success mb-1 mb-md-2">
-                            <i class="bi bi-calendar-event" style="font-size: 2rem;"></i>
+                            <i class="bi bi-calendar-event" style="font-size: 2rem;" aria-hidden="true"></i>
                         </div>
                         <h4 class="mb-0 fw-bold h5">{{ $upcomingEvents->count() }}</h4>
                         <small class="text-muted" style="font-size: 0.7rem;">Eventos</small>
@@ -75,7 +75,7 @@
                 <div class="card border-0 shadow-sm h-100 hover-card">
                     <div class="card-body text-center p-2 p-md-3">
                         <div class="text-warning mb-1 mb-md-2">
-                            <i class="bi bi-clock" style="font-size: 2rem;"></i>
+                            <i class="bi bi-clock" style="font-size: 2rem;" aria-hidden="true"></i>
                         </div>
                         <h4 class="mb-0 fw-bold h5">{{ $masses->count() }}</h4>
                         <small class="text-muted" style="font-size: 0.7rem;">Missas</small>
@@ -88,7 +88,7 @@
                 <div class="card border-0 shadow-sm h-100 hover-card">
                     <div class="card-body text-center p-2 p-md-3">
                         <div class="text-info mb-1 mb-md-2">
-                            <i class="bi bi-people" style="font-size: 2rem;"></i>
+                            <i class="bi bi-people" style="font-size: 2rem;" aria-hidden="true"></i>
                         </div>
                         <h4 class="mb-0 fw-bold h5">{{ $totalGroups }}</h4>
                         <small class="text-muted" style="font-size: 0.7rem;">Pastorais</small>
@@ -107,10 +107,10 @@
                     <div class="card-header bg-white border-0 py-3">
                         <div class="d-flex align-items-center justify-content-between">
                             <h5 class="mb-0">
-                                <i class="bi bi-calendar3 text-success"></i> Escalas dos Coroinhas
+                                <i class="bi bi-calendar3 text-success" aria-hidden="true"></i> Escalas dos Coroinhas
                             </h5>
                             <a href="{{ route('user.scales.index') }}" class="btn btn-sm btn-outline-success">
-                                Ver Todas <i class="bi bi-arrow-right"></i>
+                                Ver Todas <i class="bi bi-arrow-right" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                             <div class="d-flex mb-3 pb-3 {{ !$loop->last ? 'border-bottom' : '' }}">
                                 <div class="bg-success bg-opacity-10 rounded me-3 d-flex align-items-center justify-content-center"
                                      style="width: 60px; height: 60px; min-width: 60px;">
-                                    <i class="bi bi-file-earmark-pdf text-danger" style="font-size: 2rem;"></i>
+                                    <i class="bi bi-file-earmark-pdf text-danger" style="font-size: 2rem;" aria-hidden="true"></i>
                                 </div>
                                 <div class="flex-grow-1">
                                     <h6 class="mb-1">{{ $scale->title }}</h6>

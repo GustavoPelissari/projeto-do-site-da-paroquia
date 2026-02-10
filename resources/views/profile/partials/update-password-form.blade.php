@@ -45,12 +45,12 @@
 
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">
-                <i class="bi bi-shield-check me-1"></i> Atualizar Senha
+                <i class="bi bi-shield-check me-1" aria-hidden="true"></i> Atualizar Senha
             </button>
 
             @if (session('status') === 'password-updated')
                 <div class="alert alert-success mt-3 mb-0">
-                    <i class="bi bi-check-circle-fill me-2"></i>Senha atualizada com sucesso!
+                    <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>Senha atualizada com sucesso!
                 </div>
             @endif
         </div>

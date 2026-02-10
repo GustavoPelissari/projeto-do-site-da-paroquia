@@ -24,7 +24,7 @@
             <!-- Informações do Perfil -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white">
-                    <strong><i class="bi bi-person-fill me-2"></i>Informações do Perfil</strong>
+                    <strong><i class="bi bi-person-fill me-2" aria-hidden="true"></i>Informações do Perfil</strong>
                 </div>
                 <div class="card-body">
                     @include('profile.partials.update-profile-information-form')
@@ -34,7 +34,7 @@
             <!-- Segurança -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-white">
-                    <strong><i class="bi bi-shield-lock-fill me-2"></i>Segurança da Conta</strong>
+                    <strong><i class="bi bi-shield-lock-fill me-2" aria-hidden="true"></i>Segurança da Conta</strong>
                 </div>
                 <div class="card-body">
                     @include('profile.partials.update-password-form')
@@ -44,7 +44,7 @@
             <!-- Zona de Perigo -->
             <div class="card shadow-sm border-danger mb-4">
                 <div class="card-header bg-white text-danger">
-                    <strong><i class="bi bi-exclamation-triangle-fill me-2"></i>Zona de Perigo</strong>
+                    <strong><i class="bi bi-exclamation-triangle-fill me-2" aria-hidden="true"></i>Zona de Perigo</strong>
                 </div>
                 <div class="card-body">
                     @include('profile.partials.delete-user-form')
@@ -72,7 +72,7 @@
                     <p class="text-muted small mb-3">{{ Auth::user()->email }}</p>
                     
                     <span class="badge bg-vinho px-3 py-2 mb-3">
-                        <i class="bi bi-shield-check me-1"></i>
+                        <i class="bi bi-shield-check me-1" aria-hidden="true"></i>
                         {{ match(Auth::user()->role->value) {
                             'admin_global' => 'Admin Global',
                             'coordenador_de_pastoral' => 'Coordenador',
@@ -87,14 +87,14 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="text-muted small">Status do E-mail</span>
                             @if(Auth::user()->hasVerifiedEmail())
-                                <span class="badge bg-success"><i class="bi bi-check-circle-fill"></i> Verificado</span>
+                                <span class="badge bg-success"><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Verificado</span>
                             @else
-                                <span class="badge bg-warning text-dark"><i class="bi bi-exclamation-circle-fill"></i> Não Verificado</span>
+                                <span class="badge bg-warning text-dark"><i class="bi bi-exclamation-circle-fill" aria-hidden="true"></i> Não Verificado</span>
                             @endif
                         </div>
                         
                         <div class="d-flex align-items-start mb-2">
-                            <i class="bi bi-calendar-event text-brand-vinho me-2 mt-1"></i>
+                            <i class="bi bi-calendar-event text-brand-vinho me-2 mt-1" aria-hidden="true"></i>
                             <div class="small">
                                 <div class="text-muted">Membro desde</div>
                                 <div class="fw-semibold">{{ Auth::user()->created_at->format('d/m/Y') }}</div>
@@ -102,7 +102,7 @@
                         </div>
                         
                         <div class="d-flex align-items-start">
-                            <i class="bi bi-clock text-brand-vinho me-2 mt-1"></i>
+                            <i class="bi bi-clock text-brand-vinho me-2 mt-1" aria-hidden="true"></i>
                             <div class="small">
                                 <div class="text-muted">Último acesso</div>
                                 <div class="fw-semibold">{{ Auth::user()->updated_at->diffForHumans() }}</div>

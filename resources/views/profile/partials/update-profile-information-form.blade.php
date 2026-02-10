@@ -89,12 +89,12 @@
 
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">
-                <i class="bi bi-save me-1"></i> Salvar Alterações
+                <i class="bi bi-save me-1" aria-hidden="true"></i> Salvar Alterações
             </button>
 
             @if (session('status') === 'profile-updated')
                 <div class="alert alert-success mt-3 mb-0">
-                    <i class="bi bi-check-circle-fill me-2"></i>Perfil atualizado com sucesso!
+                    <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>Perfil atualizado com sucesso!
                 </div>
             @endif
         </div>

@@ -10,14 +10,14 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <h1 class="display-6 fw-bold mb-2" style="color: #FFFFFF;">
-                        <i class="bi bi-calendar3 me-2"></i>Escalas dos Coroinhas
+                        <i class="bi bi-calendar3 me-2" aria-hidden="true"></i>Escalas dos Coroinhas
                     </h1>
                     <p class="mb-0" style="color: #FFD66B; font-size: 1.1rem;">
                         Confira as escalas de atividades do grupo
                     </p>
                 </div>
                 <div class="text-end">
-                    <i class="bi bi-file-earmark-pdf" style="font-size: 4rem; color: #FFD66B; opacity: 0.8;"></i>
+                    <i class="bi bi-file-earmark-pdf" style="font-size: 4rem; color: #FFD66B; opacity: 0.8;" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
@@ -67,12 +67,12 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <i class="bi bi-file-earmark-pdf text-danger"></i>
+                                        <i class="bi bi-file-earmark-pdf text-danger" aria-hidden="true"></i>
                                         <small class="text-muted">{{ $scale->file_name }}</small>
                                     </td>
                                     <td>
                                         <small class="text-muted">
-                                            <i class="bi bi-calendar-range"></i>
+                                            <i class="bi bi-calendar-range" aria-hidden="true"></i>
                                             {{ $scale->valid_from->format('d/m/Y') }}
                                             até
                                             {{ $scale->valid_until->format('d/m/Y') }}
@@ -93,7 +93,7 @@
                                         <small class="text-muted">
                                             {{ $scale->uploader->name ?? 'N/A' }}
                                             <br>
-                                            <i class="bi bi-clock"></i> {{ $scale->created_at->diffForHumans() }}
+                                            <i class="bi bi-clock" aria-hidden="true"></i> {{ $scale->created_at->diffForHumans() }}
                                         </small>
                                     </td>
                                     <td class="text-center">
@@ -101,12 +101,12 @@
                                                 class="btn btn-sm btn-success me-1" 
                                                 onclick="viewPDF('{{ asset('storage/' . $scale->file_path) }}', '{{ $scale->title }}')"
                                                 title="Visualizar PDF">
-                                            <i class="bi bi-eye"></i> Visualizar
+                                            <i class="bi bi-eye" aria-hidden="true"></i> Visualizar
                                         </button>
                                         <a href="{{ route('user.scales.download', $scale) }}" 
                                            class="btn btn-sm btn-primary" 
                                            title="Baixar PDF">
-                                            <i class="bi bi-download"></i> Baixar
+                                            <i class="bi bi-download" aria-hidden="true"></i> Baixar
                                         </a>
                                     </td>
                                 </tr>
@@ -124,7 +124,7 @@
             @else
                 <!-- Empty State -->
                 <div class="text-center py-5">
-                    <i class="bi bi-calendar-x" style="font-size: 4rem; color: #ddd;"></i>
+                    <i class="bi bi-calendar-x" style="font-size: 4rem; color: #ddd;" aria-hidden="true"></i>
                     <h4 class="mt-3 text-muted">Nenhuma escala disponível</h4>
                     <p class="text-muted mb-0">As escalas do grupo serão exibidas aqui quando forem cadastradas.</p>
                 </div>
@@ -139,7 +139,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title" id="pdfViewerModalLabel">
-                    <i class="bi bi-file-earmark-pdf me-2"></i>
+                    <i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>
                     <span id="pdfTitle">Visualizar Escala</span>
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
@@ -152,7 +152,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle"></i> Fechar
+                    <i class="bi bi-x-circle" aria-hidden="true"></i> Fechar
                 </button>
             </div>
         </div>

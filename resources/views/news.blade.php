@@ -35,11 +35,11 @@
                         
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3" style="font-size: 0.85rem; color: #888;">
-                                <i class="bi bi-calendar3 me-2"></i>
+                                <i class="bi bi-calendar3 me-2" aria-hidden="true"></i>
                                 <span>{{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}</span>
                                 @if($item->parishGroup)
                                     <span class="badge bg-success ms-auto">
-                                        <i class="bi bi-people me-1"></i>{{ $item->parishGroup->name }}
+                                        <i class="bi bi-people me-1" aria-hidden="true"></i>{{ $item->parishGroup->name }}
                                     </span>
                                 @endif
                             </div>
@@ -54,10 +54,10 @@
                             
                             <div class="mt-auto pt-3 d-flex gap-2">
                                 <a href="{{ route('news.show', $item) }}" class="btn btn-success flex-fill">
-                                    <i class="bi bi-book-half me-2"></i>Ler Completa
+                                    <i class="bi bi-book-half me-2" aria-hidden="true"></i>Ler Completa
                                 </a>
                                 <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">
-                                    <i class="bi bi-info-circle"></i>
+                                    <i class="bi bi-info-circle" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
@@ -78,11 +78,11 @@
                                 @endif
                                 
                                 <div class="d-flex align-items-center mb-3 text-muted">
-                                    <i class="bi bi-calendar3 me-2"></i>
+                                    <i class="bi bi-calendar3 me-2" aria-hidden="true"></i>
                                     <small>{{ $item->published_at ? $item->published_at->format('d/m/Y \à\s H:i') : $item->created_at->format('d/m/Y \à\s H:i') }}</small>
                                     @if($item->parishGroup)
                                         <span class="badge bg-success ms-auto">
-                                            <i class="bi bi-people"></i> {{ $item->parishGroup->name }}
+                                            <i class="bi bi-people" aria-hidden="true"></i> {{ $item->parishGroup->name }}
                                         </span>
                                     @endif
                                 </div>
@@ -113,7 +113,7 @@
                 <div class="col-12">
                     <div class="card-paroquia text-center py-5">
                         <div class="card-body">
-                            <i class="bi bi-newspaper icon-lg mb-4" style="font-size: 4rem; opacity: 0.5;"></i>
+                            <i class="bi bi-newspaper icon-lg mb-4" style="font-size: 4rem; opacity: 0.5;" aria-hidden="true"></i>
                             <h3 class="text-vermelho mb-3">Nenhuma notícia disponível</h3>
                             <p class="text-muted">Ainda não há notícias publicadas. Volte em breve para conferir as novidades da nossa paróquia!</p>
                         </div>
@@ -131,7 +131,7 @@
             <div class="col-lg-8 text-center">
                 <div class="card-paroquia p-5">
                     <h3 class="text-vermelho mb-3">
-                        <i class="bi bi-bell me-2"></i>
+                        <i class="bi bi-bell me-2" aria-hidden="true"></i>
                         Mantenha-se Conectado
                     </h3>
                     <p class="mb-4">
@@ -139,10 +139,10 @@
                     </p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
                         <a href="{{ route('groups') }}" class="btn btn-success">
-                            <i class="bi bi-people me-1"></i>Conhecer Pastorais
+                            <i class="bi bi-people me-1" aria-hidden="true"></i>Conhecer Pastorais
                         </a>
                         <a href="{{ route('events') }}" class="btn btn-warning">
-                            <i class="bi bi-calendar-event me-1"></i>Ver Eventos
+                            <i class="bi bi-calendar-event me-1" aria-hidden="true"></i>Ver Eventos
                         </a>
                     </div>
                 </div>

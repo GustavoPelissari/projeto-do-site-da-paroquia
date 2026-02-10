@@ -289,3 +289,47 @@ document.addEventListener('DOMContentLoaded', atualizarProximaMissa);
 
 // Atualizar a cada minuto
 setInterval(atualizarProximaMissa, 60000);
+
+// ==========================================
+// GERENCIAMENTO DE FOCO EM MODAIS
+// ==========================================
+
+// Armazenar elemento que abriu o modal
+let elementoQueAbriuModal = null;
+
+// Monitorar todos os modais
+document.querySelectorAll('.modal').forEach(modalElement => {
+    modalElement.addEventListener('show.bs.modal', function() {
+        // Armazenar elemento que disparou o evento
+        elementoQueAbriuModal = document.activeElement;
+        
+        // Focar no primeiro elemento interativo do modal após ser mostrado
+        setTimeout(() => {
+            const primeiroElemento = this.querySelector('button, [href], input, select, textarea');
+            if (primeiroElemento) {
+                primeiroElemento.focus();
+            }
+        }, 100);
+    });
+    
+    modalElement.addEventListener('hidden.bs.modal', function() {
+        // Devolver foco ao elemento que abriu o modal
+        if (elementoQueAbriuModal) {
+            elementoQueAbriuModal.focus();
+            elementoQueAbriuModal = null;
+        }
+    });
+});
+
+// Fechar modal ao pressionar ESC (já é funcionalidade padrão do Bootstrap)
+// Apenas garantir que está configurado
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const bsModal = bootstrap.Modal.getInstance(this);
+            if (bsModal) {
+                bsModal.hide();
+            }
+        }
+    });
+});

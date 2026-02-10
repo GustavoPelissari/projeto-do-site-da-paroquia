@@ -88,15 +88,6 @@ Route::get('/sitemap.xml', function() {
         ->header('Content-Type', 'application/xml');
 });
 
-// Rota de teste (protegida para não aparecer em produção)
-Route::get('/news-test', function() {
-    if (!app()->environment('local')) {
-        abort(404);
-    }
-    $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
-    return view('news-test', compact('news'));
-});
-
 // Group requests routes (require email verification)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/group-requests/create', [GroupRequestController::class, 'create'])->name('group-requests.create');

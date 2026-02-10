@@ -4,7 +4,7 @@
     </p>
 
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeletionModal">
-        <i class="bi bi-trash"></i> Excluir Conta
+        <i class="bi bi-trash" aria-hidden="true"></i> Excluir Conta
     </button>
 
     <!-- Modal -->
@@ -17,7 +17,7 @@
 
                     <div class="modal-header bg-danger text-white">
                         <h5 class="modal-title" id="confirmDeletionModalLabel">
-                            <i class="bi bi-exclamation-triangle"></i> Tem certeza?
+                            <i class="bi bi-exclamation-triangle" aria-hidden="true"></i> Tem certeza?
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -45,7 +45,7 @@
                             Cancelar
                         </button>
                         <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-trash"></i> Excluir Conta
+                            <i class="bi bi-trash" aria-hidden="true"></i> Excluir Conta
                         </button>
                     </div>
                 </form>

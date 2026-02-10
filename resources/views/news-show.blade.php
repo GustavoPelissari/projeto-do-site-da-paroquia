@@ -71,20 +71,20 @@
                         <!-- Metadados -->
                         <div class="d-flex flex-wrap gap-3 mb-4 pb-3 border-bottom text-muted">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-calendar3 me-2"></i>
+                                <i class="bi bi-calendar3 me-2" aria-hidden="true"></i>
                                 <span>{{ $news->published_at ? $news->published_at->format('d/m/Y') : $news->created_at->format('d/m/Y') }}</span>
                             </div>
                             
                             @if($news->author)
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-person me-2"></i>
+                                    <i class="bi bi-person me-2" aria-hidden="true"></i>
                                     <span>{{ $news->author->name }}</span>
                                 </div>
                             @endif
                             
                             @if($news->parishGroup)
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-people me-2"></i>
+                                    <i class="bi bi-people me-2" aria-hidden="true"></i>
                                     <span>{{ $news->parishGroup->name }}</span>
                                 </div>
                             @endif
@@ -92,7 +92,7 @@
                             @if($news->featured)
                                 <div class="ms-auto">
                                     <span class="badge bg-warning text-dark">
-                                        <i class="bi bi-star-fill me-1"></i>Destaque
+                                        <i class="bi bi-star-fill me-1" aria-hidden="true"></i>Destaque
                                     </span>
                                 </div>
                             @endif
@@ -113,7 +113,7 @@
                         <!-- Botões de ação -->
                         <div class="mt-5 pt-4 border-top d-flex flex-column flex-sm-row gap-2 justify-content-between align-items-center">
                             <a href="{{ route('news') }}" class="btn btn-outline-success">
-                                <i class="bi bi-arrow-left me-2"></i>Voltar para Notícias
+                                <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Voltar para Notícias
                             </a>
                             
                             <div class="d-flex gap-2">
@@ -122,7 +122,7 @@
                                    target="_blank"
                                    class="btn btn-success"
                                    title="Compartilhar no WhatsApp">
-                                    <i class="bi bi-whatsapp me-1"></i>Compartilhar
+                                    <i class="bi bi-whatsapp me-1" aria-hidden="true"></i>Compartilhar
                                 </a>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                                     <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 180px; object-fit: cover;" loading="lazy">
                                                 @else
                                                     <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
-                                                        <i class="bi bi-image text-muted" style="font-size: 2.5rem;"></i>
+                                                        <i class="bi bi-image text-muted" style="font-size: 2.5rem;" aria-hidden="true"></i>
                                                     </div>
                                                 @endif
                                                 <div class="card-body d-flex flex-column p-3">
@@ -160,11 +160,11 @@
                                                         </a>
                                                     </h6>
                                                     <small class="text-muted d-block mb-3" style="font-size: 0.8rem;">
-                                                        <i class="bi bi-calendar3 me-1"></i>
+                                                        <i class="bi bi-calendar3 me-1" aria-hidden="true"></i>
                                                         {{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}
                                                     </small>
                                                     <a href="{{ route('news.show', $item) }}" class="btn btn-sm btn-outline-success mt-auto">
-                                                        Ler mais <i class="bi bi-arrow-right ms-1"></i>
+                                                        Ler mais <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
                                             </div>

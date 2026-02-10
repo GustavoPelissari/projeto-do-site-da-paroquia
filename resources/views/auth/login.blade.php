@@ -9,7 +9,7 @@
             <div class="card shadow-lg border-0">
                 <div class="card-body p-5">
                     <div class="text-center mb-4">
-                        <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo" class="mb-3" style="height: 60px;">
+                        <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo" class="mb-3" style="height: 60px;" loading="lazy">
                         <h2 class="h4 text-brand-vinho mb-2">Entrar na Paróquia</h2>
                         <p class="text-muted">Acesse sua conta para participar da nossa comunidade</p>
                     </div>
