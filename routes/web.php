@@ -30,8 +30,69 @@ Route::get('/news', [HomeController::class, 'news'])->name('news');
 Route::get('/news/{news}', [HomeController::class, 'showNews'])->name('news.show');
 Route::get('/sobre', [HomeController::class, 'about'])->name('about');
 
-// Rota de teste (pode remover em produção)
+// Sitemap XML (SEO)
+Route::get('/sitemap.xml', function() {
+    $baseUrl = url('/');
+    $sitemap = '<?xml version="1.0" encoding="UTF-8"?>';
+    $sitemap .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    
+    // Main pages
+    $pages = [
+        ['url' => '/', 'priority' => '1.0', 'changefreq' => 'daily'],
+        ['url' => '/groups', 'priority' => '0.9', 'changefreq' => 'weekly'],
+        ['url' => '/masses', 'priority' => '0.9', 'changefreq' => 'weekly'],
+        ['url' => '/events', 'priority' => '0.9', 'changefreq' => 'daily'],
+        ['url' => '/news', 'priority' => '0.9', 'changefreq' => 'daily'],
+        ['url' => '/sobre', 'priority' => '0.8', 'changefreq' => 'monthly'],
+    ];
+    
+    foreach ($pages as $page) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . $baseUrl . $page['url'] . '</loc>';
+        $sitemap .= '<changefreq>' . $page['changefreq'] . '</changefreq>';
+        $sitemap .= '<priority>' . $page['priority'] . '</priority>';
+        $sitemap .= '</url>';
+    }
+    
+    // Dynamic events
+    $events = \App\Models\Event::where('status', 'published')
+        ->where('date', '>=', now())
+        ->orderBy('date', 'asc')
+        ->get();
+    foreach ($events as $event) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . route('events.show', $event) . '</loc>';
+        $sitemap .= '<lastmod>' . $event->updated_at->toAtomString() . '</lastmod>';
+        $sitemap .= '<changefreq>weekly</changefreq>';
+        $sitemap .= '<priority>0.7</priority>';
+        $sitemap .= '</url>';
+    }
+    
+    // Dynamic news
+    $news = \App\Models\News::where('status', 'published')
+        ->latest('published_at')
+        ->limit(50)
+        ->get();
+    foreach ($news as $item) {
+        $sitemap .= '<url>';
+        $sitemap .= '<loc>' . route('news.show', $item) . '</loc>';
+        $sitemap .= '<lastmod>' . $item->updated_at->toAtomString() . '</lastmod>';
+        $sitemap .= '<changefreq>monthly</changefreq>';
+        $sitemap .= '<priority>0.6</priority>';
+        $sitemap .= '</url>';
+    }
+    
+    $sitemap .= '</urlset>';
+    
+    return response($sitemap, 200)
+        ->header('Content-Type', 'application/xml');
+});
+
+// Rota de teste (protegida para não aparecer em produção)
 Route::get('/news-test', function() {
+    if (!app()->environment('local')) {
+        abort(404);
+    }
     $news = \App\Models\News::where('status', 'published')->latest('published_at')->paginate(12);
     return view('news-test', compact('news'));
 });

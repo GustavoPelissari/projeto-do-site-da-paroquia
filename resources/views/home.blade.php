@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title', 'Paróquia São Paulo Apóstolo - Diocese de Umuarama')
+@section('meta_description', 'Bem-vindo à Paróquia São Paulo Apóstolo em Umuarama. Confira nossa agenda de missas, eventos, grupos paroquiais e notícias da comunidade católica.')
 
 @push('styles')
 <style>

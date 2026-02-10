@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title', 'Horários de Missas - Paróquia São Paulo Apóstolo')
+@section('meta_description', 'Confira os horários das missas e celebrações eucarísticas na Paróquia São Paulo Apóstolo em Umuarama. Venha fortalecer sua fé em comunidade.')
 
 @section('content')
 <!-- Hero Section -->

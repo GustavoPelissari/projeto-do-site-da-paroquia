@@ -20,18 +20,15 @@
     <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ url()->current() }}">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <!-- Vite Assets -->
+    <!-- Vite Assets (includes Bootstrap CSS and JS) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <style>
@@ -694,9 +691,6 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-    
     @stack('scripts')
 </body>
 </html>

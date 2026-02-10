@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title', 'Sobre a Paróquia - Paróquia São Paulo Apóstolo')
+@section('meta_description', 'Conheça a história, missão e valores da Paróquia São Paulo Apóstolo em Umuarama. Saiba mais sobre nossa comunidade católica e pastoral paroquial.')
 
 @section('content')
 <!-- Hero Section -->

@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title', 'Pastorais e Movimentos - Paróquia São Paulo Apóstolo')
+@section('meta_description', 'Conheça as pastorais e movimentos da Paróquia São Paulo Apóstolo. Encontre seu lugar na comunidade e participe das atividades dos grupos paroquiais.')
 
 @section('content')
 <!-- Hero Section -->

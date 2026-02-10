@@ -18,11 +18,10 @@
     <meta name="twitter:image" content="{{ asset('images/sao-paulo-logo.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/sao-paulo-logo.png') }}">
+    <link rel="canonical" href="{{ url()->current() }}">
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -44,7 +43,5 @@
     <main id="main-content" tabindex="-1" class="min-vh-100 py-4">
         @yield('content')
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>

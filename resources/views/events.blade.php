@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title', 'Eventos - Paróquia São Paulo Apóstolo')
+@section('meta_description', 'Confira a agenda de eventos e atividades da Paróquia São Paulo Apóstolo. Participe das celebrações e encontros da nossa comunidade de fé.')
 
 @section('content')
 <!-- Hero Section -->
@@ -25,7 +26,7 @@
                 <div class="col-lg-6 col-xl-4">
                     <div class="card-paroquia h-100">
                         @if($event->image)
-                            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top" style="height: 200px; object-fit: cover;" loading="lazy">
                         @else
                             <x-card.placeholder height="200px" bg="linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%)" icon="bi bi-calendar-event" iconClass="text-white" />
                         @endif
@@ -70,7 +71,7 @@
                 </div>
                 
                 <!-- Modal para evento completo -->
-                <div class="modal fade" id="eventModal{{ $event->id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->id }}" aria-hidden="true">
+                <div class="modal fade" id="eventModal{{ $event->id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->id }}" aria-hidden="true" aria-modal="true" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">

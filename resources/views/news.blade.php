@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('title', 'Notícias - Paróquia São Paulo Apóstolo')
+@section('meta_description', 'Acompanhe as últimas notícias e acontecimentos da Paróquia São Paulo Apóstolo. Fique por dentro de tudo que acontece em nossa comunidade católica.')
 
 @section('content')
 <!-- Hero Section -->
@@ -64,7 +65,7 @@
                 </div>
                 
                 <!-- Modal para notícia completa -->
-                <div class="modal fade" id="newsModal{{ $item->id }}" tabindex="-1" aria-labelledby="newsModalLabel{{ $item->id }}" aria-hidden="true">
+                <div class="modal fade" id="newsModal{{ $item->id }}" tabindex="-1" aria-labelledby="newsModalLabel{{ $item->id }}" aria-hidden="true" aria-modal="true" role="dialog">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">

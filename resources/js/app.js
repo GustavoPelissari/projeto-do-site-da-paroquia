@@ -1,5 +1,11 @@
 import './bootstrap';
 
+// Import Bootstrap JavaScript
+import * as bootstrap from 'bootstrap';
+
+// Make Bootstrap available globally for blade templates
+window.bootstrap = bootstrap;
+
 // ==========================================
 // FUNCIONALIDADES INTERATIVAS DA PARÓQUIA
 // ==========================================
