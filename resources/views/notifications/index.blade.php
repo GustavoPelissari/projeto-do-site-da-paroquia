@@ -35,7 +35,7 @@
                                 elseif ($n->type === 'scale_published') $icon = 'bi-file-earmark-pdf';
                                 elseif ($n->type === 'group_request_status_changed') $icon = 'bi-clipboard-check';
                             @endphp
-                            <i class="bi {{ $icon }}" style="color: var(--brand-vinho) !important;"></i>
+                            <i class="bi {{ $icon }}" style="color: var(--brand-vinho) !important;" aria-hidden="true"></i>
                         </div>
                         <div>
                             <h5 class="mb-1" style="color: var(--brand-vinho);">{{ $n->title }}</h5>
