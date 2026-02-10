@@ -99,7 +99,9 @@
                                     <td class="text-center">
                                         <button type="button" 
                                                 class="btn btn-sm btn-success me-1" 
-                                                onclick="viewPDF('{{ asset('storage/' . $scale->file_path) }}', '{{ addslashes($scale->title) }}')"
+                                                data-pdf-url="{{ asset('storage/' . $scale->file_path) }}"
+                                                data-pdf-title="{{ $scale->title }}"
+                                                onclick="viewPDF(this.getAttribute('data-pdf-url'), this.getAttribute('data-pdf-title'))"
                                                 title="Visualizar PDF">
                                             <i class="bi bi-eye" aria-hidden="true"></i> Visualizar
                                         </button>
