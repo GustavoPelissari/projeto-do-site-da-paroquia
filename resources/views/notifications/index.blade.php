@@ -24,7 +24,13 @@
 
     <section class="section-paroquia">
         @forelse($notifications as $n)
-            <div class="card-paroquia mb-3 {{ $n->read_at ? '' : 'border border-2' }}" style="border-color: {{ $n->read_at ? 'transparent' : 'var(--dourado-suave)' }};">
+            @php
+                $borderColor = $n->read_at ? 'transparent' : 'var(--dourado-suave)';
+            @endphp
+            <div class="card-paroquia mb-3"
+                 data-border-color="{{ $borderColor }}"
+                 @class(['border', 'border-2' => !$n->read_at])
+                 style="border-color: {{ $borderColor }};">
                 <div class="card-body d-flex justify-content-between align-items-start">
                     <div class="d-flex align-items-start">
                         <div class="rounded-circle circle-center me-3" style="width: 40px; height: 40px; background: var(--bg-rose);">
