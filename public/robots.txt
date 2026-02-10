@@ -1,2 +1,5 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://example.com/sitemap.xml
+# TODO: substitua pelo domínio real ao publicar

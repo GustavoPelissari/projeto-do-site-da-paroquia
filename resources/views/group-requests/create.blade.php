@@ -45,11 +45,14 @@
     @if ($errors->any())
         <x-alert type="error">
             <strong>Atenção!</strong> Corrija os erros abaixo:
-            <ul class="mt-2 mb-0 list-disc list-inside text-sm">
+                <ul class="mt-2 mb-0 ps-3 small">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
+                            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true" style="font-size: 24px; color: white;"></i>
+                                <i class="bi bi-envelope-x me-1" aria-hidden="true"></i> E-mail não verificado
+                                    <i class="bi bi-envelope-check me-1" aria-hidden="true"></i> Enviar E-mail de Verificação
         </x-alert>
     @endif
 
@@ -60,6 +63,7 @@
                 <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
                      style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center;">
                     <i class="bi bi-check-circle-fill" style="font-size: 24px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
+                                    <i class="bi bi-check-circle-fill" aria-hidden="true" style="font-size: 24px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
                 </div>
                 <div class="flex-grow-1">
                     <h6 class="fw-bold mb-1" style="color: var(--brand-vinho);">
@@ -79,6 +83,7 @@
                 <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
                     <h2 class="card-title-paroquia mb-0 text-white">
                         <i class="bi bi-file-text me-2"></i>
+                                                <i class="bi bi-file-text me-2" aria-hidden="true"></i>
                         Formulário de Solicitação
                     </h2>
                 </div>
@@ -91,6 +96,7 @@
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose); display: flex; align-items: center; justify-content: center;">
                                 <i class="bi bi-people-fill" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
+                                                            <i class="bi bi-people-fill" aria-hidden="true" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Grupo Desejado <span class="text-danger">*</span></span>
                         </label>
@@ -110,6 +116,7 @@
                         @error('group_id')
                             <div class="text-danger small mt-2">
                                 <i class="bi bi-exclamation-circle"></i>
+                                                                <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
                                 {{ $message }}
                             </div>
                         @enderror
@@ -120,6 +127,8 @@
                             <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                  style="width: 32px; height: 32px; background-color: var(--bg-rose); display: flex; align-items: center; justify-content: center;">
                                 <i class="bi bi-pencil-fill" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
+                                                            <i class="bi bi-pencil-fill" aria-hidden="true" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
+                                                            <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
                             </div>
                             <span style="color: var(--brand-vinho);">Mensagem <span class="text-danger">*</span></span>
                         </label>
@@ -140,6 +149,7 @@
                         @enderror
                         <div class="form-text mt-2">
                             <i class="bi bi-info-circle"></i>
+                                                        <i class="bi bi-info-circle" aria-hidden="true"></i>
                             Mínimo de 10 caracteres. Seja claro sobre suas motivações e disponibilidade.
                         </div>
                     </div>
@@ -147,10 +157,12 @@
                     <div class="d-flex gap-3 mt-4 flex-wrap">
                         <button type="submit" class="btn-paroquia btn-primary-paroquia px-4">
                             <i class="bi bi-send-fill me-2"></i>
+                                                        <i class="bi bi-send-fill me-2" aria-hidden="true"></i>
                             Enviar Solicitação
                         </button>
                         <a href="{{ route('groups') }}" class="btn btn-outline-secondary px-4 d-flex align-items-center justify-content-center" style="border: 2px solid var(--brand-vinho); color: var(--brand-vinho); text-decoration: none;">
                             <i class="bi bi-arrow-left me-2"></i>
+                                                        <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>
                             Voltar aos Grupos
                         </a>
                     </div>
@@ -163,6 +175,7 @@
                 <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
                     <h3 class="card-title-paroquia mb-0 text-white">
                         <i class="bi bi-list-ul me-2"></i>
+                                                <i class="bi bi-list-ul me-2" aria-hidden="true"></i>
                         Grupos Disponíveis
                     </h3>
                 </div>
@@ -177,6 +190,7 @@
                         <div class="mb-3 p-3 border-bottom" style="border-color: var(--bg-rose) !important;">
                             <h5 class="fw-bold mb-2 d-flex align-items-center" style="color: var(--brand-vinho);">
                                 <i class="bi bi-circle-fill me-2" style="font-size: 8px;"></i>
+                                                                <i class="bi bi-circle-fill me-2" aria-hidden="true" style="font-size: 8px;"></i>
                                 {{ $group->name }}
                             </h5>
                             
@@ -190,6 +204,7 @@
                                 @if($group->coordinator_name)
                                     <div class="d-flex align-items-center small text-muted">
                                         <i class="bi bi-person-fill me-2" style="font-size: 14px; color: var(--brand-vinho);"></i>
+                                                                                <i class="bi bi-person-fill me-2" aria-hidden="true" style="font-size: 14px; color: var(--brand-vinho);"></i>
                                         <span><strong>Coord.:</strong> {{ $group->coordinator_name }}</span>
                                     </div>
                                 @endif
@@ -197,6 +212,7 @@
                                 @if($group->meeting_info)
                                     <div class="d-flex align-items-center small text-muted">
                                         <i class="bi bi-calendar-event me-2" style="font-size: 14px; color: var(--brand-vinho);"></i>
+                                                                                <i class="bi bi-calendar-event me-2" aria-hidden="true" style="font-size: 14px; color: var(--brand-vinho);"></i>
                                         <span>{{ $group->meeting_info }}</span>
                                     </div>
                                 @endif

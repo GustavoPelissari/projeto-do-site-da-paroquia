@@ -64,7 +64,7 @@
                     <div class="card-paroquia h-100">
                         <div class="card-header-paroquia text-center">
                             <div class="mb-3">
-                                <i data-lucide="{{ $dayIcons[$day] }}" class="icon-lg text-dourado"></i>
+                                <i data-lucide="{{ $dayIcons[$day] }}" aria-hidden="true" class="icon-lg text-dourado"></i>
                             </div>
                             <h3 class="mb-0">{{ $dayNames[$day] }}</h3>
                             @if($day == 'sunday')
@@ -79,7 +79,7 @@
                                 <div class="p-3 rounded" style="background: var(--bege-claro);">
                                     <h4 class="text-vermelho mb-2 text-center">{{ \Carbon\Carbon::parse($mass->time)->format('H:i') }}</h4>
                                     <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                                        <i data-lucide="map-pin" class="icon-paroquia text-verde"></i>
+                                        <i data-lucide="map-pin" aria-hidden="true" class="icon-paroquia text-verde"></i>
                                         <small class="text-muted fw-bold">{{ $mass->location }}</small>
                                     </div>
                                     @if($mass->description)
@@ -98,7 +98,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="alert alert-warning text-center">
-                    <i data-lucide="alert-circle" class="icon-paroquia"></i>
+                    <i data-lucide="alert-circle" aria-hidden="true" class="icon-paroquia"></i>
                     <p class="mb-0">Nenhum horário de missa cadastrado no momento.</p>
                 </div>
             </div>
@@ -114,7 +114,7 @@
             <div class="col-lg-8">
                 <div class="card-paroquia text-center p-5">
                     <div class="mb-4">
-                        <i data-lucide="clock" class="icon-lg text-vermelho" style="width: 64px; height: 64px;"></i>
+                        <i data-lucide="clock" aria-hidden="true" class="icon-lg text-vermelho" style="width: 64px; height: 64px;"></i>
                     </div>
                     <h3 class="mb-4">Próxima Celebração</h3>
                     
@@ -123,7 +123,7 @@
                             <h4 class="text-vermelho mb-2">Domingo, 3 de Novembro</h4>
                             <p class="text-muted mb-3">32º Domingo do Tempo Comum</p>
                             <div class="d-flex align-items-center justify-content-center gap-2">
-                                <i data-lucide="clock" class="icon-paroquia text-dourado"></i>
+                                <i data-lucide="clock" aria-hidden="true" class="icon-paroquia text-dourado"></i>
                                 <span class="h5 mb-0">09:30</span>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                                 <small class="text-muted">para a próxima missa</small>
                             </div>
                             <a href="#como-chegar" class="btn-paroquia btn-primary-paroquia">
-                                <i data-lucide="map-pin" class="icon-paroquia"></i>
+                                <i data-lucide="map-pin" aria-hidden="true" class="icon-paroquia"></i>
                                 Como Chegar
                             </a>
                         </div>
@@ -162,7 +162,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="card-paroquia text-center p-4">
                     <div class="mb-3">
-                        <i data-lucide="candle" class="icon-lg text-dourado"></i>
+                        <i data-lucide="candle" aria-hidden="true" class="icon-lg text-dourado"></i>
                     </div>
                     <h5 class="mb-2">Primeira Sexta</h5>
                     <p class="text-muted mb-3">Adoração ao Sagrado Coração</p>
@@ -173,7 +173,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="card-paroquia text-center p-4">
                     <div class="mb-3">
-                        <i data-lucide="rosette" class="icon-lg text-dourado"></i>
+                        <i data-lucide="rosette" aria-hidden="true" class="icon-lg text-dourado"></i>
                     </div>
                     <h5 class="mb-2">Terço</h5>
                     <p class="text-muted mb-3">Oração Mariana</p>
@@ -184,7 +184,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="card-paroquia text-center p-4">
                     <div class="mb-3">
-                        <i data-lucide="cross" class="icon-lg text-dourado"></i>
+                        <i data-lucide="cross" aria-hidden="true" class="icon-lg text-dourado"></i>
                     </div>
                     <h5 class="mb-2">Via Sacra</h5>
                     <p class="text-muted mb-3">Sextas da Quaresma</p>
@@ -195,7 +195,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="card-paroquia text-center p-4">
                     <div class="mb-3">
-                        <i data-lucide="gift" class="icon-lg text-dourado"></i>
+                        <i data-lucide="gift" aria-hidden="true" class="icon-lg text-dourado"></i>
                     </div>
                     <h5 class="mb-2">Festa Patronal</h5>
                     <p class="text-muted mb-3">São Paulo Apóstolo</p>
@@ -216,7 +216,7 @@
                         <div class="col-lg-6">
                             <h3 class="mb-4">Como Chegar na Paróquia</h3>
                             <div class="d-flex align-items-start gap-3 mb-4">
-                                <i data-lucide="map-pin" class="icon-paroquia text-vermelho mt-1"></i>
+                                <i data-lucide="map-pin" aria-hidden="true" class="icon-paroquia text-vermelho mt-1"></i>
                                 <div>
                                     <h6 class="mb-1">Endereço</h6>
                                     <p class="text-muted mb-0">
@@ -243,7 +243,7 @@
                                     <a href="https://maps.app.goo.gl/RoEbuP19YY1AtxDk7" 
                                        target="_blank" 
                                        class="btn-paroquia btn-primary-paroquia">
-                                        <i data-lucide="map" class="icon-paroquia"></i>
+                                        <i data-lucide="map" aria-hidden="true" class="icon-paroquia"></i>
                                         Abrir no Google Maps
                                     </a>
                                 </div>
@@ -263,24 +263,24 @@
             <div class="col-lg-6">
                 <div class="card-paroquia h-100 p-4">
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <i data-lucide="info" class="icon-lg text-vermelho"></i>
+                        <i data-lucide="info" aria-hidden="true" class="icon-lg text-vermelho"></i>
                         <h4 class="mb-0">Orientações Gerais</h4>
                     </div>
                     <ul class="list-unstyled">
                         <li class="mb-3 d-flex align-items-start gap-2">
-                            <i data-lucide="clock" class="icon-paroquia text-dourado mt-1"></i>
+                            <i data-lucide="clock" aria-hidden="true" class="icon-paroquia text-dourado mt-1"></i>
                             <span>Chegue com 10-15 minutos de antecedência</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start gap-2">
-                            <i data-lucide="volume-x" class="icon-paroquia text-dourado mt-1"></i>
+                            <i data-lucide="volume-x" aria-hidden="true" class="icon-paroquia text-dourado mt-1"></i>
                             <span>Mantenha o celular no silencioso durante a celebração</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start gap-2">
-                            <i data-lucide="shirt" class="icon-paroquia text-dourado mt-1"></i>
+                            <i data-lucide="shirt" aria-hidden="true" class="icon-paroquia text-dourado mt-1"></i>
                             <span>Traje adequado para o ambiente sagrado</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start gap-2">
-                            <i data-lucide="heart" class="icon-paroquia text-dourado mt-1"></i>
+                            <i data-lucide="heart" aria-hidden="true" class="icon-paroquia text-dourado mt-1"></i>
                             <span>Participe ativamente dos cantos e orações</span>
                         </li>
                     </ul>
@@ -290,17 +290,17 @@
             <div class="col-lg-6">
                 <div class="card-paroquia h-100 p-4">
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <i data-lucide="phone" class="icon-lg text-vermelho"></i>
+                        <i data-lucide="phone" aria-hidden="true" class="icon-lg text-vermelho"></i>
                         <h4 class="mb-0">Contato</h4>
                     </div>
                     <div class="mb-3">
                         <h6 class="mb-2">Secretaria Paroquial</h6>
                         <p class="text-muted mb-1">
-                            <i data-lucide="phone" class="icon-paroquia me-2"></i>
+                            <i data-lucide="phone" aria-hidden="true" class="icon-paroquia me-2"></i>
                             (44) 3055-4464
                         </p>
                         <p class="text-muted mb-3">
-                            <i data-lucide="mail" class="icon-paroquia me-2"></i>
+                            <i data-lucide="mail" aria-hidden="true" class="icon-paroquia me-2"></i>
                             secretaria.pspaulo@hotmail.com
                         </p>
                     </div>
@@ -312,7 +312,7 @@
                     </div>
                     
                     <a href="https://wa.me/554430554464?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20a%20paróquia" target="_blank" class="btn-paroquia btn-outline-paroquia">
-                        <i data-lucide="message-circle" class="icon-paroquia"></i>
+                        <i data-lucide="message-circle" aria-hidden="true" class="icon-paroquia"></i>
                         Falar no WhatsApp
                     </a>
                 </div>

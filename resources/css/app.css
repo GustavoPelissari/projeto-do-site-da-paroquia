@@ -2,6 +2,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+@import "./components.css";
+@import "./utilities.css";
+@import "./app.mobile.css";
+@import "./fixes.css";
+
 /* ================================
    VARI√ÅVEIS CSS MODERNAS
 ================================ */
@@ -14,6 +19,29 @@
     --text-primary: #2C2C2C;
     --bg-light: #FBF7F6;
     --bg-rose: #F4E9E1;
+
+    /* Paleta compat√≠vel com utilit√°rios legados */
+    --cor-vinho: #8B1E3F;
+    --cor-vinho-escuro: #6E1530;
+    --cor-dourado: #FFD66B;
+    --cor-dourado-escuro: #E6B847;
+    --cor-bege: #F4E9E1;
+    --cor-bege-escuro: #EAD9CC;
+    --cor-marrom: #7A4B3A;
+    --cor-marrom-claro: #A5745C;
+    --cor-cinza-claro: #F1F1F1;
+    --cor-cinza-medio: #9E9E9E;
+    --cor-cinza-escuro: #4A4A4A;
+    --cor-preto-suave: #2C2C2C;
+    --cor-branco: #FFFFFF;
+
+    /* Alinhamento com Bootstrap 5 (CDN) */
+    --bs-primary: #8B1E3F;
+    --bs-primary-rgb: 139, 30, 63;
+    --bs-warning: #FFD66B;
+    --bs-warning-rgb: 255, 214, 107;
+    --bs-link-color: #8B1E3F;
+    --bs-link-hover-color: #6E1530;
     
     /* Compatibilidade com c√≥digo antigo */
     --sp-dourado-principal: #FFD66B;
@@ -203,6 +231,51 @@ h6 { font-size: 1.125rem; }
     background: var(--brand-rose);
     color: var(--brand-vinho-dark);
     border-color: var(--brand-vinho);
+}
+
+/* ================================
+   BOT√ïES BOOTSTRAP (VINHO/DOURADO)
+================================ */
+.btn-primary {
+    background: var(--brand-vinho);
+    border-color: var(--brand-vinho);
+    color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--brand-vinho-dark);
+    border-color: var(--brand-vinho-dark);
+    color: #fff;
+}
+
+.btn-outline-primary {
+    color: var(--brand-vinho);
+    border-color: var(--brand-vinho);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background: var(--brand-vinho);
+    border-color: var(--brand-vinho);
+    color: #fff;
+}
+
+.btn-warning {
+    background: var(--accent-dourado);
+    border-color: var(--accent-dourado);
+    color: #4a2b00;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background: var(--cor-dourado-escuro);
+    border-color: var(--cor-dourado-escuro);
+    color: #4a2b00;
+}
+
+.badge.bg-warning {
+    color: #4a2b00;
 }
 
 /* ================================
@@ -2526,29 +2599,29 @@ a.btn {
     }
 }
 /* ================================
-   PADRONIZA«√O DE BOT’ES - RESPONSIVIDADE
+   PADRONIZAÔøΩÔøΩO DE BOTÔøΩES - RESPONSIVIDADE
 ================================ */
-/* Garantir espaÁamento entre Ìcone e texto em todos os botıes */
+/* Garantir espaÔøΩamento entre ÔøΩcone e texto em todos os botÔøΩes */
 .btn i.bi,
 .btn .bi {
     line-height: 1;
     vertical-align: middle;
 }
 
-/* EspaÁamento padr„o entre Ìcone e texto */
+/* EspaÔøΩamento padrÔøΩo entre ÔøΩcone e texto */
 .btn i.me-1 { margin-right: 0.25rem !important; }
 .btn i.me-2 { margin-right: 0.5rem !important; }
 .btn i.ms-1 { margin-left: 0.25rem !important; }
 .btn i.ms-2 { margin-left: 0.5rem !important; }
 
-/* Garantir que botıes em flex containers tenham gap */
+/* Garantir que botÔøΩes em flex containers tenham gap */
 .d-flex:has(.btn):not(.gap-1):not(.gap-2):not(.gap-3):not(.gap-4):not(.gap-5) {
     gap: 0.5rem;
 }
 
-/* Botıes em grupos de aÁ„o - melhorar responsividade */
+/* BotÔøΩes em grupos de aÔøΩÔøΩo - melhorar responsividade */
 @media (max-width: 768px) {
-    /* Em mobile, botıes ocupam largura total se estiverem empilhados */
+    /* Em mobile, botÔøΩes ocupam largura total se estiverem empilhados */
     .card-footer .d-flex {
         flex-direction: column;
     }
@@ -2557,7 +2630,7 @@ a.btn {
         width: 100%;
     }
     
-    /* Reduzir padding em botıes grandes no mobile */
+    /* Reduzir padding em botÔøΩes grandes no mobile */
     .btn-lg {
         padding: 0.75rem 1.5rem;
         font-size: 1rem;

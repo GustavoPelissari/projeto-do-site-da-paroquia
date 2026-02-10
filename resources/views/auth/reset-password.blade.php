@@ -9,7 +9,7 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4">
                     <div class="text-center mb-4">
-                        <i class="bi bi-shield-lock display-5" style="color: var(--bs-primary);"></i>
+                        <i class="bi bi-shield-lock display-5" aria-hidden="true" style="color: var(--bs-primary);"></i>
                         <h1 class="h4 fw-bold text-vinho mt-2">Redefinição de Senha</h1>
                         <p class="text-muted small mb-0">Digite sua nova senha abaixo para concluir a redefinição.</p>
                     </div>
@@ -44,7 +44,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100">
-                            <i class="bi bi-check2-circle me-2"></i>Redefinir Senha
+                            <i class="bi bi-check2-circle me-2" aria-hidden="true"></i>Redefinir Senha
                         </button>
                     </form>
                 </div>
@@ -52,7 +52,7 @@
         </div>
     </div>
     <div class="text-center mt-3">
-        <a href="{{ route('login') }}" class="text-muted small"><i class="bi bi-box-arrow-in-right me-1"></i>Voltar para Entrar</a>
+        <a href="{{ route('login') }}" class="text-muted small"><i class="bi bi-box-arrow-in-right me-1" aria-hidden="true"></i>Voltar para Entrar</a>
     </div>
     
 </div>

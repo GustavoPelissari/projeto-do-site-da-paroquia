@@ -147,7 +147,7 @@
                             </div>
                         @empty
                             <div class="text-center py-3">
-                                <i class="bi bi-calendar-x" style="font-size: 2rem; color: #ddd;"></i>
+                                <i class="bi bi-calendar-x" aria-hidden="true" style="font-size: 2rem; color: #ddd;"></i>
                                 <p class="text-muted small mt-2 mb-0">Nenhuma escala disponível no momento.</p>
                             </div>
                         @endforelse
@@ -159,11 +159,11 @@
                 <div class="card-header bg-white border-0 py-2 py-md-3">
                     <div class="d-flex align-items-center justify-content-between">
                         <h5 class="mb-0">
-                            <i class="bi bi-newspaper text-primary"></i> Últimas Notícias
+                            <i class="bi bi-newspaper text-primary" aria-hidden="true"></i> Últimas Notícias
                         </h5>
                         @if($recentNews->count() > 0)
                             <a href="{{ route('news') }}" class="btn btn-sm btn-outline-primary">
-                                Ver Todas <i class="bi bi-arrow-right"></i>
+                                Ver Todas <i class="bi bi-arrow-right" aria-hidden="true"></i>
                             </a>
                         @endif
                     </div>
@@ -175,13 +175,13 @@
                                 <div class="col-5 col-md-4">
                                     @if($news->featured_image)
                                         <img src="{{ asset('storage/' . $news->featured_image) }}" 
-                                             alt="{{ $news->title }}" 
-                                             class="img-fluid w-100 h-100"
-                                             style="object-fit: cover; border-radius: 0.375rem 0 0 0.375rem;">
+                                            alt="{{ $news->title }}" 
+                                            class="img-fluid w-100 h-100"
+                                            style="object-fit: cover; border-radius: 0.375rem 0 0 0.375rem;" loading="lazy">
                                     @else
                                         <div class="bg-light d-flex align-items-center justify-content-center h-100"
                                              style="border-radius: 0.375rem 0 0 0.375rem;">
-                                            <i class="bi bi-image text-muted" style="font-size: 2.5rem;"></i>
+                                            <i class="bi bi-image text-muted" aria-hidden="true" style="font-size: 2.5rem;"></i>
                                         </div>
                                     @endif
                                 </div>
@@ -196,7 +196,7 @@
                                             {{ Str::limit($news->summary ?? $news->content, 70) }}
                                         </p>
                                         <small class="text-muted" style="font-size: 0.7rem;">
-                                            <i class="bi bi-calendar"></i> {{ $news->published_at?->format('d/m/Y') }}
+                                            <i class="bi bi-calendar" aria-hidden="true"></i> {{ $news->published_at?->format('d/m/Y') }}
                                         </small>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@
                         </div>
                     @empty
                         <div class="text-center py-5">
-                            <i class="bi bi-newspaper" style="font-size: 4rem; color: #ddd;"></i>
+                            <i class="bi bi-newspaper" aria-hidden="true" style="font-size: 4rem; color: #ddd;"></i>
                             <p class="text-muted mt-3 mb-0">Nenhuma notícia publicada ainda.</p>
                         </div>
                     @endforelse
@@ -218,7 +218,7 @@
             <div class="card border-0 shadow-sm mb-3 mb-md-4">
                 <div class="card-header bg-success text-white border-0 py-2 py-md-3">
                     <h5 class="mb-0">
-                        <i class="bi bi-calendar-event"></i> Próximos Eventos
+                        <i class="bi bi-calendar-event" aria-hidden="true"></i> Próximos Eventos
                     </h5>
                 </div>
                 <div class="card-body p-2 p-md-3">
@@ -227,21 +227,21 @@
                             <div class="card-body p-2 p-md-3">
                                 <h6 class="mb-1 mb-md-2 fw-bold small">{{ Str::limit($event->title, 40) }}</h6>
                                 <div class="small text-muted mb-1" style="font-size: 0.75rem;">
-                                    <i class="bi bi-calendar3"></i> {{ $event->start_date->format('d/m/Y') }}
+                                    <i class="bi bi-calendar3" aria-hidden="true"></i> {{ $event->start_date->format('d/m/Y') }}
                                     @if($event->start_time)
                                         às {{ $event->start_time }}
                                     @endif
                                 </div>
                                 @if($event->location)
                                     <div class="small text-muted d-none d-md-block">
-                                        <i class="bi bi-geo-alt-fill"></i> {{ Str::limit($event->location, 30) }}
+                                        <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> {{ Str::limit($event->location, 30) }}
                                     </div>
                                 @endif
                             </div>
                         </div>
                     @empty
                         <div class="text-center py-4">
-                            <i class="bi bi-calendar-x" style="font-size: 3rem; color: #ddd;"></i>
+                            <i class="bi bi-calendar-x" aria-hidden="true" style="font-size: 3rem; color: #ddd;"></i>
                             <p class="text-muted mt-2 mb-0">Nenhum evento agendado.</p>
                         </div>
                     @endforelse
@@ -249,7 +249,7 @@
                     @if($upcomingEvents->count() > 0)
                         <div class="d-grid">
                             <a href="{{ route('events') }}" class="btn btn-outline-success btn-sm">
-                                Ver Todos os Eventos <i class="bi bi-arrow-right"></i>
+                                Ver Todos os Eventos <i class="bi bi-arrow-right" aria-hidden="true"></i>
                             </a>
                         </div>
                     @endif

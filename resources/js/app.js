@@ -90,6 +90,74 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Bootstrap Icons fallback check
+    const testIcon = document.createElement('i');
+    testIcon.className = 'bi bi-house-door';
+    document.body.appendChild(testIcon);
+    const computedStyle = window.getComputedStyle(testIcon, '::before');
+    const content = computedStyle.getPropertyValue('content');
+    if (!content || content === 'none' || content === '""') {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css';
+        document.head.appendChild(link);
+    }
+    document.body.removeChild(testIcon);
+
+    // Auto-dismiss alerts after 5 seconds
+    const alerts = document.querySelectorAll('.alert-dismissible');
+    alerts.forEach(function(alert) {
+        setTimeout(function() {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }, 5000);
+    });
+
+    // Schedule PDF modal behavior
+    const pdfModal = document.getElementById('pdfModal');
+    if (pdfModal) {
+        const pdfFrame = pdfModal.querySelector('#pdfFrame');
+        pdfModal.addEventListener('show.bs.modal', function(event) {
+            const trigger = event.relatedTarget;
+            const url = trigger?.getAttribute('data-pdf-url') || '';
+            if (pdfFrame) {
+                pdfFrame.src = url;
+            }
+        });
+        pdfModal.addEventListener('hidden.bs.modal', function() {
+            if (pdfFrame) {
+                pdfFrame.src = '';
+            }
+        });
+    }
+
+    // Schedule create: update file name
+    const fileInput = document.querySelector('[data-file-input]');
+    const fileNameLabel = document.getElementById('file-name');
+    if (fileInput && fileNameLabel) {
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files.length > 0) {
+                fileNameLabel.textContent = `Arquivo selecionado: ${fileInput.files[0].name}`;
+                fileNameLabel.classList.remove('d-none');
+            } else {
+                fileNameLabel.classList.add('d-none');
+            }
+        });
+    }
+
+    // Schedule create: auto-fill end date
+    const startDateInput = document.getElementById('start_date');
+    const endDateInput = document.getElementById('end_date');
+    if (startDateInput && endDateInput) {
+        startDateInput.addEventListener('change', function() {
+            if (!endDateInput.value) {
+                const startDate = new Date(startDateInput.value);
+                const endOfMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
+                endDateInput.value = endOfMonth.toISOString().split('T')[0];
+            }
+        });
+    }
 });
 
 // Função para calcular próxima missa

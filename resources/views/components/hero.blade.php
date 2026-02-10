@@ -1,4 +1,1 @@
-@php
-    $component = 'hero';
-@endphp
-@include('components._device-resolver')
+@include('components.desktop.hero')

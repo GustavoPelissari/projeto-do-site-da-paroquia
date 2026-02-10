@@ -1,4 +1,1 @@
-@php
-    $component = 'text-input';
-@endphp
-@include('components._device-resolver')
+@include('components.desktop.text-input')

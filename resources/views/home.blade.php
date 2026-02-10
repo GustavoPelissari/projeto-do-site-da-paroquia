@@ -31,7 +31,7 @@ img[loading="lazy"].loaded {
                     </p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
                         <a href="#proxima-missa" class="btn-hero btn-hero-outline">
-                            <i data-lucide="calendar-check" style="width: 20px; height: 20px;"></i>
+                            <i data-lucide="calendar-check" aria-hidden="true" style="width: 20px; height: 20px;"></i>
                             Ver todos os horários
                         </a>
                     </div>
@@ -49,7 +49,7 @@ img[loading="lazy"].loaded {
                 <div class="card-paroquia text-center p-4 proxima-missa-card">
                     <div class="card-header-paroquia mb-4">
                         <h3 class="mb-0">
-                            <i data-lucide="clock" class="icon-lg text-white me-2" style="width: 32px; height: 32px;"></i>
+                            <i data-lucide="clock" aria-hidden="true" class="icon-lg text-white me-2" style="width: 32px; height: 32px;"></i>
                             Próxima Missa
                         </h3>
                     </div>
@@ -99,7 +99,7 @@ img[loading="lazy"].loaded {
                         </div>
                     @else
                         <div class="text-center py-4">
-                            <i data-lucide="calendar-x" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
+                            <i data-lucide="calendar-x" aria-hidden="true" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
                             <h5 class="text-muted">Nenhuma missa programada</h5>
                             <p class="text-muted mb-0">Entre em contato para mais informações</p>
                         </div>
@@ -107,7 +107,7 @@ img[loading="lazy"].loaded {
                     
                     <div class="mt-4">
                         <a href="{{ route('masses') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                            <i data-lucide="calendar" class="me-2" style="width: 16px; height: 16px;"></i>
+                            <i data-lucide="calendar" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                             Ver todos os horários
                         </a>
                     </div>
@@ -162,7 +162,7 @@ img[loading="lazy"].loaded {
                         @endif
                         
                         <div class="d-flex align-items-center text-muted small">
-                            <i data-lucide="clock" class="me-2" style="width: 14px; height: 14px;"></i>
+                            <i data-lucide="clock" aria-hidden="true" class="me-2" style="width: 14px; height: 14px;"></i>
                             <span>Chegue 15 minutos antes do início</span>
                         </div>
                     </div>
@@ -170,7 +170,7 @@ img[loading="lazy"].loaded {
             </div>
         @else
             <div class="text-center py-5">
-                <i data-lucide="calendar-plus" class="text-muted mb-3" style="width: 64px; height: 64px;"></i>
+                <i data-lucide="calendar-plus" aria-hidden="true" class="text-muted mb-3" style="width: 64px; height: 64px;"></i>
                 <h4 class="text-muted">Horários em breve</h4>
                 <p class="text-muted">Os horários das missas serão divulgados em breve.</p>
             </div>
@@ -191,7 +191,7 @@ img[loading="lazy"].loaded {
                     </p>
                     <div class="d-flex align-items-start mb-3">
                         <div class="icon-feature me-3">
-                            <i data-lucide="heart" style="width: 24px; height: 24px;"></i>
+                            <i data-lucide="heart" aria-hidden="true" style="width: 24px; height: 24px;"></i>
                         </div>
                         <div>
                             <h5 class="text-vinho fw-semibold mb-2">Amor e Acolhimento</h5>
@@ -200,7 +200,7 @@ img[loading="lazy"].loaded {
                     </div>
                     <div class="d-flex align-items-start mb-3">
                         <div class="icon-feature me-3">
-                            <i data-lucide="users" style="width: 24px; height: 24px;"></i>
+                            <i data-lucide="users" aria-hidden="true" style="width: 24px; height: 24px;"></i>
                         </div>
                         <div>
                             <h5 class="text-vinho fw-semibold mb-2">Comunidade Ativa</h5>
@@ -209,7 +209,7 @@ img[loading="lazy"].loaded {
                     </div>
                     <div class="d-flex align-items-start mb-4">
                         <div class="icon-feature me-3">
-                            <i data-lucide="book-open" style="width: 24px; height: 24px;"></i>
+                            <i data-lucide="book-open" aria-hidden="true" style="width: 24px; height: 24px;"></i>
                         </div>
                         <div>
                             <h5 class="text-vinho fw-semibold mb-2">Formação e Fé</h5>
@@ -217,7 +217,7 @@ img[loading="lazy"].loaded {
                         </div>
                     </div>
                     <a href="{{ route('about') }}" class="btn btn-outline-vinho rounded-pill px-4 py-2">
-                        <i data-lucide="arrow-right" class="me-2" style="width: 16px; height: 16px;"></i>
+                        <i data-lucide="arrow-right" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                         Conheça Nossa Paróquia
                     </a>
                 </div>
@@ -258,18 +258,18 @@ img[loading="lazy"].loaded {
                     <div class="pastoral-header">
                         <div class="pastoral-icon">
                             @if($group->image)
-                                <img src="{{ asset('storage/' . $group->image) }}" 
-                                     alt="{{ $group->name }}" 
-                                     class="rounded-circle"
-                                     style="width: 64px; height: 64px; object-fit: cover;">
+                                  <img src="{{ asset('storage/' . $group->image) }}" 
+                                      alt="{{ $group->name }}" 
+                                      class="rounded-circle"
+                                      style="width: 64px; height: 64px; object-fit: cover;" loading="lazy">
                             @else
-                                <i data-lucide="users" style="width: 32px; height: 32px;"></i>
+                                <i data-lucide="users" aria-hidden="true" style="width: 32px; height: 32px;"></i>
                             @endif
                         </div>
                         <h4 class="pastoral-title">{{ $group->name }}</h4>
                         @if($group->coordinator_name)
                             <p class="text-muted small mb-0">
-                                <i data-lucide="user" style="width: 14px; height: 14px;"></i>
+                                <i data-lucide="user" aria-hidden="true" style="width: 14px; height: 14px;"></i>
                                 {{ $group->coordinator_name }}
                             </p>
                         @endif
@@ -284,12 +284,12 @@ img[loading="lazy"].loaded {
                             @auth
                                 <a href="{{ route('group-requests.create', ['group' => $group->id]) }}" 
                                    class="btn btn-outline-vinho rounded-pill px-4 py-2">
-                                    <i data-lucide="user-plus" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    <i data-lucide="user-plus" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                                     Participar
                                 </a>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-outline-vinho rounded-pill px-4 py-2">
-                                    <i data-lucide="log-in" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    <i data-lucide="log-in" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                                     Entrar para Participar
                                 </a>
                             @endauth
@@ -301,7 +301,7 @@ img[loading="lazy"].loaded {
         
         <div class="text-center mt-5">
             <a href="{{ route('groups') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                <i data-lucide="arrow-right" class="me-2" style="width: 16px; height: 16px;"></i>
+                <i data-lucide="arrow-right" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                 Ver Todas as Pastorais
             </a>
         </div>
@@ -333,14 +333,14 @@ img[loading="lazy"].loaded {
                         </div>
                     @else
                         <div class="noticia-image noticia-placeholder">
-                            <i data-lucide="image" style="width: 48px; height: 48px; opacity: 0.3;"></i>
+                            <i data-lucide="image" aria-hidden="true" style="width: 48px; height: 48px; opacity: 0.3;"></i>
                         </div>
                     @endif
                     
                     <div class="noticia-content">
                         <div class="noticia-meta">
                             <time class="text-muted">
-                                <i data-lucide="calendar" class="me-1" style="width: 14px; height: 14px;"></i>
+                                <i data-lucide="calendar" aria-hidden="true" class="me-1" style="width: 14px; height: 14px;"></i>
                                 {{ $noticia->created_at->format('d/m/Y') }}
                             </time>
                         </div>
@@ -355,7 +355,7 @@ img[loading="lazy"].loaded {
                         
                         <a href="{{ route('news.show', $noticia->id) }}" class="btn btn-sm btn-outline-vinho rounded-pill">
                             Ler mais
-                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                            <i data-lucide="arrow-right" aria-hidden="true" class="ms-1" style="width: 14px; height: 14px;"></i>
                         </a>
                     </div>
                 </article>
@@ -364,7 +364,7 @@ img[loading="lazy"].loaded {
         
         <div class="text-center mt-5">
             <a href="{{ route('news') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                <i data-lucide="newspaper" class="me-2" style="width: 16px; height: 16px;"></i>
+                <i data-lucide="newspaper" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                 Ver todas as notícias
             </a>
         </div>
@@ -397,12 +397,12 @@ img[loading="lazy"].loaded {
                         <h4 class="evento-title">{{ $event->title }}</h4>
                         <div class="evento-meta">
                             <div class="d-flex align-items-center text-muted mb-2">
-                                <i data-lucide="clock" class="me-2" style="width: 16px; height: 16px;"></i>
+                                <i data-lucide="clock" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                                 <span>{{ $event->start_date ? $event->start_date->format('H:i') : 'A definir' }}</span>
                             </div>
                             @if($event->location)
                                 <div class="d-flex align-items-center text-muted">
-                                    <i data-lucide="map-pin" class="me-2" style="width: 16px; height: 16px;"></i>
+                                    <i data-lucide="map-pin" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                                     <span>{{ $event->location }}</span>
                                 </div>
                             @endif
@@ -416,7 +416,7 @@ img[loading="lazy"].loaded {
                         
                         <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-outline-vinho rounded-pill mt-3">
                             Saiba mais
-                            <i data-lucide="arrow-right" class="ms-1" style="width: 14px; height: 14px;"></i>
+                            <i data-lucide="arrow-right" aria-hidden="true" class="ms-1" style="width: 14px; height: 14px;"></i>
                         </a>
                     </div>
                 </div>
@@ -425,7 +425,7 @@ img[loading="lazy"].loaded {
         
         <div class="text-center mt-5">
             <a href="{{ route('events') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                <i data-lucide="calendar-days" class="me-2" style="width: 16px; height: 16px;"></i>
+                <i data-lucide="calendar-days" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
                 Ver todos os eventos
             </a>
         </div>
@@ -445,11 +445,11 @@ img[loading="lazy"].loaded {
                 </p>
                 <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
                     <a href="https://wa.me/554430554464?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20a%20paróquia" target="_blank" class="btn btn-white rounded-pill px-5 py-3 fw-semibold">
-                        <i data-lucide="phone" class="me-2" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="phone" aria-hidden="true" class="me-2" style="width: 20px; height: 20px;"></i>
                         Entre em contato
                     </a>
                     <a href="https://maps.app.goo.gl/RoEbuP19YY1AtxDk7" target="_blank" class="btn btn-outline-light rounded-pill px-5 py-3 fw-semibold">
-                        <i data-lucide="map-pin" class="me-2" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="map-pin" aria-hidden="true" class="me-2" style="width: 20px; height: 20px;"></i>
                         Como chegar
                     </a>
                 </div>

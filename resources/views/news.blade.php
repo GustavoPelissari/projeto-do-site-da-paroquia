@@ -26,7 +26,7 @@
                     <div class="card-paroquia">
                         @if($item->featured_image)
                             <div style="overflow: hidden; height: 220px;">
-                                <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top w-100" style="height: 220px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top w-100" style="height: 220px; object-fit: cover;" loading="lazy">
                             </div>
                         @else
                             <x-card.placeholder height="220px" />
@@ -73,7 +73,7 @@
                             </div>
                             <div class="modal-body">
                                 @if($item->featured_image)
-                                    <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="img-fluid rounded mb-3">
+                                    <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="img-fluid rounded mb-3" loading="lazy">
                                 @endif
                                 
                                 <div class="d-flex align-items-center mb-3 text-muted">

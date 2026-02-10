@@ -1,4 +1,1 @@
-@php
-    $component = 'application-logo';
-@endphp
-@include('components._device-resolver')
+@include('components.desktop.application-logo')

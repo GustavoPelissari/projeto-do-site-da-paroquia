@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Paróquia São Paulo Apóstolo')</title>
+    <meta name="description" content="@yield('meta_description', 'Site oficial da Paróquia São Paulo Apóstolo. Notícias, eventos, missas e informações da comunidade.')">
+    <meta property="og:title" content="@yield('title', 'Paróquia São Paulo Apóstolo')">
+    <meta property="og:description" content="@yield('meta_description', 'Site oficial da Paróquia São Paulo Apóstolo. Notícias, eventos, missas e informações da comunidade.')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/sao-paulo-logo.png') }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="@yield('title', 'Paróquia São Paulo Apóstolo')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Site oficial da Paróquia São Paulo Apóstolo. Notícias, eventos, missas e informações da comunidade.')">
+    <meta name="twitter:image" content="{{ asset('images/sao-paulo-logo.png') }}">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
@@ -169,6 +179,7 @@
     </style>
 </head>
 <body>
+    <a class="visually-hidden-focusable" href="#main-content">Ir para o conteúdo</a>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
@@ -194,125 +205,125 @@
                             <!-- Menu Admin Global -->
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.dashboard') }}">
-                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                    <i class="bi bi-speedometer2" aria-hidden="true"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.news.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.news.index') }}">
-                                    <i class="bi bi-newspaper"></i> Notícias
+                                    <i class="bi bi-newspaper" aria-hidden="true"></i> Notícias
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.events.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.events.index') }}">
-                                    <i class="bi bi-calendar-event"></i> Eventos
+                                    <i class="bi bi-calendar-event" aria-hidden="true"></i> Eventos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.groups.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.groups.index') }}">
-                                    <i class="bi bi-people"></i> Grupos
+                                    <i class="bi bi-people" aria-hidden="true"></i> Grupos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.masses.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.masses.index') }}">
-                                    <i class="bi bi-clock"></i> Missas
+                                    <i class="bi bi-clock" aria-hidden="true"></i> Missas
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.global.users') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.global.users') }}">
-                                    <i class="bi bi-person-gear"></i> Usuários
+                                    <i class="bi bi-person-gear" aria-hidden="true"></i> Usuários
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('home') || request()->routeIs('groups') || request()->routeIs('masses') || request()->routeIs('events') || request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
-                                    <i class="bi bi-globe"></i> Site Público
+                                    <i class="bi bi-globe" aria-hidden="true"></i> Site Público
                                 </a>
                             </li>
                         @elseif(Auth::user()->role->value === 'coordenador_de_pastoral')
                             <!-- Menu Coordenador -->
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.coordenador.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.dashboard') }}">
-                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                    <i class="bi bi-speedometer2" aria-hidden="true"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.coordenador.news.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.news.index') }}">
-                                    <i class="bi bi-newspaper"></i> Notícias
+                                    <i class="bi bi-newspaper" aria-hidden="true"></i> Notícias
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.coordenador.scales.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.scales.index') }}">
-                                    <i class="bi bi-calendar3"></i> Escalas
+                                    <i class="bi bi-calendar3" aria-hidden="true"></i> Escalas
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.coordenador.requests.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.coordenador.requests.index') }}">
-                                    <i class="bi bi-envelope"></i> Solicitações
+                                    <i class="bi bi-envelope" aria-hidden="true"></i> Solicitações
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('home') || request()->routeIs('groups') || request()->routeIs('masses') || request()->routeIs('events') || request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
-                                    <i class="bi bi-globe"></i> Site Público
+                                    <i class="bi bi-globe" aria-hidden="true"></i> Site Público
                                 </a>
                             </li>
                         @elseif(Auth::user()->role->value === 'administrativo')
                             <!-- Menu Administrativo -->
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.administrativo.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.dashboard') }}">
-                                    <i class="bi bi-speedometer2"></i> Dashboard
+                                    <i class="bi bi-speedometer2" aria-hidden="true"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.administrativo.news.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.news.index') }}">
-                                    <i class="bi bi-newspaper"></i> Notícias
+                                    <i class="bi bi-newspaper" aria-hidden="true"></i> Notícias
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.administrativo.masses.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('admin.administrativo.masses.index') }}">
-                                    <i class="bi bi-clock"></i> Missas
+                                    <i class="bi bi-clock" aria-hidden="true"></i> Missas
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('home') || request()->routeIs('groups') || request()->routeIs('masses') || request()->routeIs('events') || request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
-                                    <i class="bi bi-globe"></i> Site Público
+                                    <i class="bi bi-globe" aria-hidden="true"></i> Site Público
                                 </a>
                             </li>
                         @else
                             <!-- Menu Usuário Padrão -->
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('user.dashboard') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('user.dashboard') }}">
-                                    <i class="bi bi-house-heart"></i> Minha Área
+                                    <i class="bi bi-house-heart" aria-hidden="true"></i> Minha Área
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('home') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
-                                    <i class="bi bi-globe"></i> Início
+                                    <i class="bi bi-globe" aria-hidden="true"></i> Início
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('groups') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('groups') }}">
-                                    <i class="bi bi-people"></i> Grupos
+                                    <i class="bi bi-people" aria-hidden="true"></i> Grupos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('masses') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('masses') }}">
-                                    <i class="bi bi-clock"></i> Missas
+                                    <i class="bi bi-clock" aria-hidden="true"></i> Missas
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('events') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('events') }}">
-                                    <i class="bi bi-calendar-event"></i> Eventos
+                                    <i class="bi bi-calendar-event" aria-hidden="true"></i> Eventos
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('news') }}">
-                                    <i class="bi bi-newspaper"></i> Notícias
+                                    <i class="bi bi-newspaper" aria-hidden="true"></i> Notícias
                                 </a>
                             </li>
                             @if(Auth::user()->parishGroup && Auth::user()->parishGroup->id == 5)
                                 <!-- Menu especial para Coroinhas -->
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('user.scales.*') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('user.scales.index') }}">
-                                        <i class="bi bi-calendar3"></i> Escalas
+                                        <i class="bi bi-calendar3" aria-hidden="true"></i> Escalas
                                     </a>
                                 </li>
                             @endif
@@ -321,32 +332,32 @@
                         <!-- Menu não autenticado -->
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('home') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('home') }}">
-                                <i class="bi bi-house-door"></i> Início
+                                <i class="bi bi-house-door" aria-hidden="true"></i> Início
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('groups') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('groups') }}">
-                                <i class="bi bi-people"></i> Grupos
+                                <i class="bi bi-people" aria-hidden="true"></i> Grupos
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('masses') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('masses') }}">
-                                <i class="bi bi-clock"></i> Missas
+                                <i class="bi bi-clock" aria-hidden="true"></i> Missas
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('events') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('events') }}">
-                                <i class="bi bi-calendar-event"></i> Eventos
+                                <i class="bi bi-calendar-event" aria-hidden="true"></i> Eventos
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('news') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('news') }}">
-                                <i class="bi bi-newspaper"></i> Notícias
+                                <i class="bi bi-newspaper" aria-hidden="true"></i> Notícias
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('about') ? 'active text-brand-vinho fw-bold' : '' }}" href="{{ route('about') }}">
-                                <i class="bi bi-info-circle"></i> Sobre
+                                <i class="bi bi-info-circle" aria-hidden="true"></i> Sobre
                             </a>
                         </li>
                     @endauth
@@ -366,7 +377,7 @@
                                 }
                             @endphp
                             <a class="nav-link position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-bell" style="font-size: 1.2rem;"></i>
+                                <i class="bi bi-bell" aria-hidden="true" style="font-size: 1.2rem;"></i>
                                 @if($unreadCount > 0)
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
                                         {{ $unreadCount > 9 ? '9+' : $unreadCount }}
@@ -401,7 +412,7 @@
                                                         elseif ($notif->type === 'scale_published') $icon = 'bi-file-earmark-pdf';
                                                         elseif ($notif->type === 'group_request_status_changed') $icon = 'bi-clipboard-check';
                                                     @endphp
-                                                    <i class="bi {{ $icon }}" style="color: var(--brand-vinho) !important; font-size: 0.85rem;"></i>
+                                                    <i class="bi {{ $icon }}" aria-hidden="true" style="color: var(--brand-vinho) !important; font-size: 0.85rem;"></i>
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <div class="fw-semibold" style="font-size: 0.85rem;">{{ $notif->title }}</div>
@@ -416,7 +427,7 @@
                                     @endif
                                 @empty
                                     <li class="dropdown-item-text text-center text-muted small py-3">
-                                        <i class="bi bi-bell-slash d-block mb-1" style="font-size: 1.5rem;"></i>
+                                        <i class="bi bi-bell-slash d-block mb-1" aria-hidden="true" style="font-size: 1.5rem;"></i>
                                         Nenhuma notificação
                                     </li>
                                 @endforelse
@@ -433,13 +444,13 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
+                                <i class="bi bi-person-circle" aria-hidden="true"></i> {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <!-- Perfil (sempre visível) -->
                                 <li>
                                     <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                        <i class="bi bi-person"></i> Meu Perfil
+                                        <i class="bi bi-person" aria-hidden="true"></i> Meu Perfil
                                     </a>
                                 </li>
                                 
@@ -449,66 +460,66 @@
                                 @if(Auth::user()->role->value === 'admin_global')
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.global.dashboard') }}">
-                                            <i class="bi bi-speedometer2"></i> Dashboard Admin
+                                            <i class="bi bi-speedometer2" aria-hidden="true"></i> Dashboard Admin
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.global.users') }}">
-                                            <i class="bi bi-person-gear"></i> Gerenciar Usuários
+                                            <i class="bi bi-person-gear" aria-hidden="true"></i> Gerenciar Usuários
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('home') }}">
-                                            <i class="bi bi-globe"></i> Ver Site Público
+                                            <i class="bi bi-globe" aria-hidden="true"></i> Ver Site Público
                                         </a>
                                     </li>
                                 @elseif(Auth::user()->role->value === 'coordenador_de_pastoral')
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.coordenador.dashboard') }}">
-                                            <i class="bi bi-speedometer2"></i> Meu Dashboard
+                                            <i class="bi bi-speedometer2" aria-hidden="true"></i> Meu Dashboard
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.coordenador.requests.index') }}">
-                                            <i class="bi bi-envelope"></i> Solicitações Pendentes
+                                            <i class="bi bi-envelope" aria-hidden="true"></i> Solicitações Pendentes
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.coordenador.scales.index') }}">
-                                            <i class="bi bi-calendar3"></i> Minhas Escalas
+                                            <i class="bi bi-calendar3" aria-hidden="true"></i> Minhas Escalas
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('home') }}">
-                                            <i class="bi bi-globe"></i> Ver Site Público
+                                            <i class="bi bi-globe" aria-hidden="true"></i> Ver Site Público
                                         </a>
                                     </li>
                                 @elseif(Auth::user()->role->value === 'administrativo')
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.administrativo.dashboard') }}">
-                                            <i class="bi bi-speedometer2"></i> Meu Dashboard
+                                            <i class="bi bi-speedometer2" aria-hidden="true"></i> Meu Dashboard
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.administrativo.news.index') }}">
-                                            <i class="bi bi-newspaper"></i> Gerenciar Notícias
+                                            <i class="bi bi-newspaper" aria-hidden="true"></i> Gerenciar Notícias
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('admin.administrativo.masses.index') }}">
-                                            <i class="bi bi-clock"></i> Gerenciar Missas
+                                            <i class="bi bi-clock" aria-hidden="true"></i> Gerenciar Missas
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('home') }}">
-                                            <i class="bi bi-globe"></i> Ver Site Público
+                                            <i class="bi bi-globe" aria-hidden="true"></i> Ver Site Público
                                         </a>
                                     </li>
                                 @else
                                     <!-- Usuário Padrão -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('user.dashboard') }}">
-                                            <i class="bi bi-house-heart"></i> Minha Área
+                                            <i class="bi bi-house-heart" aria-hidden="true"></i> Minha Área
                                         </a>
                                     </li>
                                     
@@ -516,7 +527,7 @@
                                         {{-- Usuário está em um grupo --}}
                                         <li>
                                             <a class="dropdown-item d-flex align-items-start" style="white-space: normal; cursor: default;" onclick="return false;">
-                                                <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0"></i>
+                                                <i class="bi bi-check-circle-fill text-success me-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
                                                 <div>
                                                     <strong>Meu Grupo Principal</strong>
                                                     <small class="d-block text-muted">{{ Auth::user()->parishGroup->name }}</small>
@@ -526,20 +537,20 @@
                                     @endif
                                     <li>
                                         <a class="dropdown-item" href="{{ route('group-requests.create') }}">
-                                            <i class="bi bi-pencil-square"></i> Solicitar Entrada em Grupo
+                                            <i class="bi bi-pencil-square" aria-hidden="true"></i> Solicitar Entrada em Grupo
                                         </a>
                                     </li>
                                     
                                     <li>
                                         <a class="dropdown-item" href="{{ route('group-requests.my-requests') }}">
-                                            <i class="bi bi-list-check"></i> Minhas Solicitações
+                                            <i class="bi bi-list-check" aria-hidden="true"></i> Minhas Solicitações
                                         </a>
                                     </li>
                                     
                                     @if(Auth::user()->parishGroup && Auth::user()->parishGroup->requires_scale)
                                         <li>
                                             <a class="dropdown-item" href="{{ route('user.scales.index') }}">
-                                                <i class="bi bi-calendar3"></i> Minhas Escalas
+                                                <i class="bi bi-calendar3" aria-hidden="true"></i> Minhas Escalas
                                             </a>
                                         </li>
                                     @endif
@@ -552,7 +563,7 @@
                                     <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                         @csrf
                                         <button type="submit" class="dropdown-item text-danger">
-                                            <i class="bi bi-box-arrow-right"></i> Sair
+                                            <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
                                         </button>
                                     </form>
                                 </li>
@@ -561,12 +572,12 @@
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
-                                <i class="bi bi-box-arrow-in-right"></i> Entrar
+                                <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Entrar
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn-primary-paroquia text-white px-3 py-2 rounded" href="{{ route('register') }}">
-                                <i class="bi bi-person-plus"></i> Cadastrar
+                                <i class="bi bi-person-plus" aria-hidden="true"></i> Cadastrar
                             </a>
                         </li>
                     @endauth
@@ -576,11 +587,11 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content {{ (session('success') || session('error') || session('warning')) ? 'has-alert' : '' }}">
+    <main id="main-content" tabindex="-1" class="main-content {{ (session('success') || session('error') || session('warning')) ? 'has-alert' : '' }}">
         @if(session('success'))
             <div class="container mt-3">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                    <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>{{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             </div>
@@ -589,7 +600,7 @@
         @if(session('error'))
             <div class="container mt-3">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}
+                    <i class="bi bi-exclamation-triangle-fill me-2" aria-hidden="true"></i>{{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             </div>
@@ -598,7 +609,7 @@
         @if(session('warning'))
             <div class="container mt-3">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-circle-fill me-2"></i>{{ session('warning') }}
+                    <i class="bi bi-exclamation-circle-fill me-2" aria-hidden="true"></i>{{ session('warning') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             </div>
@@ -627,18 +638,18 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Links Rápidos</h5>
                     <ul class="footer-links">
-                        <li><a href="{{ route('home') }}"><i class="bi bi-house-door"></i> Início</a></li>
-                        <li><a href="{{ route('groups') }}"><i class="bi bi-people"></i> Grupos e Pastorais</a></li>
-                        <li><a href="{{ route('masses') }}"><i class="bi bi-clock"></i> Missas</a></li>
-                        <li><a href="{{ route('events') }}"><i class="bi bi-calendar-event"></i> Eventos</a></li>
-                        <li><a href="{{ route('news') }}"><i class="bi bi-newspaper"></i> Notícias</a></li>
+                        <li><a href="{{ route('home') }}"><i class="bi bi-house-door" aria-hidden="true"></i> Início</a></li>
+                        <li><a href="{{ route('groups') }}"><i class="bi bi-people" aria-hidden="true"></i> Grupos e Pastorais</a></li>
+                        <li><a href="{{ route('masses') }}"><i class="bi bi-clock" aria-hidden="true"></i> Missas</a></li>
+                        <li><a href="{{ route('events') }}"><i class="bi bi-calendar-event" aria-hidden="true"></i> Eventos</a></li>
+                        <li><a href="{{ route('news') }}"><i class="bi bi-newspaper" aria-hidden="true"></i> Notícias</a></li>
                         @auth
                             @if(Auth::user()->role === 'usuario_padrao')
-                                <li><a href="{{ route('group-requests.create') }}"><i class="bi bi-person-plus"></i> Participar de Grupo</a></li>
+                                <li><a href="{{ route('group-requests.create') }}"><i class="bi bi-person-plus" aria-hidden="true"></i> Participar de Grupo</a></li>
                             @endif
                         @else
-                            <li><a href="{{ route('register') }}"><i class="bi bi-person-add"></i> Cadastre-se</a></li>
-                            <li><a href="{{ route('login') }}"><i class="bi bi-box-arrow-in-right"></i> Entrar</a></li>
+                            <li><a href="{{ route('register') }}"><i class="bi bi-person-add" aria-hidden="true"></i> Cadastre-se</a></li>
+                            <li><a href="{{ route('login') }}"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Entrar</a></li>
                         @endauth
                     </ul>
                 </div>
@@ -647,20 +658,20 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="footer-title">Contato</h5>
                     <ul class="footer-contact">
-                        <li><i class="bi bi-geo-alt"></i> Av. General Mascarenhas de Morais, 4969<br>
+                        <li><i class="bi bi-geo-alt" aria-hidden="true"></i> Av. General Mascarenhas de Morais, 4969<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zona V - Umuarama/PR - CEP 87504-090</li>
-                        <li><i class="bi bi-telephone"></i> <a href="https://wa.me/554430554464" target="_blank">(44) 3055-4464</a></li>
-                        <li><i class="bi bi-envelope"></i> <a href="mailto:secretaria_pspaulo@hotmail.com">secretaria_pspaulo@hotmail.com</a></li>
-                        <li><i class="bi bi-clock"></i> Secretaria:<br>
+                        <li><i class="bi bi-telephone" aria-hidden="true"></i> <a href="https://wa.me/554430554464" target="_blank">(44) 3055-4464</a></li>
+                        <li><i class="bi bi-envelope" aria-hidden="true"></i> <a href="mailto:secretaria_pspaulo@hotmail.com">secretaria_pspaulo@hotmail.com</a></li>
+                        <li><i class="bi bi-clock" aria-hidden="true"></i> Secretaria:<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seg: 8h-12h / 14h-17h30<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qua-Sex: 8h-12h / 14h-17h30<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sáb: 8h-12h</li>
                         <li class="mt-2">
                             <a href="https://www.instagram.com/paroquiasaopauloumu" target="_blank" class="text-white me-3" title="Instagram">
-                                <i class="bi bi-instagram"></i> @paroquiasaopauloumu
+                                <i class="bi bi-instagram" aria-hidden="true"></i> @paroquiasaopauloumu
                             </a><br>
                             <a href="https://www.facebook.com/paroquiasaopauloumu" target="_blank" class="text-white" title="Facebook">
-                                <i class="bi bi-facebook"></i> Facebook
+                                <i class="bi bi-facebook" aria-hidden="true"></i> Facebook
                             </a>
                         </li>
                     </ul>
@@ -684,44 +695,7 @@
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Debug Script para ícones -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verifica se Bootstrap Icons está carregado
-            const testIcon = document.createElement('i');
-            testIcon.className = 'bi bi-house-door';
-            document.body.appendChild(testIcon);
-            
-            const computedStyle = window.getComputedStyle(testIcon, '::before');
-            const content = computedStyle.getPropertyValue('content');
-            
-            if (content && content !== 'none' && content !== '""') {
-                console.log('✅ Bootstrap Icons carregado corretamente');
-            } else {
-                console.error('❌ Bootstrap Icons não carregou');
-                console.log('Tentando carregar Bootstrap Icons como fallback...');
-                
-                // Fallback: carregar Bootstrap Icons novamente
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css';
-                document.head.appendChild(link);
-            }
-            
-            document.body.removeChild(testIcon);
-            
-            // Auto-dismiss alerts after 5 seconds
-            const alerts = document.querySelectorAll('.alert-dismissible');
-            alerts.forEach(function(alert) {
-                setTimeout(function() {
-                    const bsAlert = new bootstrap.Alert(alert);
-                    bsAlert.close();
-                }, 5000);
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     
     @stack('scripts')
 </body>

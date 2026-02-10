@@ -1,4 +1,1 @@
-@php
-    $component = 'card.placeholder';
-@endphp
-@include('components._device-resolver')
+@include('components.desktop.card.placeholder')

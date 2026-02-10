@@ -34,7 +34,7 @@
                             @else
                                 <div class="w-100 d-flex align-items-center justify-content-center"
                                      style="height: 400px; background: linear-gradient(135deg, var(--vermelho) 0%, var(--vermelho-profundo) 100%);">
-                                    <i data-lucide="user" style="width: 120px; height: 120px; color: white;"></i>
+                                    <i data-lucide="user" aria-hidden="true" style="width: 120px; height: 120px; color: white;"></i>
                                 </div>
                             @endif
                             <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(139, 28, 35, 0.95), transparent); padding: 60px 20px 20px;">
@@ -57,13 +57,13 @@
                                 <div class="border-top pt-3 mt-3">
                                     @if($member->email)
                                         <div class="d-flex align-items-center justify-content-center gap-2 mb-2">
-                                            <i data-lucide="mail" class="icon-paroquia text-vermelho"></i>
+                                            <i data-lucide="mail" aria-hidden="true" class="icon-paroquia text-vermelho"></i>
                                             <small class="text-muted">{{ $member->email }}</small>
                                         </div>
                                     @endif
                                     @if($member->phone)
                                         <div class="d-flex align-items-center justify-content-center gap-2">
-                                            <i data-lucide="phone" class="icon-paroquia text-vermelho"></i>
+                                            <i data-lucide="phone" aria-hidden="true" class="icon-paroquia text-vermelho"></i>
                                             <small class="text-muted">{{ $member->phone }}</small>
                                         </div>
                                     @endif
@@ -107,7 +107,7 @@
                         <div class="card-body-paroquia">
                             <div class="mb-3">
                                 <div class="d-flex align-items-start gap-2 mb-2">
-                                    <i data-lucide="map-pin" class="icon-paroquia text-vermelho mt-1"></i>
+                                    <i data-lucide="map-pin" aria-hidden="true" class="icon-paroquia text-vermelho mt-1"></i>
                                     <div>
                                         <strong>Endereço:</strong><br>
                                         {{ $chapel->address }}
@@ -121,7 +121,7 @@
 
                             @if($chapel->description)
                                 <div class="d-flex align-items-start gap-2 mb-3">
-                                    <i data-lucide="clock" class="icon-paroquia text-verde mt-1"></i>
+                                    <i data-lucide="clock" aria-hidden="true" class="icon-paroquia text-verde mt-1"></i>
                                     <div>
                                         <strong>Horário:</strong><br>
                                         {{ $chapel->description }}
@@ -134,7 +134,7 @@
                                     <a href="{{ $chapel->map_link }}" 
                                        target="_blank" 
                                        class="btn-paroquia btn-primary-paroquia w-100">
-                                        <i data-lucide="map" class="icon-paroquia"></i>
+                                        <i data-lucide="map" aria-hidden="true" class="icon-paroquia"></i>
                                         Ver no Mapa
                                     </a>
                                 </div>
@@ -178,7 +178,7 @@
                     testemunhando o amor de Cristo em cada ação.
                 </p>
                 <a href="{{ route('groups') }}" class="btn-paroquia btn-primary-paroquia">
-                    <i data-lucide="users" class="icon-paroquia"></i>
+                    <i data-lucide="users" aria-hidden="true" class="icon-paroquia"></i>
                     Conheça Nossas Pastorais
                 </a>
             </div>

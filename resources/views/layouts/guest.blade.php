@@ -6,6 +6,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Paróquia São Paulo Apóstolo') }}</title>
+    <meta name="description" content="@yield('meta_description', 'Acesse a Paróquia São Paulo Apóstolo: notícias, eventos, missas e comunidade.')">
+    <meta property="og:title" content="{{ config('app.name', 'Paróquia São Paulo Apóstolo') }}">
+    <meta property="og:description" content="@yield('meta_description', 'Acesse a Paróquia São Paulo Apóstolo: notícias, eventos, missas e comunidade.')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/sao-paulo-logo.png') }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ config('app.name', 'Paróquia São Paulo Apóstolo') }}">
+    <meta name="twitter:description" content="@yield('meta_description', 'Acesse a Paróquia São Paulo Apóstolo: notícias, eventos, missas e comunidade.')">
+    <meta name="twitter:image" content="{{ asset('images/sao-paulo-logo.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('images/sao-paulo-logo.png') }}">
 
@@ -17,6 +27,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-light">
+    <a class="visually-hidden-focusable" href="#main-content">Ir para o conteúdo</a>
     <!-- Header com logo da Paróquia -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
@@ -30,10 +41,10 @@
         </div>
     </nav>
 
-    <main class="min-vh-100 py-4">
+    <main id="main-content" tabindex="-1" class="min-vh-100 py-4">
         @yield('content')
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>

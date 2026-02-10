@@ -42,30 +42,30 @@
                         <div class="card-header-paroquia text-center">
                             <div class="mb-3">
                                 @if($group->image)
-                                    <img src="{{ asset('storage/' . $group->image) }}" 
+                                     <img src="{{ asset('storage/' . $group->image) }}" 
                                          alt="{{ $group->name }}" 
                                          class="rounded-circle"
-                                         style="width: 80px; height: 80px; object-fit: cover; border: 3px solid var(--accent-dourado);">
+                                         style="width: 80px; height: 80px; object-fit: cover; border: 3px solid var(--accent-dourado);" loading="lazy">
                                 @else
                                     @switch($group->category ?? 'geral')
                                         @case('catequese')
                                         @case('formation')
-                                            <i data-lucide="graduation-cap" class="icon-lg" style="width: 48px; height: 48px;"></i>
+                                            <i data-lucide="graduation-cap" aria-hidden="true" class="icon-lg" style="width: 48px; height: 48px;"></i>
                                             @break
                                         @case('liturgia')
                                         @case('liturgy')
-                                            <i data-lucide="church" class="icon-lg" style="width: 48px; height: 48px;"></i>
+                                            <i data-lucide="church" aria-hidden="true" class="icon-lg" style="width: 48px; height: 48px;"></i>
                                             @break
                                         @case('familia')
                                         @case('family')
-                                            <i data-lucide="home" class="icon-lg" style="width: 48px; height: 48px;"></i>
+                                            <i data-lucide="home" aria-hidden="true" class="icon-lg" style="width: 48px; height: 48px;"></i>
                                             @break
                                         @case('juventude')
                                         @case('youth')
-                                            <i data-lucide="zap" class="icon-lg" style="width: 48px; height: 48px;"></i>
+                                            <i data-lucide="zap" aria-hidden="true" class="icon-lg" style="width: 48px; height: 48px;"></i>
                                             @break
                                         @default
-                                            <i data-lucide="users" class="icon-lg" style="width: 48px; height: 48px;"></i>
+                                            <i data-lucide="users" aria-hidden="true" class="icon-lg" style="width: 48px; height: 48px;"></i>
                                     @endswitch
                                 @endif
                             </div>
@@ -77,21 +77,21 @@
                             
                             @if($group->coordinator_name)
                                 <div class="mb-2 small">
-                                    <i data-lucide="user" class="icon-paroquia text-vinho"></i>
+                                    <i data-lucide="user" aria-hidden="true" class="icon-paroquia text-vinho"></i>
                                     <strong>Coordenador:</strong> {{ $group->coordinator_name }}
                                 </div>
                             @endif
                             
                             @if($group->coordinator_phone)
                                 <div class="mb-2 small">
-                                    <i data-lucide="phone" class="icon-paroquia text-success"></i>
+                                    <i data-lucide="phone" aria-hidden="true" class="icon-paroquia text-success"></i>
                                     <a href="tel:{{ $group->coordinator_phone }}" class="text-decoration-none">{{ $group->coordinator_phone }}</a>
                                 </div>
                             @endif
                             
                             @if(!empty($group->meeting_info))
                                 <div class="small text-muted d-flex align-items-start gap-2 mt-3 pt-3 border-top">
-                                    <i data-lucide="calendar" class="icon-paroquia text-dourado"></i>
+                                    <i data-lucide="calendar" aria-hidden="true" class="icon-paroquia text-dourado"></i>
                                     <span>{{ $group->meeting_info }}</span>
                                 </div>
                             @endif
@@ -102,21 +102,21 @@
                                     {{-- Usuário já é membro deste grupo --}}
                                     <div class="alert mb-0 p-3" style="background-color: var(--bg-rose); border: 1px solid var(--dourado-suave); border-radius: 8px;">
                                         <div class="d-flex align-items-center">
-                                            <i data-lucide="check-circle" class="me-2" style="color: var(--brand-vinho); width: 20px; height: 20px;"></i>
+                                            <i data-lucide="check-circle" aria-hidden="true" class="me-2" style="color: var(--brand-vinho); width: 20px; height: 20px;"></i>
                                             <span class="fw-bold" style="color: var(--brand-vinho); font-size: 0.9rem;">Você é membro deste grupo!</span>
                                         </div>
                                     </div>
                                 @elseif($group->isFull())
                                     {{-- Grupo está cheio --}}
                                     <button class="btn btn-secondary w-100" disabled>
-                                        <i data-lucide="user-x" class="icon-paroquia"></i>
+                                        <i data-lucide="user-x" aria-hidden="true" class="icon-paroquia"></i>
                                         Grupo Completo
                                     </button>
                                 @else
                                     {{-- Usuário pode solicitar participação --}}
                                     <a href="{{ route('group-requests.create', ['group' => $group->id]) }}" 
                                        class="btn-paroquia btn-primary-paroquia w-100 d-flex align-items-center justify-content-center gap-2">
-                                        <i data-lucide="user-plus" class="icon-paroquia"></i>
+                                        <i data-lucide="user-plus" aria-hidden="true" class="icon-paroquia"></i>
                                         <span>Solicitar Participação</span>
                                     </a>
                                 @endif
@@ -124,7 +124,7 @@
                             @guest
                                 <a href="{{ route('login') }}" 
                                    class="btn-paroquia btn-primary-paroquia w-100 d-flex align-items-center justify-content-center gap-2">
-                                    <i data-lucide="log-in" class="icon-paroquia"></i>
+                                    <i data-lucide="log-in" aria-hidden="true" class="icon-paroquia"></i>
                                     <span>Entrar para Participar</span>
                                 </a>
                             @endguest
@@ -139,7 +139,7 @@
                 <div class="col-lg-6">
                     <div class="card-paroquia text-center p-5">
                         <div class="mb-4">
-                            <i data-lucide="users" class="icon-lg text-muted" style="width: 64px; height: 64px;"></i>
+                            <i data-lucide="users" aria-hidden="true" class="icon-lg text-muted" style="width: 64px; height: 64px;"></i>
                         </div>
                         <h3 class="text-muted mb-3">Nenhum grupo encontrado</h3>
                         <p class="text-muted">
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <i data-lucide="search" class="icon-lg text-vinho"></i>
+                        <i data-lucide="search" aria-hidden="true" class="icon-lg text-vinho"></i>
                     </div>
                     <h4 class="text-vinho">Explore as Pastorais</h4>
                     <p class="text-muted">Navegue pelos grupos disponíveis e encontre aquele que mais se alinha com seu carisma e chamado espiritual.</p>
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <i data-lucide="user-plus" class="icon-lg text-vinho"></i>
+                        <i data-lucide="user-plus" aria-hidden="true" class="icon-lg text-vinho"></i>
                     </div>
                     <h4 class="text-vinho">Solicite Participação</h4>
                     <p class="text-muted">Após fazer login, clique em "Solicitar Participação" no grupo escolhido e preencha sua solicitação.</p>
@@ -205,7 +205,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <i data-lucide="check-circle" class="icon-lg text-vinho"></i>
+                        <i data-lucide="check-circle" aria-hidden="true" class="icon-lg text-vinho"></i>
                     </div>
                     <h4 class="text-vinho">Aguarde a Aprovação</h4>
                     <p class="text-muted">O coordenador da pastoral avaliará sua solicitação e você receberá uma notificação com a resposta.</p>
@@ -230,16 +230,16 @@
                         <div class="col-lg-4 text-center">
                             @guest
                                 <a href="{{ route('register') }}" class="btn-paroquia btn-primary-paroquia w-100 mb-2 d-flex align-items-center justify-content-center gap-2">
-                                    <i data-lucide="user-plus" class="icon-paroquia"></i>
+                                    <i data-lucide="user-plus" aria-hidden="true" class="icon-paroquia"></i>
                                     <span>Criar Conta Grátis</span>
                                 </a>
                                 <a href="{{ route('login') }}" class="text-vinho text-decoration-none d-inline-flex align-items-center gap-2 mt-2" style="font-weight: 500;">
-                                    <i data-lucide="log-in" class="icon-paroquia"></i>
+                                    <i data-lucide="log-in" aria-hidden="true" class="icon-paroquia"></i>
                                     <span>Já tenho conta</span>
                                 </a>
                             @else
                                 <a href="{{ route('dashboard') }}" class="btn-paroquia btn-primary-paroquia w-100 d-flex align-items-center justify-content-center gap-2">
-                                    <i data-lucide="layout-dashboard" class="icon-paroquia"></i>
+                                    <i data-lucide="layout-dashboard" aria-hidden="true" class="icon-paroquia"></i>
                                     <span>Ir para Meu Painel</span>
                                 </a>
                             @endguest

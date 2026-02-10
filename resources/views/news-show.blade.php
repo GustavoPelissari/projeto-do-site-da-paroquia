@@ -64,7 +64,7 @@
             <div class="col-lg-8">
                 <article class="card-paroquia mb-5">
                     @if($news->featured_image)
-                        <img src="{{ asset('storage/' . $news->featured_image) }}" alt="{{ $news->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $news->featured_image) }}" alt="{{ $news->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;" loading="lazy">
                     @endif
                     
                     <div class="card-body p-4 p-md-5">
@@ -147,7 +147,7 @@
                                         <div class="col-md-4">
                                             <div class="card h-100 border-0 shadow-sm hover-shadow transition">
                                                 @if($item->featured_image)
-                                                    <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+                                                    <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 180px; object-fit: cover;" loading="lazy">
                                                 @else
                                                     <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
                                                         <i class="bi bi-image text-muted" style="font-size: 2.5rem;"></i>

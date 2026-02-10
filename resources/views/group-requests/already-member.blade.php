@@ -19,7 +19,7 @@
             <div class="card-paroquia mb-4" style="border: 2px solid var(--dourado-suave); box-shadow: 0 8px 20px rgba(139, 30, 63, 0.15);">
                 <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); color: white;">
                     <h2 class="card-title-paroquia mb-0">
-                        <i data-lucide="check-circle" class="me-2"></i>
+                        <i data-lucide="check-circle" aria-hidden="true" class="me-2"></i>
                         Seu Grupo Atual
                     </h2>
                 </div>
@@ -34,7 +34,7 @@
                         @else
                             <div class="rounded-3 me-4 d-flex align-items-center justify-content-center text-white" 
                                  style="width: 120px; height: 120px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); border: 3px solid var(--dourado-suave);">
-                                <i data-lucide="users" style="width: 48px; height: 48px;"></i>
+                                <i data-lucide="users" aria-hidden="true" style="width: 48px; height: 48px;"></i>
                             </div>
                         @endif
                         
@@ -55,7 +55,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                              style="width: 40px; height: 40px; background-color: var(--bg-rose);">
-                                            <i data-lucide="user" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
+                                            <i data-lucide="user" aria-hidden="true" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
                                         </div>
                                         <div>
                                             <small class="text-muted d-block" style="font-size: 0.75rem;">Coordenador(a)</small>
@@ -70,7 +70,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                              style="width: 40px; height: 40px; background-color: var(--bg-rose);">
-                                            <i data-lucide="calendar" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
+                                            <i data-lucide="calendar" aria-hidden="true" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
                                         </div>
                                         <div>
                                             <small class="text-muted d-block" style="font-size: 0.75rem;">Encontros</small>
@@ -84,7 +84,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                              style="width: 40px; height: 40px; background-color: var(--bg-rose);">
-                                            <i data-lucide="tag" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
+                                            <i data-lucide="tag" aria-hidden="true" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
                                         </div>
                                         <div>
                                             <small class="text-muted d-block" style="font-size: 0.75rem;">Categoria</small>
@@ -97,7 +97,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
                                              style="width: 40px; height: 40px; background-color: var(--bg-rose);">
-                                            <i data-lucide="users-2" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
+                                            <i data-lucide="users-2" aria-hidden="true" style="width: 20px; height: 20px; color: var(--brand-vinho);"></i>
                                         </div>
                                         <div>
                                             <small class="text-muted d-block" style="font-size: 0.75rem;">Membros</small>
@@ -110,7 +110,7 @@
                             @if($currentGroup->requires_scale)
                             <div class="alert mt-4 mb-0" style="background-color: var(--bg-rose); border-left: 4px solid var(--dourado-suave); border-radius: 8px;">
                                 <div class="d-flex align-items-center">
-                                    <i data-lucide="calendar-check" class="me-2" style="color: var(--brand-vinho); width: 24px; height: 24px;"></i>
+                                    <i data-lucide="calendar-check" aria-hidden="true" class="me-2" style="color: var(--brand-vinho); width: 24px; height: 24px;"></i>
                                     <div>
                                         <strong style="color: var(--brand-vinho);">Escalas Disponíveis</strong>
                                         <p class="mb-0 small text-muted">
@@ -129,7 +129,7 @@
             <div class="card-paroquia">
                 <div class="card-header-paroquia">
                     <h3 class="card-title-paroquia mb-0">
-                        <i data-lucide="info" class="me-2"></i>
+                        <i data-lucide="info" aria-hidden="true" class="me-2"></i>
                         Por que não posso solicitar outro grupo?
                     </h3>
                 </div>
@@ -137,7 +137,7 @@
                     <div class="d-flex align-items-start mb-3">
                         <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
                              style="width: 50px; height: 50px; background-color: var(--bg-rose);">
-                            <i data-lucide="shield-check" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
+                            <i data-lucide="shield-check" aria-hidden="true" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
                         </div>
                         <div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Dedicação e Compromisso</h5>
@@ -151,7 +151,7 @@
                     <div class="d-flex align-items-start mb-3">
                         <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
                              style="width: 50px; height: 50px; background-color: var(--bg-rose);">
-                            <i data-lucide="heart-handshake" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
+                            <i data-lucide="heart-handshake" aria-hidden="true" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
                         </div>
                         <div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Como mudar de grupo?</h5>
@@ -165,7 +165,7 @@
                     <div class="d-flex align-items-start">
                         <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
                              style="width: 50px; height: 50px; background-color: var(--bg-rose);">
-                            <i data-lucide="phone" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
+                            <i data-lucide="phone" aria-hidden="true" style="width: 24px; height: 24px; color: var(--brand-vinho);"></i>
                         </div>
                         <div>
                             <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Precisa de ajuda?</h5>
@@ -174,11 +174,11 @@
                             </p>
                             <div class="d-flex gap-3 flex-wrap">
                                 <a href="tel:+5518999999999" class="text-decoration-none" style="color: var(--brand-vinho);">
-                                    <i data-lucide="phone" class="icon-paroquia"></i>
+                                    <i data-lucide="phone" aria-hidden="true" class="icon-paroquia"></i>
                                     (18) 99999-9999
                                 </a>
                                 <a href="mailto:contato@paroquia.com" class="text-decoration-none" style="color: var(--brand-vinho);">
-                                    <i data-lucide="mail" class="icon-paroquia"></i>
+                                    <i data-lucide="mail" aria-hidden="true" class="icon-paroquia"></i>
                                     contato@paroquia.com
                                 </a>
                             </div>
@@ -190,19 +190,19 @@
             <!-- Botões de Ação -->
             <div class="d-flex gap-3 mt-4 flex-wrap">
                 <a href="{{ route('dashboard') }}" class="btn-paroquia btn-primary-paroquia">
-                    <i data-lucide="home" class="icon-paroquia"></i>
+                    <i data-lucide="home" aria-hidden="true" class="icon-paroquia"></i>
                     Voltar ao Início
                 </a>
                 
                 @if($currentGroup->requires_scale)
                 <a href="{{ route('user.scales.index') }}" class="btn-paroquia btn-outline-paroquia">
-                    <i data-lucide="calendar-days" class="icon-paroquia"></i>
+                    <i data-lucide="calendar-days" aria-hidden="true" class="icon-paroquia"></i>
                     Ver Minhas Escalas
                 </a>
                 @endif
 
                 <a href="{{ route('groups') }}" class="btn-paroquia btn-outline-paroquia">
-                    <i data-lucide="users" class="icon-paroquia"></i>
+                    <i data-lucide="users" aria-hidden="true" class="icon-paroquia"></i>
                     Conhecer Outros Grupos
                 </a>
             </div>

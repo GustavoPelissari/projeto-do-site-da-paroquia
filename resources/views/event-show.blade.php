@@ -29,27 +29,27 @@
             <div class="col-lg-8 mx-auto">
                 <article class="card-paroquia">
                     @if($event->image)
-                        <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;">
+                        <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;" loading="lazy">
                     @endif
                     
                     <div class="card-body">
                         <!-- Metadados -->
                         <div class="d-flex flex-wrap gap-3 mb-4 pb-3 border-bottom">
                             <div class="d-flex align-items-center text-muted">
-                                <i class="bi bi-calendar3 me-2"></i>
+                                <i class="bi bi-calendar3 me-2" aria-hidden="true"></i>
                                 <span>{{ $event->start_date->format('d/m/Y') }}</span>
                             </div>
                             
                             @if($event->start_date)
                                 <div class="d-flex align-items-center text-muted">
-                                    <i class="bi bi-clock me-2"></i>
+                                    <i class="bi bi-clock me-2" aria-hidden="true"></i>
                                     <span>{{ $event->start_date->format('H:i') }}</span>
                                 </div>
                             @endif
                             
                             @if($event->location)
                                 <div class="d-flex align-items-center text-muted">
-                                    <i class="bi bi-geo-alt me-2"></i>
+                                    <i class="bi bi-geo-alt me-2" aria-hidden="true"></i>
                                     <span>{{ $event->location }}</span>
                                 </div>
                             @endif
@@ -120,7 +120,7 @@
                         <!-- Botão Voltar -->
                         <div class="mt-4 pt-3 border-top">
                             <a href="{{ route('events') }}" class="btn btn-outline-success">
-                                <i class="bi bi-arrow-left me-2"></i>Voltar para Eventos
+                                <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>Voltar para Eventos
                             </a>
                         </div>
                     </div>

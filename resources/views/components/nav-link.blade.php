@@ -1,4 +1,1 @@
-@php
-    $component = 'nav-link';
-@endphp
-@include('components._device-resolver')
+@include('components.desktop.nav-link')

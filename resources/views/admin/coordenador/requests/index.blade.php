@@ -10,7 +10,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <h1 class="h2 fw-bold mb-2" style="color: #FFFFFF;">
-                        <i class="bi bi-envelope-check"></i> Solicitações de Entrada
+                        <i class="bi bi-envelope-check" aria-hidden="true"></i> Solicitações de Entrada
                     </h1>
                     <p class="mb-0" style="color: #FFD66B;">
                         Gerencie as solicitações de entrada para {{ Auth::user()->parishGroup->name ?? 'seu grupo' }}
@@ -30,7 +30,7 @@
         @if($requests->count() > 0)
             <div class="card-header bg-white border-0 py-3">
                 <h5 class="mb-0 fw-bold">
-                    <i class="bi bi-clock-history text-warning"></i> Solicitações Pendentes
+                    <i class="bi bi-clock-history text-warning" aria-hidden="true"></i> Solicitações Pendentes
                 </h5>
             </div>
             
@@ -62,16 +62,16 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <i class="bi bi-envelope text-muted me-1"></i>
+                                    <i class="bi bi-envelope text-muted me-1" aria-hidden="true"></i>
                                     {{ $request->user->email }}
                                 </td>
                                 <td>
-                                    <i class="bi bi-telephone text-muted me-1"></i>
+                                    <i class="bi bi-telephone text-muted me-1" aria-hidden="true"></i>
                                     {{ $request->user->phone ?? 'Não informado' }}
                                 </td>
                                 <td>
                                     <div>
-                                        <i class="bi bi-calendar-event text-muted me-1"></i>
+                                        <i class="bi bi-calendar-event text-muted me-1" aria-hidden="true"></i>
                                         <small>{{ $request->created_at->format('d/m/Y H:i') }}</small>
                                     </div>
                                     <small class="text-muted fst-italic">
@@ -84,7 +84,7 @@
                                         <form action="{{ route('admin.coordenador.requests.approve', $request) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="btn btn-success btn-sm" title="Aprovar e adicionar ao grupo imediatamente">
-                                                <i class="bi bi-check-circle-fill"></i>
+                                                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                                                 Aprovar
                                             </button>
                                         </form>
@@ -95,7 +95,7 @@
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#formationModal{{ $request->id }}"
                                                 title="Marcar como 'Em Formação'">
-                                            <i class="bi bi-book-fill text-white"></i>
+                                            <i class="bi bi-book-fill text-white" aria-hidden="true"></i>
                                             Formação
                                         </button>
 
@@ -106,7 +106,7 @@
                                                     class="btn btn-danger btn-sm" 
                                                     onclick="return confirm('Tem certeza que deseja rejeitar esta solicitação?')" 
                                                     title="Rejeitar solicitação">
-                                                <i class="bi bi-x-circle-fill"></i>
+                                                <i class="bi bi-x-circle-fill" aria-hidden="true"></i>
                                                 Rejeitar
                                             </button>
                                         </form>
@@ -118,7 +118,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header" style="background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);">
                                                     <h5 class="modal-title text-white" id="formationModalLabel{{ $request->id }}">
-                                                        <i class="bi bi-book-fill me-2"></i>Marcar como "Em Formação"
+                                                        <i class="bi bi-book-fill me-2" aria-hidden="true"></i>Marcar como "Em Formação"
                                                     </h5>
                                                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
                                                 </div>
@@ -126,7 +126,7 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="alert alert-info">
-                                                            <i class="bi bi-info-circle me-2"></i>
+                                                            <i class="bi bi-info-circle me-2" aria-hidden="true"></i>
                                                             O candidato receberá uma mensagem informando que precisa realizar formação antes de ser aprovado.
                                                         </div>
 
@@ -148,10 +148,10 @@ Coordenador(a): {{ Auth::user()->name }}</textarea>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                                                            <i class="bi bi-x-circle me-1" aria-hidden="true"></i>Cancelar
                                                         </button>
                                                         <button type="submit" class="btn btn-warning">
-                                                            <i class="bi bi-check-circle me-1"></i>Marcar como Em Formação
+                                                            <i class="bi bi-check-circle me-1" aria-hidden="true"></i>Marcar como Em Formação
                                                         </button>
                                                     </div>
                                                 </form>
@@ -175,7 +175,7 @@ Coordenador(a): {{ Auth::user()->name }}</textarea>
             <!-- Estado Vazio -->
             <div class="card-body text-center py-5">
                 <div class="mb-4">
-                    <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+                    <i class="bi bi-check-circle-fill text-success" aria-hidden="true" style="font-size: 5rem;"></i>
                 </div>
                 <h3 class="fw-bold mb-3">Nenhuma solicitação pendente</h3>
                 <p class="text-muted mb-0">
