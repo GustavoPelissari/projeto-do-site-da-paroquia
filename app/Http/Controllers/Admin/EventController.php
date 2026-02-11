@@ -29,21 +29,21 @@ class EventController extends Controller
                     break;
                 case 'this_month':
                     $query->whereMonth('start_date', now()->month)
-                        ->whereYear('start_date', now()->year);
+                          ->whereYear('start_date', now()->year);
                     break;
             }
         }
 
         // Search in title and description
         if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('title', 'like', '%'.$request->search.'%')
-                    ->orWhere('description', 'like', '%'.$request->search.'%');
+            $query->where(function($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%');
             });
         }
 
         $events = $query->latest('start_date')->paginate(10);
-
+        
         return view('admin.events.index', compact('events'));
     }
 

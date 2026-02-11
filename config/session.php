@@ -47,43 +47,7 @@ return [
     |
     */
 
-    'encrypt' => env('SESSION_ENCRYPT', true),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Session Cookie Secure Flag
-    |--------------------------------------------------------------------------
-    |
-    | When this option is set to true, the session cookie will only be sent
-    | over HTTPS connections. This is required for production security.
-    |
-    */
-
-    'secure' => env('SESSION_SECURE_COOKIE', env('APP_ENV') === 'production'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Session Cookie HttpOnly Flag
-    |--------------------------------------------------------------------------
-    |
-    | Setting this to true makes the session cookie inaccessible to JavaScript,
-    | protecting against XSS attacks.
-    |
-    */
-
-    'http_only' => env('SESSION_HTTP_ONLY', true),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Session Cookie SameSite Attribute
-    |--------------------------------------------------------------------------
-    |
-    | Protect against CSRF attacks by restricting cookie sending across sites.
-    | Values: 'strict', 'lax', 'none'
-    |
-    */
-
-    'same_site' => env('SESSION_SAME_SITE', 'strict'),
+    'encrypt' => env('SESSION_ENCRYPT', false),
 
     /*
     |--------------------------------------------------------------------------

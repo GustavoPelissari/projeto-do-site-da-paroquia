@@ -1,115 +1,92 @@
-@extends('layout')
+﻿@extends('layouts.public')
 
 @section('title', 'Paróquia São Paulo Apóstolo - Diocese de Umuarama')
-@section('meta_description', 'Bem-vindo à Paróquia São Paulo Apóstolo em Umuarama. Confira nossa agenda de missas, eventos, grupos paroquiais e notícias da comunidade católica.')
-
-@push('styles')
-<style>
-/* Lazy loading para imagens */
-img[loading="lazy"] {
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-img[loading="lazy"].loaded {
-    opacity: 1;
-}
-</style>
-@endpush
+@section('description', 'Paróquia São Paulo Apóstolo em Umuarama - PR. Comunidade católica acolhedora com missas, sacramentos, pastorais e eventos. Venha fazer parte da nossa família de fé.')
 
 @section('content')
-<!-- Hero Section Moderno -->
-<header class="hero-paroquia">
+<!-- Hero Section -->
+<section class="hero-paroquia animate-on-scroll">
     <div class="hero-content">
         <div class="container">
             <div class="row justify-content-center text-center">
-                <div class="col-lg-10">
-                    <h1 class="display-4 fw-bold mb-4">Bem-vindos à nossa paróquia</h1>
-                    <p class="lead mb-4">Onde a fé encontra acolhimento e a esperança se renova</p>
-                    <p class="mb-5" style="font-size: 1.1rem; opacity: 0.9; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); max-width: 600px; margin: 0 auto;">
+                <div class="col-lg-8">
+                    <h1 class="mb-4" style="font-size: 3rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+                        Bem-vindos à nossa paroquia
+                    </h1>
+                    <p class="lead mb-4" style="font-size: 1.25rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+                        Igreja: lugar onde a cidade encontra a graça
+                    </p>
+                    <p class="mb-5" style="font-size: 1.1rem; opacity: 0.9; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
                         Somos uma comunidade católica inspirada no exemplo de São Paulo Apóstolo, 
                         dedicada a evangelizar, acolher e servir com amor e esperança.
                     </p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                        <a href="{{ route('masses') }}" class="btn-hero btn-hero-primary">
+                            <i data-lucide="clock"></i>
+                            Ver Horários de Missa
+                        </a>
                         <a href="#proxima-missa" class="btn-hero btn-hero-outline">
-                            <i data-lucide="calendar-check" aria-hidden="true" style="width: 20px; height: 20px;"></i>
-                            Ver todos os horários
+                            <i data-lucide="calendar-check"></i>
+                            Próxima Celebração
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</header>
+</section>
 
-<!-- Próxima Missa - Card Moderno -->
+<!-- Próxima Missa -->
 <section id="proxima-missa" class="section-paroquia animate-on-scroll">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card-paroquia text-center p-4 proxima-missa-card">
+                <div class="card-paroquia text-center p-4">
                     <div class="card-header-paroquia mb-4">
                         <h3 class="mb-0">
-                            <i data-lucide="clock" aria-hidden="true" class="icon-lg text-white me-2" style="width: 32px; height: 32px;"></i>
+                            <i data-lucide="church" class="icon-lg text-dourado me-2"></i>
                             Próxima Missa
                         </h3>
                     </div>
-                    
-                    @if($masses->isNotEmpty())
-                        @php
-                            $proximaMissa = $masses->first();
-                            $diasSemana = [
-                                0 => 'Domingo', 1 => 'Segunda', 2 => 'Terça', 3 => 'Quarta',
-                                4 => 'Quinta', 5 => 'Sexta', 6 => 'Sábado'
-                            ];
-                            
-                            // Converter string do dia da semana para número
-                            $diasParaNumero = [
-                                'sunday' => 0, 'monday' => 1, 'tuesday' => 2, 'wednesday' => 3,
-                                'thursday' => 4, 'friday' => 5, 'saturday' => 6
-                            ];
-                            
-                            // Calcular próxima data baseada no dia da semana
-                            $hoje = now();
-                            $diaAtual = $hoje->dayOfWeek;
-                            $diaDaMissa = $diasParaNumero[$proximaMissa->day_of_week] ?? 0;
-                            $diasParaProxima = ($diaDaMissa - $diaAtual + 7) % 7;
-                            if ($diasParaProxima == 0) $diasParaProxima = 7; // Próxima semana se for hoje
-                            $dataProxima = $hoje->addDays($diasParaProxima);
-                        @endphp
-                        
-                        <div class="row text-center align-items-center">
-                            <div class="col-md-4 mb-3 mb-md-0">
-                                <div class="d-flex flex-column">
-                                    <small class="text-muted mb-1">{{ $diasParaProxima <= 1 ? 'Hoje' : $diasSemana[$diaDaMissa] }}</small>
-                                    <h5 class="mb-0 text-vinho fw-bold">{{ $dataProxima->format('d/m/Y') }}</h5>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3 mb-md-0">
-                                <div class="d-flex flex-column">
-                                    <small class="text-muted mb-1">Horário</small>
-                                    <h4 class="mb-0 text-vinho fw-bold">{{ $proximaMissa->time->format('H:i') }}</h4>
+                    <div id="proxima-missa-info">
+                        <!-- Conteúdo será atualizado dinamicamente pelo JavaScript -->
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div class="proxima-missa-item">
+                                    <i class="bi bi-calendar3"></i>
+                                    <div>
+                                        <strong>Carregando...</strong>
+                                        <br>
+                                        <small>Data</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="d-flex flex-column">
-                                    <small class="text-muted mb-1">Local</small>
-                                    <h5 class="mb-0 text-vinho fw-bold">{{ $proximaMissa->location ?? 'Igreja Matriz' }}</h5>
+                                <div class="proxima-missa-item">
+                                    <i class="bi bi-clock"></i>
+                                    <div>
+                                        <strong>--:--</strong>
+                                        <br>
+                                        <small>Horário</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="proxima-missa-item">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <div>
+                                        <strong>Igreja Matriz</strong>
+                                        <br>
+                                        <small>Local</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    @else
-                        <div class="text-center py-4">
-                            <i data-lucide="calendar-x" aria-hidden="true" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
-                            <h5 class="text-muted">Nenhuma missa programada</h5>
-                            <p class="text-muted mb-0">Entre em contato para mais informações</p>
-                        </div>
-                    @endif
-                    
+                    </div>
                     <div class="mt-4">
-                        <a href="{{ route('masses') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                            <i data-lucide="calendar" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
-                            Ver todos os horários
+                        <a href="{{ route('masses') }}" class="btn-hero btn-hero-primary">
+                            <i data-lucide="calendar"></i>
+                            Ver Todos os Horários
                         </a>
                     </div>
                 </div>
@@ -118,122 +95,56 @@ img[loading="lazy"].loaded {
     </div>
 </section>
 
-<!-- Horários de Missa -->
-<section class="section-paroquia animate-on-scroll" style="background: white;">
+<!-- Nossa Missão -->
+<section class="section-paroquia section-bg-bege animate-on-scroll">
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-lg-8">
-                <h2 class="text-vinho mb-3">Horários das Celebrações</h2>
+                <h2 class="mb-4">Nossa Missão</h2>
                 <p class="lead text-muted">
-                    Participe das nossas celebrações semanais e fortaleça sua fé em comunidade
+                    Inspirados no exemplo de São Paulo Apóstolo, somos uma comunidade que 
+                    acolhe, evangeliza e serve com amor fraterno.
                 </p>
             </div>
         </div>
         
-        @if($masses->isNotEmpty())
-            <div class="horarios-grid">
-                @foreach($masses as $mass)
-                    @php
-                        $diasSemana = [
-                            'sunday' => 'Domingo', 'monday' => 'Segunda-feira', 'tuesday' => 'Terça-feira', 
-                            'wednesday' => 'Quarta-feira', 'thursday' => 'Quinta-feira', 'friday' => 'Sexta-feira', 
-                            'saturday' => 'Sábado'
-                        ];
-                        $diasNumeros = [
-                            'sunday' => 0, 'monday' => 1, 'tuesday' => 2, 'wednesday' => 3,
-                            'thursday' => 4, 'friday' => 5, 'saturday' => 6
-                        ];
-                    @endphp
-                    <div class="horario-card animate-on-scroll">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <div>
-                                <h5 class="text-vinho fw-bold mb-1">{{ $diasSemana[$mass->day_of_week] ?? $mass->day_of_week }}</h5>
-                                <p class="text-muted mb-0 small">{{ $mass->location ?? 'Igreja Matriz' }}</p>
-                            </div>
-                            <div class="text-end">
-                                <h4 class="text-vinho fw-bold mb-0">{{ $mass->time->format('H:i') }}</h4>
-                                @if($mass->day_of_week == 'sunday')
-                                    <span class="badge bg-vinho text-white small">Missa Principal</span>
-                                @endif
-                            </div>
-                        </div>
-                        
-                        @if($mass->description)
-                            <p class="text-muted small mb-3">{{ $mass->description }}</p>
-                        @endif
-                        
-                        <div class="d-flex align-items-center text-muted small">
-                            <i data-lucide="clock" aria-hidden="true" class="me-2" style="width: 14px; height: 14px;"></i>
-                            <span>Chegue 15 minutos antes do início</span>
-                        </div>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card-paroquia h-100 text-center p-4">
+                    <div class="mb-4">
+                        <i data-lucide="book-open" class="icon-lg text-vermelho mb-3"></i>
+                        <h4>Palavra de Deus</h4>
                     </div>
-                @endforeach
-            </div>
-        @else
-            <div class="text-center py-5">
-                <i data-lucide="calendar-plus" aria-hidden="true" class="text-muted mb-3" style="width: 64px; height: 64px;"></i>
-                <h4 class="text-muted">Horários em breve</h4>
-                <p class="text-muted">Os horários das missas serão divulgados em breve.</p>
-            </div>
-        @endif
-    </div>
-</section>
-
-<!-- Quem Somos -->
-<section class="section-paroquia animate-on-scroll" style="background: var(--bg-rose);">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="pe-lg-4">
-                    <h2 class="text-vinho mb-4">Nossa Comunidade</h2>
-                    <p class="lead text-muted mb-4">
-                        Somos uma paróquia católica dedicada a seguir os ensinamentos de Jesus Cristo, 
-                        inspirados no exemplo missionário de São Paulo Apóstolo.
+                    <p class="text-muted">
+                        Aprofundamos nossa fé através do estudo das Escrituras e da tradição apostólica, 
+                        seguindo o exemplo de São Paulo em suas cartas às primeiras comunidades.
                     </p>
-                    <div class="d-flex align-items-start mb-3">
-                        <div class="icon-feature me-3">
-                            <i data-lucide="heart" aria-hidden="true" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-vinho fw-semibold mb-2">Amor e Acolhimento</h5>
-                            <p class="text-muted mb-0">Recebemos a todos com carinho e respeito, construindo uma família de fé unida.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-start mb-3">
-                        <div class="icon-feature me-3">
-                            <i data-lucide="users" aria-hidden="true" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-vinho fw-semibold mb-2">Comunidade Ativa</h5>
-                            <p class="text-muted mb-0">Participamos ativamente da vida comunitária através de pastorais e grupos de oração.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-start mb-4">
-                        <div class="icon-feature me-3">
-                            <i data-lucide="book-open" aria-hidden="true" style="width: 24px; height: 24px;"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-vinho fw-semibold mb-2">Formação e Fé</h5>
-                            <p class="text-muted mb-0">Oferecemos formação cristã para todas as idades, fortalecendo nossa caminhada espiritual.</p>
-                        </div>
-                    </div>
-                    <a href="{{ route('about') }}" class="btn btn-outline-vinho rounded-pill px-4 py-2">
-                        <i data-lucide="arrow-right" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
-                        Conheça Nossa Paróquia
-                    </a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="d-flex flex-column align-items-center justify-content-center h-100">
-                    <img src="{{ asset('images/Imagem_da_paroquia.png') }}" 
-                         alt="Igreja Matriz São Paulo Apóstolo" 
-                         class="img-fluid rounded-3 igreja-matriz-img"
-                         style="max-height: 450px; width: auto; border-radius: 1rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transition: transform 0.4s ease, box-shadow 0.4s ease;"
-                         loading="lazy">
-                    <div class="mt-4 text-center">
-                        <h4 class="fw-bold mb-2 text-vinho">Igreja Matriz</h4>
-                        <p class="mb-0 text-secondary">São Paulo Apóstolo - Diocese de Umuarama</p>
+            
+            <div class="col-lg-4">
+                <div class="card-paroquia h-100 text-center p-4">
+                    <div class="mb-4">
+                        <i data-lucide="heart" class="icon-lg text-vermelho mb-3"></i>
+                        <h4>Caridade</h4>
                     </div>
+                    <p class="text-muted">
+                        Praticamos o amor ao próximo através de obras de misericórdia e serviço 
+                        aos mais necessitados de nossa comunidade e além dela.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card-paroquia h-100 text-center p-4">
+                    <div class="mb-4">
+                        <i data-lucide="users" class="icon-lg text-vermelho mb-3"></i>
+                        <h4>Comunhão</h4>
+                    </div>
+                    <p class="text-muted">
+                        Vivemos em fraternidade, compartilhando a alegria do Evangelho e 
+                        crescendo juntos na caminhada da fé como uma verdadeira família.
+                    </p>
                 </div>
             </div>
         </div>
@@ -242,67 +153,53 @@ img[loading="lazy"].loaded {
 
 <!-- Pastorais em Destaque -->
 @if(isset($groups) && $groups->count() > 0)
-<section class="section-paroquia animate-on-scroll" style="background: white;">
+<section class="section-paroquia animate-on-scroll">
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-lg-8">
-                <h2 class="text-vinho mb-3">Pastorais e Movimentos</h2>
+                <h2 class="mb-4">Pastorais e Movimentos</h2>
                 <p class="lead text-muted">
                     Encontre seu lugar de serviço e crescimento espiritual em nossa comunidade
                 </p>
             </div>
         </div>
         
-        <div class="pastorais-grid">
+        <div class="row g-4">
             @foreach($groups->take(6) as $group)
-                <div class="pastoral-card animate-on-scroll">
-                    <div class="pastoral-header">
-                        <div class="pastoral-icon">
-                            @if($group->image)
-                                  <img src="{{ asset('storage/' . $group->image) }}" 
-                                      alt="{{ $group->name }}" 
-                                      class="rounded-circle"
-                                      style="width: 64px; height: 64px; object-fit: cover;" loading="lazy">
-                            @else
-                                <i data-lucide="users" aria-hidden="true" style="width: 32px; height: 32px;"></i>
-                            @endif
+            <div class="col-lg-4 col-md-6">
+                <div class="card-paroquia h-100">
+                    <div class="card-header-paroquia text-center">
+                        <div class="mb-3">
+                            <i data-lucide="users" class="icon-lg text-vermelho"></i>
                         </div>
-                        <h4 class="pastoral-title">{{ $group->name }}</h4>
-                        @if($group->coordinator_name)
-                            <p class="text-muted small mb-0">
-                                <i data-lucide="user" aria-hidden="true" style="width: 14px; height: 14px;"></i>
-                                {{ $group->coordinator_name }}
-                            </p>
-                        @endif
+                        <h5 class="mb-0">{{ $group->name }}</h5>
                     </div>
-                    
-                    <div class="pastoral-content">
-                        <p class="pastoral-description">
-                            {{ Str::limit($group->description ?? 'Grupo ativo da nossa paróquia dedicado ao serviço e crescimento espiritual da comunidade.', 120) }}
-                        </p>
+                    <div class="card-body">
+                        <p class="text-muted mb-3">{{ Str::limit($group->description ?? 'Grupo ativo da nossa paróquia', 100) }}</p>
                         
-                        <div class="pastoral-action">
+                        <div class="text-center">
                             @auth
                                 <a href="{{ route('group-requests.create', ['group' => $group->id]) }}" 
-                                   class="btn btn-outline-vinho rounded-pill px-4 py-2">
-                                    <i data-lucide="user-plus" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
+                                   class="btn-paroquia btn-outline-paroquia">
+                                    <i data-lucide="user-plus" class="icon-paroquia"></i>
                                     Participar
                                 </a>
                             @else
-                                <a href="{{ route('login') }}" class="btn btn-outline-vinho rounded-pill px-4 py-2">
-                                    <i data-lucide="log-in" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
+                                <a href="{{ route('login') }}" class="btn-paroquia btn-outline-paroquia">
+                                    <i data-lucide="log-in" class="icon-paroquia"></i>
                                     Entrar para Participar
                                 </a>
                             @endauth
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
         
         <div class="text-center mt-5">
-            <a href="{{ route('groups') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                <i data-lucide="arrow-right" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
+            <a href="{{ route('groups') }}" class="btn-paroquia btn-primary-paroquia">
+                <i data-lucide="arrow-right" class="icon-paroquia"></i>
                 Ver Todas as Pastorais
             </a>
         </div>
@@ -310,209 +207,133 @@ img[loading="lazy"].loaded {
 </section>
 @endif
 
-<!-- Notícias -->
-@if($news->isNotEmpty())
-<section class="section-paroquia animate-on-scroll" style="background: var(--bg-rose);">
+<!-- Horários de Missa -->
+@if(isset($masses) && $masses->count() > 0)
+<section class="section-paroquia section-bg-verde animate-on-scroll">
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-lg-8">
-                <h2 class="text-vinho mb-3">Últimas Notícias</h2>
+                <h2 class="mb-4">Horários de Missas</h2>
                 <p class="lead text-muted">
-                    Fique por dentro das atividades e eventos da nossa comunidade paroquial
+                    Venha participar de nossas celebrações eucarísticas durante a semana
                 </p>
             </div>
         </div>
         
-        <div class="noticias-grid">
-            @foreach($news->take(3) as $noticia)
-                <article class="noticia-card animate-on-scroll">
-                    @if($noticia->featured_image)
-                        <div class="noticia-image">
-                            <img src="{{ asset('storage/' . $noticia->featured_image) }}" 
-                                 alt="{{ $noticia->title }}"
-                                 loading="lazy">
-                        </div>
-                    @else
-                        <div class="noticia-image noticia-placeholder">
-                            <i data-lucide="image" aria-hidden="true" style="width: 48px; height: 48px; opacity: 0.3;"></i>
-                        </div>
-                    @endif
-                    
-                    <div class="noticia-content">
-                        <div class="noticia-meta">
-                            <time class="text-muted">
-                                <i data-lucide="calendar" aria-hidden="true" class="me-1" style="width: 14px; height: 14px;"></i>
-                                {{ $noticia->created_at->format('d/m/Y') }}
-                            </time>
-                        </div>
-                        
-                        <h4 class="noticia-title">
-                            <a href="{{ route('news.show', $noticia->id) }}" class="text-decoration-none text-vinho">{{ $noticia->title }}</a>
-                        </h4>
-                        
-                        <p class="noticia-excerpt">
-                            {{ Str::limit(strip_tags($noticia->content), 120) }}
-                        </p>
-                        
-                        <a href="{{ route('news.show', $noticia->id) }}" class="btn btn-sm btn-outline-vinho rounded-pill">
-                            Ler mais
-                            <i data-lucide="arrow-right" aria-hidden="true" class="ms-1" style="width: 14px; height: 14px;"></i>
-                        </a>
+        <div class="row g-4 justify-content-center">
+            @foreach($masses->take(6) as $mass)
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card-paroquia text-center p-4">
+                    <h5 class="text-vermelho mb-3">{{ ucfirst($mass->day_of_week) }}</h5>
+                    <div class="mb-3">
+                        <i data-lucide="clock" class="icon-lg text-dourado"></i>
                     </div>
-                </article>
-            @endforeach
-        </div>
-        
-        <div class="text-center mt-5">
-            <a href="{{ route('news') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                <i data-lucide="newspaper" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
-                Ver todas as notícias
-            </a>
-        </div>
-    </div>
-</section>
-@endif
-
-<!-- Eventos -->
-@if($events->isNotEmpty())
-<section class="section-paroquia animate-on-scroll" style="background: white;">
-    <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-            <div class="col-lg-8">
-                <h2 class="text-vinho mb-3">Próximos Eventos</h2>
-                <p class="lead text-muted">
-                    Participe dos eventos e atividades da nossa comunidade paroquial
-                </p>
-            </div>
-        </div>
-        
-        <div class="eventos-grid">
-            @foreach($events->take(3) as $event)
-                <div class="evento-card animate-on-scroll">
-                    <div class="evento-date">
-                        <span class="dia">{{ $event->start_date ? $event->start_date->format('d') : '--' }}</span>
-                        <span class="mes">{{ $event->start_date ? $event->start_date->translatedFormat('M') : '--' }}</span>
-                    </div>
-                    
-                    <div class="evento-content">
-                        <h4 class="evento-title">{{ $event->title }}</h4>
-                        <div class="evento-meta">
-                            <div class="d-flex align-items-center text-muted mb-2">
-                                <i data-lucide="clock" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
-                                <span>{{ $event->start_date ? $event->start_date->format('H:i') : 'A definir' }}</span>
-                            </div>
-                            @if($event->location)
-                                <div class="d-flex align-items-center text-muted">
-                                    <i data-lucide="map-pin" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
-                                    <span>{{ $event->location }}</span>
-                                </div>
-                            @endif
-                        </div>
-                        
-                        @if($event->description)
-                            <p class="evento-description">
-                                {{ Str::limit($event->description, 100) }}
-                            </p>
-                        @endif
-                        
-                        <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-outline-vinho rounded-pill mt-3">
-                            Saiba mais
-                            <i data-lucide="arrow-right" aria-hidden="true" class="ms-1" style="width: 14px; height: 14px;"></i>
-                        </a>
-                    </div>
+                    <h4 class="mb-2">{{ $mass->time->format('H:i') }}</h4>
+                    <small class="text-muted">{{ $mass->type ?? 'Missa' }}</small>
                 </div>
+            </div>
             @endforeach
         </div>
         
         <div class="text-center mt-5">
-            <a href="{{ route('events') }}" class="btn btn-vinho rounded-pill px-5 py-2 fw-semibold">
-                <i data-lucide="calendar-days" aria-hidden="true" class="me-2" style="width: 16px; height: 16px;"></i>
-                Ver todos os eventos
+            <a href="{{ route('masses') }}" class="btn-paroquia btn-primary-paroquia">
+                <i data-lucide="calendar" class="icon-paroquia"></i>
+                Ver Calendário Completo
             </a>
         </div>
     </div>
 </section>
 @endif
 
-<!-- Call to Action -->
-<section class="section-paroquia cta-paroquia">
+<!-- Chamada Final -->
+<section class="section-paroquia animate-on-scroll">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">
-                <h2 class="text-white mb-4">Venha fazer parte da nossa família</h2>
-                <p class="lead text-white mb-5" style="opacity: 0.9;">
-                    Nossa paróquia está de portas abertas para acolher você e sua família. 
-                    Juntos, construímos uma comunidade de fé, esperança e amor.
-                </p>
-                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                    <a href="https://wa.me/554430554464?text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20a%20paróquia" target="_blank" class="btn btn-white rounded-pill px-5 py-3 fw-semibold">
-                        <i data-lucide="phone" aria-hidden="true" class="me-2" style="width: 20px; height: 20px;"></i>
-                        Entre em contato
-                    </a>
-                    <a href="https://maps.app.goo.gl/RoEbuP19YY1AtxDk7" target="_blank" class="btn btn-outline-light rounded-pill px-5 py-3 fw-semibold">
-                        <i data-lucide="map-pin" aria-hidden="true" class="me-2" style="width: 20px; height: 20px;"></i>
-                        Como chegar
-                    </a>
+                <div class="card-paroquia p-5">
+                    <h3 class="mb-4 text-vermelho">Seja Parte da Nossa Família</h3>
+                    <p class="lead text-muted mb-4">
+                        "Assim como o corpo é um só e tem muitos membros, e todos os membros do corpo, 
+                        embora sejam muitos, formam um só corpo, assim também é Cristo."
+                    </p>
+                    <p class="text-muted mb-4"><em>1 Coríntios 12:12</em></p>
+                    
+                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                        @guest
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="btn-paroquia btn-primary-paroquia">
+                                    <i data-lucide="user-plus" class="icon-paroquia"></i>
+                                    Cadastrar-se
+                                </a>
+                            @endif
+                            <a href="{{ route('login') }}" class="btn-paroquia btn-outline-paroquia">
+                                <i data-lucide="log-in" class="icon-paroquia"></i>
+                                Fazer Login
+                            </a>
+                        @else
+                            <a href="{{ route('dashboard') }}" class="btn-paroquia btn-primary-paroquia">
+                                <i data-lucide="layout-dashboard" class="icon-paroquia"></i>
+                                Acessar Painel
+                            </a>
+                        @endguest
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endsection
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Lazy loading de imagens
-    const images = document.querySelectorAll('img[loading="lazy"]');
+// Countdown para próxima missa
+function updateCountdown() {
+    const now = new Date().getTime();
+    const nextSunday = new Date();
     
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.classList.add('loaded');
-                observer.unobserve(img);
-            }
-        });
-    });
+    // Encontrar próximo domingo às 09:30
+    const daysUntilSunday = (7 - nextSunday.getDay()) % 7;
+    if (daysUntilSunday === 0 && nextSunday.getHours() >= 9 && nextSunday.getMinutes() >= 30) {
+        nextSunday.setDate(nextSunday.getDate() + 7);
+    } else {
+        nextSunday.setDate(nextSunday.getDate() + daysUntilSunday);
+    }
+    nextSunday.setHours(9, 30, 0, 0);
     
-    images.forEach(img => imageObserver.observe(img));
+    const distance = nextSunday.getTime() - now;
     
-    // Animações on scroll
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    
-    const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        scrollObserver.observe(el);
-    });
-    
-    // Smooth scroll para âncoras
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+    if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        
+        let countdownText = '';
+        if (days > 0) countdownText += days + 'd ';
+        if (hours > 0) countdownText += hours + 'h ';
+        countdownText += minutes + 'min';
+        
+        document.getElementById('countdown').textContent = 'Em ' + countdownText;
+    } else {
+        document.getElementById('countdown').textContent = 'Missa em andamento';
+    }
+}
+
+// Atualizar countdown a cada minuto
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// Smooth scroll para âncoras
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     });
 });
 </script>
 @endpush
-@endsection

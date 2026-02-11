@@ -3,47 +3,28 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class VerifyEmailController extends Controller
 {
-    public function __invoke(Request $request): RedirectResponse
+    /**
+     * Mark the authenticated user's email address as verified.
+     */
+    public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
-        try {
-            $userId = $request->route('id');
-            $user = User::findOrFail($userId);
-
-            // Validate signed URL and ensure the hash matches the user's email
-            if (! $request->hasValidSignature() || ! hash_equals((string) $request->route('hash'), sha1($user->email))) {
-                return redirect()->route('login')
-                    ->with('error', 'Link de verificação inválido ou expirado.');
-            }
-            
-            // Check if already verified
-            if ($user->hasVerifiedEmail()) {
-                Auth::login($user);
-                return redirect()->route('profile.edit')
-                    ->with('success', 'Seu e-mail já está verificado!');
-            }
-            
-            // Mark as verified
-            $user->email_verified_at = now();
-            $user->save();
-
-            event(new Verified($user));
-            Auth::login($user);
-
-            return redirect()->route('profile.edit')
-                ->with('success', '✓ E-mail verificado com sucesso! Agora você pode participar de grupos.');
-            
-        } catch (\Exception $e) {
-            return redirect()->route('login')
-                ->with('error', 'Erro ao verificar e-mail: ' . $e->getMessage());
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
         }
+
+        if ($request->user()->markEmailAsVerified()) {
+            $user = $request->user();
+            if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail) {
+                event(new Verified($user));
+            }
+        }
+
+        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
     }
 }

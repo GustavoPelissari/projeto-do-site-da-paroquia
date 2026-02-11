@@ -8,33 +8,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    server: {
-        host: 'localhost',
-        hmr: {
-            host: 'localhost',
-        },
-    },
-    build: {
-        // Code splitting for better caching
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    'vendor-bootstrap': ['bootstrap'],
-                },
-            },
-        },
-        // Optimize for production
-        minify: 'terser',
-        terserOptions: {
-            compress: {
-                drop_console: true,
-            },
-        },
-        // Source maps for production debugging
-        sourcemap: false,
-        // Larger chunk size for better batching
-        chunkSizeWarningLimit: 1000,
-    },
-    // Performance hints
-    ssr: false,
 });

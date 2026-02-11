@@ -1,63 +1,63 @@
-@extends('layout')
+@extends('layouts.public')
 
 @section('title', 'Notícias - Paróquia São Paulo Apóstolo')
-@section('meta_description', 'Acompanhe as últimas notícias e acontecimentos da Paróquia São Paulo Apóstolo. Fique por dentro de tudo que acontece em nossa comunidade católica.')
+@section('description', 'Acompanhe as últimas notícias e novidades da Paróquia São Paulo Apóstolo em Umuarama - PR.')
 
 @section('content')
 <!-- Hero Section -->
-<x-hero title="Notícias da Paróquia" subtitle="Mantenha-se informado sobre tudo que acontece em nossa comunidade" minHeight="40vh" />
-
-<!-- Botão de Voltar (Mobile) -->
-<x-back-button />
-
-<!-- Breadcrumbs -->
-<div class="container mt-4">
-    <x-breadcrumbs :items="[
-        ['label' => 'Notícias', 'icon' => 'newspaper']
-    ]" />
-</div>
+<section class="hero-paroquia animate-on-scroll">
+    <div class="hero-content">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="mb-4" style="font-size: 3rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+                        Notícias da Paróquia
+                    </h1>
+                    <p class="lead mb-4" style="font-size: 1.25rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+                        Mantenha-se informado sobre tudo que acontece em nossa comunidade
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Notícias -->
-<section class="section-paroquia">
+<section class="section-paroquia animate-on-scroll">
     <div class="container">
-        @if($news->total() > 0)
+        @if($news->count() > 0)
             <div class="row g-4">
                 @foreach($news as $item)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-paroquia">
-                        @if($item->featured_image)
-                            <div style="overflow: hidden; height: 220px;">
-                                <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="card-img-top w-100" style="height: 220px; object-fit: cover;" loading="lazy">
-                            </div>
+                <div class="col-lg-6 col-xl-4">
+                    <div class="card-paroquia h-100">
+                        @if($item->image)
+                            <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
                         @else
-                            <x-card.placeholder height="220px" />
+                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);">
+                                <i class="bi bi-newspaper text-white" style="font-size: 3rem;"></i>
+                            </div>
                         @endif
                         
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3" style="font-size: 0.85rem; color: #888;">
-                                <i class="bi bi-calendar3 me-2" aria-hidden="true"></i>
-                                <span>{{ $item->published_at ? $item->published_at->format('d/m/Y') : $item->created_at->format('d/m/Y') }}</span>
-                                @if($item->parishGroup)
-                                    <span class="badge bg-success ms-auto">
-                                        <i class="bi bi-people me-1" aria-hidden="true"></i>{{ $item->parishGroup->name }}
-                                    </span>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center mb-3 text-muted">
+                                <i class="bi bi-calendar3 me-2"></i>
+                                <small>{{ $item->created_at->format('d/m/Y') }}</small>
+                                @if($item->category)
+                                    <span class="badge bg-secondary ms-auto">{{ $item->category }}</span>
                                 @endif
                             </div>
                             
-                            <h5 class="card-title">{{ $item->title }}</h5>
+                            <h5 class="card-title text-vermelho">{{ $item->title }}</h5>
                             
-                            @if($item->excerpt)
-                                <p class="card-text flex-grow-1">{{ Str::limit($item->excerpt, 120) }}</p>
+                            @if($item->summary)
+                                <p class="card-text flex-grow-1">{{ Str::limit($item->summary, 150) }}</p>
                             @else
-                                <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($item->content), 120) }}</p>
+                                <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($item->content), 150) }}</p>
                             @endif
                             
-                            <div class="mt-auto pt-3 d-flex gap-2">
-                                <a href="{{ route('news.show', $item) }}" class="btn btn-success flex-fill">
-                                    <i class="bi bi-book-half me-2" aria-hidden="true"></i>Ler Completa
-                                </a>
-                                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">
-                                    <i class="bi bi-info-circle" aria-hidden="true"></i>
+                            <div class="mt-auto">
+                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#newsModal{{ $item->id }}">
+                                    <i class="bi bi-eye me-1"></i>Ler Completa
                                 </button>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                 </div>
                 
                 <!-- Modal para notícia completa -->
-                <div class="modal fade" id="newsModal{{ $item->id }}" tabindex="-1" aria-labelledby="newsModalLabel{{ $item->id }}" aria-hidden="true" aria-modal="true" role="dialog">
+                <div class="modal fade" id="newsModal{{ $item->id }}" tabindex="-1" aria-labelledby="newsModalLabel{{ $item->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -73,17 +73,15 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                @if($item->featured_image)
-                                    <img src="{{ asset('storage/' . $item->featured_image) }}" alt="{{ $item->title }}" class="img-fluid rounded mb-3" loading="lazy">
+                                @if($item->image)
+                                    <img src="{{ Storage::url($item->image) }}" alt="{{ $item->title }}" class="img-fluid rounded mb-3">
                                 @endif
                                 
                                 <div class="d-flex align-items-center mb-3 text-muted">
-                                    <i class="bi bi-calendar3 me-2" aria-hidden="true"></i>
-                                    <small>{{ $item->published_at ? $item->published_at->format('d/m/Y \à\s H:i') : $item->created_at->format('d/m/Y \à\s H:i') }}</small>
-                                    @if($item->parishGroup)
-                                        <span class="badge bg-success ms-auto">
-                                            <i class="bi bi-people" aria-hidden="true"></i> {{ $item->parishGroup->name }}
-                                        </span>
+                                    <i class="bi bi-calendar3 me-2"></i>
+                                    <small>{{ $item->created_at->format('d/m/Y \à\s H:i') }}</small>
+                                    @if($item->category)
+                                        <span class="badge bg-secondary ms-auto">{{ $item->category }}</span>
                                     @endif
                                 </div>
                                 
@@ -113,7 +111,7 @@
                 <div class="col-12">
                     <div class="card-paroquia text-center py-5">
                         <div class="card-body">
-                            <i class="bi bi-newspaper icon-lg mb-4" style="font-size: 4rem; opacity: 0.5;" aria-hidden="true"></i>
+                            <i class="bi bi-newspaper icon-lg mb-4" style="font-size: 4rem; opacity: 0.5;"></i>
                             <h3 class="text-vermelho mb-3">Nenhuma notícia disponível</h3>
                             <p class="text-muted">Ainda não há notícias publicadas. Volte em breve para conferir as novidades da nossa paróquia!</p>
                         </div>
@@ -131,7 +129,7 @@
             <div class="col-lg-8 text-center">
                 <div class="card-paroquia p-5">
                     <h3 class="text-vermelho mb-3">
-                        <i class="bi bi-bell me-2" aria-hidden="true"></i>
+                        <i class="bi bi-bell me-2"></i>
                         Mantenha-se Conectado
                     </h3>
                     <p class="mb-4">
@@ -139,10 +137,10 @@
                     </p>
                     <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
                         <a href="{{ route('groups') }}" class="btn btn-success">
-                            <i class="bi bi-people me-1" aria-hidden="true"></i>Conhecer Pastorais
+                            <i class="bi bi-people me-1"></i>Conhecer Pastorais
                         </a>
                         <a href="{{ route('events') }}" class="btn btn-warning">
-                            <i class="bi bi-calendar-event me-1" aria-hidden="true"></i>Ver Eventos
+                            <i class="bi bi-calendar-event me-1"></i>Ver Eventos
                         </a>
                     </div>
                 </div>

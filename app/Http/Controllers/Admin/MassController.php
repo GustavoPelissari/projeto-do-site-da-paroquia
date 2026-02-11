@@ -24,15 +24,15 @@ class MassController extends Controller
 
         // Search in name and description
         if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%'.$request->search.'%')
-                    ->orWhere('description', 'like', '%'.$request->search.'%')
-                    ->orWhere('location', 'like', '%'.$request->search.'%');
+            $query->where(function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%')
+                  ->orWhere('location', 'like', '%' . $request->search . '%');
             });
         }
 
         $masses = $query->orderBy('day_of_week')->orderBy('time')->paginate(10);
-
+        
         return view('admin.masses.index', compact('masses'));
     }
 

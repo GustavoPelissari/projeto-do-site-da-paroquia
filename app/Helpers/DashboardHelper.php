@@ -26,7 +26,7 @@ class DashboardHelper
      */
     public static function getUserDashboardRoute(): string
     {
-        if (! Auth::check()) {
+        if (!Auth::check()) {
             return route('login');
         }
 
@@ -46,7 +46,7 @@ class DashboardHelper
      */
     public static function getUserAreaLabel(): string
     {
-        if (! Auth::check()) {
+        if (!Auth::check()) {
             return 'Login';
         }
 

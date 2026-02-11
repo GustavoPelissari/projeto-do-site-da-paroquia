@@ -52,12 +52,12 @@ class Scale extends Model
     {
         $bytes = $this->file_size;
         $units = ['B', 'KB', 'MB', 'GB'];
-
+        
         for ($i = 0; $bytes > 1024 && $i < count($units) - 1; $i++) {
             $bytes /= 1024;
         }
-
-        return round($bytes, 2).' '.$units[$i];
+        
+        return round($bytes, 2) . ' ' . $units[$i];
     }
 
     /**
@@ -66,19 +66,19 @@ class Scale extends Model
     public function isValid(): bool
     {
         $now = now();
-
-        if (! $this->is_active) {
+        
+        if (!$this->is_active) {
             return false;
         }
-
+        
         if ($this->valid_from && $now < $this->valid_from) {
             return false;
         }
-
+        
         if ($this->valid_until && $now > $this->valid_until) {
             return false;
         }
-
+        
         return true;
     }
 
@@ -96,13 +96,13 @@ class Scale extends Model
     public function scopeValid($query)
     {
         return $query->where('is_active', true)
-            ->where(function ($q) {
-                $q->whereNull('valid_from')
-                    ->orWhere('valid_from', '<=', now());
-            })
-            ->where(function ($q) {
-                $q->whereNull('valid_until')
-                    ->orWhere('valid_until', '>=', now());
-            });
+                    ->where(function ($q) {
+                        $q->whereNull('valid_from')
+                          ->orWhere('valid_from', '<=', now());
+                    })
+                    ->where(function ($q) {
+                        $q->whereNull('valid_until')
+                          ->orWhere('valid_until', '>=', now());
+                    });
     }
 }

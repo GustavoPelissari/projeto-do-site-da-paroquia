@@ -2,15 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Group;
-use App\Models\GroupRequest;
-use App\Models\Mass;
-use App\Models\News;
-use App\Models\Notification;
-use App\Models\Schedule;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Group;
+use App\Models\Mass;
+use App\Models\News;
+use App\Models\Schedule;
+use App\Models\GroupRequest;
+use App\Models\Notification;
+use Carbon\Carbon;
 
 class DevSeeder extends Seeder
 {
@@ -96,18 +97,6 @@ class DevSeeder extends Seeder
             ]
         );
         $this->command->line("  ✅ Usuário padrão: {$usuario->email}");
-
-        // Usuário Coroinha (para testar visualização de escalas)
-        $coroinha = User::firstOrCreate(
-            ['email' => 'pedro.coroinha@paroquia.test'],
-            [
-                'name' => 'Pedro Coroinha',
-                'email_verified_at' => now(),
-                'password' => Hash::make('User123!'),
-                'role' => 'usuario_padrao',
-            ]
-        );
-        $this->command->line("  ✅ Usuário Coroinha: {$coroinha->email}");
     }
 
     private function createGroups(): void
@@ -154,22 +143,11 @@ class DevSeeder extends Seeder
         ];
 
         foreach ($groups as $groupData) {
-            $group = Group::create($groupData);
-            $this->command->line("  ✅ Grupo criado: {$group->name}");
-        }
-
-        // Associar coordenador ao grupo Coroinhas
-        $grupoCoroinhas = Group::where('name', 'Coroinhas')->first();
-        if ($grupoCoroinhas && $coordenador) {
-            $coordenador->update(['parish_group_id' => $grupoCoroinhas->id]);
-            $this->command->line("  ✅ Coordenador associado ao grupo Coroinhas");
-        }
-
-        // Associar usuário Pedro ao grupo Coroinhas
-        $coroinha = User::where('email', 'pedro.coroinha@paroquia.test')->first();
-        if ($grupoCoroinhas && $coroinha) {
-            $coroinha->update(['parish_group_id' => $grupoCoroinhas->id]);
-            $this->command->line("  ✅ Usuário Pedro associado ao grupo Coroinhas");
+            $group = Group::firstOrCreate(
+                ['name' => $groupData['name']],
+                $groupData
+            );
+            $this->command->line("  ✅ Grupo: {$group->name}");
         }
     }
 
@@ -238,7 +216,7 @@ class DevSeeder extends Seeder
         if ($coroinhas && $coordenador) {
             // Criar diretório de escalas se não existir
             $scalesPath = storage_path('app/public/scales');
-            if (! file_exists($scalesPath)) {
+            if (!file_exists($scalesPath)) {
                 mkdir($scalesPath, 0755, true);
             }
 
@@ -298,18 +276,18 @@ startxref
 %%EOF';
 
             $fileName = 'escala_coroinhas_dezembro_2025.pdf';
-            $filePath = $scalesPath.'/'.$fileName;
+            $filePath = $scalesPath . '/' . $fileName;
             file_put_contents($filePath, $pdfContent);
 
             $schedule = Schedule::firstOrCreate(
                 [
                     'group_id' => $coroinhas->id,
-                    'title' => 'Escala Coroinhas - Dezembro 2025',
+                    'title' => 'Escala Coroinhas - Dezembro 2025'
                 ],
                 [
                     'user_id' => $coordenador->id,
                     'description' => 'Escala de coroinhas para o mês de dezembro de 2025',
-                    'pdf_path' => 'scales/'.$fileName,
+                    'pdf_path' => 'scales/' . $fileName,
                     'pdf_filename' => $fileName,
                     'start_date' => '2025-12-01',
                     'end_date' => '2025-12-31',
@@ -351,7 +329,7 @@ startxref
             $notification = Notification::create([
                 'user_id' => $coordenador->id,
                 'title' => 'Nova solicitação de ingresso',
-                'message' => 'Maria Usuario solicitou ingresso no grupo Coroinhas. Clique para avaliar a solicitação.',
+                'message' => "Maria Usuario solicitou ingresso no grupo Coroinhas. Clique para avaliar a solicitação.",
                 'type' => 'group_request',
                 'read_at' => null,
             ]);

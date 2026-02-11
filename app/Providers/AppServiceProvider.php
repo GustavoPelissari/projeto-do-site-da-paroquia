@@ -2,30 +2,12 @@
 
 namespace App\Providers;
 
-use App\Models\Event;
-use App\Models\Group;
-use App\Models\News;
-use App\Policies\EventPolicy;
-use App\Policies\GroupPolicy;
-use App\Policies\NewsPolicy;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
+use App\Helpers\DashboardHelper;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
-    protected $policies = [
-        Event::class => EventPolicy::class,
-        News::class => NewsPolicy::class,
-        Group::class => GroupPolicy::class,
-    ];
-
     /**
      * Register any application services.
      */
@@ -39,15 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Register policies
-        foreach ($this->policies as $model => $policy) {
-            Gate::policy($model, $policy);
-        }
-
-        // Configurar Carbon para português brasileiro
-        Carbon::setLocale('pt_BR');
-        setlocale(LC_TIME, 'pt_BR.utf8', 'pt_BR', 'Portuguese_Brazil');
-        
         // Register Blade directives for dashboard helper
         Blade::directive('userDashboard', function () {
             return "<?php echo App\Helpers\DashboardHelper::getUserDashboardRoute(); ?>";

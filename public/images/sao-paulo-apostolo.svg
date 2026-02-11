@@ -1,0 +1,35 @@
+<!-- 
+Este é um arquivo SVG placeholder para a imagem de São Paulo Apóstolo.
+Substitua este arquivo pela imagem PNG real salva como sao-paulo-apostolo.png
+-->
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo dourado -->
+  <circle cx="60" cy="60" r="58" fill="#D4AF37" stroke="#8B1538" stroke-width="4"/>
+  
+  <!-- Auréola -->
+  <circle cx="60" cy="35" r="20" fill="none" stroke="#F4E4A6" stroke-width="2" opacity="0.8"/>
+  
+  <!-- Rosto simplificado -->
+  <circle cx="60" cy="45" r="15" fill="#F5F1E8"/>
+  
+  <!-- Barba -->
+  <path d="M45 55 Q60 70 75 55" fill="#8B8680" opacity="0.7"/>
+  
+  <!-- Túnica vermelha -->
+  <rect x="40" y="65" width="40" height="45" fill="#8B1538" rx="5"/>
+  
+  <!-- Capa azul-esverdeada -->
+  <path d="M35 70 Q60 65 85 70 L85 110 Q60 105 35 110 Z" fill="#4A7C7E"/>
+  
+  <!-- Livro/Pergaminho -->
+  <rect x="50" y="80" width="20" height="15" fill="#F5F1E8" stroke="#8B1538" rx="2"/>
+  
+  <!-- Cruz pequena -->
+  <g transform="translate(60,35)">
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#D4AF37" stroke-width="2"/>
+    <line x1="-5" y1="-3" x2="5" y2="-3" stroke="#D4AF37" stroke-width="2"/>
+  </g>
+  
+  <!-- Texto ao redor (opcional) -->
+  <text x="60" y="15" text-anchor="middle" font-family="serif" font-size="8" fill="#8B1538">SÃO PAULO</text>
+</svg>

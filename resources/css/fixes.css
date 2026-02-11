@@ -75,14 +75,14 @@ img[loading="lazy"].loaded {
 .bg-vinho-escuro,
 .bg-dourado,
 .bg-dourado-escuro {
-    color: white !important;
+    color: var(--cor-branco);
 }
 
 .bg-vinho *,
 .bg-vinho-escuro *,
 .bg-dourado *,
 .bg-dourado-escuro * {
-    color: white !important;
+    color: inherit;
 }
 
 /* ==========================================

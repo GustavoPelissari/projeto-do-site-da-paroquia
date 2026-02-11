@@ -1,0 +1,675 @@
+/* 
+ * Tema São Paulo Apóstolo
+ * Cores inspiradas na iconografia do santo: vermelho profundo, dourado, azul-esverdeado, bege
+ * Design reverente, moderno e acessível
+ */
+
+:root {
+  /* Cores Principais - Baseadas na imagem de São Paulo Apóstolo */
+  --paulo-red: #8B1538;           /* Vermelho profundo da túnica */
+  --paulo-red-light: #A64B6B;     /* Vermelho suave */
+  --paulo-red-dark: #5C0E24;      /* Vermelho escuro */
+  
+  --paulo-gold: #D4AF37;          /* Dourado litúrgico */
+  --paulo-gold-light: #F4E4A6;    /* Dourado claro */
+  --paulo-gold-dark: #B8941F;     /* Dourado escuro */
+  
+  --paulo-teal: #4A7C7E;          /* Azul-esverdeado da capa */
+  --paulo-teal-light: #6B9B9D;    /* Azul-esverdeado claro */
+  --paulo-teal-dark: #2F5456;     /* Azul-esverdeado escuro */
+  
+  --paulo-beige: #F5F1E8;         /* Bege suave */
+  --paulo-beige-dark: #E8DCC6;    /* Bege escuro */
+  
+  /* Cores Neutras Complementares */
+  --paulo-white: #FEFDFB;
+  --paulo-cream: #FAF7F0;
+  --paulo-gray-light: #F0EDE5;
+  --paulo-gray: #8B8680;
+  --paulo-gray-dark: #5A5751;
+  --paulo-black: #2C2A26;
+  
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, var(--paulo-red) 0%, var(--paulo-teal) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--paulo-gold) 0%, var(--paulo-gold-light) 100%);
+  --gradient-sacred: linear-gradient(135deg, var(--paulo-red-dark) 0%, var(--paulo-red) 50%, var(--paulo-gold) 100%);
+  
+  /* Sombras */
+  --shadow-soft: 0 2px 15px rgba(139, 21, 56, 0.08);
+  --shadow-medium: 0 4px 25px rgba(139, 21, 56, 0.12);
+  --shadow-strong: 0 8px 40px rgba(139, 21, 56, 0.16);
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.25);
+  
+  /* Tipografia */
+  --font-primary: 'Crimson Text', 'Georgia', serif;
+  --font-secondary: 'Inter', 'Segoe UI', sans-serif;
+  --font-decorative: 'Cormorant Garamond', serif;
+  
+  /* Espaçamentos */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Transições */
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.3s ease-out;
+  --transition-slow: 0.5s ease-out;
+}
+
+/* Importação de Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+/* Reset e Base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--paulo-cream);
+  color: var(--paulo-black);
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+/* Tipografia */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-decorative);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--paulo-red-dark);
+  margin-bottom: var(--space-md);
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--paulo-gray-dark);
+}
+
+/* Links */
+a {
+  color: var(--paulo-red);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+a:hover {
+  color: var(--paulo-red-dark);
+  text-decoration: underline;
+}
+
+/* Header Moderno */
+.paulo-header {
+  background: var(--paulo-white);
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid var(--gradient-primary);
+}
+
+.paulo-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.paulo-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-decoration: none;
+  transition: transform var(--transition-base);
+}
+
+.paulo-logo:hover {
+  transform: scale(1.02);
+  text-decoration: none;
+}
+
+.paulo-logo-image {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paulo-saint-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--paulo-gold);
+  box-shadow: var(--shadow-gold);
+  transition: all var(--transition-base);
+  display: block !important;
+  background-color: var(--paulo-white);
+}
+
+.paulo-saint-image:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-strong), 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.paulo-logo-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--gradient-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--paulo-white);
+  box-shadow: var(--shadow-gold);
+}
+
+.paulo-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.paulo-logo-title {
+  font-family: var(--font-decorative);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--paulo-red);
+  margin: 0;
+}
+
+.paulo-logo-subtitle {
+  font-family: var(--font-secondary);
+  font-size: 0.75rem;
+  color: var(--paulo-teal);
+  margin: 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Navegação */
+.paulo-nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paulo-nav-link {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  color: var(--paulo-gray-dark);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 8px;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.paulo-nav-link:hover,
+.paulo-nav-link.active {
+  background: var(--paulo-beige);
+  color: var(--paulo-red);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.paulo-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--paulo-gold);
+  transition: all var(--transition-base);
+  transform: translateX(-50%);
+}
+
+.paulo-nav-link:hover::after,
+.paulo-nav-link.active::after {
+  width: 100%;
+}
+
+/* Banner Hero */
+.paulo-hero {
+  background: var(--gradient-sacred);
+  color: var(--paulo-white);
+  padding: var(--space-3xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.paulo-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cross" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10 5v10M5 10h10" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23cross)"/></svg>');
+  opacity: 0.3;
+}
+
+.paulo-hero-content {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  text-align: center;
+}
+
+.paulo-hero-saint {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--space-xl);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paulo-hero-saint-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--paulo-gold);
+  box-shadow: var(--shadow-strong), 0 0 0 4px var(--paulo-white);
+  animation: pulseGlow 3s ease-in-out infinite;
+  transition: all var(--transition-base);
+}
+
+.paulo-hero-saint-image:hover {
+  transform: scale(1.05);
+}
+
+.paulo-hero-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--space-xl);
+  background: var(--paulo-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--paulo-red);
+  box-shadow: var(--shadow-strong);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: var(--shadow-strong), 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  50% { box-shadow: var(--shadow-strong), 0 0 0 20px rgba(212, 175, 55, 0); }
+}
+
+.paulo-hero-title {
+  color: var(--paulo-white);
+  margin-bottom: var(--space-lg);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.paulo-hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--paulo-gold-light);
+  margin-bottom: var(--space-2xl);
+  font-weight: 400;
+}
+
+/* Cards Elegantes */
+.paulo-card {
+  background: var(--paulo-white);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-soft);
+  transition: all var(--transition-base);
+  border: 1px solid var(--paulo-beige-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.paulo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-gold);
+}
+
+.paulo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.paulo-card-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gradient-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--paulo-white);
+  margin-bottom: var(--space-lg);
+}
+
+.paulo-card-title {
+  font-size: 1.25rem;
+  color: var(--paulo-red-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.paulo-card-text {
+  color: var(--paulo-gray-dark);
+  line-height: 1.6;
+}
+
+/* Botões Elegantes */
+.paulo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: 12px;
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-base);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.paulo-btn-primary {
+  background: var(--gradient-primary);
+  color: var(--paulo-white);
+  box-shadow: var(--shadow-soft);
+}
+
+.paulo-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  color: var(--paulo-white);
+  text-decoration: none;
+}
+
+.paulo-btn-secondary {
+  background: var(--paulo-white);
+  color: var(--paulo-red);
+  border: 2px solid var(--paulo-red);
+}
+
+.paulo-btn-secondary:hover {
+  background: var(--paulo-red);
+  color: var(--paulo-white);
+  text-decoration: none;
+}
+
+.paulo-btn-gold {
+  background: var(--gradient-gold);
+  color: var(--paulo-black);
+}
+
+.paulo-btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+  color: var(--paulo-black);
+  text-decoration: none;
+}
+
+/* Seções */
+.paulo-section {
+  padding: var(--space-3xl) 0;
+}
+
+.paulo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.paulo-section-title {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  position: relative;
+}
+
+.paulo-section-title::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-gold);
+  display: block;
+  margin: var(--space-lg) auto 0;
+  border-radius: 2px;
+}
+
+/* Grid Responsivo */
+.paulo-grid {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.paulo-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.paulo-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.paulo-grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Rodapé Sagrado */
+.paulo-footer {
+  background: var(--paulo-red-dark);
+  color: var(--paulo-white);
+  padding: var(--space-3xl) 0 var(--space-xl);
+  position: relative;
+}
+
+.paulo-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-gold);
+}
+
+.paulo-footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-xl);
+}
+
+.paulo-footer-section h3 {
+  color: var(--paulo-gold);
+  margin-bottom: var(--space-lg);
+}
+
+.paulo-footer-section p,
+.paulo-footer-section a {
+  color: var(--paulo-beige);
+}
+
+.paulo-footer-section a:hover {
+  color: var(--paulo-gold);
+}
+
+.paulo-footer-bottom {
+  text-align: center;
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--paulo-red);
+  color: var(--paulo-beige);
+}
+
+/* Utilitários */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+
+/* Acessibilidade */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus visible para acessibilidade */
+.paulo-btn:focus-visible,
+.paulo-nav-link:focus-visible {
+  outline: 3px solid var(--paulo-gold);
+  outline-offset: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  :root {
+    --space-3xl: 2rem;
+    --space-2xl: 1.5rem;
+  }
+  
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.5rem; }
+  
+  .paulo-nav {
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-md);
+  }
+  
+  .paulo-nav-links {
+    gap: var(--space-md);
+  }
+  
+  .paulo-hero {
+    padding: var(--space-2xl) 0;
+  }
+  
+  .paulo-hero-saint,
+  .paulo-hero-saint-image,
+  .paulo-hero-icon {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 2rem;
+  }
+  
+  .paulo-saint-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .paulo-logo-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .paulo-container {
+    padding: 0 var(--space-md);
+  }
+}
+
+/* Estados de loading suaves */
+.paulo-loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.paulo-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--paulo-gold);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Microinterações suaves */
+.paulo-interactive {
+  transition: all var(--transition-base);
+}
+
+.paulo-interactive:hover {
+  transform: translateY(-1px);
+}
+
+.paulo-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

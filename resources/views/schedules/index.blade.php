@@ -1,25 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2 class="h5 mb-0">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Gerenciar Escalas') }}
             </h2>
             <a href="{{ route('admin.schedules.create') }}" 
-               class="btn btn-primary btn-sm">
+               class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                 Nova Escala
             </a>
         </div>
     </x-slot>
 
-    <div class="py-5">
-        <div class="container-xl">
-            <div class="card shadow-sm">
-                <div class="card-body">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
                     <!-- Filtros -->
-                    <div class="mb-4">
-                        <form method="GET" class="d-flex flex-wrap gap-2">
+                    <div class="mb-6 flex flex-col sm:flex-row gap-4">
+                        <form method="GET" class="flex gap-2 flex-wrap">
                             @if(auth()->user()->isAdminGlobal() && $groups->count() > 0)
-                                <select name="group_id" class="form-select" onchange="this.form.submit()" style="min-width: 200px;">
+                                <select name="group_id" class="rounded-md border-gray-300" onchange="this.form.submit()">
                                     <option value="">Todos os grupos</option>
                                     @foreach($groups as $group)
                                         <option value="{{ $group->id }}" {{ request('group_id') == $group->id ? 'selected' : '' }}>
@@ -29,7 +29,7 @@
                                 </select>
                             @endif
 
-                            <select name="status" class="form-select" onchange="this.form.submit()" style="min-width: 180px;">
+                            <select name="status" class="rounded-md border-gray-300" onchange="this.form.submit()">
                                 <option value="">Todos os status</option>
                                 <option value="active" {{ request('status') === 'active' ? 'selected' : '' }}>Ativas</option>
                                 <option value="upcoming" {{ request('status') === 'upcoming' ? 'selected' : '' }}>Futuras</option>
@@ -40,84 +40,74 @@
 
                     <!-- Lista de Escalas -->
                     @if($schedules->count() > 0)
-                        <div class="d-grid gap-3">
+                        <div class="grid gap-6">
                             @foreach($schedules as $schedule)
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-column flex-lg-row gap-3">
-                                            <div class="flex-grow-1">
-                                                <h3 class="h6 fw-semibold mb-2">
+                                <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div class="flex-1">
+                                            <h3 class="text-lg font-semibold text-gray-900 mb-2">
                                                 {{ $schedule->title }}
-                                                </h3>
-                                                
-                                                <div class="d-flex flex-wrap gap-3 text-muted small mb-3">
-                                                    <span class="d-inline-flex align-items-center gap-1">
-                                                        <i class="bi bi-people" aria-hidden="true"></i>
-                                                        {{ $schedule->group->name }}
-                                                    </span>
-                                                    <span class="d-inline-flex align-items-center gap-1">
-                                                        <i class="bi bi-calendar-event" aria-hidden="true"></i>
-                                                        {{ $schedule->start_date->format('d/m/Y') }} - {{ $schedule->end_date->format('d/m/Y') }}
-                                                    </span>
-                                                    <span class="d-inline-flex align-items-center gap-1">
-                                                        <i class="bi bi-person" aria-hidden="true"></i>
-                                                        {{ $schedule->user->name }}
-                                                    </span>
-                                                </div>
-
-                                                @if($schedule->description)
-                                                    <p class="text-muted mb-3">{{ $schedule->description }}</p>
-                                                @endif
-
-                                                <div class="d-flex flex-wrap gap-3 align-items-center">
-                                                    @php
-                                                        $status = $schedule->getStatusBadge();
-                                                        $statusClass = [
-                                                            'gray' => 'secondary',
-                                                            'blue' => 'primary',
-                                                            'red' => 'danger',
-                                                            'green' => 'success',
-                                                        ][$status['color']] ?? 'secondary';
-                                                    @endphp
-                                                    <span class="badge bg-{{ $statusClass }}">
-                                                        {{ $status['text'] }}
-                                                    </span>
-                                                    
-                                                    <span class="text-muted small">
-                                                        Arquivo: {{ $schedule->pdf_filename }} ({{ $schedule->getPdfSize() }})
-                                                    </span>
-                                                </div>
+                                            </h3>
+                                            
+                                            <div class="flex items-center space-x-4 text-sm text-gray-600 mb-3">
+                                                <span class="flex items-center">
+                                                    <span class="mr-1">👥</span>
+                                                    {{ $schedule->group->name }}
+                                                </span>
+                                                <span class="flex items-center">
+                                                    <span class="mr-1">📅</span>
+                                                    {{ $schedule->start_date->format('d/m/Y') }} - {{ $schedule->end_date->format('d/m/Y') }}
+                                                </span>
+                                                <span class="flex items-center">
+                                                    <span class="mr-1">👤</span>
+                                                    {{ $schedule->user->name }}
+                                                </span>
                                             </div>
 
-                                            <!-- Ações -->
-                                            <div class="d-flex flex-wrap gap-2">
-                                                <a href="{{ route('admin.schedules.show', $schedule) }}" 
-                                                   class="btn btn-outline-primary btn-sm">
-                                                    Ver
-                                                </a>
+                                            @if($schedule->description)
+                                                <p class="text-gray-700 mb-3">{{ $schedule->description }}</p>
+                                            @endif
+
+                                            <div class="flex items-center space-x-4">
+                                                @php $status = $schedule->getStatusBadge() @endphp
+                                                <span class="px-2 py-1 text-xs rounded-full bg-{{ $status['color'] }}-100 text-{{ $status['color'] }}-800">
+                                                    {{ $status['text'] }}
+                                                </span>
                                                 
-                                                <a href="{{ route('admin.schedules.download', $schedule) }}" 
-                                                   class="btn btn-outline-success btn-sm">
-                                                    PDF
-                                                </a>
-                                                
-                                                @if(auth()->user()->canManageSchedules())
-                                                    <a href="{{ route('admin.schedules.edit', $schedule) }}" 
-                                                       class="btn btn-outline-warning btn-sm">
-                                                        Editar
-                                                    </a>
-                                                    
-                                                    <form method="POST" action="{{ route('admin.schedules.destroy', $schedule) }}" 
-                                                          class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir esta escala?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" 
-                                                                class="btn btn-outline-danger btn-sm">
-                                                            Excluir
-                                                        </button>
-                                                    </form>
-                                                @endif
+                                                <span class="text-xs text-gray-500">
+                                                    Arquivo: {{ $schedule->pdf_filename }} ({{ $schedule->getPdfSize() }})
+                                                </span>
                                             </div>
+                                        </div>
+
+                                        <!-- Ações -->
+                                        <div class="flex space-x-2 ml-4">
+                                            <a href="{{ route('admin.schedules.show', $schedule) }}" 
+                                               class="bg-blue-100 text-blue-600 px-3 py-1 rounded text-sm hover:bg-blue-200">
+                                                Ver
+                                            </a>
+                                            
+                                            <a href="{{ route('admin.schedules.download', $schedule) }}" 
+                                               class="bg-green-100 text-green-600 px-3 py-1 rounded text-sm hover:bg-green-200">
+                                                PDF
+                                            </a>
+                                            
+                                            @if(auth()->user()->canManageSchedules())
+                                                <a href="{{ route('admin.schedules.edit', $schedule) }}" 
+                                                   class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded text-sm hover:bg-yellow-200">
+                                                    Editar
+                                                </a>
+                                                
+                                                <form method="POST" action="{{ route('admin.schedules.destroy', $schedule) }}" 
+                                                      class="inline" onsubmit="return confirm('Tem certeza que deseja excluir esta escala?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" 
+                                                            class="bg-red-100 text-red-600 px-3 py-1 rounded text-sm hover:bg-red-200">
+                                                        Excluir
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -129,10 +119,10 @@
                             {{ $schedules->appends(request()->query())->links() }}
                         </div>
                     @else
-                        <div class="text-center py-5">
-                            <div class="text-muted fs-1 mb-3">📋</div>
-                            <h3 class="h6 fw-semibold mb-2">Nenhuma escala encontrada</h3>
-                            <p class="text-muted mb-4">
+                        <div class="text-center py-12">
+                            <div class="text-gray-400 text-6xl mb-4">📋</div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhuma escala encontrada</h3>
+                            <p class="text-gray-600 mb-6">
                                 @if(request()->hasAny(['group_id', 'status']))
                                     Tente ajustar os filtros para ver mais resultados.
                                 @else
@@ -141,7 +131,7 @@
                             </p>
                             
                             <a href="{{ route('admin.schedules.create') }}" 
-                               class="btn btn-primary">
+                               class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
                                 Criar Primeira Escala
                             </a>
                         </div>

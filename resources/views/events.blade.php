@@ -1,24 +1,29 @@
-@extends('layout')
+@extends('layouts.public')
 
 @section('title', 'Eventos - Paróquia São Paulo Apóstolo')
-@section('meta_description', 'Confira a agenda de eventos e atividades da Paróquia São Paulo Apóstolo. Participe das celebrações e encontros da nossa comunidade de fé.')
+@section('description', 'Participe dos eventos e atividades da Paróquia São Paulo Apóstolo em Umuarama - PR.')
 
 @section('content')
 <!-- Hero Section -->
-<x-hero title="Eventos da Paróquia" subtitle="Participe das atividades da nossa comunidade de fé" titleSize="3rem" subtitleSize="1.25rem" />
-
-<!-- Botão de Voltar (Mobile) -->
-<x-back-button />
-
-<!-- Breadcrumbs -->
-<div class="container mt-4">
-    <x-breadcrumbs :items="[
-        ['label' => 'Eventos', 'icon' => 'calendar-event']
-    ]" />
-</div>
+<section class="hero-paroquia animate-on-scroll">
+    <div class="hero-content">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="mb-4" style="font-size: 3rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+                        Eventos da Paróquia
+                    </h1>
+                    <p class="lead mb-4" style="font-size: 1.25rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+                        Participe das atividades da nossa comunidade de fé
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Eventos -->
-<section class="section-paroquia">
+<section class="section-paroquia animate-on-scroll">
     <div class="container">
         @if($events->count() > 0)
             <div class="row g-4">
@@ -26,9 +31,11 @@
                 <div class="col-lg-6 col-xl-4">
                     <div class="card-paroquia h-100">
                         @if($event->image)
-                            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top" style="height: 200px; object-fit: cover;" loading="lazy">
+                            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
                         @else
-                            <x-card.placeholder height="200px" bg="linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%)" icon="bi bi-calendar-event" iconClass="text-white" />
+                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);">
+                                <i class="bi bi-calendar-event text-white" style="font-size: 3rem;"></i>
+                            </div>
                         @endif
                         
                         <div class="card-body d-flex flex-column">
@@ -58,12 +65,9 @@
                                 <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($event->description), 150) }}</p>
                             @endif
                             
-                            <div class="mt-auto d-flex gap-2">
-                                <a href="{{ route('events.show', $event) }}" class="btn btn-success btn-sm">
+                            <div class="mt-auto">
+                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->id }}">
                                     <i class="bi bi-eye me-1"></i>Ver Detalhes
-                                </a>
-                                <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->id }}">
-                                    <i class="bi bi-info-circle me-1"></i>Resumo
                                 </button>
                             </div>
                         </div>
@@ -71,7 +75,7 @@
                 </div>
                 
                 <!-- Modal para evento completo -->
-                <div class="modal fade" id="eventModal{{ $event->id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->id }}" aria-hidden="true" aria-modal="true" role="dialog">
+                <div class="modal fade" id="eventModal{{ $event->id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -215,3 +219,73 @@
 }
 </style>
 @endpush
+                            <span class="mx-2">•</span>
+                            <span>{{ $event->start_date->format('H:i') }}</span>
+                        </div>
+                        
+                        <span class="px-3 py-1 text-xs rounded 
+                            @switch($event->status)
+                                @case('confirmed') bg-green-100 text-green-800 @break
+                                @case('scheduled') bg-blue-100 text-blue-800 @break
+                                @case('cancelled') bg-red-100 text-red-800 @break
+                                @default bg-yellow-100 text-yellow-800
+                            @endswitch">
+                            @switch($event->status)
+                                @case('confirmed') Confirmado @break
+                                @case('scheduled') Agendado @break
+                                @case('cancelled') Cancelado @break
+                                @default {{ ucfirst($event->status) }}
+                            @endswitch
+                        </span>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ $event->title }}</h3>
+                    
+                    @if($event->location)
+                        <div class="flex items-center text-sm text-gray-600 mb-3">
+                            <span>📍</span>
+                            <span class="ml-2">{{ $event->location }}</span>
+                        </div>
+                    @endif
+                    
+                    <p class="text-gray-600 mb-4">{{ Str::limit($event->description, 120) }}</p>
+                    
+                    @if($event->end_date)
+                        <div class="text-sm text-gray-500 mb-4">
+                            <strong>Término:</strong> {{ $event->end_date->format('d/m/Y H:i') }}
+                        </div>
+                    @endif
+                    
+                    <div class="flex justify-between items-center">
+                        @if($event->max_participants)
+                            <span class="text-sm text-gray-500">
+                                Máx: {{ $event->max_participants }} pessoas
+                            </span>
+                        @else
+                            <span class="text-sm text-gray-500">Sem limite de participantes</span>
+                        @endif
+                        
+                        @if($event->requirements)
+                            <span class="text-xs text-blue-600 cursor-help" title="{{ $event->requirements }}">
+                                ℹ️ Requisitos
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-12">
+            {{ $events->links() }}
+        </div>
+    @else
+        <div class="text-center py-12">
+            <div class="text-gray-400 text-6xl mb-4">📅</div>
+            <h3 class="text-2xl font-medium text-gray-900 mb-2">Nenhum evento programado</h3>
+            <p class="text-gray-600">Volte em breve para conferir os próximos eventos da nossa paróquia.</p>
+        </div>
+    @endif
+</div>
+@endsection

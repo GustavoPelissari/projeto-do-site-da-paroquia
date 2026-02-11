@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\UserRole;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\UserRole;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,7 +16,7 @@ class CheckRoleAndArea
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (! Auth::check()) {
+        if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'Você precisa estar logado para acessar esta área.');
         }
 
@@ -32,7 +32,7 @@ class CheckRoleAndArea
                 'user_role' => $userRole,
                 'required_role' => $role,
                 'url' => $request->url(),
-                'ip' => $request->ip(),
+                'ip' => $request->ip()
             ]);
 
             // Redirecionar para área apropriada do usuário
@@ -41,7 +41,7 @@ class CheckRoleAndArea
 
         // Verificação adicional para coordenadores - só podem acessar recursos do seu grupo
         if ($role === UserRole::COORDENADOR_PASTORAL->value && $this->requiresGroupRestriction($request)) {
-            if (! $user->parish_group_id) {
+            if (!$user->group_id) {
                 return $this->redirectToUserArea($userRole, 'Você precisa estar associado a um grupo para acessar esta área.');
             }
         }
@@ -57,11 +57,11 @@ class CheckRoleAndArea
         $routes = [
             UserRole::ADMIN_GLOBAL->value => 'admin.global.dashboard',
             UserRole::COORDENADOR_PASTORAL->value => 'admin.coordenador.dashboard',
-            UserRole::ADMINISTRATIVO->value => 'admin.administrativo.dashboard',
+            UserRole::ADMINISTRATIVO->value => 'admin.administrativo.dashboard'
         ];
 
         $route = $routes[$userRole] ?? 'home';
-
+        
         return redirect()->route($route)->with('error', $message);
     }
 
@@ -74,7 +74,7 @@ class CheckRoleAndArea
             'admin.coordenador.news',
             'admin.coordenador.events',
             'admin.coordenador.schedules',
-            'admin.coordenador.scales',
+            'admin.coordenador.scales'
         ];
 
         foreach ($restrictedRoutes as $route) {

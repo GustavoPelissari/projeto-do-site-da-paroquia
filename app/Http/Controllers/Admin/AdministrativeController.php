@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
-use App\Models\Group;
-use App\Models\Mass;
+use App\Models\User;
 use App\Models\News;
+use App\Models\Event;
+use App\Models\Mass;
+use App\Enums\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class AdministrativeController extends Controller
         // Apenas administrativos podem acessar
         $userRole = Auth::user()->role;
         $roleValue = $userRole instanceof \App\Enums\UserRole ? $userRole->value : $userRole;
-
+        
         if ($roleValue !== 'administrativo') {
             abort(403, 'Acesso negado.');
         }
@@ -43,9 +44,9 @@ class AdministrativeController extends Controller
      */
     public function newsIndex()
     {
-        $news = News::where(function ($query) {
+        $news = News::where(function($query) {
             $query->where('created_by', Auth::id())
-                ->orWhere('scope', '!=', 'global');
+                  ->orWhere('scope', '!=', 'global');
         })->latest()->paginate(10);
 
         return view('admin.administrativo.news.index', compact('news'));
@@ -161,9 +162,9 @@ class AdministrativeController extends Controller
      */
     public function eventsIndex()
     {
-        $events = Event::where(function ($query) {
+        $events = Event::where(function($query) {
             $query->where('created_by', Auth::id())
-                ->orWhere('category', '!=', 'global');
+                  ->orWhere('category', '!=', 'global');
         })->latest()->paginate(10);
 
         return view('admin.administrativo.events.index', compact('events'));
@@ -254,158 +255,16 @@ class AdministrativeController extends Controller
     }
 
     /**
-     * Masses Management
+     * Masses Management - View Only
      */
     public function massesIndex()
     {
         $masses = Mass::latest()->paginate(10);
-
         return view('admin.administrativo.masses.index', compact('masses'));
-    }
-
-    public function massesCreate()
-    {
-        return view('admin.administrativo.masses.create');
-    }
-
-    public function massesStore(Request $request)
-    {
-        $validated = $request->validate([
-            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
-            'time' => 'required|date_format:H:i',
-            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
-            'description' => 'nullable|string',
-            'is_active' => 'boolean',
-        ]);
-
-        Mass::create($validated);
-
-        return redirect()->route('admin.administrativo.masses.index')
-            ->with('success', 'Horário de missa criado com sucesso!');
     }
 
     public function massesShow(Mass $mass)
     {
         return view('admin.administrativo.masses.show', compact('mass'));
-    }
-
-    public function massesEdit(Mass $mass)
-    {
-        return view('admin.administrativo.masses.edit', compact('mass'));
-    }
-
-    public function massesUpdate(Request $request, Mass $mass)
-    {
-        $validated = $request->validate([
-            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
-            'time' => 'required|date_format:H:i',
-            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
-            'description' => 'nullable|string',
-            'is_active' => 'boolean',
-        ]);
-
-        $mass->update($validated);
-
-        return redirect()->route('admin.administrativo.masses.index')
-            ->with('success', 'Horário de missa atualizado com sucesso!');
-    }
-
-    public function massesDestroy(Mass $mass)
-    {
-        $mass->delete();
-
-        return redirect()->route('admin.administrativo.masses.index')
-            ->with('success', 'Horário de missa excluído com sucesso!');
-    }
-
-    /**
-     * Groups Management - Full CRUD
-     */
-    public function groupsIndex()
-    {
-        $groups = Group::orderBy('name')->paginate(10);
-        return view('admin.administrativo.groups.index', compact('groups'));
-    }
-
-    public function groupsCreate()
-    {
-        return view('admin.administrativo.groups.create');
-    }
-
-    public function groupsStore(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'coordinator_name' => 'nullable|string|max:255',
-            'coordinator_phone' => 'nullable|string|max:20',
-            'meeting_info' => 'nullable|string|max:255',
-            'category' => 'nullable|string|in:catequese,liturgia,familia,juventude,geral',
-            'max_members' => 'nullable|integer|min:1',
-            'is_active' => 'boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('groups', 'public');
-        }
-
-        $validated['is_active'] = $request->has('is_active');
-
-        Group::create($validated);
-
-        return redirect()->route('admin.administrativo.groups.index')
-            ->with('success', 'Grupo criado com sucesso!');
-    }
-
-    public function groupsShow(Group $group)
-    {
-        return view('admin.administrativo.groups.show', compact('group'));
-    }
-
-    public function groupsEdit(Group $group)
-    {
-        return view('admin.administrativo.groups.edit', compact('group'));
-    }
-
-    public function groupsUpdate(Request $request, Group $group)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'coordinator_name' => 'nullable|string|max:255',
-            'coordinator_phone' => 'nullable|string|max:20',
-            'meeting_info' => 'nullable|string|max:255',
-            'category' => 'nullable|string|in:catequese,liturgia,familia,juventude,geral',
-            'max_members' => 'nullable|integer|min:1',
-            'is_active' => 'boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        if ($request->hasFile('image')) {
-            if ($group->image) {
-                Storage::disk('public')->delete($group->image);
-            }
-            $validated['image'] = $request->file('image')->store('groups', 'public');
-        }
-
-        $validated['is_active'] = $request->has('is_active');
-
-        $group->update($validated);
-
-        return redirect()->route('admin.administrativo.groups.index')
-            ->with('success', 'Grupo atualizado com sucesso!');
-    }
-
-    public function groupsDestroy(Group $group)
-    {
-        if ($group->image) {
-            Storage::disk('public')->delete($group->image);
-        }
-
-        $group->delete();
-
-        return redirect()->route('admin.administrativo.groups.index')
-            ->with('success', 'Grupo excluído com sucesso!');
     }
 }

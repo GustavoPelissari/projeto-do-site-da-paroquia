@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Enums\UserRole;
-use App\Models\Group;
 use App\Models\User;
+use App\Models\Group;
 use Illuminate\Database\Seeder;
 
 class UpdateUserRolesSeeder extends Seeder
@@ -15,20 +15,20 @@ class UpdateUserRolesSeeder extends Seeder
     public function run(): void
     {
         // Atualizar usuários existentes com novos papéis
-
+        
         // Usuários admin -> admin_global
         User::where('role', 'admin')->update([
-            'role' => UserRole::ADMIN_GLOBAL->value,
+            'role' => UserRole::ADMIN_GLOBAL->value
         ]);
 
         // Usuários moderator -> administrativo
         User::where('role', 'moderator')->update([
-            'role' => UserRole::ADMINISTRATIVO->value,
+            'role' => UserRole::ADMINISTRATIVO->value
         ]);
 
         // Usuários member -> usuario_padrao
         User::where('role', 'member')->update([
-            'role' => UserRole::USUARIO_PADRAO->value,
+            'role' => UserRole::USUARIO_PADRAO->value
         ]);
 
         // Criar alguns grupos de exemplo com requires_scale
@@ -128,7 +128,7 @@ class UpdateUserRolesSeeder extends Seeder
             ],
             [
                 'name' => 'Maria Fiel',
-                'email' => 'maria.fiel@paroquia.com',
+                'email' => 'maria.fiel@paroquia.com', 
                 'role' => UserRole::USUARIO_PADRAO->value,
                 'password' => bcrypt('123456'),
                 'email_verified_at' => now(),

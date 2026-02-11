@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>@yield('title', 'Paróquia São Paulo Apóstolo - Diocese de Umuarama')</title>
+    <meta name="description" content="@yield('description', 'Paróquia São Paulo Apóstolo em Umuarama - PR. Comunidade católica com missas, sacramentos, pastorais e eventos. Diocese de Umuarama.')">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
+
+    <!-- Fonts - Playfair Display (títulos) + Poppins (textos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Design System -->
+    <style>
+        :root {
+            /* Paleta baseada na logo */
+            --dourado-suave: #CFAE67;
+            --vermelho-profundo: #7A1C1C;
+            --bege-claro: #F3E5C1;
+            --verde-agua: #8FB6A0;
+            --branco: #FFFFFF;
+            --cinza-chumbo: #333333;
+            --cinza-claro: #F8F9FA;
+            --cinza-medio: #6C757D;
+            
+            /* Tipografia */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            
+            /* Espacamentos */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            
+            /* Bordas e sombras */
+            --radius: 12px;
+            --radius-lg: 16px;
+            --shadow-soft: 0 4px 20px rgba(122, 28, 28, 0.08);
+            --shadow-medium: 0 8px 30px rgba(122, 28, 28, 0.12);
+            --shadow-strong: 0 12px 40px rgba(122, 28, 28, 0.16);
+            
+            /* Transições */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--cinza-chumbo);
+            line-height: 1.6;
+            background-color: var(--branco);
+            font-weight: 400;
+        }
+        
+        /* Tipografia */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--vermelho-profundo);
+            line-height: 1.2;
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+        
+        .text-dourado { color: var(--dourado-suave); }
+        .text-vermelho { color: var(--vermelho-profundo); }
+        .text-verde { color: var(--verde-agua); }
+        
+        /* Header/Navbar */
+        .navbar-paroquia {
+            background: var(--branco);
+            box-shadow: var(--shadow-soft);
+            border-bottom: 2px solid var(--dourado-suave);
+            padding: var(--spacing-md) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand-paroquia {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            text-decoration: none;
+            color: var(--vermelho-profundo) !important;
+        }
+        
+        .logo-paroquia {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        
+        .brand-text h5 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin: 0;
+            color: var(--vermelho-profundo);
+        }
+        
+        .brand-text small {
+            color: var(--cinza-medio);
+            font-size: 0.85rem;
+        }
+        
+        .nav-link-paroquia {
+            color: var(--cinza-chumbo) !important;
+            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-md) !important;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            text-decoration: none;
+        }
+        
+        .nav-link-paroquia:hover {
+            background-color: var(--bege-claro);
+            color: var(--vermelho-profundo) !important;
+            transform: translateY(-1px);
+        }
+        
+        .nav-link-paroquia.active {
+            background-color: var(--dourado-suave);
+            color: var(--branco) !important;
+        }
+        
+        /* Botões */
+        .btn-paroquia {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+        }
+        
+        .btn-primary-paroquia {
+            background: var(--vermelho-profundo);
+            color: var(--branco);
+        }
+        
+        .btn-primary-paroquia:hover {
+            background: #5A1515;
+            color: var(--branco);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-secondary-paroquia {
+            background: var(--dourado-suave);
+            color: var(--cinza-chumbo);
+        }
+        
+        .btn-secondary-paroquia:hover {
+            background: #B8941F;
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-paroquia {
+            background: transparent;
+            color: var(--vermelho-profundo);
+            border: 2px solid var(--vermelho-profundo);
+        }
+        
+        .btn-outline-paroquia:hover {
+            background: var(--vermelho-profundo);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+        
+        /* Cards */
+        .card-paroquia {
+            background: var(--branco);
+            border: none;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        
+        .card-paroquia:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .card-header-paroquia {
+            background: var(--bege-claro);
+            border: none;
+            padding: var(--spacing-lg);
+        }
+        
+        /* Seções */
+        .section-paroquia {
+            padding: var(--spacing-3xl) 0;
+        }
+        
+        .section-bg-bege {
+            background: var(--bege-claro);
+        }
+        
+        .section-bg-verde {
+            background: linear-gradient(135deg, rgba(143, 182, 160, 0.1), rgba(207, 174, 103, 0.05));
+        }
+        
+        /* Hero */
+        .hero-paroquia {
+            background: linear-gradient(135deg, var(--vermelho-profundo), var(--dourado-suave));
+            color: var(--branco);
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-paroquia::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            background-size: 40px 40px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Footer */
+        .footer-paroquia {
+            background: var(--cinza-chumbo);
+            color: var(--branco);
+            padding: var(--spacing-2xl) 0 var(--spacing-lg);
+        }
+        
+        .footer-paroquia h6 {
+            color: var(--dourado-suave);
+            font-family: var(--font-heading);
+        }
+        
+        .footer-paroquia a {
+            color: var(--cinza-claro);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-paroquia a:hover {
+            color: var(--dourado-suave);
+        }
+        
+        /* Utilitários */
+        .icon-paroquia {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+        
+        .icon-lg {
+            width: 32px;
+            height: 32px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            
+            .hero-paroquia {
+                padding: var(--spacing-2xl) 0;
+            }
+            
+            .section-paroquia {
+                padding: var(--spacing-2xl) 0;
+            }
+            
+            .brand-text h5 {
+                font-size: 1rem;
+            }
+            
+            .logo-paroquia {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        /* Animações suaves */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('styles')
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-paroquia">
+        <div class="container">
+            <a class="navbar-brand-paroquia" href="{{ route('home') }}">
+                <img src="{{ asset('images/sao-paulo-logo.png') }}" 
+                     alt="Paróquia São Paulo Apóstolo" 
+                     class="logo-paroquia">
+                <div class="brand-text">
+                    <h5>Paróquia São Paulo Apóstolo</h5>
+                    <small>Diocese de Umuarama</small>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link-paroquia {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                            <i data-lucide="home" class="icon-paroquia"></i>
+                            Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-paroquia {{ request()->routeIs('masses') ? 'active' : '' }}" href="{{ route('masses') }}">
+                            <i data-lucide="clock" class="icon-paroquia"></i>
+                            Horários
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-paroquia {{ request()->routeIs('groups') ? 'active' : '' }}" href="{{ route('groups') }}">
+                            <i data-lucide="users" class="icon-paroquia"></i>
+                            Pastorais
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-paroquia" href="#eventos">
+                            <i data-lucide="calendar" class="icon-paroquia"></i>
+                            Eventos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-paroquia" href="#contato">
+                            <i data-lucide="mail" class="icon-paroquia"></i>
+                            Contato
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex gap-2 ms-3">
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="btn-paroquia btn-outline-paroquia">
+                            <i data-lucide="user" class="icon-paroquia"></i>
+                            Painel
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-paroquia btn-primary-paroquia">
+                            <i data-lucide="log-in" class="icon-paroquia"></i>
+                            Entrar
+                        </a>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-paroquia">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="{{ asset('images/sao-paulo-logo.png') }}" 
+                             alt="Paróquia São Paulo Apóstolo" 
+                             class="logo-paroquia">
+                        <div>
+                            <h6>Paróquia São Paulo Apóstolo</h6>
+                            <small>Diocese de Umuarama</small>
+                        </div>
+                    </div>
+                    <p class="mb-0">Uma comunidade de fé, esperança e caridade, inspirada no exemplo do Apóstolo dos Gentios.</p>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h6>Navegação</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('home') }}">Início</a></li>
+                        <li><a href="{{ route('masses') }}">Horários</a></li>
+                        <li><a href="{{ route('groups') }}">Pastorais</a></li>
+                        <li><a href="#eventos">Eventos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h6>Contato</h6>
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center gap-2 mb-2">
+                            <i data-lucide="map-pin" class="icon-paroquia"></i>
+                            <small>Av. General Mascarenhas de Morais, 4969<br>Umuarama - PR</small>
+                        </li>
+                        <li class="d-flex align-items-center gap-2 mb-2">
+                            <i data-lucide="phone" class="icon-paroquia"></i>
+                            <small>(44) 3055-4464</small>
+                        </li>
+                        <li class="d-flex align-items-center gap-2">
+                            <i data-lucide="mail" class="icon-paroquia"></i>
+                            <small>secretaria.pspaulo@hotmail.com</small>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3">
+                    <h6>Horários de Missa</h6>
+                    <ul class="list-unstyled">
+                        <li><strong>Domingo:</strong> 09:30 e 18:00</li>
+                        <li><strong>Quarta:</strong> 20:00</li>
+                        <li><strong>Sábado:</strong> 19:30</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: var(--dourado-suave);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <small>&copy; {{ date('Y') }} Paróquia São Paulo Apóstolo. Todos os direitos reservados.</small>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small>Diocese de Umuarama - PR</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inicializar Lucide Icons
+        lucide.createIcons();
+        
+        // Animação de scroll reveal simples
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observar elementos com a classe 'animate-on-scroll'
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            animateElements.forEach(el => observer.observe(el));
+        });
+    </script>
+    
+    @stack('scripts')
+</body>
+</html>
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--paroquia-azul);
+        }
+        
+        .btn-donate {
+            background: linear-gradient(135deg, var(--paroquia-dourado), #B8941F);
+            color: var(--paroquia-branco);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn-donate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+            color: var(--paroquia-branco);
+        }
+        
+        .btn-primary {
+            background: var(--paroquia-azul);
+            border-color: var(--paroquia-azul);
+            border-radius: var(--radius);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #1f2251;
+            border-color: #1f2251;
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline-primary {
+            color: var(--paroquia-azul);
+            border-color: var(--paroquia-azul);
+            border-radius: var(--radius);
+            font-weight: 500;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--paroquia-azul);
+            border-color: var(--paroquia-azul);
+        }
+        
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--paroquia-branco);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(44, 47, 107, 0.15);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--paroquia-azul);
+            color: var(--paroquia-branco);
+        }
+        
+        .footer h5 {
+            color: var(--paroquia-dourado);
+            font-family: var(--font-heading);
+        }
+        
+        .footer a {
+            color: #E6E6FA;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--paroquia-dourado);
+        }
+        
+        /* Ícones */
+        .icon-liturgico {
+            color: var(--paroquia-dourado);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        
+        .icon-large {
+            font-size: 2.5rem;
+            color: var(--paroquia-azul);
+        }
+        
+        /* Seção destacada */
+        .section-highlight {
+            background: linear-gradient(135deg, rgba(44, 47, 107, 0.05), rgba(212, 175, 55, 0.05));
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            
+            .section-highlight {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    @stack('styles')
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
+                <i class="bi bi-cross me-2" style="color: var(--paroquia-dourado);"></i>
+                Paróquia São Paulo Apóstolo
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">
+                            <i class="bi bi-house icon-liturgico"></i>Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('masses') }}">
+                            <i class="bi bi-clock icon-liturgico"></i>Horários
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('groups') }}">
+                            <i class="bi bi-people icon-liturgico"></i>Pastorais
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#eventos">
+                            <i class="bi bi-calendar-event icon-liturgico"></i>Eventos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">
+                            <i class="bi bi-envelope icon-liturgico"></i>Contato
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex gap-2">
+                    <a href="#doacoes" class="btn-donate">
+                        <i class="bi bi-heart me-1"></i>Apoiar a Paróquia
+                    </a>
+                    @auth
+                        <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-primary">
+                            <i class="bi bi-gear me-1"></i>Admin
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                        </a>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="mb-3">
+                        <i class="bi bi-cross me-2"></i>Paróquia São Paulo Apóstolo
+                    </h5>
+                    <p class="mb-3">
+                        Igreja: lugar onde a cidade encontra a graça.<br>
+                        <small class="text-light">Diocese de Umuarama</small>
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" title="Facebook da Paróquia" aria-label="Facebook">
+                            <i class="bi bi-facebook fs-4"></i>
+                        </a>
+                        <a href="#" title="Instagram da Paróquia" aria-label="Instagram">
+                            <i class="bi bi-instagram fs-4"></i>
+                        </a>
+                        <a href="#" title="Canal do YouTube" aria-label="YouTube">
+                            <i class="bi bi-youtube fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-3">
+                        <i class="bi bi-geo-alt me-2"></i>Localização & Contato
+                    </h5>
+                    <div class="mb-2">
+                        <i class="bi bi-geo-alt-fill me-2" style="color: var(--paroquia-dourado);"></i>
+                        Av. General Mascarenhas de Morais, 4969<br>
+                        <span class="ms-4">Umuarama, PR</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="bi bi-telephone-fill me-2" style="color: var(--paroquia-dourado);"></i>
+                        <a href="tel:+5544305540464">(44) 3055-4464</a>
+                    </div>
+                    <div class="mb-2">
+                        <i class="bi bi-envelope-fill me-2" style="color: var(--paroquia-dourado);"></i>
+                        <a href="mailto:secretaria_pspaulo@hotmail.com">secretaria_pspaulo@hotmail.com</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5 class="mb-3">
+                        <i class="bi bi-clock me-2"></i>Horários de Missa
+                    </h5>
+                    <div class="mb-2">
+                        <strong>Domingo:</strong> 09:30 e 18:00
+                    </div>
+                    <div class="mb-2">
+                        <strong>Quarta:</strong> 20:00
+                    </div>
+                    <div class="mb-2">
+                        <strong>Sábado:</strong> 19:30
+                    </div>
+                    <div class="mb-2">
+                        <strong>1ª Sexta:</strong> 20:00
+                    </div>
+                    <small class="text-light">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Confirme horários especiais na secretaria
+                    </small>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: var(--paroquia-dourado);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">
+                        &copy; {{ date('Y') }} Paróquia São Paulo Apóstolo - Diocese de Umuarama
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small>
+                        <i class="bi bi-shield-check me-1"></i>
+                        Sistema desenvolvido com <i class="bi bi-heart-fill" style="color: var(--paroquia-dourado);"></i>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    @stack('scripts')
+</body>
+</html>

@@ -1,222 +1,83 @@
 import './bootstrap';
 
-// Import Bootstrap JavaScript
-import * as bootstrap from 'bootstrap';
+import Alpine from 'alpinejs';
 
-// Make Bootstrap available globally for blade templates
-window.bootstrap = bootstrap;
+window.Alpine = Alpine;
+
+Alpine.start();
 
 // ==========================================
 // FUNCIONALIDADES INTERATIVAS DA PARÓQUIA
 // ==========================================
 
-// Debounce utility function
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Throttle utility function
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ==========================================
-    // NAVBAR SCROLL EFFECT (com throttle)
-    // ==========================================
+    // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-        const handleScroll = throttle(function() {
+        window.addEventListener('scroll', function() {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-        }, 100);
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
-    }
-    
-    // ==========================================
-    // ANIMATE ON SCROLL - APENAS DESKTOP
-    // ==========================================
-    const isMobile = window.innerWidth <= 768;
-    
-    if (!isMobile) {
-        // Apenas aplicar animação em desktop
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Unobserve após animação para performance
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all animate-on-scroll elements
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-    } else {
-        // Mobile: remover animação de scroll, deixar tudo estático
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            el.classList.remove('animate-on-scroll');
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-        
-        // Remover animação dos cards
-        document.querySelectorAll('.card-paroquia').forEach(el => {
-            el.style.animation = 'none';
-            el.style.opacity = '1';
         });
     }
     
-    // ==========================================
-    // SMOOTH SCROLL (com delegação)
-    // ==========================================
-    document.addEventListener('click', function(e) {
-        // Verificar se clicou em link com href começando com #
-        const anchor = e.target.closest('a[href^="#"]');
-        if (!anchor) return;
-        
-        e.preventDefault();
-        const targetId = anchor.getAttribute('href');
-        const target = document.querySelector(targetId);
-        
-        if (target) {
-            const offset = navbar ? navbar.offsetHeight : 0;
-            const targetPosition = target.offsetTop - offset - 20;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
+    // Animate on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all animate-on-scroll elements
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
     });
     
-    // ==========================================
-    // AUTO-CLOSE MOBILE MENU (com delegação)
-    // ==========================================
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offset = navbar ? navbar.offsetHeight : 0;
+                const targetPosition = target.offsetTop - offset - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+    
+    // Auto-close mobile menu on link click
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    if (navbarCollapse) {
-        navbarCollapse.addEventListener('click', function(e) {
-            const navLink = e.target.closest('.nav-link');
-            if (!navLink) return;
-            
-            if (navbarCollapse.classList.contains('show')) {
-                const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || 
-                                 new bootstrap.Collapse(navbarCollapse, { toggle: false });
-                bsCollapse.hide();
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: true
+                });
             }
         });
-    }
-
-    // ==========================================
-    // BOOTSTRAP ICONS VERIFICATION
-    // ==========================================
-    const testIcon = document.createElement('i');
-    testIcon.className = 'bi bi-house-door';
-    testIcon.style.position = 'absolute';
-    testIcon.style.left = '-9999px';
-    document.body.appendChild(testIcon);
-    
-    const computedStyle = window.getComputedStyle(testIcon, '::before');
-    const content = computedStyle.getPropertyValue('content');
-    
-    if (content && content !== 'none' && content !== '""') {
-        console.log('✅ Bootstrap Icons carregado corretamente');
-    } else {
-        console.warn('⚠️ Bootstrap Icons pode não estar carregado');
-    }
-    
-    document.body.removeChild(testIcon);
-
-    // ==========================================
-    // AUTO-DISMISS ALERTS
-    // ==========================================
-    const alerts = document.querySelectorAll('.alert-dismissible');
-    alerts.forEach(function(alert) {
-        setTimeout(function() {
-            const bsAlert = bootstrap.Alert.getInstance(alert) || new bootstrap.Alert(alert);
-            bsAlert.close();
-        }, 5000);
     });
-
-    // ==========================================
-    // SCHEDULE PDF MODAL
-    // ==========================================
-    const pdfModal = document.getElementById('pdfModal');
-    if (pdfModal) {
-        const pdfFrame = pdfModal.querySelector('#pdfFrame');
-        
-        pdfModal.addEventListener('show.bs.modal', function(event) {
-            const trigger = event.relatedTarget;
-            const url = trigger?.getAttribute('data-pdf-url') || '';
-            if (pdfFrame && url) {
-                pdfFrame.src = url;
-            }
-        });
-        
-        pdfModal.addEventListener('hidden.bs.modal', function() {
-            if (pdfFrame) {
-                pdfFrame.src = '';
-            }
-        });
-    }
-
-    // ==========================================
-    // SCHEDULE FILE INPUT
-    // ==========================================
-    const fileInput = document.querySelector('[data-file-input]');
-    const fileNameLabel = document.getElementById('file-name');
-    if (fileInput && fileNameLabel) {
-        fileInput.addEventListener('change', function() {
-            if (fileInput.files.length > 0) {
-                fileNameLabel.textContent = `Arquivo selecionado: ${fileInput.files[0].name}`;
-                fileNameLabel.classList.remove('d-none');
-            } else {
-                fileNameLabel.classList.add('d-none');
-            }
-        });
-    }
-
-    // ==========================================
-    // SCHEDULE AUTO-FILL END DATE
-    // ==========================================
-    const startDateInput = document.getElementById('start_date');
-    const endDateInput = document.getElementById('end_date');
-    if (startDateInput && endDateInput) {
-        startDateInput.addEventListener('change', function() {
-            if (!endDateInput.value) {
-                const startDate = new Date(startDateInput.value);
-                const endOfMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
-                endDateInput.value = endOfMonth.toISOString().split('T')[0];
-            }
-        });
-    }
 });
 
 // Função para calcular próxima missa
@@ -342,28 +203,3 @@ document.addEventListener('DOMContentLoaded', atualizarProximaMissa);
 
 // Atualizar a cada minuto
 setInterval(atualizarProximaMissa, 60000);
-
-// ==========================================
-// GERENCIAMENTO DE FOCO EM MODAIS
-// ==========================================
-let elementoQueAbriuModal = null;
-
-// Delegação de eventos para todos os modais
-document.addEventListener('show.bs.modal', function(e) {
-    elementoQueAbriuModal = document.activeElement;
-    
-    // Focar no primeiro elemento interativo do modal após ser mostrado
-    setTimeout(() => {
-        const primeiroElemento = e.target.querySelector('button:not([data-bs-dismiss]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        if (primeiroElemento) {
-            primeiroElemento.focus();
-        }
-    }, 150);
-});
-
-document.addEventListener('hidden.bs.modal', function() {
-    if (elementoQueAbriuModal && document.body.contains(elementoQueAbriuModal)) {
-        elementoQueAbriuModal.focus();
-        elementoQueAbriuModal = null;
-    }
-});
