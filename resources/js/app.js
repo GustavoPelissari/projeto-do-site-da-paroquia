@@ -66,15 +66,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Auto-close mobile menu on link click
+    // Correção: Verifica se bootstrap está definido antes de usar Collapse
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
     const navbarCollapse = document.querySelector('.navbar-collapse');
     
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                    toggle: true
-                });
+                // Verifica se bootstrap.Collapse está disponível antes de instanciar
+                if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: true
+                    });
+                } else {
+                    // Fallback: remove a classe show manualmente
+                    navbarCollapse.classList.remove('show');
+                }
             }
         });
     });
@@ -203,3 +210,6 @@ document.addEventListener('DOMContentLoaded', atualizarProximaMissa);
 
 // Atualizar a cada minuto
 setInterval(atualizarProximaMissa, 60000);
+
+// Exportar funções para testes unitários
+export { calcularProximaMissa, atualizarProximaMissa };
