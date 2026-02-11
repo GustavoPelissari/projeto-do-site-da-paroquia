@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
 use Illuminate\Console\Command;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class CreateAdminUser extends Command
@@ -33,7 +33,6 @@ class CreateAdminUser extends Command
 
         if (User::where('email', $email)->exists()) {
             $this->error('User with this email already exists!');
-
             return;
         }
 
@@ -45,7 +44,7 @@ class CreateAdminUser extends Command
             'email_verified_at' => now(),
         ]);
 
-        $this->info('Admin user created successfully!');
+        $this->info("Admin user created successfully!");
         $this->info("Email: {$user->email}");
         $this->info("Role: {$user->role->value}");
     }

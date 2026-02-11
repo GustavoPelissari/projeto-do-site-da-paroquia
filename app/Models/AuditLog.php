@@ -29,27 +29,16 @@ class AuditLog extends Model
 
     // Action types
     const ACTION_CREATE = 'create';
-
     const ACTION_UPDATE = 'update';
-
     const ACTION_DELETE = 'delete';
-
     const ACTION_LOGIN = 'login';
-
     const ACTION_LOGOUT = 'logout';
-
     const ACTION_APPROVE_REQUEST = 'approve_group_request';
-
     const ACTION_REJECT_REQUEST = 'reject_group_request';
-
     const ACTION_UPLOAD_SCHEDULE = 'upload_schedule';
-
     const ACTION_DELETE_SCHEDULE = 'delete_schedule';
-
     const ACTION_ASSIGN_ROLE = 'assign_role';
-
     const ACTION_REMOVE_COORDINATOR = 'remove_coordinator';
-
     const ACTION_CHANGE_SETTINGS = 'change_settings';
 
     public static function getActions(): array
@@ -88,7 +77,7 @@ class AuditLog extends Model
 
     public function getIcon(): string
     {
-        return match ($this->action) {
+        return match($this->action) {
             self::ACTION_CREATE => '➕',
             self::ACTION_UPDATE => '✏️',
             self::ACTION_DELETE => '🗑️',
@@ -107,7 +96,7 @@ class AuditLog extends Model
 
     public function getColor(): string
     {
-        return match ($this->action) {
+        return match($this->action) {
             self::ACTION_CREATE => 'green',
             self::ACTION_UPDATE => 'blue',
             self::ACTION_DELETE, self::ACTION_DELETE_SCHEDULE, self::ACTION_REMOVE_COORDINATOR => 'red',
@@ -137,11 +126,11 @@ class AuditLog extends Model
     public function scopeForResource($query, $resourceType, $resourceId = null)
     {
         $query = $query->where('resource_type', $resourceType);
-
+        
         if ($resourceId) {
             $query->where('resource_id', $resourceId);
         }
-
+        
         return $query;
     }
 
@@ -189,7 +178,7 @@ class AuditLog extends Model
             'action' => self::ACTION_LOGIN,
             'resource_type' => 'User',
             'resource_id' => $user->id,
-            'description' => 'Login realizado',
+            'description' => "Login realizado",
             'ip_address' => request()->ip(),
             'user_agent' => request()->userAgent(),
         ]);
@@ -202,7 +191,7 @@ class AuditLog extends Model
             'action' => self::ACTION_LOGOUT,
             'resource_type' => 'User',
             'resource_id' => $user->id,
-            'description' => 'Logout realizado',
+            'description' => "Logout realizado",
             'ip_address' => request()->ip(),
             'user_agent' => request()->userAgent(),
         ]);

@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Group extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'name',
         'description',
@@ -23,11 +20,10 @@ class Group extends Model
         'image',
         'is_active',
         'requires_scale',
-        'max_members',
         'coordinator_id',
         'created_by',
     ];
-
+    
     protected function casts(): array
     {
         return [
@@ -35,39 +31,34 @@ class Group extends Model
             'requires_scale' => 'boolean',
         ];
     }
-
-    public function scopeActive(Builder $query): Builder
+    
+    public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
 
-    public function scopeWithSchedules(Builder $query): Builder
+    public function scopeWithSchedules($query)
     {
         return $query->where('requires_scale', true);
     }
 
-    public function scopeWithoutSchedules(Builder $query): Builder
+    public function scopeWithoutSchedules($query)
     {
         return $query->where('requires_scale', false);
     }
-
-    public function getCategoryNameAttribute(): string
+    
+    public function getCategoryNameAttribute()
     {
         $categories = [
             'liturgy' => 'Liturgia',
-            'liturgia' => 'Liturgia',
             'pastoral' => 'Pastoral',
             'service' => 'Serviço',
-            'caridade' => 'Caridade',
             'formation' => 'Formação',
-            'catequese' => 'Catequese',
             'youth' => 'Juventude',
-            'jovens' => 'Juventude',
             'family' => 'Família',
-            'geral' => 'Geral',
         ];
-
-        return $categories[$this->category] ?? ucfirst($this->category);
+        
+        return $categories[$this->category] ?? $this->category;
     }
 
     public function hasCoordinator(): bool
@@ -87,70 +78,51 @@ class Group extends Model
 
     public function getPendingRequestsCount(): int
     {
-        return $this->groupRequests()->where('status', GroupRequest::STATUS_PENDING)->count();
+        return $this->groupRequests()->pending()->count();
     }
 
     public function getCurrentSchedule(): ?Schedule
     {
-        /** @var Schedule|null $schedule */
-        $schedule = $this->schedules()->where('is_active', true)
-            ->where('start_date', '<=', now()->toDateString())
-            ->where('end_date', '>=', now()->toDateString())
-            ->first();
-
-        return $schedule;
+        return $this->schedules()->current()->first();
     }
 
     public function getActiveSchedules()
     {
-        return $this->schedules()->where('is_active', true)
-            ->orderBy('start_date', 'desc')
-            ->get();
-    }
-
-    public function isFull(): bool
-    {
-        // Se não tem limite de membros, nunca está cheio
-        if (!isset($this->max_members) || $this->max_members === null) {
-            return false;
-        }
-
-        // Verifica se o número de membros atingiu o limite
-        return $this->getMembersCount() >= $this->max_members;
+        return $this->schedules()->active()->orderBy('start_date', 'desc')->get();
     }
 
     // Relationships
-    public function coordinator(): BelongsTo
+    public function coordinator()
     {
         return $this->belongsTo(User::class, 'coordinator_id');
     }
 
-    public function creator(): BelongsTo
+    public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function members(): HasMany
+    public function members()
     {
         return $this->hasMany(User::class, 'parish_group_id');
     }
 
-    public function groupRequests(): HasMany
+    public function groupRequests()
     {
         return $this->hasMany(GroupRequest::class);
     }
 
-    public function schedules(): HasMany
+    public function schedules()
     {
         return $this->hasMany(Schedule::class);
     }
 
-    public function news(): HasMany
+    public function news()
     {
         return $this->hasMany(News::class);
     }
 
-    public function events(): HasMany
+    public function events()
     {
         return $this->hasMany(Event::class);
     }

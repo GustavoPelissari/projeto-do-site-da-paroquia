@@ -1,310 +1,224 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Solicitar Entrada em Grupo - Paróquia São Paulo Apóstolo')
 
 @section('content')
-<x-hero title="Participar da Nossa Comunidade" subtitle="Junte-se aos nossos grupos e pastorais">
-    <p class="mb-0" style="opacity: 0.9;">
-        Preencha o formulário abaixo para solicitar sua participação em um grupo paroquial
-    </p>
-</x-hero>
+    <div class="sp-container sp-py-large">
+        {{-- Hero Section --}}
+        <section class="sp-hero">
+            <div class="sp-hero-content">
+                <h1 class="sp-hero-title">🙏 Participar da Nossa Comunidade</h1>
+                <p class="sp-hero-subtitle">
+                    Envie uma solicitação para se juntar a um dos nossos grupos e pastorais
+                </p>
+            </div>
+        </section>
 
-<!-- Botão de Voltar (Mobile) -->
-<x-back-button />
-
-<div class="container my-5">
-    {{-- Alert para email não verificado --}}
-    @if(!Auth::user()->hasVerifiedEmail())
-        <div class="alert alert-warning mb-4" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-left: 4px solid #FF9800; border-radius: 10px; box-shadow: 0 2px 8px rgba(255, 152, 0, 0.1);">
-            <div class="d-flex align-items-start">
-                <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
-                     style="width: 48px; height: 48px; background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
-                    <i class="bi bi-exclamation-triangle-fill" style="font-size: 24px; color: white;"></i>
-                </div>
-                <div class="flex-grow-1">
-                    <h6 class="fw-bold mb-2" style="color: #E65100;">
-                        <i class="bi bi-envelope-x me-1"></i> E-mail não verificado
-                    </h6>
-                    <p class="mb-2 small">
-                        Para solicitar participação em um grupo, você precisa verificar seu e-mail primeiro.
-                        Isso garante que possamos enviar notificações importantes sobre sua solicitação.
-                    </p>
-                    <form method="POST" action="{{ route('verification.send') }}" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-sm btn-warning">
-                            <i class="bi bi-envelope-check me-1"></i> Enviar E-mail de Verificação
-                        </button>
-                    </form>
+        {{-- Alerts --}}
+        @if (session('success'))
+            <div class="sp-alert sp-alert-success sp-mb-6">
+                <div class="sp-alert-icon">✅</div>
+                <div class="sp-alert-content">
+                    <strong>Sucesso!</strong> {{ session('success') }}
                 </div>
             </div>
-        </div>
-    @endif
+        @endif
 
-    {{-- Removido alerta local de sucesso para evitar duplicidade (layout já exibe) --}}
-
-    @if ($errors->any())
-        <x-alert type="error">
-            <strong>Atenção!</strong> Corrija os erros abaixo:
-                <ul class="mt-2 mb-0 ps-3 small">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-                            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true" style="font-size: 24px; color: white;"></i>
-                                <i class="bi bi-envelope-x me-1" aria-hidden="true"></i> E-mail não verificado
-                                    <i class="bi bi-envelope-check me-1" aria-hidden="true"></i> Enviar E-mail de Verificação
-        </x-alert>
-    @endif
-
-    @if(isset($currentGroup))
-        {{-- Alerta informativo sobre grupo atual --}}
-        <div class="alert mb-4" style="background: linear-gradient(135deg, #FFF5F0 0%, #FFEEE5 100%); border-left: 4px solid var(--brand-vinho); border-radius: 10px; box-shadow: 0 2px 8px rgba(139, 30, 63, 0.1);">
-            <div class="d-flex align-items-center">
-                <div class="rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" 
-                     style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center;">
-                    <i class="bi bi-check-circle-fill" style="font-size: 24px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                                    <i class="bi bi-check-circle-fill" aria-hidden="true" style="font-size: 24px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                </div>
-                <div class="flex-grow-1">
-                    <h6 class="fw-bold mb-1" style="color: var(--brand-vinho);">
-                        Você já participa do grupo: {{ $currentGroup->name }}
-                    </h6>
-                    <p class="mb-0 small text-muted">
-                        Você pode solicitar participação em outros grupos para ampliar seu serviço na paróquia.
-                    </p>
+        @if ($errors->any())
+            <div class="sp-alert sp-alert-error sp-mb-6">
+                <div class="sp-alert-icon">❌</div>
+                <div class="sp-alert-content">
+                    <strong>Atenção!</strong> Corrija os erros abaixo:
+                    <ul class="sp-list sp-mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
-        </div>
-    @endif
+        @endif
 
-    <div class="row g-4">
-        <div class="col-lg-7">
-            <div class="card-paroquia shadow-sm">
-                <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                    <h2 class="card-title-paroquia mb-0 text-white">
-                        <i class="bi bi-file-text me-2"></i>
-                                                <i class="bi bi-file-text me-2" aria-hidden="true"></i>
-                        Formulário de Solicitação
-                    </h2>
-                </div>
-                
-                <form action="{{ route('group-requests.store') }}" method="POST" class="card-body-paroquia p-4">
-                    @csrf
+        {{-- Main Content --}}
+        <section class="sp-section">
+            <div class="sp-content-wrapper">
+                <div class="sp-grid sp-grid-2" style="gap: var(--space-8); align-items: start;">
                     
-                    <div class="mb-4">
-                        <label for="group_id" class="form-label fw-bold d-flex align-items-center mb-3">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
-                                 style="width: 32px; height: 32px; background-color: var(--bg-rose); display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-people-fill" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                                                            <i class="bi bi-people-fill" aria-hidden="true" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                            </div>
-                            <span style="color: var(--brand-vinho);">Grupo Desejado <span class="text-danger">*</span></span>
-                        </label>
-                        <select id="group_id" name="group_id" required class="form-select form-select-lg" style="border: 2px solid var(--bg-rose); border-radius: 8px;">
-                            <option value="">Selecione um grupo...</option>
-                            @foreach($groups as $group)
-                                @if(!isset($currentGroup) || $currentGroup->id !== $group->id)
-                                    <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                        {{ $group->name }}
-                                        @if($group->description)
-                                            - {{ Str::limit($group->description, 50) }}
-                                        @endif
-                                    </option>
-                                @endif
-                            @endforeach
-                        </select>
-                        @error('group_id')
-                            <div class="text-danger small mt-2">
-                                <i class="bi bi-exclamation-circle"></i>
-                                                                <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="message" class="form-label fw-bold d-flex align-items-center mb-3">
-                            <div class="rounded-circle d-flex align-items-center justify-content-center me-2" 
-                                 style="width: 32px; height: 32px; background-color: var(--bg-rose); display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-pencil-fill" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                                                            <i class="bi bi-pencil-fill" aria-hidden="true" style="font-size: 16px; color: var(--brand-vinho) !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                                                            <i class="bi bi-exclamation-circle" aria-hidden="true"></i>
-                            </div>
-                            <span style="color: var(--brand-vinho);">Mensagem <span class="text-danger">*</span></span>
-                        </label>
-                        <textarea 
-                            id="message" 
-                            name="message" 
-                            rows="6" 
-                            required
-                            placeholder="Explique por que deseja participar deste grupo e como pode contribuir para a nossa missão..."
-                            class="form-control"
-                            style="border: 2px solid var(--bg-rose); border-radius: 8px; resize: vertical;"
-                        >{{ old('message') }}</textarea>
-                        @error('message')
-                            <div class="text-danger small mt-2">
-                                <i class="bi bi-exclamation-circle"></i>
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <div class="form-text mt-2">
-                            <i class="bi bi-info-circle"></i>
-                                                        <i class="bi bi-info-circle" aria-hidden="true"></i>
-                            Mínimo de 10 caracteres. Seja claro sobre suas motivações e disponibilidade.
+                    {{-- Formulário --}}
+                    <div class="sp-card">
+                        <div class="sp-card-header">
+                            <h2 class="sp-card-title">📝 Formulário de Solicitação</h2>
                         </div>
-                    </div>
-
-                    <div class="d-flex gap-3 mt-4 flex-wrap">
-                        <button type="submit" class="btn-paroquia btn-primary-paroquia px-4">
-                            <i class="bi bi-send-fill me-2"></i>
-                                                        <i class="bi bi-send-fill me-2" aria-hidden="true"></i>
-                            Enviar Solicitação
-                        </button>
-                        <a href="{{ route('groups') }}" class="btn btn-outline-secondary px-4 d-flex align-items-center justify-content-center" style="border: 2px solid var(--brand-vinho); color: var(--brand-vinho); text-decoration: none;">
-                            <i class="bi bi-arrow-left me-2"></i>
-                                                        <i class="bi bi-arrow-left me-2" aria-hidden="true"></i>
-                            Voltar aos Grupos
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <div class="card-paroquia shadow-sm">
-                <div class="card-header-paroquia" style="background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%);">
-                    <h3 class="card-title-paroquia mb-0 text-white">
-                        <i class="bi bi-list-ul me-2"></i>
-                                                <i class="bi bi-list-ul me-2" aria-hidden="true"></i>
-                        Grupos Disponíveis
-                    </h3>
-                </div>
-                <div class="card-body-paroquia p-3" style="max-height: 600px; overflow-y: auto;">
-                    @php
-                        $availableGroups = $groups->filter(function($group) use ($currentGroup) {
-                            return !isset($currentGroup) || $currentGroup->id !== $group->id;
-                        });
-                    @endphp
-                    
-                    @forelse($availableGroups as $group)
-                        <div class="mb-3 p-3 border-bottom" style="border-color: var(--bg-rose) !important;">
-                            <h5 class="fw-bold mb-2 d-flex align-items-center" style="color: var(--brand-vinho);">
-                                <i class="bi bi-circle-fill me-2" style="font-size: 8px;"></i>
-                                                                <i class="bi bi-circle-fill me-2" aria-hidden="true" style="font-size: 8px;"></i>
-                                {{ $group->name }}
-                            </h5>
+                        
+                        <form action="{{ route('group-requests.store') }}" method="POST" class="sp-card-content">
+                            @csrf
                             
-                            @if($group->description)
-                                <p class="small text-muted mb-2" style="line-height: 1.5;">
-                                    {{ Str::limit($group->description, 100) }}
-                                </p>
-                            @endif
-
-                            <div class="d-flex flex-column gap-1 mt-2">
-                                @if($group->coordinator_name)
-                                    <div class="d-flex align-items-center small text-muted">
-                                        <i class="bi bi-person-fill me-2" style="font-size: 14px; color: var(--brand-vinho);"></i>
-                                                                                <i class="bi bi-person-fill me-2" aria-hidden="true" style="font-size: 14px; color: var(--brand-vinho);"></i>
-                                        <span><strong>Coord.:</strong> {{ $group->coordinator_name }}</span>
-                                    </div>
-                                @endif
-
-                                @if($group->meeting_info)
-                                    <div class="d-flex align-items-center small text-muted">
-                                        <i class="bi bi-calendar-event me-2" style="font-size: 14px; color: var(--brand-vinho);"></i>
-                                                                                <i class="bi bi-calendar-event me-2" aria-hidden="true" style="font-size: 14px; color: var(--brand-vinho);"></i>
-                                        <span>{{ $group->meeting_info }}</span>
-                                    </div>
-                                @endif
+                            {{-- Grupo Desejado --}}
+                            <div class="sp-form-group">
+                                <label for="group_id" class="sp-label">
+                                    🏛️ Grupo Desejado <span class="sp-text-error">*</span>
+                                </label>
+                                <select id="group_id" name="group_id" required class="sp-select">
+                                    <option value="">Selecione um grupo...</option>
+                                    @foreach($groups as $group)
+                                        <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                            {{ $group->name }}
+                                            @if($group->description)
+                                                - {{ Str::limit($group->description, 50) }}
+                                            @endif
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('group_id')
+                                    <div class="sp-form-error">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                            <span class="badge mt-2" style="background-color: var(--dourado-suave); color: var(--brand-vinho); font-size: 0.75rem;">
-                                {{ $group->category_name }}
-                            </span>
+                            {{-- Mensagem --}}
+                            <div class="sp-form-group">
+                                <label for="message" class="sp-label">
+                                    💬 Mensagem <span class="sp-text-error">*</span>
+                                </label>
+                                <textarea 
+                                    id="message" 
+                                    name="message" 
+                                    rows="4" 
+                                    required
+                                    placeholder="Explique por que deseja participar deste grupo e como pode contribuir para a nossa missão..."
+                                    class="sp-textarea"
+                                >{{ old('message') }}</textarea>
+                                @error('message')
+                                    <div class="sp-form-error">{{ $message }}</div>
+                                @enderror
+                                <div class="sp-form-help">
+                                    💡 Mínimo de 10 caracteres. Seja claro sobre suas motivações e como deseja servir.
+                                </div>
+                            </div>
+
+                            {{-- Disponibilidade --}}
+                            <div class="sp-form-group">
+                                <label for="availability" class="sp-label">
+                                    📅 Disponibilidade
+                                </label>
+                                <textarea 
+                                    id="availability" 
+                                    name="availability" 
+                                    rows="3" 
+                                    placeholder="Descreva sua disponibilidade: dias da semana, horários preferenciais, compromissos..."
+                                    class="sp-textarea"
+                                >{{ old('availability') }}</textarea>
+                                @error('availability')
+                                    <div class="sp-form-error">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- Botões --}}
+                            <div class="sp-form-actions">
+                                <a href="{{ route('groups') }}" class="sp-btn sp-btn-outline">
+                                    ← Voltar aos Grupos
+                                </a>
+                                <button type="submit" class="sp-btn sp-btn-gold sp-btn-lg">
+                                    🚀 Enviar Solicitação
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    {{-- Informações dos Grupos --}}
+                    <div class="sp-card">
+                        <div class="sp-card-header">
+                            <h3 class="sp-card-title">🏛️ Grupos Disponíveis</h3>
                         </div>
-                    @empty
-                        <div class="text-center py-5">
-                            <i class="bi bi-people" style="font-size: 64px; opacity: 0.3; color: #6c757d;"></i>
-                            <p class="text-muted mb-0 mt-3">Nenhum grupo disponível no momento.</p>
+                        <div class="sp-card-content">
+                            @forelse($groups as $group)
+                                <div class="sp-card sp-mb-4" style="border: 1px solid var(--sp-gray-200);">
+                                    <div class="sp-card-content" style="padding: var(--space-4);">
+                                        <h4 class="sp-text-lg sp-font-semibold sp-mb-2" style="color: var(--sp-red);">
+                                            {{ $group->name }}
+                                        </h4>
+                                        
+                                        @if($group->description)
+                                            <p class="sp-text-sm sp-text-muted sp-mb-3">
+                                                {{ $group->description }}
+                                            </p>
+                                        @endif
+
+                                        @if($group->coordinator_name)
+                                            <div class="sp-flex sp-items-center sp-text-xs sp-text-muted">
+                                                <span class="sp-icon">👤</span>
+                                                <span>Coordenador: {{ $group->coordinator_name }}</span>
+                                            </div>
+                                        @endif
+
+                                        @if($group->meeting_info)
+                                            <div class="sp-flex sp-items-center sp-text-xs sp-text-muted sp-mt-1">
+                                                <span class="sp-icon">📅</span>
+                                                <span>{{ $group->meeting_info }}</span>
+                                            </div>
+                                        @endif
+
+                                        <div class="sp-badge sp-badge-{{ $group->category }}" style="margin-top: var(--space-2);">
+                                            {{ $group->getCategoryName() }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="sp-text-center sp-py-8">
+                                    <div class="sp-icon-large sp-mb-4" style="color: var(--sp-gray-light);">🏛️</div>
+                                    <p class="sp-text-muted">Nenhum grupo disponível no momento.</p>
+                                </div>
+                            @endforelse
                         </div>
-                    @endforelse
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        {{-- Seção de Orientações --}}
+        <section class="sp-section">
+            <div class="sp-content-wrapper">
+                <div class="sp-card" style="background: var(--sp-ivory); border-left: 4px solid var(--sp-gold);">
+                    <div class="sp-card-header">
+                        <h3 class="sp-card-title" style="color: var(--sp-red);">💡 Orientações Importantes</h3>
+                    </div>
+                    <div class="sp-card-content">
+                        <div class="sp-grid sp-grid-2">
+                            <div>
+                                <h4 class="sp-font-semibold sp-mb-2" style="color: var(--sp-red-dark);">Antes de solicitar:</h4>
+                                <ul class="sp-list">
+                                    <li>Leia atentamente a descrição de cada grupo</li>
+                                    <li>Considere sua disponibilidade real</li>
+                                    <li>Pense em como pode contribuir</li>
+                                    <li>Seja sincero em sua motivação</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="sp-font-semibold sp-mb-2" style="color: var(--sp-red-dark);">Após enviar:</h4>
+                                <ul class="sp-list">
+                                    <li>Sua solicitação será analisada pelo coordenador</li>
+                                    <li>Você receberá uma resposta em até 7 dias</li>
+                                    <li>Pode acompanhar o status em "Minhas Solicitações"</li>
+                                    <li>Em caso de dúvidas, procure o coordenador</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- Call to Action --}}
+        <section class="sp-section">
+            <div class="sp-content-wrapper sp-text-center">
+                <div class="sp-cta">
+                    <h3 class="sp-cta-title">Precisa de mais informações?</h3>
+                    <p class="sp-cta-text">
+                        Converse conosco para esclarecer dúvidas sobre os grupos e pastorais.
+                    </p>
+                    <a href="{{ route('groups') }}" class="sp-btn sp-btn-outline sp-btn-lg">
+                        📖 Conhecer Todos os Grupos
+                    </a>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <section class="section-paroquia section-bg-bege mt-5">
-        <div class="container">
-            <div class="text-center mb-4">
-                <h3 class="fw-bold" style="color: var(--brand-vinho);">
-                    <i class="bi bi-info-circle me-2"></i>
-                    Orientações Importantes
-                </h3>
-            </div>
-            
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia pt-5">
-                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
-                                <i class="bi bi-book" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Leia a Descrição</h5>
-                            <p class="small text-muted mb-0">
-                                Conheça bem o grupo antes de solicitar participação
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia pt-5">
-                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
-                                <i class="bi bi-clock" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Disponibilidade</h5>
-                            <p class="small text-muted mb-0">
-                                Considere seu tempo e compromisso com o grupo
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia pt-5">
-                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
-                                <i class="bi bi-heart-fill" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Motivação</h5>
-                            <p class="small text-muted mb-0">
-                                Seja sincero sobre como deseja contribuir
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="card-paroquia h-100 text-center shadow-sm" style="border-top: 3px solid var(--brand-vinho);">
-                        <div class="card-body-paroquia pt-5">
-                            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--brand-vinho) 0%, #6B0F2A 100%); display: flex; align-items: center; justify-content: center; margin-top: -50px;">
-                                <i class="bi bi-calendar-check-fill" style="font-size: 28px; color: white !important; margin: 0; line-height: 1; vertical-align: middle;"></i>
-                            </div>
-                            <h5 class="fw-bold mb-2" style="color: var(--brand-vinho);">Resposta em 7 dias</h5>
-                            <p class="small text-muted mb-0">
-                                O coordenador analisará sua solicitação
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-
 @endsection

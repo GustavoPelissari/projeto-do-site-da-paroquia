@@ -59,8 +59,7 @@ class Schedule extends Model
 
         if ($schedules->count() > 5) {
             $toDelete = $schedules->slice(5);
-
-            /** @var Schedule $oldSchedule */
+            
             foreach ($toDelete as $oldSchedule) {
                 // Log da exclusão automática
                 AuditLog::create([
@@ -82,7 +81,7 @@ class Schedule extends Model
         if ($this->pdf_path && Storage::exists($this->pdf_path)) {
             return Storage::url($this->pdf_path);
         }
-
+        
         return null;
     }
 
@@ -90,39 +89,38 @@ class Schedule extends Model
     {
         if ($this->pdf_path && Storage::exists($this->pdf_path)) {
             $bytes = Storage::size($this->pdf_path);
-
             return $this->formatBytes($bytes);
         }
-
+        
         return null;
     }
 
     private function formatBytes($bytes, $precision = 2): string
     {
         $units = ['B', 'KB', 'MB', 'GB'];
-
+        
         for ($i = 0; $bytes > 1024; $i++) {
             $bytes /= 1024;
         }
-
-        return round($bytes, $precision).' '.$units[$i];
+        
+        return round($bytes, $precision) . ' ' . $units[$i];
     }
 
     public function isCurrentlyActive(): bool
     {
-        if (! $this->is_active) {
+        if (!$this->is_active) {
             return false;
         }
 
         $now = now()->toDateString();
-
-        return $now >= $this->start_date->toDateString() &&
+        
+        return $now >= $this->start_date->toDateString() && 
                $now <= $this->end_date->toDateString();
     }
 
     public function getStatusBadge(): array
     {
-        if (! $this->is_active) {
+        if (!$this->is_active) {
             return ['text' => 'Inativo', 'color' => 'gray'];
         }
 
@@ -143,7 +141,7 @@ class Schedule extends Model
     {
         $title = "Nova Escala: {$this->title}";
         $message = "Uma nova escala foi publicada para {$this->group->name}";
-
+        
         $data = [
             'schedule_id' => $this->id,
             'group_id' => $this->group_id,
@@ -153,10 +151,10 @@ class Schedule extends Model
         ];
 
         Notification::createForGroup(
-            $this->group,
-            Notification::TYPE_NEW_SCHEDULE,
-            $title,
-            $message,
+            $this->group, 
+            Notification::TYPE_NEW_SCHEDULE, 
+            $title, 
+            $message, 
             $data
         );
     }
@@ -186,16 +184,15 @@ class Schedule extends Model
     public function scopeCurrent($query)
     {
         $now = now()->toDateString();
-
         return $query->where('is_active', true)
-            ->where('start_date', '<=', $now)
-            ->where('end_date', '>=', $now);
+                    ->where('start_date', '<=', $now)
+                    ->where('end_date', '>=', $now);
     }
 
     public function scopeUpcoming($query)
     {
         return $query->where('is_active', true)
-            ->where('start_date', '>', now()->toDateString());
+                    ->where('start_date', '>', now()->toDateString());
     }
 
     public function scopeExpired($query)

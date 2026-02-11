@@ -1,149 +1,222 @@
-﻿@extends('admin.layout')
+@extends('admin.layout')
 
 @section('title', 'Gerenciar Escalas PDF')
 
 @section('content')
-<div class="container-fluid px-4 py-4">
-    <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #8B1538 0%, #6E1530 50%, #8B1538 100%); border-radius: 15px;">
-        <div class="card-body text-white py-4 px-4">
-            <h1 class="h2 fw-bold mb-2" style="color: #FFFFFF;"><i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Escalas PDF - {{ $group->name }}</h1>
-            <p class="mb-0" style="color: #FFD66B;">Gerencie as escalas em PDF do seu grupo</p>
-        </div>
+<div class="sp-admin-dashboard">
+    <div class="sp-dashboard-header">
+        <h1 class="sp-page-title">📄 Escalas PDF - {{ $group->name }}</h1>
+        <p class="sp-page-subtitle">Gerencie as escalas em PDF do seu grupo</p>
     </div>
 
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-header bg-white py-3"><h5 class="mb-0 fw-bold"><i class="bi bi-cloud-upload" aria-hidden="true"></i> Enviar Nova Escala</h5></div>
-        <div class="card-body">
-            <form action="{{ route('admin.coordenador.scales.upload') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row g-3 mb-3">
-                    <div class="col-md-6">
-                        <label for="title" class="form-label fw-semibold"><i class="bi bi-card-heading" aria-hidden="true"></i> Título da Escala</label>
-                        <input type="text" id="title" name="title" class="form-control" required placeholder="Ex: Escala de Coroinhas - Dezembro 2025">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="file" class="form-label fw-semibold"><i class="bi bi-file-pdf" aria-hidden="true"></i> Arquivo PDF</label>
-                        <input type="file" id="file" name="file" class="form-control" accept=".pdf" required>
-                        <small class="text-muted">Apenas arquivos PDF, máximo 10MB</small>
-                    </div>
+    <!-- Upload Form -->
+    <div class="sp-dashboard-section">
+        <h2>📤 Enviar Nova Escala</h2>
+        <form action="{{ route('admin.coordenador.scales.upload') }}" method="POST" enctype="multipart/form-data" class="sp-form">
+            @csrf
+            
+            <div class="sp-form-row">
+                <div class="sp-form-group">
+                    <label for="title" class="sp-form-label">Título da Escala</label>
+                    <input type="text" id="title" name="title" class="sp-form-input" required>
                 </div>
-                <div class="row g-3 mb-3">
-                    <div class="col-md-6">
-                        <label for="valid_from" class="form-label fw-semibold"><i class="bi bi-calendar-check" aria-hidden="true"></i> Válido a partir de</label>
-                        <input type="date" id="valid_from" name="valid_from" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="valid_until" class="form-label fw-semibold"><i class="bi bi-calendar-x" aria-hidden="true"></i> Válido até</label>
-                        <input type="date" id="valid_until" name="valid_until" class="form-control">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label fw-semibold"><i class="bi bi-text-paragraph" aria-hidden="true"></i> Descrição (Opcional)</label>
-                    <textarea id="description" name="description" class="form-control" rows="3" placeholder="Informações adicionais sobre a escala..."></textarea>
-                </div>
-                <div class="text-end"><button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-cloud-upload me-2" aria-hidden="true"></i>Enviar Escala</button></div>
-            </form>
-        </div>
-    </div>
-
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-white py-3"><h5 class="mb-0 fw-bold"><i class="bi bi-file-earmark-text" aria-hidden="true"></i> Escalas Enviadas</h5></div>
-        @if($scales->count() > 0)
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead class="table-light"><tr><th>Título</th><th>Arquivo</th><th>Período</th><th class="text-center">Status</th><th>Enviado</th><th class="text-center">Ações</th></tr></thead>
-                        <tbody>
-                            @foreach($scales as $scale)
-                                <tr>
-                                    <td><strong>{{ $scale->title }}</strong>@if($scale->description)<br><small class="text-muted">{{ Str::limit($scale->description, 50) }}</small>@endif</td>
-                                    <td><div class="d-flex align-items-center gap-2"><i class="bi bi-file-pdf-fill text-danger" aria-hidden="true" style="font-size: 1.5rem;"></i><div><div>{{ $scale->original_filename }}</div><small class="text-muted">({{ $scale->file_size_human }})</small></div></div></td>
-                                    <td>@if($scale->valid_from || $scale->valid_until)@if($scale->valid_from)<div><small class="text-muted">De:</small> {{ $scale->valid_from->format('d/m/Y') }}</div>@endif @if($scale->valid_until)<div><small class="text-muted">Até:</small> {{ $scale->valid_until->format('d/m/Y') }}</div>@endif @else <span class="badge bg-secondary">Indefinido</span>@endif</td>
-                                    <td class="text-center">@if($scale->isValid())<span class="badge bg-success"><i class="bi bi-check-circle" aria-hidden="true"></i> Ativo</span>@else<span class="badge bg-warning"><i class="bi bi-pause-circle" aria-hidden="true"></i> Inativo</span>@endif</td>
-                                    <td><div>{{ $scale->created_at->format('d/m/Y H:i') }}</div><small class="text-muted">por {{ $scale->uploader->name }}</small></td>
-                                    <td class="text-center">
-                                        <div class="d-flex gap-2 justify-content-center">
-                                            <button type="button" class="btn btn-sm btn-outline-success" data-pdf-url="{{ asset('storage/' . $scale->file_path) }}" data-pdf-title="{{ $scale->title }}" onclick="viewPDF(this.getAttribute('data-pdf-url'), this.getAttribute('data-pdf-title'))" title="Visualizar PDF">
-                                                <i class="bi bi-eye me-1" aria-hidden="true"></i>Ver
-                                            </button>
-                                            <a href="{{ route('admin.coordenador.scales.download', $scale) }}" class="btn btn-sm btn-outline-primary" title="Baixar PDF">
-                                                <i class="bi bi-download me-1" aria-hidden="true"></i>Baixar
-                                            </a>
-                                            <form action="{{ route('admin.coordenador.scales.destroy', $scale) }}" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja remover esta escala?')">
-                                                @csrf @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Remover">
-                                                    <i class="bi bi-trash me-1" aria-hidden="true"></i>Remover
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                
+                <div class="sp-form-group">
+                    <label for="file" class="sp-form-label">Arquivo PDF</label>
+                    <input type="file" id="file" name="file" class="sp-form-input" accept=".pdf" required>
+                    <small class="sp-form-help">Apenas arquivos PDF, máximo 10MB</small>
                 </div>
             </div>
-            @if($scales->hasPages())<div class="card-footer">{{ $scales->links() }}</div>@endif
+
+            <div class="sp-form-row">
+                <div class="sp-form-group">
+                    <label for="valid_from" class="sp-form-label">Válido a partir de</label>
+                    <input type="date" id="valid_from" name="valid_from" class="sp-form-input">
+                </div>
+                
+                <div class="sp-form-group">
+                    <label for="valid_until" class="sp-form-label">Válido até</label>
+                    <input type="date" id="valid_until" name="valid_until" class="sp-form-input">
+                </div>
+            </div>
+
+            <div class="sp-form-group">
+                <label for="description" class="sp-form-label">Descrição</label>
+                <textarea id="description" name="description" class="sp-form-textarea" rows="3" placeholder="Informações adicionais sobre a escala..."></textarea>
+            </div>
+
+            <div class="sp-form-actions">
+                <button type="submit" class="sp-btn sp-btn-primary">
+                    📤 Enviar Escala
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Scales List -->
+    <div class="sp-dashboard-section">
+        <h2>📋 Escalas Enviadas</h2>
+        
+        @if($scales->count() > 0)
+            <div class="sp-table-container">
+                <table class="sp-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Arquivo</th>
+                            <th>Período</th>
+                            <th>Status</th>
+                            <th>Enviado</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($scales as $scale)
+                            <tr>
+                                <td>
+                                    <strong>{{ $scale->title }}</strong>
+                                    @if($scale->description)
+                                        <br><small class="sp-text-muted">{{ Str::limit($scale->description, 50) }}</small>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="sp-file-info">
+                                        <i class="fas fa-file-pdf sp-text-red"></i>
+                                        <span>{{ $scale->original_filename }}</span>
+                                        <small>({{ $scale->file_size_human }})</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if($scale->valid_from || $scale->valid_until)
+                                        @if($scale->valid_from)
+                                            De: {{ $scale->valid_from->format('d/m/Y') }}<br>
+                                        @endif
+                                        @if($scale->valid_until)
+                                            Até: {{ $scale->valid_until->format('d/m/Y') }}
+                                        @endif
+                                    @else
+                                        <span class="sp-badge sp-badge-secondary">Indefinido</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($scale->isValid())
+                                        <span class="sp-badge sp-badge-success">
+                                            <i class="fas fa-check"></i> Ativo
+                                        </span>
+                                    @else
+                                        <span class="sp-badge sp-badge-warning">
+                                            <i class="fas fa-pause"></i> Inativo
+                                        </span>
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $scale->created_at->format('d/m/Y H:i') }}
+                                    <br><small>por {{ $scale->uploader->name }}</small>
+                                </td>
+                                <td>
+                                    <div class="sp-action-buttons">
+                                        <a href="{{ route('admin.coordenador.scales.download', $scale) }}" 
+                                           class="sp-btn sp-btn-sm sp-btn-secondary" 
+                                           title="Baixar PDF">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                        
+                                        <form action="{{ route('admin.coordenador.scales.destroy', $scale) }}" 
+                                              method="POST" 
+                                              style="display: inline;"
+                                              onsubmit="return confirm('Tem certeza que deseja remover esta escala?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    class="sp-btn sp-btn-sm sp-btn-danger" 
+                                                    title="Remover">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="sp-pagination">
+                {{ $scales->links() }}
+            </div>
         @else
-            <div class="card-body text-center py-5">
-                <div class="mb-4"><i class="bi bi-file-earmark-pdf" aria-hidden="true" style="font-size: 4rem; color: #dee2e6;"></i></div>
-                <h3 class="fw-bold text-muted mb-3">Nenhuma escala enviada</h3>
-                <p class="text-muted mb-0">Use o formulário acima para enviar a primeira escala PDF do seu grupo.</p>
+            <div class="sp-empty-state">
+                <i class="fas fa-file-pdf"></i>
+                <h3>Nenhuma escala enviada</h3>
+                <p>Use o formulário acima para enviar a primeira escala PDF do seu grupo.</p>
             </div>
         @endif
     </div>
 
-    <div class="alert alert-info mt-4" role="alert">
-        <x-alert type="info" class="mt-4">
-            <h5 class="alert-heading"><i class="bi bi-info-circle"></i> Sobre as Escalas PDF</h5>
-            <hr>
-            <ul class="mb-0">
-                <li>Apenas arquivos PDF são aceitos (máximo 10MB)</li>
-                <li>Você pode definir um período de validade para cada escala</li>
-                <li>Escalas ativas são marcadas com badge verde</li>
-                <li>Apenas coordenadores do grupo podem gerenciar as escalas</li>
-            </ul>
-        </x-alert>
-</div>
-
-<!-- Modal de Visualização de PDF -->
-<div class="modal fade" id="pdfViewerModal" tabindex="-1" aria-labelledby="pdfViewerModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header" style="background: linear-gradient(135deg, #8B1538 0%, #6E1530 100%);">
-                <h5 class="modal-title text-white" id="pdfViewerModalLabel">
-                    <i class="bi bi-file-earmark-pdf me-2"></i>
-                    <span id="pdfTitle">Visualizar Escala</span>
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body p-0" style="height: 80vh;">
-                <iframe id="pdfIframe" 
-                        style="width: 100%; height: 100%; border: none;" 
-                        src="">
-                </iframe>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="bi bi-x-circle"></i> Fechar
-                </button>
+    <!-- Information -->
+    <div class="sp-dashboard-section">
+        <div class="sp-notice sp-notice-info">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <h4>Sobre as Escalas PDF</h4>
+                <ul>
+                    <li>Apenas arquivos PDF são aceitos (máximo 10MB)</li>
+                    <li>Você pode definir um período de validade para cada escala</li>
+                    <li>Escalas ativas são marcadas com badge verde</li>
+                    <li>Apenas coordenadores do grupo podem gerenciar as escalas</li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-function viewPDF(pdfUrl, title) {
-    document.getElementById('pdfTitle').textContent = title;
-    document.getElementById('pdfIframe').src = pdfUrl;
-    
-    const modal = new bootstrap.Modal(document.getElementById('pdfViewerModal'));
-    modal.show();
+<style>
+.sp-file-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
 }
 
-// Limpar iframe ao fechar modal
-document.getElementById('pdfViewerModal').addEventListener('hidden.bs.modal', function () {
-    document.getElementById('pdfIframe').src = '';
-});
-</script>
+.sp-action-buttons {
+    display: flex;
+    gap: var(--space-1);
+}
+
+.sp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.sp-badge-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: rgb(34, 197, 94);
+}
+
+.sp-badge-warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: rgb(245, 158, 11);
+}
+
+.sp-badge-secondary {
+    background: rgba(107, 114, 128, 0.1);
+    color: rgb(107, 114, 128);
+}
+
+.sp-empty-state {
+    text-align: center;
+    padding: var(--space-8);
+    color: var(--sp-text-muted);
+}
+
+.sp-empty-state i {
+    font-size: 3rem;
+    margin-bottom: var(--space-4);
+    opacity: 0.5;
+}
+</style>
 @endsection

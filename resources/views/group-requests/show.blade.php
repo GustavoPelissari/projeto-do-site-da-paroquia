@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Detalhes da Solicitação - Paróquia São Paulo Apóstolo')
 
@@ -22,7 +22,7 @@
         {{-- Status da Solicitação --}}
         <section class="sp-section">
             <div class="sp-content-wrapper">
-                <div class="sp-card status-{{ $request->status }}">
+                <div class="sp-card" style="border-left: 4px solid {{ $request->status === 'pending' ? 'var(--sp-gold)' : ($request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)') }};">
                     <div class="sp-card-header">
                         <div class="sp-flex sp-justify-between sp-items-center">
                             <h2 class="sp-card-title">📊 Status da Solicitação</h2>
@@ -38,16 +38,13 @@
                         </div>
                     </div>
                     <div class="sp-card-content">
-                        @php
-                            $statusAt = $request->approved_at ?? $request->rejected_at;
-                        @endphp
                         <div class="sp-grid sp-grid-3">
                             <div class="sp-stat">
                                 <div class="sp-stat-icon">📅</div>
                                 <div class="sp-stat-content">
                                     <div class="sp-stat-label">Data da Solicitação</div>
-                                    <div class="sp-stat-value">{{ $request->created_at?->format('d/m/Y') }}</div>
-                                    <div class="sp-stat-description">{{ $request->created_at?->format('H:i') }}</div>
+                                    <div class="sp-stat-value">{{ $request->created_at->format('d/m/Y') }}</div>
+                                    <div class="sp-stat-description">{{ $request->created_at->format('H:i') }}</div>
                                 </div>
                             </div>
                             
@@ -56,8 +53,8 @@
                                     <div class="sp-stat-icon">⚡</div>
                                     <div class="sp-stat-content">
                                         <div class="sp-stat-label">Data da Resposta</div>
-                                        <div class="sp-stat-value">{{ $statusAt?->format('d/m/Y') ?? '—' }}</div>
-                                        <div class="sp-stat-description">{{ $statusAt?->format('H:i') ?? '—' }}</div>
+                                        <div class="sp-stat-value">{{ ($request->approved_at ?? $request->rejected_at)->format('d/m/Y') }}</div>
+                                        <div class="sp-stat-description">{{ ($request->approved_at ?? $request->rejected_at)->format('H:i') }}</div>
                                     </div>
                                 </div>
                                 
@@ -65,7 +62,7 @@
                                     <div class="sp-stat-icon">⏱️</div>
                                     <div class="sp-stat-content">
                                         <div class="sp-stat-label">Tempo de Resposta</div>
-                                        <div class="sp-stat-value">{{ $request->created_at?->diffInDays($statusAt ?? now()) }}</div>
+                                        <div class="sp-stat-value">{{ $request->created_at->diffInDays($request->approved_at ?? $request->rejected_at) }}</div>
                                         <div class="sp-stat-description">dias</div>
                                     </div>
                                 </div>
@@ -74,7 +71,7 @@
                                     <div class="sp-stat-icon">⏰</div>
                                     <div class="sp-stat-content">
                                         <div class="sp-stat-label">Tempo em Análise</div>
-                                        <div class="sp-stat-value">{{ $request->created_at?->diffInDays(now()) }}</div>
+                                        <div class="sp-stat-value">{{ $request->created_at->diffInDays(now()) }}</div>
                                         <div class="sp-stat-description">dias</div>
                                     </div>
                                 </div>
@@ -99,7 +96,7 @@
                             <div class="sp-profile">
                                 <div class="sp-profile-avatar">
                                     <div class="sp-avatar sp-avatar-xl">
-                                        {{ \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr($request->user?->name ?? 'US', 0, 2)) }}
+                                        {{ strtoupper(substr($request->user->name, 0, 2)) }}
                                     </div>
                                 </div>
                                 <div class="sp-profile-info">
@@ -198,9 +195,9 @@
         @if($request->status !== 'pending' && $request->response_message)
             <section class="sp-section">
                 <div class="sp-content-wrapper">
-                    <div class="sp-card response-card response-{{ $request->status }}">
+                    <div class="sp-card" style="background: {{ $request->status === 'approved' ? 'var(--sp-teal-50)' : 'var(--sp-red-50)' }}; border-left: 4px solid {{ $request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)' }};">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title response-title-{{ $request->status }}">
+                            <h3 class="sp-card-title" style="color: {{ $request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)' }};">
                                 @if($request->status === 'approved')
                                     ✅ Resposta de Aprovação
                                 @else
@@ -216,12 +213,7 @@
                                     </div>
                                     <div class="sp-response-info">
                                         <div class="sp-response-author">Coordenador do Grupo</div>
-                                        @php $statusAt = $request->approved_at ?? $request->rejected_at; @endphp
-                                        <div class="sp-response-date">
-                                            @if($statusAt)
-                                                {{ $statusAt->format('d/m/Y') }} às {{ $statusAt->format('H:i') }}
-                                            @endif
-                                        </div>
+                                        <div class="sp-response-date">{{ ($request->approved_at ?? $request->rejected_at)->format('d/m/Y \à\s H:i') }}</div>
                                     </div>
                                 </div>
                                 <div class="sp-response-content">
@@ -238,7 +230,7 @@
         @if($request->status === 'pending')
             <section class="sp-section">
                 <div class="sp-content-wrapper">
-                    <div class="sp-card admin-actions">
+                    <div class="sp-card" style="background: var(--sp-gray-50); border-left: 4px solid var(--sp-red);">
                         <div class="sp-card-header">
                             <h3 class="sp-card-title" style="color: var(--sp-red);">🎯 Ações Disponíveis</h3>
                         </div>
@@ -315,9 +307,7 @@
                                     <p class="sp-timeline-description">
                                         {{ $request->user->name }} enviou a solicitação para entrar no grupo "{{ $request->group->name }}"
                                     </p>
-                                    <div class="sp-timeline-meta">
-                                        {{ $request->created_at?->format('d/m/Y') }} às {{ $request->created_at?->format('H:i') }}
-                                    </div>
+                                    <div class="sp-timeline-meta">{{ $request->created_at->format('d/m/Y \à\s H:i') }}</div>
                                 </div>
                             </div>
 
@@ -333,11 +323,7 @@
                                                 e deixou uma mensagem de boas-vindas
                                             @endif
                                         </p>
-                                        @if($request->approved_at)
-                                            <div class="sp-timeline-meta">
-                                                {{ $request->approved_at?->format('d/m/Y') }} às {{ $request->approved_at?->format('H:i') }}
-                                            </div>
-                                        @endif
+                                        <div class="sp-timeline-meta">{{ $request->approved_at->format('d/m/Y \à\s H:i') }}</div>
                                     </div>
                                 </div>
                             @elseif($request->status === 'rejected')
@@ -352,11 +338,7 @@
                                                 e deixou uma explicação
                                             @endif
                                         </p>
-                                        @if($request->rejected_at)
-                                            <div class="sp-timeline-meta">
-                                                {{ $request->rejected_at?->format('d/m/Y') }} às {{ $request->rejected_at?->format('H:i') }}
-                                            </div>
-                                        @endif
+                                        <div class="sp-timeline-meta">{{ $request->rejected_at->format('d/m/Y \à\s H:i') }}</div>
                                     </div>
                                 </div>
                             @else
@@ -402,19 +384,6 @@
 
     {{-- Custom Styles para esta página --}}
     <style>
-        /* Status border colors for main status card */
-        .status-pending { border-left: 4px solid var(--sp-gold); }
-        .status-approved { border-left: 4px solid var(--sp-teal); }
-        .status-rejected { border-left: 4px solid var(--sp-red); }
-
-        /* Response card colors */
-        .response-card.response-approved { background: var(--sp-teal-50); border-left: 4px solid var(--sp-teal); }
-        .response-card.response-rejected { background: var(--sp-red-50); border-left: 4px solid var(--sp-red); }
-        .response-title-approved { color: var(--sp-teal); }
-        .response-title-rejected { color: var(--sp-red); }
-
-        /* Admin actions panel */
-        .admin-actions { background: var(--sp-gray-50); border-left: 4px solid var(--sp-red); }
         .sp-profile {
             display: flex;
             align-items: center;

@@ -3,21 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreEventRequest;
-use App\Http\Requests\StoreNewsRequest;
-use App\Http\Requests\UpdateEventRequest;
-use App\Http\Requests\UpdateNewsRequest;
+use App\Models\News;
 use App\Models\Event;
 use App\Models\Group;
 use App\Models\GroupRequest;
 use App\Models\Mass;
-use App\Models\News;
 use App\Models\User;
-use App\Services\NotificationService;
+use App\Enums\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class AdminGlobalController extends Controller
 {
@@ -31,64 +25,64 @@ class AdminGlobalController extends Controller
         if ($user->role->value !== 'admin_global') {
             abort(403, 'Acesso negado. Apenas o Padre (admin global) pode acessar esta área.');
         }
-
+        
         // Comprehensive statistics for the priest
         $stats = [
             'users_count' => User::count(),
             'active_users' => User::where('role', '!=', 'visitante')->count(),
             'coordinators_count' => User::where('role', 'coordenador_de_pastoral')->count(),
             'admin_users' => User::where('role', 'administrativo')->count(),
-
+            
             'groups_count' => Group::active()->count(),
             'total_groups' => Group::count(),
-
+            
             'masses_count' => Mass::active()->count(),
             'total_masses' => Mass::count(),
-
+            
             'news_count' => News::count(),
             'published_news' => News::published()->count(),
             'draft_news' => News::draft()->count(),
-
+            
             'events_count' => Event::count(),
             'upcoming_events' => Event::upcoming()->count(),
             'past_events' => Event::where('start_date', '<', now())->count(),
-
+            
             'pending_requests' => GroupRequest::pending()->count(),
             'approved_requests' => GroupRequest::approved()->count(),
             'total_requests' => GroupRequest::count(),
         ];
-
+        
         // Recent activity data
         $recent_news = News::with('user')
             ->latest()
             ->take(5)
             ->get();
-
+            
         $upcoming_events = Event::with('user')
             ->upcoming()
             ->orderBy('start_date')
             ->take(5)
             ->get();
-
+            
         $recent_requests = GroupRequest::with(['user', 'group'])
             ->latest()
             ->take(3)
             ->get();
-
+            
         $recent_users = User::where('created_at', '>=', now()->subDays(30))
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
-
+        
         return view('admin.global.dashboard', compact(
-            'stats',
-            'recent_news',
-            'upcoming_events',
-            'recent_requests',
+            'stats', 
+            'recent_news', 
+            'upcoming_events', 
+            'recent_requests', 
             'recent_users'
         ));
     }
-
+    
     /**
      * Show system overview for admin global
      */
@@ -97,7 +91,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         // System health and overview data
         $overview = [
             'system_status' => 'operational',
@@ -108,10 +102,10 @@ class AdminGlobalController extends Controller
                 ->where('last_login_at', '>=', now()->subHours(24))
                 ->count(),
         ];
-
+        
         return view('admin.global.system-overview', compact('overview'));
     }
-
+    
     /**
      * Manage users - exclusive to admin global
      */
@@ -120,55 +114,14 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
-        $users = User::with(['parishGroup'])
+        
+        $users = User::with(['groups'])
             ->orderBy('created_at', 'desc')
             ->paginate(20);
-
+            
         return view('admin.global.manage-users', compact('users'));
     }
-
-    /**
-     * Update user role
-     */
-    public function updateUserRole(Request $request, User $user)
-    {
-        if (Auth::user()->role->value !== 'admin_global') {
-            abort(403, 'Acesso negado.');
-        }
-
-        $validated = $request->validate([
-            'role' => 'required|in:admin_global,coordenador_de_pastoral,administrativo,usuario_padrao',
-        ]);
-
-        $user->update(['role' => $validated['role']]);
-
-        return redirect()->route('admin.global.users')
-            ->with('success', 'Função do usuário atualizada com sucesso!');
-    }
-
-    /**
-     * Delete user
-     */
-    public function deleteUser(User $user)
-    {
-        if (Auth::user()->role->value !== 'admin_global') {
-            abort(403, 'Acesso negado.');
-        }
-
-        // Prevent admin from deleting themselves
-        if ($user->id === Auth::id()) {
-            return redirect()->route('admin.global.users')
-                ->with('error', 'Você não pode excluir sua própria conta.');
-        }
-
-        $userName = $user->name;
-        $user->delete();
-
-        return redirect()->route('admin.global.users')
-            ->with('success', "Usuário '{$userName}' excluído com sucesso!");
-    }
-
+    
     /**
      * Show parish statistics
      */
@@ -177,7 +130,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $stats = [
             'monthly_stats' => [
                 'new_members' => User::whereMonth('created_at', now()->month)->count(),
@@ -195,92 +148,52 @@ class AdminGlobalController extends Controller
                 'total_news' => News::whereYear('created_at', now()->year)->count(),
                 'groups_created' => Group::whereYear('created_at', now()->year)->count(),
             ],
-            'top_groups' => Group::withCount('members')
-                ->orderBy('members_count', 'desc')
+            'top_groups' => Group::withCount('users')
+                ->orderBy('users_count', 'desc')
                 ->take(5)
                 ->get(),
         ];
-
+        
         return view('admin.global.parish-stats', compact('stats'));
     }
 
     // News Management Methods
     public function newsIndex()
     {
-        $user = Auth::user();
-        
-        // Permite admin_global e coordenadores acessarem
-        if (!in_array($user->role->value, ['admin_global', 'coordenador_de_pastoral'])) {
+        if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
-        // Admin global vê todas as notícias, coordenadores veem apenas as suas
-        if ($user->role->value === 'admin_global') {
-            $news = News::with('user')->latest()->paginate(10);
-        } else {
-            $news = News::with('user')->where('user_id', $user->id)->latest()->paginate(10);
-        }
-
+        
+        $news = News::with('user')->latest()->paginate(10);
         return view('admin.global.news.index', compact('news'));
     }
 
     public function newsCreate()
     {
-        $user = Auth::user();
-        
-        // Permite admin_global e coordenadores criarem notícias
-        if (!in_array($user->role->value, ['admin_global', 'coordenador_de_pastoral'])) {
+        if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.news.create');
     }
 
-    public function newsStore(StoreNewsRequest $request)
+    public function newsStore(Request $request)
     {
-        // Permite admin_global e coordenadores criarem notícias
-        $user = Auth::user();
-        if (!in_array($user->role->value, ['admin_global', 'coordenador_de_pastoral'])) {
-            abort(403, 'Você não tem permissão para criar notícias.');
+        if (Auth::user()->role->value !== 'admin_global') {
+            abort(403, 'Acesso negado.');
         }
-
-        Log::info('=== INICIO DO UPLOAD DE NOTÍCIA ===');
-        Log::info('Usuário: ' . $user->email);
-        Log::info('Arquivos no request: ' . json_encode($request->allFiles()));
-        Log::info('Tem arquivo featured_image? ' . ($request->hasFile('featured_image') ? 'SIM' : 'NÃO'));
-
-        $validated = $request->validated();
+        
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'status' => 'required|in:published,draft',
+            'featured_image' => 'nullable|image|max:2048',
+        ]);
 
         $validated['user_id'] = Auth::id();
-
-        // Processar upload da imagem se houver
-        if ($request->hasFile('featured_image')) {
-            $file = $request->file('featured_image');
-            Log::info('Arquivo detectado: ' . $file->getClientOriginalName() . ' - Tamanho: ' . $file->getSize() . ' bytes');
-            
-            $validated['featured_image'] = $file->store('news', 'public');
-            Log::info('Imagem salva em: ' . $validated['featured_image']);
-        } else {
-            Log::info('Nenhuma imagem foi enviada no request');
-        }
-
-        Log::info('Dados validados: ' . json_encode($validated));
         
         $news = News::create($validated);
         
-        Log::info('Notícia criada com ID: ' . $news->id);
-        Log::info('=== FIM DO UPLOAD DE NOTÍCIA ===');
-
-        // Notificar todos os usuários se a notícia foi publicada
-        if ($news->status === 'published') {
-            NotificationService::notifyUsers(
-                User::where('id', '!=', Auth::id())->get(),
-                'news_published',
-                'Nova Notícia: ' . $news->title,
-                'Uma nova notícia foi publicada. Confira agora!'
-            );
-        }
-
         return redirect()->route('admin.global.news.index')
             ->with('success', 'Notícia criada com sucesso!');
     }
@@ -290,79 +203,46 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.news.show', compact('news'));
     }
 
     public function newsEdit(News $news)
     {
-        $user = Auth::user();
-        
-        // Admin global pode editar qualquer notícia
-        // Coordenadores podem editar apenas suas próprias notícias
-        if ($user->role->value !== 'admin_global' && $news->user_id !== $user->id) {
-            abort(403, 'Você não tem permissão para editar esta notícia.');
+        if (Auth::user()->role->value !== 'admin_global') {
+            abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.news.edit', compact('news'));
     }
 
-    public function newsUpdate(UpdateNewsRequest $request, News $news)
+    public function newsUpdate(Request $request, News $news)
     {
-        $user = Auth::user();
+        if (Auth::user()->role->value !== 'admin_global') {
+            abort(403, 'Acesso negado.');
+        }
         
-        // Admin global pode atualizar qualquer notícia
-        // Coordenadores podem atualizar apenas suas próprias notícias
-        if ($user->role->value !== 'admin_global' && $news->user_id !== $user->id) {
-            abort(403, 'Você não tem permissão para editar esta notícia.');
-        }
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'status' => 'required|in:published,draft',
+            'featured_image' => 'nullable|image|max:2048',
+        ]);
 
-        $validated = $request->validated();
-
-        // Processar upload da imagem se houver
-        if ($request->hasFile('featured_image')) {
-            // Deletar imagem antiga se existir
-            if ($news->featured_image && Storage::disk('public')->exists($news->featured_image)) {
-                Storage::disk('public')->delete($news->featured_image);
-            }
-            
-            $validated['featured_image'] = $request->file('featured_image')->store('news', 'public');
-        }
-
-        $wasPublished = $news->status === 'published';
         $news->update($validated);
-
-        // Notificar todos os usuários se a notícia foi recém publicada
-        if (!$wasPublished && $news->status === 'published') {
-            NotificationService::notifyUsers(
-                User::where('id', '!=', Auth::id())->get(),
-                'news_published',
-                'Nova Notícia: ' . $news->title,
-                'Uma nova notícia foi publicada. Confira agora!'
-            );
-        }
-
+        
         return redirect()->route('admin.global.news.index')
             ->with('success', 'Notícia atualizada com sucesso!');
     }
 
     public function newsDestroy(News $news)
     {
-        $user = Auth::user();
+        if (Auth::user()->role->value !== 'admin_global') {
+            abort(403, 'Acesso negado.');
+        }
         
-        // Admin global pode deletar qualquer notícia
-        // Coordenadores podem deletar apenas suas próprias notícias
-        if ($user->role->value !== 'admin_global' && $news->user_id !== $user->id) {
-            abort(403, 'Você não tem permissão para excluir esta notícia.');
-        }
-
-        // Deletar imagem se existir
-        if ($news->featured_image && Storage::disk('public')->exists($news->featured_image)) {
-            Storage::disk('public')->delete($news->featured_image);
-        }
-
         $news->delete();
-
+        
         return redirect()->route('admin.global.news.index')
             ->with('success', 'Notícia excluída com sucesso!');
     }
@@ -373,9 +253,8 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $events = Event::with('user')->latest()->paginate(10);
-
         return view('admin.global.events.index', compact('events'));
     }
 
@@ -384,37 +263,29 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.events.create');
     }
 
-    public function eventsStore(StoreEventRequest $request)
+    public function eventsStore(Request $request)
     {
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
-        $validated = $request->validated();
+        
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'location' => 'nullable|string|max:255',
+            'category' => 'required|string|max:100',
+        ]);
 
         $validated['user_id'] = Auth::id();
-
-        // Upload de imagem
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('events', 'public');
-        }
-
+        
         $event = Event::create($validated);
-
-        // Notificar todos os usuários se o evento foi publicado
-        if ($event->status === 'published') {
-            NotificationService::notifyUsers(
-                User::where('id', '!=', Auth::id())->get(),
-                'event_published',
-                'Novo Evento: ' . $event->title,
-                'Um novo evento foi publicado. Confira os detalhes!'
-            );
-        }
-
+        
         return redirect()->route('admin.global.events.index')
             ->with('success', 'Evento criado com sucesso!');
     }
@@ -424,7 +295,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.events.show', compact('event'));
     }
 
@@ -433,48 +304,27 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.events.edit', compact('event'));
     }
 
-    public function eventsUpdate(UpdateEventRequest $request, Event $event)
+    public function eventsUpdate(Request $request, Event $event)
     {
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
+        
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'location' => 'nullable|string|max:255',
+            'category' => 'required|string|max:100',
+        ]);
 
-        $validated = $request->validated();
-
-        // Remover imagem se solicitado
-        if ($request->has('remove_image') && $request->remove_image) {
-            if ($event->image) {
-                Storage::disk('public')->delete($event->image);
-                $validated['image'] = null;
-            }
-        }
-
-        // Upload de nova imagem
-        if ($request->hasFile('image')) {
-            // Remove imagem antiga se existir
-            if ($event->image) {
-                Storage::disk('public')->delete($event->image);
-            }
-            $validated['image'] = $request->file('image')->store('events', 'public');
-        }
-
-        $wasPublished = $event->status === 'published';
         $event->update($validated);
-
-        // Notificar todos os usuários se o evento foi recém publicado
-        if (!$wasPublished && $event->status === 'published') {
-            NotificationService::notifyUsers(
-                User::where('id', '!=', Auth::id())->get(),
-                'event_published',
-                'Novo Evento: ' . $event->title,
-                'Um novo evento foi publicado. Confira os detalhes!'
-            );
-        }
-
+        
         return redirect()->route('admin.global.events.index')
             ->with('success', 'Evento atualizado com sucesso!');
     }
@@ -484,9 +334,9 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $event->delete();
-
+        
         return redirect()->route('admin.global.events.index')
             ->with('success', 'Evento excluído com sucesso!');
     }
@@ -497,9 +347,8 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
-    $groups = Group::withCount('members')->latest()->paginate(10);
-
+        
+        $groups = Group::withCount('users')->latest()->paginate(10);
         return view('admin.global.groups.index', compact('groups'));
     }
 
@@ -508,7 +357,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.groups.create');
     }
 
@@ -517,7 +366,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -526,8 +375,10 @@ class AdminGlobalController extends Controller
             'is_active' => 'boolean',
         ]);
 
+        $validated['created_by'] = Auth::id();
+        
         $group = Group::create($validated);
-
+        
         return redirect()->route('admin.global.groups.index')
             ->with('success', 'Grupo criado com sucesso!');
     }
@@ -537,9 +388,8 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
-    $group->load(['members', 'groupRequests']);
-
+        
+        $group->load(['users', 'requests']);
         return view('admin.global.groups.show', compact('group'));
     }
 
@@ -548,7 +398,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.groups.edit', compact('group'));
     }
 
@@ -557,39 +407,17 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'category' => 'required|string|max:100',
-            'coordinator_name' => 'nullable|string|max:255',
-            'coordinator_phone' => 'nullable|string|max:20',
-            'coordinator_email' => 'nullable|email|max:255',
-            'meeting_info' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'remove_image' => 'nullable|boolean',
+            'max_members' => 'nullable|integer|min:1',
             'is_active' => 'boolean',
         ]);
 
-        // Remover imagem se solicitado
-        if ($request->has('remove_image') && $request->remove_image) {
-            if ($group->image) {
-                Storage::disk('public')->delete($group->image);
-                $validated['image'] = null;
-            }
-        }
-
-        // Upload de nova imagem
-        if ($request->hasFile('image')) {
-            // Remover imagem antiga se existir
-            if ($group->image) {
-                Storage::disk('public')->delete($group->image);
-            }
-            $validated['image'] = $request->file('image')->store('groups', 'public');
-        }
-
         $group->update($validated);
-
+        
         return redirect()->route('admin.global.groups.index')
             ->with('success', 'Grupo atualizado com sucesso!');
     }
@@ -599,9 +427,9 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $group->delete();
-
+        
         return redirect()->route('admin.global.groups.index')
             ->with('success', 'Grupo excluído com sucesso!');
     }
@@ -612,9 +440,8 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $masses = Mass::latest()->paginate(10);
-
         return view('admin.global.masses.index', compact('masses'));
     }
 
@@ -623,7 +450,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.masses.create');
     }
 
@@ -632,17 +459,17 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $validated = $request->validate([
-            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
+            'day_of_week' => 'required|string|max:50',
             'time' => 'required|date_format:H:i',
-            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
-            'description' => 'nullable|string',
+            'location' => 'required|string|max:255',
+            'type' => 'required|string|max:100',
             'is_active' => 'boolean',
         ]);
 
         $mass = Mass::create($validated);
-
+        
         return redirect()->route('admin.global.masses.index')
             ->with('success', 'Horário de missa criado com sucesso!');
     }
@@ -652,7 +479,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.masses.show', compact('mass'));
     }
 
@@ -661,7 +488,7 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         return view('admin.global.masses.edit', compact('mass'));
     }
 
@@ -670,17 +497,17 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $validated = $request->validate([
-            'day_of_week' => 'required|in:sunday,monday,tuesday,wednesday,thursday,friday,saturday',
+            'day_of_week' => 'required|string|max:50',
             'time' => 'required|date_format:H:i',
-            'location' => 'required|in:Paróquia São Paulo Apóstolo,Capela Santo Antônio,Capela Nossa Senhora de Fátima',
-            'description' => 'nullable|string',
+            'location' => 'required|string|max:255',
+            'type' => 'required|string|max:100',
             'is_active' => 'boolean',
         ]);
 
         $mass->update($validated);
-
+        
         return redirect()->route('admin.global.masses.index')
             ->with('success', 'Horário de missa atualizado com sucesso!');
     }
@@ -690,9 +517,9 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-
+        
         $mass->delete();
-
+        
         return redirect()->route('admin.global.masses.index')
             ->with('success', 'Horário de missa excluído com sucesso!');
     }

@@ -123,12 +123,12 @@
                     @guest
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="btn" style="background: #2C2F6B; color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
-                                <i class="bi bi-star-fill me-2" aria-hidden="true"></i>Começar Agora
+                                <i class="bi bi-star-fill me-2"></i>Começar Agora
                             </a>
                         @endif
                     @else
                         <a href="{{ route('dashboard') }}" class="btn" style="background: #2C2F6B; color: white; padding: 0.75rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">
-                            <i class="bi bi-house-fill me-2" aria-hidden="true"></i>Acessar Painel
+                            <i class="bi bi-house-fill me-2"></i>Acessar Painel
                         </a>
                     @endguest
                 </div>

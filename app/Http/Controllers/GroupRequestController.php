@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\GroupRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,15 +20,19 @@ class GroupRequestController extends Controller
      */
     public function create()
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
+        
+        // Verificar se usuário já está em um grupo
+        if ($user->parish_group_id) {
+            return redirect()->route('dashboard')
+                ->with('error', 'Você já faz parte de um grupo: ' . $user->parishGroup->name);
+        }
 
         // Buscar grupos ativos que o usuário pode solicitar entrada
-        // Excluir grupos onde usuário já é membro ou tem solicitação pendente
         $groups = Group::active()
             ->whereDoesntHave('groupRequests', function ($query) use ($user) {
                 $query->where('user_id', $user->id)
-                    ->where('status', GroupRequest::STATUS_PENDING);
+                      ->where('status', GroupRequest::STATUS_PENDING);
             })
             ->get();
 
@@ -37,10 +42,7 @@ class GroupRequestController extends Controller
             ->with('group')
             ->get();
 
-        // Grupo atual do usuário (se tiver)
-        $currentGroup = $user->parishGroup;
-
-        return view('group-requests.create', compact('groups', 'pendingRequests', 'currentGroup'));
+        return view('group-requests.create', compact('groups', 'pendingRequests'));
     }
 
     /**
@@ -48,18 +50,17 @@ class GroupRequestController extends Controller
      */
     public function store(Request $request)
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-
+        
         $request->validate([
             'group_id' => 'required|exists:groups,id',
             'message' => 'nullable|string|max:500',
         ]);
 
-        // Verificar se usuário já é membro do grupo que está solicitando
-        if ($user->parish_group_id == $request->group_id) {
+        // Verificar se usuário já está em um grupo
+        if ($user->parish_group_id) {
             return redirect()->back()
-                ->with('error', 'Você já é membro deste grupo.');
+                ->with('error', 'Você já faz parte de um grupo.');
         }
 
         // Verificar se já existe solicitação pendente para este grupo
@@ -96,7 +97,7 @@ class GroupRequestController extends Controller
                     'user_name' => $user->name,
                     'group_id' => $group->id,
                     'group_name' => $group->name,
-                ],
+                ]
             ]);
         }
 
@@ -109,11 +110,10 @@ class GroupRequestController extends Controller
      */
     public function index(Request $request)
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-
+        
         // Verificar permissões
-        if (! $user->canApproveRequests()) {
+        if (!$user->canApproveRequests()) {
             return redirect()->route('dashboard')
                 ->with('error', 'Você não tem permissão para visualizar solicitações.');
         }
@@ -135,7 +135,7 @@ class GroupRequestController extends Controller
         }
 
         $requests = $query->orderBy('created_at', 'desc')->paginate(15);
-
+        
         // Grupos disponíveis para filtro (apenas para admin)
         $groups = collect();
         if ($user->isAdminGlobal()) {
@@ -150,11 +150,10 @@ class GroupRequestController extends Controller
      */
     public function show(GroupRequest $groupRequest)
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-
+        
         // Verificar permissões
-        if (! $user->canApproveRequests()) {
+        if (!$user->canApproveRequests()) {
             return redirect()->route('dashboard')
                 ->with('error', 'Você não tem permissão para visualizar esta solicitação.');
         }
@@ -173,11 +172,10 @@ class GroupRequestController extends Controller
      */
     public function approve(Request $request, GroupRequest $groupRequest)
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-
+        
         // Verificar permissões
-        if (! $user->canApproveRequests()) {
+        if (!$user->canApproveRequests()) {
             return response()->json(['error' => 'Sem permissão'], 403);
         }
 
@@ -186,7 +184,7 @@ class GroupRequestController extends Controller
             return response()->json(['error' => 'Sem permissão'], 403);
         }
 
-        if (! $groupRequest->isPending()) {
+        if (!$groupRequest->isPending()) {
             return response()->json(['error' => 'Solicitação já foi processada'], 400);
         }
 
@@ -198,7 +196,7 @@ class GroupRequestController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Solicitação aprovada com sucesso!',
+            'message' => 'Solicitação aprovada com sucesso!'
         ]);
     }
 
@@ -207,11 +205,10 @@ class GroupRequestController extends Controller
      */
     public function reject(Request $request, GroupRequest $groupRequest)
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-
+        
         // Verificar permissões
-        if (! $user->canApproveRequests()) {
+        if (!$user->canApproveRequests()) {
             return response()->json(['error' => 'Sem permissão'], 403);
         }
 
@@ -220,7 +217,7 @@ class GroupRequestController extends Controller
             return response()->json(['error' => 'Sem permissão'], 403);
         }
 
-        if (! $groupRequest->isPending()) {
+        if (!$groupRequest->isPending()) {
             return response()->json(['error' => 'Solicitação já foi processada'], 400);
         }
 
@@ -232,7 +229,7 @@ class GroupRequestController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Solicitação rejeitada.',
+            'message' => 'Solicitação rejeitada.'
         ]);
     }
 
@@ -241,9 +238,8 @@ class GroupRequestController extends Controller
      */
     public function myRequests()
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
-
+        
         $requests = GroupRequest::where('user_id', $user->id)
             ->with(['group', 'approver'])
             ->orderBy('created_at', 'desc')

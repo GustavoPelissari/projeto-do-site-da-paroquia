@@ -24,7 +24,8 @@ class RegisteredUserController extends Controller
 
     /**
      * Handle an incoming registration request.
-     * Creates user immediately and sends verification email (optional).
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
@@ -44,6 +45,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('verification.notice');
+        return redirect(route('dashboard', absolute: false));
     }
 }

@@ -25,14 +25,14 @@ class GroupController extends Controller
 
         // Search in name and description
         if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%'.$request->search.'%')
-                    ->orWhere('description', 'like', '%'.$request->search.'%');
+            $query->where(function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%');
             });
         }
 
         $groups = $query->latest()->paginate(12);
-
+        
         return view('admin.groups.index', compact('groups'));
     }
 

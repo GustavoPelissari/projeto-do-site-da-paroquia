@@ -234,12 +234,12 @@
                 <span class="section-icon">🔧</span>
                 Ações de Manutenção
             </h2>
-            <div class="action-buttons d-flex flex-wrap gap-2">
-                <button class="btn btn-primary"><i class="bi bi-arrow-repeat me-2"></i>Limpar Cache</button>
-                <button class="btn btn-primary"><i class="bi bi-gear me-2"></i>Recarregar Configurações</button>
-                <button class="btn btn-secondary"><i class="bi bi-graph-up me-2"></i>Relatório de Uso</button>
-                <button class="btn btn-secondary"><i class="bi bi-tools me-2"></i>Modo de Manutenção</button>
-                <button class="btn btn-secondary"><i class="bi bi-hdd me-2"></i>Backup Manual</button>
+            <div class="action-buttons">
+                <button class="btn btn-primary">🧹 Limpar Cache</button>
+                <button class="btn btn-primary">🔄 Recarregar Configurações</button>
+                <button class="btn btn-secondary">📊 Relatório de Uso</button>
+                <button class="btn btn-secondary">🛠️ Modo de Manutenção</button>
+                <button class="btn btn-secondary">💾 Backup Manual</button>
             </div>
         </div>
         

@@ -1,308 +1,320 @@
 @extends('admin.layout')
 
-@section('title', 'Dashboard Coordenador')
+@section('title', 'Dashboard Coordenador - Coroinhas')
 
 @push('styles')
 <style>
-    .text-brand-vinho {
-        color: #8B1538 !important;
+    .coordinator-hero {
+        background: linear-gradient(135deg, var(--sp-teal-dark) 0%, var(--sp-teal) 100%);
+        color: var(--sp-white);
+        padding: var(--space-xl) var(--space-6);
+        border-radius: var(--radius-xl);
+        margin: var(--space-6);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-2xl);
     }
     
-    .list-group-item-action:hover {
-        background-color: #f8f9fa;
+    .coordinator-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cross" patternUnits="userSpaceOnUse" width="20" height="20"><path d="M10,2 L10,18 M2,10 L18,10" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23cross)"/></svg>');
+        opacity: 0.3;
     }
-
-    @keyframes pulse {
-        0%, 100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        50% {
-            opacity: 0.8;
-            transform: scale(1.05);
-        }
+    
+    .coordinator-welcome {
+        position: relative;
+        z-index: 2;
+        text-align: center;
     }
-
-    .pulse-animation {
-        animation: pulse 2s infinite;
+    
+    .coordinator-title {
+        font-size: var(--text-3xl);
+        font-weight: var(--font-bold);
+        margin-bottom: var(--space-md);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .coordinator-subtitle {
+        font-size: var(--text-lg);
+        color: var(--sp-gold-light);
+        font-weight: var(--font-medium);
+        margin-bottom: var(--space-lg);
+    }
+    
+    .coordinator-quote {
+        font-style: italic;
+        font-size: var(--text-base);
+        opacity: 0.9;
+        border-left: 3px solid var(--sp-gold);
+        padding-left: var(--space-md);
+        margin: var(--space-lg) auto;
+        max-width: 600px;
+        font-family: var(--font-secondary);
+    }
+    
+    /* Cards de estatísticas para coordenador */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--space-6);
+        margin: var(--space-6);
+    }
+    
+    .stat-card {
+        background: var(--sp-white);
+        border-radius: var(--radius-xl);
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--sp-gray-200);
+        transition: all var(--duration-300) ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--sp-teal);
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .stat-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-md);
+    }
+    
+    .stat-icon {
+        font-size: var(--text-2xl);
+        width: 60px;
+        height: 60px;
+        background: var(--sp-teal);
+        border-radius: var(--radius-full);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-md);
+        color: var(--sp-white);
+    }
+    
+    .stat-title {
+        font-size: var(--text-lg);
+        font-weight: var(--font-semibold);
+        color: var(--sp-teal-dark);
+    }
+    
+    .stat-number {
+        font-size: var(--text-4xl);
+        font-weight: var(--font-bold);
+        color: var(--sp-teal);
+        margin-bottom: var(--space-sm);
+    }
+    
+    .stat-description {
+        color: var(--sp-gray-600);
+        font-size: var(--text-sm);
+    }
+    
+    /* Seções de visualização */
+    .view-section {
+        margin: var(--space-6);
+        background: var(--sp-white);
+        border-radius: var(--radius-xl);
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--sp-gray-200);
+    }
+    
+    .section-title {
+        font-size: var(--text-xl);
+        font-weight: var(--font-bold);
+        color: var(--sp-teal-dark);
+        margin-bottom: var(--space-lg);
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+    }
+    
+    .section-icon {
+        font-size: var(--text-2xl);
+    }
+    
+    .item-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+    
+    .item {
+        padding: var(--space-4);
+        background: var(--sp-gray-50);
+        border-radius: var(--radius-lg);
+        border-left: 4px solid var(--sp-teal);
+    }
+    
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: var(--space-2);
+    }
+    
+    .item-title {
+        font-weight: var(--font-medium);
+        color: var(--sp-gray-700);
+    }
+    
+    .item-date {
+        font-size: var(--text-sm);
+        color: var(--sp-gray-500);
+    }
+    
+    .item-description {
+        font-size: var(--text-sm);
+        color: var(--sp-gray-600);
+        line-height: var(--leading-relaxed);
+    }
+    
+    .no-items {
+        text-align: center;
+        padding: var(--space-8);
+        color: var(--sp-gray-500);
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .coordinator-hero {
+            margin: var(--space-4);
+            padding: var(--space-lg) var(--space-4);
+        }
+        
+        .coordinator-title {
+            font-size: var(--text-2xl);
+        }
+        
+        .coordinator-subtitle {
+            font-size: var(--text-base);
+        }
+        
+        .stats-grid,
+        .view-section {
+            margin: var(--space-4);
+        }
+        
+        .stat-card {
+            padding: var(--space-4);
+        }
+        
+        .stat-number {
+            font-size: var(--text-3xl);
+        }
     }
 </style>
 @endpush
 
 @section('content')
-<div class="container-fluid px-4 py-4">
-    <!-- Hero Header - Boas-vindas Coordenador -->
-    <div class="card border-0 shadow-lg mb-4" style="background: linear-gradient(135deg, #8B1538 0%, #6E1530 50%, #8B1538 100%); border-radius: 20px; overflow: hidden;">
-        <div class="card-body text-white py-5 px-4 position-relative">
-            <!-- Padrão decorativo de fundo -->
-            <div style="position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 opacity=%220.1%22>✟</text></svg>'); background-size: contain; opacity: 0.15;"></div>
-            
-            <div class="row align-items-center position-relative">
-                <div class="col-lg-8">
-                    <!-- Ícone e saudação -->
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-white bg-opacity-20 p-3 rounded-circle me-3" style="backdrop-filter: blur(10px);">
-                            <i class="bi bi-person-workspace" style="font-size: 2.5rem; color: #FFD66B;"></i>
-                        </div>
-                        <div>
-                            <h1 class="display-4 fw-bold mb-0" style="color: #FFFFFF; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-                                Bem-vindo, Coordenador!
-                            </h1>
-                            <p class="lead mb-0 mt-2" style="color: #FFD66B; font-weight: 500;">
-                                <i class="bi bi-person-fill me-2"></i>{{ Auth::user()->name }}
-                            </p>
-                            <p class="mb-0 mt-1" style="color: #FFFFFF; font-size: 1.1rem; opacity: 0.9;">
-                                <i class="bi bi-diagram-3-fill me-2"></i>{{ $stats['grupo_nome'] }}
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Mensagem inspiradora -->
-                    <div class="mt-4 p-3 bg-white bg-opacity-10 rounded-3" style="backdrop-filter: blur(10px); border-left: 4px solid #FFD66B;">
-                        <p class="mb-0 fst-italic" style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.6;">
-                            <i class="bi bi-quote" style="font-size: 1.5rem; opacity: 0.7;"></i>
-                            "Deixai vir a mim as criancinhas e não as impeçais, porque das tais é o Reino dos céus."
-                            <span class="d-block text-end mt-2" style="color: #FFFFFF; font-size: 0.9rem; opacity: 0.9;">- Mateus 19:14</span>
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 text-end d-none d-lg-block">
-                    <div class="bg-white bg-opacity-10 p-4 rounded-3" style="backdrop-filter: blur(10px);">
-                        <i class="bi bi-calendar-event" style="color: #FFFFFF; font-size: 1.2rem; opacity: 0.8;"></i>
-                        <p class="mb-1 mt-2 fw-semibold" style="color: #FFFFFF; font-size: 1.1rem;">{{ now()->locale('pt_BR')->isoFormat('dddd') }}</p>
-                        <p class="mb-0 h4 fw-bold" style="color: #FFD66B;">{{ now()->format('d/m/Y') }}</p>
-                        <p class="mb-0 mt-1" style="color: #FFFFFF; font-size: 0.9rem; opacity: 0.9;">{{ now()->format('H:i') }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Hero Section para Coordenador -->
+<div class="coordinator-hero">
+    <div class="coordinator-welcome">
+        <h1 class="coordinator-title">👨‍🏫 Bem-vindo, Coordenador!</h1>
+        <p class="coordinator-subtitle">{{ auth()->user()->name }} - Pastoral dos Coroinhas</p>
+        <blockquote class="coordinator-quote">
+            "Deixai vir a mim as criancinhas e não as impeçais, porque das tais é o Reino dos céus." - Mateus 19:14
+        </blockquote>
     </div>
+</div>
 
-    <div class="row g-4 mb-4">
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-primary bg-opacity-10 p-3 rounded-3">
-                            <i class="bi bi-people-fill text-primary" style="font-size: 2rem;"></i>
-                        </div>
-                    </div>
-                    <h3 class="fw-bold text-brand-vinho mb-2">{{ $stats['membros_grupo'] ?? 0 }}</h3>
-                    <p class="text-muted mb-0">Membros do Grupo</p>
-                    <small class="text-muted">Total de integrantes</small>
-                </div>
-            </div>
+<!-- Estatísticas dos Coroinhas -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">👦</div>
+            <div class="stat-title">Total de Coroinhas</div>
         </div>
-
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-info bg-opacity-10 p-3 rounded-3">
-                            <i class="bi bi-newspaper text-info" style="font-size: 2rem;"></i>
-                        </div>
-                    </div>
-                    <h3 class="fw-bold text-brand-vinho mb-2">{{ $stats['noticias_grupo'] ?? 0 }}</h3>
-                    <p class="text-muted mb-0">Notícias do Grupo</p>
-                    <small class="text-muted">Publicações realizadas</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="bg-success bg-opacity-10 p-3 rounded-3">
-                            <i class="bi bi-calendar-event text-success" style="font-size: 2rem;"></i>
-                        </div>
-                    </div>
-                    <h3 class="fw-bold text-brand-vinho mb-2">{{ $stats['eventos_grupo'] ?? 0 }}</h3>
-                    <p class="text-muted mb-0">Eventos do Grupo</p>
-                    <small class="text-muted">Atividades programadas</small>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <a href="{{ route('admin.coordenador.requests.index') }}" class="text-decoration-none">
-                <div class="card border-0 shadow-sm h-100 {{ $stats['solicitacoes_pendentes'] > 0 ? 'border-warning border-2' : '' }}" 
-                     style="{{ $stats['solicitacoes_pendentes'] > 0 ? 'background: linear-gradient(135deg, #FFF3CD 0%, #FFFAEE 100%); border: 2px solid #FFC107 !important;' : '' }}">
-                    <div class="card-body position-relative">
-                        @if($stats['solicitacoes_pendentes'] > 0)
-                            <div class="position-absolute top-0 end-0 m-2">
-                                <span class="badge bg-danger pulse-animation" style="font-size: 0.7rem; animation: pulse 2s infinite;">
-                                    <i class="bi bi-exclamation-circle me-1"></i>NOVO
-                                </span>
-                            </div>
-                        @endif
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="p-3 rounded-3" style="background: {{ $stats['solicitacoes_pendentes'] > 0 ? 'linear-gradient(135deg, #FFC107 0%, #FFB300 100%)' : 'rgba(255, 193, 7, 0.1)' }};">
-                                <i class="bi bi-clipboard-check" style="font-size: 2rem; color: {{ $stats['solicitacoes_pendentes'] > 0 ? '#FFFFFF' : '#FFC107' }};"></i>
-                            </div>
-                        </div>
-                        <h3 class="fw-bold mb-2" style="color: {{ $stats['solicitacoes_pendentes'] > 0 ? '#D97706' : 'var(--brand-vinho)' }};">
-                            {{ $stats['solicitacoes_pendentes'] ?? 0 }}
-                        </h3>
-                        <p class="mb-0 fw-semibold" style="color: {{ $stats['solicitacoes_pendentes'] > 0 ? '#92400E' : '#6c757d' }};">
-                            Solicitações Pendentes
-                        </p>
-                        <small class="text-muted">
-                            @if($stats['solicitacoes_pendentes'] > 0)
-                                <i class="bi bi-clock-history me-1"></i>Aguardando aprovação
-                            @else
-                                Nenhuma solicitação
-                            @endif
-                        </small>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <div class="stat-number">{{ $stats['total_coroinhas'] ?? 0 }}</div>
+        <div class="stat-description">Usuários cadastrados na paróquia</div>
     </div>
-
-    <!-- Notícias Recentes -->
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-header bg-white border-0 py-3">
-            <h5 class="mb-0 fw-bold">
-                <i class="bi bi-newspaper text-primary me-2"></i>
-                Notícias Recentes da Paróquia
-            </h5>
+    
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon">✅</div>
+            <div class="stat-title">Coroinhas Ativos</div>
         </div>
-        <div class="card-body p-0">
-            @if($recent_news && $recent_news->count() > 0)
-                <div class="list-group list-group-flush">
-                    @foreach($recent_news as $news)
-                        <div class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between align-items-start">
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-2 fw-semibold">{{ $news->title }}</h6>
-                                    <p class="mb-2 text-muted small">{{ $news->excerpt ?: Str::limit($news->content, 120) }}</p>
-                                    <small class="text-muted">
-                                        <i class="bi bi-calendar3 me-1"></i>{{ $news->created_at->format('d/m/Y') }}
-                                        <i class="bi bi-clock ms-2 me-1"></i>{{ $news->created_at->format('H:i') }}
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                <div class="text-center py-5">
-                    <i class="bi bi-newspaper text-muted" style="font-size: 4rem; opacity: 0.3;"></i>
-                    <h5 class="mt-3 text-muted">Nenhuma notícia recente</h5>
-                    <p class="text-muted mb-0">Não há notícias publicadas recentemente.</p>
-                </div>
-            @endif
-        </div>
+        <div class="stat-number">{{ $stats['coroinhas_ativos'] ?? 0 }}</div>
+        <div class="stat-description">Com solicitação aprovada</div>
     </div>
+</div>
 
-    <!-- Próximos Eventos -->
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-header bg-white border-0 py-3">
-            <h5 class="mb-0 fw-bold">
-                <i class="bi bi-calendar-event text-success me-2"></i>
-                Próximos Eventos da Paróquia
-            </h5>
-        </div>
-        <div class="card-body p-0">
-            @if($upcoming_events && $upcoming_events->count() > 0)
-                <div class="list-group list-group-flush">
-                    @foreach($upcoming_events as $event)
-                        <div class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between align-items-start">
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-2 fw-semibold">{{ $event->title }}</h6>
-                                    @if($event->location)
-                                        <p class="mb-1 small">
-                                            <i class="bi bi-geo-alt text-danger me-1"></i>
-                                            <span class="text-muted">{{ $event->location }}</span>
-                                        </p>
-                                    @endif
-                                    <p class="mb-2 text-muted small">{{ Str::limit($event->description, 120) }}</p>
-                                    <small class="text-muted">
-                                        <i class="bi bi-calendar3 me-1"></i>{{ $event->start_date->format('d/m/Y') }}
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+<!-- Notícias Recentes (Somente Visualização) -->
+<div class="view-section">
+    <h2 class="section-title">
+        <span class="section-icon">📰</span>
+        Notícias Recentes da Paróquia
+    </h2>
+    
+    <div class="item-list">
+        @if($recent_news && $recent_news->count() > 0)
+            @foreach($recent_news as $news)
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{ $news->title }}</span>
+                        <span class="item-date">{{ $news->created_at->format('d/m/Y') }}</span>
+                    </div>
+                    <div class="item-description">
+                        {{ $news->excerpt ?: Str::limit($news->content, 150) }}
+                    </div>
                 </div>
-            @else
-                <div class="text-center py-5">
-                    <i class="bi bi-calendar-event text-muted" style="font-size: 4rem; opacity: 0.3;"></i>
-                    <h5 class="mt-3 text-muted">Nenhum evento próximo</h5>
-                    <p class="text-muted mb-0">Não há eventos programados no momento.</p>
-                </div>
-            @endif
-        </div>
-    </div>
-
-    <!-- Escalas do Grupo -->
-    <div class="card border-0 shadow-sm mb-4">
-        <div class="card-header bg-white border-0 py-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0 fw-bold">
-                    <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-                    Escalas do Grupo
-                </h5>
-                <a href="{{ route('admin.coordenador.scales.index') }}" class="btn btn-sm btn-outline-primary">
-                    <i class="bi bi-arrow-right-circle me-1"></i>Ver Todas
-                </a>
+            @endforeach
+        @else
+            <div class="no-items">
+                <h3>📰 Nenhuma notícia recente</h3>
+                <p>Não há notícias publicadas recentemente.</p>
             </div>
-        </div>
-        <div class="card-body">
-            @if($scales && $scales->count() > 0)
-                <div class="list-group list-group-flush">
-                    @foreach($scales as $scale)
-                        <div class="list-group-item px-0 border-0 border-bottom py-3">
-                            <div class="d-flex align-items-start">
-                                <div class="me-3">
-                                    <i class="bi bi-file-earmark-pdf-fill text-danger" style="font-size: 2.5rem;"></i>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-2 fw-semibold">{{ $scale->title }}</h6>
-                                    @if($scale->description)
-                                        <p class="mb-2 text-muted small">{{ Str::limit($scale->description, 100) }}</p>
-                                    @endif
-                                    <div class="d-flex gap-3 align-items-center">
-                                        <small class="text-muted">
-                                            <i class="bi bi-calendar3 me-1"></i>
-                                            @if($scale->valid_from && $scale->valid_until)
-                                                {{ $scale->valid_from->format('d/m/Y') }} até {{ $scale->valid_until->format('d/m/Y') }}
-                                            @elseif($scale->valid_from)
-                                                A partir de {{ $scale->valid_from->format('d/m/Y') }}
-                                            @else
-                                                Enviado em {{ $scale->created_at->format('d/m/Y') }}
-                                            @endif
-                                        </small>
-                                        @if($scale->isValid())
-                                            <span class="badge bg-success">
-                                                <i class="bi bi-check-circle"></i> Ativo
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="{{ route('admin.coordenador.scales.download', $scale) }}" class="btn btn-sm btn-outline-primary">
-                                        <i class="bi bi-download"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+        @endif
+    </div>
+</div>
+
+<!-- Eventos Futuros (Somente Visualização) -->
+<div class="view-section">
+    <h2 class="section-title">
+        <span class="section-icon">📅</span>
+        Próximos Eventos da Paróquia
+    </h2>
+    
+    <div class="item-list">
+        @if($upcoming_events && $upcoming_events->count() > 0)
+            @foreach($upcoming_events as $event)
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">{{ $event->title }}</span>
+                        <span class="item-date">{{ $event->start_date->format('d/m/Y') }}</span>
+                    </div>
+                    <div class="item-description">
+                        <strong>Local:</strong> {{ $event->location ?? 'Não informado' }}<br>
+                        {{ Str::limit($event->description, 150) }}
+                    </div>
                 </div>
-            @else
-                <div class="text-center py-5">
-                    <i class="bi bi-calendar3 text-muted" style="font-size: 4rem; opacity: 0.3;"></i>
-                    <h5 class="mt-3 text-muted">Nenhuma escala enviada</h5>
-                    <p class="text-muted mb-3">Organize as escalas de atividades do seu grupo</p>
-                    <a href="{{ route('admin.coordenador.scales.index') }}" class="btn btn-primary">
-                        <i class="bi bi-calendar-plus me-2"></i>Gerenciar Escalas
-                    </a>
-                </div>
-            @endif
-        </div>
+            @endforeach
+        @else
+            <div class="no-items">
+                <h3>📅 Nenhum evento próximo</h3>
+                <p>Não há eventos programados no momento.</p>
+            </div>
+        @endif
     </div>
 </div>
 @endsection
