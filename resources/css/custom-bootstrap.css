@@ -242,23 +242,23 @@
 
 /* Responsive Utilities - Mobile First */
 @media (min-width: 640px) {
-    .sm\:px-0 { padding-left: 0; padding-right: 0; }
-    .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .sm\:max-w-sm { max-width: 24rem; }
-    .sm\:max-w-md { max-width: 28rem; }
-    .sm\:max-w-lg { max-width: 32rem; }
-    .sm\:max-w-xl { max-width: 36rem; }
-    .sm\:max-w-2xl { max-width: 42rem; }
-    .sm\:mx-auto { margin-left: auto; margin-right: auto; }
-    .sm\:flex { display: flex; }
-    .sm\:items-center { align-items: center; }
-    .sm\:ms-6 { margin-left: 1.5rem !important; }
+    .sm-px-0 { padding-left: 0; padding-right: 0; }
+    .sm-px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .sm-max-w-sm { max-width: 24rem; }
+    .sm-max-w-md { max-width: 28rem; }
+    .sm-max-w-lg { max-width: 32rem; }
+    .sm-max-w-xl { max-width: 36rem; }
+    .sm-max-w-2xl { max-width: 42rem; }
+    .sm-mx-auto { margin-left: auto; margin-right: auto; }
+    .sm-flex { display: flex; }
+    .sm-items-center { align-items: center; }
+    .sm-ms-6 { margin-left: 1.5rem !important; }
     .d-sm-none { display: none !important; }
     .d-sm-flex { display: flex !important; }
 }
 
 @media (min-width: 992px) {
-    .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+    .lg-px-8 { padding-left: 2rem; padding-right: 2rem; }
 }
 
 /* Additional utilities for profile and schedules */
@@ -273,7 +273,7 @@
 .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
 .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
 .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-.sm\:p-8 { padding: 2rem; }
+.sm-p-8 { padding: 2rem; }
 .max-w-xl { max-width: 36rem; }
 .w-3\/4 { width: 75%; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
@@ -356,29 +356,29 @@
 .whitespace-pre-line { white-space: pre-line; }
 .fst-italic { font-style: italic; }
 .fw-semibold { font-weight: 600; }
-.hover\:bg-blue-200:hover { background-color: #bfdbfe; }
-.hover\:bg-blue-700:hover { background-color: #1d4ed8; }
-.hover\:bg-yellow-200:hover { background-color: #fef3c7; }
-.hover\:bg-yellow-700:hover { background-color: #a16207; }
-.hover\:bg-green-200:hover { background-color: #bbf7d0; }
-.hover\:bg-green-700:hover { background-color: #15803d; }
-.hover\:bg-red-200:hover { background-color: #fecaca; }
-.hover\:bg-gray-400:hover { background-color: #9ca3af; }
-.hover\:bg-gray-700:hover { background-color: #374151; }
-.hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.hover-bg-blue-200:hover { background-color: #bfdbfe; }
+.hover-bg-blue-700:hover { background-color: #1d4ed8; }
+.hover-bg-yellow-200:hover { background-color: #fef3c7; }
+.hover-bg-yellow-700:hover { background-color: #a16207; }
+.hover-bg-green-200:hover { background-color: #bbf7d0; }
+.hover-bg-green-700:hover { background-color: #15803d; }
+.hover-bg-red-200:hover { background-color: #fecaca; }
+.hover-bg-gray-400:hover { background-color: #9ca3af; }
+.hover-bg-gray-700:hover { background-color: #374151; }
+.hover-shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
 .flex-1 { flex: 1 1 0%; }
 
 /* Responsive utilities - Medium screens */
 @media (min-width: 768px) {
-    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .md\:flex-row { flex-direction: row; }
-    .sm\:flex-row { flex-direction: row; }
+    .md-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .md-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md-flex-row { flex-direction: row; }
+    .sm-flex-row { flex-direction: row; }
 }
 
 /* Large screens */
 @media (min-width: 1024px) {
-    .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .lg-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* Additional utilities for schedules */
@@ -401,20 +401,20 @@
 .to-blue-600 { --gradient-to: #2563eb; }
 
 /* Hover utilities with backslash escape */
-.hover\:bg-blue-50:hover { background-color: #eff6ff; }
-.hover\:bg-blue-200:hover { background-color: #bfdbfe; }
-.hover\:bg-blue-700:hover { background-color: #1d4ed8; }
-.hover\:bg-green-200:hover { background-color: #bbf7d0; }
-.hover\:bg-green-700:hover { background-color: #15803d; }
-.hover\:bg-yellow-200:hover { background-color: #fef3c7; }
-.hover\:bg-yellow-700:hover { background-color: #a16207; }
-.hover\:bg-red-200:hover { background-color: #fecaca; }
-.hover\:bg-gray-400:hover { background-color: #9ca3af; }
-.hover\:bg-gray-700:hover { background-color: #374151; }
-.hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.hover-bg-blue-50:hover { background-color: #eff6ff; }
+.hover-bg-blue-200:hover { background-color: #bfdbfe; }
+.hover-bg-blue-700:hover { background-color: #1d4ed8; }
+.hover-bg-green-200:hover { background-color: #bbf7d0; }
+.hover-bg-green-700:hover { background-color: #15803d; }
+.hover-bg-yellow-200:hover { background-color: #fef3c7; }
+.hover-bg-yellow-700:hover { background-color: #a16207; }
+.hover-bg-red-200:hover { background-color: #fecaca; }
+.hover-bg-gray-400:hover { background-color: #9ca3af; }
+.hover-bg-gray-700:hover { background-color: #374151; }
+.hover-shadow-md:hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
 .hover-text-indigo-500:hover { color: #6366f1; }
-.hover\:text-blue-800:hover { color: #1e40af; }
-.hover\:text-gray-600:hover { color: #4b5563; }
+.hover-text-blue-800:hover { color: #1e40af; }
+.hover-text-gray-600:hover { color: #4b5563; }
 
 /* Focus utilities for form elements */
 .focus-border-indigo-500:focus { border-color: #6366f1; }
@@ -422,13 +422,13 @@
 
 /* Responsive padding utilities with backslash escape */
 @media (min-width: 640px) {
-    .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .sm\:rounded-lg { border-radius: 0.5rem; }
-    .sm\:flex-row { flex-direction: row; }
+    .sm-px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .sm-rounded-lg { border-radius: 0.5rem; }
+    .sm-flex-row { flex-direction: row; }
 }
 
 @media (min-width: 1024px) {
-    .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+    .lg-px-8 { padding-left: 2rem; padding-right: 2rem; }
 }
 
 /* Opacity utilities */
