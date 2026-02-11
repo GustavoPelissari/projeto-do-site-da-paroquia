@@ -20,7 +20,6 @@ export default defineConfig({
             output: {
                 manualChunks: {
                     'vendor-bootstrap': ['bootstrap'],
-                    'vendor-icons': ['bootstrap-icons'],
                 },
             },
         },

@@ -40,7 +40,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Register policies
-        Gate::guessPoliciesForModels();
+        foreach ($this->policies as $model => $policy) {
+            Gate::policy($model, $policy);
+        }
 
         // Configurar Carbon para português brasileiro
         Carbon::setLocale('pt_BR');
