@@ -1,23 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Front-end removido</title>
-    <meta name="robots" content="noindex,nofollow">
-    <style>html,body{height:100%;margin:0;font-family:Arial, Helvetica, sans-serif;background:#fff;color:#111} .placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:2rem} .placeholder h1{color:#2C2F6B;margin-bottom:.5rem} .placeholder p{color:#444;opacity:.9}</style>
-</head>
-<body>
-    <div class="placeholder">
-        <h1>Front-end temporariamente removido</h1>
-        <p>As views públicas foram limpas para reconstrução.</p>
-        <p style="margin-top:1rem"><a href="{{ route('login') }}">Ir para login</a></p>
-    </div>
-</body>
-</html>
-            z-index: 999;
-        }
-    </style>
-</body>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="bg-gray-100" style="min-height: 100vh;">
+            @include('layouts.navigation')
+
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow-sm">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
 </html>
