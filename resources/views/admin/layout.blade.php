@@ -502,7 +502,7 @@
                     </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="nav-link w-full text-left border-0 bg-transparent">
+                        <button type="submit" class="nav-link w-100 text-start border-0 bg-transparent">
                             <span class="nav-icon">🚪</span>
                             <span class="nav-text">Sair</span>
                         </button>

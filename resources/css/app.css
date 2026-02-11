@@ -1,13 +1,12 @@
 /* Paroquia Sao Paulo Apostolo - Design Profissional */
 
-/* Import de fontes deve vir antes das diretivas Tailwind para evitar warnings PostCSS */
+/* Import de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Import custom Bootstrap extensions (replaces Tailwind utilities) */
+@import './custom-bootstrap.css';
 
-/* Compatibilidade com Tailwind CSS */
+/* Design System da Paróquia São Paulo Apóstolo - Baseado em Bootstrap 5 */
 :root {
     --sp-dourado-principal: #DAA520;
     --sp-dourado-claro: #F0E68C;

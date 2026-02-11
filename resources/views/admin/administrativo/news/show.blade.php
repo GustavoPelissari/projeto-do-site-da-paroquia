@@ -3,73 +3,73 @@
 @section('title', $news->title)
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
+<div class="d-flex justify-content-between align-items-center mb-6">
     <div>
-        <h2 class="text-2xl font-bold text-gray-900">{{ $news->title }}</h2>
-        <div class="flex items-center space-x-4 mt-2 text-sm text-gray-600">
+        <h2 class="h2 fw-bold text-dark">{{ $news->title }}</h2>
+        <div class="d-flex align-items-center gap-4 mt-2 small text-secondary">
             <span>Por {{ $news->user->name }}</span>
             <span>•</span>
             <span>{{ $news->created_at->format('d/m/Y H:i') }}</span>
             <span>•</span>
-            <span class="px-2 py-1 rounded text-xs
-                {{ $news->status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
+            <span class="px-2 py-1 rounded small
+                {{ $news->status === 'published' ? 'bg-success-subtle text-success-emphasis' : 'bg-warning-subtle text-warning-emphasis' }}">
                 {{ $news->status === 'published' ? 'Publicado' : 'Rascunho' }}
             </span>
             @if($news->featured)
-                <span class="text-yellow-500">⭐ Destaque</span>
+                <span class="text-warning">⭐ Destaque</span>
             @endif
         </div>
     </div>
     
-    <div class="flex space-x-3">
+    <div class="d-flex gap-3">
         <a href="{{ route('admin.administrativo.news.edit', $news) }}" 
-           class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+           class="btn btn-primary px-4 py-2 rounded hover-bg-primary-dark">
             Editar
         </a>
         <a href="{{ route('admin.administrativo.news.index') }}" 
-           class="text-gray-600 hover:text-gray-800 px-4 py-2 border border-gray-300 rounded-lg">
+           class="btn btn-outline-secondary px-4 py-2 rounded">
             Voltar
         </a>
     </div>
 </div>
 
 @if(session('success'))
-    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+    <div class="alert alert-success border border-success px-4 py-3 rounded mb-4">
         {{ session('success') }}
     </div>
 @endif
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="row g-6">
     <!-- Main Content -->
-    <div class="lg:col-span-2">
-        <div class="bg-white rounded-lg shadow">
+    <div class="col-12 col-lg-8">
+        <div class="bg-white rounded shadow">
             <!-- Featured Image -->
             @if($news->featured_image)
                 <div class="mb-6">
                     <img src="{{ Storage::url($news->featured_image) }}" 
                          alt="{{ $news->title }}" 
-                         class="w-full h-64 object-cover rounded-t-lg">
+                         class="w-100 object-cover rounded-top" style="height: 16rem;">
                 </div>
             @endif
             
             <div class="p-6">
                 <!-- Summary -->
                 @if($news->summary)
-                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-                        <p class="text-blue-800 font-medium">{{ $news->summary }}</p>
+                    <div class="alert alert-info border-start border-4 border-primary p-4 mb-6">
+                        <p class="text-primary fw-medium mb-0">{{ $news->summary }}</p>
                     </div>
                 @endif
 
                 <!-- Content -->
-                <div class="prose max-w-none">
+                <div class="prose">
                     {!! nl2br(e($news->content)) !!}
                 </div>
 
                 <!-- Meta Information -->
                 @if($news->meta_description)
-                    <div class="mt-8 pt-6 border-t">
-                        <h3 class="font-semibold text-gray-900 mb-2">Meta Descrição (SEO)</h3>
-                        <p class="text-gray-600">{{ $news->meta_description }}</p>
+                    <div class="mt-8 pt-6 border-top">
+                        <h3 class="fw-semibold text-dark mb-2">Meta Descrição (SEO)</h3>
+                        <p class="text-secondary">{{ $news->meta_description }}</p>
                     </div>
                 @endif
             </div>
@@ -77,12 +77,12 @@
 
         <!-- Preview Notice -->
         @if($news->status === 'draft')
-            <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="text-yellow-400 mr-3">⚠️</div>
+            <div class="mt-6 alert alert-warning border border-warning rounded p-4">
+                <div class="d-flex align-items-center">
+                    <div class="text-warning me-3">⚠️</div>
                     <div>
-                        <h3 class="font-medium text-yellow-800">Esta notícia está em rascunho</h3>
-                        <p class="text-yellow-700 text-sm">
+                        <h3 class="fw-medium text-warning-emphasis">Esta notícia está em rascunho</h3>
+                        <p class="text-warning-emphasis small mb-0">
                             Ela não será exibida no site público até ser publicada.
                         </p>
                     </div>
@@ -92,140 +92,139 @@
     </div>
 
     <!-- Sidebar -->
-    <div class="space-y-6">
-        <!-- Quick Actions -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <h3 class="font-semibold text-gray-900 mb-4">Ações Rápidas</h3>
-            <div class="space-y-3">
-                <a href="{{ route('admin.administrativo.news.edit', $news) }}" 
-                   class="block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition">
-                    ✏️ Editar Notícia
-                </a>
-                
-                @if($news->status === 'published')
-                    <form method="POST" action="{{ route('admin.administrativo.news.update', $news) }}" class="block">
+    <div class="col-12 col-lg-4">
+        <div class="d-flex flex-column gap-4">
+            <!-- Quick Actions -->
+            <div class="bg-white rounded shadow p-4">
+                <h3 class="fw-semibold text-dark mb-4">Ações Rápidas</h3>
+                <div class="d-flex flex-column gap-2">
+                    <a href="{{ route('admin.administrativo.news.edit', $news) }}" 
+                       class="btn btn-primary w-100 text-center">
+                        ✏️ Editar Notícia
+                    </a>
+                    
+                    @if($news->status === 'published')
+                        <form method="POST" action="{{ route('admin.administrativo.news.update', $news) }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="status" value="draft">
+                            <button type="submit" class="btn btn-warning w-100">
+                                📝 Tornar Rascunho
+                            </button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ route('admin.administrativo.news.update', $news) }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="status" value="published">
+                            <button type="submit" class="btn btn-success w-100">
+                                🚀 Publicar Agora
+                            </button>
+                        </form>
+                    @endif
+
+                    <form method="POST" action="{{ route('admin.administrativo.news.destroy', $news) }}" 
+                          onsubmit="return confirm('Tem certeza que deseja excluir esta notícia? Esta ação não pode ser desfeita.')">
                         @csrf
-                        @method('PUT')
-                        <input type="hidden" name="status" value="draft">
-                        <button type="submit" 
-                                class="w-full bg-yellow-600 text-white py-2 px-4 rounded-md hover:bg-yellow-700 transition">
-                            📝 Tornar Rascunho
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger w-100">
+                            🗑️ Excluir Notícia
                         </button>
                     </form>
-                @else
-                    <form method="POST" action="{{ route('admin.administrativo.news.update', $news) }}" class="block">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="status" value="published">
-                        <button type="submit" 
-                                class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition">
-                            🚀 Publicar Agora
-                        </button>
-                    </form>
-                @endif
-
-                <form method="POST" action="{{ route('admin.administrativo.news.destroy', $news) }}" 
-                      onsubmit="return confirm('Tem certeza que deseja excluir esta notícia? Esta ação não pode ser desfeita.')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" 
-                            class="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition">
-                        🗑️ Excluir Notícia
-                    </button>
-                </form>
+                </div>
             </div>
-        </div>
 
-        <!-- Publishing Information -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <h3 class="font-semibold text-gray-900 mb-4">Informações de Publicação</h3>
-            <div class="space-y-3 text-sm">
-                <div>
-                    <span class="font-medium text-gray-700">Status:</span>
-                    <span class="ml-2 px-2 py-1 rounded text-xs
-                        {{ $news->status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }}">
-                        {{ $news->status === 'published' ? 'Publicado' : 'Rascunho' }}
-                    </span>
-                </div>
-                
-                <div>
-                    <span class="font-medium text-gray-700">Autor:</span>
-                    <span class="ml-2 text-gray-600">{{ $news->user->name }}</span>
-                </div>
-                
-                <div>
-                    <span class="font-medium text-gray-700">Criado em:</span>
-                    <span class="ml-2 text-gray-600">{{ $news->created_at->format('d/m/Y H:i') }}</span>
-                </div>
-                
-                @if($news->updated_at != $news->created_at)
+            <!-- Publishing Information -->
+            <div class="bg-white rounded shadow p-4">
+                <h3 class="fw-semibold text-dark mb-4">Informações de Publicação</h3>
+                <div class="d-flex flex-column gap-3 small">
                     <div>
-                        <span class="font-medium text-gray-700">Atualizado em:</span>
-                        <span class="ml-2 text-gray-600">{{ $news->updated_at->format('d/m/Y H:i') }}</span>
+                        <span class="fw-medium text-dark">Status:</span>
+                        <span class="ms-2 px-2 py-1 rounded small
+                            {{ $news->status === 'published' ? 'bg-success-subtle text-success-emphasis' : 'bg-warning-subtle text-warning-emphasis' }}">
+                            {{ $news->status === 'published' ? 'Publicado' : 'Rascunho' }}
+                        </span>
                     </div>
-                @endif
-                
-                @if($news->published_at)
+                    
                     <div>
-                        <span class="font-medium text-gray-700">Publicado em:</span>
-                        <span class="ml-2 text-gray-600">{{ $news->published_at->format('d/m/Y H:i') }}</span>
+                        <span class="fw-medium text-dark">Autor:</span>
+                        <span class="ms-2 text-secondary">{{ $news->user->name }}</span>
                     </div>
-                @endif
-                
-                <div>
-                    <span class="font-medium text-gray-700">Destaque:</span>
-                    <span class="ml-2 text-gray-600">{{ $news->featured ? 'Sim' : 'Não' }}</span>
-                </div>
-                
-                @if($news->slug)
+                    
                     <div>
-                        <span class="font-medium text-gray-700">URL:</span>
-                        <span class="ml-2 text-gray-600 text-xs break-all">{{ $news->slug }}</span>
+                        <span class="fw-medium text-dark">Criado em:</span>
+                        <span class="ms-2 text-secondary">{{ $news->created_at->format('d/m/Y H:i') }}</span>
                     </div>
-                @endif
-            </div>
-        </div>
-
-        <!-- SEO Information -->
-        @if($news->meta_description || $news->slug)
-            <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="font-semibold text-gray-900 mb-4">SEO</h3>
-                <div class="space-y-3 text-sm">
-                    @if($news->slug)
+                    
+                    @if($news->updated_at != $news->created_at)
                         <div>
-                            <span class="font-medium text-gray-700">URL Amigável:</span>
-                            <div class="mt-1 p-2 bg-gray-50 rounded text-xs font-mono">
-                                /noticias/{{ $news->slug }}
-                            </div>
+                            <span class="fw-medium text-dark">Atualizado em:</span>
+                            <span class="ms-2 text-secondary">{{ $news->updated_at->format('d/m/Y H:i') }}</span>
                         </div>
                     @endif
                     
-                    @if($news->meta_description)
+                    @if($news->published_at)
                         <div>
-                            <span class="font-medium text-gray-700">Meta Descrição:</span>
-                            <div class="mt-1 text-gray-600">{{ $news->meta_description }}</div>
+                            <span class="fw-medium text-dark">Publicado em:</span>
+                            <span class="ms-2 text-secondary">{{ $news->published_at->format('d/m/Y H:i') }}</span>
+                        </div>
+                    @endif
+                    
+                    <div>
+                        <span class="fw-medium text-dark">Destaque:</span>
+                        <span class="ms-2 text-secondary">{{ $news->featured ? 'Sim' : 'Não' }}</span>
+                    </div>
+                    
+                    @if($news->slug)
+                        <div>
+                            <span class="fw-medium text-dark">URL:</span>
+                            <span class="ms-2 text-secondary small text-break">{{ $news->slug }}</span>
                         </div>
                     @endif
                 </div>
             </div>
-        @endif
 
-        <!-- Navigation -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <h3 class="font-semibold text-gray-900 mb-4">Navegação</h3>
-            <div class="space-y-2">
-                <a href="{{ route('admin.administrativo.news.index') }}" 
-                   class="block text-blue-600 hover:text-blue-800 text-sm">
-                    ← Todas as Notícias
-                </a>
-                <a href="{{ route('admin.administrativo.news.create') }}" 
-                   class="block text-green-600 hover:text-green-800 text-sm">
-                    + Nova Notícia
-                </a>
-                <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
-                   class="block text-gray-600 hover:text-gray-800 text-sm">
-                    🏠 Dashboard
-                </a>
+            <!-- SEO Information -->
+            @if($news->meta_description || $news->slug)
+                <div class="bg-white rounded shadow p-4">
+                    <h3 class="fw-semibold text-dark mb-4">SEO</h3>
+                    <div class="d-flex flex-column gap-3 small">
+                        @if($news->slug)
+                            <div>
+                                <span class="fw-medium text-dark">URL Amigável:</span>
+                                <div class="mt-1 p-2 bg-secondary-subtle rounded small font-monospace">
+                                    /noticias/{{ $news->slug }}
+                                </div>
+                            </div>
+                        @endif
+                        
+                        @if($news->meta_description)
+                            <div>
+                                <span class="fw-medium text-dark">Meta Descrição:</span>
+                                <div class="mt-1 text-secondary">{{ $news->meta_description }}</div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
+
+            <!-- Navigation -->
+            <div class="bg-white rounded shadow p-4">
+                <h3 class="fw-semibold text-dark mb-4">Navegação</h3>
+                <div class="d-flex flex-column gap-2">
+                    <a href="{{ route('admin.administrativo.news.index') }}" 
+                       class="text-primary text-decoration-none small hover-text-primary-dark">
+                        ← Todas as Notícias
+                    </a>
+                    <a href="{{ route('admin.administrativo.news.create') }}" 
+                       class="text-success text-decoration-none small hover-text-success-dark">
+                        + Nova Notícia
+                    </a>
+                    <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
+                       class="text-secondary text-decoration-none small hover-text-secondary-dark">
+                        🏠 Dashboard
+                    </a>
+                </div>
             </div>
         </div>
     </div>

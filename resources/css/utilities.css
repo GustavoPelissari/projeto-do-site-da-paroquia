@@ -148,6 +148,71 @@
     color: var(--cor-vinho) !important;
 }
 
+/* Bootstrap color hover classes */
+.hover-text-primary-dark:hover {
+    color: #0b5ed7 !important;
+}
+
+.hover-text-success-dark:hover {
+    color: #0a3622 !important;
+}
+
+.hover-text-danger-dark:hover {
+    color: #842029 !important;
+}
+
+.hover-text-dark:hover {
+    color: #212529 !important;
+}
+
+.hover-text-secondary-dark:hover {
+    color: #495057 !important;
+}
+
+.hover-bg-primary-dark:hover {
+    background-color: #0b5ed7 !important;
+}
+
+.hover-bg-success-dark:hover {
+    background-color: #0a3622 !important;
+}
+
+.hover-bg-danger-dark:hover {
+    background-color: #842029 !important;
+}
+
+.hover-bg-secondary-dark:hover {
+    background-color: #495057 !important;
+}
+
+.hover-bg-light:hover {
+    background-color: #f8f9fa !important;
+}
+
+/* Focus ring classes */
+.focus-ring-2:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.focus-ring-primary:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.focus-ring-success:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.focus-border-primary:focus {
+    border-color: #86b7fe;
+}
+
+.focus-border-success:focus {
+    border-color: #75b798;
+}
+
 /* ==========================================
    ANIMAÇÕES UTILITÁRIAS
    ========================================== */
