@@ -394,15 +394,11 @@
 .row-cols-lg-3 > * { flex: 0 0 auto; width: 33.333333%; }
 .col-md-6 { flex: 0 0 auto; width: 50%; }
 .rounded-circle { border-radius: 50% !important; }
-.justify-content-center { justify-content: center; }
-.align-items-center { align-items: center; }
 .d-grid { display: grid; }
-.cursor-pointer { cursor: pointer; }
 .fw-bold { font-weight: 700; }
-.position-relative { position: relative; }
-.bg-gradient-to-r { background: linear-gradient(to right, var(--bs-primary), var(--bs-primary)); }
-.from-blue-500 { --bs-primary: #3b82f6; }
-.to-blue-600 { --bs-primary: #2563eb; }
+.bg-gradient-to-r { background: linear-gradient(to right, var(--gradient-from), var(--gradient-to)); }
+.from-blue-500 { --gradient-from: #3b82f6; }
+.to-blue-600 { --gradient-to: #2563eb; }
 
 /* Hover utilities with backslash escape */
 .hover\:bg-blue-50:hover { background-color: #eff6ff; }
