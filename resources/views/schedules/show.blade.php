@@ -7,12 +7,12 @@
             <div class="d-flex gap-2">
                 @if(auth()->user()->canManageSchedules())
                     <a href="{{ route('admin.schedules.edit', $schedule) }}" 
-                       class="bg-yellow-600 text-white px-4 py-2 rounded hover\:bg-yellow-700">
+                       class="bg-yellow-600 text-white px-4 py-2 rounded hover-bg-yellow-700">
                         Editar
                     </a>
                 @endif
                 <a href="{{ route('admin.schedules.download', $schedule) }}" 
-                   class="bg-green-600 text-white px-4 py-2 rounded hover\:bg-green-700">
+                   class="bg-green-600 text-white px-4 py-2 rounded hover-bg-green-700">
                     Baixar PDF
                 </a>
             </div>
@@ -20,9 +20,9 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-4xl mx-auto sm\:px-6 lg\:px-8">
+        <div class="max-w-4xl mx-auto sm-px-6 lg-px-8">
             <!-- Informações da Escala -->
-            <div class="bg-white overflow-hidden shadow-sm sm\:rounded-lg mb-6">
+            <div class="bg-white overflow-hidden shadow-sm sm-rounded-lg mb-6">
                 <div class="p-6 bg-white border-bottom border-gray-200">
                     <div class="row g-3 mb-6">
                         <div class="col-md-6">
@@ -81,11 +81,11 @@
                                 
                                 <div class="d-flex gap-2">
                                     <a href="{{ route('admin.schedules.download', $schedule) }}" 
-                                       class="flex-1 bg-blue-600 text-white text-center px-3 py-2 rounded text-sm hover\:bg-blue-700">
+                                       class="flex-1 bg-blue-600 text-white text-center px-3 py-2 rounded text-sm hover-bg-blue-700">
                                         Baixar
                                     </a>
                                     <button onclick="openPdfViewer()" 
-                                            class="flex-1 bg-gray-600 text-white px-3 py-2 rounded text-sm hover\:bg-gray-700">
+                                            class="flex-1 bg-gray-600 text-white px-3 py-2 rounded text-sm hover-bg-gray-700">
                                         Visualizar
                                     </button>
                                 </div>
@@ -110,7 +110,7 @@
             </div>
 
             <!-- Membros do Grupo -->
-            <div class="bg-white overflow-hidden shadow-sm sm\:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm-rounded-lg">
                 <div class="p-6 bg-white border-bottom border-gray-200">
                     <h3 class="text-lg font-medium text-gray-900 mb-4">
                         Membros do Grupo ({{ $schedule->group->getMembersCount() }})

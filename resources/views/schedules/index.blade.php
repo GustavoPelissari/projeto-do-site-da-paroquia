@@ -5,18 +5,18 @@
                 {{ __('Gerenciar Escalas') }}
             </h2>
             <a href="{{ route('admin.schedules.create') }}" 
-               class="bg-blue-600 text-white px-4 py-2 rounded hover\:bg-blue-700">
+               class="bg-blue-600 text-white px-4 py-2 rounded hover-bg-blue-700">
                 Nova Escala
             </a>
         </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm\:px-6 lg\:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm\:rounded-lg">
+        <div class="max-w-7xl mx-auto sm-px-6 lg-px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm-rounded-lg">
                 <div class="p-6 bg-white border-bottom border-gray-200">
                     <!-- Filtros -->
-                    <div class="mb-6 d-flex flex-column sm\:flex-row gap-4">
+                    <div class="mb-6 d-flex flex-column sm-flex-row gap-4">
                         <form method="GET" class="d-flex gap-2 flex-wrap">
                             @if(auth()->user()->isAdminGlobal() && $groups->count() > 0)
                                 <select name="group_id" class="rounded-md border-gray-300 form-select" onchange="this.form.submit()">
@@ -42,7 +42,7 @@
                     @if($schedules->count() > 0)
                         <div class="d-grid gap-6">
                             @foreach($schedules as $schedule)
-                                <div class="border border-gray-200 rounded-lg p-6 hover\:shadow-md transition">
+                                <div class="border border-gray-200 rounded-lg p-6 hover-shadow-md transition">
                                     <div class="d-flex align-items-start justify-content-between mb-4">
                                         <div class="flex-1">
                                             <h3 class="text-lg font-semibold text-gray-900 mb-2">
@@ -83,18 +83,18 @@
                                         <!-- Ações -->
                                         <div class="d-flex gap-2 ms-4">
                                             <a href="{{ route('admin.schedules.show', $schedule) }}" 
-                                               class="bg-blue-100 text-blue-600 px-3 py-1 rounded text-sm hover\:bg-blue-200">
+                                               class="bg-blue-100 text-blue-600 px-3 py-1 rounded text-sm hover-bg-blue-200">
                                                 Ver
                                             </a>
                                             
                                             <a href="{{ route('admin.schedules.download', $schedule) }}" 
-                                               class="bg-green-100 text-green-600 px-3 py-1 rounded text-sm hover\:bg-green-200">
+                                               class="bg-green-100 text-green-600 px-3 py-1 rounded text-sm hover-bg-green-200">
                                                 PDF
                                             </a>
                                             
                                             @if(auth()->user()->canManageSchedules())
                                                 <a href="{{ route('admin.schedules.edit', $schedule) }}" 
-                                                   class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded text-sm hover\:bg-yellow-200">
+                                                   class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded text-sm hover-bg-yellow-200">
                                                     Editar
                                                 </a>
                                                 
@@ -103,7 +103,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" 
-                                                            class="bg-red-100 text-red-600 px-3 py-1 rounded text-sm hover\:bg-red-200">
+                                                            class="bg-red-100 text-red-600 px-3 py-1 rounded text-sm hover-bg-red-200">
                                                         Excluir
                                                     </button>
                                                 </form>
@@ -131,7 +131,7 @@
                             </p>
                             
                             <a href="{{ route('admin.schedules.create') }}" 
-                               class="bg-blue-600 text-white px-6 py-3 rounded-lg hover\:bg-blue-700">
+                               class="bg-blue-600 text-white px-6 py-3 rounded-lg hover-bg-blue-700">
                                 Criar Primeira Escala
                             </a>
                         </div>

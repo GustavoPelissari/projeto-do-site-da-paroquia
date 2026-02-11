@@ -3,7 +3,7 @@
 @section('title', 'Escalas - ' . $group->name)
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm\:px-6 lg\:px-8 py-12">
+<div class="max-w-7xl mx-auto px-4 sm-px-6 lg-px-8 py-12">
     <!-- Header -->
     <div class="text-center mb-12">
         <h1 class="text-4xl fw-bold text-gray-900 mb-4">Escalas - {{ $group->name }}</h1>
@@ -27,7 +27,7 @@
                 
                 <div class="text-center">
                     <a href="{{ $currentSchedule->getPdfUrl() }}" target="_blank"
-                       class="bg-white text-blue-600 px-6 py-3 rounded-lg fw-semibold hover\:bg-blue-50 transition d-inline-flex align-items-center">
+                       class="bg-white text-blue-600 px-6 py-3 rounded-lg fw-semibold hover-bg-blue-50 transition d-inline-flex align-items-center">
                         <svg class="w-5 h-5 me-2" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path>
                         </svg>
@@ -65,7 +65,7 @@
             
             <div class="divide-y divide-gray-200">
                 @foreach($schedules as $schedule)
-                    <div class="px-6 py-4 hover\:bg-gray-50 transition">
+                    <div class="px-6 py-4 hover-bg-gray-50 transition">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="flex-1">
                                 <h3 class="text-lg font-medium text-gray-900 mb-1">
@@ -102,7 +102,7 @@
 
                                 <!-- Download -->
                                 <a href="{{ $schedule->getPdfUrl() }}" target="_blank"
-                                   class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover\:bg-blue-700 d-inline-flex align-items-center">
+                                   class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover-bg-blue-700 d-inline-flex align-items-center">
                                     <svg class="w-4 h-4 me-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                                     </svg>
@@ -162,7 +162,7 @@
                         @if($group->coordinator_phone)
                             <div>
                                 <span class="font-medium text-gray-700">Telefone:</span>
-                                <a href="tel:{{ $group->coordinator_phone }}" class="text-blue-600 hover\:text-blue-800">
+                                <a href="tel:{{ $group->coordinator_phone }}" class="text-blue-600 hover-text-blue-800">
                                     {{ $group->coordinator_phone }}
                                 </a>
                             </div>
@@ -170,7 +170,7 @@
                         @if($group->coordinator_email)
                             <div>
                                 <span class="font-medium text-gray-700">E-mail:</span>
-                                <a href="mailto:{{ $group->coordinator_email }}" class="text-blue-600 hover\:text-blue-800">
+                                <a href="mailto:{{ $group->coordinator_email }}" class="text-blue-600 hover-text-blue-800">
                                     {{ $group->coordinator_email }}
                                 </a>
                             </div>
@@ -190,7 +190,7 @@
                             Faça uma solicitação para entrar em {{ $group->name }} e participe das nossas atividades.
                         </p>
                         <a href="{{ route('group-requests.create') }}" 
-                           class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover\:bg-blue-700">
+                           class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover-bg-blue-700">
                             Solicitar Entrada
                         </a>
                     </div>
@@ -205,11 +205,11 @@
                     </p>
                     <div class="d-flex gap-2">
                         <a href="{{ route('login') }}" 
-                           class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover\:bg-blue-700">
+                           class="bg-blue-600 text-white px-4 py-2 rounded text-sm hover-bg-blue-700">
                             Fazer Login
                         </a>
                         <a href="{{ route('register') }}" 
-                           class="bg-gray-600 text-white px-4 py-2 rounded text-sm hover\:bg-gray-700">
+                           class="bg-gray-600 text-white px-4 py-2 rounded text-sm hover-bg-gray-700">
                             Registrar-se
                         </a>
                     </div>

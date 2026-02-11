@@ -6,8 +6,8 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-4xl mx-auto sm\:px-6 lg\:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm\:rounded-lg">
+        <div class="max-w-4xl mx-auto sm-px-6 lg-px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm-rounded-lg">
                 <div class="p-6 bg-white border-bottom border-gray-200">
                     <form method="POST" action="{{ route('admin.schedules.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -125,11 +125,11 @@
                         <!-- Botões -->
                         <div class="d-flex justify-end gap-3">
                             <a href="{{ route('admin.schedules.index') }}" 
-                               class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover\:bg-gray-400">
+                               class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover-bg-gray-400">
                                 Cancelar
                             </a>
                             <button type="submit" 
-                                    class="bg-blue-600 text-white px-6 py-2 rounded hover\:bg-blue-700">
+                                    class="bg-blue-600 text-white px-6 py-2 rounded hover-bg-blue-700">
                                 Criar Escala
                             </button>
                         </div>
