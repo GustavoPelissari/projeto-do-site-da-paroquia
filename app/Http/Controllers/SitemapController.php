@@ -14,7 +14,7 @@ class SitemapController extends Controller
 
         return response($sitemap, 200, [
             'Content-Type' => 'application/xml; charset=utf-8',
-            'Cache-Control' => 'public, max-age=86400', // Cache for 24 hours
+            'Cache-Control' => 'public, max-age=86400',
         ]);
     }
 
@@ -22,30 +22,28 @@ class SitemapController extends Controller
     {
         $baseUrl = url('/');
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
-        $xml .= '         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"' . "\n";
-        $xml .= '         xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
         // Main pages
         $pages = [
-            ['url' => '/', 'priority' => 1.0, 'changefreq' => 'daily', 'lastmod' => now()],
-            ['url' => '/groups', 'priority' => 0.9, 'changefreq' => 'weekly', 'lastmod' => now()],
-            ['url' => '/masses', 'priority' => 0.9, 'changefreq' => 'weekly', 'lastmod' => now()],
-            ['url' => '/events', 'priority' => 0.9, 'changefreq' => 'daily', 'lastmod' => now()],
-            ['url' => '/news', 'priority' => 0.9, 'changefreq' => 'daily', 'lastmod' => now()],
-            ['url' => '/sobre', 'priority' => 0.8, 'changefreq' => 'monthly', 'lastmod' => now()],
+            ['url' => '/', 'priority' => 1.0, 'changefreq' => 'daily'],
+            ['url' => '/groups', 'priority' => 0.9, 'changefreq' => 'weekly'],
+            ['url' => '/masses', 'priority' => 0.9, 'changefreq' => 'weekly'],
+            ['url' => '/events', 'priority' => 0.9, 'changefreq' => 'daily'],
+            ['url' => '/news', 'priority' => 0.9, 'changefreq' => 'daily'],
+            ['url' => '/sobre', 'priority' => 0.8, 'changefreq' => 'monthly'],
         ];
 
         foreach ($pages as $page) {
             $xml .= $this->createUrlEntry(
                 $baseUrl . $page['url'],
-                $page['lastmod'],
+                now(),
                 $page['changefreq'],
                 $page['priority']
             );
         }
 
-        // Dynamic events
+        // Dynamic events (last 7 days)
         $events = Event::where('status', 'published')
             ->where('date', '>=', now()->subDays(7))
             ->orderBy('date', 'asc')
@@ -72,8 +70,7 @@ class SitemapController extends Controller
                 route('news.show', $item),
                 $item->updated_at,
                 'monthly',
-                0.6,
-                $item->featured_image
+                0.6
             );
         }
 
@@ -84,29 +81,26 @@ class SitemapController extends Controller
 
     protected function createUrlEntry(
         string $loc,
-        ?\DateTimeInterface $lastmod = null,
+        $lastmod = null,
         string $changefreq = 'monthly',
-        float $priority = 0.5,
-        ?string $image = null
+        float $priority = 0.5
     ): string {
         $entry = '  <url>' . "\n";
         $entry .= '    <loc>' . htmlspecialchars($loc, ENT_XML1, 'UTF-8') . '</loc>' . "\n";
 
         if ($lastmod) {
-            $entry .= '    <lastmod>' . $lastmod->toAtomString() . '</lastmod>' . "\n";
+            try {
+                $entry .= '    <lastmod>' . $lastmod->toAtomString() . '</lastmod>' . "\n";
+            } catch (\Exception $e) {
+                // Skip lastmod if there's an error
+            }
         }
 
-        $entry .= '    <changefreq>' . htmlspecialchars($changefreq) . '</changefreq>' . "\n";
+        $entry .= '    <changefreq>' . htmlspecialchars($changefreq, ENT_XML1, 'UTF-8') . '</changefreq>' . "\n";
         $entry .= '    <priority>' . number_format($priority, 1) . '</priority>' . "\n";
-
-        if ($image) {
-            $entry .= '    <image:image>' . "\n";
-            $entry .= '      <image:loc>' . htmlspecialchars(\Illuminate\Support\Facades\Storage::url($image), ENT_XML1, 'UTF-8') . '</image:loc>' . "\n";
-            $entry .= '    </image:image>' . "\n";
-        }
-
         $entry .= '  </url>' . "\n";
 
         return $entry;
     }
 }
+
