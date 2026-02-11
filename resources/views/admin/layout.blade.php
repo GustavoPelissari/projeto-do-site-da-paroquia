@@ -10,74 +10,13 @@
     <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <!-- Vite Assets -->
+    <!-- Vite Assets (includes Bootstrap, Bootstrap Icons, and Google Fonts) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-    <style>
-        /* Garantir que o body ocupe toda a altura */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        /* Header fixo no topo */
-        .navbar.fixed-top {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1030;
-        }
-        
-        /* Main content com espaçamento correto */
-        .main-content {
-            flex: 1 0 auto;
-            margin-top: 80px;
-            margin-bottom: 2rem;
-            min-height: calc(100vh - 80px - 300px); /* Viewport - header - footer aproximado */
-        }
-        
-        /* Footer fixo no final */
-        .footer-paroquia {
-            flex-shrink: 0;
-            margin-top: auto;
-        }
-        
-        /* Ajuste quando há alertas */
-        .main-content.has-alert {
-            margin-top: 140px;
-        }
-        
-        /* Alertas fixos abaixo do header */
-        .alert-container {
-            position: fixed;
-            top: 72px;
-            left: 0;
-            right: 0;
-            z-index: 1025;
-            padding: 0.5rem;
-        }
-    </style>
 </head>
 <body>
+    <!-- Skip to main content (acessibilidade) -->
+    <a href="#main-content" class="skip-to-content">Pular para o conteúdo principal</a>
+    
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
@@ -585,9 +524,6 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <!-- Debug Script para ícones -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -599,20 +535,13 @@
             const computedStyle = window.getComputedStyle(testIcon, '::before');
             const content = computedStyle.getPropertyValue('content');
             
+            document.body.removeChild(testIcon);
+            
             if (content && content !== 'none' && content !== '""') {
                 console.log('✅ Bootstrap Icons carregado corretamente');
             } else {
-                console.error('❌ Bootstrap Icons não carregou');
-                console.log('Tentando carregar Bootstrap Icons como fallback...');
-                
-                // Fallback: carregar Bootstrap Icons novamente
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css';
-                document.head.appendChild(link);
+                console.warn('⚠️ Bootstrap Icons pode não estar carregado');
             }
-            
-            document.body.removeChild(testIcon);
             
             // Auto-dismiss alerts after 5 seconds
             const alerts = document.querySelectorAll('.alert-dismissible');

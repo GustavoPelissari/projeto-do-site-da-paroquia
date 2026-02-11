@@ -1,2397 +1,318 @@
-/* Paroquia São Paulo Apóstolo - Design Moderno */
+/* ============================================
+   PARÓQUIA SÃO PAULO APÓSTOLO
+   Sistema de Gestão Paroquial
+   CSS Principal - Versão Limpa e Consolidada
+============================================ */
 
-/* Import Design Tokens - DEVE SER PRIMEIRO */
-@import "./design-tokens.css";
-
-/* Import Bootstrap CSS */
+/* ============================================
+   IMPORTS EXTERNOS
+============================================ */
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
-
-/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* Import custom styles */
-@import "./components.css";
-@import "./utilities.css";
-@import "./app.mobile.css";
-@import "./fixes.css";
-
-/* ================================
-   VARIÁVEIS CSS MODERNAS
-================================ */
+/* ============================================
+   DESIGN TOKENS - VARIÁVEIS CSS
+============================================ */
 :root {
-    /* Paleta principal */
-    --brand-vinho: #8B1E3F;
-    --brand-vinho-dark: #6E1530;
-    --brand-rose: #F4E9E1;
-    --accent-dourado: #FFD66B;
-    --text-primary: #2C2C2C;
-    --bg-light: #FBF7F6;
-    --bg-rose: #F4E9E1;
-
-    /* Paleta compatível com utilitários legados */
-    --cor-vinho: #8B1E3F;
-    --cor-vinho-escuro: #6E1530;
-    --cor-dourado: #FFD66B;
-    --cor-dourado-escuro: #E6B847;
-    --cor-bege: #F4E9E1;
-    --cor-bege-escuro: #EAD9CC;
-    --cor-marrom: #7A4B3A;
-    --cor-marrom-claro: #A5745C;
-    --cor-cinza-claro: #F1F1F1;
-    --cor-cinza-medio: #9E9E9E;
-    --cor-cinza-escuro: #4A4A4A;
-    --cor-preto-suave: #2C2C2C;
-    --cor-branco: #FFFFFF;
-
-    /* Alinhamento com Bootstrap 5 (CDN) */
-    --bs-primary: #8B1E3F;
-    --bs-primary-rgb: 139, 30, 63;
-    --bs-warning: #FFD66B;
-    --bs-warning-rgb: 255, 214, 107;
-    --bs-link-color: #8B1E3F;
-    --bs-link-hover-color: #6E1530;
+    /* Cores Principais */
+    --color-primary: #8B1E3F;
+    --color-primary-dark: #6E1530;
+    --color-primary-light: #A73057;
+    --color-secondary: #FFD66B;
+    --color-secondary-dark: #E6B847;
+    --color-secondary-light: #FFE699;
     
-    /* Compatibilidade com código antigo */
-    --sp-dourado-principal: #FFD66B;
-    --sp-azul-celestial: #28a745;
-    --sp-vermelho-sangue: #dc3545;
+    /* Cores Neutras */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-gray-50: #F8F9FA;
+    --color-gray-100: #F1F1F1;
+    --color-gray-200: #E0E0E0;
+    --color-gray-300: #D0D0D0;
+    --color-gray-400: #B0B0B0;
+    --color-gray-500: #9E9E9E;
+    --color-gray-600: #7A7A7A;
+    --color-gray-700: #4A4A4A;
+    --color-gray-800: #2C2C2C;
+    --color-gray-900: #1A1A1A;
+    
+    /* Cores Semânticas */
+    --color-success: #28A745;
+    --color-warning: #FFC107;
+    --color-danger: #DC3545;
+    --color-info: #17A2B8;
+    
+    /* Backgrounds */
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F4E9E1;
+    --color-bg-tertiary: #F8F9FA;
+    --bg-light: #FBF7F6;
     
     /* Tipografia */
-    --font-serif: 'Playfair Display', Georgia, serif;
-    --font-sans: 'Poppins', 'Segoe UI', sans-serif;
+    --font-family-display: 'Playfair Display', serif;
+    --font-family-body: 'Poppins', sans-serif;
     
     /* Sombras */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     
     /* Transições */
-    --transition-base: all 0.25s ease;
-    --transition-fast: all 0.15s ease;
+    --transition-fast: 150ms ease-in-out;
+    --transition-base: 300ms ease-in-out;
+    --transition-slow: 500ms ease-in-out;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-base: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Z-Index */
+    --z-dropdown: 1000;
+    --z-sticky: 1010;
+    --z-fixed: 1020;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    
+    /* Bootstrap Override */
+    --bs-primary: #8B1E3F;
+    --bs-primary-rgb: 139, 30, 63;
+    --bs-link-color: #8B1E3F;
+    --bs-link-hover-color: #6E1530;
 }
 
-/* ================================
-   RESET E BASE STYLES
-================================ */
+/* ============================================
+   RESET E BASE
+============================================ */
 * {
     box-sizing: border-box;
-}
-/* Utility: ensure icons are perfectly centered inside circles */
-.circle-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.circle-center .bi,
-.circle-center i.bi {
-    margin: 0;
-    line-height: 1;
-    vertical-align: middle;
 }
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-family-body);
     font-weight: 400;
     line-height: 1.6;
-    color: var(--text-primary);
+    color: var(--color-gray-800);
     background-color: var(--bg-light);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-/* ================================
-   TIPOGRAFIA MODERNA
-================================ */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+/* ============================================
+   TIPOGRAFIA
+============================================ */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-family-display);
     font-weight: 600;
     line-height: 1.2;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-}
-
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 1.875rem); }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1.125rem; }
-
-.lead {
-    font-size: 1.125rem;
-    font-weight: 400;
-    opacity: 0.9;
-}
-
-/* ================================
-   HERO SECTION MODERNA
-================================ */
-.hero-paroquia {
-    min-height: auto;
-    background: linear-gradient(
-        135deg,
-        rgba(139, 30, 63, 0.8) 0%,
-        rgba(110, 21, 48, 0.9) 50%,
-        rgba(139, 30, 63, 0.7) 100%
-    ),
-    url('/images/igreja-bg.jpg') center/cover no-repeat;
-    background-attachment: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    padding: 2rem 0;
-}
-
-.hero-paroquia::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(139, 30, 63, 0.6) 0%,
-        rgba(139, 30, 63, 0.4) 50%,
-        rgba(139, 30, 63, 0.8) 100%
-    );
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    padding: 0;
-}
-
-.hero-paroquia h1 {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    color: white;
-    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-}
-
-.hero-paroquia .lead {
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* ================================
-   BOTÕES MODERNOS
-================================ */
-.btn-hero {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 50px;
-    text-decoration: none;
-    border: 2px solid transparent;
-    transition: var(--transition-base);
-    box-shadow: var(--shadow-md);
-    transform: translateY(0);
-    white-space: nowrap;
-}
-
-.btn-hero:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-xl);
-    text-decoration: none;
-}
-
-.btn-hero-primary {
-    background: var(--brand-vinho);
-    color: white;
-    border-color: var(--brand-vinho);
-}
-
-.btn-hero-primary:hover {
-    background: var(--brand-vinho-dark);
-    border-color: var(--brand-vinho-dark);
-    color: white;
-}
-
-.btn-hero-outline {
-    background: rgba(244, 233, 225, 0.95);
-    color: var(--brand-vinho);
-    border-color: var(--brand-rose);
-    backdrop-filter: blur(10px);
-}
-
-.btn-hero-outline:hover {
-    background: var(--brand-rose);
-    color: var(--brand-vinho-dark);
-    border-color: var(--brand-vinho);
-}
-
-/* ================================
-   BOTÕES BOOTSTRAP (VINHO/DOURADO)
-================================ */
-.btn-primary {
-    background: var(--brand-vinho);
-    border-color: var(--brand-vinho);
-    color: #fff;
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-    background: var(--brand-vinho-dark);
-    border-color: var(--brand-vinho-dark);
-    color: #fff;
-}
-
-.btn-outline-primary {
-    color: var(--brand-vinho);
-    border-color: var(--brand-vinho);
-}
-
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-    background: var(--brand-vinho);
-    border-color: var(--brand-vinho);
-    color: #fff;
-}
-
-.btn-warning {
-    background: var(--accent-dourado);
-    border-color: var(--accent-dourado);
-    color: #4a2b00;
-}
-
-.btn-warning:hover,
-.btn-warning:focus {
-    background: var(--cor-dourado-escuro);
-    border-color: var(--cor-dourado-escuro);
-    color: #4a2b00;
-}
-
-.badge.bg-warning {
-    color: #4a2b00;
-}
-
-/* ================================
-   CARDS MODERNOS
-================================ */
-.card-paroquia {
-    background: white;
-    border-radius: 16px;
-    border: 1px solid rgba(139, 0, 0, 0.08);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-paroquia:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(139, 0, 0, 0.15);
-    border-color: rgba(139, 0, 0, 0.2);
-}
-
-.card-paroquia .card-img-top {
-    border-radius: 0;
-    transition: transform 0.3s ease;
-}
-
-.card-paroquia:hover .card-img-top {
-    transform: scale(1.05);
-}
-
-.card-paroquia .card-body {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.card-paroquia .card-title {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-    color: var(--brand-vinho);
-}
-
-.card-paroquia .card-text {
-    color: #666;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-
-.card-paroquia .badge {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.75rem;
-    font-weight: 500;
-}
-
-.card-header-paroquia {
-    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
-    color: white;
-    padding: 1.5rem 2rem 1rem;
-    margin: -1.5rem -1.5rem 1.5rem;
-    border-radius: 24px 24px 0 0;
-}
-
-.card-header-paroquia h3 {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ================================
-   IMAGEM IGREJA MATRIZ - Efeito Foto Viva
-================================ */
-.igreja-matriz-img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25) !important;
-}
-
-/* ================================
-   SEÇÕES E ESPAÇAMENTOS
-================================ */
-.section-paroquia {
-    padding: 4rem 0;
-    position: relative;
-}
-
-.section-paroquia:nth-child(even) {
-    background: white;
-}
-
-.section-paroquia:nth-child(odd) {
-    background: var(--bg-light);
-}
-
-/* Garantir espaçamento mínimo em todas as seções */
-section, .section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-section:first-of-type, .section:first-of-type {
-    padding-top: 0;
-}
-
-/* Container com padding padrão */
-.container, .container-fluid {
-    padding-right: 1rem;
-    padding-left: 1rem;
-}
-
-@media (min-width: 576px) {
-    .container, .container-fluid {
-        padding-right: 1.5rem;
-        padding-left: 1.5rem;
-    }
-}
-
-/* Cards sempre com espaçamento interno adequado */
-.card-paroquia .card-body,
-.card .card-body {
-    padding: 1.5rem;
-}
-
-.card-paroquia,
-.card {
-    margin-bottom: 1.5rem;
-}
-
-/* ================================
-   NAVEGAÇÃO MODERNA
-================================ */
-.navbar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(139, 30, 63, 0.1);
-    padding: 1rem 0;
-    transition: var(--transition-base);
-}
-
-.navbar.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: var(--shadow-sm);
-}
-
-.navbar-brand {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    color: var(--brand-vinho) !important;
-    text-decoration: none;
-}
-
-/* Responsivo - Navbar brand menor no mobile */
-@media (max-width: 768px) {
-    .navbar-brand img {
-        height: 32px !important;
-    }
-    
-    .navbar-brand .fw-bold {
-        font-size: 0.85rem;
-        line-height: 1.2;
-    }
-    
-    .navbar-brand small {
-        font-size: 0.65rem;
-    }
-}
-
-.nav-link {
-    font-family: var(--font-sans);
-    font-weight: 500;
-    color: var(--text-primary) !important;
-    transition: var(--transition-base);
-    position: relative;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--brand-vinho) !important;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--brand-vinho);
-    transition: var(--transition-base);
-    transform: translateX(-50%);
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
-}
-
-/* ================================
-   FIX: Bootstrap Navbar Responsiveness
-================================ */
-/* Garantir que o menu apareça em desktop (lg = 992px+) */
-@media (min-width: 992px) {
-    /* Sobrescrever o comportamento do collapse do Bootstrap */
-    .navbar-expand-lg .navbar-collapse.collapse {
-        display: flex !important;
-        flex-basis: auto;
-        visibility: visible !important;
-    }
-    
-    .navbar-expand-lg .navbar-toggler {
-        display: none;
-    }
-}
-
-/* Em mobile, o menu fica escondido até clicar no toggler */
-@media (max-width: 991.98px) {
-    .navbar-collapse {
-        display: none;
-    }
-    
-    .navbar-collapse.show {
-        display: block !important;
-        visibility: visible !important;
-    }
-    
-    .navbar-collapse.collapsing {
-        display: block;
-        visibility: visible !important;
-    }
-}
-
-/* ================================
-   COMPONENTES ESPECÍFICOS
-================================ */
-.proxima-missa-card {
-    background: linear-gradient(135deg, white 0%, var(--bg-light) 100%);
-    border: 1px solid rgba(139, 30, 63, 0.1);
-}
-
-.proxima-missa-card .row > div {
-    position: relative;
-}
-
-.proxima-missa-card .row > div:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    height: 60%;
-    width: 1px;
-    background: rgba(139, 30, 63, 0.2);
-    transform: translateY(-50%);
-}
-
-.horarios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.horario-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    border: 1px solid rgba(139, 30, 63, 0.1);
-    transition: var(--transition-base);
-    position: relative;
-    overflow: hidden;
-}
-
-.horario-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--brand-vinho), var(--accent-dourado));
-}
-
-.horario-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-/* ================================
-   ÍCONES E ELEMENTOS VISUAIS
-================================ */
-.icon-lg {
-    width: 2rem;
-    height: 2rem;
-}
-
-.text-dourado {
-    color: var(--accent-dourado) !important;
-}
-
-.text-vinho {
-    color: var(--brand-vinho) !important;
-}
-
-.bg-vinho {
-    background-color: var(--brand-vinho) !important;
-    color: white !important;
-}
-
-.bg-vinho * {
-    color: white !important;
-}
-
-.bg-rose {
-    background-color: var(--brand-rose) !important;
-}
-
-/* Logo da paróquia */
-.logo-paroquia {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
-}
-
-.brand-text {
-    line-height: 1.2;
-}
-
-.brand-titulo {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--brand-vinho);
-    display: block;
-}
-
-.brand-subtitulo {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    color: var(--text-primary);
-    opacity: 0.7;
-}
-
-/* ================================
-   ANIMAÇÕES E MICROINTERAÇÕES
-================================ */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-}
-
-.animate-on-scroll.animated {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ================================
-   RESPONSIVIDADE MOBILE - GLOBAL
-================================ */
-@media (max-width: 768px) {
-    /* DESABILITAR ANIMAÇÕES NO MOBILE */
-    .animate-on-scroll {
-        opacity: 1 !important;
-        transform: none !important;
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    .card-paroquia {
-        animation: none !important;
-        opacity: 1 !important;
-    }
-    
-    /* HERO SECTIONS */
-    .hero-paroquia {
-        min-height: auto;
-        background-attachment: scroll;
-        padding: 1.5rem 0;
-    }
-    
-    .hero-content {
-        padding: 0;
-    }
-    
-    .hero-paroquia h1 {
-        font-size: 1.5rem !important;
-        margin-bottom: 0.5rem;
-    }
-    
-    .hero-paroquia .lead {
-        font-size: 0.95rem !important;
-        margin-bottom: 0.75rem;
-    }
-    
-    /* BOTÕES */
-    .btn-hero {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 1rem;
-    }
-    
-    .btn-group {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .btn-group .btn {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-    
-    /* SEÇÕES */
-    .section-paroquia {
-        padding: 2rem 0;
-    }
-    
-    /* CONTAINERS - garantir espaçamento */
-    .container, .container-fluid {
-        padding-right: 1rem;
-        padding-left: 1rem;
-    }
-    
-    /* TABELAS RESPONSIVAS */
-    .table-responsive {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    table {
-        font-size: 0.875rem;
-    }
-    
-    table th,
-    table td {
-        padding: 0.5rem !important;
-        white-space: nowrap;
-    }
-    
-    /* FORMULÁRIOS */
-    .form-label {
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .form-control,
-    .form-select {
-        font-size: 0.9rem;
-        padding: 0.5rem;
-    }
-    
-    /* CARDS */
-    .card {
-        margin-bottom: 1rem;
-    }
-    
-    .card-body {
-        padding: 1rem !important;
-    }
-    
-    .card-header {
-        padding: 0.75rem 1rem !important;
-    }
-    
-    /* BADGES E LABELS */
-    .badge {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
-    }
-    
-    /* MODAIS */
-    .modal-dialog {
-        margin: 0.5rem;
-    }
-    
-    .modal-content {
-        border-radius: 1rem;
-    }
-    
-    /* NAVEGAÇÃO ADMIN */
-    .navbar-nav {
-        padding: 1rem 0;
-    }
-    
-    .nav-link {
-        padding: 0.75rem 0 !important;
-    }
-    
-    /* TÍTULOS */
-    h1, .h1 { font-size: 1.75rem !important; }
-    h2, .h2 { font-size: 1.5rem !important; }
-    h3, .h3 { font-size: 1.25rem !important; }
-    h4, .h4 { font-size: 1.1rem !important; }
-    h5, .h5 { font-size: 1rem !important; }
-    h6, .h6 { font-size: 0.9rem !important; }
-    
-    /* FILTROS E BUSCAS */
-    .row.g-3 > [class*="col-"] {
-        margin-bottom: 0.75rem;
-    }
-    
-    /* ACTIONS E BOTÕES EM LINHA */
-    .d-flex.justify-content-between {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .d-flex.justify-content-between > * {
-        width: 100%;
-    }
-    
-    /* ALERTAS */
-    .alert {
-        font-size: 0.9rem;
-        padding: 0.75rem;
-    }
-    
-    /* BREADCRUMBS */
-    .breadcrumb {
-        font-size: 0.85rem;
-        padding: 0.5rem 0;
-    }
-    
-    /* IMAGENS */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    /* GRID LAYOUTS */
-    .pastorais-grid,
-    .noticias-grid,
-    .eventos-grid,
-    .horarios-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
-    }
-    
-    /* COLUNAS ROW */
-    .row.g-4 {
-        gap: 1rem !important;
-    }
-    
-    .row.g-5 {
-        gap: 1.5rem !important;
-    }
-    
-    /* ESPAÇAMENTOS UTILITÁRIOS */
-    .py-5 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
-    .px-5 { padding-left: 1rem !important; padding-right: 1rem !important; }
-    .my-5 { margin-top: 2rem !important; margin-bottom: 2rem !important; }
-    .mx-5 { margin-left: 1rem !important; margin-right: 1rem !important; }
-    
-    /* DASHBOARD CARDS */
-    .dashboard-card {
-        margin-bottom: 1rem;
-    }
-    
-    /* EVENTOS CARD */
-    .evento-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .evento-date {
-        margin-bottom: 1rem;
-    }
-    
-    /* NOTÍCIAS */
-    .noticia-image {
-        height: 200px !important;
-    }
-    
-    /* TEXTO RESPONSIVO */
-    .lead {
-        font-size: 1rem !important;
-    }
-    
-    p, li, span {
-        font-size: 0.95rem;
-    }
-    
-    /* TABELAS ADMIN - Scroll horizontal */
-    .table-responsive table {
-        min-width: 600px;
-    }
-}
-
-/* MOBILE PEQUENO - Otimização adicional */
-@media (max-width: 576px) {
-    /* HERO EXTRA COMPACTO - mesmo tamanho que seções */
-    .hero-paroquia {
-        padding: 1.25rem 0;
-    }
-    
-    .hero-content {
-        padding: 0;
-    }
-    
-    .hero-paroquia h1 {
-        font-size: 1.35rem !important;
-        margin-bottom: 0.35rem;
-        line-height: 1.1;
-    }
-    
-    .hero-paroquia .lead {
-        font-size: 0.9rem !important;
-        margin-bottom: 0.5rem;
-    }
-    
-    .btn-hero {
-        padding: 0.65rem 1.25rem !important;
-        font-size: 0.85rem !important;
-    }
-    
-    /* FORMULÁRIOS DE AUTENTICAÇÃO - Melhorar visibilidade no mobile */
-    .card {
-        margin: 0 -1rem !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        border: none !important;
-    }
-    
-    .card-body {
-        padding: 1.5rem 1rem !important;
-    }
-    
-    .col-md-6, 
-    .col-lg-5 {
-        max-width: 100% !important;
-        flex: 0 0 100% !important;
-    }
-    
-    .py-5 {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
-    }
-    
-    .btn-primary-paroquia,
-    .btn {
-        width: 100%;
-        padding: 0.75rem 1rem !important;
-    }
-    
-    .d-grid {
-        gap: 0.5rem !important;
-    }
-    
-    /* SEÇÕES MAIS COMPACTAS */
-    .section-paroquia {
-        padding: 1.5rem 0;
-    }
-    
-    section, .section {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-    
-    /* CONTAINERS MAIS COMPACTOS */
-    .container, .container-fluid {
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
-    }
-    
-    /* TÍTULOS MENORES */
-    h1, .h1 { font-size: 1.5rem !important; }
-    h2, .h2 { font-size: 1.35rem !important; }
-    h3, .h3 { font-size: 1.15rem !important; }
-    
-    /* BOTÕES MENORES */
-    .btn {
-        font-size: 0.875rem;
-        padding: 0.5rem 1rem;
-    }
-    
-    .btn-lg {
-        font-size: 1rem;
-        padding: 0.65rem 1.25rem;
-    }
-    
-    .btn-sm {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.75rem;
-    }
-    
-    /* MODAIS FULLSCREEN */
-    .modal-dialog {
-        margin: 0;
-        max-width: 100%;
-        height: 100%;
-    }
-    
-    .modal-content {
-        height: 100%;
-        border-radius: 0;
-    }
-    
-    /* TABELAS - fonte menor */
-    table {
-        font-size: 0.8rem;
-    }
-    
-    table th,
-    table td {
-        padding: 0.35rem !important;
-    }
-    
-    /* ESPAÇAMENTOS REDUZIDOS */
-    .py-5 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-    .py-4 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
-    .my-5 { margin-top: 1.5rem !important; margin-bottom: 1.5rem !important; }
-    .my-4 { margin-top: 1rem !important; margin-bottom: 1rem !important; }
-}
-
-/* LANDSCAPE MOBILE - Ajuste específico */
-@media (max-width: 896px) and (orientation: landscape) {
-    .hero-paroquia {
-        min-height: 40vh;
-    }
-    
-    .hero-content {
-        padding: 1rem 0;
-    }
-    
-    .section-paroquia {
-        padding: 1.5rem 0;
-    }
-}
-
-/* ================================
-   MELHORIAS DE ACESSIBILIDADE
-================================ */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-:focus-visible {
-    outline: 2px solid var(--brand-vinho);
-    outline-offset: 2px;
-}
-
-/* ================================
-   FORMULÁRIOS DE AUTENTICAÇÃO
-================================ */
-/* Formulários sempre com padding adequado */
-form .container,
-form .container-fluid,
-.auth-container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-
-/* Páginas de formulário */
-.form-page {
-    min-height: calc(100vh - 80px - 300px);
-    display: flex;
-    align-items: center;
-    padding: 2rem 0;
-}
-
-.btn-primary-paroquia {
-    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
-    border: none;
-    color: white;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    transition: var(--transition-base);
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.btn-primary-paroquia:hover {
-    background: linear-gradient(135deg, var(--brand-vinho-dark), var(--brand-vinho));
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    color: white;
-}
-
-.btn-primary-paroquia:focus {
-    box-shadow: 0 0 0 3px rgba(139, 30, 63, 0.3);
-    color: white;
-}
-
-.text-brand-vinho {
-    color: var(--brand-vinho) !important;
-}
-
-/* Estilos para o footer */
-.footer-paroquia {
-    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
-    color: white;
-    padding: 2rem 0 1rem;
-    margin-top: 3rem;
-    flex-shrink: 0;
-}
-
-/* Responsivo - Footer mais compacto no mobile */
-@media (max-width: 768px) {
-    .footer-paroquia {
-        padding: 1.5rem 0 0.5rem;
-        margin-top: 2rem;
-    }
-    
-    .footer-title {
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
-    }
-    
-    .footer-text {
-        font-size: 0.9rem;
-        margin-bottom: 0.75rem;
-    }
-    
-    .footer-links li,
-    .footer-contact li {
-        margin-bottom: 0.4rem;
-        font-size: 0.9rem;
-    }
-    
-    .footer-bottom {
-        margin-top: 1.5rem;
-        padding-top: 1rem;
-    }
-    
-    .footer-bottom p {
-        font-size: 0.85rem;
-        margin-bottom: 0.5rem;
-    }
-}
-
-/* Garantir espaço antes do footer */
-main:last-of-type,
-.main-content:last-of-type {
-    padding-bottom: 2rem;
-    margin-bottom: 0;
-}
-
-.footer-title {
-    color: var(--accent-dourado);
-    font-family: var(--font-serif);
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.footer-text {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1rem;
-}
-
-.footer-verse {
-    color: var(--accent-dourado);
-    font-style: italic;
-    font-size: 0.9rem;
-}
-
-.footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-links li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: var(--transition-fast);
-}
-
-.footer-links a:hover {
-    color: var(--accent-dourado);
-}
-
-.footer-contact {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-contact li {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 0.5rem;
-}
-
-.footer-contact a {
-    color: var(--accent-dourado);
-    text-decoration: none;
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 2rem;
-    padding-top: 2rem;
-}
-
-.footer-bottom .footer-verse {
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
-}
-
-/* ================================
-   CORREÇÕES DE LEGIBILIDADE 
-================================ */
-/* Garantir texto branco em todos os elementos com fundo vinho */
-[class*="bg-vinho"],
-[class*="btn-primary"],
-.btn-primary-paroquia,
-.card-header-paroquia,
-.navbar.bg-vinho,
-.footer-paroquia {
-    color: white !important;
-}
-
-[class*="bg-vinho"] *,
-[class*="btn-primary"] *,
-.btn-primary-paroquia *,
-.card-header-paroquia *,
-.navbar.bg-vinho *,
-.footer-paroquia * {
-    color: white !important;
-}
-
-/* Específico para links e botões em fundos escuros */
-[class*="bg-vinho"] a,
-[class*="btn-primary"] a,
-.btn-primary-paroquia a,
-.card-header-paroquia a,
-.footer-paroquia a {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
-
-[class*="bg-vinho"] a:hover,
-[class*="btn-primary"] a:hover,
-.btn-primary-paroquia a:hover,
-.card-header-paroquia a:hover,
-.footer-paroquia a:hover {
-    color: white !important;
-}
-
-/* ================================
-   ÍCONES CONSISTENTES
-================================ */
-/* Garantir que os ícones tenham a mesma cor do texto */
-i.bi, .bi {
-    color: inherit !important;
-    font-size: inherit;
-    vertical-align: baseline;
-    margin-right: 0.5rem;
-    display: inline-block;
-    font-family: "Bootstrap Icons" !important;
-    font-style: normal;
-    font-weight: normal !important;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Ícones em links mantêm a cor do link */
-a i.bi {
-    color: inherit !important;
-}
-
-/* Ícones em botões mantêm a cor do botão */
-.btn i.bi,
-.btn-primary-paroquia i.bi,
-button i.bi {
-    color: inherit !important;
-}
-
-/* Ícones no footer */
-.footer-links i.bi,
-.footer-contact i.bi {
-    color: inherit !important;
-    margin-right: 0.5rem;
-    width: 1.2em;
-    display: inline-block;
-}
-
-/* Hover states para links com ícones */
-.footer-links a:hover i.bi,
-.footer-contact a:hover i.bi,
-a:hover i.bi {
-    color: inherit !important;
-}
-
-/* Ícones em headers */
-h1 i.bi, h2 i.bi, h3 i.bi, h4 i.bi, h5 i.bi, h6 i.bi {
-    margin-right: 0.5rem;
-    color: inherit !important;
-}
-
-/* ================================
-   GRIDS DE CONTEÚDO
-================================ */
-/* Grid de Pastorais */
-.pastorais-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.pastoral-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    border: 1px solid rgba(139, 30, 63, 0.1);
-    transition: var(--transition-base);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.pastoral-card:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--brand-vinho), var(--accent-dourado));
-}
-
-.pastoral-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--brand-vinho);
-}
-
-.pastoral-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.pastoral-icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    color: white;
-}
-
-.pastoral-title {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    color: var(--brand-vinho);
-    margin: 0;
-    font-size: 1.25rem;
-}
-
-.pastoral-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.pastoral-description {
-    color: var(--text-primary);
-    opacity: 0.8;
-    line-height: 1.6;
-    flex: 1;
-    margin-bottom: 1.5rem;
-}
-
-.pastoral-action {
-    text-align: center;
-    margin-top: auto;
-}
-
-/* Grid de Notícias */
-.noticias-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Quando houver apenas 1 notícia */
-.noticias-grid:has(.noticia-card:only-child) {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-}
-
-/* Quando houver 2 notícias */
-.noticias-grid:has(.noticia-card:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 800px;
-}
-
-/* Quando houver 3 notícias */
-.noticias-grid:has(.noticia-card:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1200px;
-}
-
-.noticia-card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(139, 30, 63, 0.1);
-    transition: var(--transition-base);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.noticia-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.noticia-image {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    background: linear-gradient(135deg, var(--bg-rose), var(--bg-light));
-}
-
-.noticia-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--brand-vinho);
-}
-
-.noticia-content {
-    padding: 1.5rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.noticia-meta {
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-}
-
-.noticia-title {
-    margin-bottom: 1rem;
-}
-
-.noticia-title a {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.25rem;
-    transition: var(--transition-fast);
-}
-
-.noticia-title a:hover {
-    color: var(--brand-vinho-dark) !important;
-}
-
-.noticia-excerpt {
-    color: var(--text-primary);
-    opacity: 0.8;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    flex: 1;
-}
-
-/* Grid de Eventos */
-.eventos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.evento-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    border: 1px solid rgba(139, 30, 63, 0.1);
-    transition: var(--transition-base);
-    position: relative;
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-}
-
-.evento-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--brand-vinho);
-}
-
-.evento-date {
-    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
-    color: white;
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: center;
-    min-width: 80px;
-    flex-shrink: 0;
-}
-
-.evento-date .dia {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    font-family: var(--font-serif);
-    line-height: 1;
-}
-
-.evento-date .mes {
-    display: block;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    margin-top: 0.25rem;
-    opacity: 0.9;
-}
-
-.evento-content {
-    flex: 1;
-}
-
-.evento-title {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    color: var(--brand-vinho);
-    margin-bottom: 0.75rem;
-    font-size: 1.25rem;
-}
-
-.evento-meta {
-    margin-bottom: 1rem;
-    font-size: 0.875rem;
-}
-
-.evento-description {
-    color: var(--text-primary);
-    opacity: 0.8;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-
-/* Call to Action Section */
-.cta-paroquia {
-    background: linear-gradient(135deg, var(--brand-vinho) 0%, var(--brand-vinho-dark) 100%) !important;
-    position: relative;
-    overflow: hidden;
-    padding: 5rem 0 !important;
-    opacity: 1 !important; /* Garantir visibilidade sem depender de JavaScript */
-    transform: translateY(0) !important; /* Garantir posição correta */
-}
-
-.cta-paroquia:before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>');
-    opacity: 0.3;
-}
-
-.cta-paroquia * {
-    position: relative;
-    z-index: 1;
-}
-
-.btn-white {
-    background: white;
-    color: var(--brand-vinho);
-    border: 2px solid white;
-    font-weight: 600;
-    transition: var(--transition-base);
-}
-
-.btn-white:hover {
-    background: transparent;
-    color: white;
-    border-color: white;
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-xl);
-}
-
-.btn-outline-light {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    font-weight: 600;
-    transition: var(--transition-base);
-}
-
-.btn-outline-light:hover {
-    background: white;
-    color: var(--brand-vinho);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-xl);
-}
-
-.btn-outline-vinho {
-    background: transparent;
-    color: var(--brand-vinho);
-    border: 2px solid var(--brand-vinho);
-    font-weight: 500;
-    transition: var(--transition-base);
-}
-
-.btn-outline-vinho:hover {
-    background: var(--brand-vinho);
-    color: white;
-    border-color: var(--brand-vinho);
-}
-
-.btn-vinho {
-    background: linear-gradient(135deg, var(--brand-vinho), var(--brand-vinho-dark));
-    color: white;
-    border: none;
-    font-weight: 600;
-    transition: var(--transition-base);
-}
-
-.btn-vinho:hover {
-    background: linear-gradient(135deg, var(--brand-vinho-dark), var(--brand-vinho));
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-/* Responsividade para grids */
-@media (max-width: 768px) {
-    .pastorais-grid,
-    .noticias-grid,
-    .eventos-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem;
-        max-width: 100% !important;
-    }
-    
-    .evento-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .evento-date {
-        margin-bottom: 1rem;
-    }
-    
-    .noticia-image {
-        height: 200px;
-    }
-}
-
-/* Responsividade para tablets */
-@media (min-width: 769px) and (max-width: 992px) {
-    .noticias-grid:has(.noticia-card:nth-child(3):last-child) {
-        grid-template-columns: repeat(2, 1fr) !important;
-        max-width: 800px !important;
-    }
-}
-
-/* ================================
-   OTIMIZAÇÕES MOBILE COMPLETAS
-================================ */
-
-/* Mobile - Smartphones (≤576px) */
-@media (max-width: 576px) {
-    /* Tipografia Mobile */
-    html {
-        font-size: 14px;
-    }
-    
-    h1 { font-size: 1.75rem !important; line-height: 1.2; }
-    h2 { font-size: 1.5rem !important; line-height: 1.3; }
-    h3 { font-size: 1.25rem !important; line-height: 1.3; }
-    h4 { font-size: 1.125rem !important; }
-    h5 { font-size: 1rem !important; }
-    h6 { font-size: 0.95rem !important; }
-    
-    .lead {
-        font-size: 1rem !important;
-    }
-    
-    /* Containers e espaçamentos */
-    .container {
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }
-    
-    .section-paroquia {
-        padding: 2rem 0 !important;
-    }
-    
-    /* Navbar Mobile */
-    .navbar-brand {
-        font-size: 0.875rem !important;
-    }
-    
-    .navbar-brand img {
-        height: 32px !important;
-    }
-    
-    .navbar-brand div {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
-    
-    .navbar-brand .fw-bold {
-        font-size: 0.85rem !important;
-        line-height: 1.2;
-    }
-    
-    .navbar-brand small {
-        font-size: 0.65rem !important;
-    }
-    
-    .navbar-nav .nav-link {
-        padding: 0.75rem 1rem !important;
-        font-size: 0.95rem;
-    }
-    
-    .navbar-collapse {
-        max-height: 70vh;
-        overflow-y: auto;
-    }
-    
-    /* Hero Mobile - Mais compacto e legível */
-    .hero-paroquia {
-        min-height: 45vh !important;
-        background-attachment: scroll !important;
-    }
-    
-    .hero-content {
-        padding: 1.5rem 0 !important;
-    }
-    
-    .hero-paroquia h1,
-    .hero-title {
-        font-size: 1.75rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.2 !important;
-    }
-    
-    .hero-paroquia .lead,
-    .hero-subtitle {
-        font-size: 0.95rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.5;
-    }
-    
-    .hero-paroquia p {
-        font-size: 0.9rem !important;
-    }
-    
-    /* Botões Hero Mobile */
-    .btn-hero,
-    .btn-paroquia {
-        padding: 0.75rem 1.25rem !important;
-        font-size: 0.9rem !important;
-        width: 100%;
-        margin-bottom: 0.75rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .btn-hero:last-child,
-    .btn-paroquia:last-child {
-        margin-bottom: 0;
-    }
-    
-    .hero-paroquia .d-flex.gap-3,
-    .hero-paroquia .d-flex.gap-2 {
-        flex-direction: column !important;
-        gap: 0.75rem !important;
-        width: 100%;
-    }
-    
-    /* Cards Mobile - Melhor hierarquia */
-    .card-paroquia {
-        margin-bottom: 1.5rem;
-        border-radius: 12px !important;
-    }
-    
-    .card-paroquia img {
-        border-radius: 12px 12px 0 0 !important;
-    }
-    
-    .card-body,
-    .card-body-paroquia {
-        padding: 1.25rem !important;
-    }
-    
-    .card-header-paroquia {
-        padding: 1.25rem !important;
-    }
-    
-    .card-title {
-        font-size: 1.125rem !important;
-        margin-bottom: 0.75rem !important;
-    }
-    
-    .card-text {
-        font-size: 0.95rem !important;
-        line-height: 1.6;
-    }
-    
-    /* Grids Mobile - Stack vertical */
-    .row.g-4 {
-        row-gap: 1.5rem !important;
-    }
-    
-    .row.g-5 {
-        row-gap: 2rem !important;
-    }
-    
-    /* Botões dentro de cards */
-    .card-body .btn,
-    .card-body .btn-paroquia,
-    .card-body-paroquia .btn {
-        width: 100% !important;
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem !important;
-    }
-    
-    .card-body .d-flex.gap-2,
-    .card-body-paroquia .d-flex.gap-2 {
-        flex-direction: column !important;
-        gap: 0.5rem !important;
-    }
-    
-    .card-body .btn:last-child {
-        margin-bottom: 0;
-    }
-    
-    /* Footer Mobile - Mais compacto */
-    .footer-paroquia,
-    .sp-footer {
-        padding: 2rem 0 !important;
-    }
-    
-    .sp-footer-content {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-        text-align: center;
-    }
-    
-    .footer-paroquia .row > div {
-        margin-bottom: 1.5rem !important;
-    }
-    
-    .footer-title,
-    .sp-footer-section h3 {
-        font-size: 1.125rem !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    .footer-text,
-    .footer-links li,
-    .sp-footer-section p {
-        font-size: 0.875rem !important;
-    }
-    
-    .footer-contact li {
-        font-size: 0.85rem !important;
-        margin-bottom: 0.75rem;
-    }
-    
-    /* Imagens responsivas */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    .img-fluid {
-        border-radius: 8px !important;
-    }
-    
-    /* Modais Mobile */
-    .modal-dialog {
-        margin: 0.5rem !important;
-        max-width: calc(100% - 1rem) !important;
-    }
-    
-    .modal-content {
-        border-radius: 12px !important;
-    }
-    
-    .modal-header {
-        padding: 1rem !important;
-    }
-    
-    .modal-title {
-        font-size: 1.125rem !important;
-    }
-    
-    .modal-body {
-        padding: 1rem !important;
-        font-size: 0.95rem;
-    }
-    
-    /* Breadcrumbs Mobile */
-    .breadcrumb {
-        font-size: 0.85rem !important;
-        padding: 0.75rem 1rem !important;
-        margin-bottom: 1rem;
-    }
-    
-    /* Badges e Tags */
-    .badge {
-        font-size: 0.75rem !important;
-        padding: 0.35rem 0.65rem !important;
-    }
-    
-    /* Alertas Mobile */
-    .alert {
-        padding: 0.875rem !important;
-        font-size: 0.9rem !important;
-        margin-bottom: 1rem;
-    }
-    
-    .alert i {
-        font-size: 1.125rem;
-    }
-    
-    /* Formulários Mobile */
-    .form-control,
-    .form-select {
-        font-size: 1rem !important;
-        padding: 0.75rem !important;
-    }
-    
-    .form-label {
-        font-size: 0.9rem !important;
-        margin-bottom: 0.5rem;
-    }
-    
-    /* Tabelas Mobile - Scroll horizontal */
-    .table-responsive {
-        border-radius: 8px;
-        margin-bottom: 1rem;
-    }
-    
-    table {
-        font-size: 0.875rem !important;
-    }
-    
-    /* Ícones */
-    .icon-paroquia {
-        width: 20px !important;
-        height: 20px !important;
-    }
-    
-    .icon-lg {
-        width: 40px !important;
-        height: 40px !important;
-    }
-    
-    /* Seções especiais */
-    .section-bg-bege,
-    .section-bg-verde,
-    .bg-light {
-        padding: 2rem 0 !important;
-    }
-    
-    /* Feature cards (welcome) */
-    .feature-card {
-        padding: 1.5rem !important;
-        margin-bottom: 1.5rem;
-    }
-    
-    .feature-icon {
-        font-size: 2.5rem !important;
-        margin-bottom: 1rem;
-    }
-    
-    .feature-title {
-        font-size: 1.125rem !important;
-        margin-bottom: 0.75rem !important;
-    }
-    
-    .feature-text {
-        font-size: 0.9rem !important;
-        line-height: 1.6;
-    }
-    
-    /* CTA Section Mobile */
-    .cta-paroquia {
-        padding: 2.5rem 0 !important;
-    }
-    
-    .cta-paroquia h2 {
-        font-size: 1.5rem !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    /* Grupos/Pastorais filtros */
-    #category-filters {
-        gap: 0.5rem !important;
-    }
-    
-    #category-filters .btn-paroquia {
-        padding: 0.5rem 0.875rem !important;
-        font-size: 0.85rem !important;
-        width: auto !important;
-    }
-    
-    /* Countdown e elementos especiais */
-    #countdown-display {
-        font-size: 0.9rem !important;
-    }
-    
-    #countdown-text {
-        font-size: 1.25rem !important;
-    }
-    
-    /* Dropdown menu mobile */
-    .dropdown-menu {
-        font-size: 0.9rem !important;
-    }
-    
-    .dropdown-item {
-        padding: 0.75rem 1rem !important;
-    }
-    
-    /* Overflow text fix */
-    * {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-    
-    /* Prevent horizontal scroll */
-    body {
-        overflow-x: hidden;
-    }
-    
-    .container,
-    .container-fluid {
-        overflow-x: hidden;
-    }
-}
-
-/* Tablet - iPads e dispositivos médios (577px - 768px) */
-@media (min-width: 577px) and (max-width: 768px) {
-    html {
-        font-size: 15px;
-    }
-    
-    h1 { font-size: 2rem !important; }
-    h2 { font-size: 1.75rem !important; }
-    h3 { font-size: 1.5rem !important; }
-    
-    .hero-paroquia {
-        min-height: 50vh !important;
-    }
-    
-    .hero-paroquia h1 {
-        font-size: 2rem !important;
-    }
-    
-    .navbar-brand {
-        font-size: 0.95rem !important;
-    }
-    
-    .btn-hero {
-        width: auto !important;
-        min-width: 200px;
-    }
-    
-    /* Cards em 2 colunas quando possível */
-    .row > [class*='col-'] {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-/* Landscape mobile (altura pequena) */
-@media (max-height: 600px) and (orientation: landscape) {
-    .hero-paroquia {
-        min-height: 80vh !important;
-    }
-    
-    .hero-content {
-        padding: 1rem 0 !important;
-    }
-    
-    .navbar-collapse {
-        max-height: 50vh;
-    }
-}
-
-/* Ajustes finos para telas muito pequenas */
-@media (max-width: 375px) {
-    html {
-        font-size: 13px;
-    }
-    
-    .container {
-        padding-left: 0.75rem !important;
-        padding-right: 0.75rem !important;
-    }
-    
-    .hero-paroquia h1 {
-        font-size: 1.5rem !important;
-    }
-    
-    .btn-hero,
-    .btn-paroquia {
-        padding: 0.65rem 1rem !important;
-        font-size: 0.85rem !important;
-    }
-    
-    .navbar-brand .fw-bold {
-        font-size: 0.75rem !important;
-    }
-    
-    .navbar-brand small {
-        display: none !important;
-    }
-}
-
-/* Melhorias para interações touch */
-@media (hover: none) and (pointer: coarse) {
-    /* Aumentar área de toque para botões */
-    .btn,
-    .btn-paroquia,
-    .nav-link,
-    a {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    /* Remover hover effects em dispositivos touch */
-    .card-paroquia:hover,
-    .btn-hero:hover,
-    .btn-paroquia:hover {
-        transform: none !important;
-    }
-    
-    /* Feedback visual ao tocar */
-    .btn:active,
-    .btn-paroquia:active {
-        transform: scale(0.98);
-        opacity: 0.9;
-    }
-}
-
-/* ================================
-   MICRO-INTERAÇÕES E ANIMAÇÕES
-================================ */
-
-/* Animação de entrada suave para elementos */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInFromLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-/* Classes de utilidade para animações */
-.fade-in {
-    animation: fadeIn 0.6s ease-out;
-}
-
-.fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.slide-in-left {
-    animation: slideInFromLeft 0.8s ease-out;
-}
-
-.slide-in-right {
-    animation: slideInFromRight 0.8s ease-out;
-}
-
-/* Animação para cards ao aparecer na tela */
-.card-paroquia {
-    animation: fadeInUp 0.6s ease-out;
-    animation-fill-mode: both;
-}
-
-.card-paroquia:nth-child(1) { animation-delay: 0.1s; }
-.card-paroquia:nth-child(2) { animation-delay: 0.2s; }
-.card-paroquia:nth-child(3) { animation-delay: 0.3s; }
-.card-paroquia:nth-child(4) { animation-delay: 0.4s; }
-.card-paroquia:nth-child(5) { animation-delay: 0.5s; }
-.card-paroquia:nth-child(6) { animation-delay: 0.6s; }
-
-/* Hero animação de entrada */
-.hero-title {
-    animation: fadeInUp 1s ease-out;
-}
-
-.hero-subtitle {
-    animation: fadeInUp 1.2s ease-out;
-}
-
-.hero-actions {
-    animation: fadeInUp 1.4s ease-out;
-}
-
-/* Botões com transição suave */
-.btn,
-.btn-paroquia,
-.btn-hero {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Efeito ripple nos botões */
-.btn::before,
-.btn-paroquia::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:active::before,
-.btn-paroquia:active::before {
-    width: 300px;
-    height: 300px;
-}
-
-/* Cards com sombra suave ao hover */
-.card-paroquia {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@media (hover: hover) {
-    .card-paroquia:hover {
-        transform: translateY(-8px) scale(1.02);
-    }
-}
-
-/* Links com underline animado */
-a:not(.btn):not(.btn-paroquia):not(.nav-link) {
-    position: relative;
-    text-decoration: none;
-}
-
-a:not(.btn):not(.btn-paroquia):not(.nav-link)::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--brand-vinho);
-    transition: width 0.3s ease;
-}
-
-a:not(.btn):not(.btn-paroquia):not(.nav-link):hover::after {
-    width: 100%;
-}
-
-/* Ícones com rotação suave */
-.icon-paroquia,
-i[data-lucide] {
-    transition: transform 0.3s ease;
-}
-
-.icon-paroquia:hover,
-i[data-lucide]:hover {
-    transform: rotate(5deg) scale(1.1);
-}
-
-/* Badges com animação de entrada */
-.badge {
-    animation: fadeIn 0.5s ease-out;
+    color: var(--color-primary);
+}
+
+/* ============================================
+   LINKS
+============================================ */
+a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-color: rgba(139, 30, 63, 0.3);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
     transition: all 0.2s ease;
 }
 
-.badge:hover {
-    transform: scale(1.05);
+a:hover {
+    color: var(--color-primary-dark);
+    text-decoration-thickness: 2px;
 }
 
-/* Imagens com zoom suave */
-img {
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+.nav-link,
+.navbar-brand,
+.dropdown-item,
+a.btn {
+    text-decoration: none;
 }
 
-@media (hover: hover) {
-    .card-paroquia:hover img,
-    .img-hover-zoom:hover {
-        transform: scale(1.08);
-    }
+/* ============================================
+   ACESSIBILIDADE - FOCUS VISIBLE (WCAG AA)
+============================================ */
+*:focus {
+    outline: none;
 }
 
-/* Alertas com slide in */
-.alert {
-    animation: slideInFromRight 0.5s ease-out;
+*:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
 }
 
-/* Modais com fade in */
-.modal.fade .modal-dialog {
-    transition: transform 0.3s ease-out;
+.btn:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(255, 214, 107, 0.2);
 }
 
-/* Navbar collapse com transição suave */
-.navbar-collapse {
-    transition: max-height 0.3s ease-out;
+.form-control:focus-visible,
+.form-select:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
 }
 
-/* Breadcrumbs com fade in */
-.breadcrumb {
-    animation: fadeIn 0.5s ease-out;
+a:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+    text-decoration-thickness: 2px;
 }
 
-/* Loading state para botões */
-.btn-loading {
+/* Skip to Content */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.skip-to-content:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1rem;
+}
+
+.sr-only,
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   LAYOUT - ESTRUTURA
+============================================ */
+.navbar.fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+}
+
+.main-content {
+    flex: 1 0 auto;
+    margin-top: 80px;
+    margin-bottom: 2rem;
+    min-height: calc(100vh - 80px - 300px);
+}
+
+.footer-paroquia {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* ============================================
+   BOTÕES
+============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    border-radius: var(--radius-base);
+    transition: var(--transition-base);
+    text-decoration: none;
+    border: none;
+}
+
+.btn i,
+.btn .bi {
+    line-height: 1;
+    margin: 0;
+}
+
+.btn-primary,
+.btn-paroquia {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-paroquia:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active,
+.btn-paroquia:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+    color: var(--color-gray-900);
+}
+
+.btn-secondary:hover {
+    background: var(--color-secondary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: var(--color-primary);
+    color: white;
+}
+
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn.loading {
     position: relative;
     pointer-events: none;
     opacity: 0.7;
 }
 
-.btn-loading::after {
+.btn.loading::after {
     content: '';
     position: absolute;
     width: 16px;
@@ -2410,26 +331,280 @@ img {
     to { transform: rotate(360deg); }
 }
 
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
+/* ============================================
+   FORMULÁRIOS
+============================================ */
+.form-control,
+.form-select,
+textarea {
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--radius-base);
+    padding: 0.625rem 0.875rem;
+    transition: var(--transition-base);
+    font-family: var(--font-family-body);
 }
 
-/* Focus visible para acessibilidade */
-*:focus-visible {
-    outline: 2px solid var(--brand-vinho);
-    outline-offset: 2px;
-    border-radius: 4px;
+.form-control:focus,
+.form-select:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(139, 30, 63, 0.15);
+    outline: none;
 }
 
-/* Transição suave para mudança de cores */
-* {
-    transition-property: background-color, border-color, color;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
+.form-label {
+    font-weight: 500;
+    color: var(--color-gray-700);
+    margin-bottom: 0.5rem;
 }
 
-/* Desabilitar animações para usuários que preferem movimento reduzido */
+.form-text {
+    color: var(--color-gray-600);
+    font-size: 0.875rem;
+}
+
+.invalid-feedback {
+    color: var(--color-danger);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--color-danger);
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+/* ============================================
+   CARDS
+============================================ */
+.card {
+    border: none;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-base);
+    transition: var(--transition-base);
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.card-header {
+    background-color: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-gray-200);
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    background-color: var(--color-bg-tertiary);
+    border-top: 1px solid var(--color-gray-200);
+    padding: 1rem 1.5rem;
+}
+
+/* ============================================
+   NAVBAR
+============================================ */
+.navbar {
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+    padding: 0.75rem 0;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-family-display);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.nav-link {
+    color: var(--color-gray-700);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: var(--transition-base);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--color-primary);
+    background-color: rgba(139, 30, 63, 0.05);
+    border-radius: var(--radius-base);
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    border-radius: var(--radius-sm);
+    padding: 0.625rem 1rem;
+    transition: var(--transition-fast);
+}
+
+.dropdown-item:hover {
+    background-color: rgba(139, 30, 63, 0.05);
+    color: var(--color-primary);
+}
+
+/* ============================================
+   ALERTAS
+============================================ */
+.alert {
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.alert i,
+.alert .bi {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #856404;
+}
+
+.alert-info {
+    background-color: rgba(23, 162, 184, 0.1);
+    color: #0c5460;
+}
+
+/* ============================================
+   BADGES
+============================================ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   TABELAS
+============================================ */
+.table {
+    background-color: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-gray-800);
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-gray-300);
+    padding: 0.875rem;
+}
+
+.table td {
+    padding: 0.875rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.table tbody tr:hover {
+    background-color: rgba(139, 30, 63, 0.02);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================
+   UTILIDADES
+============================================ */
+.text-dourado { color: var(--color-secondary) !important; }
+.text-vinho { color: var(--color-primary) !important; }
+.bg-dourado { background-color: var(--color-secondary) !important; }
+.bg-vinho { background-color: var(--color-primary) !important; color: white !important; }
+.bg-rose { background-color: var(--color-bg-secondary) !important; }
+
+/* ============================================
+   RESPONSIVIDADE - MOBILE
+============================================ */
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 70px;
+    }
+    
+    .navbar-brand img {
+        height: 36px;
+    }
+    
+    .navbar-brand {
+        font-size: 0.9rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    h1, .h1 { font-size: 2rem; }
+    h2, .h2 { font-size: 1.75rem; }
+    h3, .h3 { font-size: 1.5rem; }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        margin-top: 65px;
+    }
+    
+    .navbar-brand img {
+        height: 32px;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ============================================
+   PERFORMANCE - ANIMAÇÕES
+============================================ */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -2440,209 +615,3 @@ html {
         scroll-behavior: auto !important;
     }
 }
-
-/* ================================
-   CORREÇÕES DE ALINHAMENTO - DESKTOP E MOBILE
-   Garantir consistência visual em todo o projeto
-================================ */
-
-/* BOTÕES - Centralização perfeita vertical e horizontal (todas as telas) */
-.btn,
-.btn-primary,
-.btn-secondary,
-.btn-success,
-.btn-danger,
-.btn-warning,
-.btn-primary-paroquia,
-.btn-paroquia,
-.btn-hero,
-.btn-vinho,
-.btn-outline-vinho,
-.btn-outline-paroquia,
-button[type="submit"],
-button[type="button"] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1.5;
-}
-
-/* Ícones dentro de botões - alinhamento perfeito (todas as telas) */
-.btn i,
-.btn svg,
-.btn .bi,
-.btn-primary-paroquia i,
-.btn-paroquia i {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    line-height: 1;
-    vertical-align: middle;
-}
-
-/* BADGES - Alinhamento consistente (todas as telas) */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    vertical-align: middle;
-}
-
-.badge i,
-.badge .bi {
-    margin: 0;
-    line-height: 1;
-}
-
-/* ALERTAS - Alinhamento de ícones (todas as telas) */
-.alert {
-    display: flex;
-    align-items: center;
-}
-
-.alert i,
-.alert .bi {
-    flex-shrink: 0;
-    margin-right: 0.75rem;
-}
-
-/* DROPDOWN - Alinhamento de ícones (todas as telas) */
-.dropdown-item {
-    display: flex;
-    align-items: center;
-}
-
-.dropdown-item i,
-.dropdown-item .bi {
-    width: 1.25rem;
-    margin-right: 0.625rem;
-    flex-shrink: 0;
-}
-
-/* NAV LINKS - Alinhamento (todas as telas) */
-.nav-link {
-    display: flex;
-    align-items: center;
-}
-
-/* BREADCRUMBS - Alinhamento (todas as telas) */
-.breadcrumb-item {
-    display: flex;
-    align-items: center;
-}
-
-/* PAGINAÇÃO - Centralização (todas as telas) */
-.pagination .page-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* CORREÇÃO: Evitar quebra indesejada em textos com ícones (todas as telas) */
-.d-flex.align-items-center i,
-.d-flex.align-items-center .bi,
-.d-inline-flex.align-items-center i,
-.d-inline-flex.align-items-center .bi {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/* CORREÇÃO: Links como botões sem decoração (todas as telas) */
-a.btn {
-    text-decoration: none;
-}
-
-/* CORREÇÃO: Botões em grupos sem margem extra (todas as telas) */
-.btn-group .btn {
-    margin: 0;
-}
-
-/* CORREÇÃO: Modal footer - botões alinhados (todas as telas) */
-.modal-footer {
-    gap: 0.75rem;
-}
-
-.modal-footer .btn {
-    margin: 0;
-}
-
-/* CORREÇÃO: Form check alinhamento (todas as telas) */
-.form-check {
-    display: flex;
-    align-items: center;
-}
-
-.form-check-input {
-    margin-top: 0;
-}
-
-/* CORREÇÃO: Tabelas - alinhamento vertical (todas as telas) */
-.table th,
-.table td {
-    vertical-align: middle;
-}
-
-/* CORREÇÃO: Input groups - botões alinhados (todas as telas) */
-.input-group .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ================================
-   CORREÇÕES ESPECÍFICAS DESKTOP (acima de 768px)
-================================ */
-@media (min-width: 769px) {
-    /* Espaçamento entre botões em desktop */
-    .btn + .btn:not(.btn-group .btn) {
-        margin-left: 0.5rem;
-    }
-    
-    /* Botões em linha no desktop */
-    .d-flex .btn + .btn {
-        margin-left: 0.5rem;
-    }
-}
-/* ================================
-   PADRONIZA��O DE BOT�ES - RESPONSIVIDADE
-================================ */
-/* Garantir espa�amento entre �cone e texto em todos os bot�es */
-.btn i.bi,
-.btn .bi {
-    line-height: 1;
-    vertical-align: middle;
-}
-
-/* Espa�amento padr�o entre �cone e texto */
-.btn i.me-1 { margin-right: 0.25rem !important; }
-.btn i.me-2 { margin-right: 0.5rem !important; }
-.btn i.ms-1 { margin-left: 0.25rem !important; }
-.btn i.ms-2 { margin-left: 0.5rem !important; }
-
-/* Garantir que bot�es em flex containers tenham gap */
-.d-flex:has(.btn):not(.gap-1):not(.gap-2):not(.gap-3):not(.gap-4):not(.gap-5) {
-    gap: 0.5rem;
-}
-
-/* Bot�es em grupos de a��o - melhorar responsividade */
-@media (max-width: 768px) {
-    /* Em mobile, bot�es ocupam largura total se estiverem empilhados */
-    .card-footer .d-flex {
-        flex-direction: column;
-    }
-    
-    .card-footer .btn {
-        width: 100%;
-    }
-    
-    /* Reduzir padding em bot�es grandes no mobile */
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-

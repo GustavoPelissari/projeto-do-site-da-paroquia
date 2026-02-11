@@ -10,21 +10,52 @@ window.bootstrap = bootstrap;
 // FUNCIONALIDADES INTERATIVAS DA PARÓQUIA
 // ==========================================
 
+// Debounce utility function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Throttle utility function
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Navbar scroll effect
+    // ==========================================
+    // NAVBAR SCROLL EFFECT (com throttle)
+    // ==========================================
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-        window.addEventListener('scroll', function() {
+        const handleScroll = throttle(function() {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-        });
+        }, 100);
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
     }
     
-    // Animate on scroll - DESABILITAR NO MOBILE
+    // ==========================================
+    // ANIMATE ON SCROLL - APENAS DESKTOP
+    // ==========================================
     const isMobile = window.innerWidth <= 768;
     
     if (!isMobile) {
@@ -38,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    // Unobserve após animação para performance
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -61,76 +94,92 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offset = navbar ? navbar.offsetHeight : 0;
-                const targetPosition = target.offsetTop - offset - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
+    // ==========================================
+    // SMOOTH SCROLL (com delegação)
+    // ==========================================
+    document.addEventListener('click', function(e) {
+        // Verificar se clicou em link com href começando com #
+        const anchor = e.target.closest('a[href^="#"]');
+        if (!anchor) return;
+        
+        e.preventDefault();
+        const targetId = anchor.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
+        if (target) {
+            const offset = navbar ? navbar.offsetHeight : 0;
+            const targetPosition = target.offsetTop - offset - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
     
-    // Initialize Lucide icons
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-    
-    // Auto-close mobile menu on link click
-    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    // ==========================================
+    // AUTO-CLOSE MOBILE MENU (com delegação)
+    // ==========================================
     const navbarCollapse = document.querySelector('.navbar-collapse');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                    toggle: true
-                });
+    if (navbarCollapse) {
+        navbarCollapse.addEventListener('click', function(e) {
+            const navLink = e.target.closest('.nav-link');
+            if (!navLink) return;
+            
+            if (navbarCollapse.classList.contains('show')) {
+                const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || 
+                                 new bootstrap.Collapse(navbarCollapse, { toggle: false });
+                bsCollapse.hide();
             }
         });
-    });
+    }
 
-    // Bootstrap Icons fallback check
+    // ==========================================
+    // BOOTSTRAP ICONS VERIFICATION
+    // ==========================================
     const testIcon = document.createElement('i');
     testIcon.className = 'bi bi-house-door';
+    testIcon.style.position = 'absolute';
+    testIcon.style.left = '-9999px';
     document.body.appendChild(testIcon);
+    
     const computedStyle = window.getComputedStyle(testIcon, '::before');
     const content = computedStyle.getPropertyValue('content');
-    if (!content || content === 'none' || content === '""') {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css';
-        document.head.appendChild(link);
+    
+    if (content && content !== 'none' && content !== '""') {
+        console.log('✅ Bootstrap Icons carregado corretamente');
+    } else {
+        console.warn('⚠️ Bootstrap Icons pode não estar carregado');
     }
+    
     document.body.removeChild(testIcon);
 
-    // Auto-dismiss alerts after 5 seconds
+    // ==========================================
+    // AUTO-DISMISS ALERTS
+    // ==========================================
     const alerts = document.querySelectorAll('.alert-dismissible');
     alerts.forEach(function(alert) {
         setTimeout(function() {
-            const bsAlert = new bootstrap.Alert(alert);
+            const bsAlert = bootstrap.Alert.getInstance(alert) || new bootstrap.Alert(alert);
             bsAlert.close();
         }, 5000);
     });
 
-    // Schedule PDF modal behavior
+    // ==========================================
+    // SCHEDULE PDF MODAL
+    // ==========================================
     const pdfModal = document.getElementById('pdfModal');
     if (pdfModal) {
         const pdfFrame = pdfModal.querySelector('#pdfFrame');
+        
         pdfModal.addEventListener('show.bs.modal', function(event) {
             const trigger = event.relatedTarget;
             const url = trigger?.getAttribute('data-pdf-url') || '';
-            if (pdfFrame) {
+            if (pdfFrame && url) {
                 pdfFrame.src = url;
             }
         });
+        
         pdfModal.addEventListener('hidden.bs.modal', function() {
             if (pdfFrame) {
                 pdfFrame.src = '';
@@ -138,7 +187,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Schedule create: update file name
+    // ==========================================
+    // SCHEDULE FILE INPUT
+    // ==========================================
     const fileInput = document.querySelector('[data-file-input]');
     const fileNameLabel = document.getElementById('file-name');
     if (fileInput && fileNameLabel) {
@@ -152,7 +203,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Schedule create: auto-fill end date
+    // ==========================================
+    // SCHEDULE AUTO-FILL END DATE
+    // ==========================================
     const startDateInput = document.getElementById('start_date');
     const endDateInput = document.getElementById('end_date');
     if (startDateInput && endDateInput) {
@@ -293,43 +346,24 @@ setInterval(atualizarProximaMissa, 60000);
 // ==========================================
 // GERENCIAMENTO DE FOCO EM MODAIS
 // ==========================================
-
-// Armazenar elemento que abriu o modal
 let elementoQueAbriuModal = null;
 
-// Monitorar todos os modais
-document.querySelectorAll('.modal').forEach(modalElement => {
-    modalElement.addEventListener('show.bs.modal', function() {
-        // Armazenar elemento que disparou o evento
-        elementoQueAbriuModal = document.activeElement;
-        
-        // Focar no primeiro elemento interativo do modal após ser mostrado
-        setTimeout(() => {
-            const primeiroElemento = this.querySelector('button, [href], input, select, textarea');
-            if (primeiroElemento) {
-                primeiroElemento.focus();
-            }
-        }, 100);
-    });
+// Delegação de eventos para todos os modais
+document.addEventListener('show.bs.modal', function(e) {
+    elementoQueAbriuModal = document.activeElement;
     
-    modalElement.addEventListener('hidden.bs.modal', function() {
-        // Devolver foco ao elemento que abriu o modal
-        if (elementoQueAbriuModal) {
-            elementoQueAbriuModal.focus();
-            elementoQueAbriuModal = null;
+    // Focar no primeiro elemento interativo do modal após ser mostrado
+    setTimeout(() => {
+        const primeiroElemento = e.target.querySelector('button:not([data-bs-dismiss]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if (primeiroElemento) {
+            primeiroElemento.focus();
         }
-    });
+    }, 150);
 });
 
-// Fechar modal ao pressionar ESC (já é funcionalidade padrão do Bootstrap)
-// Apenas garantir que está configurado
-document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const bsModal = bootstrap.Modal.getInstance(this);
-            if (bsModal) {
-                bsModal.hide();
-            }
-        }
-    });
+document.addEventListener('hidden.bs.modal', function() {
+    if (elementoQueAbriuModal && document.body.contains(elementoQueAbriuModal)) {
+        elementoQueAbriuModal.focus();
+        elementoQueAbriuModal = null;
+    }
 });

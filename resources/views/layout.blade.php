@@ -6,178 +6,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Paróquia São Paulo Apóstolo')</title>
     
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
-    
     <!-- DNS prefetch for external resources -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://maps.googleapis.com">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <!-- Vite Assets -->
+    <!-- Vite Assets (includes Bootstrap, Bootstrap Icons, and Google Fonts) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-    <style>
-        /* Garantir que o body ocupe toda a altura */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        /* Header fixo no topo */
-        .navbar.fixed-top {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1030;
-        }
-        
-        /* Main content com espaçamento correto */
-        .main-content {
-            flex: 1 0 auto;
-            margin-top: 80px;
-            margin-bottom: 2rem;
-            min-height: calc(100vh - 80px - 300px);
-        }
-        
-        /* Footer fixo no final */
-        .footer-paroquia {
-            flex-shrink: 0;
-            margin-top: auto;
-        }
-        
-        /* Ajuste quando há alertas */
-        .main-content.has-alert {
-            margin-top: 140px;
-        }
-        
-        /* Alertas fixos abaixo do header */
-        .alert-container {
-            position: fixed;
-            top: 72px;
-            left: 0;
-            right: 0;
-            z-index: 1025;
-            padding: 0.5rem;
-        }
-        
-        /* Mobile navbar improvements */
-        @media (max-width: 768px) {
-            .main-content {
-                margin-top: 70px;
-            }
-            
-            .navbar {
-                padding: 0.5rem 0;
-            }
-            
-            .navbar-brand {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            
-            .navbar-brand img {
-                height: 36px;
-            }
-            
-            .navbar-brand > div {
-                display: flex;
-                flex-direction: column;
-                line-height: 1.2;
-            }
-            
-            .navbar-brand .fw-bold {
-                font-size: 0.9rem;
-            }
-            
-            .navbar-brand small {
-                font-size: 0.7rem;
-            }
-            
-            .navbar-toggler {
-                padding: 0.5rem;
-                font-size: 1.125rem;
-            }
-            
-            .navbar-collapse {
-                max-height: 70vh;
-                overflow-y: auto;
-                margin-top: 0.5rem;
-            }
-            
-            .navbar-nav {
-                padding: 0.5rem 0;
-            }
-            
-            .nav-item {
-                border-bottom: 1px solid rgba(0,0,0,0.05);
-            }
-            
-            .nav-item:last-child {
-                border-bottom: none;
-            }
-            
-            .nav-link {
-                padding: 0.875rem 0.5rem !important;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            
-            .dropdown-menu {
-                border: none;
-                box-shadow: none;
-                background-color: #f8f9fa;
-                padding: 0;
-            }
-            
-            .dropdown-item {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .main-content {
-                margin-top: 65px;
-            }
-            
-            .navbar-brand .fw-bold {
-                font-size: 0.8rem;
-            }
-            
-            .navbar-brand small {
-                font-size: 0.65rem;
-            }
-        }
-    </style>
 </head>
 <body>
+    <!-- Skip to main content (acessibilidade) -->
+    <a href="#main-content" class="skip-to-content">Pular para o conteúdo principal</a>
+    
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
@@ -585,7 +427,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content {{ (session('success') || session('error') || session('warning')) ? 'has-alert' : '' }}">
+    <main id="main-content" class="main-content {{ (session('success') || session('error') || session('warning')) ? 'has-alert' : '' }}" role="main">>
         @if(session('success'))
             <div class="container mt-3">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -692,9 +534,6 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <!-- Debug Script para ícones -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -706,20 +545,13 @@
             const computedStyle = window.getComputedStyle(testIcon, '::before');
             const content = computedStyle.getPropertyValue('content');
             
+            document.body.removeChild(testIcon);
+            
             if (content && content !== 'none' && content !== '""') {
                 console.log('✅ Bootstrap Icons carregado corretamente');
             } else {
-                console.error('❌ Bootstrap Icons não carregou');
-                console.log('Tentando carregar Bootstrap Icons como fallback...');
-                
-                // Fallback: carregar Bootstrap Icons novamente
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css';
-                document.head.appendChild(link);
+                console.warn('⚠️ Bootstrap Icons pode não estar carregado');
             }
-            
-            document.body.removeChild(testIcon);
             
             // Auto-dismiss alerts after 5 seconds
             const alerts = document.querySelectorAll('.alert-dismissible');
