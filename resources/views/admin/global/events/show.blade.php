@@ -13,11 +13,11 @@
             <span>•</span>
             <span class="badge
                 @switch($event->status)
-                    @case('confirmed') bg-green-100 text-green-800 @break
-                    @case('scheduled') bg-blue-100 text-blue-800 @break
-                    @case('cancelled') bg-red-100 text-red-800 @break
+                    @case('confirmed') bg-success-subtle text-success-emphasis @break
+                    @case('scheduled') bg-info-subtle text-info-emphasis @break
+                    @case('cancelled') bg-danger-subtle text-danger-emphasis @break
                     @case('completed') bg-secondary-subtle text-secondary-emphasis @break
-                    @default bg-yellow-100 text-yellow-800
+                    @default bg-warning-subtle text-warning-emphasis
                 @endswitch">
                 @switch($event->status)
                     @case('confirmed') Confirmado @break
@@ -162,11 +162,11 @@
                     <span class="fw-medium text-body">Status:</span>
                     <span class="ms-2 badge
                         @switch($event->status)
-                            @case('confirmed') bg-green-100 text-green-800 @break
-                            @case('scheduled') bg-blue-100 text-blue-800 @break
-                            @case('cancelled') bg-red-100 text-red-800 @break
+                            @case('confirmed') bg-success-subtle text-success-emphasis @break
+                            @case('scheduled') bg-info-subtle text-info-emphasis @break
+                            @case('cancelled') bg-danger-subtle text-danger-emphasis @break
                             @case('completed') bg-secondary-subtle text-secondary-emphasis @break
-                            @default bg-yellow-100 text-yellow-800
+                            @default bg-warning-subtle text-warning-emphasis
                         @endswitch">
                         @switch($event->status)
                             @case('confirmed') Confirmado @break

@@ -195,7 +195,7 @@
                 </a>
                 
                 <a href="{{ route('admin.global.news.show', $news) }}" 
-                   class="text-blue-600 hover:text-blue-800 font-medium">
+                   class="text-primary text-decoration-none fw-medium hover-text-primary-dark">
                     Visualizar
                 </a>
             </div>
