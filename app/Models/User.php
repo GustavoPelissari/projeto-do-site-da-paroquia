@@ -161,6 +161,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role->canDeleteGroups();
     }
 
+    public function canManageContent(): bool
+    {
+        return $this->isAdminGlobal() || $this->isAdministrativo();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdminGlobal();
+    }
+
+    public function isCoordinator(): bool
+    {
+        return $this->isCoordenador();
+    }
+
     public function canManageGroup(Group $group): bool
     {
         if ($this->isAdminGlobal()) {

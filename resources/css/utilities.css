@@ -399,6 +399,125 @@
     cursor: not-allowed;
 }
 
+/* ==========================================
+   ACESSIBILIDADE
+   ========================================== */
+
+/* Focus visible para navegação por teclado */
+*:focus-visible {
+    outline: 3px solid var(--cor-vinho) !important;
+    outline-offset: 2px !important;
+    border-radius: 4px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--cor-vinho) !important;
+    outline-offset: 2px !important;
+}
+
+/* Aumentar area de click para touch devices */
+@media (hover: none) and (pointer: coarse) {
+    button, a, input[type="button"], input[type="submit"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Melhorar contraste WCAG AA */
+.btn {
+    text-decoration: underline;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+/* Labels visíveis */
+label {
+    font-weight: 500;
+    color: var(--cor-preto-suave);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Skip link para navegação por teclado */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--cor-vinho);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Indicador visual para inputs com erro */
+.is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* ARIA live region */
+[role="alert"] {
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-left: 4px solid var(--cor-vinho);
+    background-color: rgba(139, 30, 63, 0.1);
+}
+
+/* Melhorar visibilidade de status (disabled, loading) */
+[aria-disabled="true"],
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+[aria-busy="true"] {
+    position: relative;
+}
+
+/* Melhorar legibilidade com espaçamento em lists */
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* Melhorar contraste em forms */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+    border: 2px solid #d0d0d0;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--cor-vinho);
+    box-shadow: 0 0 0 3px rgba(139, 30, 63, 0.1);
+}
+
 .loading::after {
     content: '';
     position: absolute;

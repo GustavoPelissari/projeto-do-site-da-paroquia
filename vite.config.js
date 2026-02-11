@@ -14,4 +14,28 @@ export default defineConfig({
             host: '192.168.18.71',
         },
     },
+    build: {
+        // Code splitting for better caching
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    'vendor-bootstrap': ['bootstrap'],
+                    'vendor-icons': ['bootstrap-icons'],
+                },
+            },
+        },
+        // Optimize for production
+        minify: 'terser',
+        terserOptions: {
+            compress: {
+                drop_console: true,
+            },
+        },
+        // Source maps for production debugging
+        sourcemap: false,
+        // Larger chunk size for better batching
+        chunkSizeWarningLimit: 1000,
+    },
+    // Performance hints
+    ssr: false,
 });

@@ -11,6 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+        $middleware->append(\App\Http\Middleware\CacheHeaders::class);
+        
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
             'admin.role' => \App\Http\Middleware\CheckAdminRole::class,
@@ -19,5 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // Hide stack traces in production
+        if (app()->environment('production')) {
+            $exceptions->shouldRenderJsonWhen(fn() => true);
+        }
     })->create();

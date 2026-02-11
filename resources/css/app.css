@@ -1,5 +1,8 @@
 /* Paroquia São Paulo Apóstolo - Design Moderno */
 
+/* Import Design Tokens - DEVE SER PRIMEIRO */
+@import "./design-tokens.css";
+
 /* Import Bootstrap CSS */
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';

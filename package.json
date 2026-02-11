@@ -3,8 +3,11 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "dev": "vite",
         "build": "vite build",
-        "dev": "vite"
+        "preview": "vite preview",
+        "lint": "prettier --check resources/",
+        "format": "prettier --write resources/"
     },
     "dependencies": {
         "bootstrap": "^5.3.3",
