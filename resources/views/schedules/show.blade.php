@@ -154,7 +154,7 @@
     </div>
 
     <!-- Modal para visualizar PDF -->
-    <div id="pdfModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 hidden d-flex align-items-center justify-center z-50">
+    <div id="pdfModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 d-none align-items-center justify-center z-50">
         <div class="bg-white rounded-lg max-w-4xl w-full h-5/6 mx-4 d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
                 <h3 class="text-lg font-medium">{{ $schedule->title }}</h3>
@@ -175,7 +175,7 @@
             const modal = document.getElementById('pdfModal');
             const frame = document.getElementById('pdfFrame');
             frame.src = '{{ $schedule->getPdfUrl() }}';
-            modal.classList.remove('hidden');
+            modal.classList.remove('d-none');
             modal.classList.add('d-flex');
         }
 
@@ -183,7 +183,7 @@
             const modal = document.getElementById('pdfModal');
             const frame = document.getElementById('pdfFrame');
             frame.src = '';
-            modal.classList.add('hidden');
+            modal.classList.add('d-none');
             modal.classList.remove('d-flex');
         }
 

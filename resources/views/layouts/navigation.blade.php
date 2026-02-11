@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="d-none space-x-8 sm:flex" style="margin-top: -1px; margin-left: 2.5rem;">
+                <div class="d-none d-sm-flex gap-4" style="margin-top: -1px; margin-left: 2.5rem;">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
