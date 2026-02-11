@@ -229,6 +229,7 @@ tail -f storage/logs/laravel-*.log
 - **[PROJETO_PRONTO_PRODUCAO.md](PROJETO_PRONTO_PRODUCAO.md)** - Status final e próximas etapas
 - **[docs/GUIA_INSTALACAO.md](docs/GUIA_INSTALACAO.md)** - Instalação local detalhada
 - **[docs/USUARIOS_TESTE.md](docs/USUARIOS_TESTE.md)** - Usuários de teste com credenciais
+- **[docs/COMO_ACEITAR_PULL_REQUEST.md](docs/COMO_ACEITAR_PULL_REQUEST.md)** - Guia bilíngue (PT/EN) para aceitar PRs
 
 ### **Scripts Úteis**
 ```bash
@@ -265,6 +266,8 @@ php artisan route:cache
 3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
 4. Push para a branch (`git push origin feature/nova-funcionalidade`)
 5. Abra um Pull Request
+
+📖 **Para mantenedores**: Veja [docs/COMO_ACEITAR_PULL_REQUEST.md](docs/COMO_ACEITAR_PULL_REQUEST.md) - Guia bilíngue (PT/EN) sobre como revisar e aceitar Pull Requests no GitHub.
 
 ## 📄 **Licença**
 
