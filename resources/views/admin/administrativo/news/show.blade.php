@@ -5,8 +5,8 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-6">
     <div>
-        <h2 class="h2 fw-bold text-gray-900">{{ $news->title }}</h2>
-        <div class="d-flex align-items-center gap-4 mt-2 small text-gray-600">
+        <h2 class="h2 fw-bold text-dark">{{ $news->title }}</h2>
+        <div class="d-flex align-items-center gap-4 mt-2 small text-secondary">
             <span>Por {{ $news->user->name }}</span>
             <span>•</span>
             <span>{{ $news->created_at->format('d/m/Y H:i') }}</span>
@@ -68,7 +68,7 @@
                 <!-- Meta Information -->
                 @if($news->meta_description)
                     <div class="mt-8 pt-6 border-top">
-                        <h3 class="fw-semibold text-gray-900 mb-2">Meta Descrição (SEO)</h3>
+                        <h3 class="fw-semibold text-dark mb-2">Meta Descrição (SEO)</h3>
                         <p class="text-secondary">{{ $news->meta_description }}</p>
                     </div>
                 @endif
