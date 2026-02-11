@@ -118,7 +118,7 @@
                             <img src="{{ Storage::url($news->featured_image) }}" 
                                  alt="Imagem atual" 
                                  class="w-100 rounded">
-                            <label class="flex items-center mt-2">
+                            <label class="d-flex align-items-center mt-2">
                                 <input type="checkbox" name="remove_image" value="1" 
                                        class="form-check-input">
                                 <span class="form-check-label text-danger">Remover imagem atual</span>
