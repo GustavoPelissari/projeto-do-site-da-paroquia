@@ -1,557 +1,705 @@
-/* ============================================
-   PARÓQUIA SÃO PAULO APÓSTOLO
-   Sistema de Gestão Paroquial
-   CSS Principal - Versão Limpa e Consolidada
-============================================ */
+/* Paroquia Sao Paulo Apostolo - Design Profissional */
 
-/* ============================================
-   IMPORTS EXTERNOS
-============================================ */
-
-@import 'design-tokens.css';
-@import './app.mobile.css';
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
+/* Import de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* ============================================
-   DESIGN TOKENS - VARIÁVEIS CSS
-============================================ */
-/* Variáveis removidas: agora são importadas de design-tokens.css */
-    --z-modal-backdrop: 1040;
-    --z-modal: 1050;
+/* (Import removido porque não usaremos custom-bootstrap, somente Bootstrap puro) */
+/* A partir desta versão, custom-bootstrap foi removido para evitar
+   dependência de utilitários Tailwind-like. O Bootstrap padrão já
+   oferece classes suficientes para o layout. Se necessário,
+   implemente utilitários adicionais diretamente neste arquivo. */
+
+/* Design System da Paróquia São Paulo Apóstolo - Baseado em Bootstrap 5 */
+:root {
+    --sp-dourado-principal: #DAA520;
+    --sp-dourado-claro: #F0E68C;
+    --sp-dourado-escuro: #B8860B;
+    --sp-vermelho-manto: #8B1538;
+    --sp-vermelho-bordô: #722F37;
+    --sp-verde-tunica: #2E8B57;
+    --sp-verde-esperanca: #3CB371;
+    --sp-azul-manto: #1F4E79;
+    --sp-azul-celestial: #4682B4;
+    --sp-pergaminho: #F5F5DC;
+    --sp-marfim: #FDF5E6;
+    --sp-terra: #8B7355;
+    --sp-cinza-pedra: #696969;
+    --sp-branco-liturgico: #FFFFFF;
     
-    /* Bootstrap Override */
-    --bs-primary: #8B1E3F;
-    --bs-primary-rgb: 139, 30, 63;
-    --bs-link-color: #8B1E3F;
-    --bs-link-hover-color: #6E1530;
+    /* Gradientes */
+    --gradiente-dourado: linear-gradient(135deg, var(--sp-dourado-principal) 0%, var(--sp-dourado-escuro) 100%);
+    --gradiente-vermelho: linear-gradient(135deg, var(--sp-vermelho-manto) 0%, var(--sp-vermelho-bordô) 100%);
+    --gradiente-verde: linear-gradient(135deg, var(--sp-verde-tunica) 0%, var(--sp-verde-esperanca) 100%);
+    --gradiente-azul: linear-gradient(135deg, var(--sp-azul-manto) 0%, var(--sp-azul-celestial) 100%);
+    --gradiente-pergaminho: linear-gradient(135deg, var(--sp-pergaminho) 0%, var(--sp-marfim) 100%);
+    
+    /* Sombras */
+    --sombra-suave: 0 2px 8px rgba(139, 21, 56, 0.08);
+    --sombra-media: 0 4px 16px rgba(139, 21, 56, 0.12);
+    --sombra-forte: 0 8px 40px rgba(139, 21, 56, 0.16);
+    --sombra-dourada: 0 4px 16px rgba(218, 165, 32, 0.15);
+    
+    /* Transições */
+    --transicao-suave: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transicao-rapida: all 0.2s ease;
+
+    /*--------------------------------------------------------------
+     *  Variáveis de design da Paróquia em estilo Bootstrap
+     *  As classes utilitárias e componentes deste projeto fazem
+     *  referência a variáveis como --cor-dourado, --cor-vinho e
+     *  --borda-radius. Essas variáveis não existiam neste arquivo
+     *  originalmente, o que quebrava o estilo ao importar
+     *  utilities.css e components.css. Abaixo definimos aliases
+     *  apontando para as cores e sombras já existentes do Design
+     *  System baseado em Bootstrap (prefixo --sp-*). Isso garante
+     *  compatibilidade com os utilitários sem introduzir novas
+     *  dependências ou frameworks.
+     *--------------------------------------------------------------*/
+    /* Paleta de cores básicas */
+    --cor-dourado: var(--sp-dourado-principal);
+    --cor-dourado-escuro: var(--sp-dourado-escuro);
+    --cor-vinho: var(--sp-vermelho-manto);
+    --cor-vinho-escuro: var(--sp-vermelho-bordô);
+    --cor-marrom: var(--sp-terra);
+    --cor-marrom-claro: #A68B5B;
+    --cor-bege: var(--sp-pergaminho);
+        --cor-bege-escuro: var(--sp-marfim);
+    --cor-branco: var(--sp-branco-liturgico);
+    --cor-cinza-claro: var(--sp-cinza-pedra);
+    --cor-cinza-medio: #6C757D;
+    --cor-cinza-escuro: #343A40;
+    --cor-preto-suave: #2C2C2C;
+
+    /* Gradientes utilitários */
+    --gradiente-vinho: linear-gradient(135deg, var(--cor-vinho) 0%, var(--cor-vinho-escuro) 100%);
+    --gradiente-celestial: linear-gradient(135deg, var(--cor-bege) 0%, var(--cor-branco) 100%);
+
+    /* Tipografia utilitária */
+    --fonte-titulo: 'Playfair Display', serif;
+    --fonte-corpo: 'Poppins', sans-serif;
+
+    /* Raio de borda utilitário */
+    --borda-radius: 0.5rem;
+    --borda-radius-suave: 0.75rem;
 }
 
-/* ============================================
-   RESET E BASE
-============================================ */
+/* Reset Moderno e Base */
 * {
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-    height: 100%;
-}
-
 body {
-    font-family: var(--font-family-body);
-    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    color: var(--color-gray-800);
-    background-color: var(--bg-light);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
+    color: #2d3748;
+    background: #ffffff;
     min-height: 100vh;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    padding-top: 85px;
 }
 
-/* ============================================
-   TIPOGRAFIA
-============================================ */
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: var(--font-family-display);
-    font-weight: 600;
-    line-height: 1.2;
-    color: var(--color-primary);
-}
+/* ========================================== */
+/*              NAVEGAÇÃO                     */
+/* ========================================== */
 
-/* ============================================
-   LINKS
-============================================ */
-a {
-    color: var(--color-primary);
-    text-decoration: underline;
-    text-decoration-color: rgba(139, 30, 63, 0.3);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-    transition: all 0.2s ease;
-}
-
-a:hover {
-    color: var(--color-primary-dark);
-    text-decoration-thickness: 2px;
-}
-
-.nav-link,
-.navbar-brand,
-.dropdown-item,
-a.btn {
-    text-decoration: none;
-}
-
-/* ============================================
-   ACESSIBILIDADE - FOCUS VISIBLE (WCAG AA)
-============================================ */
-*:focus {
-    outline: none;
-}
-
-*:focus-visible {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 2px;
-    border-radius: var(--radius-sm);
-}
-
-.btn:focus-visible,
-button:focus-visible {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(255, 214, 107, 0.2);
-}
-
-.form-control:focus-visible,
-.form-select:focus-visible {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 2px;
-}
-
-a:focus-visible {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 2px;
-    text-decoration-thickness: 2px;
-}
-
-/* Skip to Content */
-.skip-to-content {
-    position: absolute;
-    left: -9999px;
-    z-index: 999;
-    padding: 1em;
-    background-color: var(--color-primary);
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.skip-to-content:focus {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 1rem;
-}
-
-.sr-only,
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* ============================================
-   LAYOUT - ESTRUTURA
-============================================ */
-.navbar.fixed-top {
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: var(--z-fixed);
+    z-index: 1030;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(139, 21, 56, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: var(--transicao-suave);
+    padding: 1rem 0;
 }
 
-.main-content {
-    flex: 1 0 auto;
-    margin-top: 80px;
-    margin-bottom: 2rem;
-    min-height: calc(100vh - 80px - 300px);
+/* Regras responsivas para navbar */
+.navbar-expand-lg .navbar-collapse {
+    display: none !important;
 }
 
-.footer-paroquia {
-    flex-shrink: 0;
-    margin-top: auto;
+.navbar-expand-lg .navbar-collapse.show,
+.navbar-expand-lg .navbar-collapse.d-lg-flex {
+    display: flex !important;
 }
 
-/* ============================================
-   BOTÕES
-============================================ */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    border-radius: var(--radius-base);
-    transition: var(--transition-base);
-    text-decoration: none;
-    border: none;
-}
-
-.btn i,
-.btn .bi {
-    line-height: 1;
-    margin: 0;
-}
-
-.btn-primary,
-.btn-paroquia {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: white;
-    border: none;
-}
-
-.btn-primary:hover,
-.btn-paroquia:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-primary:active,
-.btn-paroquia:active {
-    transform: translateY(0);
-}
-
-.btn-secondary {
-    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
-    color: var(--color-gray-900);
-}
-
-.btn-secondary:hover {
-    background: var(--color-secondary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-outline-primary {
-    border: 2px solid var(--color-primary);
-    color: var(--color-primary);
-    background: transparent;
-}
-
-.btn-outline-primary:hover {
-    background: var(--color-primary);
-    color: white;
-}
-
-.btn:disabled,
-.btn.disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-
-.btn.loading {
-    position: relative;
-    pointer-events: none;
-    opacity: 0.7;
-}
-
-.btn.loading::after {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 50%;
-    left: 50%;
-    margin-left: -8px;
-    margin-top: -8px;
-    border: 2px solid transparent;
-    border-top-color: currentColor;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* ============================================
-   FORMULÁRIOS
-============================================ */
-.form-control,
-.form-select,
-textarea {
-    border: 2px solid var(--color-gray-300);
-    border-radius: var(--radius-base);
-    padding: 0.625rem 0.875rem;
-    transition: var(--transition-base);
-    font-family: var(--font-family-body);
-}
-
-.form-control:focus,
-.form-select:focus,
-textarea:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(139, 30, 63, 0.15);
-    outline: none;
-}
-
-.form-label {
-    font-weight: 500;
-    color: var(--color-gray-700);
-    margin-bottom: 0.5rem;
-}
-
-.form-text {
-    color: var(--color-gray-600);
-    font-size: 0.875rem;
-}
-
-.invalid-feedback {
-    color: var(--color-danger);
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
-.form-control.is-invalid,
-.form-select.is-invalid {
-    border-color: var(--color-danger);
-}
-
-.form-control.is-invalid:focus,
-.form-select.is-invalid:focus {
-    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
-}
-
-/* ============================================
-   CARDS
-============================================ */
-.card {
-    border: none;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-base);
-    transition: var(--transition-base);
-    overflow: hidden;
-}
-
-.card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-4px);
-}
-
-.card-header {
-    background-color: var(--color-bg-tertiary);
-    border-bottom: 1px solid var(--color-gray-200);
-    padding: 1rem 1.5rem;
-    font-weight: 600;
-}
-
-.card-body {
-    padding: 1.5rem;
-}
-
-.card-footer {
-    background-color: var(--color-bg-tertiary);
-    border-top: 1px solid var(--color-gray-200);
-    padding: 1rem 1.5rem;
-}
-
-/* ============================================
-   NAVBAR
-============================================ */
-.navbar {
-    background-color: var(--color-white);
-    box-shadow: var(--shadow-md);
-    padding: 0.75rem 0;
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+    
+    .navbar-expand-lg .navbar-toggler {
+        display: none !important;
+    }
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-family: var(--font-family-display);
-    font-weight: 700;
-    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transicao-suave);
 }
 
-.navbar-brand img {
-    height: 40px;
+.navbar-brand:hover {
+    transform: translateY(-1px);
 }
 
-.nav-link {
-    color: var(--color-gray-700);
+.logo-paroquia {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--sp-dourado-principal);
+    background: white;
+    padding: 4px;
+    box-shadow: var(--sombra-dourada);
+}
+
+.brand-text {
+    margin-left: 1rem;
+}
+
+.brand-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--sp-vermelho-manto);
+    display: block;
+    line-height: 1.2;
+}
+
+.brand-subtitulo {
+    font-size: 0.8rem;
+    color: #718096;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.navbar-toggler {
+    border: 1px solid var(--sp-vermelho-manto);
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 21, 56, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%28139, 21, 56%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #4a5568;
+    margin: 0 0.5rem;
     padding: 0.5rem 1rem;
-    transition: var(--transition-base);
+    border-radius: 8px;
+    transition: var(--transicao-suave);
+    position: relative;
 }
 
-.nav-link:hover,
-.nav-link.active {
-    color: var(--color-primary);
-    background-color: rgba(139, 30, 63, 0.05);
-    border-radius: var(--radius-base);
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    background: rgba(139, 21, 56, 0.08);
+    color: var(--sp-vermelho-manto);
+    transform: translateY(-1px);
 }
 
-.dropdown-menu {
-    border: none;
-    box-shadow: var(--shadow-lg);
-    border-radius: var(--radius-md);
-    padding: 0.5rem;
+.navbar-nav .nav-link.active {
+    font-weight: 600;
+    background: rgba(139, 21, 56, 0.12);
 }
 
-.dropdown-item {
-    border-radius: var(--radius-sm);
-    padding: 0.625rem 1rem;
-    transition: var(--transition-fast);
+.navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--sp-vermelho-manto);
+    border-radius: 2px;
 }
 
-.dropdown-item:hover {
-    background-color: rgba(139, 30, 63, 0.05);
-    color: var(--color-primary);
+.navbar-nav .nav-link i {
+    color: var(--sp-vermelho-manto);
+    margin-right: 0.5rem;
 }
 
-/* ============================================
-   ALERTAS
-============================================ */
-.alert {
-    border: none;
-    border-radius: var(--radius-md);
-    padding: 1rem 1.25rem;
+/* ========================================== */
+/*              TIPOGRAFIA                    */
+/* ========================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: var(--sp-vermelho-manto);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+}
+
+.text-dourado {
+    color: var(--sp-dourado-principal);
+}
+
+.text-azul {
+    color: var(--sp-azul-manto);
+}
+
+.text-celestial {
+    color: var(--sp-azul-celestial);
+}
+
+.text-vermelho {
+    color: var(--sp-vermelho-manto);
+}
+
+.text-verde {
+    color: var(--sp-verde-tunica);
+}
+
+.text-pergaminho {
+    color: var(--sp-pergaminho);
+}
+
+/* ========================================== */
+/*              HERO SECTION                  */
+/* ========================================== */
+
+.hero-paroquia {
+    position: relative;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-}
-
-.alert i,
-.alert .bi {
-    flex-shrink: 0;
-    font-size: 1.25rem;
-}
-
-.alert-success {
-    background-color: rgba(40, 167, 69, 0.1);
-    color: #155724;
-}
-
-.alert-danger {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: #721c24;
-}
-
-.alert-warning {
-    background-color: rgba(255, 193, 7, 0.1);
-    color: #856404;
-}
-
-.alert-info {
-    background-color: rgba(23, 162, 184, 0.1);
-    color: #0c5460;
-}
-
-/* ============================================
-   BADGES
-============================================ */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.375rem 0.75rem;
-    font-weight: 600;
-    border-radius: var(--radius-full);
-    font-size: 0.875rem;
-}
-
-/* ============================================
-   TABELAS
-============================================ */
-.table {
-    background-color: white;
-    border-radius: var(--radius-md);
+    background: 
+        linear-gradient(
+            135deg,
+            rgba(139, 21, 56, 0.9) 0%,
+            rgba(139, 21, 56, 0.8) 100%
+        ),
+        url('/images/igreja-bg.jpg') center/cover;
+    color: white;
+    text-align: center;
     overflow: hidden;
 }
 
-.table th {
-    background-color: var(--color-bg-tertiary);
-    color: var(--color-gray-800);
+.hero-paroquia::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(139, 21, 56, 0.1);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem 0;
+}
+
+.hero-paroquia h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-paroquia .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-paroquia p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+/* ========================================== */
+/*              BOTÕES                        */
+/* ========================================== */
+
+.btn-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
     font-weight: 600;
-    border-bottom: 2px solid var(--color-gray-300);
-    padding: 0.875rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: var(--transicao-suave);
+    border: 2px solid transparent;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-.table td {
-    padding: 0.875rem;
-    vertical-align: middle;
-    border-bottom: 1px solid var(--color-gray-200);
+.btn-hero-primary {
+    background: var(--sp-vermelho-manto);
+    color: white;
+    border-color: var(--sp-vermelho-manto);
 }
 
-.table tbody tr:hover {
-    background-color: rgba(139, 30, 63, 0.02);
+.btn-hero-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 21, 56, 0.3);
+    color: white;
+    background: var(--sp-vermelho-bordô);
 }
 
-.table tbody tr:last-child td {
-    border-bottom: none;
+.btn-hero-outline {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
 }
 
-/* ============================================
-   UTILIDADES
-============================================ */
-.text-dourado { color: var(--color-secondary) !important; }
-.text-vinho { color: var(--color-primary) !important; }
-.bg-dourado { background-color: var(--color-secondary) !important; }
-.bg-vinho { background-color: var(--color-primary) !important; color: white !important; }
-.bg-rose { background-color: var(--color-bg-secondary) !important; }
+.btn-hero-outline:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    color: white;
+}
 
-/* ============================================
-   RESPONSIVIDADE - MOBILE
-============================================ */
+/* ========================================== */
+/*              CARDS E SEÇÕES               */
+/* ========================================== */
+
+.section-paroquia {
+    padding: 6rem 0;
+    position: relative;
+    background: #ffffff;
+}
+
+.section-paroquia::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.card-paroquia {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transicao-suave);
+    overflow: hidden;
+    position: relative;
+}
+
+.card-paroquia::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--sp-vermelho-manto);
+}
+
+.card-paroquia:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(139, 21, 56, 0.1);
+}
+
+.card-header-paroquia {
+    background: rgba(139, 21, 56, 0.03);
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid rgba(139, 21, 56, 0.1);
+    text-align: center;
+}
+
+.card-header-paroquia h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--sp-vermelho-manto);
+}
+
+.icon-lg {
+    font-size: 2rem;
+    color: var(--sp-vermelho-manto);
+    opacity: 0.8;
+}
+
+/* ========================================== */
+/*              COMPONENTES BOOTSTRAP         */
+/* ========================================== */
+
+.btn-success {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-success:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+}
+
+.btn-danger {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-danger:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+}
+
+.btn-warning {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: white;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-warning:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+    color: white;
+}
+
+.btn-primary {
+    background: var(--sp-vermelho-manto);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+.btn-primary:hover {
+    background: var(--sp-vermelho-bordô);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 21, 56, 0.3);
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--sp-vermelho-manto);
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transicao-suave);
+}
+
+.btn-outline-light:hover {
+    background: var(--sp-vermelho-manto);
+    border-color: var(--sp-vermelho-manto);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ========================================== */
+/*              ALERTAS                       */
+/* ========================================== */
+
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 1.5rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+}
+
+.alert-success {
+    border-left: 4px solid #10b981;
+    color: #065f46;
+}
+
+.alert-danger {
+    border-left: 4px solid var(--sp-vermelho-manto);
+    color: var(--sp-vermelho-manto);
+}
+
+.alert-warning {
+    border-left: 4px solid #f59e0b;
+    color: #92400e;
+}
+
+.alert-info {
+    border-left: 4px solid #3b82f6;
+    color: #1e40af;
+}
+
+/* ========================================== */
+/*              FOOTER                        */
+/* ========================================== */
+
+footer {
+    background: var(--sp-vermelho-manto);
+    color: white;
+    margin-top: 4rem;
+}
+
+.logo-footer {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: var(--transicao-suave);
+}
+
+footer a:hover {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
+
+/* ========================================== */
+/*              ANIMAÇÕES                     */
+/* ========================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transicao-suave);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================== */
+/*              RESPONSIVIDADE                */
+/* ========================================== */
+
 @media (max-width: 768px) {
-    .main-content {
-        margin-top: 70px;
+    .hero-paroquia {
+        min-height: 80vh;
     }
     
-    .navbar-brand img {
-        height: 36px;
+    .section-paroquia {
+        padding: 4rem 0;
     }
     
-    .navbar-brand {
+    .card-header-paroquia {
+        padding: 2rem 1.5rem;
+    }
+    
+    .btn-hero {
+        padding: 0.875rem 1.5rem;
         font-size: 0.9rem;
     }
     
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
+    .brand-titulo {
+        font-size: 1.2rem;
     }
     
-    .card-body {
-        padding: 1rem;
+    .brand-subtitulo {
+        font-size: 0.75rem;
     }
-    
-    h1, .h1 { font-size: 2rem; }
-    h2, .h2 { font-size: 1.75rem; }
-    h3, .h3 { font-size: 1.5rem; }
 }
 
 @media (max-width: 576px) {
-    .main-content {
-        margin-top: 65px;
+    body {
+        padding-top: 70px;
     }
     
-    .navbar-brand img {
-        height: 32px;
+    .navbar {
+        padding: 0.75rem 0;
     }
     
-    .btn {
+    .logo-paroquia {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .hero-paroquia h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-paroquia .lead {
+        font-size: 1.3rem;
+    }
+    
+    .btn-hero {
         width: 100%;
-        justify-content: center;
-    }
-}
-
-/* ============================================
-   PERFORMANCE - ANIMAÇÕES
-============================================ */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+        margin-bottom: 1rem;
     }
 }

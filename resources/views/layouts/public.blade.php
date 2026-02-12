@@ -33,10 +33,10 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-paroquia me-3">
-                <div class="brand-text">
-                    <span class="brand-titulo">Paróquia São Paulo Apóstolo</span>
-                    <small class="brand-subtitulo d-block">Diocese de Umuarama</small>
+                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="me-3 rounded-circle" style="width: 56px; height: 56px; object-fit: cover;">
+                <div>
+                    <span class="d-block fw-semibold">Paróquia São Paulo Apóstolo</span>
+                    <small class="d-block text-muted">Diocese de Umuarama</small>
                 </div>
             </a>
             
