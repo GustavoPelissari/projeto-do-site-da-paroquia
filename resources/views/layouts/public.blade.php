@@ -8,19 +8,15 @@
     <title>@yield('title', 'Paróquia São Paulo Apóstolo - Umuarama PR')</title>
     <meta name="description" content="@yield('description', 'Paróquia São Paulo Apóstolo em Umuarama - PR. Uma comunidade de fé, esperança e caridade, inspirada no exemplo do Apóstolo dos Gentios.')">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-    <!-- Google Fonts - Playfair Display & Poppins -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -28,23 +24,27 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
-<body>
+
+<body class="has-fixed-navbar">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg fixed-top js-navbar-scroll">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="me-3 rounded-circle" style="width: 56px; height: 56px; object-fit: cover;">
+                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo"
+                     class="me-3 rounded-circle"
+                     style="width: 56px; height: 56px; object-fit: cover;">
                 <div>
                     <span class="d-block fw-semibold">Paróquia São Paulo Apóstolo</span>
                     <small class="d-block text-muted">Diocese de Umuarama</small>
                 </div>
             </a>
-            
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
-            <div class="navbar-collapse collapse d-lg-flex" id="navbarNav">
+
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
@@ -77,8 +77,8 @@
                         </a>
                     </li>
                 </ul>
-                
-                <div class="d-flex gap-2">
+
+                <div class="d-flex gap-2 ms-lg-3 mt-3 mt-lg-0">
                     <a href="#doacoes" class="btn btn-warning">
                         <i class="bi bi-heart me-1"></i>Apoiar a Paróquia
                     </a>
@@ -87,7 +87,7 @@
                             <i class="bi bi-gear me-1"></i>Admin
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-outline-light">
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary">
                             <i class="bi bi-box-arrow-in-right me-1"></i>Painel
                         </a>
                     @endauth
@@ -96,13 +96,11 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
         @yield('content')
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light mt-5">
+    <footer class="bg-dark text-light mt-5" id="contato">
         <div class="container py-5">
             <div class="row g-4">
                 <div class="col-lg-4">
@@ -129,17 +127,17 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-2 col-md-4">
                     <h6 class="mb-3">Navegação</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="{{ route('home') }}" class="text-light text-decoration-none">Início</a></li>
                         <li class="mb-2"><a href="{{ route('masses') }}" class="text-light text-decoration-none">Horários</a></li>
                         <li class="mb-2"><a href="{{ route('groups') }}" class="text-light text-decoration-none">Pastorais</a></li>
-                        <li class="mb-2"><a href="#eventos" class="text-light text-decoration-none">Eventos</a></li>
+                        <li class="mb-2"><a href="{{ route('events') }}" class="text-light text-decoration-none">Eventos</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="col-lg-3 col-md-4">
                     <h6 class="mb-3">Contato</h6>
                     <div class="d-flex align-items-start gap-2 mb-2">
@@ -158,7 +156,7 @@
                         <a href="mailto:secretaria.pspaulo@hotmail.com" class="text-light text-decoration-none">secretaria.pspaulo@hotmail.com</a>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-3 col-md-4">
                     <h6 class="mb-3">Horários de Missa</h6>
                     <div>
@@ -168,32 +166,20 @@
                     </div>
                 </div>
             </div>
-            
+
             <hr class="my-4">
-            
+
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <small>
-                        © 2025 Paróquia São Paulo Apóstolo. Todos os direitos reservados.
-                    </small>
+                    <small>© 2025 Paróquia São Paulo Apóstolo. Todos os direitos reservados.</small>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <small>
-                        Diocese de Umuarama - PR
-                    </small>
+                    <small>Diocese de Umuarama - PR</small>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Lucide Icons Initialization -->
-    <script>
-        lucide.createIcons();
-    </script>
-    
     @stack('scripts')
 </body>
 </html>

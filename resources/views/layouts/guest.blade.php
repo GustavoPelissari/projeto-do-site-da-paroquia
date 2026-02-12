@@ -7,13 +7,16 @@
 
     <title>{{ config('app.name', 'Laravel') }} - São Paulo Apóstolo</title>
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Compiled CSS (Bootstrap + custom) -->
     @vite(['resources/css/app.css'])
 </head>
+
 <body class="d-flex align-items-center justify-content-center bg-light" style="min-height: 100vh;">
     <main class="container py-5">
         <div class="row justify-content-center">
@@ -21,30 +24,27 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body p-4">
                         <div class="text-center mb-4">
-                            <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo" class="img-fluid mb-2" style="width: 64px; height: 64px;">
+                            <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo"
+                                 class="img-fluid mb-2" style="width: 64px; height: 64px;">
                             <h1 class="h4 mb-1" style="font-family: 'Playfair Display', serif;">São Paulo Apóstolo</h1>
                             <p class="mb-0 text-muted small">Comunidade de Fé</p>
                         </div>
-                        <!-- Content section for forms (login, registro, etc.) -->
-                        {{--
-                            Quando este layout é usado como um componente (<x-guest-layout>),
-                            o conteúdo é passado na variável $slot. Quando é estendido com
-                            @extends('layouts.guest'), o conteúdo vem da seção 'content'.
-                            Verificamos se $slot está definido para suportar ambos os casos.
-                        --}}
+
                         @if(isset($slot))
                             {{ $slot }}
                         @else
                             @yield('content')
                         @endif
-                        <p class="text-center mt-4 mb-0 text-muted fst-italic">"A paz de Cristo seja convosco sempre!"</p>
+
+                        <p class="text-center mt-4 mb-0 text-muted fst-italic">
+                            "A paz de Cristo seja convosco sempre!"
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Compiled JS -->
     @vite(['resources/js/app.js'])
 </body>
 </html>
