@@ -24,7 +24,7 @@ class Event extends Model
         'user_id',
         'group_id',
         'created_by',
-        'scope',
+        // A coluna "scope" não existe na tabela events; removido para evitar erros
     ];
     
     protected function casts(): array
