@@ -9,6 +9,16 @@ class Group extends Model
 {
     use HasFactory;
     
+    /**
+     * A lista de atributos que podem ser atribuídos em massa.
+     *
+     *
+     * Importante: o campo `created_by` não está presente na tabela `groups`.
+     * Incluir esse campo aqui fazia com que o Eloquent tentasse inseri‑lo,
+     * gerando erros de SQL durante os testes. O relacionamento
+     * com o criador permanece definido através do método `creator()`,
+     * mas não deve ser mass assignable.
+     */
     protected $fillable = [
         'name',
         'description',
@@ -21,7 +31,6 @@ class Group extends Model
         'is_active',
         'requires_scale',
         'coordinator_id',
-        'created_by',
     ];
     
     protected function casts(): array

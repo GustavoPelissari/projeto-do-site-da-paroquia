@@ -39,7 +39,7 @@
             <div class="container">
                 @if (View::hasSection('content'))
                     @yield('content')
-                @else
+                @elseif(isset($slot))
                     {{ $slot }}
                 @endif
             </div>

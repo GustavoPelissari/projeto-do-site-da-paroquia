@@ -26,7 +26,17 @@
                             <p class="mb-0 text-muted small">Comunidade de Fé</p>
                         </div>
                         <!-- Content section for forms (login, registro, etc.) -->
-                        @yield('content')
+                        {{--
+                            Quando este layout é usado como um componente (<x-guest-layout>),
+                            o conteúdo é passado na variável $slot. Quando é estendido com
+                            @extends('layouts.guest'), o conteúdo vem da seção 'content'.
+                            Verificamos se $slot está definido para suportar ambos os casos.
+                        --}}
+                        @if(isset($slot))
+                            {{ $slot }}
+                        @else
+                            @yield('content')
+                        @endif
                         <p class="text-center mt-4 mb-0 text-muted fst-italic">"A paz de Cristo seja convosco sempre!"</p>
                     </div>
                 </div>
