@@ -25,8 +25,8 @@
                             <h1 class="h4 mb-1" style="font-family: 'Playfair Display', serif;">São Paulo Apóstolo</h1>
                             <p class="mb-0 text-muted small">Comunidade de Fé</p>
                         </div>
-                        <!-- Slot para formulários (login, registro, etc.) -->
-                        {{ $slot }}
+                        <!-- Content section for forms (login, registro, etc.) -->
+                        @yield('content')
                         <p class="text-center mt-4 mb-0 text-muted fst-italic">"A paz de Cristo seja convosco sempre!"</p>
                     </div>
                 </div>

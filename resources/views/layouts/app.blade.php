@@ -20,18 +20,28 @@
         @include('layouts.navigation')
 
         <!-- Page Heading -->
-        @isset($header)
+        @if (View::hasSection('header'))
+            <header class="bg-white border-bottom shadow-sm py-3">
+                <div class="container">
+                    @yield('header')
+                </div>
+            </header>
+        @elseif(isset($header))
             <header class="bg-white border-bottom shadow-sm py-3">
                 <div class="container">
                     {{ $header }}
                 </div>
             </header>
-        @endisset
+        @endif
 
         <!-- Page Content -->
         <main class="py-4">
             <div class="container">
-                {{ $slot }}
+                @if (View::hasSection('content'))
+                    @yield('content')
+                @else
+                    {{ $slot }}
+                @endif
             </div>
         </main>
     </body>

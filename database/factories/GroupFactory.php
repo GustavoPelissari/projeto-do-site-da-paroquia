@@ -40,7 +40,6 @@ class GroupFactory extends Factory
             'is_active' => true,
             'requires_scale' => false,
             'coordinator_id' => null,
-            'created_by' => null,
         ];
     }
 }
