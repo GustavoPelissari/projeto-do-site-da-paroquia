@@ -8,4 +8,35 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        host: '0.0.0.0', // Permite acesso externo
+        hmr: {
+            host: 'localhost', // Ajuste para o host real se necessário
+        },
+    },
+    // Se o site for servido em subdiretório, descomente e ajuste a linha abaixo:
+    // base: '/paroquia/',
+    build: {
+        // Code splitting for better caching
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    'vendor-bootstrap': ['bootstrap'],
+                },
+            },
+        },
+        // Optimize for production
+        minify: 'terser',
+        terserOptions: {
+            compress: {
+                drop_console: true,
+            },
+        },
+        // Source maps for production debugging
+        sourcemap: false,
+        // Larger chunk size for better batching
+        chunkSizeWarningLimit: 1000,
+    },
+    // Performance hints
+    ssr: false,
 });
