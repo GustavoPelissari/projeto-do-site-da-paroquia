@@ -77,7 +77,7 @@ class AdministrativeController extends Controller
         }
 
         $validated['created_by'] = Auth::id();
-        $validated['status'] = 'pending'; // Administrativos precisam de aprovação
+        $validated['status'] = $validated['status'] ?? 'scheduled';
 
         News::create($validated);
 
@@ -132,7 +132,7 @@ class AdministrativeController extends Controller
             $validated['image'] = $request->file('image')->store('news', 'public');
         }
 
-        $validated['status'] = 'pending'; // Volta para aprovação após edição
+        $validated['status'] = $validated['status'] ?? 'scheduled';
 
         $news->update($validated);
 
@@ -180,15 +180,16 @@ class AdministrativeController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
-            'time' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'location' => 'required|string|max:255',
             'category' => 'required|in:parish,liturgy,group',
             'group_id' => 'nullable|exists:groups,id',
+            'status' => 'nullable|in:scheduled,ongoing,completed,cancelled',
         ]);
 
         $validated['created_by'] = Auth::id();
-        $validated['status'] = 'pending'; // Administrativos precisam de aprovação
+        $validated['status'] = $validated['status'] ?? 'scheduled';
 
         Event::create($validated);
 
@@ -208,12 +209,12 @@ class AdministrativeController extends Controller
 
     public function eventsEdit(Event $event)
     {
-        // Pode editar apenas seus próprios eventos
         if ($event->created_by !== Auth::id()) {
             abort(403, 'Você só pode editar seus próprios eventos.');
         }
 
-        return view('admin.administrativo.events.edit', compact('event'));
+        return redirect()->route('admin.administrativo.events.show', $event)
+            ->with('warning', 'Tela dedicada de edição indisponível no momento.');
     }
 
     public function eventsUpdate(Request $request, Event $event)
@@ -226,14 +227,15 @@ class AdministrativeController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
-            'time' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'location' => 'required|string|max:255',
             'category' => 'required|in:parish,liturgy,group',
             'group_id' => 'nullable|exists:groups,id',
+            'status' => 'nullable|in:scheduled,ongoing,completed,cancelled',
         ]);
 
-        $validated['status'] = 'pending'; // Volta para aprovação após edição
+        $validated['status'] = $validated['status'] ?? 'scheduled';
 
         $event->update($validated);
 
@@ -265,6 +267,6 @@ class AdministrativeController extends Controller
 
     public function massesShow(Mass $mass)
     {
-        return view('admin.administrativo.masses.show', compact('mass'));
+        return redirect()->route('admin.administrativo.masses.index');
     }
 }

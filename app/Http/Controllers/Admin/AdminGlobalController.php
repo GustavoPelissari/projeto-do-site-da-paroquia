@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Enums\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AdminGlobalController extends Controller
 {
@@ -115,7 +116,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
         
-        $users = User::with(['groups'])
+        $users = User::with(['group', 'parishGroup'])
             ->orderBy('created_at', 'desc')
             ->paginate(20);
             
@@ -134,8 +135,8 @@ class AdminGlobalController extends Controller
         $stats = [
             'monthly_stats' => [
                 'new_members' => User::whereMonth('created_at', now()->month)->count(),
-                'events_held' => Event::whereMonth('date', now()->month)
-                    ->where('date', '<', now())
+                'events_held' => Event::whereMonth('start_date', now()->month)
+                    ->where('start_date', '<', now())
                     ->count(),
                 'news_published' => News::whereMonth('created_at', now()->month)
                     ->published()
@@ -144,12 +145,12 @@ class AdminGlobalController extends Controller
             ],
             'yearly_stats' => [
                 'total_members_joined' => User::whereYear('created_at', now()->year)->count(),
-                'total_events' => Event::whereYear('date', now()->year)->count(),
+                'total_events' => Event::whereYear('start_date', now()->year)->count(),
                 'total_news' => News::whereYear('created_at', now()->year)->count(),
                 'groups_created' => Group::whereYear('created_at', now()->year)->count(),
             ],
-            'top_groups' => Group::withCount('users')
-                ->orderBy('users_count', 'desc')
+            'top_groups' => Group::withCount('members')
+                ->orderBy('members_count', 'desc')
                 ->take(5)
                 ->get(),
         ];
@@ -267,6 +268,24 @@ class AdminGlobalController extends Controller
         return view('admin.global.events.create');
     }
 
+    public function updateUserRole(Request $request, User $user)
+    {
+        if (Auth::user()->role->value !== UserRole::ADMIN_GLOBAL->value) {
+            abort(403, 'Acesso negado.');
+        }
+
+        $validated = $request->validate([
+            'role' => ['required', Rule::in(array_column(UserRole::cases(), 'value'))],
+        ]);
+
+        $user->update([
+            'role' => $validated['role'],
+        ]);
+
+        return redirect()->route('admin.global.users')
+            ->with('success', 'Perfil do usuário atualizado com sucesso.');
+    }
+
     public function eventsStore(Request $request)
     {
         if (Auth::user()->role->value !== 'admin_global') {
@@ -305,7 +324,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
         
-        return view('admin.global.events.edit', compact('event'));
+        return redirect()->route('admin.global.events.show', $event)->with('warning', 'Tela dedicada de edição indisponível no momento.');
     }
 
     public function eventsUpdate(Request $request, Event $event)
@@ -357,8 +376,9 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-        
-        return view('admin.global.groups.create');
+
+        return redirect()->route('admin.global.groups.index')
+            ->with('warning', 'Formulário de criação de grupos indisponível no momento.');
     }
 
     public function groupsStore(Request $request)
@@ -388,9 +408,8 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-        
-        $group->load(['users', 'requests']);
-        return view('admin.global.groups.show', compact('group'));
+
+        return redirect()->route('admin.global.groups.index');
     }
 
     public function groupsEdit(Group $group)
@@ -398,8 +417,9 @@ class AdminGlobalController extends Controller
         if (Auth::user()->role->value !== 'admin_global') {
             abort(403, 'Acesso negado.');
         }
-        
-        return view('admin.global.groups.edit', compact('group'));
+
+        return redirect()->route('admin.global.groups.index')
+            ->with('warning', 'Formulário de edição de grupos indisponível no momento.');
     }
 
     public function groupsUpdate(Request $request, Group $group)
@@ -451,7 +471,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
         
-        return view('admin.global.masses.create');
+        return redirect()->route('admin.global.masses.index')->with('warning', 'Formulário de criação de missas indisponível no momento.');
     }
 
     public function massesStore(Request $request)
@@ -480,7 +500,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
         
-        return view('admin.global.masses.show', compact('mass'));
+        return redirect()->route('admin.global.masses.index');
     }
 
     public function massesEdit(Mass $mass)
@@ -489,7 +509,7 @@ class AdminGlobalController extends Controller
             abort(403, 'Acesso negado.');
         }
         
-        return view('admin.global.masses.edit', compact('mass'));
+        return redirect()->route('admin.global.masses.index')->with('warning', 'Formulário de edição de missas indisponível no momento.');
     }
 
     public function massesUpdate(Request $request, Mass $mass)

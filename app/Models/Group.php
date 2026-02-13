@@ -135,4 +135,16 @@ class Group extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+
+    // Compat aliases
+    public function users()
+    {
+        return $this->members();
+    }
+
+    public function requests()
+    {
+        return $this->groupRequests();
+    }
 }
