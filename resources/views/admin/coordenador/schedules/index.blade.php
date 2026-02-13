@@ -8,7 +8,7 @@
         <p class="admin-overline mb-1">Coordenação pastoral</p>
         <h2 class="h3 mb-0">Escalas legadas do grupo</h2>
     </div>
-    <span class="badge text-bg-light border">Cadastro disponível em breve</span>
+    <a href="{{ route('admin.coordenador.schedules.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Nova escala</a>
 </div>
 
 <div class="card">
@@ -21,7 +21,7 @@
                             <th>Título</th>
                             <th>Período</th>
                             <th>Status</th>
-                            <th class="text-end">Arquivo</th>
+                            <th class="text-end">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,11 +35,14 @@
                                 <td>{{ $schedule->start_date?->format('d/m/Y') }} - {{ $schedule->end_date?->format('d/m/Y') }}</td>
                                 <td><span class="badge text-bg-secondary">{{ $badge['text'] }}</span></td>
                                 <td class="text-end">
-                                    @if($schedule->pdf_path)
-                                        <a class="btn btn-sm btn-outline-secondary" href="{{ Storage::url($schedule->pdf_path) }}" target="_blank" rel="noopener">Abrir PDF</a>
-                                    @else
-                                        <span class="text-secondary small">Sem arquivo</span>
-                                    @endif
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ route('admin.coordenador.schedules.edit', $schedule->id) }}" class="btn btn-outline-primary">Editar</a>
+                                        <form method="POST" action="{{ route('admin.coordenador.schedules.destroy', $schedule->id) }}" onsubmit="return confirm('Remover esta escala?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger">Excluir</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

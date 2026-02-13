@@ -8,7 +8,7 @@
         <p class="admin-overline mb-1">Coordenação pastoral</p>
         <h2 class="h3 mb-0">Eventos do grupo</h2>
     </div>
-    <span class="badge text-bg-light border">Criação disponível em breve</span>
+    <a href="{{ route('admin.coordenador.events.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Novo evento</a>
 </div>
 
 <div class="card">
@@ -36,7 +36,14 @@
                                 <td>{{ $event->location ?: '—' }}</td>
                                 <td><span class="badge text-bg-secondary">{{ ucfirst($event->status ?? 'agendado') }}</span></td>
                                 <td class="text-end">
-                                    <span class="text-secondary small">Edição indisponível</span>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ route('admin.coordenador.events.edit', $event) }}" class="btn btn-outline-primary">Editar</a>
+                                        <form method="POST" action="{{ route('admin.coordenador.events.destroy', $event) }}" onsubmit="return confirm('Remover este evento?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger">Excluir</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
