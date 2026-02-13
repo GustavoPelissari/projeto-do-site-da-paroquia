@@ -8,14 +8,14 @@
         <section class="sp-admin-header">
             <div class="sp-header-content">
                 <div class="sp-header-main">
-                    <h1 class="sp-admin-title">📰 Gerenciar Notícias</h1>
+                    <h1 class="sp-admin-title"> Gerenciar Notícias</h1>
                     <p class="sp-admin-subtitle">
                         Gerencie as notícias e comunicados da paróquia
                     </p>
                 </div>
                 <div class="sp-header-actions">
                     <a href="{{ route('admin.global.news.create') }}" class="sp-btn sp-btn-primary sp-btn-lg">
-                        ➕ Nova Notícia
+                         Nova Notícia
                     </a>
                 </div>
             </div>
@@ -26,39 +26,39 @@
             <div class="sp-content-wrapper">
                 <div class="sp-card">
                     <div class="sp-card-header">
-                        <h3 class="sp-card-title">🔍 Filtros</h3>
+                        <h3 class="sp-card-title"> Filtros</h3>
                     </div>
                     <div class="sp-card-content">
                         <form method="GET" class="sp-filter-form">
                             <div class="sp-filter-grid">
                                 <div class="sp-form-group">
-                                    <label for="status" class="sp-label">📊 Status</label>
+                                    <label for="status" class="sp-label"> Status</label>
                                     <select name="status" id="status" class="sp-select">
                                         <option value="">Todos os status</option>
                                         <option value="published" {{ request('status') === 'published' ? 'selected' : '' }}>
-                                            ✅ Publicados
+                                             Publicados
                                         </option>
                                         <option value="draft" {{ request('status') === 'draft' ? 'selected' : '' }}>
-                                            📝 Rascunhos
+                                             Rascunhos
                                         </option>
                                     </select>
                                 </div>
 
                                 <div class="sp-form-group">
-                                    <label for="featured" class="sp-label">⭐ Destaque</label>
+                                    <label for="featured" class="sp-label">Destaque</label>
                                     <select name="featured" id="featured" class="sp-select">
                                         <option value="">Todos</option>
                                         <option value="1" {{ request('featured') === '1' ? 'selected' : '' }}>
-                                            ⭐ Em destaque
+                                            Em destaque
                                         </option>
                                         <option value="0" {{ request('featured') === '0' ? 'selected' : '' }}>
-                                            📄 Não destacados
+                                             Não destacados
                                         </option>
                                     </select>
                                 </div>
 
                                 <div class="sp-form-group">
-                                    <label for="search" class="sp-label">🔎 Buscar</label>
+                                    <label for="search" class="sp-label"> Buscar</label>
                                     <input type="text" 
                                            name="search" 
                                            id="search" 
@@ -69,11 +69,11 @@
 
                                 <div class="sp-form-actions">
                                     <button type="submit" class="sp-btn sp-btn-secondary">
-                                        🔍 Filtrar
+                                         Filtrar
                                     </button>
                                     @if(request()->hasAny(['status', 'featured', 'search']))
                                         <a href="{{ route('admin.global.news.index') }}" class="sp-btn sp-btn-outline">
-                                            🔄 Limpar
+                                             Limpar
                                         </a>
                                     @endif
                                 </div>
@@ -90,7 +90,7 @@
                 @if($news->count() > 0)
                     <div class="sp-card">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title">📋 Lista de Notícias</h3>
+                            <h3 class="sp-card-title"> Lista de Notícias</h3>
                             <div class="sp-card-meta">
                                 {{ $news->total() }} {{ Str::plural('notícia', $news->total()) }} encontrada{{ $news->total() !== 1 ? 's' : '' }}
                             </div>
@@ -100,12 +100,12 @@
                                 <table class="sp-table">
                                     <thead class="sp-table-header">
                                         <tr>
-                                            <th class="sp-table-cell sp-table-cell-header">📰 Notícia</th>
-                                            <th class="sp-table-cell sp-table-cell-header">👤 Autor</th>
-                                            <th class="sp-table-cell sp-table-cell-header">📊 Status</th>
-                                            <th class="sp-table-cell sp-table-cell-header">⭐ Destaque</th>
-                                            <th class="sp-table-cell sp-table-cell-header">📅 Data</th>
-                                            <th class="sp-table-cell sp-table-cell-header">⚙️ Ações</th>
+                                            <th class="sp-table-cell sp-table-cell-header"> Notícia</th>
+                                            <th class="sp-table-cell sp-table-cell-header"> Autor</th>
+                                            <th class="sp-table-cell sp-table-cell-header"> Status</th>
+                                            <th class="sp-table-cell sp-table-cell-header">Destaque</th>
+                                            <th class="sp-table-cell sp-table-cell-header"> Data</th>
+                                            <th class="sp-table-cell sp-table-cell-header"> Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody class="sp-table-body">
@@ -116,7 +116,7 @@
                                                         <h4 class="sp-news-title-small">{{ $item->title }}</h4>
                                                         <p class="sp-news-excerpt">{{ Str::limit($item->content, 80) }}</p>
                                                         @if($item->featured_image)
-                                                            <span class="sp-badge sp-badge-info sp-badge-sm">📷 Com imagem</span>
+                                                            <span class="sp-badge sp-badge-info sp-badge-sm"> Com imagem</span>
                                                         @endif
                                                     </div>
                                                 </td>
@@ -129,15 +129,15 @@
                                                 <td class="sp-table-cell">
                                                     <span class="sp-badge sp-badge-{{ $item->status === 'published' ? 'success' : 'warning' }}">
                                                         @if($item->status === 'published')
-                                                            ✅ Publicado
+                                                             Publicado
                                                         @else
-                                                            📝 Rascunho
+                                                             Rascunho
                                                         @endif
                                                     </span>
                                                 </td>
                                                 <td class="sp-table-cell">
                                                     @if($item->featured)
-                                                        <span class="sp-badge sp-badge-gold">⭐ Destaque</span>
+                                                        <span class="sp-badge sp-badge-gold">Destaque</span>
                                                     @else
                                                         <span class="sp-text-muted">-</span>
                                                     @endif
@@ -153,23 +153,23 @@
                                                         <a href="{{ route('admin.global.news.show', $item) }}" 
                                                            class="sp-btn sp-btn-outline sp-btn-xs"
                                                            title="Visualizar">
-                                                            👁️ Ver
+                                                             Ver
                                                         </a>
                                                         <a href="{{ route('admin.global.news.edit', $item) }}" 
                                                            class="sp-btn sp-btn-secondary sp-btn-xs"
                                                            title="Editar">
-                                                            ✏️ Editar
+                                                             Editar
                                                         </a>
                                                         <form method="POST" 
                                                               action="{{ route('admin.global.news.destroy', $item) }}" 
                                                               class="sp-inline"
-                                                              onsubmit="return confirm('⚠️ Tem certeza que deseja excluir esta notícia?\n\nEsta ação não pode ser desfeita.')">
+                                                              onsubmit="return confirm(' Tem certeza que deseja excluir esta notícia?\n\nEsta ação não pode ser desfeita.')">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" 
                                                                     class="sp-btn sp-btn-error sp-btn-xs"
                                                                     title="Excluir">
-                                                                🗑️ Excluir
+                                                                 Excluir
                                                             </button>
                                                         </form>
                                                     </div>
@@ -195,7 +195,7 @@
                     <div class="sp-card">
                         <div class="sp-card-content">
                             <div class="sp-empty-state sp-text-center">
-                                <div class="sp-empty-icon">📰</div>
+                                <div class="sp-empty-icon"></div>
                                 <h3 class="sp-empty-title">Nenhuma notícia encontrada</h3>
                                 @if(request()->hasAny(['status', 'featured', 'search']))
                                     <p class="sp-empty-description">
@@ -204,10 +204,10 @@
                                     </p>
                                     <div class="sp-empty-actions">
                                         <a href="{{ route('admin.global.news.index') }}" class="sp-btn sp-btn-outline sp-btn-lg">
-                                            🔄 Limpar Filtros
+                                             Limpar Filtros
                                         </a>
                                         <a href="{{ route('admin.global.news.create') }}" class="sp-btn sp-btn-primary sp-btn-lg">
-                                            ➕ Nova Notícia
+                                             Nova Notícia
                                         </a>
                                     </div>
                                 @else
@@ -216,7 +216,7 @@
                                     </p>
                                     <div class="sp-empty-actions">
                                         <a href="{{ route('admin.global.news.create') }}" class="sp-btn sp-btn-primary sp-btn-lg">
-                                            🚀 Criar Primeira Notícia
+                                             Criar Primeira Notícia
                                         </a>
                                     </div>
                                 @endif

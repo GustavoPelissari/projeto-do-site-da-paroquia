@@ -5,13 +5,13 @@
 @section('content')
 <div class="sp-admin-dashboard">
     <div class="sp-dashboard-header">
-        <h1 class="sp-page-title">📄 Escalas PDF - {{ $group->name }}</h1>
+        <h1 class="sp-page-title"> Escalas PDF - {{ $group->name }}</h1>
         <p class="sp-page-subtitle">Gerencie as escalas em PDF do seu grupo</p>
     </div>
 
     <!-- Upload Form -->
     <div class="sp-dashboard-section">
-        <h2>📤 Enviar Nova Escala</h2>
+        <h2> Enviar Nova Escala</h2>
         <form action="{{ route('admin.coordenador.scales.upload') }}" method="POST" enctype="multipart/form-data" class="sp-form">
             @csrf
             
@@ -47,7 +47,7 @@
 
             <div class="sp-form-actions">
                 <button type="submit" class="sp-btn sp-btn-primary">
-                    📤 Enviar Escala
+                     Enviar Escala
                 </button>
             </div>
         </form>
@@ -55,7 +55,7 @@
 
     <!-- Scales List -->
     <div class="sp-dashboard-section">
-        <h2>📋 Escalas Enviadas</h2>
+        <h2> Escalas Enviadas</h2>
         
         @if($scales->count() > 0)
             <div class="sp-table-container">

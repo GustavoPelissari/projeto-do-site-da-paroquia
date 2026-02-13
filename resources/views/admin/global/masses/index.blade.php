@@ -117,7 +117,7 @@
             </div>
         @else
             <div class="text-center py-5">
-                <div class="display-1 text-muted mb-3">⛪</div>
+                <div class="display-1 text-muted mb-3"></div>
                 <h3 class="h4 fw-medium mb-2">Nenhum horário encontrado</h3>
                 <p class="text-muted mb-3">Comece criando o primeiro horário de missa.</p>
                 <a href="{{ route('admin.global.masses.create') }}" 

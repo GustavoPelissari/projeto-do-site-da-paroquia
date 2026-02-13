@@ -101,49 +101,49 @@
 @section('content')
 <div class="parish-stats">
     <div class="stats-header">
-        <h1>📈 Estatísticas Paroquiais</h1>
+        <h1> Estatísticas Paroquiais</h1>
         <p>Visão completa do crescimento e atividades da Paróquia São Paulo Apóstolo</p>
     </div>
     
     <!-- Estatísticas Principais -->
     <div class="stats-grid">
         <div class="stat-card">
-            <div class="stat-icon">👥</div>
+            <div class="stat-icon"></div>
             <div class="stat-number">{{ $stats['total_users'] ?? 0 }}</div>
             <div class="stat-label">Total de Fiéis</div>
             <div class="stat-description">Cadastrados no sistema</div>
         </div>
         
         <div class="stat-card">
-            <div class="stat-icon">🏛️</div>
+            <div class="stat-icon"></div>
             <div class="stat-number">{{ $stats['active_groups'] ?? 0 }}</div>
             <div class="stat-label">Grupos Ativos</div>
             <div class="stat-description">Pastorais e ministérios</div>
         </div>
         
         <div class="stat-card">
-            <div class="stat-icon">📅</div>
+            <div class="stat-icon"></div>
             <div class="stat-number">{{ $stats['total_events'] ?? 0 }}</div>
             <div class="stat-label">Eventos Realizados</div>
             <div class="stat-description">Este ano</div>
         </div>
         
         <div class="stat-card">
-            <div class="stat-icon">📰</div>
+            <div class="stat-icon"></div>
             <div class="stat-number">{{ $stats['published_news'] ?? 0 }}</div>
             <div class="stat-label">Notícias Publicadas</div>
             <div class="stat-description">Conteúdo ativo</div>
         </div>
         
         <div class="stat-card">
-            <div class="stat-icon">⛪</div>
+            <div class="stat-icon"></div>
             <div class="stat-number">{{ $stats['weekly_masses'] ?? 0 }}</div>
             <div class="stat-label">Missas Semanais</div>
             <div class="stat-description">Horários regulares</div>
         </div>
         
         <div class="stat-card">
-            <div class="stat-icon">📋</div>
+            <div class="stat-icon"></div>
             <div class="stat-number">{{ $stats['pending_requests'] ?? 0 }}</div>
             <div class="stat-label">Solicitações Pendentes</div>
             <div class="stat-description">Aguardando aprovação</div>
@@ -152,7 +152,7 @@
     
     <!-- Crescimento Mensal -->
     <div class="charts-section">
-        <h2 class="section-title">📊 Crescimento da Comunidade</h2>
+        <h2 class="section-title"> Crescimento da Comunidade</h2>
         <div class="growth-stats">
             <div class="growth-item">
                 <div class="growth-percentage">+{{ $growth['users_this_month'] ?? 0 }}%</div>
@@ -178,7 +178,7 @@
     
     <!-- Distribuição por Função -->
     <div class="charts-section">
-        <h2 class="section-title">👤 Distribuição de Usuários por Função</h2>
+        <h2 class="section-title"> Distribuição de Usuários por Função</h2>
         <div class="growth-stats">
             <div class="growth-item">
                 <div class="growth-percentage">{{ $usersByRole['admin_global'] ?? 0 }}</div>

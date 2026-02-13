@@ -16,7 +16,7 @@
                 {{ $news->status === 'published' ? 'Publicado' : 'Rascunho' }}
             </span>
             @if($news->featured)
-                <span class="text-warning">⭐ Destaque</span>
+                <span class="text-warning">Destaque</span>
             @endif
         </div>
     </div>
@@ -79,7 +79,7 @@
         @if($news->status === 'draft')
             <div class="mt-6 alert alert-warning border border-warning rounded p-4">
                 <div class="d-flex align-items-center">
-                    <div class="text-warning me-3">⚠️</div>
+                    <div class="text-warning me-3"></div>
                     <div>
                         <h3 class="fw-medium text-warning-emphasis">Esta notícia está em rascunho</h3>
                         <p class="text-warning-emphasis small mb-0">
@@ -100,7 +100,7 @@
                 <div class="d-flex flex-column gap-2">
                     <a href="{{ route('admin.administrativo.news.edit', $news) }}" 
                        class="btn btn-primary w-100 text-center">
-                        ✏️ Editar Notícia
+                         Editar Notícia
                     </a>
                     
                     @if($news->status === 'published')
@@ -109,7 +109,7 @@
                             @method('PUT')
                             <input type="hidden" name="status" value="draft">
                             <button type="submit" class="btn btn-warning w-100">
-                                📝 Tornar Rascunho
+                                 Tornar Rascunho
                             </button>
                         </form>
                     @else
@@ -118,7 +118,7 @@
                             @method('PUT')
                             <input type="hidden" name="status" value="published">
                             <button type="submit" class="btn btn-success w-100">
-                                🚀 Publicar Agora
+                                 Publicar Agora
                             </button>
                         </form>
                     @endif
@@ -128,7 +128,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger w-100">
-                            🗑️ Excluir Notícia
+                             Excluir Notícia
                         </button>
                     </form>
                 </div>
@@ -222,7 +222,7 @@
                     </a>
                     <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
                        class="text-secondary text-decoration-none small hover-text-secondary-dark">
-                        🏠 Painel
+                         Painel
                     </a>
                 </div>
             </div>

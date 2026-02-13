@@ -230,7 +230,7 @@
 <!-- Hero Section para Coordenador -->
 <div class="coordinator-hero">
     <div class="coordinator-welcome">
-        <h1 class="coordinator-title">👨‍🏫 Bem-vindo, Coordenador!</h1>
+        <h1 class="coordinator-title"> Bem-vindo, Coordenador!</h1>
         <p class="coordinator-subtitle">{{ auth()->user()->name }} - Pastoral dos Coroinhas</p>
         <blockquote class="coordinator-quote">
             "Deixai vir a mim as criancinhas e não as impeçais, porque das tais é o Reino dos céus." - Mateus 19:14
@@ -242,7 +242,7 @@
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">👦</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Total de Coroinhas</div>
         </div>
         <div class="stat-number">{{ $stats['total_coroinhas'] ?? 0 }}</div>
@@ -251,7 +251,7 @@
     
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">✅</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Coroinhas Ativos</div>
         </div>
         <div class="stat-number">{{ $stats['coroinhas_ativos'] ?? 0 }}</div>
@@ -262,7 +262,7 @@
 <!-- Notícias Recentes (Somente Visualização) -->
 <div class="view-section">
     <h2 class="section-title">
-        <span class="section-icon">📰</span>
+        <span class="section-icon"></span>
         Notícias Recentes da Paróquia
     </h2>
     
@@ -281,7 +281,7 @@
             @endforeach
         @else
             <div class="no-items">
-                <h3>📰 Nenhuma notícia recente</h3>
+                <h3> Nenhuma notícia recente</h3>
                 <p>Não há notícias publicadas recentemente.</p>
             </div>
         @endif
@@ -291,7 +291,7 @@
 <!-- Eventos Futuros (Somente Visualização) -->
 <div class="view-section">
     <h2 class="section-title">
-        <span class="section-icon">📅</span>
+        <span class="section-icon"></span>
         Próximos Eventos da Paróquia
     </h2>
     
@@ -311,7 +311,7 @@
             @endforeach
         @else
             <div class="no-items">
-                <h3>📅 Nenhum evento próximo</h3>
+                <h3> Nenhum evento próximo</h3>
                 <p>Não há eventos programados no momento.</p>
             </div>
         @endif

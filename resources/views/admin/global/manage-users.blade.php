@@ -113,7 +113,7 @@
 @section('content')
 <div class="users-management">
     <div class="users-header">
-        <h1>👥 Gerenciamento de Usuários</h1>
+        <h1> Gerenciamento de Usuários</h1>
         <p>Administração global de todos os usuários do sistema paroquial</p>
     </div>
     
@@ -129,19 +129,19 @@
                         <div class="user-role">
                             @switch($user->role)
                                 @case('admin_global')
-                                    ⛪ Padre - Admin Global
+                                     Padre - Admin Global
                                     @break
                                 @case('administrativo')
-                                    📋 Administrativo
+                                     Administrativo
                                     @break
                                 @case('coordenador_de_pastoral')
-                                    🎯 Coordenador de Pastoral
+                                     Coordenador de Pastoral
                                     @break
                                 @case('usuario_padrao')
-                                    👤 Usuário Padrão
+                                     Usuário Padrão
                                     @break
                                 @default
-                                    🔍 {{ $user->role }}
+                                     {{ $user->role }}
                             @endswitch
                         </div>
                         <div class="user-email">{{ $user->email }}</div>
@@ -149,9 +149,9 @@
                 </div>
                 
                 <div class="user-actions">
-                    <button class="btn btn-secondary">✏️ Editar</button>
+                    <button class="btn btn-secondary"> Editar</button>
                     @if($user->role !== 'admin_global')
-                        <button class="btn btn-primary">🔄 Alterar Função</button>
+                        <button class="btn btn-primary"> Alterar Função</button>
                     @endif
                 </div>
             </div>
@@ -160,7 +160,7 @@
         @if($users->isEmpty())
             <div class="user-card">
                 <div style="text-align: center; padding: var(--space-8); color: var(--sp-gray-500);">
-                    <h3>👤 Nenhum usuário encontrado</h3>
+                    <h3> Nenhum usuário encontrado</h3>
                     <p>O sistema ainda não possui usuários cadastrados.</p>
                 </div>
             </div>

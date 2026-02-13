@@ -87,7 +87,7 @@
                         </div>
                     @else
                         <div class="text-center py-5">
-                            <div class="display-6 mb-3">📋</div>
+                            <div class="display-6 mb-3"></div>
                             <h3 class="h5 mb-2">Nenhuma escala encontrada</h3>
                             <p class="text-muted mb-4">
                                 @if(request()->hasAny(['group_id', 'status']))

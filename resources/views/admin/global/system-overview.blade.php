@@ -153,7 +153,7 @@
 @section('content')
 <div class="system-overview">
     <div class="system-header">
-        <h1>⚙️ Visão Geral do Sistema</h1>
+        <h1> Visão Geral do Sistema</h1>
         <p>Monitoramento e controle completo do sistema paroquial</p>
     </div>
     
@@ -161,7 +161,7 @@
         <!-- Status do Sistema -->
         <div class="system-section">
             <h2 class="section-title">
-                <span class="section-icon">🟢</span>
+                <span class="section-icon"></span>
                 Status do Sistema
             </h2>
             <div class="system-info">
@@ -202,7 +202,7 @@
         <!-- Informações do Sistema -->
         <div class="system-section">
             <h2 class="section-title">
-                <span class="section-icon">💻</span>
+                <span class="section-icon"></span>
                 Informações Técnicas
             </h2>
             <div class="system-info">
@@ -231,43 +231,43 @@
         <!-- Ações do Sistema -->
         <div class="system-section">
             <h2 class="section-title">
-                <span class="section-icon">🔧</span>
+                <span class="section-icon"></span>
                 Ações de Manutenção
             </h2>
             <div class="action-buttons">
-                <button class="btn btn-primary">🧹 Limpar Cache</button>
-                <button class="btn btn-primary">🔄 Recarregar Configurações</button>
-                <button class="btn btn-secondary">📊 Relatório de Uso</button>
-                <button class="btn btn-secondary">🛠️ Modo de Manutenção</button>
-                <button class="btn btn-secondary">💾 Backup Manual</button>
+                <button class="btn btn-primary"> Limpar Cache</button>
+                <button class="btn btn-primary"> Recarregar Configurações</button>
+                <button class="btn btn-secondary"> Relatório de Uso</button>
+                <button class="btn btn-secondary"> Modo de Manutenção</button>
+                <button class="btn btn-secondary"> Backup Manual</button>
             </div>
         </div>
         
         <!-- Atividade Recente do Sistema -->
         <div class="system-section">
             <h2 class="section-title">
-                <span class="section-icon">📋</span>
+                <span class="section-icon"></span>
                 Atividade Recente do Sistema
             </h2>
             <ul class="recent-activity">
                 <li class="activity-item">
-                    <span class="activity-description">✅ Sistema iniciado com sucesso</span>
+                    <span class="activity-description"> Sistema iniciado com sucesso</span>
                     <span class="activity-time">Agora</span>
                 </li>
                 <li class="activity-item">
-                    <span class="activity-description">🔄 Cache limpo automaticamente</span>
+                    <span class="activity-description"> Cache limpo automaticamente</span>
                     <span class="activity-time">2 horas atrás</span>
                 </li>
                 <li class="activity-item">
-                    <span class="activity-description">👤 Novo usuário registrado</span>
+                    <span class="activity-description"> Novo usuário registrado</span>
                     <span class="activity-time">1 dia atrás</span>
                 </li>
                 <li class="activity-item">
-                    <span class="activity-description">📰 Notícia publicada</span>
+                    <span class="activity-description"> Notícia publicada</span>
                     <span class="activity-time">2 dias atrás</span>
                 </li>
                 <li class="activity-item">
-                    <span class="activity-description">🏛️ Grupo criado</span>
+                    <span class="activity-description"> Grupo criado</span>
                     <span class="activity-time">3 dias atrás</span>
                 </li>
             </ul>
@@ -276,7 +276,7 @@
         <!-- Monitoramento de Recursos -->
         <div class="system-section">
             <h2 class="section-title">
-                <span class="section-icon">📈</span>
+                <span class="section-icon"></span>
                 Uso de Recursos
             </h2>
             <div class="system-info">

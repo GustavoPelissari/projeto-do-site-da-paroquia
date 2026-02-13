@@ -8,7 +8,7 @@
         <section class="sp-hero">
             <div class="sp-hero-content">
                 <div class="sp-flex sp-items-center sp-justify-between sp-mb-4">
-                    <h1 class="sp-hero-title">📋 Detalhes da Solicitação</h1>
+                    <h1 class="sp-hero-title"> Detalhes da Solicitação</h1>
                     <a href="{{ route('group-requests.index') }}" class="sp-btn sp-btn-outline">
                         ← Voltar
                     </a>
@@ -25,14 +25,14 @@
                 <div class="sp-card" style="border-left: 4px solid {{ $request->status === 'pending' ? 'var(--sp-gold)' : ($request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)') }};">
                     <div class="sp-card-header">
                         <div class="sp-flex sp-justify-between sp-items-center">
-                            <h2 class="sp-card-title">📊 Status da Solicitação</h2>
+                            <h2 class="sp-card-title"> Status da Solicitação</h2>
                             <div class="sp-badge sp-badge-lg sp-badge-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'error') }}">
                                 @if($request->status === 'pending')
                                     ⏳ Aguardando Análise
                                 @elseif($request->status === 'approved')
-                                    ✅ Aprovada
+                                     Aprovada
                                 @else
-                                    ❌ Rejeitada
+                                     Rejeitada
                                 @endif
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                     <div class="sp-card-content">
                         <div class="sp-grid sp-grid-3">
                             <div class="sp-stat">
-                                <div class="sp-stat-icon">📅</div>
+                                <div class="sp-stat-icon"></div>
                                 <div class="sp-stat-content">
                                     <div class="sp-stat-label">Data da Solicitação</div>
                                     <div class="sp-stat-value">{{ $request->created_at->format('d/m/Y') }}</div>
@@ -50,7 +50,7 @@
                             
                             @if($request->status !== 'pending')
                                 <div class="sp-stat">
-                                    <div class="sp-stat-icon">⚡</div>
+                                    <div class="sp-stat-icon"></div>
                                     <div class="sp-stat-content">
                                         <div class="sp-stat-label">Data da Resposta</div>
                                         <div class="sp-stat-value">{{ ($request->approved_at ?? $request->rejected_at)->format('d/m/Y') }}</div>
@@ -59,7 +59,7 @@
                                 </div>
                                 
                                 <div class="sp-stat">
-                                    <div class="sp-stat-icon">⏱️</div>
+                                    <div class="sp-stat-icon"></div>
                                     <div class="sp-stat-content">
                                         <div class="sp-stat-label">Tempo de Resposta</div>
                                         <div class="sp-stat-value">{{ $request->created_at->diffInDays($request->approved_at ?? $request->rejected_at) }}</div>
@@ -90,7 +90,7 @@
                     {{-- Dados Pessoais --}}
                     <div class="sp-card">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title">👤 Dados do Candidato</h3>
+                            <h3 class="sp-card-title"> Dados do Candidato</h3>
                         </div>
                         <div class="sp-card-content">
                             <div class="sp-profile">
@@ -101,9 +101,9 @@
                                 </div>
                                 <div class="sp-profile-info">
                                     <h4 class="sp-profile-name">{{ $request->user->name }}</h4>
-                                    <p class="sp-profile-email">📧 {{ $request->user->email }}</p>
+                                    <p class="sp-profile-email"> {{ $request->user->email }}</p>
                                     @if($request->user->phone)
-                                        <p class="sp-profile-phone">📱 {{ $request->user->phone }}</p>
+                                        <p class="sp-profile-phone"> {{ $request->user->phone }}</p>
                                     @endif
                                     <div class="sp-badge sp-badge-secondary sp-mt-2">
                                         Membro desde {{ $request->user->created_at->format('m/Y') }}
@@ -116,7 +116,7 @@
                     {{-- Informações do Grupo --}}
                     <div class="sp-card">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title">🏛️ Grupo de Destino</h3>
+                            <h3 class="sp-card-title"> Grupo de Destino</h3>
                         </div>
                         <div class="sp-card-content">
                             <div class="sp-group-info">
@@ -128,7 +128,7 @@
                                 <div class="sp-info-grid">
                                     @if($request->group->meeting_day)
                                         <div class="sp-info-item">
-                                            <span class="sp-info-label">📅 Dia da Reunião:</span>
+                                            <span class="sp-info-label"> Dia da Reunião:</span>
                                             <span class="sp-info-value">{{ $request->group->meeting_day }}</span>
                                         </div>
                                     @endif
@@ -142,7 +142,7 @@
                                     
                                     @if($request->group->location)
                                         <div class="sp-info-item">
-                                            <span class="sp-info-label">📍 Local:</span>
+                                            <span class="sp-info-label"> Local:</span>
                                             <span class="sp-info-value">{{ $request->group->location }}</span>
                                         </div>
                                     @endif
@@ -160,7 +160,7 @@
                 <div class="sp-content-wrapper">
                     <div class="sp-card" style="background: var(--sp-ivory); border-left: 4px solid var(--sp-gold);">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title">💬 Mensagem do Candidato</h3>
+                            <h3 class="sp-card-title"> Mensagem do Candidato</h3>
                         </div>
                         <div class="sp-card-content">
                             <div class="sp-quote">
@@ -181,7 +181,7 @@
                 <div class="sp-content-wrapper">
                     <div class="sp-card" style="background: var(--sp-cream); border-left: 4px solid var(--sp-teal);">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title">📅 Disponibilidade Informada</h3>
+                            <h3 class="sp-card-title"> Disponibilidade Informada</h3>
                         </div>
                         <div class="sp-card-content">
                             <p class="sp-text-lg">{{ $request->availability }}</p>
@@ -199,9 +199,9 @@
                         <div class="sp-card-header">
                             <h3 class="sp-card-title" style="color: {{ $request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)' }};">
                                 @if($request->status === 'approved')
-                                    ✅ Resposta de Aprovação
+                                     Resposta de Aprovação
                                 @else
-                                    ❌ Resposta de Rejeição
+                                     Resposta de Rejeição
                                 @endif
                             </h3>
                         </div>
@@ -232,11 +232,11 @@
                 <div class="sp-content-wrapper">
                     <div class="sp-card" style="background: var(--sp-gray-50); border-left: 4px solid var(--sp-red);">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title" style="color: var(--sp-red);">🎯 Ações Disponíveis</h3>
+                            <h3 class="sp-card-title" style="color: var(--sp-red);"> Ações Disponíveis</h3>
                         </div>
                         <div class="sp-card-content">
                             <div class="sp-alert sp-alert-info sp-mb-6">
-                                <div class="sp-alert-icon">💡</div>
+                                <div class="sp-alert-icon"></div>
                                 <div class="sp-alert-content">
                                     <strong>Orientação:</strong> Analise cuidadosamente as informações do candidato antes de tomar uma decisão. 
                                     Uma resposta personalizada ajuda a criar um ambiente acolhedor.
@@ -255,7 +255,7 @@
 
                             <div class="sp-form-group">
                                 <label for="response_message" class="sp-label">
-                                    💌 Mensagem de Resposta
+                                     Mensagem de Resposta
                                 </label>
                                 <textarea 
                                     id="response_message" 
@@ -264,7 +264,7 @@
                                     class="sp-textarea"
                                 ></textarea>
                                 <div class="sp-form-help">
-                                    🌟 Uma mensagem calorosa faz toda a diferença na experiência do candidato.
+                                     Uma mensagem calorosa faz toda a diferença na experiência do candidato.
                                 </div>
                             </div>
                             
@@ -274,14 +274,14 @@
                                     onclick="approveRequest()"
                                     class="sp-btn sp-btn-success sp-btn-lg"
                                 >
-                                    ✅ Aprovar Solicitação
+                                     Aprovar Solicitação
                                 </button>
                                 <button 
                                     type="button"
                                     onclick="rejectRequest()"
                                     class="sp-btn sp-btn-error sp-btn-lg"
                                 >
-                                    ❌ Rejeitar Solicitação
+                                     Rejeitar Solicitação
                                 </button>
                             </div>
                         </div>
@@ -295,13 +295,13 @@
             <div class="sp-content-wrapper">
                 <div class="sp-card">
                     <div class="sp-card-header">
-                        <h3 class="sp-card-title">📜 Histórico da Solicitação</h3>
+                        <h3 class="sp-card-title"> Histórico da Solicitação</h3>
                     </div>
                     <div class="sp-card-content">
                         <div class="sp-timeline">
                             {{-- Solicitação Criada --}}
                             <div class="sp-timeline-item sp-timeline-item-active">
-                                <div class="sp-timeline-marker sp-timeline-marker-success">📝</div>
+                                <div class="sp-timeline-marker sp-timeline-marker-success"></div>
                                 <div class="sp-timeline-content">
                                     <h4 class="sp-timeline-title">Solicitação Enviada</h4>
                                     <p class="sp-timeline-description">
@@ -314,7 +314,7 @@
                             @if($request->status === 'approved')
                                 {{-- Solicitação Aprovada --}}
                                 <div class="sp-timeline-item sp-timeline-item-active">
-                                    <div class="sp-timeline-marker sp-timeline-marker-success">✅</div>
+                                    <div class="sp-timeline-marker sp-timeline-marker-success"></div>
                                     <div class="sp-timeline-content">
                                         <h4 class="sp-timeline-title">Solicitação Aprovada</h4>
                                         <p class="sp-timeline-description">
@@ -329,7 +329,7 @@
                             @elseif($request->status === 'rejected')
                                 {{-- Solicitação Rejeitada --}}
                                 <div class="sp-timeline-item sp-timeline-item-active">
-                                    <div class="sp-timeline-marker sp-timeline-marker-error">❌</div>
+                                    <div class="sp-timeline-marker sp-timeline-marker-error"></div>
                                     <div class="sp-timeline-content">
                                         <h4 class="sp-timeline-title">Solicitação Rejeitada</h4>
                                         <p class="sp-timeline-description">
@@ -365,7 +365,7 @@
     @if($request->status === 'pending')
         <script>
             function approveRequest() {
-                if (confirm('🤝 Tem certeza que deseja APROVAR esta solicitação?\n\nO candidato será notificado e poderá participar do grupo.')) {
+                if (confirm(' Tem certeza que deseja APROVAR esta solicitação?\n\nO candidato será notificado e poderá participar do grupo.')) {
                     const message = document.getElementById('response_message').value;
                     document.getElementById('approve-message').value = message;
                     document.getElementById('approve-form').submit();
@@ -373,7 +373,7 @@
             }
 
             function rejectRequest() {
-                if (confirm('❌ Tem certeza que deseja REJEITAR esta solicitação?\n\nO candidato será notificado da decisão.')) {
+                if (confirm(' Tem certeza que deseja REJEITAR esta solicitação?\n\nO candidato será notificado da decisão.')) {
                     const message = document.getElementById('response_message').value;
                     document.getElementById('reject-message').value = message;
                     document.getElementById('reject-form').submit();

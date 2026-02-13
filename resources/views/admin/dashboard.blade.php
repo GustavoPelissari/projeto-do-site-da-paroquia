@@ -7,7 +7,7 @@
         {{-- Hero Section --}}
         <section class="sp-hero sp-mb-large">
             <div class="sp-hero-content">
-                <h1 class="sp-hero-title">📊 Painel Administrativo</h1>
+                <h1 class="sp-hero-title"> Painel Administrativo</h1>
                 <p class="sp-hero-subtitle">
                     Visão geral das atividades e gerenciamento da paróquia
                 </p>
@@ -21,12 +21,12 @@
                     {{-- Card Notícias --}}
                     <div class="sp-stat-card" style="border-left: 4px solid var(--sp-blue);">
                         <div class="sp-stat-header">
-                            <div class="sp-stat-icon sp-stat-icon-blue">📰</div>
+                            <div class="sp-stat-icon sp-stat-icon-blue"></div>
                             <div class="sp-stat-info">
                                 <div class="sp-stat-value">{{ $stats['news_count'] }}</div>
                                 <div class="sp-stat-label">Total de Notícias</div>
                                 <div class="sp-stat-meta sp-stat-meta-success">
-                                    ✅ {{ $stats['published_news'] }} publicadas
+                                     {{ $stats['published_news'] }} publicadas
                                 </div>
                             </div>
                         </div>
@@ -35,12 +35,12 @@
                     {{-- Card Eventos --}}
                     <div class="sp-stat-card" style="border-left: 4px solid var(--sp-teal);">
                         <div class="sp-stat-header">
-                            <div class="sp-stat-icon sp-stat-icon-teal">📅</div>
+                            <div class="sp-stat-icon sp-stat-icon-teal"></div>
                             <div class="sp-stat-info">
                                 <div class="sp-stat-value">{{ $stats['events_count'] }}</div>
                                 <div class="sp-stat-label">Total de Eventos</div>
                                 <div class="sp-stat-meta sp-stat-meta-info">
-                                    📌 {{ $stats['upcoming_events'] }} próximos
+                                     {{ $stats['upcoming_events'] }} próximos
                                 </div>
                             </div>
                         </div>
@@ -49,12 +49,12 @@
                     {{-- Card Grupos --}}
                     <div class="sp-stat-card" style="border-left: 4px solid var(--sp-purple);">
                         <div class="sp-stat-header">
-                            <div class="sp-stat-icon sp-stat-icon-purple">👥</div>
+                            <div class="sp-stat-icon sp-stat-icon-purple"></div>
                             <div class="sp-stat-info">
                                 <div class="sp-stat-value">{{ $stats['groups_count'] }}</div>
                                 <div class="sp-stat-label">Grupos Ativos</div>
                                 <div class="sp-stat-meta sp-stat-meta-neutral">
-                                    🏛️ Comunidades
+                                     Comunidades
                                 </div>
                             </div>
                         </div>
@@ -63,12 +63,12 @@
                     {{-- Card Missas --}}
                     <div class="sp-stat-card" style="border-left: 4px solid var(--sp-red);">
                         <div class="sp-stat-header">
-                            <div class="sp-stat-icon sp-stat-icon-red">⛪</div>
+                            <div class="sp-stat-icon sp-stat-icon-red"></div>
                             <div class="sp-stat-info">
                                 <div class="sp-stat-value">{{ $stats['masses_count'] }}</div>
                                 <div class="sp-stat-label">Horários de Missa</div>
                                 <div class="sp-stat-meta sp-stat-meta-neutral">
-                                    🕐 Semanais
+                                     Semanais
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                     <div class="sp-card">
                         <div class="sp-card-header">
                             <div class="sp-flex sp-justify-between sp-items-center">
-                                <h3 class="sp-card-title">📰 Notícias Recentes</h3>
+                                <h3 class="sp-card-title"> Notícias Recentes</h3>
                                 <a href="{{ route('admin.news.index') }}" class="sp-btn sp-btn-outline sp-btn-sm">
                                     Ver todas →
                                 </a>
@@ -101,21 +101,21 @@
                                                 <h4 class="sp-list-title">{{ $news->title }}</h4>
                                                 <div class="sp-list-meta">
                                                     <span class="sp-text-sm">
-                                                        👤 {{ $news->user->name }} • 
-                                                        📅 {{ $news->created_at->format('d/m/Y H:i') }}
+                                                         {{ $news->user->name }} • 
+                                                         {{ $news->created_at->format('d/m/Y H:i') }}
                                                     </span>
                                                 </div>
                                                 <div class="sp-badge sp-badge-{{ $news->status === 'published' ? 'success' : 'warning' }} sp-mt-2">
                                                     @if($news->status === 'published')
-                                                        ✅ Publicado
+                                                         Publicado
                                                     @else
-                                                        📝 Rascunho
+                                                         Rascunho
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="sp-list-action">
                                                 <a href="{{ route('admin.news.edit', $news) }}" class="sp-btn sp-btn-secondary sp-btn-sm">
-                                                    ✏️ Editar
+                                                     Editar
                                                 </a>
                                             </div>
                                         </div>
@@ -123,11 +123,11 @@
                                 </div>
                             @else
                                 <div class="sp-empty-state">
-                                    <div class="sp-empty-icon">📰</div>
+                                    <div class="sp-empty-icon"></div>
                                     <h4 class="sp-empty-title">Nenhuma notícia encontrada</h4>
                                     <p class="sp-empty-description">Comece criando sua primeira notícia para a comunidade.</p>
                                     <a href="{{ route('admin.news.create') }}" class="sp-btn sp-btn-primary">
-                                        ➕ Criar Notícia
+                                         Criar Notícia
                                     </a>
                                 </div>
                             @endif
@@ -138,7 +138,7 @@
                     <div class="sp-card">
                         <div class="sp-card-header">
                             <div class="sp-flex sp-justify-between sp-items-center">
-                                <h3 class="sp-card-title">📅 Próximos Eventos</h3>
+                                <h3 class="sp-card-title"> Próximos Eventos</h3>
                                 <a href="{{ route('admin.events.index') }}" class="sp-btn sp-btn-outline sp-btn-sm">
                                     Ver todos →
                                 </a>
@@ -153,17 +153,17 @@
                                                 <h4 class="sp-list-title">{{ $event->title }}</h4>
                                                 <div class="sp-list-meta">
                                                     <span class="sp-text-sm">
-                                                        🕐 {{ $event->start_date->format('d/m/Y H:i') }} • 
-                                                        📍 {{ $event->location ?: 'Local a definir' }}
+                                                         {{ $event->start_date->format('d/m/Y H:i') }} • 
+                                                         {{ $event->location ?: 'Local a definir' }}
                                                     </span>
                                                 </div>
                                                 <div class="sp-badge sp-badge-info sp-mt-2">
-                                                    📌 {{ ucfirst($event->status) }}
+                                                     {{ ucfirst($event->status) }}
                                                 </div>
                                             </div>
                                             <div class="sp-list-action">
                                                 <a href="{{ route('admin.events.edit', $event) }}" class="sp-btn sp-btn-secondary sp-btn-sm">
-                                                    ✏️ Editar
+                                                     Editar
                                                 </a>
                                             </div>
                                         </div>
@@ -171,11 +171,11 @@
                                 </div>
                             @else
                                 <div class="sp-empty-state">
-                                    <div class="sp-empty-icon">📅</div>
+                                    <div class="sp-empty-icon"></div>
                                     <h4 class="sp-empty-title">Nenhum evento próximo</h4>
                                     <p class="sp-empty-description">Programe os próximos eventos da comunidade.</p>
                                     <a href="{{ route('admin.events.create') }}" class="sp-btn sp-btn-primary">
-                                        ➕ Criar Evento
+                                         Criar Evento
                                     </a>
                                 </div>
                             @endif
@@ -190,7 +190,7 @@
             <div class="sp-content-wrapper">
                 <div class="sp-card" style="background: var(--sp-ivory); border-left: 4px solid var(--sp-gold);">
                     <div class="sp-card-header">
-                        <h3 class="sp-card-title" style="color: var(--sp-red);">⚡ Ações Rápidas</h3>
+                        <h3 class="sp-card-title" style="color: var(--sp-red);"> Ações Rápidas</h3>
                         <p class="sp-card-description">
                             Acesso direto às funcionalidades mais utilizadas
                         </p>
@@ -199,7 +199,7 @@
                         <div class="sp-action-grid">
                             {{-- Nova Notícia --}}
                             <a href="{{ route('admin.news.create') }}" class="sp-action-card sp-action-card-blue">
-                                <div class="sp-action-icon">📝</div>
+                                <div class="sp-action-icon"></div>
                                 <div class="sp-action-content">
                                     <h4 class="sp-action-title">Nova Notícia</h4>
                                     <p class="sp-action-description">Publicar informações importantes</p>
@@ -219,7 +219,7 @@
                             
                             {{-- Novo Grupo --}}
                             <a href="{{ route('admin.groups.create') }}" class="sp-action-card sp-action-card-purple">
-                                <div class="sp-action-icon">👥</div>
+                                <div class="sp-action-icon"></div>
                                 <div class="sp-action-content">
                                     <h4 class="sp-action-title">Novo Grupo</h4>
                                     <p class="sp-action-description">Criar comunidades paroquiais</p>
@@ -229,7 +229,7 @@
                             
                             {{-- Nova Missa --}}
                             <a href="{{ route('admin.masses.create') }}" class="sp-action-card sp-action-card-red">
-                                <div class="sp-action-icon">⛪</div>
+                                <div class="sp-action-icon"></div>
                                 <div class="sp-action-content">
                                     <h4 class="sp-action-title">Nova Missa</h4>
                                     <p class="sp-action-description">Configurar horários litúrgicos</p>

@@ -8,11 +8,11 @@
         <nav class="sp-breadcrumb sp-mb-6">
             <ol class="sp-breadcrumb-list">
                 <li class="sp-breadcrumb-item">
-                    <a href="{{ route('home') }}" class="sp-breadcrumb-link">🏠 Início</a>
+                    <a href="{{ route('home') }}" class="sp-breadcrumb-link"> Início</a>
                 </li>
                 <li class="sp-breadcrumb-divider">→</li>
                 <li class="sp-breadcrumb-item">
-                    <a href="{{ route('news.index') }}" class="sp-breadcrumb-link">📰 Notícias</a>
+                    <a href="{{ route('news.index') }}" class="sp-breadcrumb-link"> Notícias</a>
                 </li>
                 <li class="sp-breadcrumb-divider">→</li>
                 <li class="sp-breadcrumb-item sp-breadcrumb-current">
@@ -40,7 +40,7 @@
                     @if($article->featured)
                         <div class="sp-article-badge">
                             <span class="sp-badge sp-badge-gold sp-badge-lg">
-                                ⭐ Notícia em Destaque
+                                Notícia em Destaque
                             </span>
                         </div>
                     @endif
@@ -50,12 +50,12 @@
                     <div class="sp-article-meta">
                         <div class="sp-meta-group">
                             <span class="sp-meta-item">
-                                <span class="sp-meta-icon">👤</span>
+                                <span class="sp-meta-icon"></span>
                                 <span class="sp-meta-text">{{ $article->user->name }}</span>
                             </span>
                             
                             <span class="sp-meta-item">
-                                <span class="sp-meta-icon">📅</span>
+                                <span class="sp-meta-icon"></span>
                                 <span class="sp-meta-text">{{ $article->published_at->format('d/m/Y') }}</span>
                             </span>
                             
@@ -70,7 +70,7 @@
                     @if($article->summary)
                         <div class="sp-article-summary">
                             <div class="sp-summary-content">
-                                <div class="sp-summary-icon">💡</div>
+                                <div class="sp-summary-icon"></div>
                                 <p class="sp-summary-text">{{ $article->summary }}</p>
                             </div>
                         </div>
@@ -89,11 +89,11 @@
                     <div class="sp-article-info">
                         @if($article->updated_at != $article->created_at)
                             <span class="sp-article-date">
-                                📝 Última atualização: {{ $article->updated_at->format('d/m/Y \à\s H:i') }}
+                                 Última atualização: {{ $article->updated_at->format('d/m/Y \à\s H:i') }}
                             </span>
                         @else
                             <span class="sp-article-date">
-                                📅 Publicado em {{ $article->created_at->format('d/m/Y \à\s H:i') }}
+                                 Publicado em {{ $article->created_at->format('d/m/Y \à\s H:i') }}
                             </span>
                         @endif
                     </div>
@@ -103,7 +103,7 @@
                             ← Voltar às Notícias
                         </a>
                         <button onclick="window.print()" class="sp-btn sp-btn-outline sp-btn-lg">
-                            🖨️ Imprimir
+                             Imprimir
                         </button>
                     </div>
                 </footer>
@@ -123,7 +123,7 @@
             <section class="sp-section sp-mt-large">
                 <div class="sp-content-wrapper">
                     <div class="sp-section-header sp-text-center sp-mb-8">
-                        <h2 class="sp-section-title">📰 Outras Notícias</h2>
+                        <h2 class="sp-section-title"> Outras Notícias</h2>
                         <p class="sp-section-description">
                             Continue acompanhando as novidades da nossa paróquia
                         </p>
@@ -140,14 +140,14 @@
                                                  class="sp-image-cover">
                                         @else
                                             <div class="sp-image-placeholder">
-                                                <span class="sp-placeholder-icon">📰</span>
+                                                <span class="sp-placeholder-icon"></span>
                                             </div>
                                         @endif
                                     </div>
                                     
                                     <div class="sp-card-content">
                                         <div class="sp-related-meta">
-                                            📅 {{ $related->published_at->format('d/m/Y') }}
+                                             {{ $related->published_at->format('d/m/Y') }}
                                         </div>
                                         
                                         <h3 class="sp-related-title">
@@ -182,16 +182,16 @@
             <div class="sp-content-wrapper">
                 <div class="sp-card sp-text-center" style="background: var(--sp-cream); border-left: 4px solid var(--sp-teal);">
                     <div class="sp-card-content">
-                        <h3 class="sp-title-lg sp-mb-4" style="color: var(--sp-red);">📢 Participe da Nossa Comunidade</h3>
+                        <h3 class="sp-title-lg sp-mb-4" style="color: var(--sp-red);"> Participe da Nossa Comunidade</h3>
                         <p class="sp-text-lg sp-mb-6" style="color: var(--sp-gray-dark);">
                             Gostou desta notícia? Venha fazer parte da nossa comunidade paroquial!
                         </p>
                         <div class="sp-flex sp-justify-center sp-gap-4">
                             <a href="{{ route('groups.index') }}" class="sp-btn sp-btn-primary">
-                                👥 Ver Grupos
+                                 Ver Grupos
                             </a>
                             <a href="{{ route('events.index') }}" class="sp-btn sp-btn-outline">
-                                📅 Ver Eventos
+                                 Ver Eventos
                             </a>
                         </div>
                     </div>

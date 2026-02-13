@@ -71,7 +71,7 @@
                 <!-- Event Details -->
                 <div class="row g-4 mb-4">
                     <div>
-                        <h4 class="fw-semibold text-dark mb-2">📅 Data e Horário</h4>
+                        <h4 class="fw-semibold text-dark mb-2"> Data e Horário</h4>
                         <div class="text-body">
                             <p><strong>Início:</strong> {{ $event->start_date->format('d/m/Y H:i') }}</p>
                             @if($event->end_date)
@@ -82,7 +82,7 @@
 
                     @if($event->location)
                         <div>
-                            <h4 class="fw-semibold text-dark mb-2">📍 Local</h4>
+                            <h4 class="fw-semibold text-dark mb-2"> Local</h4>
                             <p class="text-body">{{ $event->location }}</p>
                         </div>
                     @endif
@@ -90,7 +90,7 @@
 
                 @if($event->requirements)
                     <div class="mb-4">
-                        <h4 class="fw-semibold text-dark mb-2">📋 Requisitos</h4>
+                        <h4 class="fw-semibold text-dark mb-2"> Requisitos</h4>
                         <div class="text-body">{!! nl2br(e($event->requirements)) !!}</div>
                     </div>
                 @endif
@@ -107,7 +107,7 @@
             <div class="d-flex flex-column gap-2">
                 <a href="{{ route('admin.global.events.edit', $event) }}" 
                    class="btn btn-success w-100">
-                    ✏️ Editar Evento
+                     Editar Evento
                 </a>
                 
                 @if($event->status !== 'confirmed')
@@ -120,7 +120,7 @@
                         <input type="hidden" name="start_date" value="{{ $event->start_date }}">
                         <button type="submit" 
                                 class="btn btn-primary w-100">
-                            ✅ Confirmar Evento
+                             Confirmar Evento
                         </button>
                     </form>
                 @endif
@@ -136,7 +136,7 @@
                         <button type="submit" 
                                 class="btn btn-danger w-100"
                                 onclick="return confirm('Tem certeza que deseja cancelar este evento?')">
-                            ❌ Cancelar Evento
+                             Cancelar Evento
                         </button>
                     </form>
                 @endif
@@ -147,7 +147,7 @@
                     @method('DELETE')
                     <button type="submit" 
                             class="btn btn-secondary w-100">
-                        🗑️ Excluir Evento
+                         Excluir Evento
                     </button>
                 </form>
             </div>
@@ -241,7 +241,7 @@
                     </a>
                     <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
                        class="text-secondary hover-text-dark small">
-                        🏠 Painel
+                         Painel
                     </a>
                 </div>
             </div>

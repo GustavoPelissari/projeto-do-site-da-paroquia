@@ -15,7 +15,7 @@
         <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-8 text-white mb-8">
             <div class="d-flex align-items-center justify-content-between">
                 <div>
-                    <h2 class="text-2xl fw-bold mb-2">📅 Escala Atual</h2>
+                    <h2 class="text-2xl fw-bold mb-2"> Escala Atual</h2>
                     <h3 class="text-xl fw-semibold mb-3">{{ $currentSchedule->title }}</h3>
                     <p class="text-blue-100 mb-4">
                         Período: {{ $currentSchedule->start_date->format('d/m/Y') }} - {{ $currentSchedule->end_date->format('d/m/Y') }}
@@ -116,7 +116,7 @@
         </div>
     @else
         <div class="text-center py-12">
-            <div class="text-gray-400 text-6xl mb-4">📋</div>
+            <div class="text-gray-400 text-6xl mb-4"></div>
             <h3 class="text-2xl font-medium text-gray-900 mb-2">Nenhuma escala disponível</h3>
             <p class="text-gray-600 mb-6">
                 As escalas para {{ $group->name }} ainda não foram publicadas.

@@ -505,7 +505,7 @@
 <!-- Hero Section especial para o Padre -->
 <div class="padre-hero">
     <div class="padre-welcome">
-        <h1 class="padre-title">⛪ Bem-vindo, Padre {{ auth()->user()->name }}!</h1>
+        <h1 class="padre-title"> Bem-vindo, Padre {{ auth()->user()->name }}!</h1>
         <p class="padre-subtitle">Painel de Administração Global - Paróquia São Paulo Apóstolo</p>
         <blockquote class="padre-quote">
             "Combati o bom combate, terminei a corrida, guardei a fé." - 2 Timóteo 4:7
@@ -517,7 +517,7 @@
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">👥</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Fiéis Cadastrados</div>
         </div>
         <div class="stat-number">{{ $stats['users_count'] ?? 0 }}</div>
@@ -526,7 +526,7 @@
     
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">🏛️</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Grupos Ativos</div>
         </div>
         <div class="stat-number">{{ $stats['groups_count'] ?? 0 }}</div>
@@ -535,7 +535,7 @@
     
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">⛪</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Horários de Missa</div>
         </div>
         <div class="stat-number">{{ $stats['masses_count'] ?? 0 }}</div>
@@ -544,7 +544,7 @@
     
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">📅</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Próximos Eventos</div>
         </div>
         <div class="stat-number">{{ $stats['upcoming_events'] ?? 0 }}</div>
@@ -553,7 +553,7 @@
     
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">📰</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Notícias Publicadas</div>
         </div>
         <div class="stat-number">{{ $stats['published_news'] ?? 0 }}</div>
@@ -562,7 +562,7 @@
     
     <div class="stat-card">
         <div class="stat-header">
-            <div class="stat-icon">📋</div>
+            <div class="stat-icon"></div>
             <div class="stat-title">Solicitações Pendentes</div>
         </div>
         <div class="stat-number">{{ $stats['pending_requests'] ?? 0 }}</div>
@@ -573,7 +573,7 @@
 <!-- Ações Rápidas -->
 <div class="quick-actions">
     <h2 class="section-title">
-        <div class="section-icon">⚡</div>
+        <div class="section-icon"></div>
         Ações Rápidas - Administração Pastoral
     </h2>
     <div class="actions-grid">
@@ -589,7 +589,7 @@
         
         <a href="{{ route('admin.global.events.create') }}" class="action-card">
             <div class="action-header">
-                <div class="action-icon">📅</div>
+                <div class="action-icon"></div>
                 <div>
                     <h3 class="action-title">Novo Evento</h3>
                     <p class="action-description">Criar evento ou celebração especial</p>
@@ -599,7 +599,7 @@
         
         <a href="{{ route('admin.global.groups.index') }}" class="action-card">
             <div class="action-header">
-                <div class="action-icon">👥</div>
+                <div class="action-icon"></div>
                 <div>
                     <h3 class="action-title">Gerenciar Grupos</h3>
                     <p class="action-description">Administrar pastorais e ministérios</p>
@@ -609,7 +609,7 @@
         
         <a href="{{ route('admin.global.masses.index') }}" class="action-card">
             <div class="action-header">
-                <div class="action-icon">⛪</div>
+                <div class="action-icon"></div>
                 <div>
                     <h3 class="action-title">Horários de Missa</h3>
                     <p class="action-description">Configurar celebrações e horários</p>
@@ -619,7 +619,7 @@
         
         <a href="{{ route('group-requests.index') }}" class="action-card">
             <div class="action-header">
-                <div class="action-icon">📋</div>
+                <div class="action-icon"></div>
                 <div>
                     <h3 class="action-title">Aprovar Solicitações</h3>
                     <p class="action-description">Revisar pedidos de entrada em grupos</p>
@@ -629,7 +629,7 @@
         
         <a href="{{ route('home') }}" class="action-card">
             <div class="action-header">
-                <div class="action-icon">🌐</div>
+                <div class="action-icon"></div>
                 <div>
                     <h3 class="action-title">Ver Site Público</h3>
                     <p class="action-description">Visualizar como os fiéis veem o site</p>
@@ -642,7 +642,7 @@
 <!-- Atividades Recentes -->
 <div class="content-section">
     <h2 class="section-title">
-        <div class="section-icon">📊</div>
+        <div class="section-icon"></div>
         Atividades Recentes da Paróquia
     </h2>
     
@@ -651,7 +651,7 @@
             @foreach($recent_news->take(3) as $news)
                 <div class="activity-item">
                     <div class="activity-header">
-                        <span class="activity-text">📰 Nova notícia publicada</span>
+                        <span class="activity-text"> Nova notícia publicada</span>
                         <span class="activity-time">{{ $news->created_at->diffForHumans() }}</span>
                     </div>
                     <div class="activity-description">
@@ -665,7 +665,7 @@
             @foreach($upcoming_events->take(2) as $event)
                 <div class="activity-item">
                     <div class="activity-header">
-                        <span class="activity-text">📅 Próximo evento</span>
+                        <span class="activity-text"> Próximo evento</span>
                         <span class="activity-time">{{ $event->start_date->format('d/m/Y') }}</span>
                     </div>
                     <div class="activity-description">
@@ -678,7 +678,7 @@
         @if((!isset($recent_news) || $recent_news->count() == 0) && (!isset($upcoming_events) || $upcoming_events->count() == 0))
             <div class="activity-item">
                 <div class="activity-header">
-                    <span class="activity-text">🌱 Sistema em funcionamento</span>
+                    <span class="activity-text"> Sistema em funcionamento</span>
                     <span class="activity-time">Agora</span>
                 </div>
                 <div class="activity-description">
