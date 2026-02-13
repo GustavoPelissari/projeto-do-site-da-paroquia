@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Notícias do grupo')
+@section('title', 'Notícias do Grupo')
 
 @section('content')
 <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
@@ -14,7 +14,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="h5 mb-0">Lista de notícias</h3>
-        <small class="text-secondary">{{ $news->total() }} registro(s)</small>
+        <small class="text-secondary">{{ $news->total() }} registro{{ $news->total() === 1 ? '' : 's' }}</small>
     </div>
     <div class="card-body p-0">
         @if($news->count())

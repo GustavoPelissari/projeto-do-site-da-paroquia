@@ -70,7 +70,7 @@
                                     <small class="text-secondary">{{ Str::limit($mass->description ?: 'Sem descrição', 80) }}</small>
                                 </td>
                                 <td>{{ $mass->day_name }}</td>
-                                <td>{{ $mass->time ? \Carbon\Carbon::parse($mass->time)->format('H:i') : '—' }}</td>
+                                <td>{{ optional($mass->time)->format('H:i') ?? '—' }}</td>
                                 <td>{{ $mass->location }}</td>
                                 <td><span class="badge {{ $mass->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $mass->is_active ? 'Ativo' : 'Inativo' }}</span></td>
                                 <td class="text-end">

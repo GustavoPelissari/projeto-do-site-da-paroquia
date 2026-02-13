@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Escalas legadas')
+@section('title', 'Escalas Legadas')
 
 @section('content')
 <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">

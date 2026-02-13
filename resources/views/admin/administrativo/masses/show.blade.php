@@ -21,7 +21,7 @@
             <dd class="col-sm-9">{{ $mass->day_name }}</dd>
 
             <dt class="col-sm-3">Horário</dt>
-            <dd class="col-sm-9">{{ $mass->time ? \Carbon\Carbon::parse($mass->time)->format('H:i') : '—' }}</dd>
+            <dd class="col-sm-9">{{ optional($mass->time)->format('H:i') ?? '—' }}</dd>
 
             <dt class="col-sm-3">Local</dt>
             <dd class="col-sm-9">{{ $mass->location }}</dd>
