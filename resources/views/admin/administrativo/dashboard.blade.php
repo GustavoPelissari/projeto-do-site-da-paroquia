@@ -1,110 +1,73 @@
 @extends('admin.layout')
 
-@section('title', 'Painel Administrativo')
+@section('title', 'Painel administrativo')
 
 @section('content')
-<div class="sp-admin-dashboard">
-    <div class="sp-dashboard-header">
-        <h1 class="sp-page-title">Painel Administrativo</h1>
-        <p class="sp-page-subtitle">Painel de controle para funções administrativas</p>
+<div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
+    <div>
+        <p class="admin-overline mb-1">Área administrativa</p>
+        <h2 class="h3 mb-0">Visão geral</h2>
     </div>
-
-    <!-- Statistics Cards -->
-    <div class="sp-stats-grid">
-        <div class="sp-stat-card">
-            <div class="sp-stat-icon sp-text-accent">
-                <i class="fas fa-newspaper"></i>
-            </div>
-            <div class="sp-stat-content">
-                <h3>{{ $stats['total_news'] }}</h3>
-                <p>Total de Notícias</p>
-            </div>
-        </div>
-
-        <div class="sp-stat-card">
-            <div class="sp-stat-icon sp-text-primary">
-                <i class="fas fa-calendar-alt"></i>
-            </div>
-            <div class="sp-stat-content">
-                <h3>{{ $stats['total_events'] }}</h3>
-                <p>Total de Eventos</p>
-            </div>
-        </div>
-
-        <div class="sp-stat-card">
-            <div class="sp-stat-icon sp-text-liturgy">
-                <i class="fas fa-church"></i>
-            </div>
-            <div class="sp-stat-content">
-                <h3>{{ $stats['total_masses'] }}</h3>
-                <p>Total de Missas</p>
-            </div>
-        </div>
-
-        <div class="sp-stat-card">
-            <div class="sp-stat-icon sp-text-secondary">
-                <i class="fas fa-edit"></i>
-            </div>
-            <div class="sp-stat-content">
-                <h3>{{ $stats['my_news'] }}</h3>
-                <p>Minhas Notícias</p>
-            </div>
-        </div>
-
-        <div class="sp-stat-card">
-            <div class="sp-stat-icon sp-text-tertiary">
-                <i class="fas fa-tasks"></i>
-            </div>
-            <div class="sp-stat-content">
-                <h3>{{ $stats['my_events'] }}</h3>
-                <p>Meus Eventos</p>
-            </div>
-        </div>
+    <div class="d-flex flex-wrap gap-2">
+        <a href="{{ route('admin.administrativo.news.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i>Nova notícia
+        </a>
+        <a href="{{ route('admin.administrativo.events.create') }}" class="btn btn-outline-primary">
+            <i class="bi bi-calendar-plus me-1"></i>Novo evento
+        </a>
     </div>
+</div>
 
-    <!-- Quick Actions -->
-    <div class="sp-dashboard-sections">
-        <div class="sp-dashboard-section">
-            <h2>Ações Rápidas</h2>
-            <div class="sp-action-grid">
-                <a href="{{ route('admin.administrativo.news.create') }}" class="sp-action-card">
-                    <i class="fas fa-plus"></i>
-                    <span>Nova Notícia</span>
-                </a>
-                
-                <a href="{{ route('admin.administrativo.events.create') }}" class="sp-action-card">
-                    <i class="fas fa-calendar-plus"></i>
-                    <span>Novo Evento</span>
-                </a>
-                
-                <a href="{{ route('admin.administrativo.news.index') }}" class="sp-action-card">
-                    <i class="fas fa-list"></i>
-                    <span>Gerenciar Notícias</span>
-                </a>
-                
-                <a href="{{ route('admin.administrativo.events.index') }}" class="sp-action-card">
-                    <i class="fas fa-calendar"></i>
-                    <span>Gerenciar Eventos</span>
-                </a>
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body">
+            <p class="text-secondary small mb-1">Total de notícias</p>
+            <h3 class="h4 mb-0">{{ $stats['total_news'] }}</h3>
+        </div></div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body">
+            <p class="text-secondary small mb-1">Total de eventos</p>
+            <h3 class="h4 mb-0">{{ $stats['total_events'] }}</h3>
+        </div></div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body">
+            <p class="text-secondary small mb-1">Total de missas</p>
+            <h3 class="h4 mb-0">{{ $stats['total_masses'] }}</h3>
+        </div></div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body">
+            <p class="text-secondary small mb-1">Conteúdos criados por você</p>
+            <h3 class="h4 mb-0">{{ $stats['my_news'] + $stats['my_events'] }}</h3>
+        </div></div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-12 col-lg-8">
+        <div class="card h-100">
+            <div class="card-header">
+                <h3 class="h5 mb-0">Acesso rápido</h3>
             </div>
-        </div>
-
-        <div class="sp-dashboard-section">
-            <h2>Informações Importantes</h2>
-            <div class="sp-notice sp-notice-info">
-                <i class="fas fa-info-circle"></i>
-                <div>
-                    <h4>Permissões Administrativas</h4>
-                    <p>Como administrativo, você pode criar e gerenciar notícias e eventos não-globais. Todas as suas criações passam por aprovação antes de serem publicadas.</p>
+            <div class="card-body">
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ route('admin.administrativo.news.index') }}" class="btn btn-outline-primary">Gerenciar notícias</a>
+                    <a href="{{ route('admin.administrativo.events.index') }}" class="btn btn-outline-primary">Gerenciar eventos</a>
+                    <a href="{{ route('admin.administrativo.masses.index') }}" class="btn btn-outline-primary">Horários de missa</a>
                 </div>
             </div>
-            
-            <div class="sp-notice sp-notice-warning">
-                <i class="fas fa-exclamation-triangle"></i>
-                <div>
-                    <h4>Limitações</h4>
-                    <p>Você não pode editar conteúdo global ou de outros usuários. Para alterações em conteúdo global, entre em contato com o administrador geral.</p>
-                </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h3 class="h5 mb-0">Permissões</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-2">Você pode criar e editar conteúdos administrativos.</p>
+                <p class="text-secondary small mb-0">Conteúdos globais continuam sob responsabilidade do administrador global.</p>
             </div>
         </div>
     </div>
