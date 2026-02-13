@@ -113,7 +113,7 @@
 
                         <!-- Informações importantes -->
                         <div class="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                            <h4 class="font-medium text-blue-900 mb-2">ℹ️ Informações Importantes</h4>
+                            <h4 class="font-medium text-blue-900 mb-2"> Informações Importantes</h4>
                             <ul class="text-sm text-blue-800 space-y-1">
                                 <li>• O arquivo PDF será o documento oficial da escala</li>
                                 <li>• Todos os membros do grupo serão notificados automaticamente</li>

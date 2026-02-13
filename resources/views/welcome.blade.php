@@ -16,13 +16,13 @@
 </body>
 </html>
                         <a href="{{ route('register') }}" class="sp-btn sp-btn-gold sp-btn-lg">
-                            ✨ Junte-se à Nossa Comunidade
+                             Junte-se à Nossa Comunidade
                         </a>
                     @endif
                     
                     @if (Route::has('login'))
                         <a href="{{ route('login') }}" class="sp-btn sp-btn-outline sp-btn-lg" style="border-color: var(--sp-white); color: var(--sp-white);">
-                            🚪 Fazer Login
+                             Fazer Login
                         </a>
                     @endif
                 @endauth
@@ -44,7 +44,7 @@
             
             <div class="sp-grid sp-grid-3">
                 <div class="feature-card sp-fade-in">
-                    <span class="feature-icon" style="color: var(--sp-red);">🤝</span>
+                    <span class="feature-icon" style="color: var(--sp-red);"></span>
                     <h3 class="feature-title">Grupos e Pastorais</h3>
                     <p class="feature-text">
                         Participe de nossos grupos de oração, pastorais e movimentos. 
@@ -58,7 +58,7 @@
                 </div>
                 
                 <div class="feature-card sp-fade-in">
-                    <span class="feature-icon" style="color: var(--sp-teal);">⛪</span>
+                    <span class="feature-icon" style="color: var(--sp-teal);"></span>
                     <h3 class="feature-title">Vida Litúrgica</h3>
                     <p class="feature-text">
                         Celebre conosco a Eucaristia e os sacramentos. 
@@ -78,7 +78,7 @@
                 </div>
                 
                 <div class="feature-card sp-fade-in">
-                    <span class="feature-icon" style="color: var(--sp-gold);">❤️</span>
+                    <span class="feature-icon" style="color: var(--sp-gold);"></span>
                     <h3 class="feature-title">Vida Comunitária</h3>
                     <p class="feature-text">
                         Faça parte de uma família unida pela fé. 

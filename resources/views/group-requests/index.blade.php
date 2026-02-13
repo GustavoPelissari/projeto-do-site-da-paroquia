@@ -7,7 +7,7 @@
         {{-- Hero Section --}}
         <section class="section-paroquia">
             <div class="section-header">
-                <h1>📥 Gerenciar Solicitações</h1>
+                <h1> Gerenciar Solicitações</h1>
                 <p class="lead">
                     Analise e responda às solicitações de entrada no seu grupo ou pastoral
                 </p>
@@ -17,7 +17,7 @@
         {{-- Alerts --}}
         @if (session('success'))
             <div class="alert alert-success d-flex align-items-center mb-4">
-                <div class="me-3">✅</div>
+                <div class="me-3"></div>
                 <div>
                     <strong>Sucesso!</strong> {{ session('success') }}
                 </div>
@@ -26,7 +26,7 @@
 
         @if (session('error'))
             <div class="alert alert-danger d-flex align-items-center mb-4">
-                <div class="me-3">❌</div>
+                <div class="me-3"></div>
                 <div>
                     <strong>Erro!</strong> {{ session('error') }}
                 </div>
@@ -44,13 +44,13 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
                                     <div class="d-flex align-items-center mb-2">
-                                        <h3 class="h5 mb-0">👤 {{ $request->user->name }}</h3>
+                                        <h3 class="h5 mb-0"> {{ $request->user->name }}</h3>
                                         <span class="badge bg-secondary ms-3">
                                             {{ $request->user->email }}
                                         </span>
                                     </div>
                                     <p class="text-muted small">
-                                        📅 Solicitado em {{ $request->created_at->format('d/m/Y \à\s H:i') }}
+                                         Solicitado em {{ $request->created_at->format('d/m/Y \à\s H:i') }}
                                     </p>
                                 </div>
                                 
@@ -58,9 +58,9 @@
                                     @if($request->status === 'pending')
                                         ⏳ Aguardando Análise
                                     @elseif($request->status === 'approved')
-                                        ✅ Aprovada
+                                         Aprovada
                                     @else
-                                        ❌ Rejeitada
+                                         Rejeitada
                                     @endif
                                 </span>
                             </div>
@@ -73,7 +73,7 @@
                             @if($request->message)
                                 <div class="card mb-3" style="background: var(--sp-pergaminho); border: 1px solid rgba(200, 134, 13, 0.2);">
                                     <div class="card-header py-2">
-                                        <h6 class="mb-0 fw-semibold text-dourado">💬 Mensagem do Candidato</h6>
+                                        <h6 class="mb-0 fw-semibold text-dourado"> Mensagem do Candidato</h6>
                                     </div>
                                     <div class="card-body py-2">
                                         <p class="small fst-italic text-muted mb-0">
@@ -87,7 +87,7 @@
                             @if($request->availability)
                                 <div class="card mb-3" style="background: var(--sp-marfim); border: 1px solid rgba(59, 130, 246, 0.2);">
                                     <div class="card-header py-2">
-                                        <h6 class="mb-0 fw-semibold text-celestial">📅 Disponibilidade Informada</h6>
+                                        <h6 class="mb-0 fw-semibold text-celestial"> Disponibilidade Informada</h6>
                                     </div>
                                     <div class="card-body py-2">
                                         <p class="small text-muted mb-0">
@@ -101,7 +101,7 @@
                             @if($request->status === 'pending')
                                 <div class="card" style="background: var(--sp-marfim); border: 1px solid rgba(107, 114, 128, 0.2);">
                                     <div class="card-header">
-                                        <h5 class="mb-0 fw-semibold text-azul">🎯 Tomar Decisão</h5>
+                                        <h5 class="mb-0 fw-semibold text-azul"> Tomar Decisão</h5>
                                     </div>
                                     <div class="card-body">
                                         <form action="{{ route('group-requests.approve', $request) }}" method="POST" id="approve-form-{{ $request->id }}" class="d-none">
@@ -116,7 +116,7 @@
 
                                         <div class="mb-3">
                                             <label for="response_message_{{ $request->id }}" class="form-label fw-semibold">
-                                                💌 Mensagem de Resposta (opcional)
+                                                 Mensagem de Resposta (opcional)
                                             </label>
                                             <textarea 
                                                 id="response_message_{{ $request->id }}" 
@@ -125,7 +125,7 @@
                                                 class="form-control"
                                             ></textarea>
                                             <div class="form-text">
-                                                💡 Uma mensagem personalizada ajuda o candidato a entender sua decisão.
+                                                 Uma mensagem personalizada ajuda o candidato a entender sua decisão.
                                             </div>
                                         </div>
                                         
@@ -135,14 +135,14 @@
                                                 onclick="approveRequest({{ $request->id }})"
                                                 class="btn btn-success btn-lg"
                                             >
-                                                ✅ Aprovar Solicitação
+                                                 Aprovar Solicitação
                                             </button>
                                             <button 
                                                 type="button"
                                                 onclick="rejectRequest({{ $request->id }})"
                                                 class="btn btn-danger btn-lg"
                                             >
-                                                ❌ Rejeitar Solicitação
+                                                 Rejeitar Solicitação
                                             </button>
                                         </div>
                                     </div>
@@ -153,9 +153,9 @@
                                     <div class="card-header">
                                         <h5 class="mb-0 fw-semibold" style="color: {{ $request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)' }};">
                                             @if($request->status === 'approved')
-                                                ✅ Solicitação Aprovada
+                                                 Solicitação Aprovada
                                             @else
-                                                ❌ Solicitação Rejeitada
+                                                 Solicitação Rejeitada
                                             @endif
                                         </h5>
                                     </div>
@@ -180,13 +180,13 @@
                 @empty
                     <div class="card-paroquia text-center">
                         <div class="card-body py-5">
-                            <div class="mb-4" style="font-size: 4rem; color: var(--sp-cinza-pedra);">📥</div>
+                            <div class="mb-4" style="font-size: 4rem; color: var(--sp-cinza-pedra);"></div>
                             <h3 class="h4 mb-3">Nenhuma solicitação encontrada</h3>
                             <p class="text-muted mb-4">
                                 Não há solicitações para o seu grupo no momento. Quando alguém solicitar entrada, aparecerá aqui.
                             </p>
                             <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-outline-primary btn-lg">
-                                📊 Voltar ao Painel
+                                 Voltar ao Painel
                             </a>
                         </div>
                     </div>
@@ -199,26 +199,26 @@
             <div class="container">
                 <div class="card-paroquia" style="background: var(--sp-pergaminho); border-left: 4px solid var(--sp-dourado-principal);">
                     <div class="card-header-paroquia">
-                        <h3 class="text-azul">💡 Orientações para Coordenadores</h3>
+                        <h3 class="text-azul"> Orientações para Coordenadores</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <h5 class="fw-semibold mb-3 text-azul">Ao aprovar:</h5>
                                 <ul class="list-unstyled">
-                                    <li class="mb-2">✓ Certifique-se de que o candidato tem disponibilidade</li>
-                                    <li class="mb-2">✓ Verifique se entendeu bem a motivação</li>
-                                    <li class="mb-2">✓ Deixe uma mensagem acolhedora</li>
-                                    <li class="mb-2">✓ Explique os próximos passos</li>
+                                    <li class="mb-2"> Certifique-se de que o candidato tem disponibilidade</li>
+                                    <li class="mb-2"> Verifique se entendeu bem a motivação</li>
+                                    <li class="mb-2"> Deixe uma mensagem acolhedora</li>
+                                    <li class="mb-2"> Explique os próximos passos</li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <h5 class="fw-semibold mb-3 text-azul">Ao rejeitar:</h5>
                                 <ul class="list-unstyled">
-                                    <li class="mb-2">✓ Seja respeitoso e construtivo</li>
-                                    <li class="mb-2">✓ Explique os motivos da decisão</li>
-                                    <li class="mb-2">✓ Sugira outras formas de participação</li>
-                                    <li class="mb-2">✓ Mantenha a porta aberta para o futuro</li>
+                                    <li class="mb-2"> Seja respeitoso e construtivo</li>
+                                    <li class="mb-2"> Explique os motivos da decisão</li>
+                                    <li class="mb-2"> Sugira outras formas de participação</li>
+                                    <li class="mb-2"> Mantenha a porta aberta para o futuro</li>
                                 </ul>
                             </div>
                         </div>
@@ -231,7 +231,7 @@
     {{-- JavaScript para as ações --}}
     <script>
         function approveRequest(requestId) {
-            if (confirm('🤝 Tem certeza que deseja APROVAR esta solicitação?\n\nO candidato será notificado e poderá participar do grupo.')) {
+            if (confirm(' Tem certeza que deseja APROVAR esta solicitação?\n\nO candidato será notificado e poderá participar do grupo.')) {
                 const message = document.getElementById(`response_message_${requestId}`).value;
                 document.getElementById(`approve-message-${requestId}`).value = message;
                 document.getElementById(`approve-form-${requestId}`).submit();
@@ -239,7 +239,7 @@
         }
 
         function rejectRequest(requestId) {
-            if (confirm('❌ Tem certeza que deseja REJEITAR esta solicitação?\n\nO candidato será notificado da decisão.')) {
+            if (confirm(' Tem certeza que deseja REJEITAR esta solicitação?\n\nO candidato será notificado da decisão.')) {
                 const message = document.getElementById(`response_message_${requestId}`).value;
                 document.getElementById(`reject-message-${requestId}`).value = message;
                 document.getElementById(`reject-form-${requestId}`).submit();

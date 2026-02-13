@@ -7,7 +7,7 @@
         {{-- Hero Section --}}
         <section class="sp-hero">
             <div class="sp-hero-content">
-                <h1 class="sp-hero-title">📋 Minhas Solicitações</h1>
+                <h1 class="sp-hero-title"> Minhas Solicitações</h1>
                 <p class="sp-hero-subtitle">
                     Acompanhe o status das suas solicitações de entrada em grupos e pastorais
                 </p>
@@ -17,7 +17,7 @@
         {{-- Alerts --}}
         @if (session('success'))
             <div class="sp-alert sp-alert-success sp-mb-6">
-                <div class="sp-alert-icon">✅</div>
+                <div class="sp-alert-icon"></div>
                 <div class="sp-alert-content">
                     <strong>Sucesso!</strong> {{ session('success') }}
                 </div>
@@ -26,7 +26,7 @@
 
         @if (session('error'))
             <div class="sp-alert sp-alert-error sp-mb-6">
-                <div class="sp-alert-icon">❌</div>
+                <div class="sp-alert-icon"></div>
                 <div class="sp-alert-content">
                     <strong>Atenção!</strong> {{ session('error') }}
                 </div>
@@ -43,7 +43,7 @@
                             Envie uma nova solicitação para se juntar a outros grupos da nossa paróquia.
                         </p>
                         <a href="{{ route('group-requests.create') }}" class="sp-btn sp-btn-gold sp-btn-lg">
-                            ➕ Nova Solicitação
+                             Nova Solicitação
                         </a>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <div class="sp-card-header">
                             <div class="sp-flex sp-justify-between sp-items-start">
                                 <div>
-                                    <h3 class="sp-card-title">🏛️ {{ $request->group->name }}</h3>
+                                    <h3 class="sp-card-title"> {{ $request->group->name }}</h3>
                                     <p class="sp-text-sm sp-text-muted">
                                         Solicitado em {{ $request->created_at->format('d/m/Y \à\s H:i') }}
                                     </p>
@@ -70,9 +70,9 @@
                                     @if($request->status === 'pending')
                                         ⏳ Pendente
                                     @elseif($request->status === 'approved')
-                                        ✅ Aprovada
+                                         Aprovada
                                     @else
-                                        ❌ Rejeitada
+                                         Rejeitada
                                     @endif
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                 <div class="sp-timeline-item">
                                     <div class="sp-timeline-marker sp-timeline-marker-blue"></div>
                                     <div class="sp-timeline-content">
-                                        <h4 class="sp-font-semibold sp-text-blue-900">📝 Solicitação Enviada</h4>
+                                        <h4 class="sp-font-semibold sp-text-blue-900"> Solicitação Enviada</h4>
                                         <p class="sp-text-sm sp-text-muted">
                                             {{ $request->created_at->format('d/m/Y \à\s H:i') }}
                                         </p>
@@ -110,9 +110,9 @@
                                         <div class="sp-timeline-content">
                                             <h4 class="sp-font-semibold" style="color: {{ $request->status === 'approved' ? 'var(--sp-teal)' : 'var(--sp-red)' }};">
                                                 @if($request->status === 'approved')
-                                                    ✅ Solicitação Aprovada
+                                                     Solicitação Aprovada
                                                 @else
-                                                    ❌ Solicitação Rejeitada
+                                                     Solicitação Rejeitada
                                                 @endif
                                             </h4>
                                             <p class="sp-text-sm sp-text-muted">
@@ -138,12 +138,12 @@
                             {{-- Informações do Grupo --}}
                             <div class="sp-card sp-mt-4" style="background: var(--sp-ivory); border: 1px solid var(--sp-gray-200);">
                                 <div class="sp-card-header">
-                                    <h4 class="sp-text-lg sp-font-semibold" style="color: var(--sp-red);">📖 Informações do Grupo</h4>
+                                    <h4 class="sp-text-lg sp-font-semibold" style="color: var(--sp-red);"> Informações do Grupo</h4>
                                 </div>
                                 <div class="sp-card-content">
                                     <div class="sp-grid sp-grid-2">
                                         <div class="sp-flex sp-items-center sp-mb-2">
-                                            <span class="sp-icon">🏷️</span>
+                                            <span class="sp-icon"></span>
                                             <span class="sp-text-sm">
                                                 <strong>Categoria:</strong> {{ $request->group->getCategoryName() }}
                                             </span>
@@ -151,7 +151,7 @@
                                         
                                         @if($request->group->requires_scale)
                                             <div class="sp-flex sp-items-center sp-mb-2">
-                                                <span class="sp-icon">📅</span>
+                                                <span class="sp-icon"></span>
                                                 <span class="sp-text-sm">
                                                     <strong>Tipo:</strong> Grupo com escala
                                                 </span>
@@ -160,7 +160,7 @@
                                         
                                         @if($request->group->coordinator_name)
                                             <div class="sp-flex sp-items-center sp-mb-2">
-                                                <span class="sp-icon">👤</span>
+                                                <span class="sp-icon"></span>
                                                 <span class="sp-text-sm">
                                                     <strong>Coordenador:</strong> {{ $request->group->coordinator_name }}
                                                 </span>
@@ -169,7 +169,7 @@
                                         
                                         @if($request->group->coordinator_phone)
                                             <div class="sp-flex sp-items-center sp-mb-2">
-                                                <span class="sp-icon">📞</span>
+                                                <span class="sp-icon"></span>
                                                 <span class="sp-text-sm">
                                                     <strong>Contato:</strong> {{ $request->group->coordinator_phone }}
                                                 </span>
@@ -179,7 +179,7 @@
 
                                     @if($request->group->meeting_info)
                                         <div class="sp-flex sp-items-center sp-mt-3 sp-pt-3" style="border-top: 1px solid var(--sp-gray-200);">
-                                            <span class="sp-icon">📅</span>
+                                            <span class="sp-icon"></span>
                                             <span class="sp-text-sm">
                                                 <strong>Reuniões:</strong> {{ $request->group->meeting_info }}
                                             </span>
@@ -191,7 +191,7 @@
                             {{-- Ações para solicitações aprovadas --}}
                             @if($request->status === 'approved')
                                 <div class="sp-alert sp-alert-success sp-mt-4">
-                                    <div class="sp-alert-icon">🎉</div>
+                                    <div class="sp-alert-icon"></div>
                                     <div class="sp-alert-content">
                                         <strong>Parabéns!</strong> Você agora faz parte do grupo <strong>{{ $request->group->name }}</strong>.
                                         @if($request->group->requires_scale)
@@ -205,14 +205,14 @@
                 @empty
                     <div class="sp-card sp-text-center">
                         <div class="sp-card-content">
-                            <div class="sp-icon-large sp-mb-4" style="color: var(--sp-gray-light);">📝</div>
+                            <div class="sp-icon-large sp-mb-4" style="color: var(--sp-gray-light);"></div>
                             <h3 class="sp-title-lg sp-mb-2">Nenhuma solicitação encontrada</h3>
                             <p class="sp-text-muted sp-mb-6">
                                 Você ainda não fez nenhuma solicitação de entrada em grupos.
                             </p>
                             @if(!auth()->user()->parish_group_id)
                                 <a href="{{ route('group-requests.create') }}" class="sp-btn sp-btn-gold sp-btn-lg">
-                                    📝 Fazer Primeira Solicitação
+                                     Fazer Primeira Solicitação
                                 </a>
                             @endif
                         </div>
@@ -230,7 +230,7 @@
                         Se tiver dúvidas sobre suas solicitações, entre em contato com os coordenadores.
                     </p>
                     <a href="{{ route('groups') }}" class="sp-btn sp-btn-outline sp-btn-lg">
-                        📖 Ver Todos os Grupos
+                         Ver Todos os Grupos
                     </a>
                 </div>
             </div>
@@ -372,7 +372,7 @@
                                         <div class="mt-4 pt-4 border-t border-gray-200">
                                             <div class="bg-green-50 border border-green-200 rounded p-3">
                                                 <p class="text-sm text-green-800">
-                                                    🎉 <span class="font-medium">Parabéns!</span> Você agora faz parte do grupo <strong>{{ $request->group->name }}</strong>.
+                                                     <span class="font-medium">Parabéns!</span> Você agora faz parte do grupo <strong>{{ $request->group->name }}</strong>.
                                                     @if($request->group->requires_scale)
                                                         Fique atento às escalas que serão publicadas.
                                                     @endif
@@ -390,7 +390,7 @@
                         </div>
                     @else
                         <div class="text-center py-12">
-                            <div class="text-gray-400 text-6xl mb-4">📝</div>
+                            <div class="text-gray-400 text-6xl mb-4"></div>
                             <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhuma solicitação encontrada</h3>
                             <p class="text-gray-600 mb-6">Você ainda não fez nenhuma solicitação de entrada em grupos.</p>
                             

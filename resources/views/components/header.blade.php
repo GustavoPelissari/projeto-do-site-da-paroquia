@@ -84,7 +84,7 @@
                         <a href="{{ route('profile.edit') }}" 
                            class="sp-nav-link" 
                            style="display: block; margin: 0; padding: var(--space-sm); border-radius: var(--radius-sm);">
-                            👤 Meu Perfil
+                             Meu Perfil
                         </a>
                         
                         {{-- Menu para usuário padrão --}}
@@ -93,13 +93,13 @@
                                style="display: block; padding: var(--space-sm); color: var(--sp-gray-dark); text-decoration: none; border-radius: var(--radius-sm); transition: background-color var(--transition-fast);"
                                onmouseover="this.style.backgroundColor='var(--sp-ivory)'"
                                onmouseout="this.style.backgroundColor='transparent'">
-                                📝 Solicitar Entrada em Grupo
+                                 Solicitar Entrada em Grupo
                             </a>
                             <a href="{{ route('group-requests.my-requests') }}" 
                                style="display: block; padding: var(--space-sm); color: var(--sp-gray-dark); text-decoration: none; border-radius: var(--radius-sm); transition: background-color var(--transition-fast);"
                                onmouseover="this.style.backgroundColor='var(--sp-ivory)'"
                                onmouseout="this.style.backgroundColor='transparent'">
-                                📋 Minhas Solicitações
+                                 Minhas Solicitações
                             </a>
                         @endif
 
@@ -109,14 +109,14 @@
                                style="display: block; padding: var(--space-sm); color: var(--sp-gray-dark); text-decoration: none; border-radius: var(--radius-sm); transition: background-color var(--transition-fast);"
                                onmouseover="this.style.backgroundColor='var(--sp-ivory)'"
                                onmouseout="this.style.backgroundColor='transparent'">
-                                ✉️ Solicitações Pendentes
+                                 Solicitações Pendentes
                             </a>
                             @if(Route::has('admin.schedules.index'))
                             <a href="{{ route('admin.schedules.index') }}" 
                                style="display: block; padding: var(--space-sm); color: var(--sp-gray-dark); text-decoration: none; border-radius: var(--radius-sm); transition: background-color var(--transition-fast);"
                                onmouseover="this.style.backgroundColor='var(--sp-ivory)'"
                                onmouseout="this.style.backgroundColor='transparent'">
-                                📅 Gerenciar Escalas
+                                 Gerenciar Escalas
                             </a>
                             @endif
                         @endif
@@ -128,7 +128,7 @@
                                style="display: block; padding: var(--space-sm); color: var(--sp-gray-dark); text-decoration: none; border-radius: var(--radius-sm); transition: background-color var(--transition-fast);"
                                onmouseover="this.style.backgroundColor='var(--sp-ivory)'"
                                onmouseout="this.style.backgroundColor='transparent'">
-                                👥 Gerenciar Usuários
+                                 Gerenciar Usuários
                             </a>
                             @endif
                             @if(Route::has('admin.groups.index'))
@@ -136,7 +136,7 @@
                                style="display: block; padding: var(--space-sm); color: var(--sp-gray-dark); text-decoration: none; border-radius: var(--radius-sm); transition: background-color var(--transition-fast);"
                                onmouseover="this.style.backgroundColor='var(--sp-ivory)'"
                                onmouseout="this.style.backgroundColor='transparent'">
-                                🏛️ Gerenciar Grupos
+                                 Gerenciar Grupos
                             </a>
                             @endif
                         @endif
@@ -151,7 +151,7 @@
                                     style="display: block; width: 100%; text-align: left; padding: var(--space-sm); color: var(--sp-red); background: none; border: none; cursor: pointer; border-radius: var(--radius-sm); transition: background-color var(--transition-fast);"
                                     onmouseover="this.style.backgroundColor='var(--sp-ivory)'"
                                     onmouseout="this.style.backgroundColor='transparent'">
-                                🚪 Sair
+                                 Sair
                             </button>
                         </form>
                     </div>
@@ -166,7 +166,7 @@
                            style="border-color: var(--sp-red); color: var(--sp-red); font-weight: 500; padding: var(--space-2) var(--space-4); transition: all 0.3s ease;"
                            onmouseover="this.style.background='var(--sp-red)'; this.style.color='white'; this.style.transform='translateY(-1px)'"
                            onmouseout="this.style.background='transparent'; this.style.color='var(--sp-red)'; this.style.transform='translateY(0)'">
-                            🔑 Entrar
+                             Entrar
                         </a>
                     @endif
                     
@@ -176,7 +176,7 @@
                            style="background: linear-gradient(135deg, var(--sp-gold) 0%, var(--sp-gold-light) 100%); color: var(--sp-red-900); border: none; font-weight: 600; padding: var(--space-2) var(--space-4); box-shadow: 0 2px 8px rgba(212,175,55,0.3); transition: all 0.3s ease;"
                            onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 4px 15px rgba(212,175,55,0.4)'"
                            onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 2px 8px rgba(212,175,55,0.3)'">
-                            ✨ Cadastrar
+                             Cadastrar
                         </a>
                     @endif
                 </div>

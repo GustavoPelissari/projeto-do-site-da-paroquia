@@ -66,7 +66,7 @@
                              class="card-img-top" style="height: 12rem; object-fit: cover;">
                     @else
                         <div class="card-img-top bg-secondary-subtle d-flex align-items-center justify-content-center" style="height: 12rem;">
-                            <span class="text-muted display-4">👥</span>
+                            <span class="text-muted display-4"></span>
                         </div>
                     @endif
                     
@@ -115,7 +115,7 @@
             </div>
         @else
             <div class="text-center py-5">
-                <div class="display-1 text-muted mb-3">👥</div>
+                <div class="display-1 text-muted mb-3"></div>
                 <h3 class="h4 fw-medium mb-2">Nenhum grupo encontrado</h3>
                 <p class="text-muted mb-3">Comece criando seu primeiro grupo.</p>
                 <a href="{{ route('admin.global.groups.create') }}" 

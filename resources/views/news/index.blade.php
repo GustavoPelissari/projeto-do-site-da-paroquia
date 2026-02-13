@@ -7,7 +7,7 @@
         {{-- Hero Section --}}
         <section class="sp-hero">
             <div class="sp-hero-content">
-                <h1 class="sp-hero-title">📰 Notícias da Paróquia</h1>
+                <h1 class="sp-hero-title"> Notícias da Paróquia</h1>
                 <p class="sp-hero-subtitle">
                     Fique por dentro das últimas novidades e acontecimentos da nossa comunidade
                 </p>
@@ -34,22 +34,22 @@
                                              class="sp-image-cover">
                                     @else
                                         <div class="sp-image-placeholder sp-image-placeholder-featured">
-                                            <span class="sp-placeholder-icon">📰</span>
+                                            <span class="sp-placeholder-icon"></span>
                                         </div>
                                     @endif
                                     <div class="sp-featured-badge">
-                                        <span class="sp-badge sp-badge-gold sp-badge-lg">⭐ Destaque</span>
+                                        <span class="sp-badge sp-badge-gold sp-badge-lg">Destaque</span>
                                     </div>
                                 </div>
                                 
                                 <div class="sp-featured-content">
                                     <div class="sp-article-meta">
                                         <span class="sp-meta-item">
-                                            📅 {{ $featuredNews->published_at->format('d/m/Y') }}
+                                             {{ $featuredNews->published_at->format('d/m/Y') }}
                                         </span>
                                         <span class="sp-meta-divider">•</span>
                                         <span class="sp-meta-item">
-                                            👤 {{ $featuredNews->user->name }}
+                                             {{ $featuredNews->user->name }}
                                         </span>
                                     </div>
                                     
@@ -69,7 +69,7 @@
                                     
                                     <a href="{{ route('news.show', $featuredNews->id) }}" 
                                        class="sp-btn sp-btn-primary sp-btn-lg">
-                                        📖 Ler Notícia Completa
+                                         Ler Notícia Completa
                                     </a>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                                      class="sp-image-cover">
                                             @else
                                                 <div class="sp-image-placeholder">
-                                                    <span class="sp-placeholder-icon">📰</span>
+                                                    <span class="sp-placeholder-icon"></span>
                                                 </div>
                                             @endif
                                         </div>
@@ -97,11 +97,11 @@
                                         <div class="sp-card-content">
                                             <div class="sp-article-meta sp-mb-3">
                                                 <span class="sp-meta-item">
-                                                    📅 {{ $article->published_at->format('d/m/Y') }}
+                                                     {{ $article->published_at->format('d/m/Y') }}
                                                 </span>
                                                 <span class="sp-meta-divider">•</span>
                                                 <span class="sp-meta-item">
-                                                    👤 {{ $article->user->name }}
+                                                     {{ $article->user->name }}
                                                 </span>
                                             </div>
                                             
@@ -139,14 +139,14 @@
                 @else
                     {{-- Empty State --}}
                     <div class="sp-empty-state sp-text-center">
-                        <div class="sp-empty-icon">📰</div>
+                        <div class="sp-empty-icon"></div>
                         <h3 class="sp-empty-title">Nenhuma notícia encontrada</h3>
                         <p class="sp-empty-description">
                             Volte em breve para conferir as novidades da nossa paróquia. 
                             Nossa equipe está sempre trabalhando para mantê-lo informado!
                         </p>
                         <a href="{{ route('home') }}" class="sp-btn sp-btn-primary sp-mt-6">
-                            🏠 Voltar à Página Inicial
+                             Voltar à Página Inicial
                         </a>
                     </div>
                 @endif
@@ -165,10 +165,10 @@
                         </p>
                         <div class="sp-flex sp-justify-center sp-gap-4">
                             <a href="#" class="sp-btn sp-btn-primary">
-                                📱 Redes Sociais
+                                 Redes Sociais
                             </a>
                             <a href="{{ route('groups.index') }}" class="sp-btn sp-btn-outline">
-                                👥 Participar de Grupos
+                                 Participar de Grupos
                             </a>
                         </div>
                     </div>

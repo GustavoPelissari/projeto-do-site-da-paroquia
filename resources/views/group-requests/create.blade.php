@@ -7,7 +7,7 @@
         {{-- Hero Section --}}
         <section class="sp-hero">
             <div class="sp-hero-content">
-                <h1 class="sp-hero-title">🙏 Participar da Nossa Comunidade</h1>
+                <h1 class="sp-hero-title"> Participar da Nossa Comunidade</h1>
                 <p class="sp-hero-subtitle">
                     Envie uma solicitação para se juntar a um dos nossos grupos e pastorais
                 </p>
@@ -17,7 +17,7 @@
         {{-- Alerts --}}
         @if (session('success'))
             <div class="sp-alert sp-alert-success sp-mb-6">
-                <div class="sp-alert-icon">✅</div>
+                <div class="sp-alert-icon"></div>
                 <div class="sp-alert-content">
                     <strong>Sucesso!</strong> {{ session('success') }}
                 </div>
@@ -26,7 +26,7 @@
 
         @if ($errors->any())
             <div class="sp-alert sp-alert-error sp-mb-6">
-                <div class="sp-alert-icon">❌</div>
+                <div class="sp-alert-icon"></div>
                 <div class="sp-alert-content">
                     <strong>Atenção!</strong> Corrija os erros abaixo:
                     <ul class="sp-list sp-mt-2">
@@ -46,7 +46,7 @@
                     {{-- Formulário --}}
                     <div class="sp-card">
                         <div class="sp-card-header">
-                            <h2 class="sp-card-title">📝 Formulário de Solicitação</h2>
+                            <h2 class="sp-card-title"> Formulário de Solicitação</h2>
                         </div>
                         
                         <form action="{{ route('group-requests.store') }}" method="POST" class="sp-card-content">
@@ -55,7 +55,7 @@
                             {{-- Grupo Desejado --}}
                             <div class="sp-form-group">
                                 <label for="group_id" class="sp-label">
-                                    🏛️ Grupo Desejado <span class="sp-text-error">*</span>
+                                     Grupo Desejado <span class="sp-text-error">*</span>
                                 </label>
                                 <select id="group_id" name="group_id" required class="sp-select">
                                     <option value="">Selecione um grupo...</option>
@@ -76,7 +76,7 @@
                             {{-- Mensagem --}}
                             <div class="sp-form-group">
                                 <label for="message" class="sp-label">
-                                    💬 Mensagem <span class="sp-text-error">*</span>
+                                     Mensagem <span class="sp-text-error">*</span>
                                 </label>
                                 <textarea 
                                     id="message" 
@@ -90,14 +90,14 @@
                                     <div class="sp-form-error">{{ $message }}</div>
                                 @enderror
                                 <div class="sp-form-help">
-                                    💡 Mínimo de 10 caracteres. Seja claro sobre suas motivações e como deseja servir.
+                                     Mínimo de 10 caracteres. Seja claro sobre suas motivações e como deseja servir.
                                 </div>
                             </div>
 
                             {{-- Disponibilidade --}}
                             <div class="sp-form-group">
                                 <label for="availability" class="sp-label">
-                                    📅 Disponibilidade
+                                     Disponibilidade
                                 </label>
                                 <textarea 
                                     id="availability" 
@@ -117,7 +117,7 @@
                                     ← Voltar aos Grupos
                                 </a>
                                 <button type="submit" class="sp-btn sp-btn-gold sp-btn-lg">
-                                    🚀 Enviar Solicitação
+                                     Enviar Solicitação
                                 </button>
                             </div>
                         </form>
@@ -126,7 +126,7 @@
                     {{-- Informações dos Grupos --}}
                     <div class="sp-card">
                         <div class="sp-card-header">
-                            <h3 class="sp-card-title">🏛️ Grupos Disponíveis</h3>
+                            <h3 class="sp-card-title"> Grupos Disponíveis</h3>
                         </div>
                         <div class="sp-card-content">
                             @forelse($groups as $group)
@@ -144,14 +144,14 @@
 
                                         @if($group->coordinator_name)
                                             <div class="sp-flex sp-items-center sp-text-xs sp-text-muted">
-                                                <span class="sp-icon">👤</span>
+                                                <span class="sp-icon"></span>
                                                 <span>Coordenador: {{ $group->coordinator_name }}</span>
                                             </div>
                                         @endif
 
                                         @if($group->meeting_info)
                                             <div class="sp-flex sp-items-center sp-text-xs sp-text-muted sp-mt-1">
-                                                <span class="sp-icon">📅</span>
+                                                <span class="sp-icon"></span>
                                                 <span>{{ $group->meeting_info }}</span>
                                             </div>
                                         @endif
@@ -163,7 +163,7 @@
                                 </div>
                             @empty
                                 <div class="sp-text-center sp-py-8">
-                                    <div class="sp-icon-large sp-mb-4" style="color: var(--sp-gray-light);">🏛️</div>
+                                    <div class="sp-icon-large sp-mb-4" style="color: var(--sp-gray-light);"></div>
                                     <p class="sp-text-muted">Nenhum grupo disponível no momento.</p>
                                 </div>
                             @endforelse
@@ -178,7 +178,7 @@
             <div class="sp-content-wrapper">
                 <div class="sp-card" style="background: var(--sp-ivory); border-left: 4px solid var(--sp-gold);">
                     <div class="sp-card-header">
-                        <h3 class="sp-card-title" style="color: var(--sp-red);">💡 Orientações Importantes</h3>
+                        <h3 class="sp-card-title" style="color: var(--sp-red);"> Orientações Importantes</h3>
                     </div>
                     <div class="sp-card-content">
                         <div class="sp-grid sp-grid-2">
@@ -215,7 +215,7 @@
                         Converse conosco para esclarecer dúvidas sobre os grupos e pastorais.
                     </p>
                     <a href="{{ route('groups') }}" class="sp-btn sp-btn-outline sp-btn-lg">
-                        📖 Conhecer Todos os Grupos
+                         Conhecer Todos os Grupos
                     </a>
                 </div>
             </div>

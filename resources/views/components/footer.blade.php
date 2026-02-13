@@ -9,17 +9,17 @@
                 
                 <div style="margin-top: var(--space-lg);">
                     <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
-                        <span>📧</span>
+                        <span></span>
                         <a href="mailto:contato@paroquiasaopaulo.org.br">contato@paroquiasaopaulo.org.br</a>
                     </div>
                     
                     <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-sm);">
-                        <span>📞</span>
+                        <span></span>
                         <a href="tel:+5511999999999">(11) 99999-9999</a>
                     </div>
                     
                     <div style="display: flex; align-items: center; gap: var(--space-sm);">
-                        <span>📍</span>
+                        <span></span>
                         <span>Rua São Paulo Apóstolo, 123 - Centro - São Paulo/SP</span>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                     <span>•</span>
                     <span>Todos os direitos reservados</span>
                     <span>•</span>
-                    <span>Desenvolvido com ❤️ para a comunidade</span>
+                    <span>Desenvolvido para a comunidade</span>
                 </div>
                 
                 <div style="font-size: var(--text-xs); color: var(--sp-gold-light);">

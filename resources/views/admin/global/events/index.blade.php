@@ -137,7 +137,7 @@
             </div>
         @else
             <div class="text-center py-5">
-                <div class="display-1 text-muted mb-3">📅</div>
+                <div class="display-1 text-muted mb-3"></div>
                 <h3 class="h4 fw-medium mb-2">Nenhum evento encontrado</h3>
                 <p class="text-muted mb-3">Comece criando seu primeiro evento.</p>
                 <a href="{{ route('admin.global.events.create') }}" 

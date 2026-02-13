@@ -151,14 +151,14 @@
 
 @section('content')
 <div class="news-header">
-    <h1>📰 Minhas Notícias</h1>
+    <h1> Minhas Notícias</h1>
     <p>Gerencie as notícias que você criou</p>
 </div>
 
 <div class="news-actions">
     <h2 style="margin: 0; color: var(--sp-teal-dark);">Lista de Notícias</h2>
     <a href="{{ route('admin.coordinator.news.create') }}" class="btn btn-primary">
-        ➕ Nova Notícia
+         Nova Notícia
     </a>
 </div>
 
@@ -168,14 +168,14 @@
             <div class="news-header-card">
                 <h3 class="news-title">{{ $item->title }}</h3>
                 <span class="news-status {{ $item->status === 'published' ? 'status-published' : 'status-draft' }}">
-                    {{ $item->status === 'published' ? '✅ Publicada' : '📝 Rascunho' }}
+                    {{ $item->status === 'published' ? ' Publicada' : ' Rascunho' }}
                 </span>
             </div>
             
             <div class="news-meta">
-                <span>📅 {{ $item->created_at->format('d/m/Y H:i') }}</span>
+                <span> {{ $item->created_at->format('d/m/Y H:i') }}</span>
                 @if($item->published_at)
-                    <span>🌐 Publicada em {{ $item->published_at->format('d/m/Y') }}</span>
+                    <span> Publicada em {{ $item->published_at->format('d/m/Y') }}</span>
                 @endif
             </div>
             
@@ -185,26 +185,26 @@
             
             <div class="news-actions-card">
                 <a href="{{ route('admin.coordinator.news.edit', $item) }}" class="btn btn-secondary">
-                    ✏️ Editar
+                     Editar
                 </a>
                 @if($item->status === 'published')
                     <span class="btn btn-secondary" style="opacity: 0.6; cursor: not-allowed;">
-                        👁️ Publicada
+                         Publicada
                     </span>
                 @else
                     <span class="btn btn-secondary" style="opacity: 0.6; cursor: not-allowed;">
-                        📝 Rascunho
+                         Rascunho
                     </span>
                 @endif
             </div>
         </div>
     @empty
         <div class="empty-state">
-            <div class="empty-icon">📰</div>
+            <div class="empty-icon"></div>
             <h3>Nenhuma notícia encontrada</h3>
             <p>Você ainda não criou nenhuma notícia. Clique no botão acima para criar sua primeira notícia!</p>
             <a href="{{ route('admin.coordinator.news.create') }}" class="btn btn-primary" style="margin-top: var(--space-4);">
-                ➕ Criar Primeira Notícia
+                 Criar Primeira Notícia
             </a>
         </div>
     @endforelse

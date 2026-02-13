@@ -31,10 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Lucide icons (só se carregado no layout)
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
 
     // Auto-fechar menu mobile ao clicar num link (se navbar collapse estiver aberto)
     const navbarCollapse = document.querySelector('.navbar-collapse');

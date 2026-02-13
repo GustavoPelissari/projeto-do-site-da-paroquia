@@ -93,7 +93,7 @@
                             
                             <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded p-3">
                                 <p class="text-sm text-yellow-800">
-                                    <span class="font-medium">📄 Arquivo oficial:</span> 
+                                    <span class="font-medium"> Arquivo oficial:</span> 
                                     Este é o documento oficial da escala. Sempre consulte o PDF para informações atualizadas.
                                 </p>
                             </div>
@@ -133,7 +133,7 @@
                                                 {{ $member->name }}
                                             </p>
                                             @if($member->isVerified())
-                                                <span class="text-xs text-green-600">✓ Verificado</span>
+                                                <span class="text-xs text-green-600"> Verificado</span>
                                             @else
                                                 <span class="text-xs text-gray-500">Não verificado</span>
                                             @endif
@@ -144,7 +144,7 @@
                         </div>
                     @else
                         <div class="text-center py-8">
-                            <div class="text-gray-400 text-4xl mb-2">👥</div>
+                            <div class="text-gray-400 text-4xl mb-2"></div>
                             <p class="text-gray-600">Nenhum membro cadastrado no grupo ainda.</p>
                         </div>
                     @endif
