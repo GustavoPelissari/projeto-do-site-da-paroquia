@@ -32,7 +32,7 @@
                                     <div class="fw-semibold">{{ $event->title }}</div>
                                     <small class="text-secondary">{{ Str::limit($event->description, 90) }}</small>
                                 </td>
-                                <td>{{ $event->start_date?->format('d/m/Y H:i') ?: '—' }}</td>
+                                <td>{{ $event->start_date?->format('d/m/Y H:i') }}</td>
                                 <td>{{ $event->location ?: '—' }}</td>
                                 <td><span class="badge text-bg-secondary">{{ ucfirst($event->status ?? 'agendado') }}</span></td>
                                 <td class="text-end">

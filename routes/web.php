@@ -53,7 +53,7 @@ Route::get('/dashboard', function () {
             case 'administrativo':
                 return redirect()->route('admin.administrativo.dashboard');
             case 'usuario_padrao':
-                return view('dashboard');
+                return redirect()->route('profile.edit');
             default:
                 return redirect()->route('profile.edit')->with('warning', 'Seu perfil não possui área administrativa habilitada.');
         }
