@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Notícias do Grupo')
+@section('title', 'Notícias do grupo')
 
 @section('content')
 <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
@@ -8,15 +8,13 @@
         <p class="admin-overline mb-1">Coordenação pastoral</p>
         <h2 class="h3 mb-0">Notícias do grupo</h2>
     </div>
-    <a href="{{ route('admin.coordenador.news.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-circle me-1"></i>Nova notícia
-    </a>
+    <span class="badge text-bg-light border">Criação disponível em breve</span>
 </div>
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="h5 mb-0">Lista de notícias</h3>
-        <small class="text-secondary">{{ $news->total() }} registro{{ $news->total() === 1 ? '' : 's' }}</small>
+        <small class="text-secondary">{{ $news->total() }} registro(s)</small>
     </div>
     <div class="card-body p-0">
         @if($news->count())
@@ -37,23 +35,14 @@
                                     <div class="fw-semibold">{{ $item->title }}</div>
                                     <small class="text-secondary">{{ Str::limit($item->excerpt ?: strip_tags($item->content), 100) }}</small>
                                 </td>
-                                <td>
-                                    <span class="badge {{ $item->status === 'published' ? 'text-bg-success' : 'text-bg-secondary' }}">
-                                        {{ $item->status === 'published' ? 'Publicado' : 'Rascunho' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <small>{{ $item->created_at->format('d/m/Y H:i') }}</small>
-                                </td>
+                                <td><span class="badge {{ $item->status === 'published' ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $item->status === 'published' ? 'Publicado' : 'Rascunho' }}</span></td>
+                                <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                 <td class="text-end">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('admin.coordenador.news.edit', $item) }}" class="btn btn-outline-primary">Editar</a>
-                                        <form method="POST" action="{{ route('admin.coordenador.news.destroy', $item) }}" onsubmit="return confirm('Deseja excluir esta notícia?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger">Excluir</button>
-                                        </form>
-                                    </div>
+                                    <form method="POST" action="{{ route('admin.coordenador.news.destroy', $item) }}" onsubmit="return confirm('Deseja excluir esta notícia?')" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

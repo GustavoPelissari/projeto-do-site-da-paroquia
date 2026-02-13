@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Escalas Legadas')
+@section('title', 'Escalas legadas')
 
 @section('content')
 <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
@@ -8,7 +8,7 @@
         <p class="admin-overline mb-1">Coordenação pastoral</p>
         <h2 class="h3 mb-0">Escalas legadas do grupo</h2>
     </div>
-    <a href="{{ route('admin.coordenador.schedules.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Nova escala</a>
+    <span class="badge text-bg-light border">Cadastro disponível em breve</span>
 </div>
 
 <div class="card">
@@ -21,7 +21,7 @@
                             <th>Título</th>
                             <th>Período</th>
                             <th>Status</th>
-                            <th class="text-end">Ações</th>
+                            <th class="text-end">Arquivo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,14 +35,11 @@
                                 <td>{{ $schedule->start_date?->format('d/m/Y') }} - {{ $schedule->end_date?->format('d/m/Y') }}</td>
                                 <td><span class="badge text-bg-secondary">{{ $badge['text'] }}</span></td>
                                 <td class="text-end">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('admin.coordenador.schedules.edit', $schedule->id) }}" class="btn btn-outline-primary">Editar</a>
-                                        <form method="POST" action="{{ route('admin.coordenador.schedules.destroy', $schedule->id) }}" onsubmit="return confirm('Remover esta escala?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger">Excluir</button>
-                                        </form>
-                                    </div>
+                                    @if($schedule->pdf_path)
+                                        <a class="btn btn-sm btn-outline-secondary" href="{{ Storage::url($schedule->pdf_path) }}" target="_blank" rel="noopener">Abrir PDF</a>
+                                    @else
+                                        <span class="text-secondary small">Sem arquivo</span>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

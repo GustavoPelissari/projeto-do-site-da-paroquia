@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Eventos do Grupo')
+@section('title', 'Eventos do grupo')
 
 @section('content')
 <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
@@ -8,7 +8,7 @@
         <p class="admin-overline mb-1">Coordenação pastoral</p>
         <h2 class="h3 mb-0">Eventos do grupo</h2>
     </div>
-    <a href="{{ route('admin.coordenador.events.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Novo evento</a>
+    <span class="badge text-bg-light border">Criação disponível em breve</span>
 </div>
 
 <div class="card">
@@ -32,18 +32,11 @@
                                     <div class="fw-semibold">{{ $event->title }}</div>
                                     <small class="text-secondary">{{ Str::limit($event->description, 90) }}</small>
                                 </td>
-                                <td>{{ $event->start_date?->format('d/m/Y H:i') }}</td>
+                                <td>{{ $event->start_date?->format('d/m/Y H:i') ?: '—' }}</td>
                                 <td>{{ $event->location ?: '—' }}</td>
                                 <td><span class="badge text-bg-secondary">{{ ucfirst($event->status ?? 'agendado') }}</span></td>
                                 <td class="text-end">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('admin.coordenador.events.edit', $event) }}" class="btn btn-outline-primary">Editar</a>
-                                        <form method="POST" action="{{ route('admin.coordenador.events.destroy', $event) }}" onsubmit="return confirm('Remover este evento?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger">Excluir</button>
-                                        </form>
-                                    </div>
+                                    <span class="text-secondary small">Edição indisponível</span>
                                 </td>
                             </tr>
                         @endforeach

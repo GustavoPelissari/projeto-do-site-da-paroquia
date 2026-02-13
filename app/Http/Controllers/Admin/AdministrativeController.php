@@ -44,10 +44,29 @@ class AdministrativeController extends Controller
      */
     public function newsIndex()
     {
-        $news = News::where(function($query) {
+        $news = News::with(['user', 'group'])
+            ->where(function($query) {
             $query->where('created_by', Auth::id())
                   ->orWhere('scope', '!=', 'global');
-        })->latest()->paginate(10);
+        });
+
+        if (request('status')) {
+            $news->where('status', request('status'));
+        }
+
+        if (request('scope')) {
+            $news->where('scope', request('scope'));
+        }
+
+        if (request('search')) {
+            $search = request('search');
+            $news->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        $news = $news->latest()->paginate(10);
 
         return view('admin.administrativo.news.index', compact('news'));
     }
@@ -66,11 +85,6 @@ class AdministrativeController extends Controller
             'scope' => 'required|in:parish,group',
             'group_id' => 'nullable|exists:groups,id',
         ]);
-
-        // Administrativos não podem criar notícias globais
-        if ($validated['scope'] === 'global') {
-            abort(403, 'Você não tem permissão para criar notícias globais.');
-        }
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('news', 'public');
@@ -120,11 +134,6 @@ class AdministrativeController extends Controller
             'group_id' => 'nullable|exists:groups,id',
         ]);
 
-        // Administrativos não podem definir scope como global
-        if ($validated['scope'] === 'global') {
-            abort(403, 'Você não tem permissão para criar notícias globais.');
-        }
-
         if ($request->hasFile('image')) {
             if ($news->image) {
                 Storage::disk('public')->delete($news->image);
@@ -162,10 +171,30 @@ class AdministrativeController extends Controller
      */
     public function eventsIndex()
     {
-        $events = Event::where(function($query) {
+        $events = Event::with(['user', 'group'])
+            ->where(function($query) {
             $query->where('created_by', Auth::id())
                   ->orWhere('category', '!=', 'global');
-        })->latest()->paginate(10);
+        });
+
+        if (request('status')) {
+            $events->where('status', request('status'));
+        }
+
+        if (request('category')) {
+            $events->where('category', request('category'));
+        }
+
+        if (request('search')) {
+            $search = request('search');
+            $events->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%");
+            });
+        }
+
+        $events = $events->latest()->paginate(10);
 
         return view('admin.administrativo.events.index', compact('events'));
     }
@@ -261,12 +290,34 @@ class AdministrativeController extends Controller
      */
     public function massesIndex()
     {
-        $masses = Mass::latest()->paginate(10);
+        $masses = Mass::query();
+
+        if (request()->filled('day')) {
+            $masses->where('day_of_week', request('day'));
+        }
+
+        if (request()->filled('status')) {
+            $masses->where('is_active', request('status') === 'active');
+        }
+
+        if (request('search')) {
+            $search = request('search');
+            $masses->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%");
+            });
+        }
+
+        $masses = $masses
+            ->orderByRaw("FIELD(day_of_week, 'sunday','monday','tuesday','wednesday','thursday','friday','saturday')")
+            ->orderBy('time')
+            ->paginate(10);
+
         return view('admin.administrativo.masses.index', compact('masses'));
     }
 
     public function massesShow(Mass $mass)
     {
-        return redirect()->route('admin.administrativo.masses.index');
+        return view('admin.administrativo.masses.show', compact('mass'));
     }
 }
