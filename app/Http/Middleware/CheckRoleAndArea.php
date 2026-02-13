@@ -41,7 +41,7 @@ class CheckRoleAndArea
 
         // Verificação adicional para coordenadores - só podem acessar recursos do seu grupo
         if ($role === UserRole::COORDENADOR_PASTORAL->value && $this->requiresGroupRestriction($request)) {
-            if (!$user->group_id) {
+            if (!$user->group_id && !$user->parish_group_id) {
                 return $this->redirectToUserArea($userRole, 'Você precisa estar associado a um grupo para acessar esta área.');
             }
         }
