@@ -1,11 +1,11 @@
 @extends('admin.layout')
 
-@section('title', 'Dashboard Administrativo')
+@section('title', 'Painel Administrativo')
 
 @section('content')
 <div class="sp-admin-dashboard">
     <div class="sp-dashboard-header">
-        <h1 class="sp-page-title">Dashboard Administrativo</h1>
+        <h1 class="sp-page-title">Painel Administrativo</h1>
         <p class="sp-page-subtitle">Painel de controle para funções administrativas</p>
     </div>
 

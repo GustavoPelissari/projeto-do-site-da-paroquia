@@ -1,22 +1,28 @@
-# Instruções para adicionar a imagem de São Paulo Apóstolo
+# Logo da Paróquia (com transparência)
 
-Para completar a implementação do logo, por favor:
+O projeto usa, por padrão, o arquivo:
 
-1. Salve a imagem de São Paulo Apóstolo como: 
-   `C:\Site paroquia\paroquia-sistema\public\images\sao-paulo-apostolo.png`
+- `public/images/sao-paulo-apostolo.svg`
 
-2. A imagem já está sendo referenciada no código, então após salvá-la, 
-   ela aparecerá automaticamente no site.
+Esse arquivo deve ter fundo transparente.
 
-## Locais onde o logo aparece:
-- Header/Navegação principal
-- Hero section da página inicial  
-- Rodapé
-- Favicon (ícone do navegador)
+## Como trocar a logo
 
-## Formatos suportados:
-- PNG (recomendado para logos com transparência)
-- JPG/JPEG 
-- SVG (melhor qualidade)
+1. Adicione um arquivo PNG ou SVG com transparência em `public/images/`.
+2. Configure o caminho no `.env`:
 
-A imagem será automaticamente redimensionada pelo CSS conforme necessário.
+```env
+APP_LOGO_PATH=images/sua-logo-transparente.svg
+```
+
+3. Limpe o cache de configuração:
+
+```bash
+php artisan config:clear
+```
+
+## Onde a logo é exibida
+
+- Layout público (navbar e rodapé)
+- Layout de autenticação (login, recuperação de senha, etc.)
+- Header compartilhado

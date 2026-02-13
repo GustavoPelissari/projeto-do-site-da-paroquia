@@ -237,7 +237,7 @@
                 </a>
                 <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
                    class="d-block text-secondary hover-text-dark small">
-                    🏠 Dashboard
+                    🏠 Painel
                 </a>
             </div>
         </div>
