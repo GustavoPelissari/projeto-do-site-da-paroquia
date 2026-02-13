@@ -4,14 +4,14 @@
 @section('description', 'Paróquia São Paulo Apóstolo em Umuarama - PR. Comunidade católica acolhedora com missas, sacramentos, pastorais e eventos.')
 
 @section('content')
-<section class="py-5 bg-dark text-white text-center">
+<section class="py-5 bg-light text-center">
     <div class="container py-4">
-        <h1 class="display-5 fw-bold mb-3">Bem-vindos à nossa paróquia</h1>
-        <p class="lead mb-4">Igreja: lugar onde a cidade encontra a graça</p>
-        <p class="mb-4">Somos uma comunidade católica inspirada no exemplo de São Paulo Apóstolo, dedicada a evangelizar, acolher e servir.</p>
+        <h1 class="display-5 fw-bold mb-3 text-primary">Bem-vindos à nossa paróquia</h1>
+        <p class="lead mb-4 text-primary">Igreja: lugar onde a cidade encontra a graça</p>
+        <p class="mb-4 text-muted">Somos uma comunidade católica inspirada no exemplo de São Paulo Apóstolo, dedicada a evangelizar, acolher e servir.</p>
         <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
             <a href="{{ route('masses') }}" class="btn btn-primary">Ver Horários de Missa</a>
-            <a href="{{ route('groups') }}" class="btn btn-outline-light">Conhecer Pastorais</a>
+            <a href="{{ route('groups') }}" class="btn btn-outline-primary">Conhecer Pastorais</a>
         </div>
     </div>
 </section>

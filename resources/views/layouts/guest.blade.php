@@ -17,16 +17,16 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body class="d-flex align-items-center justify-content-center bg-light" style="min-height: 100vh;">
+<body class="auth-body d-flex align-items-center justify-content-center">
     <main class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-5">
-                <div class="card shadow-sm border-0">
+                <div class="card auth-card">
                     <div class="card-body p-4">
                         <div class="text-center mb-4">
                             <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo"
-                                 class="img-fluid mb-2" style="width: 64px; height: 64px;">
-                            <h1 class="h4 mb-1" style="font-family: 'Playfair Display', serif;">São Paulo Apóstolo</h1>
+                                 class="auth-logo mb-2">
+                            <h1 class="h4 mb-1 auth-title">São Paulo Apóstolo</h1>
                             <p class="mb-0 text-muted small">Comunidade de Fé</p>
                         </div>
 

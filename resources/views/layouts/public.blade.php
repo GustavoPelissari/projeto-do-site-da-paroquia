@@ -27,14 +27,13 @@
 
 <body class="has-fixed-navbar">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top js-navbar-scroll">
+    <nav class="navbar navbar-expand-lg fixed-top site-navbar navbar-light js-navbar-scroll">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo"
-                     class="me-3 rounded-circle"
-                     style="width: 56px; height: 56px; object-fit: cover;">
+                     class="me-3 brand-mark">
                 <div>
-                    <span class="d-block fw-semibold">Paróquia São Paulo Apóstolo</span>
+                    <span class="d-block fw-semibold text-primary">Paróquia São Paulo Apóstolo</span>
                     <small class="d-block text-muted">Diocese de Umuarama</small>
                 </div>
             </a>
@@ -79,11 +78,11 @@
                 </ul>
 
                 <div class="d-flex gap-2 ms-lg-3 mt-3 mt-lg-0">
-                    <a href="#doacoes" class="btn btn-warning">
+                    <a href="#doacoes" class="btn btn-primary">
                         <i class="bi bi-heart me-1"></i>Apoiar a Paróquia
                     </a>
                     @auth
-                        <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-primary">
+                        <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-outline-primary">
                             <i class="bi bi-gear me-1"></i>Admin
                         </a>
                     @else
@@ -100,14 +99,14 @@
         @yield('content')
     </main>
 
-    <footer class="bg-dark text-light mt-5" id="contato">
+    <footer class="site-footer mt-5" id="contato">
         <div class="container py-5">
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="d-flex align-items-center gap-3 mb-3">
                         <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-footer">
                         <div>
-                            <h5 class="mb-0">Paróquia São Paulo Apóstolo</h5>
+                            <h5 class="mb-0 footer-title">Paróquia São Paulo Apóstolo</h5>
                             <small>Diocese de Umuarama - PR</small>
                         </div>
                     </div>
@@ -116,30 +115,30 @@
                         inspirada no exemplo do Apóstolo dos Gentios.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="#" class="text-light" title="Facebook da Paróquia" aria-label="Facebook">
+                        <a href="#" title="Facebook da Paróquia" aria-label="Facebook">
                             <i class="bi bi-facebook fs-4"></i>
                         </a>
-                        <a href="#" class="text-light" title="Instagram da Paróquia" aria-label="Instagram">
+                        <a href="#" title="Instagram da Paróquia" aria-label="Instagram">
                             <i class="bi bi-instagram fs-4"></i>
                         </a>
-                        <a href="#" class="text-light" title="Canal do YouTube" aria-label="YouTube">
+                        <a href="#" title="Canal do YouTube" aria-label="YouTube">
                             <i class="bi bi-youtube fs-4"></i>
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-2 col-md-4">
-                    <h6 class="mb-3">Navegação</h6>
+                    <h6 class="mb-3 footer-title">Navegação</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('home') }}" class="text-light text-decoration-none">Início</a></li>
-                        <li class="mb-2"><a href="{{ route('masses') }}" class="text-light text-decoration-none">Horários</a></li>
-                        <li class="mb-2"><a href="{{ route('groups') }}" class="text-light text-decoration-none">Pastorais</a></li>
-                        <li class="mb-2"><a href="{{ route('events') }}" class="text-light text-decoration-none">Eventos</a></li>
+                        <li class="mb-2"><a href="{{ route('home') }}">Início</a></li>
+                        <li class="mb-2"><a href="{{ route('masses') }}">Horários</a></li>
+                        <li class="mb-2"><a href="{{ route('groups') }}">Pastorais</a></li>
+                        <li class="mb-2"><a href="{{ route('events') }}">Eventos</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
-                    <h6 class="mb-3">Contato</h6>
+                    <h6 class="mb-3 footer-title">Contato</h6>
                     <div class="d-flex align-items-start gap-2 mb-2">
                         <i class="bi bi-geo-alt mt-1"></i>
                         <span>
@@ -149,16 +148,16 @@
                     </div>
                     <div class="d-flex align-items-center gap-2 mb-2">
                         <i class="bi bi-telephone"></i>
-                        <a href="tel:+5544305540464" class="text-light text-decoration-none">(44) 3055-4464</a>
+                        <a href="tel:+5544305540464">(44) 3055-4464</a>
                     </div>
                     <div class="d-flex align-items-center gap-2">
                         <i class="bi bi-envelope"></i>
-                        <a href="mailto:secretaria.pspaulo@hotmail.com" class="text-light text-decoration-none">secretaria.pspaulo@hotmail.com</a>
+                        <a href="mailto:secretaria.pspaulo@hotmail.com">secretaria.pspaulo@hotmail.com</a>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
-                    <h6 class="mb-3">Horários de Missa</h6>
+                    <h6 class="mb-3 footer-title">Horários de Missa</h6>
                     <div>
                         <div class="mb-1"><strong>Domingo:</strong> 09:30 e 18:00</div>
                         <div class="mb-1"><strong>Quarta:</strong> 20:00</div>
@@ -167,7 +166,7 @@
                 </div>
             </div>
 
-            <hr class="my-4">
+            <hr class="my-4 footer-divider">
 
             <div class="row align-items-center">
                 <div class="col-md-6">

@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light border-bottom shadow-sm app-navbar">
     <div class="container">
         <!-- Brand -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
             <x-application-logo style="height: 32px; width: 32px;" class="me-2" />
-            <span>{{ config('app.name', 'Laravel') }}</span>
+            <span class="fw-semibold">Paróquia São Paulo Apóstolo</span>
         </a>
 
         <!-- Toggler -->

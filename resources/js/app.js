@@ -51,6 +51,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Sidebar admin (mobile)
+    const adminSidebar = document.querySelector('.admin-sidebar');
+    const adminToggle = document.querySelector('[data-admin-toggle]');
+    if (adminSidebar && adminToggle) {
+        adminToggle.addEventListener('click', () => {
+            adminSidebar.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth > 991) return;
+            if (!adminSidebar.classList.contains('open')) return;
+            if (adminSidebar.contains(event.target) || adminToggle.contains(event.target)) return;
+
+            adminSidebar.classList.remove('open');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 991) {
+                adminSidebar.classList.remove('open');
+            }
+        });
+    }
+
     // Próxima missa (só roda se existir o container)
     const proximaMissaEl = document.querySelector('#proxima-missa-info');
     if (proximaMissaEl) {

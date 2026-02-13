@@ -15,19 +15,19 @@
         <!-- Vite compiled CSS & JS (Bootstrap included) -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-light">
+    <body class="bg-body">
         <!-- Navigation -->
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @if (View::hasSection('header'))
-            <header class="bg-white border-bottom shadow-sm py-3">
+            <header class="app-page-header border-bottom shadow-sm py-3">
                 <div class="container">
                     @yield('header')
                 </div>
             </header>
         @elseif(isset($header))
-            <header class="bg-white border-bottom shadow-sm py-3">
+            <header class="app-page-header border-bottom shadow-sm py-3">
                 <div class="container">
                     {{ $header }}
                 </div>

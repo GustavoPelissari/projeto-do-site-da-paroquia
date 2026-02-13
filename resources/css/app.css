@@ -4,64 +4,268 @@
 /* =========================================================
    CSS custom MINIMALISTA e CENTRALIZADO
    Justificativa:
-   - Fonte institucional (Poppins + Playfair)
-   - Identidade sutil (vinho/dourado)
-   - Navbar fixa com leve efeito
+   - Fonte institucional (Playfair + Poppins)
+   - Identidade vinho discreta e coerente
+   - Ajustes de layout apenas para complementar o Bootstrap
    ========================================================= */
 
-:root{
+:root {
   /* Identidade (sutil) */
-  --paroquia-vinho: #8B1538;
-  --paroquia-vinho-escuro: #722F37;
-  --paroquia-dourado: #DAA520;
+  --paroquia-wine: #7b1430;
+  --paroquia-wine-dark: #651026;
+  --paroquia-wine-soft: #9a1b3d;
+  --paroquia-ivory: #f8f5f1;
+  --paroquia-sand: #f2eee9;
+  --paroquia-ink: #1f1d1c;
+  --paroquia-gold: #c5a052;
 
   /* Tipografia */
   --paroquia-font-body: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --paroquia-font-title: "Playfair Display", Georgia, "Times New Roman", serif;
 
   /* Ajustes Bootstrap (via CSS vars 5.3+) */
-  --bs-primary: var(--paroquia-vinho);
-  --bs-primary-rgb: 139, 21, 56;
-  --bs-link-color: var(--paroquia-vinho);
-  --bs-link-hover-color: var(--paroquia-vinho-escuro);
+  --bs-primary: var(--paroquia-wine);
+  --bs-primary-rgb: 123, 20, 48;
+  --bs-link-color: var(--paroquia-wine);
+  --bs-link-hover-color: var(--paroquia-wine-dark);
+  --bs-body-bg: var(--paroquia-ivory);
+  --bs-body-color: var(--paroquia-ink);
+  --bs-border-color: #e4ded8;
 }
 
-body{
+body {
   font-family: var(--paroquia-font-body);
+  background-color: var(--bs-body-bg);
 }
 
 /* Títulos com cara institucional */
-h1,h2,h3,.display-1,.display-2,.display-3,.display-4{
+h1, h2, h3, h4, h5, h6,
+.display-1, .display-2, .display-3, .display-4 {
   font-family: var(--paroquia-font-title);
+  letter-spacing: 0.2px;
 }
 
 /* Navbar pública fixa (SEM quebrar collapse do Bootstrap) */
-.navbar.fixed-top{
-  background: rgba(255,255,255,.96);
+.site-navbar {
+  background: rgba(248, 245, 241, 0.98);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,.06);
 }
 
-.js-navbar-scroll.is-scrolled{
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+.js-navbar-scroll.is-scrolled {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Espaço para navbar fixa (só quando usar fixed-top) */
-.has-fixed-navbar{
-  padding-top: 84px;
-}
-
-/* Pequeno charme no botão dourado (sem carnaval) */
-.btn-warning{
-  background-color: var(--paroquia-dourado);
-  border-color: var(--paroquia-dourado);
-}
-
-/* Footer logo (usado no layout público) */
-.logo-footer{
+.brand-mark {
   width: 56px;
   height: 56px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid rgba(255,255,255,.35);
+  border: 2px solid rgba(123, 20, 48, 0.2);
+}
+
+/* Espaço para navbar fixa (só quando usar fixed-top) */
+.has-fixed-navbar {
+  padding-top: 88px;
+}
+
+/* Footer institucional */
+.site-footer {
+  background: #2a1e22;
+  color: #f6f1ec;
+}
+
+.site-footer a {
+  color: #f6f1ec;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--paroquia-gold);
+}
+
+.site-footer .footer-title {
+  color: #f4ece5;
+  font-weight: 600;
+}
+
+.site-footer .footer-divider {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* App (usuário logado) */
+.app-page-header {
+  background: #fff;
+}
+
+.app-navbar {
+  background: #fff;
+}
+
+/* Footer logo (usado no layout público) */
+.logo-footer {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Auth layout */
+.auth-body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #faf7f3 0%, #f1ece6 100%);
+}
+
+.auth-card {
+  border: 0;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.auth-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.auth-title {
+  font-family: var(--paroquia-font-title);
+}
+
+/* Admin layout */
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+  background: var(--paroquia-sand);
+}
+
+.admin-sidebar {
+  width: 260px;
+  background: #6b122a;
+  color: #f7f2ed;
+  z-index: 1040;
+}
+
+.admin-sidebar .sidebar-header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-sidebar .sidebar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--paroquia-font-title);
+}
+
+.admin-sidebar .sidebar-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.admin-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0 1.5rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1.5rem;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-nav-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.admin-nav-link.active {
+  background: rgba(255, 255, 255, 0.16);
+  border-left-color: var(--paroquia-gold);
+  color: #fff;
+}
+
+.admin-link-button {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.admin-nav-icon {
+  font-size: 1.1rem;
+  width: 1.4rem;
+  text-align: center;
+}
+
+.admin-nav-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 1rem 1.5rem;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.admin-header {
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.admin-header .header-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--paroquia-wine);
+  font-family: var(--paroquia-font-title);
+}
+
+.admin-content {
+  flex: 1;
+  background: var(--paroquia-sand);
+}
+
+@media (min-width: 992px) {
+  .admin-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
 }
