@@ -110,18 +110,13 @@
                                 @endif
                             </td>
                             <td class="py-3">
-                                <div class="d-flex gap-2">
-                                    <a href="{{ route('admin.global.events.show', $event) }}" 
-                                       class="text-primary hover-text-primary-dark small">Ver</a>
-                                    <a href="{{ route('admin.global.events.edit', $event) }}" 
-                                       class="text-success hover-text-success-dark small">Editar</a>
-                                    <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" 
-                                          class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este evento?')">
+                                <div class="admin-table-actions">
+                                    <a href="{{ route('admin.global.events.show', $event) }}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                    <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                    <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este evento?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-link text-danger hover-text-danger-dark p-0 small">
-                                            Excluir
-                                        </button>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
                                     </form>
                                 </div>
                             </td>
@@ -149,18 +144,4 @@
     </div>
 </div>
 
-<style>
-.hover-bg-gray-50:hover {
-    background-color: #f8f9fa;
-}
-.hover-text-primary-dark:hover {
-    color: #0056b3 !important;
-}
-.hover-text-success-dark:hover {
-    color: #198754 !important;
-}
-.hover-text-danger-dark:hover {
-    color: #bb2d3b !important;
-}
-</style>
 @endsection
