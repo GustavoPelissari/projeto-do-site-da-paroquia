@@ -2,169 +2,79 @@
 
 @section('title', 'Gerenciar Usuários - Admin Global')
 
-@push('styles')
-<style>
-    .users-management {
-        padding: var(--space-6);
-    }
-    
-    .users-header {
-        background: linear-gradient(135deg, var(--sp-red-dark) 0%, var(--sp-red) 100%);
-        color: var(--sp-white);
-        padding: var(--space-xl);
-        border-radius: var(--radius-xl);
-        margin-bottom: var(--space-6);
-        text-align: center;
-    }
-    
-    .users-grid {
-        display: grid;
-        gap: var(--space-4);
-    }
-    
-    .user-card {
-        background: var(--sp-white);
-        border: 1px solid var(--sp-gray-200);
-        border-radius: var(--radius-lg);
-        padding: var(--space-5);
-        box-shadow: var(--shadow-md);
-        transition: all var(--duration-300) ease;
-    }
-    
-    .user-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .user-info {
-        display: flex;
-        align-items: center;
-        gap: var(--space-4);
-        margin-bottom: var(--space-4);
-    }
-    
-    .user-avatar {
-        width: 60px;
-        height: 60px;
-        background: var(--sp-red);
-        color: var(--sp-white);
-        border-radius: var(--radius-full);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 600;
-        font-size: var(--text-lg);
-    }
-    
-    .user-details h3 {
-        margin: 0 0 var(--space-1) 0;
-        font-size: var(--text-lg);
-        font-weight: var(--font-semibold);
-        color: var(--sp-red-dark);
-    }
-    
-    .user-role {
-        color: var(--sp-gray-600);
-        font-size: var(--text-sm);
-    }
-    
-    .user-email {
-        color: var(--sp-teal);
-        font-size: var(--text-sm);
-    }
-    
-    .user-actions {
-        display: flex;
-        gap: var(--space-2);
-        justify-content: flex-end;
-    }
-    
-    .btn {
-        padding: var(--space-2) var(--space-3);
-        border-radius: var(--radius-md);
-        text-decoration: none;
-        font-size: var(--text-sm);
-        font-weight: var(--font-medium);
-        border: none;
-        cursor: pointer;
-        transition: all var(--duration-200) ease;
-    }
-    
-    .btn-primary {
-        background: var(--sp-red);
-        color: var(--sp-white);
-    }
-    
-    .btn-primary:hover {
-        background: var(--sp-red-dark);
-    }
-    
-    .btn-secondary {
-        background: var(--sp-gray-100);
-        color: var(--sp-gray-700);
-    }
-    
-    .btn-secondary:hover {
-        background: var(--sp-gray-200);
-    }
-</style>
-@endpush
-
 @section('content')
-<div class="users-management">
-    <div class="users-header">
-        <h1> Gerenciamento de Usuários</h1>
-        <p>Administração global de todos os usuários do sistema paroquial</p>
+<div class="mb-4">
+    <p class="admin-overline mb-1">Administração de acesso</p>
+    <h2 class="h3 mb-1">Gerenciamento de usuários</h2>
+    <p class="text-secondary mb-0">Controle de perfis e papéis de acesso do sistema.</p>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="h5 mb-0">Usuários cadastrados</h3>
+        <span class="badge text-bg-light border">{{ $users->total() }} usuários</span>
     </div>
-    
-    <div class="users-grid">
-        @foreach($users as $user)
-            <div class="user-card">
-                <div class="user-info">
-                    <div class="user-avatar">
-                        {{ strtoupper(substr($user->name, 0, 2)) }}
-                    </div>
-                    <div class="user-details">
-                        <h3>{{ $user->name }}</h3>
-                        <div class="user-role">
-                            @switch($user->role)
-                                @case('admin_global')
-                                     Padre - Admin Global
-                                    @break
-                                @case('administrativo')
-                                     Administrativo
-                                    @break
-                                @case('coordenador_de_pastoral')
-                                     Coordenador de Pastoral
-                                    @break
-                                @case('usuario_padrao')
-                                     Usuário Padrão
-                                    @break
-                                @default
-                                     {{ $user->role }}
-                            @endswitch
-                        </div>
-                        <div class="user-email">{{ $user->email }}</div>
-                    </div>
-                </div>
-                
-                <div class="user-actions">
-                    <button class="btn btn-secondary"> Editar</button>
-                    @if($user->role !== 'admin_global')
-                        <button class="btn btn-primary"> Alterar Função</button>
-                    @endif
-                </div>
+    <div class="card-body p-0">
+        @if($users->count() > 0)
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>E-mail</th>
+                            <th>Perfil atual</th>
+                            <th>Criado em</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                            @php
+                                $role = is_object($user->role) ? $user->role->value : $user->role;
+                                $roleLabel = [
+                                    'admin_global' => 'Administrador Global',
+                                    'administrativo' => 'Administrativo',
+                                    'coordenador_de_pastoral' => 'Coordenador de Pastoral',
+                                    'usuario_padrao' => 'Usuário padrão',
+                                ][$role] ?? $role;
+                            @endphp
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="badge rounded-pill text-bg-light border">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
+                                        <span class="fw-semibold">{{ $user->name }}</span>
+                                    </div>
+                                </td>
+                                <td>{{ $user->email }}</td>
+                                <td><span class="badge text-bg-secondary">{{ $roleLabel }}</span></td>
+                                <td>{{ $user->created_at?->format('d/m/Y') }}</td>
+                                <td class="text-end">
+                                    @if($role !== 'admin_global')
+                                        <form method="POST" action="{{ route('admin.global.users.updateRole', $user) }}" class="d-inline-flex gap-2 align-items-center">
+                                            @csrf
+                                            <select class="form-select form-select-sm" name="role" aria-label="Alterar função de {{ $user->name }}">
+                                                <option value="usuario_padrao" @selected($role === 'usuario_padrao')>Usuário padrão</option>
+                                                <option value="coordenador_de_pastoral" @selected($role === 'coordenador_de_pastoral')>Coordenador</option>
+                                                <option value="administrativo" @selected($role === 'administrativo')>Administrativo</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                                        </form>
+                                    @else
+                                        <span class="text-secondary small">Sem alteração</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-        @endforeach
-        
-        @if($users->isEmpty())
-            <div class="user-card">
-                <div style="text-align: center; padding: var(--space-8); color: var(--sp-gray-500);">
-                    <h3> Nenhum usuário encontrado</h3>
-                    <p>O sistema ainda não possui usuários cadastrados.</p>
-                </div>
-            </div>
+        @else
+            <div class="p-4 text-center text-secondary">Nenhum usuário encontrado.</div>
         @endif
     </div>
 </div>
+
+@if($users->hasPages())
+    <div class="mt-4">{{ $users->links() }}</div>
+@endif
 @endsection

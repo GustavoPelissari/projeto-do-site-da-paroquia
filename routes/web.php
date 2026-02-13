@@ -52,8 +52,10 @@ Route::get('/dashboard', function () {
                 return redirect()->route('admin.coordenador.dashboard');
             case 'administrativo':
                 return redirect()->route('admin.administrativo.dashboard');
+            case 'usuario_padrao':
+                return view('dashboard');
             default:
-                return redirect()->route('login')->with('error', 'Você não tem permissão para acessar a área administrativa.');
+                return redirect()->route('profile.edit')->with('warning', 'Seu perfil não possui área administrativa habilitada.');
         }
     }
     return redirect()->route('login');
@@ -226,11 +228,7 @@ Route::prefix('admin/administrativo')->name('admin.administrativo.')->middleware
     // Mass Management (limited)
     Route::prefix('masses')->name('masses.')->group(function () {
         Route::get('/', [AdministrativeController::class, 'massesIndex'])->name('index');
-        Route::get('/create', [AdministrativeController::class, 'massesIndex'])->name('create');
-        Route::post('/', [AdministrativeController::class, 'massesIndex'])->name('store');
         Route::get('/{mass}', [AdministrativeController::class, 'massesShow'])->name('show');
-        Route::get('/{mass}/edit', [AdministrativeController::class, 'massesShow'])->name('edit');
-        Route::delete('/{mass}', [AdministrativeController::class, 'massesShow'])->name('destroy');
     });
 });
 

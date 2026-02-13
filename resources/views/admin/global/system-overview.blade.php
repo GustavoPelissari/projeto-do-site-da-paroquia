@@ -2,304 +2,59 @@
 
 @section('title', 'Visão do Sistema - Admin Global')
 
-@push('styles')
-<style>
-    .system-overview {
-        padding: var(--space-6);
-    }
-    
-    .system-header {
-        background: linear-gradient(135deg, var(--sp-gold-dark) 0%, var(--sp-gold) 100%);
-        color: var(--sp-white);
-        padding: var(--space-xl);
-        border-radius: var(--radius-xl);
-        margin-bottom: var(--space-6);
-        text-align: center;
-    }
-    
-    .system-sections {
-        display: grid;
-        gap: var(--space-6);
-    }
-    
-    .system-section {
-        background: var(--sp-white);
-        border-radius: var(--radius-xl);
-        padding: var(--space-6);
-        box-shadow: var(--shadow-lg);
-        border: 1px solid var(--sp-gray-200);
-    }
-    
-    .section-title {
-        font-size: var(--text-xl);
-        font-weight: var(--font-bold);
-        color: var(--sp-red-dark);
-        margin-bottom: var(--space-4);
-        display: flex;
-        align-items: center;
-        gap: var(--space-3);
-    }
-    
-    .section-icon {
-        font-size: var(--text-2xl);
-    }
-    
-    .system-info {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: var(--space-4);
-    }
-    
-    .info-item {
-        background: var(--sp-gray-50);
-        padding: var(--space-4);
-        border-radius: var(--radius-lg);
-        border-left: 4px solid var(--sp-teal);
-    }
-    
-    .info-label {
-        font-weight: var(--font-semibold);
-        color: var(--sp-gray-700);
-        margin-bottom: var(--space-1);
-    }
-    
-    .info-value {
-        color: var(--sp-red);
-        font-size: var(--text-lg);
-        font-weight: var(--font-medium);
-    }
-    
-    .status-indicator {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin-right: var(--space-2);
-    }
-    
-    .status-online { background: #10b981; }
-    .status-warning { background: #f59e0b; }
-    .status-offline { background: #ef4444; }
-    
-    .action-buttons {
-        display: flex;
-        gap: var(--space-3);
-        margin-top: var(--space-4);
-        flex-wrap: wrap;
-    }
-    
-    .btn {
-        padding: var(--space-3) var(--space-4);
-        border-radius: var(--radius-md);
-        text-decoration: none;
-        font-size: var(--text-sm);
-        font-weight: var(--font-medium);
-        border: none;
-        cursor: pointer;
-        transition: all var(--duration-200) ease;
-    }
-    
-    .btn-primary {
-        background: var(--sp-red);
-        color: var(--sp-white);
-    }
-    
-    .btn-primary:hover {
-        background: var(--sp-red-dark);
-        text-decoration: none;
-        color: var(--sp-white);
-    }
-    
-    .btn-secondary {
-        background: var(--sp-gray-100);
-        color: var(--sp-gray-700);
-    }
-    
-    .btn-secondary:hover {
-        background: var(--sp-gray-200);
-        text-decoration: none;
-        color: var(--sp-gray-700);
-    }
-    
-    .recent-activity {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .activity-item {
-        padding: var(--space-3);
-        border-bottom: 1px solid var(--sp-gray-200);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .activity-item:last-child {
-        border-bottom: none;
-    }
-    
-    .activity-description {
-        color: var(--sp-gray-700);
-    }
-    
-    .activity-time {
-        color: var(--sp-gray-500);
-        font-size: var(--text-sm);
-    }
-</style>
-@endpush
-
 @section('content')
-<div class="system-overview">
-    <div class="system-header">
-        <h1> Visão Geral do Sistema</h1>
-        <p>Monitoramento e controle completo do sistema paroquial</p>
+<div class="mb-4">
+    <p class="admin-overline mb-1">Operação técnica</p>
+    <h2 class="h3 mb-1">Visão geral do sistema</h2>
+    <p class="text-secondary mb-0">Status dos serviços, informações de ambiente e uso de recursos.</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-12 col-xl-8">
+        <div class="card h-100">
+            <div class="card-header"><h3 class="h5 mb-0">Status dos serviços</h3></div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="border rounded-3 p-3"><div class="d-flex align-items-center gap-2 mb-1"><span class="badge text-bg-success">Online</span><strong>Sistema principal</strong></div><small class="text-secondary">Funcionando normalmente</small></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3"><div class="d-flex align-items-center gap-2 mb-1"><span class="badge text-bg-success">Conectado</span><strong>Banco de dados</strong></div><small class="text-secondary">Conexão estável</small></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3"><div class="d-flex align-items-center gap-2 mb-1"><span class="badge text-bg-success">Ativo</span><strong>Cache</strong></div><small class="text-secondary">Desempenho otimizado</small></div></div>
+                    <div class="col-md-6"><div class="border rounded-3 p-3"><div class="d-flex align-items-center gap-2 mb-1"><span class="badge text-bg-warning">Atenção</span><strong>Backup</strong></div><small class="text-secondary">Último backup: {{ optional($overview['last_backup'] ?? null)?->format('d/m/Y H:i') ?? 'não disponível' }}</small></div></div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div class="system-sections">
-        <!-- Status do Sistema -->
-        <div class="system-section">
-            <h2 class="section-title">
-                <span class="section-icon"></span>
-                Status do Sistema
-            </h2>
-            <div class="system-info">
-                <div class="info-item">
-                    <div class="info-label">
-                        <span class="status-indicator status-online"></span>
-                        Sistema Principal
-                    </div>
-                    <div class="info-value">Online</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">
-                        <span class="status-indicator status-online"></span>
-                        Banco de Dados
-                    </div>
-                    <div class="info-value">Conectado</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">
-                        <span class="status-indicator status-online"></span>
-                        Cache
-                    </div>
-                    <div class="info-value">Funcionando</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">
-                        <span class="status-indicator status-warning"></span>
-                        Backup
-                    </div>
-                    <div class="info-value">Configurar</div>
-                </div>
+
+    <div class="col-12 col-xl-4">
+        <div class="card h-100">
+            <div class="card-header"><h3 class="h5 mb-0">Ambiente</h3></div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between"><span>Versão sistema</span><strong>v1.0.0</strong></li>
+                    <li class="list-group-item d-flex justify-content-between"><span>Laravel</span><strong>{{ app()->version() }}</strong></li>
+                    <li class="list-group-item d-flex justify-content-between"><span>PHP</span><strong>{{ PHP_VERSION }}</strong></li>
+                    <li class="list-group-item d-flex justify-content-between"><span>Timezone</span><strong>{{ config('app.timezone') }}</strong></li>
+                    <li class="list-group-item d-flex justify-content-between"><span>Sessões ativas</span><strong>{{ $overview['active_sessions'] ?? 0 }}</strong></li>
+                    <li class="list-group-item d-flex justify-content-between"><span>Visitantes/mês</span><strong>{{ $overview['monthly_visitors'] ?? 0 }}</strong></li>
+                </ul>
             </div>
         </div>
-        
-        <!-- Informações do Sistema -->
-        <div class="system-section">
-            <h2 class="section-title">
-                <span class="section-icon"></span>
-                Informações Técnicas
-            </h2>
-            <div class="system-info">
-                <div class="info-item">
-                    <div class="info-label">Versão do Sistema</div>
-                    <div class="info-value">v1.0.0</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">Laravel</div>
-                    <div class="info-value">{{ app()->version() }}</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">PHP</div>
-                    <div class="info-value">{{ PHP_VERSION }}</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">Timezone</div>
-                    <div class="info-value">{{ config('app.timezone') }}</div>
-                </div>
-            </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="h5 mb-0">Uso de recursos</h3>
+        <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" type="button">Limpar cache</button>
+            <button class="btn btn-sm btn-outline-secondary" type="button">Backup manual</button>
         </div>
-        
-        <!-- Ações do Sistema -->
-        <div class="system-section">
-            <h2 class="section-title">
-                <span class="section-icon"></span>
-                Ações de Manutenção
-            </h2>
-            <div class="action-buttons">
-                <button class="btn btn-primary"> Limpar Cache</button>
-                <button class="btn btn-primary"> Recarregar Configurações</button>
-                <button class="btn btn-secondary"> Relatório de Uso</button>
-                <button class="btn btn-secondary"> Modo de Manutenção</button>
-                <button class="btn btn-secondary"> Backup Manual</button>
-            </div>
-        </div>
-        
-        <!-- Atividade Recente do Sistema -->
-        <div class="system-section">
-            <h2 class="section-title">
-                <span class="section-icon"></span>
-                Atividade Recente do Sistema
-            </h2>
-            <ul class="recent-activity">
-                <li class="activity-item">
-                    <span class="activity-description"> Sistema iniciado com sucesso</span>
-                    <span class="activity-time">Agora</span>
-                </li>
-                <li class="activity-item">
-                    <span class="activity-description"> Cache limpo automaticamente</span>
-                    <span class="activity-time">2 horas atrás</span>
-                </li>
-                <li class="activity-item">
-                    <span class="activity-description"> Novo usuário registrado</span>
-                    <span class="activity-time">1 dia atrás</span>
-                </li>
-                <li class="activity-item">
-                    <span class="activity-description"> Notícia publicada</span>
-                    <span class="activity-time">2 dias atrás</span>
-                </li>
-                <li class="activity-item">
-                    <span class="activity-description"> Grupo criado</span>
-                    <span class="activity-time">3 dias atrás</span>
-                </li>
-            </ul>
-        </div>
-        
-        <!-- Monitoramento de Recursos -->
-        <div class="system-section">
-            <h2 class="section-title">
-                <span class="section-icon"></span>
-                Uso de Recursos
-            </h2>
-            <div class="system-info">
-                <div class="info-item">
-                    <div class="info-label">Memória PHP</div>
-                    <div class="info-value">{{ number_format(memory_get_usage(true) / 1024 / 1024, 2) }} MB</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">Limite de Memória</div>
-                    <div class="info-value">{{ ini_get('memory_limit') }}</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">Tempo de Execução</div>
-                    <div class="info-value">{{ ini_get('max_execution_time') }}s</div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-label">Upload Máximo</div>
-                    <div class="info-value">{{ ini_get('upload_max_filesize') }}</div>
-                </div>
-            </div>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3"><div class="border rounded-3 p-3"><small class="text-secondary">Memória PHP</small><div class="h5 mb-0">{{ number_format(memory_get_usage(true) / 1024 / 1024, 2) }} MB</div></div></div>
+            <div class="col-md-3"><div class="border rounded-3 p-3"><small class="text-secondary">Limite de memória</small><div class="h5 mb-0">{{ ini_get('memory_limit') }}</div></div></div>
+            <div class="col-md-3"><div class="border rounded-3 p-3"><small class="text-secondary">Tempo de execução</small><div class="h5 mb-0">{{ ini_get('max_execution_time') }}s</div></div></div>
+            <div class="col-md-3"><div class="border rounded-3 p-3"><small class="text-secondary">Upload máximo</small><div class="h5 mb-0">{{ ini_get('upload_max_filesize') }}</div></div></div>
         </div>
     </div>
 </div>
