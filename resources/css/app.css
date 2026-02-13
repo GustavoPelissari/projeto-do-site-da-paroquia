@@ -610,22 +610,3 @@ h1, h2, h3, h4, h5, h6,
     transform: translateX(0);
   }
 }
-
-
-/* Ações padronizadas (Ver / Editar / Excluir) */
-.admin-table-actions,
-.admin-card-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.admin-table-actions .btn,
-.admin-card-actions .btn {
-  --bs-btn-padding-y: 0.22rem;
-  --bs-btn-padding-x: 0.6rem;
-  --bs-btn-font-size: 0.8rem;
-  min-width: 64px;
-  line-height: 1.2;
-}

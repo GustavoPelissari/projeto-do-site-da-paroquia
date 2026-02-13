@@ -82,13 +82,13 @@
                                 </td>
                                 <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                 <td class="text-end">
-                                    <div class="admin-table-actions justify-content-end">
-                                        <a href="{{ route('admin.global.news.show', $item) }}" class="btn btn-sm btn-outline-secondary">Ver</a>
-                                        <a href="{{ route('admin.global.news.edit', $item) }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ route('admin.global.news.show', $item) }}" class="btn btn-outline-secondary">Ver</a>
+                                        <a href="{{ route('admin.global.news.edit', $item) }}" class="btn btn-outline-primary">Editar</a>
                                         <form method="POST" action="{{ route('admin.global.news.destroy', $item) }}" class="d-inline" onsubmit="return confirm('Deseja excluir esta notícia?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                            <button type="submit" class="btn btn-outline-danger">Excluir</button>
                                         </form>
                                     </div>
                                 </td>
