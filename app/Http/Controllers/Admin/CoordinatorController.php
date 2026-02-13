@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\News;
 use App\Models\Event;
+use App\Models\Group;
 use App\Models\GroupRequest;
 use App\Models\Mass;
 use App\Models\Scale;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +22,19 @@ class CoordinatorController extends Controller
         return $user->group_id ?? $user->parish_group_id;
     }
 
+    private function ensureCoordinatorGroup()
+    {
+        $user = Auth::user();
+        $groupId = $this->currentGroupId($user);
+
+        if (!$groupId) {
+            return [null, null, redirect()->route('admin.coordenador.dashboard')
+                ->with('error', 'Você precisa estar associado a um grupo para acessar este módulo.')];
+        }
+
+        return [$user, $groupId, null];
+    }
+
     public function dashboard()
     {
         $user = Auth::user();
@@ -29,16 +44,19 @@ class CoordinatorController extends Controller
         }
 
         $groupId = $this->currentGroupId($user);
+        $group = $groupId ? Group::find($groupId) : null;
 
         if (!$groupId) {
             $stats = [
                 'total_coroinhas' => 0,
                 'coroinhas_ativos' => 0,
                 'solicitacoes_pendentes' => 0,
+                'escalas_ativas' => 0,
             ];
 
             return view('admin.coordenador.dashboard', [
                 'stats' => $stats,
+                'group' => null,
                 'recent_news' => collect(),
                 'upcoming_events' => collect(),
             ])->with('warning', 'Você precisa estar associado a um grupo para acessar todos os recursos.');
@@ -48,6 +66,7 @@ class CoordinatorController extends Controller
             'total_coroinhas' => User::where('parish_group_id', $groupId)->count(),
             'coroinhas_ativos' => User::where('parish_group_id', $groupId)->whereNotNull('email_verified_at')->count(),
             'solicitacoes_pendentes' => GroupRequest::where('group_id', $groupId)->where('status', GroupRequest::STATUS_PENDING)->count(),
+            'escalas_ativas' => Scale::where('group_id', $groupId)->where('is_active', true)->count(),
         ];
 
         $recent_news = News::where('group_id', $groupId)->latest()->take(5)->get();
@@ -58,17 +77,14 @@ class CoordinatorController extends Controller
             ->take(5)
             ->get();
 
-        return view('admin.coordenador.dashboard', compact('stats', 'recent_news', 'upcoming_events'));
+        return view('admin.coordenador.dashboard', compact('stats', 'recent_news', 'upcoming_events', 'group'));
     }
 
     public function newsIndex()
     {
-        $user = Auth::user();
-        $groupId = $this->currentGroupId($user);
-
-        if (!$groupId) {
-            return redirect()->route('admin.coordenador.dashboard')
-                ->with('error', 'Você precisa estar associado a um grupo para gerenciar notícias.');
+        [, $groupId, $redirect] = $this->ensureCoordinatorGroup();
+        if ($redirect) {
+            return $redirect;
         }
 
         $news = News::where('group_id', $groupId)->latest()->paginate(10);
@@ -84,11 +100,9 @@ class CoordinatorController extends Controller
 
     public function newsStore(Request $request)
     {
-        $user = Auth::user();
-        $groupId = $this->currentGroupId($user);
-
-        if (!$groupId) {
-            return redirect()->route('admin.coordenador.dashboard')->with('error', 'Usuário sem grupo associado.');
+        [, $groupId, $redirect] = $this->ensureCoordinatorGroup();
+        if ($redirect) {
+            return $redirect;
         }
 
         $validated = $request->validate([
@@ -139,21 +153,38 @@ class CoordinatorController extends Controller
 
     public function eventsIndex()
     {
-        return redirect()->route('admin.coordenador.dashboard')
-            ->with('warning', 'Módulo de eventos do coordenador está em atualização.');
+        [, $groupId, $redirect] = $this->ensureCoordinatorGroup();
+        if ($redirect) {
+            return $redirect;
+        }
+
+        $events = Event::where('group_id', $groupId)
+            ->orderByDesc('start_date')
+            ->paginate(10);
+
+        return view('admin.coordenador.events.index', compact('events'));
     }
 
-    public function eventsCreate() { return $this->eventsIndex(); }
-    public function eventsStore(Request $request) { return $this->eventsIndex(); }
-    public function eventsShow(Event $event) { return $this->eventsIndex(); }
-    public function eventsEdit(Event $event) { return $this->eventsIndex(); }
-    public function eventsUpdate(Request $request, Event $event) { return $this->eventsIndex(); }
-    public function eventsDestroy(Event $event) { return $this->eventsIndex(); }
+    public function eventsCreate() { return redirect()->route('admin.coordenador.events.index')->with('warning', 'Criação de eventos pelo coordenador será liberada em breve.'); }
+    public function eventsStore(Request $request) { return $this->eventsCreate(); }
+    public function eventsShow(Event $event) { return redirect()->route('admin.coordenador.events.index'); }
+    public function eventsEdit(Event $event) { return redirect()->route('admin.coordenador.events.index')->with('warning', 'Edição de eventos pelo coordenador será liberada em breve.'); }
+    public function eventsUpdate(Request $request, Event $event) { return $this->eventsEdit($event); }
+    public function eventsDestroy(Event $event) { return redirect()->route('admin.coordenador.events.index')->with('warning', 'Exclusão de eventos pelo coordenador será liberada em breve.'); }
 
     public function requestsIndex()
     {
-        return redirect()->route('admin.coordenador.dashboard')
-            ->with('warning', 'Módulo de solicitações está em atualização.');
+        [, $groupId, $redirect] = $this->ensureCoordinatorGroup();
+        if ($redirect) {
+            return $redirect;
+        }
+
+        $requests = GroupRequest::with(['user', 'group'])
+            ->where('group_id', $groupId)
+            ->latest()
+            ->paginate(10);
+
+        return view('admin.coordenador.requests.index', compact('requests'));
     }
 
     public function approveRequest(GroupRequest $request)
@@ -171,48 +202,57 @@ class CoordinatorController extends Controller
 
     public function schedulesIndex()
     {
-        return redirect()->route('admin.coordenador.dashboard')
-            ->with('warning', 'Módulo de escalas legadas está em atualização.');
+        [, $groupId, $redirect] = $this->ensureCoordinatorGroup();
+        if ($redirect) {
+            return $redirect;
+        }
+
+        $schedules = Schedule::with('user')
+            ->where('group_id', $groupId)
+            ->latest()
+            ->paginate(10);
+
+        return view('admin.coordenador.schedules.index', compact('schedules'));
     }
 
-    public function schedulesCreate() { return $this->schedulesIndex(); }
-    public function schedulesStore(Request $request) { return $this->schedulesIndex(); }
-    public function schedulesEdit($schedule) { return $this->schedulesIndex(); }
-    public function schedulesUpdate(Request $request, $schedule) { return $this->schedulesIndex(); }
-    public function schedulesDestroy($schedule) { return $this->schedulesIndex(); }
+    public function schedulesCreate() { return redirect()->route('admin.coordenador.schedules.index')->with('warning', 'Cadastro de escala legado será liberado em breve.'); }
+    public function schedulesStore(Request $request) { return $this->schedulesCreate(); }
+    public function schedulesEdit($schedule) { return redirect()->route('admin.coordenador.schedules.index')->with('warning', 'Edição de escala legado será liberada em breve.'); }
+    public function schedulesUpdate(Request $request, $schedule) { return $this->schedulesEdit($schedule); }
+    public function schedulesDestroy($schedule) { return redirect()->route('admin.coordenador.schedules.index')->with('warning', 'Exclusão de escala legado será liberada em breve.'); }
 
     public function massesIndex()
     {
-        return redirect()->route('admin.coordenador.dashboard')
-            ->with('warning', 'Módulo de missas do coordenador está em atualização.');
+        $masses = Mass::orderByRaw("FIELD(day_of_week, 'sunday','monday','tuesday','wednesday','thursday','friday','saturday')")
+            ->orderBy('time')
+            ->paginate(20);
+
+        return view('admin.coordenador.masses.index', compact('masses'));
     }
 
     public function massesShow(Mass $mass)
     {
-        return $this->massesIndex();
+        return redirect()->route('admin.coordenador.masses.index');
     }
 
     public function scalesIndex()
     {
-        $user = Auth::user();
-        $groupId = $this->currentGroupId($user);
-
-        if (!$groupId) {
-            return redirect()->route('admin.coordenador.dashboard')
-                ->with('error', 'Você precisa estar associado a um grupo para gerenciar escalas.');
+        [, $groupId, $redirect] = $this->ensureCoordinatorGroup();
+        if ($redirect) {
+            return $redirect;
         }
 
+        $group = Group::find($groupId);
         $scales = Scale::where('group_id', $groupId)->with(['uploader'])->latest()->paginate(10);
 
-        return view('admin.coordenador.scales.index', compact('scales'));
+        return view('admin.coordenador.scales.index', compact('scales', 'group'));
     }
 
     public function scalesUpload(Request $request)
     {
-        $groupId = $this->currentGroupId(Auth::user());
-
-        if (!$groupId) {
-            return redirect()->route('admin.coordenador.dashboard')->with('error', 'Usuário sem grupo associado.');
+        [, $groupId, $redirect] = $this->ensureCoordinatorGroup();
+        if ($redirect) {
+            return $redirect;
         }
 
         $validated = $request->validate([

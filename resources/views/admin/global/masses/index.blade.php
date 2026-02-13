@@ -85,25 +85,20 @@
                             <td class="py-3 text-body">{{ $mass->time->format('H:i') }}</td>
                             <td class="py-3 text-body">{{ $mass->location }}</td>
                             <td class="py-3">
-                                <span class="badge {{{ $mass->is_active ? 'bg-success-subtle text-success-emphasis' : 'bg-danger-subtle text-danger-emphasis' }}}">
+                                <span class="badge {{ $mass->is_active ? 'bg-success-subtle text-success-emphasis' : 'bg-danger-subtle text-danger-emphasis' }}">
                                     {{ $mass->is_active ? 'Ativo' : 'Inativo' }}
                                 </span>
                             </td>
                             <td class="py-3">
-                                <div class="d-flex gap-2">
-                                    <a href="{{ route('admin.global.masses.show', $mass) }}" 
-                                       class="text-primary hover-text-primary-dark small">Ver</a>
-                                    <a href="{{ route('admin.global.masses.edit', $mass) }}" 
-                                       class="text-success hover-text-success-dark small">Editar</a>
-                                    <form method="POST" action="{{ route('admin.global.masses.destroy', $mass) }}" 
-                                          class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este horário?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-link text-danger hover-text-danger-dark p-0 small">
-                                            Excluir
-                                        </button>
-                                    </form>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a href="{{ route('admin.global.masses.show', $mass) }}" class="btn btn-outline-secondary">Ver</a>
+                                    <a href="{{ route('admin.global.masses.edit', $mass) }}" class="btn btn-outline-primary">Editar</a>
                                 </div>
+                                <form method="POST" action="{{ route('admin.global.masses.destroy', $mass) }}" onsubmit="return confirm('Tem certeza que deseja excluir este horário?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

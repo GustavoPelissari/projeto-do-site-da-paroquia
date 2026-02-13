@@ -2,204 +2,73 @@
 
 @section('title', 'Estatísticas Paroquiais - Admin Global')
 
-@push('styles')
-<style>
-    .parish-stats {
-        padding: var(--space-6);
-    }
-    
-    .stats-header {
-        background: linear-gradient(135deg, var(--sp-teal-dark) 0%, var(--sp-teal) 100%);
-        color: var(--sp-white);
-        padding: var(--space-xl);
-        border-radius: var(--radius-xl);
-        margin-bottom: var(--space-6);
-        text-align: center;
-    }
-    
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: var(--space-6);
-        margin-bottom: var(--space-6);
-    }
-    
-    .stat-card {
-        background: var(--sp-white);
-        border-radius: var(--radius-xl);
-        padding: var(--space-6);
-        box-shadow: var(--shadow-lg);
-        border: 1px solid var(--sp-gray-200);
-        text-align: center;
-    }
-    
-    .stat-icon {
-        font-size: var(--text-4xl);
-        margin-bottom: var(--space-4);
-    }
-    
-    .stat-number {
-        font-size: var(--text-5xl);
-        font-weight: var(--font-bold);
-        color: var(--sp-red);
-        margin-bottom: var(--space-2);
-    }
-    
-    .stat-label {
-        font-size: var(--text-lg);
-        color: var(--sp-gray-600);
-        margin-bottom: var(--space-2);
-    }
-    
-    .stat-description {
-        font-size: var(--text-sm);
-        color: var(--sp-gray-500);
-    }
-    
-    .charts-section {
-        background: var(--sp-white);
-        border-radius: var(--radius-xl);
-        padding: var(--space-6);
-        box-shadow: var(--shadow-lg);
-        margin-bottom: var(--space-6);
-    }
-    
-    .section-title {
-        font-size: var(--text-2xl);
-        font-weight: var(--font-bold);
-        color: var(--sp-red-dark);
-        margin-bottom: var(--space-6);
-        text-align: center;
-    }
-    
-    .growth-stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: var(--space-4);
-    }
-    
-    .growth-item {
-        background: var(--sp-gray-50);
-        padding: var(--space-4);
-        border-radius: var(--radius-lg);
-        text-align: center;
-    }
-    
-    .growth-percentage {
-        font-size: var(--text-2xl);
-        font-weight: var(--font-bold);
-        color: var(--sp-teal);
-    }
-    
-    .growth-label {
-        color: var(--sp-gray-600);
-        font-size: var(--text-sm);
-    }
-</style>
-@endpush
-
 @section('content')
-<div class="parish-stats">
-    <div class="stats-header">
-        <h1> Estatísticas Paroquiais</h1>
-        <p>Visão completa do crescimento e atividades da Paróquia São Paulo Apóstolo</p>
+<div class="mb-4">
+    <p class="admin-overline mb-1">Indicadores da paróquia</p>
+    <h2 class="h3 mb-1">Estatísticas paroquiais</h2>
+    <p class="text-secondary mb-0">Acompanhe evolução mensal/anual e os grupos com mais participantes.</p>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body"><small class="text-secondary">Novos membros (mês)</small><div class="display-6 fw-semibold text-primary">{{ $stats['monthly_stats']['new_members'] ?? 0 }}</div></div></div>
     </div>
-    
-    <!-- Estatísticas Principais -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-icon"></div>
-            <div class="stat-number">{{ $stats['total_users'] ?? 0 }}</div>
-            <div class="stat-label">Total de Fiéis</div>
-            <div class="stat-description">Cadastrados no sistema</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon"></div>
-            <div class="stat-number">{{ $stats['active_groups'] ?? 0 }}</div>
-            <div class="stat-label">Grupos Ativos</div>
-            <div class="stat-description">Pastorais e ministérios</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon"></div>
-            <div class="stat-number">{{ $stats['total_events'] ?? 0 }}</div>
-            <div class="stat-label">Eventos Realizados</div>
-            <div class="stat-description">Este ano</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon"></div>
-            <div class="stat-number">{{ $stats['published_news'] ?? 0 }}</div>
-            <div class="stat-label">Notícias Publicadas</div>
-            <div class="stat-description">Conteúdo ativo</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon"></div>
-            <div class="stat-number">{{ $stats['weekly_masses'] ?? 0 }}</div>
-            <div class="stat-label">Missas Semanais</div>
-            <div class="stat-description">Horários regulares</div>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon"></div>
-            <div class="stat-number">{{ $stats['pending_requests'] ?? 0 }}</div>
-            <div class="stat-label">Solicitações Pendentes</div>
-            <div class="stat-description">Aguardando aprovação</div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body"><small class="text-secondary">Eventos realizados (mês)</small><div class="display-6 fw-semibold text-primary">{{ $stats['monthly_stats']['events_held'] ?? 0 }}</div></div></div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body"><small class="text-secondary">Notícias publicadas (mês)</small><div class="display-6 fw-semibold text-primary">{{ $stats['monthly_stats']['news_published'] ?? 0 }}</div></div></div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <div class="card h-100"><div class="card-body"><small class="text-secondary">Solicitações de grupos (mês)</small><div class="display-6 fw-semibold text-primary">{{ $stats['monthly_stats']['group_requests'] ?? 0 }}</div></div></div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="h5 mb-0">Resumo anual</h3>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3"><div class="border rounded-3 p-3 h-100"><small class="text-secondary">Membros no ano</small><div class="h4 mb-0">{{ $stats['yearly_stats']['total_members_joined'] ?? 0 }}</div></div></div>
+            <div class="col-md-3"><div class="border rounded-3 p-3 h-100"><small class="text-secondary">Eventos no ano</small><div class="h4 mb-0">{{ $stats['yearly_stats']['total_events'] ?? 0 }}</div></div></div>
+            <div class="col-md-3"><div class="border rounded-3 p-3 h-100"><small class="text-secondary">Notícias no ano</small><div class="h4 mb-0">{{ $stats['yearly_stats']['total_news'] ?? 0 }}</div></div></div>
+            <div class="col-md-3"><div class="border rounded-3 p-3 h-100"><small class="text-secondary">Grupos criados no ano</small><div class="h4 mb-0">{{ $stats['yearly_stats']['groups_created'] ?? 0 }}</div></div></div>
         </div>
     </div>
-    
-    <!-- Crescimento Mensal -->
-    <div class="charts-section">
-        <h2 class="section-title"> Crescimento da Comunidade</h2>
-        <div class="growth-stats">
-            <div class="growth-item">
-                <div class="growth-percentage">+{{ $growth['users_this_month'] ?? 0 }}%</div>
-                <div class="growth-label">Novos usuários este mês</div>
-            </div>
-            
-            <div class="growth-item">
-                <div class="growth-percentage">+{{ $growth['groups_this_year'] ?? 0 }}</div>
-                <div class="growth-label">Grupos criados este ano</div>
-            </div>
-            
-            <div class="growth-item">
-                <div class="growth-percentage">{{ $growth['events_this_month'] ?? 0 }}</div>
-                <div class="growth-label">Eventos este mês</div>
-            </div>
-            
-            <div class="growth-item">
-                <div class="growth-percentage">{{ $growth['news_this_month'] ?? 0 }}</div>
-                <div class="growth-label">Notícias publicadas</div>
-            </div>
-        </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="h5 mb-0">Top grupos por membros</h3>
     </div>
-    
-    <!-- Distribuição por Função -->
-    <div class="charts-section">
-        <h2 class="section-title"> Distribuição de Usuários por Função</h2>
-        <div class="growth-stats">
-            <div class="growth-item">
-                <div class="growth-percentage">{{ $usersByRole['admin_global'] ?? 0 }}</div>
-                <div class="growth-label">Admin Global</div>
+    <div class="card-body p-0">
+        @if(($stats['top_groups'] ?? collect())->count())
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead>
+                        <tr>
+                            <th>Grupo</th>
+                            <th>Categoria</th>
+                            <th>Status</th>
+                            <th class="text-end">Membros</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($stats['top_groups'] as $group)
+                            <tr>
+                                <td class="fw-semibold">{{ $group->name }}</td>
+                                <td>{{ $group->category_name }}</td>
+                                <td><span class="badge {{ $group->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $group->is_active ? 'Ativo' : 'Inativo' }}</span></td>
+                                <td class="text-end">{{ $group->members_count }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            
-            <div class="growth-item">
-                <div class="growth-percentage">{{ $usersByRole['administrativo'] ?? 0 }}</div>
-                <div class="growth-label">Administrativos</div>
-            </div>
-            
-            <div class="growth-item">
-                <div class="growth-percentage">{{ $usersByRole['coordenador_de_pastoral'] ?? 0 }}</div>
-                <div class="growth-label">Coordenadores</div>
-            </div>
-            
-            <div class="growth-item">
-                <div class="growth-percentage">{{ $usersByRole['usuario_padrao'] ?? 0 }}</div>
-                <div class="growth-label">Usuários Padrão</div>
-            </div>
-        </div>
+        @else
+            <div class="p-4 text-center text-secondary">Sem dados de grupos para exibir.</div>
+        @endif
     </div>
 </div>
 @endsection
