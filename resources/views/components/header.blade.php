@@ -3,11 +3,11 @@
     <nav class="sp-nav sp-container">
         {{-- Logo da Paróquia --}}
         <a href="{{ route('home') }}" class="sp-logo" style="transition: all 0.3s ease;">
-            <img src="{{ asset('images/sao-paulo-logo.png') }}" 
+            <x-parish-logo 
                  alt="São Paulo Apóstolo"
-                 style="height: 48px; width: auto; max-height: 60px; border-radius: 50%; border: 2px solid var(--sp-gold); padding: 2px; background: white; transition: all 0.3s ease;"
-                 onmouseover="this.style.transform='scale(1.1) rotate(5deg)'; this.style.borderColor='var(--sp-red)'"
-                 onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.borderColor='var(--sp-gold)'">
+                 style="height: 48px; width: auto; max-height: 60px; transition: all 0.3s ease;"
+                 onmouseover="this.style.transform='scale(1.1) rotate(5deg)'"
+                 onmouseout="this.style.transform='scale(1) rotate(0deg)'" />
             <div class="sp-logo-text">
                 <div class="sp-logo-title" style="color: var(--sp-red); font-weight: 700; font-size: 1.1rem;">São Paulo Apóstolo</div>
                 <div class="sp-logo-subtitle" style="color: var(--sp-gold-dark); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Comunidade de Fé</div>

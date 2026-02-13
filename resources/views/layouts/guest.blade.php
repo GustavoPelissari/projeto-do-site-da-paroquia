@@ -24,8 +24,7 @@
                 <div class="card auth-card">
                     <div class="card-body p-4">
                         <div class="text-center mb-4">
-                            <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="São Paulo Apóstolo"
-                                 class="auth-logo mb-2">
+                            <x-parish-logo class="auth-logo mb-2" alt="São Paulo Apóstolo" />
                             <h1 class="h4 mb-1 auth-title">São Paulo Apóstolo</h1>
                             <p class="mb-0 text-muted small">Comunidade de Fé</p>
                         </div>

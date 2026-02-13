@@ -47,14 +47,14 @@ class DashboardHelper
     public static function getUserAreaLabel(): string
     {
         if (!Auth::check()) {
-            return 'Login';
+            return 'Entrar';
         }
 
         $user = Auth::user();
         $userRole = $user->role instanceof \App\Enums\UserRole ? $user->role->value : $user->role;
 
         return match ($userRole) {
-            'admin_global' => 'Admin Global',
+            'admin_global' => 'Administrador Global',
             'coordenador_de_pastoral' => 'Painel Coordenador',
             'administrativo' => 'Painel Administrativo',
             default => 'Meu Painel'

@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Estatísticas Paroquiais - Admin Global')
+@section('title', 'Estatísticas Paroquiais - Administrador Global')
 
 @push('styles')
 <style>
@@ -182,7 +182,7 @@
         <div class="growth-stats">
             <div class="growth-item">
                 <div class="growth-percentage">{{ $usersByRole['admin_global'] ?? 0 }}</div>
-                <div class="growth-label">Admin Global</div>
+                <div class="growth-label">Administrador Global</div>
             </div>
             
             <div class="growth-item">

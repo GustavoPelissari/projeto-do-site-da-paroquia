@@ -185,8 +185,8 @@
                             <p class="text-muted mb-4">
                                 Não há solicitações para o seu grupo no momento. Quando alguém solicitar entrada, aparecerá aqui.
                             </p>
-                            <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-outline-primary btn-lg">
-                                📊 Voltar ao Dashboard
+                            <a href="{{ \App\Helpers\PainelHelper::getPainelRoute(auth()->user()->role) }}" class="btn btn-outline-primary btn-lg">
+                                📊 Voltar ao Painel
                             </a>
                         </div>
                     </div>

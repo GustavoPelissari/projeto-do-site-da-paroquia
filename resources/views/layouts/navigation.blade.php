@@ -2,12 +2,12 @@
     <div class="container">
         <!-- Brand -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
-            <x-application-logo style="height: 32px; width: 32px;" class="me-2" />
+            <x-parish-logo class="me-2" style="height: 32px; width: 32px;" alt="Logo da Paróquia" />
             <span class="fw-semibold">Paróquia São Paulo Apóstolo</span>
         </a>
 
         <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Alternar navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -17,7 +17,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                        {{ __('Dashboard') }}
+                        {{ __('Painel') }}
                     </a>
                 </li>
             </ul>
@@ -32,11 +32,11 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
+                            <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Perfil') }}</a>
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
                                 <button type="submit" class="dropdown-item">
-                                    {{ __('Log Out') }}
+                                    {{ __('Sair') }}
                                 </button>
                             </form>
                         </div>

@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Painel do Padre - Admin Global')
+@section('title', 'Painel do Padre - Administrador Global')
 
 @push('styles')
 <style>

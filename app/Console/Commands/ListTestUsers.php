@@ -30,15 +30,14 @@ class ListTestUsers extends Command
         $this->line('════════════════════════════════════════════════════════════════');
 
         $testUsers = User::whereIn('email', [
-            'admin@paroquia.test',
-            'coord.coroinhas@paroquia.test', 
-            'administrativo@paroquia.test',
-            'maria@paroquia.test'
+            'padre@teste.com',
+            'admin@teste.com',
+            'coordenador@teste.com'
         ])->get();
 
         if ($testUsers->isEmpty()) {
             $this->warn('❌ Nenhum usuário de teste encontrado.');
-            $this->info('Execute: php artisan db:seed --class=DevSeeder');
+            $this->info('Execute: php artisan db:seed --class=DevRoleUsersSeeder');
             return Command::FAILURE;
         }
 
@@ -62,7 +61,7 @@ class ListTestUsers extends Command
         $this->info('🚀 INSTRUÇÕES PARA TESTE:');
         $this->line('');
         $this->line('1. Acesse: http://localhost:8000/login');
-        $this->line('2. Use qualquer email e senha acima para fazer login');
+        $this->line('2. Use qualquer e-mail e a senha acima para fazer login');
         $this->line('3. Teste diferentes funcionalidades baseadas no papel do usuário');
         $this->line('');
         
@@ -75,10 +74,9 @@ class ListTestUsers extends Command
     private function getPasswordForUser($email)
     {
         $passwords = [
-            'admin@paroquia.test' => 'Admin123!',
-            'coord.coroinhas@paroquia.test' => 'Coord123!',
-            'administrativo@paroquia.test' => 'Adm123!',
-            'maria@paroquia.test' => 'User123!',
+            'padre@teste.com' => 'Teste@1234',
+            'admin@teste.com' => 'Teste@1234',
+            'coordenador@teste.com' => 'Teste@1234',
         ];
 
         return $passwords[$email] ?? 'N/A';

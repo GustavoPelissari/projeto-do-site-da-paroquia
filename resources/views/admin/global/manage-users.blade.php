@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Gerenciar Usuários - Admin Global')
+@section('title', 'Gerenciar Usuários - Administrador Global')
 
 @push('styles')
 <style>
@@ -129,7 +129,7 @@
                         <div class="user-role">
                             @switch($user->role)
                                 @case('admin_global')
-                                    ⛪ Padre - Admin Global
+                                    ⛪ Padre - Administrador Global
                                     @break
                                 @case('administrativo')
                                     📋 Administrativo

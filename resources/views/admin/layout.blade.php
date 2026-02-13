@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Dashboard') - Paróquia São Paulo Apóstolo</title>
+    <title>@yield('title', 'Painel') - Paróquia São Paulo Apóstolo</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/sao-paulo-logo.png') }}">
@@ -32,7 +32,7 @@
         <nav class="admin-sidebar" id="adminSidebar" aria-label="Menu administrativo">
             <div class="sidebar-header">
                 <div class="d-flex align-items-center gap-3">
-                    <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo da Paróquia" class="admin-logo">
+                    <x-parish-logo class="admin-logo" alt="Logo da Paróquia" />
                     <div>
                         <div class="sidebar-title">Painel Administrativo</div>
                         <div class="sidebar-subtitle">Paróquia São Paulo Apóstolo</div>
@@ -48,7 +48,7 @@
                         @if(auth()->user()->role->value === 'admin_global')
                             <a href="{{ route('admin.global.dashboard') }}" class="admin-nav-link {{ request()->routeIs('admin.global.dashboard') ? 'active' : '' }}">
                                 <i class="bi bi-grid-1x2 admin-nav-icon"></i>
-                                <span class="nav-text">Dashboard</span>
+                                <span class="nav-text">Painel</span>
                             </a>
                             <a href="{{ route('admin.global.news.index') }}" class="admin-nav-link {{ request()->routeIs('admin.global.news.*') ? 'active' : '' }}">
                                 <i class="bi bi-newspaper admin-nav-icon"></i>
@@ -61,7 +61,7 @@
                         @elseif(auth()->user()->role->value === 'coordenador_de_pastoral')
                             <a href="{{ route('admin.coordenador.dashboard') }}" class="admin-nav-link {{ request()->routeIs('admin.coordenador.dashboard') ? 'active' : '' }}">
                                 <i class="bi bi-grid-1x2 admin-nav-icon"></i>
-                                <span class="nav-text">Dashboard</span>
+                                <span class="nav-text">Painel</span>
                             </a>
                             <a href="{{ route('admin.coordenador.news.index') }}" class="admin-nav-link {{ request()->routeIs('admin.coordenador.news.*') ? 'active' : '' }}">
                                 <i class="bi bi-newspaper admin-nav-icon"></i>
@@ -111,7 +111,7 @@
                         <button class="btn btn-outline-secondary d-lg-none" type="button" data-admin-toggle aria-controls="adminSidebar" aria-label="Abrir menu">
                             <i class="bi bi-list"></i>
                         </button>
-                        <h1 class="header-title mb-0">@yield('title', 'Dashboard')</h1>
+                        <h1 class="header-title mb-0">@yield('title', 'Painel')</h1>
                     </div>
                 </div>
             </header>

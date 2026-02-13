@@ -1,13 +1,13 @@
 @extends('admin.layout')
 
-@section('title', 'Dashboard Administrativo - Paróquia São Paulo Apóstolo')
+@section('title', 'Painel Administrativo - Paróquia São Paulo Apóstolo')
 
 @section('content')
     <div class="sp-container sp-py-large">
         {{-- Hero Section --}}
         <section class="sp-hero sp-mb-large">
             <div class="sp-hero-content">
-                <h1 class="sp-hero-title">📊 Dashboard Administrativo</h1>
+                <h1 class="sp-hero-title">📊 Painel Administrativo</h1>
                 <p class="sp-hero-subtitle">
                     Visão geral das atividades e gerenciamento da paróquia
                 </p>

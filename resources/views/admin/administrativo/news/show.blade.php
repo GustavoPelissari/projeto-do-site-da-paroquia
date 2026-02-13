@@ -220,9 +220,9 @@
                        class="text-success text-decoration-none small hover-text-success-dark">
                         + Nova Notícia
                     </a>
-                    <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
+                    <a href="{{ \App\Helpers\PainelHelper::getPainelRoute(auth()->user()->role) }}" 
                        class="text-secondary text-decoration-none small hover-text-secondary-dark">
-                        🏠 Dashboard
+                        🏠 Painel
                     </a>
                 </div>
             </div>
