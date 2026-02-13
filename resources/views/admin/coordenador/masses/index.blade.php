@@ -27,7 +27,7 @@
                             <tr>
                                 <td>{{ $mass->name }}</td>
                                 <td>{{ $mass->day_name }}</td>
-                                <td>{{ optional($mass->time)->format('H:i') ?? '—' }}</td>
+                                <td>{{ $mass->time->format('H:i') }}</td>
                                 <td>{{ $mass->location }}</td>
                                 <td><span class="badge {{ $mass->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $mass->is_active ? 'Ativo' : 'Inativo' }}</span></td>
                             </tr>
