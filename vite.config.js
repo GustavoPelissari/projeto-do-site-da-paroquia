@@ -25,13 +25,8 @@ export default defineConfig({
                 },
             },
         },
-        // Optimize for production
-        minify: 'terser',
-        terserOptions: {
-            compress: {
-                drop_console: true,
-            },
-        },
+        // Optimize for production without optional terser dependency
+        minify: 'esbuild',
         // Source maps for production debugging
         sourcemap: false,
         // Larger chunk size for better batching
