@@ -85,7 +85,7 @@
                                     <div class="btn-group btn-group-sm" role="group">
                                         <a href="{{ route('admin.global.news.show', $item) }}" class="btn btn-outline-secondary">Ver</a>
                                         <a href="{{ route('admin.global.news.edit', $item) }}" class="btn btn-outline-primary">Editar</a>
-                                        <form method="POST" action="{{ route('admin.global.news.destroy', $item) }}" class="d-inline" onsubmit="return confirm('Deseja excluir esta notícia?')">
+                                        <form method="POST" action="{{ route('admin.global.news.destroy', $item) }}" onsubmit="return confirm('Deseja excluir esta notícia?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-outline-danger">Excluir</button>

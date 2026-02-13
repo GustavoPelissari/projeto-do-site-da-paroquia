@@ -94,7 +94,7 @@
                                     <a href="{{ route('admin.global.masses.show', $mass) }}" class="btn btn-outline-secondary">Ver</a>
                                     <a href="{{ route('admin.global.masses.edit', $mass) }}" class="btn btn-outline-primary">Editar</a>
                                 </div>
-                                <form method="POST" action="{{ route('admin.global.masses.destroy', $mass) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este horário?')">
+                                <form method="POST" action="{{ route('admin.global.masses.destroy', $mass) }}" onsubmit="return confirm('Tem certeza que deseja excluir este horário?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>

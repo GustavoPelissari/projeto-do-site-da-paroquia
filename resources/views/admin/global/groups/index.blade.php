@@ -80,7 +80,7 @@
                                 <a href="{{ route('admin.global.groups.show', $group) }}" class="btn btn-outline-secondary">Ver</a>
                                 <a href="{{ route('admin.global.groups.edit', $group) }}" class="btn btn-outline-primary">Editar</a>
                             </div>
-                            <form method="POST" action="{{ route('admin.global.groups.destroy', $group) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este grupo?')">
+                            <form method="POST" action="{{ route('admin.global.groups.destroy', $group) }}" onsubmit="return confirm('Tem certeza que deseja excluir este grupo?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>

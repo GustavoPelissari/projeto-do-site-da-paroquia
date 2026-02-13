@@ -114,7 +114,7 @@
                                     <a href="{{ route('admin.global.events.show', $event) }}" class="btn btn-outline-secondary">Ver</a>
                                     <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-outline-primary">Editar</a>
                                 </div>
-                                <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este evento?')">
+                                <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" onsubmit="return confirm('Tem certeza que deseja excluir este evento?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
