@@ -222,7 +222,7 @@
                     </a>
                     <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" 
                        class="text-secondary text-decoration-none small hover-text-secondary-dark">
-                        🏠 Dashboard
+                        🏠 Painel
                     </a>
                 </div>
             </div>

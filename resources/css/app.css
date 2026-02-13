@@ -59,9 +59,11 @@ h1, h2, h3, h4, h5, h6,
 .brand-mark {
   width: 56px;
   height: 56px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid rgba(123, 20, 48, 0.2);
+  object-fit: contain;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
 }
 
 /* Espaço para navbar fixa (só quando usar fixed-top) */
@@ -106,9 +108,11 @@ h1, h2, h3, h4, h5, h6,
 .logo-footer {
   width: 56px;
   height: 56px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.35);
+  object-fit: contain;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
 }
 
 /* Auth layout */
@@ -125,8 +129,10 @@ h1, h2, h3, h4, h5, h6,
 .auth-logo {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 .auth-title {
@@ -167,9 +173,11 @@ h1, h2, h3, h4, h5, h6,
 .admin-logo {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  object-fit: contain;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0;
+  box-shadow: none !important;
 }
 
 .admin-section-title {

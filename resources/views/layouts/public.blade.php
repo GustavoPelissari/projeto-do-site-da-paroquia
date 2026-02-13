@@ -30,7 +30,7 @@
     <nav class="navbar navbar-expand-lg fixed-top site-navbar navbar-light js-navbar-scroll">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo"
+                <img src="{{ asset(config('branding.logo_path')) }}" alt="Logo São Paulo Apóstolo"
                      class="me-3 brand-mark">
                 <div>
                     <span class="d-block fw-semibold text-primary">Paróquia São Paulo Apóstolo</span>
@@ -39,7 +39,7 @@
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -83,7 +83,7 @@
                     </a>
                     @auth
                         <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-outline-primary">
-                            <i class="bi bi-gear me-1"></i>Admin
+                            <i class="bi bi-gear me-1"></i>Administração
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-primary">
@@ -104,7 +104,7 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="d-flex align-items-center gap-3 mb-3">
-                        <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-footer">
+                        <img src="{{ asset(config('branding.logo_path')) }}" alt="Logo São Paulo Apóstolo" class="logo-footer">
                         <div>
                             <h5 class="mb-0 footer-title">Paróquia São Paulo Apóstolo</h5>
                             <small>Diocese de Umuarama - PR</small>

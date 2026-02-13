@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Dashboard Coordenador - Coroinhas')
+@section('title', 'Painel Coordenador - Coroinhas')
 
 @push('styles')
 <style>
