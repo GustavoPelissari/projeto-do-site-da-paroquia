@@ -2,7 +2,7 @@
 
 O projeto usa, por padrão, o arquivo:
 
-- `public/images/sao-paulo-apostolo.svg`
+- `public/images/png-clipart-paul-the-apostle-saint-paul-new-testament-catholicism-others-miscellaneous-christianity-thumbnail.png`
 
 Esse arquivo deve ter fundo transparente.
 
@@ -12,7 +12,7 @@ Esse arquivo deve ter fundo transparente.
 2. Configure o caminho no `.env`:
 
 ```env
-APP_LOGO_PATH=images/sua-logo-transparente.svg
+APP_LOGO_PATH=images/png-clipart-paul-the-apostle-saint-paul-new-testament-catholicism-others-miscellaneous-christianity-thumbnail.png
 ```
 
 3. Limpe o cache de configuração:
