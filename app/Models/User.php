@@ -63,7 +63,20 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getRoleAttribute($value): UserRole
     {
-        return UserRole::from($value);
+        return match ($value) {
+            UserRole::ADMIN_GLOBAL->value,
+            'admin' => UserRole::ADMIN_GLOBAL,
+
+            UserRole::ADMINISTRATIVO->value,
+            'moderator' => UserRole::ADMINISTRATIVO,
+
+            UserRole::COORDENADOR_PASTORAL->value => UserRole::COORDENADOR_PASTORAL,
+            UserRole::USUARIO_PADRAO->value,
+            'member' => UserRole::USUARIO_PADRAO,
+            UserRole::VISITANTE->value => UserRole::VISITANTE,
+
+            default => UserRole::USUARIO_PADRAO,
+        };
     }
     
     // Role helper methods
