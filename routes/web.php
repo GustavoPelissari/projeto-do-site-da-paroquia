@@ -53,6 +53,12 @@ Route::get('/dashboard', function () {
             case 'administrativo':
                 return redirect()->route('admin.administrativo.dashboard');
             case 'usuario_padrao':
+                $hasIncompleteProfile = blank($user->phone) || blank($user->birth_date) || blank($user->address);
+
+                if ($hasIncompleteProfile) {
+                    return redirect()->route('profile.edit')->with('warning', 'Complete seus dados de perfil para liberar todos os recursos.');
+                }
+
                 return view('dashboard');
             default:
                 return redirect()->route('profile.edit')->with('warning', 'Seu perfil não possui área administrativa habilitada.');
