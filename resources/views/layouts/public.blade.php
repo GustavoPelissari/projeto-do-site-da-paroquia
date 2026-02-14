@@ -80,8 +80,9 @@
                         <i class="bi bi-heart me-1"></i>Apoiar a Paróquia
                     </a>
                     @auth
+                        @php($role = auth()->user()->role instanceof \App\Enums\UserRole ? auth()->user()->role->value : auth()->user()->role)
                         <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-outline-primary">
-                            <i class="bi bi-gear me-1"></i>Administração
+                            <i class="bi bi-gear me-1"></i>{{ in_array($role, ['admin_global', 'coordenador_de_pastoral', 'administrativo']) ? 'Administração' : 'Meu painel' }}
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-primary">
