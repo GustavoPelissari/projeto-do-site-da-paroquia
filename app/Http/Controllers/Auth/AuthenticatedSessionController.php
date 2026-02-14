@@ -27,10 +27,8 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        $request->session()->forget('url.intended');
 
-        // Sempre envia para o dashboard da função (evita cair em /profile por URL "intended" antiga)
-        return redirect()->route('dashboard');
+        return redirect()->intended(route('dashboard'));
     }
 
     /**
