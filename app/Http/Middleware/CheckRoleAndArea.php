@@ -57,10 +57,11 @@ class CheckRoleAndArea
         $routes = [
             UserRole::ADMIN_GLOBAL->value => 'admin.global.dashboard',
             UserRole::COORDENADOR_PASTORAL->value => 'admin.coordenador.dashboard',
-            UserRole::ADMINISTRATIVO->value => 'admin.administrativo.dashboard'
+            UserRole::ADMINISTRATIVO->value => 'admin.administrativo.dashboard',
+            UserRole::USUARIO_PADRAO->value => 'dashboard',
         ];
 
-        $route = $routes[$userRole] ?? 'home';
+        $route = $routes[$userRole] ?? 'dashboard';
         
         return redirect()->route($route)->with('error', $message);
     }

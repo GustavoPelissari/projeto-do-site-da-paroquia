@@ -111,11 +111,15 @@ class GroupRequestController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        
-        // Verificar permissões
+
+        // Usuário padrão visualiza apenas suas próprias solicitações
         if (!$user->canApproveRequests()) {
-            return redirect()->route('dashboard')
-                ->with('error', 'Você não tem permissão para visualizar solicitações.');
+            $requests = GroupRequest::where('user_id', $user->id)
+                ->with(['group', 'approver'])
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+            return view('group-requests.my-requests', compact('requests'));
         }
 
         $query = GroupRequest::with(['user', 'group']);
@@ -238,13 +242,6 @@ class GroupRequestController extends Controller
      */
     public function myRequests()
     {
-        $user = Auth::user();
-        
-        $requests = GroupRequest::where('user_id', $user->id)
-            ->with(['group', 'approver'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-
-        return view('group-requests.my-requests', compact('requests'));
+        return $this->index(request());
     }
 }

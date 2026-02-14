@@ -61,7 +61,8 @@ Route::get('/dashboard', function () {
 
                 return view('dashboard');
             default:
-                return redirect()->route('profile.edit')->with('warning', 'Seu perfil não possui área administrativa habilitada.');
+                Log::warning('Papel de usuário não mapeado para dashboard', ['user_id' => $user->id, 'role' => $roleValue]);
+                return view('dashboard');
         }
     }
     return redirect()->route('login');
