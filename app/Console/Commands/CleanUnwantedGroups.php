@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Group;
+use Illuminate\Console\Command;
 
 class CleanUnwantedGroups extends Command
 {
@@ -30,7 +30,7 @@ class CleanUnwantedGroups extends Command
             'Coral Paroquial',
             'Ministros Extraordinários da Eucaristia',
             'Pastoral da Família',
-            'Pastoral da Juventude'
+            'Pastoral da Juventude',
         ];
 
         $this->info('🧹 Procurando pastorais indesejadas para remoção...');
@@ -39,6 +39,7 @@ class CleanUnwantedGroups extends Command
 
         if ($groupsToRemove->isEmpty()) {
             $this->info('✅ Nenhuma pastoral indesejada encontrada.');
+
             return Command::SUCCESS;
         }
 
@@ -47,9 +48,10 @@ class CleanUnwantedGroups extends Command
             $this->line("  • {$group->id} - {$group->name}");
         }
 
-        if (!$this->option('force')) {
-            if (!$this->confirm('Deseja continuar com a remoção?')) {
+        if (! $this->option('force')) {
+            if (! $this->confirm('Deseja continuar com a remoção?')) {
                 $this->info('❌ Operação cancelada.');
+
                 return Command::FAILURE;
             }
         }
@@ -62,7 +64,7 @@ class CleanUnwantedGroups extends Command
                 // Soft delete preferencial
                 $group->update(['is_active' => false]);
                 $group->delete();
-                
+
                 $this->line("  ✅ Removido: {$group->name}");
                 $removedCount++;
             } catch (\Exception $e) {
@@ -71,7 +73,7 @@ class CleanUnwantedGroups extends Command
         }
 
         $this->info("🎉 Operação concluída! {$removedCount} pastorais removidas.");
-        
+
         if ($removedCount > 0) {
             $this->warn('💡 Lembre-se de verificar se há rotas ou views específicas para essas pastorais que precisam ser removidas.');
         }

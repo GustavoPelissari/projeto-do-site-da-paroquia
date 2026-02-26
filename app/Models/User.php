@@ -2,20 +2,52 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserRole;
+use App\Notifications\CustomVerifyEmail;
+use App\Notifications\CustomResetPassword;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
  * @property-read Group|null $group
  * @property-read Group|null $parishGroup
+ * @method bool isAdminGlobal()
+ * @method bool isAdministrativo()
+ * @method bool isCoordenador()
+ * @method bool isUsuarioPadrao()
+ * @method bool canManageUsers()
+ * @method bool canManageMasses()
+ * @method bool canCreateNews()
+ * @method bool canManageGroups()
+ * @method bool canManageOwnGroup()
+ * @method bool canManageSchedules()
+ * @method bool canApproveRequests()
+ * @method bool canDeleteGroups()
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+
+    /**
+     * Send the email verification notification.
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new CustomVerifyEmail);
+    }
+
+    /**
+     * Send the password reset notification.
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPassword($token));
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -53,25 +85,19 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'phone_verified_at' => 'datetime',
         'password' => 'hashed',
         'birth_date' => 'date',
         'role' => UserRole::class,
     ];
-    
-    /**
-     * Get the role as UserRole enum
-     */
-    public function getRoleAttribute($value): UserRole
-    {
-        return UserRole::from($value);
-    }
-    
+
     // Role helper methods
     public function hasRole(UserRole|string $role): bool
     {
         if (is_string($role)) {
             $role = UserRole::from($role);
         }
+
         return $this->role === $role;
     }
 
@@ -135,6 +161,21 @@ class User extends Authenticatable
         return $this->role->canDeleteGroups();
     }
 
+    public function canManageContent(): bool
+    {
+        return $this->isAdminGlobal() || $this->isAdministrativo();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdminGlobal();
+    }
+
+    public function isCoordinator(): bool
+    {
+        return $this->isCoordenador();
+    }
+
     public function canManageGroup(Group $group): bool
     {
         if ($this->isAdminGlobal()) {
@@ -168,44 +209,39 @@ class User extends Authenticatable
     }
 
     // Relationships
-    public function news()
+    public function news(): HasMany
     {
         return $this->hasMany(News::class);
     }
-    
-    public function events()
+
+    public function events(): HasMany
     {
         return $this->hasMany(Event::class);
     }
 
-    public function parishGroup()
+    public function parishGroup(): BelongsTo
     {
         return $this->belongsTo(Group::class, 'parish_group_id');
     }
 
-    public function groupRequests()
+    public function groupRequests(): HasMany
     {
         return $this->hasMany(GroupRequest::class);
     }
 
-    public function notifications()
+    public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
     }
 
-    public function auditLogs()
+    public function auditLogs(): HasMany
     {
         return $this->hasMany(AuditLog::class);
     }
 
-    public function schedules()
+    public function schedules(): HasMany
     {
         return $this->hasMany(Schedule::class);
-    }
-
-    public function group()
-    {
-        return $this->belongsTo(Group::class, 'group_id');
     }
 
     // Scopes
@@ -217,6 +253,6 @@ class User extends Authenticatable
     public function scopeVerified($query)
     {
         return $query->whereNotNull('email_verified_at')
-                    ->whereNotNull('phone_verified_at');
+            ->whereNotNull('phone_verified_at');
     }
 }

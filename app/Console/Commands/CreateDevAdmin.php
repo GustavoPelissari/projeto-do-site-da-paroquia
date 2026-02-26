@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\User;
+use Illuminate\Console\Command;
 
 class CreateDevAdmin extends Command
 {
@@ -52,28 +52,28 @@ class CreateDevAdmin extends Command
 
         $this->info('✅ Usuários criados/atualizados!');
         $this->newLine();
-        
+
         $this->info('� ADMIN GLOBAL (Padre):');
         $this->info('�📧 Email: admin@paroquia.com');
         $this->info('🔑 Senha: 123456');
-        $this->info('👤 Nome: ' . $adminUser->name);
-        $this->info('🏷️ Role: ' . $adminUser->role->value);
-        $this->info('🆔 ID: ' . $adminUser->id);
-        
+        $this->info('👤 Nome: '.$adminUser->name);
+        $this->info('🏷️ Role: '.$adminUser->role->value);
+        $this->info('🆔 ID: '.$adminUser->id);
+
         $this->newLine();
-        
+
         $this->info('🟡 COORDENADOR DE PASTORAL:');
         $this->info('📧 Email: coordenador@paroquia.com');
         $this->info('🔑 Senha: 123456');
-        $this->info('👤 Nome: ' . $coordenadorUser->name);
-        $this->info('🏷️ Role: ' . $coordenadorUser->role->value);
-        $this->info('🆔 ID: ' . $coordenadorUser->id);
-        
+        $this->info('👤 Nome: '.$coordenadorUser->name);
+        $this->info('🏷️ Role: '.$coordenadorUser->role->value);
+        $this->info('🆔 ID: '.$coordenadorUser->id);
+
         $this->newLine();
         $this->info('🌐 Acesse: http://localhost:8000/login');
         $this->info('🎯 Dashboard Admin: http://localhost:8000/admin');
         $this->info('⛪ Dashboard Padre: http://localhost:8000/admin/global');
-        
+
         return 0;
     }
 }

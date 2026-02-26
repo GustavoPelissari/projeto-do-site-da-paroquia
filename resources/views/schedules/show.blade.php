@@ -1,149 +1,157 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="h5 mb-0">
                 {{ $schedule->title }}
             </h2>
-            <div class="flex space-x-2">
+            <div class="d-flex gap-2">
                 @if(auth()->user()->canManageSchedules())
                     <a href="{{ route('admin.schedules.edit', $schedule) }}" 
-                       class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">
+                       class="btn btn-warning btn-sm">
                         Editar
                     </a>
                 @endif
                 <a href="{{ route('admin.schedules.download', $schedule) }}" 
-                   class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                   class="btn btn-success btn-sm">
                     Baixar PDF
                 </a>
             </div>
         </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-5">
+        <div class="container-lg">
             <!-- Informações da Escala -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Informações Gerais</h3>
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <h3 class="h6 fw-semibold mb-3">Informações Gerais</h3>
                             
-                            <div class="space-y-3">
+                            <div class="d-grid gap-2">
                                 <div>
-                                    <span class="text-sm font-medium text-gray-500">Grupo:</span>
-                                    <p class="text-gray-900">{{ $schedule->group->name }}</p>
+                                    <span class="text-muted small fw-semibold">Grupo:</span>
+                                    <p class="mb-0">{{ $schedule->group->name }}</p>
                                 </div>
                                 
                                 <div>
-                                    <span class="text-sm font-medium text-gray-500">Período:</span>
-                                    <p class="text-gray-900">
+                                    <span class="text-muted small fw-semibold">Período:</span>
+                                    <p class="mb-0">
                                         {{ $schedule->start_date->format('d/m/Y') }} até {{ $schedule->end_date->format('d/m/Y') }}
                                     </p>
                                 </div>
                                 
                                 <div>
-                                    <span class="text-sm font-medium text-gray-500">Status:</span>
-                                    @php $status = $schedule->getStatusBadge() @endphp
-                                    <span class="inline-block px-2 py-1 text-xs rounded-full bg-{{ $status['color'] }}-100 text-{{ $status['color'] }}-800">
+                                    <span class="text-muted small fw-semibold">Status:</span>
+                                    @php
+                                        $status = $schedule->getStatusBadge();
+                                        $statusClass = [
+                                            'gray' => 'secondary',
+                                            'blue' => 'primary',
+                                            'red' => 'danger',
+                                            'green' => 'success',
+                                        ][$status['color']] ?? 'secondary';
+                                    @endphp
+                                    <span class="badge bg-{{ $statusClass }}">
                                         {{ $status['text'] }}
                                     </span>
                                 </div>
                                 
                                 <div>
-                                    <span class="text-sm font-medium text-gray-500">Criada por:</span>
-                                    <p class="text-gray-900">{{ $schedule->user->name }}</p>
+                                    <span class="text-muted small fw-semibold">Criada por:</span>
+                                    <p class="mb-0">{{ $schedule->user->name }}</p>
                                 </div>
                                 
                                 <div>
-                                    <span class="text-sm font-medium text-gray-500">Criada em:</span>
-                                    <p class="text-gray-900">{{ $schedule->created_at->format('d/m/Y \à\s H:i') }}</p>
+                                    <span class="text-muted small fw-semibold">Criada em:</span>
+                                    <p class="mb-0">{{ $schedule->created_at->format('d/m/Y \à\s H:i') }}</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div>
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Arquivo PDF</h3>
+                        <div class="col-md-6">
+                            <h3 class="h6 fw-semibold mb-3">Arquivo PDF</h3>
                             
-                            <div class="border border-gray-200 rounded-lg p-4">
-                                <div class="flex items-center space-x-3 mb-3">
+                            <div class="border rounded p-3">
+                                <div class="d-flex align-items-center gap-3 mb-3">
                                     <div class="flex-shrink-0">
-                                        <svg class="h-8 w-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
-                                        </svg>
+                                        <i class="bi bi-file-earmark-pdf text-danger fs-3" aria-hidden="true"></i>
                                     </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900 truncate">
+                                    <div class="flex-grow-1" style="min-width: 0;">
+                                        <p class="mb-0 fw-semibold text-truncate">
                                             {{ $schedule->pdf_filename }}
                                         </p>
-                                        <p class="text-sm text-gray-500">{{ $schedule->getPdfSize() }}</p>
+                                        <p class="mb-0 text-muted small">{{ $schedule->getPdfSize() }}</p>
                                     </div>
                                 </div>
                                 
-                                <div class="flex space-x-2">
+                                <div class="d-flex gap-2">
                                     <a href="{{ route('admin.schedules.download', $schedule) }}" 
-                                       class="flex-1 bg-blue-600 text-white text-center px-3 py-2 rounded text-sm hover:bg-blue-700">
+                                       class="btn btn-outline-primary btn-sm flex-fill">
                                         Baixar
                                     </a>
-                                    <button onclick="openPdfViewer()" 
-                                            class="flex-1 bg-gray-600 text-white px-3 py-2 rounded text-sm hover:bg-gray-700">
+                                    <button type="button"
+                                            class="btn btn-outline-secondary btn-sm flex-fill"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#pdfModal"
+                                            data-pdf-url="{{ $schedule->getPdfUrl() }}">
                                         Visualizar
                                     </button>
                                 </div>
                             </div>
                             
-                            <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded p-3">
-                                <p class="text-sm text-yellow-800">
-                                    <span class="font-medium">📄 Arquivo oficial:</span> 
-                                    Este é o documento oficial da escala. Sempre consulte o PDF para informações atualizadas.
-                                </p>
+                            <div class="alert alert-warning small mt-3 mb-0">
+                                <strong>Arquivo oficial:</strong> este é o documento oficial da escala. Sempre consulte o PDF para informações atualizadas.
                             </div>
                         </div>
                     </div>
 
                     @if($schedule->description)
-                        <div class="border-t pt-6">
-                            <h3 class="text-lg font-medium text-gray-900 mb-3">Descrição</h3>
-                            <p class="text-gray-700 whitespace-pre-line">{{ $schedule->description }}</p>
+                        <div class="border-top pt-4">
+                            <h3 class="h6 fw-semibold mb-3">Descrição</h3>
+                            <p class="mb-0" style="white-space: pre-line;">{{ $schedule->description }}</p>
                         </div>
                     @endif
                 </div>
             </div>
 
             <!-- Membros do Grupo -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="h6 fw-semibold mb-4">
                         Membros do Grupo ({{ $schedule->group->getMembersCount() }})
                     </h3>
                     
                     @if($schedule->group->members->count() > 0)
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="row g-3">
                             @foreach($schedule->group->members as $member)
-                                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0">
-                                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                                            <span class="text-white text-sm font-medium">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="d-flex align-items-center gap-3 p-3 bg-light rounded">
+                                        <div class="flex-shrink-0">
+                                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                                <span class="small fw-semibold">
                                                 {{ substr($member->name, 0, 1) }}
-                                            </span>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-gray-900 truncate">
-                                            {{ $member->name }}
-                                        </p>
-                                        @if($member->isVerified())
-                                            <span class="text-xs text-green-600">✓ Verificado</span>
-                                        @else
-                                            <span class="text-xs text-gray-500">Não verificado</span>
-                                        @endif
+                                        <div class="flex-grow-1" style="min-width: 0;">
+                                            <p class="mb-0 fw-semibold text-truncate">
+                                                {{ $member->name }}
+                                            </p>
+                                            @if($member->isVerified())
+                                                <span class="small text-success">✓ Verificado</span>
+                                            @else
+                                                <span class="small text-muted">Não verificado</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     @else
-                        <div class="text-center py-8">
-                            <div class="text-gray-400 text-4xl mb-2">👥</div>
-                            <p class="text-gray-600">Nenhum membro cadastrado no grupo ainda.</p>
+                        <div class="text-center py-4">
+                            <div class="text-muted fs-3 mb-2">👥</div>
+                            <p class="text-muted mb-0">Nenhum membro cadastrado no grupo ainda.</p>
                         </div>
                     @endif
                 </div>
@@ -152,44 +160,17 @@
     </div>
 
     <!-- Modal para visualizar PDF -->
-    <div id="pdfModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg max-w-4xl w-full h-5/6 mx-4 flex flex-col">
-            <div class="flex justify-between items-center p-4 border-b">
-                <h3 class="text-lg font-medium">{{ $schedule->title }}</h3>
-                <button onclick="closePdfViewer()" class="text-gray-400 hover:text-gray-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="flex-1 p-4">
-                <iframe id="pdfFrame" class="w-full h-full border-0"></iframe>
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfModalLabel">{{ $schedule->title }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <iframe id="pdfFrame" class="w-100 border-0" style="height: 75vh;"></iframe>
+                </div>
             </div>
         </div>
     </div>
-
-    <script>
-        function openPdfViewer() {
-            const modal = document.getElementById('pdfModal');
-            const frame = document.getElementById('pdfFrame');
-            frame.src = '{{ $schedule->getPdfUrl() }}';
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closePdfViewer() {
-            const modal = document.getElementById('pdfModal');
-            const frame = document.getElementById('pdfFrame');
-            frame.src = '';
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // Fechar modal com ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closePdfViewer();
-            }
-        });
-    </script>
 </x-app-layout>

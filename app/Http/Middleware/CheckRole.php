@@ -14,12 +14,12 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$permissions): Response
     {
-        if (!$request->user()) {
+        if (! $request->user()) {
             return redirect('/login');
         }
 
         $user = $request->user();
-        
+
         // Se não há permissões específicas requeridas, apenas verifica autenticação
         if (empty($permissions)) {
             return $next($request);
@@ -45,7 +45,7 @@ class CheckRole
     private function userHasPermission($user, string $permission, Request $request): bool
     {
         // Verificações específicas por permissão
-        return match($permission) {
+        return match ($permission) {
             // Permissões básicas por papel
             'admin_global' => $user->role === UserRole::ADMIN_GLOBAL,
             'administrativo' => $user->role === UserRole::ADMINISTRATIVO,
@@ -75,14 +75,14 @@ class CheckRole
 
             // Hierarquia de permissões para conteúdo
             'publish_news' => in_array($user->role, [
-                UserRole::ADMIN_GLOBAL, 
-                UserRole::ADMINISTRATIVO, 
-                UserRole::COORDENADOR_PASTORAL
+                UserRole::ADMIN_GLOBAL,
+                UserRole::ADMINISTRATIVO,
+                UserRole::COORDENADOR_PASTORAL,
             ]),
 
             'moderate_comments' => in_array($user->role, [
-                UserRole::ADMIN_GLOBAL, 
-                UserRole::ADMINISTRATIVO
+                UserRole::ADMIN_GLOBAL,
+                UserRole::ADMINISTRATIVO,
             ]),
 
             default => false,
@@ -91,7 +91,7 @@ class CheckRole
 
     private function canManageOwnGroup($user, Request $request): bool
     {
-        if (!$user->canManageOwnGroup()) {
+        if (! $user->canManageOwnGroup()) {
             return false;
         }
 
@@ -103,7 +103,7 @@ class CheckRole
         // Se é coordenador, só pode gerenciar seu próprio grupo
         if ($user->isCoordenador()) {
             $groupId = $request->route('group') ?? $request->route('id');
-            
+
             if ($groupId) {
                 return $user->parish_group_id == $groupId;
             }
@@ -114,7 +114,7 @@ class CheckRole
 
     private function canManageGroupSchedules($user, Request $request): bool
     {
-        if (!$user->canManageSchedules()) {
+        if (! $user->canManageSchedules()) {
             return false;
         }
 
@@ -126,6 +126,7 @@ class CheckRole
         // Coordenador só pode gerenciar escalas do seu grupo
         if ($user->isCoordenador()) {
             $groupId = $request->route('group') ?? $request->get('group_id');
+
             return $user->parish_group_id == $groupId;
         }
 
@@ -134,7 +135,7 @@ class CheckRole
 
     private function canViewGroupRequests($user, Request $request): bool
     {
-        if (!$user->canApproveRequests()) {
+        if (! $user->canApproveRequests()) {
             return false;
         }
 
@@ -146,6 +147,7 @@ class CheckRole
         // Coordenador só vê solicitações do seu grupo
         if ($user->isCoordenador()) {
             $groupId = $request->route('group') ?? $request->get('group_id');
+
             return $user->parish_group_id == $groupId;
         }
 

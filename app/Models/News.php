@@ -2,29 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 class News extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'title',
         'excerpt',
         'content',
         'image',
-        'featured_image',
+        'featured_image', // Adicionado para compatibilidade
         'status',
         'featured',
         'user_id',
-        'group_id',
-        'created_by',
-        'scope',
+        'parish_group_id',
         'published_at',
     ];
-    
+
     protected function casts(): array
     {
         return [
@@ -32,46 +32,41 @@ class News extends Model
             'published_at' => 'datetime',
         ];
     }
-    
+
     // Scopes
-    public function scopePublished($query)
+    public function scopePublished(Builder $query): Builder
     {
         return $query->where('status', 'published');
     }
-    
-    public function scopeDraft($query)
+
+    public function scopeDraft(Builder $query): Builder
     {
         return $query->where('status', 'draft');
     }
-    
-    public function scopeFeatured($query)
+
+    public function scopeFeatured(Builder $query): Builder
     {
         return $query->where('featured', true);
     }
-    
+
     // Relationships
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    
-    public function group()
+
+    public function parishGroup(): BelongsTo
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class, 'parish_group_id');
     }
-    
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-    
+
     // Helpers
-    public function isPublished()
+    public function isPublished(): bool
     {
         return $this->status === 'published';
     }
-    
-    public function getExcerptAttribute($value)
+
+    public function getExcerptAttribute(?string $value): string
     {
         return $value ?: Str::limit($this->content, 150);
     }

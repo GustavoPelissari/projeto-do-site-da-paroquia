@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Mass extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'name',
         'day_of_week',
         'time',
         'location',
         'description',
         'is_active',
     ];
-    
+
     protected function casts(): array
     {
         return [
@@ -25,13 +25,13 @@ class Mass extends Model
             'time' => 'datetime:H:i',
         ];
     }
-    
-    public function scopeActive($query)
+
+    public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
     }
-    
-    public function getDayNameAttribute()
+
+    public function getDayNameAttribute(): string
     {
         $days = [
             'sunday' => 'Domingo',
@@ -42,12 +42,7 @@ class Mass extends Model
             'friday' => 'Sexta-feira',
             'saturday' => 'Sábado',
         ];
-        
+
         return $days[$this->day_of_week] ?? $this->day_of_week;
-    }
-    
-    public function getDayOfWeekName()
-    {
-        return $this->getDayNameAttribute();
     }
 }

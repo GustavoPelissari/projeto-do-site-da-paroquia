@@ -30,8 +30,8 @@
                                 <div class="sp-featured-image">
                                     @if($featuredNews->featured_image)
                                         <img src="{{ Storage::url($featuredNews->featured_image) }}" 
-                                             alt="{{ $featuredNews->title }}" 
-                                             class="sp-image-cover">
+                                            alt="{{ $featuredNews->title }}" 
+                                            class="sp-image-cover" loading="lazy">
                                     @else
                                         <div class="sp-image-placeholder sp-image-placeholder-featured">
                                             <span class="sp-placeholder-icon">📰</span>
@@ -84,9 +84,9 @@
                                     <div class="sp-card sp-card-hover">
                                         <div class="sp-news-image">
                                             @if($article->featured_image)
-                                                <img src="{{ Storage::url($article->featured_image) }}" 
-                                                     alt="{{ $article->title }}" 
-                                                     class="sp-image-cover">
+                                                   <img src="{{ Storage::url($article->featured_image) }}" 
+                                                       alt="{{ $article->title }}" 
+                                                       class="sp-image-cover" loading="lazy">
                                             @else
                                                 <div class="sp-image-placeholder">
                                                     <span class="sp-placeholder-icon">📰</span>

@@ -3,12 +3,261 @@
 @section('title', 'Editar: ' . $news->title)
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold text-gray-900">Editar Notícia</h2>
-    <a href="{{ route('admin.administrativo.news.index') }}" class="text-blue-600 hover:text-blue-800">
-        ← Voltar para Notícias
-    </a>
+<div class="container-fluid px-4 py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 fw-bold">Editar Notícia</h2>
+        <a href="{{ route('admin.administrativo.news.index') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i> Voltar para Notícias
+        </a>
+    </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('admin.administrativo.news.update', $news) }}" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="row g-4">
+                    <!-- Main Content -->
+                    <div class="col-lg-8">
+                        <!-- Title -->
+                        <div class="mb-4">
+                            <label for="title" class="form-label fw-semibold">Título *</label>
+                            <input type="text" name="title" id="title" value="{{ old('title', $news->title) }}" 
+                                   class="form-control form-control-lg" required>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="mb-4">
+                            <label for="content" class="form-label fw-semibold">Conteúdo *</label>
+                            <textarea name="content" id="content" rows="15" 
+                                      class="form-control" required>{{ old('content', $news->content) }}</textarea>
+                            <small class="form-text text-muted">Use quebras de linha para separar parágrafos.</small>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="mb-4">
+                            <label for="summary" class="form-label fw-semibold">Resumo</label>
+                            <textarea name="summary" id="summary" rows="3" 
+                                      class="form-control"
+                                      placeholder="Breve resumo da notícia (opcional)">{{ old('summary', $news->summary) }}</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Publishing Options -->
+                        <div class="card bg-light border-0 mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold mb-3">Opções de Publicação</h5>
+                                
+                                <!-- Status -->
+                                <div class="mb-3">
+                                    <label for="status" class="form-label">Status</label>
+                                    <select name="status" id="status" class="form-select">
+                                        <option value="draft" {{ old('status', $news->status) === 'draft' ? 'selected' : '' }}>Rascunho</option>
+                                        <option value="published" {{ old('status', $news->status) === 'published' ? 'selected' : '' }}>Publicado</option>
+                                    </select>
+                                </div>
+
+                                <!-- Featured -->
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="featured" value="1" 
+                                               {{ old('featured', $news->featured) ? 'checked' : '' }}
+                                               class="form-check-input" id="featured">
+                                        <label class="form-check-label" for="featured">
+                                            Destacar na página inicial
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Publish Date -->
+                                <div class="mb-0">
+                                    <label for="published_at" class="form-label">Data de Publicação</label>
+                                    <input type="datetime-local" name="published_at" id="published_at" 
+                                           value="{{ old('published_at', $news->published_at ? $news->published_at->format('Y-m-d\TH:i') : '') }}"
+                                           class="form-control">
+                                    <small class="form-text text-muted">Deixe vazio para usar data atual</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Image -->
+                        <div class="card bg-light border-0 mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold mb-3">Imagem de Destaque</h5>
+                                
+                                <!-- Current Image -->
+                                @if($news->featured_image)
+                                    <div class="mb-3">
+                                        <p class="small mb-2">Imagem atual:</p>
+                                        <img src="{{ Storage::url($news->featured_image) }}" 
+                                             alt="Imagem atual" 
+                                             class="img-fluid rounded">
+                                        <div class="form-check mt-2">
+                                            <input type="checkbox" name="remove_image" value="1" 
+                                                   class="form-check-input" id="remove_image">
+                                            <label class="form-check-label text-danger" for="remove_image">
+                                                Remover imagem atual
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endif
+                                
+                                <div class="mb-3">
+                                    <label for="featured_image" class="form-label">
+                                        {{ $news->featured_image ? 'Substituir Imagem' : 'Escolher Imagem' }}
+                                    </label>
+                                    <input type="file" name="featured_image" id="featured_image" 
+                                           accept="image/*"
+                                           class="form-control">
+                                    <small class="form-text text-muted">Formatos: JPG, PNG, GIF (máx. 2MB)</small>
+                                </div>
+
+                                <!-- Image Preview -->
+                                <div id="image-preview" class="d-none">
+                                    <p class="small mb-2">Nova imagem:</p>
+                                    <img id="preview-img" src="" alt="Preview" class="img-fluid rounded">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEO -->
+                        <div class="card bg-light border-0 mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold mb-3">SEO</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="meta_description" class="form-label">Meta Descrição</label>
+                                    <textarea name="meta_description" id="meta_description" rows="3" 
+                                              class="form-control"
+                                              placeholder="Descrição para motores de busca">{{ old('meta_description', $news->meta_description) }}</textarea>
+                                </div>
+
+                                <div class="mb-0">
+                                    <label for="slug" class="form-label">URL Amigável</label>
+                                    <input type="text" name="slug" id="slug" value="{{ old('slug', $news->slug) }}" 
+                                           class="form-control"
+                                           placeholder="url-da-noticia">
+                                    <small class="form-text text-muted">Será gerada automaticamente se vazio</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Publishing Info -->
+                        <div class="card border-info border-start border-3 bg-light mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title fw-bold mb-2">Informações</h6>
+                                <div class="small">
+                                    <p class="mb-1"><strong>Autor:</strong> {{ $news->user->name }}</p>
+                                    <p class="mb-1"><strong>Criado:</strong> {{ $news->created_at->format('d/m/Y H:i') }}</p>
+                                    @if($news->updated_at != $news->created_at)
+                                        <p class="mb-1"><strong>Atualizado:</strong> {{ $news->updated_at->format('d/m/Y H:i') }}</p>
+                                    @endif
+                                    @if($news->published_at)
+                                        <p class="mb-0"><strong>Publicado:</strong> {{ $news->published_at->format('d/m/Y H:i') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="card-footer bg-white border-top d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-2">
+                    <a href="{{ route('admin.administrativo.news.index') }}" 
+                       class="btn btn-outline-secondary">
+                        Cancelar
+                    </a>
+                    
+                    <a href="{{ route('admin.administrativo.news.show', $news) }}" 
+                       class="btn btn-outline-primary">
+                        Visualizar
+                    </a>
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <button type="submit" name="action" value="draft" 
+                            class="btn btn-secondary">
+                        <i class="bi bi-file-earmark me-1"></i> Salvar como Rascunho
+                    </button>
+                    <button type="submit" name="action" value="publish" 
+                            class="btn btn-primary">
+                        <i class="bi bi-send-check me-1"></i> Atualizar e Publicar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+
+<script>
+// Auto-generate slug from title (only if slug is empty)
+document.getElementById('title').addEventListener('input', function() {
+    const slugField = document.getElementById('slug');
+    if (slugField.value === '') {
+        const title = this.value;
+        const slug = title
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '') // Remove accents
+            .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
+            .replace(/\s+/g, '-') // Replace spaces with hyphens
+            .replace(/-+/g, '-') // Replace multiple hyphens
+            .trim('-'); // Remove leading/trailing hyphens
+        
+        slugField.value = slug;
+    }
+});
+
+// Image preview
+document.getElementById('featured_image').addEventListener('change', function() {
+    const file = this.files[0];
+    const preview = document.getElementById('image-preview');
+    const previewImg = document.getElementById('preview-img');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            preview.classList.remove('d-none');
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.classList.add('d-none');
+    }
+});
+
+// Handle form submission buttons
+document.querySelectorAll('button[name="action"]').forEach(button => {
+    button.addEventListener('click', function() {
+        const status = this.value === 'publish' ? 'published' : 'draft';
+        document.getElementById('status').value = status;
+    });
+});
+</script>
+@endsection
 
 @if ($errors->any())
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">

@@ -3,125 +3,122 @@
 @section('title', 'Gerenciar Eventos')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold text-gray-900">Gerenciar Eventos</h2>
-    <a href="{{ route('admin.global.events.create') }}" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
-        Novo Evento
-    </a>
-</div>
-
-@if(session('success'))
-    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-        {{ session('success') }}
+<div class="container py-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3 gap-3">
+        <div>
+            <h1 class="h3 text-brand-vinho mb-1">Gerenciar Eventos</h1>
+            <p class="text-muted mb-0">Administre os eventos e atividades da paróquia</p>
+        </div>
+        <a href="{{ route('admin.global.events.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Novo Evento
+        </a>
     </div>
-@endif
 
-<div class="bg-white rounded-lg shadow">
-    <div class="p-6">
-        <!-- Filters -->
-        <form method="GET" class="mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select name="status" id="status" class="w-full border border-gray-300 rounded-md px-3 py-2">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white">
+            <strong>Filtros</strong>
+        </div>
+        <div class="card-body">
+            <form method="GET" class="row g-3 align-items-end">
+                <div class="col-sm-4 col-md-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-select">
                         <option value="">Todos</option>
                         <option value="scheduled" {{ request('status') === 'scheduled' ? 'selected' : '' }}>Agendado</option>
                         <option value="confirmed" {{ request('status') === 'confirmed' ? 'selected' : '' }}>Confirmado</option>
                         <option value="cancelled" {{ request('status') === 'cancelled' ? 'selected' : '' }}>Cancelado</option>
-                        <option value="completed" {{ request('status') === 'completed' ? 'selected' : '' }}>Concluído</option>
                     </select>
                 </div>
-                <div>
-                    <label for="date_filter" class="block text-sm font-medium text-gray-700 mb-1">Período</label>
-                    <select name="date_filter" id="date_filter" class="w-full border border-gray-300 rounded-md px-3 py-2">
-                        <option value="">Todos</option>
-                        <option value="upcoming" {{ request('date_filter') === 'upcoming' ? 'selected' : '' }}>Próximos</option>
-                        <option value="past" {{ request('date_filter') === 'past' ? 'selected' : '' }}>Passados</option>
-                        <option value="this_month" {{ request('date_filter') === 'this_month' ? 'selected' : '' }}>Este Mês</option>
+                <div class="col-sm-4 col-md-3">
+                    <label for="category" class="form-label">Categoria</label>
+                    <select name="category" id="category" class="form-select">
+                        <option value="">Todas</option>
+                        <option value="liturgy" {{ request('category') === 'liturgy' ? 'selected' : '' }}>Liturgia</option>
+                        <option value="formation" {{ request('category') === 'formation' ? 'selected' : '' }}>Formação</option>
+                        <option value="social" {{ request('category') === 'social' ? 'selected' : '' }}>Social</option>
+                        <option value="youth" {{ request('category') === 'youth' ? 'selected' : '' }}>Juventude</option>
+                        <option value="family" {{ request('category') === 'family' ? 'selected' : '' }}>Família</option>
+                        <option value="other" {{ request('category') === 'other' ? 'selected' : '' }}>Outros</option>
                     </select>
                 </div>
-                <div>
-                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Buscar</label>
-                    <input type="text" name="search" id="search" value="{{ request('search') }}" 
-                           placeholder="Título ou descrição..." 
-                           class="w-full border border-gray-300 rounded-md px-3 py-2">
+                <div class="col-sm-8 col-md-4">
+                    <label for="search" class="form-label">Buscar</label>
+                    <input type="text" name="search" id="search" value="{{ request('search') }}" class="form-control" placeholder="Título, descrição ou local...">
                 </div>
-                <div class="flex items-end">
-                    <button type="submit" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition">
-                        Filtrar
-                    </button>
+                <div class="col-sm-4 col-md-2 d-flex gap-2">
+                    <button type="submit" class="btn btn-outline-secondary w-100"><i class="bi bi-search"></i> Filtrar</button>
+                    @if(request()->hasAny(['status','category','search']))
+                        <a href="{{ route('admin.global.events.index') }}" class="btn btn-light w-100">Limpar</a>
+                    @endif
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+    </div>
 
-        <!-- Events Table -->
-        @if($events->count() > 0)
-            <div class="overflow-x-auto">
-                <table class="w-full table-auto">
-                    <thead>
-                        <tr class="border-b bg-gray-50">
-                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Evento</th>
-                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Data/Hora</th>
-                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Local</th>
-                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
-                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Participantes</th>
-                            <th class="text-left py-3 px-4 font-semibold text-gray-700">Ações</th>
+    @if($events->count() > 0)
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <strong>Lista de Eventos</strong>
+                <small class="text-muted">{{ $events->total() }} registro(s)</small>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Título</th>
+                            <th>Data/Hora</th>
+                            <th>Local</th>
+                            <th>Status</th>
+                            <th>Categoria</th>
+                            <th class="text-end">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($events as $event)
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3 px-4">
-                                <div>
-                                    <h4 class="font-medium text-gray-900">{{ $event->title }}</h4>
-                                    <p class="text-sm text-gray-500">{{ Str::limit($event->description, 60) }}</p>
-                                </div>
+                        <tr>
+                            <td>
+                                <div class="fw-semibold">{{ $event->title }}</div>
+                                <div class="text-muted small">{{ Str::limit($event->description, 80) }}</div>
                             </td>
-                            <td class="py-3 px-4 text-gray-700">
-                                <div class="text-sm">
-                                    <div>{{ $event->start_date->format('d/m/Y') }}</div>
-                                    <div class="text-gray-500">{{ $event->start_date->format('H:i') }}</div>
-                                </div>
+                            <td>
+                                <div class="small">{{ $event->start_date->format('d/m/Y') }}</div>
+                                <div class="text-muted small">{{ $event->start_date->format('H:i') }}</div>
                             </td>
-                            <td class="py-3 px-4 text-gray-700">{{ $event->location ?: '-' }}</td>
-                            <td class="py-3 px-4">
-                                <span class="px-2 py-1 text-xs rounded 
-                                    @switch($event->status)
-                                        @case('confirmed') bg-green-100 text-green-800 @break
-                                        @case('scheduled') bg-blue-100 text-blue-800 @break
-                                        @case('cancelled') bg-red-100 text-red-800 @break
-                                        @case('completed') bg-gray-100 text-gray-800 @break
-                                        @default bg-yellow-100 text-yellow-800
-                                    @endswitch">
-                                    @switch($event->status)
-                                        @case('confirmed') Confirmado @break
-                                        @case('scheduled') Agendado @break
-                                        @case('cancelled') Cancelado @break
-                                        @case('completed') Concluído @break
-                                        @default {{ ucfirst($event->status) }}
-                                    @endswitch
-                                </span>
+                            <td>
+                                <div class="small">{{ $event->location ?: '-' }}</div>
                             </td>
-                            <td class="py-3 px-4 text-gray-700">
-                                @if($event->max_participants)
-                                    <span class="text-sm">Máx: {{ $event->max_participants }}</span>
+                            <td>
+                                @if($event->status === 'confirmed')
+                                    <span class="badge bg-success">Confirmado</span>
+                                @elseif($event->status === 'scheduled')
+                                    <span class="badge bg-info">Agendado</span>
                                 @else
-                                    <span class="text-gray-400">Sem limite</span>
+                                    <span class="badge bg-danger">Cancelado</span>
                                 @endif
                             </td>
-                            <td class="py-3 px-4">
-                                <div class="flex space-x-2">
-                                    <a href="{{ route('admin.global.events.show', $event) }}" 
-                                       class="text-blue-600 hover:text-blue-800 text-sm">Ver</a>
-                                    <a href="{{ route('admin.global.events.edit', $event) }}" 
-                                       class="text-green-600 hover:text-green-800 text-sm">Editar</a>
-                                    <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" 
-                                          class="inline" onsubmit="return confirm('Tem certeza que deseja excluir este evento?')">
+                            <td>
+                                @if($event->category === 'liturgy')
+                                    <span class="badge bg-secondary">Liturgia</span>
+                                @elseif($event->category === 'formation')
+                                    <span class="badge bg-secondary">Formação</span>
+                                @elseif($event->category === 'social')
+                                    <span class="badge bg-secondary">Social</span>
+                                @elseif($event->category === 'youth')
+                                    <span class="badge bg-secondary">Juventude</span>
+                                @elseif($event->category === 'family')
+                                    <span class="badge bg-secondary">Família</span>
+                                @else
+                                    <span class="badge bg-secondary">Outros</span>
+                                @endif
+                            </td>
+                            <td class="text-end">
+                                <div class="d-flex gap-2 justify-content-end">
+                                    <a href="{{ route('admin.global.events.show', $event) }}" class="btn btn-outline-secondary btn-sm" title="Ver"><i class="bi bi-eye me-1"></i>Ver</a>
+                                    <a href="{{ route('admin.global.events.edit', $event) }}" class="btn btn-secondary btn-sm" title="Editar"><i class="bi bi-pencil me-1"></i>Editar</a>
+                                    <form method="POST" action="{{ route('admin.global.events.destroy', $event) }}" onsubmit="return confirm('Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-800 text-sm">
-                                            Excluir
-                                        </button>
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash me-1"></i>Excluir</button>
                                     </form>
                                 </div>
                             </td>
@@ -130,22 +127,26 @@
                     </tbody>
                 </table>
             </div>
-
-            <!-- Pagination -->
-            <div class="mt-6">
-                {{ $events->withQueryString()->links() }}
+            @if($events->hasPages())
+                <div class="card-footer bg-white d-flex justify-content-center">
+                    {{ $events->withQueryString()->links() }}
+                </div>
+            @endif
+        </div>
+    @else
+        <div class="card shadow-sm">
+            <div class="card-body text-center py-5">
+                <div class="display-6 mb-3">�</div>
+                <h5 class="mb-2">Nenhum evento encontrado</h5>
+                @if(request()->hasAny(['status','category','search']))
+                    <p class="text-muted">Não encontramos eventos com os filtros aplicados.</p>
+                    <a href="{{ route('admin.global.events.index') }}" class="btn btn-light">Limpar Filtros</a>
+                @else
+                    <p class="text-muted">Comece criando seu primeiro evento para a comunidade.</p>
+                    <a href="{{ route('admin.global.events.create') }}" class="btn btn-primary">Criar Evento</a>
+                @endif
             </div>
-        @else
-            <div class="text-center py-8">
-                <div class="text-gray-400 text-6xl mb-4">📅</div>
-                <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhum evento encontrado</h3>
-                <p class="text-gray-500 mb-4">Comece criando seu primeiro evento.</p>
-                <a href="{{ route('admin.global.events.create') }}" 
-                   class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
-                    Criar Primeiro Evento
-                </a>
-            </div>
-        @endif
-    </div>
+        </div>
+    @endif
 </div>
 @endsection
