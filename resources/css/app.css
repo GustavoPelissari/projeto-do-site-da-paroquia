@@ -661,3 +661,37 @@ footer a:hover {
         margin-bottom: 1rem;
     }
 }
+
+/* ========================================== */
+/*         PUBLIC DESIGN SYSTEM TOKENS        */
+/* ========================================== */
+
+.hero-subtitle,
+.hero-description {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.hero-description {
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.public-meta-box {
+    background: rgba(139, 21, 56, 0.05);
+    border: 1px solid rgba(139, 21, 56, 0.1);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+}
+
+.public-empty-icon {
+    width: 64px;
+    height: 64px;
+}
+
+.pagination {
+    --bs-pagination-active-bg: var(--sp-vermelho-manto);
+    --bs-pagination-active-border-color: var(--sp-vermelho-manto);
+    --bs-pagination-color: var(--sp-vermelho-manto);
+    --bs-pagination-hover-color: var(--sp-vermelho-bordô);
+}
