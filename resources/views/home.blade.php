@@ -41,7 +41,7 @@
                 <div class="card-paroquia text-center p-4">
                     <div class="card-header-paroquia mb-4">
                         <h3 class="mb-0">
-                            <i data-lucide="church" class="icon-lg text-dourado me-2"></i>
+                            <i data-lucide="church" class="icon-lg mr-2 text-dourado"></i>
                             Próxima Missa
                         </h3>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
                             <div>
                                 <div class="proxima-missa-item">
-                                    <span>📅</span>
+                                    <i data-lucide="calendar-days" class="icon-lg text-dourado" aria-hidden="true"></i>
                                     <div>
                                         <strong>Carregando...</strong>
                                         <br>
@@ -60,7 +60,7 @@
                             </div>
                             <div>
                                 <div class="proxima-missa-item">
-                                    <span>⏰</span>
+                                    <i data-lucide="clock-3" class="icon-lg text-dourado" aria-hidden="true"></i>
                                     <div>
                                         <strong>--:--</strong>
                                         <br>
@@ -70,7 +70,7 @@
                             </div>
                             <div>
                                 <div class="proxima-missa-item">
-                                    <span>📍</span>
+                                    <i data-lucide="map-pin" class="icon-lg text-dourado" aria-hidden="true"></i>
                                     <div>
                                         <strong>Igreja Matriz</strong>
                                         <br>

@@ -168,7 +168,7 @@ function atualizarProximaMissa() {
         elemento.innerHTML = `
             <div class="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
                 <div class="proxima-missa-item">
-                    <span>📅</span>
+                    <i data-lucide="calendar-days" class="icon-lg text-dourado" aria-hidden="true"></i>
                     <div>
                         <strong>${diasSemana[proximaMissa.dia]}</strong>
                         <br>
@@ -176,7 +176,7 @@ function atualizarProximaMissa() {
                     </div>
                 </div>
                 <div class="proxima-missa-item">
-                    <span>⏰</span>
+                    <i data-lucide="clock-3" class="icon-lg text-dourado" aria-hidden="true"></i>
                     <div>
                         <strong>${proximaMissa.horario}</strong>
                         <br>
@@ -184,7 +184,7 @@ function atualizarProximaMissa() {
                     </div>
                 </div>
                 <div class="proxima-missa-item">
-                    <span>📍</span>
+                    <i data-lucide="map-pin" class="icon-lg text-dourado" aria-hidden="true"></i>
                     <div>
                         <strong>Igreja Matriz</strong>
                         <br>
@@ -193,6 +193,10 @@ function atualizarProximaMissa() {
                 </div>
             </div>
         `;
+
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
     }
 }
 
