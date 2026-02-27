@@ -21,12 +21,12 @@
 </head>
 <body>
     <nav class="sp-topbar fixed inset-x-0 top-0 z-50 border-b border-[rgba(139,21,56,0.12)] bg-white/95 backdrop-blur">
-        <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-            <a href="{{ route('home') }}" class="flex items-center gap-3 no-underline">
+        <div class="sp-page-container flex items-center gap-4 py-3">
+            <a href="{{ route('home') }}" class="flex min-w-0 items-center gap-3 no-underline">
                 <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-paroquia">
-                <div class="brand-text">
+                <div class="brand-text min-w-0">
                     <span class="brand-titulo">Paróquia São Paulo Apóstolo</span>
-                    <small class="brand-subtitulo block">Diocese de Umuarama</small>
+                    <small class="brand-subtitulo block">Diocese de Morama</small>
                 </div>
             </a>
 
@@ -36,27 +36,27 @@
                 </svg>
             </button>
 
-            <div id="navbarNav" class="hidden w-full flex-col gap-4 lg:flex lg:w-auto lg:flex-row lg:items-center lg:justify-end">
-                <ul class="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-2">
-                    <li><a class="sp-nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><span>🏠</span><span>Início</span></a></li>
-                    <li><a class="sp-nav-link {{ request()->routeIs('masses') ? 'active' : '' }}" href="{{ route('masses') }}"><span>⏰</span><span>Horários de Missa</span></a></li>
-                    <li><a class="sp-nav-link {{ request()->routeIs('groups') ? 'active' : '' }}" href="{{ route('groups') }}"><span>👥</span><span>Pastorais</span></a></li>
-                    <li><a class="sp-nav-link {{ request()->routeIs('events') ? 'active' : '' }}" href="{{ route('events') }}"><span>📅</span><span>Eventos</span></a></li>
-                    <li><a class="sp-nav-link {{ request()->routeIs('news') ? 'active' : '' }}" href="{{ route('news') }}"><span>📰</span><span>Notícias</span></a></li>
-                    <li><a class="sp-nav-link" href="#contato"><span>✉️</span><span>Contato</span></a></li>
+            <div id="navbarNav" class="hidden w-full flex-col gap-4 lg:ml-6 lg:flex lg:w-auto lg:flex-row lg:items-center">
+                <ul class="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-1">
+                    <li><a class="sp-nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><i data-lucide="house" class="sp-nav-icon" aria-hidden="true"></i><span>Início</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('masses') ? 'active' : '' }}" href="{{ route('masses') }}"><i data-lucide="clock-3" class="sp-nav-icon" aria-hidden="true"></i><span>Horários de Missa</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('groups') ? 'active' : '' }}" href="{{ route('groups') }}"><i data-lucide="users" class="sp-nav-icon" aria-hidden="true"></i><span>Pastorais</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('events') ? 'active' : '' }}" href="{{ route('events') }}"><i data-lucide="calendar-days" class="sp-nav-icon" aria-hidden="true"></i><span>Eventos</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('news') ? 'active' : '' }}" href="{{ route('news') }}"><i data-lucide="newspaper" class="sp-nav-icon" aria-hidden="true"></i><span>Notícias</span></a></li>
+                    <li><a class="sp-nav-link" href="#contato"><i data-lucide="mail" class="sp-nav-icon" aria-hidden="true"></i><span>Contato</span></a></li>
                 </ul>
 
-                <div class="flex flex-col gap-2 lg:ml-3 lg:flex-row">
+                <div class="flex flex-col gap-2 lg:ml-4 lg:flex-row">
                     <a href="#doacoes" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--sp-gold)] px-4 py-2 font-semibold text-[var(--sp-red-900)] transition hover:brightness-95">
-                        <span>❤️</span><span>Apoiar a Paróquia</span>
+                        <i data-lucide="heart" class="sp-nav-icon" aria-hidden="true"></i><span>Apoiar a Paróquia</span>
                     </a>
                     @auth
                         <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--sp-vermelho-manto)] px-4 py-2 font-semibold text-white transition hover:bg-[var(--sp-vermelho-bordô)]">
-                            <span>⚙️</span><span>Admin</span>
+                            <i data-lucide="shield-check" class="sp-nav-icon" aria-hidden="true"></i><span>Admin</span>
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--sp-vermelho-manto)] px-4 py-2 font-semibold text-[var(--sp-vermelho-manto)] transition hover:bg-[var(--sp-vermelho-manto)] hover:text-white">
-                            <span>🔐</span><span>Painel</span>
+                            <i data-lucide="lock" class="sp-nav-icon" aria-hidden="true"></i><span>Painel</span>
                         </a>
                     @endauth
                 </div>
@@ -69,7 +69,7 @@
     </main>
 
     <footer class="mt-16 bg-[var(--sp-vermelho-manto)] text-white" id="contato">
-        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="sp-page-container py-12">
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <div>
                     <div class="mb-3 flex items-center gap-3">
@@ -81,9 +81,9 @@
                     </div>
                     <p class="mb-3 text-white/90">Uma comunidade de fé, esperança e caridade, inspirada no exemplo do Apóstolo dos Gentios.</p>
                     <div class="flex gap-4 text-xl">
-                        <a href="#" class="text-white/90 hover:text-white" title="Facebook da Paróquia" aria-label="Facebook">📘</a>
-                        <a href="#" class="text-white/90 hover:text-white" title="Instagram da Paróquia" aria-label="Instagram">📸</a>
-                        <a href="#" class="text-white/90 hover:text-white" title="Canal do YouTube" aria-label="YouTube">▶️</a>
+                        <a href="#" class="text-white/90 hover:text-white" title="Facebook da Paróquia" aria-label="Facebook"><i data-lucide="facebook" class="sp-footer-icon" aria-hidden="true"></i></a>
+                        <a href="#" class="text-white/90 hover:text-white" title="Instagram da Paróquia" aria-label="Instagram"><i data-lucide="instagram" class="sp-footer-icon" aria-hidden="true"></i></a>
+                        <a href="#" class="text-white/90 hover:text-white" title="Canal do YouTube" aria-label="YouTube"><i data-lucide="youtube" class="sp-footer-icon" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -100,9 +100,9 @@
                 <div>
                     <h6 class="mb-3 text-base font-semibold text-white">Contato</h6>
                     <div class="space-y-2 text-white/90">
-                        <div class="flex items-start gap-2"><span>📍</span><span>Av. General Mascarenhas de Morais, 4969<br>Umuarama - PR</span></div>
-                        <div class="flex items-center gap-2"><span>☎️</span><a href="tel:+5544305540464" class="text-white/90 hover:text-white">(44) 3055-4464</a></div>
-                        <div class="flex items-center gap-2"><span>✉️</span><a href="mailto:secretaria.pspaulo@hotmail.com" class="text-white/90 hover:text-white">secretaria.pspaulo@hotmail.com</a></div>
+                        <div class="flex items-start gap-2"><i data-lucide="map-pin" class="sp-footer-icon mt-0.5 shrink-0" aria-hidden="true"></i><span>Av. General Mascarenhas de Morais, 4969<br>Umuarama - PR</span></div>
+                        <div class="flex items-center gap-2"><i data-lucide="phone" class="sp-footer-icon shrink-0" aria-hidden="true"></i><a href="tel:+5544305540464" class="text-white/90 hover:text-white">(44) 3055-4464</a></div>
+                        <div class="flex items-center gap-2"><i data-lucide="mail" class="sp-footer-icon shrink-0" aria-hidden="true"></i><a href="mailto:secretaria.pspaulo@hotmail.com" class="text-white/90 hover:text-white">secretaria.pspaulo@hotmail.com</a></div>
                     </div>
                 </div>
 

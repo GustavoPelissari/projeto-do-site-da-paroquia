@@ -6,7 +6,7 @@
 
 <section class="hero-paroquia animate-on-scroll">
     <div class="hero-content">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="sp-page-container">
             <div class="mx-auto max-w-4xl text-center">
                     <h1 class="mb-4">{{ $title }}</h1>
                     @if($subtitle)

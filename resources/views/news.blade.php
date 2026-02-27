@@ -10,7 +10,7 @@
     description="Acompanhe as atualizações, ações pastorais e notícias importantes para nossa comunidade." />
 
 <section class="section-paroquia">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         @if($news->count() > 0)
             <x-public.section-header
                 title="Últimas Publicações"

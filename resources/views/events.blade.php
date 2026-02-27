@@ -10,7 +10,7 @@
     description="Celebrações especiais, encontros e atividades para toda a comunidade." />
 
 <section class="section-paroquia">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         @if($events->count() > 0)
             <x-public.section-header
                 title="Próximos Eventos"

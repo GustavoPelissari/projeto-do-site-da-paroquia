@@ -79,6 +79,29 @@ body {
     margin-left: 0.25rem;
 }
 
+.sp-page-container {
+    width: 100%;
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    .sp-page-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .sp-page-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
 .sp-nav-link {
     display: flex;
     align-items: center;
@@ -89,6 +112,20 @@ body {
     padding: 0.5rem 0.75rem;
     border-radius: 8px;
     transition: var(--transicao-suave);
+    min-height: 2.5rem;
+}
+
+.sp-nav-icon {
+    width: 1rem;
+    height: 1rem;
+    stroke-width: 2;
+    flex-shrink: 0;
+}
+
+.sp-footer-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    stroke-width: 2;
 }
 
 .sp-nav-link:hover,
@@ -100,6 +137,13 @@ body {
 
 .sp-nav-link.active {
     font-weight: 600;
+}
+
+.sp-nav-link:focus-visible,
+#mobile-menu-toggle:focus-visible,
+#navbarNav a:focus-visible {
+    outline: 2px solid var(--sp-dourado-principal);
+    outline-offset: 2px;
 }
 
 .logo-paroquia {
@@ -114,11 +158,12 @@ body {
 
 .brand-titulo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 600;
     color: var(--sp-vermelho-manto);
     display: block;
     line-height: 1.2;
+    white-space: nowrap;
 }
 
 .brand-subtitulo {
@@ -127,6 +172,13 @@ body {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+@media (max-width: 1023px) {
+    .brand-titulo {
+        font-size: 1.05rem;
+        white-space: normal;
+    }
 }
 
 

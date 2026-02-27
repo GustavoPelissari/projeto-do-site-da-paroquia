@@ -5,7 +5,7 @@
 
 @section('content')
 <section class="auth-page-section">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <div class="flex justify-center">
             <div class="w-full max-w-2xl">
                 <div class="auth-card">
