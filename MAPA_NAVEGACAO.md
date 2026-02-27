@@ -225,8 +225,8 @@ LOGIN BEM-SUCEDIDO
 ### 🎨 **CARACTERÍSTICAS DE DESIGN:**
 - **Paleta:** Vermelho apostólico (#8B1538) como cor principal
 - **Tipografia:** Playfair Display (títulos) + Poppins (corpo)
-- **Layout:** Responsivo com grid Bootstrap
-- **Ícones:** Bootstrap Icons vetoriais
+- **Layout:** Responsivo com utilitários Tailwind
+- **Ícones:** Lucide Icons
 - **Tema:** Reverente e elegante para ambiente religioso
 
 ### 🔒 **SEGURANÇA IMPLEMENTADA:**

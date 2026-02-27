@@ -43,10 +43,10 @@ Sistema completo de gerenciamento para a Paróquia São Paulo Apóstolo da Dioce
 ## 🛠️ **Tecnologias Utilizadas**
 
 - **Framework**: Laravel 11
-- **Frontend**: Blade Templates, Bootstrap 5, Tailwind CSS
+- **Frontend**: Blade Templates, Tailwind CSS, CSS puro
 - **Database**: MySQL/MariaDB
 - **Build**: Vite 7.1.12
-- **Icons**: Bootstrap Icons, Lucide Icons
+- **Icons**: Lucide Icons
 - **Fonts**: Playfair Display (títulos), Poppins (corpo)
 
 ## 📦 **Instalação**

@@ -3,11 +3,9 @@
     'subtitle' => null,
 ])
 
-<div class="row justify-content-center text-center mb-5">
-    <div class="col-lg-8">
+<div class="mx-auto mb-10 max-w-4xl text-center">
         <h2 class="mb-4">{{ $title }}</h2>
         @if($subtitle)
-            <p class="lead text-muted">{{ $subtitle }}</p>
+            <p class="text-lg text-gray-600">{{ $subtitle }}</p>
         @endif
-    </div>
 </div>

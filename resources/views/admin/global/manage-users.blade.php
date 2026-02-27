@@ -30,7 +30,7 @@
         box-shadow: var(--shadow-md);
         transition: all var(--duration-300) ease;
     }
-    
+
     .user-card:hover {
         transform: translateY(-2px);
         box-shadow: var(--shadow-lg);
@@ -79,7 +79,8 @@
         justify-content: flex-end;
     }
     
-    .btn {
+    .sp-action-primary,
+    .sp-action-secondary {
         padding: var(--space-2) var(--space-3);
         border-radius: var(--radius-md);
         text-decoration: none;
@@ -90,22 +91,26 @@
         transition: all var(--duration-200) ease;
     }
     
-    .btn-primary {
+    .sp-action-primary {
         background: var(--sp-red);
         color: var(--sp-white);
     }
     
-    .btn-primary:hover {
+    .sp-action-primary:hover {
         background: var(--sp-red-dark);
+        color: var(--sp-white);
+        text-decoration: none;
     }
     
-    .btn-secondary {
+    .sp-action-secondary {
         background: var(--sp-gray-100);
         color: var(--sp-gray-700);
     }
     
-    .btn-secondary:hover {
+    .sp-action-secondary:hover {
         background: var(--sp-gray-200);
+        color: var(--sp-gray-700);
+        text-decoration: none;
     }
 </style>
 @endpush
@@ -149,9 +154,9 @@
                 </div>
                 
                 <div class="user-actions">
-                    <button class="btn btn-secondary">✏️ Editar</button>
+                    <button class="sp-action-secondary">✏️ Editar</button>
                     @if($user->role !== 'admin_global')
-                        <button class="btn btn-primary">🔄 Alterar Função</button>
+                        <button class="sp-action-primary">🔄 Alterar Função</button>
                     @endif
                 </div>
             </div>

@@ -3,12 +3,12 @@
 @section('title', 'Gerenciar Solicitações - Paróquia São Paulo Apóstolo')
 
 @section('content')
-    <div class="container py-5">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {{-- Hero Section --}}
         <section class="section-paroquia">
             <div class="section-header">
                 <h1>📥 Gerenciar Solicitações</h1>
-                <p class="lead">
+                <p class="text-lg text-gray-600">
                     Analise e responda às solicitações de entrada no seu grupo ou pastoral
                 </p>
             </div>
@@ -16,8 +16,8 @@
 
         {{-- Alerts --}}
         @if (session('success'))
-            <div class="alert alert-success d-flex align-items-center mb-4">
-                <div class="me-3">✅</div>
+            <div class="mb-4 flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
+                <div>✅</div>
                 <div>
                     <strong>Sucesso!</strong> {{ session('success') }}
                 </div>
@@ -25,8 +25,8 @@
         @endif
 
         @if (session('error'))
-            <div class="alert alert-danger d-flex align-items-center mb-4">
-                <div class="me-3">❌</div>
+            <div class="mb-4 flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+                <div>❌</div>
                 <div>
                     <strong>Erro!</strong> {{ session('error') }}
                 </div>
@@ -35,26 +35,26 @@
 
         {{-- Main Content --}}
         <section class="section-paroquia">
-            <div class="container">
+            <div>
                 @forelse($requests as $request)
                     <div class="card-paroquia mb-4" style="border-left: 4px solid {{ $request->status === 'pending' ? 'var(--sp-dourado-principal)' : ($request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)') }};">
                         
                         {{-- Header --}}
                         <div class="card-header-paroquia">
-                            <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <h3 class="h5 mb-0">👤 {{ $request->user->name }}</h3>
-                                        <span class="badge bg-secondary ms-3">
+                                    <div class="mb-2 flex items-center gap-3">
+                                        <h3 class="mb-0 text-lg">👤 {{ $request->user->name }}</h3>
+                                        <span class="rounded-full bg-gray-200 px-2 py-1 text-xs text-gray-700">
                                             {{ $request->user->email }}
                                         </span>
                                     </div>
-                                    <p class="text-muted small">
+                                    <p class="text-sm text-gray-600">
                                         📅 Solicitado em {{ $request->created_at->format('d/m/Y \à\s H:i') }}
                                     </p>
                                 </div>
                                 
-                                <span class="badge bg-{{ $request->status === 'pending' ? 'warning' : ($request->status === 'approved' ? 'success' : 'danger') }}">
+                                <span class="rounded-full px-3 py-1 text-xs font-semibold {{ $request->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : ($request->status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-700') }}">
                                     @if($request->status === 'pending')
                                         ⏳ Aguardando Análise
                                     @elseif($request->status === 'approved')
@@ -71,12 +71,12 @@
                             
                             {{-- Mensagem do Candidato --}}
                             @if($request->message)
-                                <div class="card mb-3" style="background: var(--sp-pergaminho); border: 1px solid rgba(200, 134, 13, 0.2);">
-                                    <div class="card-header py-2">
-                                        <h6 class="mb-0 fw-semibold text-dourado">💬 Mensagem do Candidato</h6>
+                                <div class="mb-3 rounded-lg border border-yellow-200 bg-yellow-50">
+                                    <div class="px-4 py-2">
+                                        <h6 class="mb-0 font-semibold text-dourado">💬 Mensagem do Candidato</h6>
                                     </div>
-                                    <div class="card-body py-2">
-                                        <p class="small fst-italic text-muted mb-0">
+                                    <div class="px-4 py-2">
+                                        <p class="mb-0 text-sm italic text-gray-600">
                                             "{{ $request->message }}"
                                         </p>
                                     </div>
@@ -85,12 +85,12 @@
 
                             {{-- Disponibilidade (se houver) --}}
                             @if($request->availability)
-                                <div class="card mb-3" style="background: var(--sp-marfim); border: 1px solid rgba(59, 130, 246, 0.2);">
-                                    <div class="card-header py-2">
-                                        <h6 class="mb-0 fw-semibold text-celestial">📅 Disponibilidade Informada</h6>
+                                <div class="mb-3 rounded-lg border border-blue-200 bg-blue-50">
+                                    <div class="px-4 py-2">
+                                        <h6 class="mb-0 font-semibold text-celestial">📅 Disponibilidade Informada</h6>
                                     </div>
-                                    <div class="card-body py-2">
-                                        <p class="small text-muted mb-0">
+                                    <div class="px-4 py-2">
+                                        <p class="mb-0 text-sm text-gray-600">
                                             {{ $request->availability }}
                                         </p>
                                     </div>
@@ -99,48 +99,48 @@
 
                             {{-- Ações para Solicitações Pendentes --}}
                             @if($request->status === 'pending')
-                                <div class="card" style="background: var(--sp-marfim); border: 1px solid rgba(107, 114, 128, 0.2);">
-                                    <div class="card-header">
-                                        <h5 class="mb-0 fw-semibold text-azul">🎯 Tomar Decisão</h5>
+                                <div class="rounded-lg border border-gray-200 bg-[var(--sp-marfim)]">
+                                    <div class="px-4 py-3">
+                                        <h5 class="mb-0 font-semibold text-azul">🎯 Tomar Decisão</h5>
                                     </div>
-                                    <div class="card-body">
-                                        <form action="{{ route('group-requests.approve', $request) }}" method="POST" id="approve-form-{{ $request->id }}" class="d-none">
+                                    <div class="p-4">
+                                        <form action="{{ route('group-requests.approve', $request) }}" method="POST" id="approve-form-{{ $request->id }}" class="hidden">
                                             @csrf
                                             <input type="hidden" name="response_message" id="approve-message-{{ $request->id }}">
                                         </form>
                                         
-                                        <form action="{{ route('group-requests.reject', $request) }}" method="POST" id="reject-form-{{ $request->id }}" class="d-none">
+                                        <form action="{{ route('group-requests.reject', $request) }}" method="POST" id="reject-form-{{ $request->id }}" class="hidden">
                                             @csrf
                                             <input type="hidden" name="response_message" id="reject-message-{{ $request->id }}">
                                         </form>
 
                                         <div class="mb-3">
-                                            <label for="response_message_{{ $request->id }}" class="form-label fw-semibold">
+                                            <label for="response_message_{{ $request->id }}" class="font-semibold">
                                                 💌 Mensagem de Resposta (opcional)
                                             </label>
                                             <textarea 
                                                 id="response_message_{{ $request->id }}" 
                                                 rows="3" 
                                                 placeholder="Deixe uma mensagem para o candidato explicando sua decisão..."
-                                                class="form-control"
+                                                class="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2"
                                             ></textarea>
-                                            <div class="form-text">
+                                            <div class="mt-1 text-sm text-gray-600">
                                                 💡 Uma mensagem personalizada ajuda o candidato a entender sua decisão.
                                             </div>
                                         </div>
                                         
-                                        <div class="d-flex gap-3">
+                                        <div class="flex flex-col gap-3 sm:flex-row">
                                             <button 
                                                 type="button"
                                                 onclick="approveRequest({{ $request->id }})"
-                                                class="btn btn-success btn-lg"
+                                                class="rounded-lg bg-green-600 px-5 py-3 font-semibold text-white hover:bg-green-700"
                                             >
                                                 ✅ Aprovar Solicitação
                                             </button>
                                             <button 
                                                 type="button"
                                                 onclick="rejectRequest({{ $request->id }})"
-                                                class="btn btn-danger btn-lg"
+                                                class="rounded-lg bg-red-600 px-5 py-3 font-semibold text-white hover:bg-red-700"
                                             >
                                                 ❌ Rejeitar Solicitação
                                             </button>
@@ -149,9 +149,9 @@
                                 </div>
                             @else
                                 {{-- Informações da Resposta Dada --}}
-                                <div class="card" style="background: {{ $request->status === 'approved' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(185, 28, 28, 0.1)' }}; border: 1px solid {{ $request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)' }};">
-                                    <div class="card-header">
-                                        <h5 class="mb-0 fw-semibold" style="color: {{ $request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)' }};">
+                                <div class="rounded-lg border p-3" style="background: {{ $request->status === 'approved' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(185, 28, 28, 0.1)' }}; border-color: {{ $request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)' }};">
+                                    <div class="px-1 py-2">
+                                        <h5 class="mb-0 font-semibold" style="color: {{ $request->status === 'approved' ? 'var(--sp-azul-celestial)' : 'var(--sp-vermelho-sangue)' }};">
                                             @if($request->status === 'approved')
                                                 ✅ Solicitação Aprovada
                                             @else
@@ -159,17 +159,15 @@
                                             @endif
                                         </h5>
                                     </div>
-                                    <div class="card-body">
-                                        <p class="small text-muted mb-2">
+                                    <div class="px-1 py-2">
+                                        <p class="mb-2 text-sm text-gray-600">
                                             Respondido em {{ ($request->approved_at ?? $request->rejected_at)->format('d/m/Y \à\s H:i') }}
                                         </p>
                                         @if($request->response_message)
-                                            <div class="card" style="background: white; border: 1px solid rgba(107, 114, 128, 0.2);">
-                                                <div class="card-body py-2">
-                                                    <p class="small mb-0">
+                                            <div class="rounded-lg border border-gray-200 bg-white px-4 py-2">
+                                                    <p class="mb-0 text-sm">
                                                         <strong>Sua resposta:</strong> {{ $request->response_message }}
                                                     </p>
-                                                </div>
                                             </div>
                                         @endif
                                     </div>
@@ -179,13 +177,13 @@
                     </div>
                 @empty
                     <div class="card-paroquia text-center">
-                        <div class="card-body py-5">
+                        <div class="py-5">
                             <div class="mb-4" style="font-size: 4rem; color: var(--sp-cinza-pedra);">📥</div>
-                            <h3 class="h4 mb-3">Nenhuma solicitação encontrada</h3>
-                            <p class="text-muted mb-4">
+                            <h3 class="mb-3 text-xl">Nenhuma solicitação encontrada</h3>
+                            <p class="mb-4 text-gray-600">
                                 Não há solicitações para o seu grupo no momento. Quando alguém solicitar entrada, aparecerá aqui.
                             </p>
-                            <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-outline-primary btn-lg">
+                            <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="inline-flex items-center rounded-lg border border-blue-500 px-5 py-3 font-semibold text-blue-600 hover:bg-blue-50">
                                 📊 Voltar ao Dashboard
                             </a>
                         </div>
@@ -196,25 +194,25 @@
 
         {{-- Guidelines Section --}}
         <section class="section-paroquia">
-            <div class="container">
+            <div>
                 <div class="card-paroquia" style="background: var(--sp-pergaminho); border-left: 4px solid var(--sp-dourado-principal);">
                     <div class="card-header-paroquia">
                         <h3 class="text-azul">💡 Orientações para Coordenadores</h3>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5 class="fw-semibold mb-3 text-azul">Ao aprovar:</h5>
-                                <ul class="list-unstyled">
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <div>
+                                <h5 class="mb-3 font-semibold text-azul">Ao aprovar:</h5>
+                                <ul>
                                     <li class="mb-2">✓ Certifique-se de que o candidato tem disponibilidade</li>
                                     <li class="mb-2">✓ Verifique se entendeu bem a motivação</li>
                                     <li class="mb-2">✓ Deixe uma mensagem acolhedora</li>
                                     <li class="mb-2">✓ Explique os próximos passos</li>
                                 </ul>
                             </div>
-                            <div class="col-md-6">
-                                <h5 class="fw-semibold mb-3 text-azul">Ao rejeitar:</h5>
-                                <ul class="list-unstyled">
+                            <div>
+                                <h5 class="mb-3 font-semibold text-azul">Ao rejeitar:</h5>
+                                <ul>
                                     <li class="mb-2">✓ Seja respeitoso e construtivo</li>
                                     <li class="mb-2">✓ Explique os motivos da decisão</li>
                                     <li class="mb-2">✓ Sugira outras formas de participação</li>

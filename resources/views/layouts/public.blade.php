@@ -8,19 +8,10 @@
     <title>@yield('title', 'Paróquia São Paulo Apóstolo - Umuarama PR')</title>
     <meta name="description" content="@yield('description', 'Paróquia São Paulo Apóstolo em Umuarama - PR. Uma comunidade de fé, esperança e caridade, inspirada no exemplo do Apóstolo dos Gentios.')">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-    <!-- Google Fonts - Playfair Display & Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -29,66 +20,43 @@
     @stack('styles')
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-paroquia me-3">
+    <nav class="sp-topbar fixed inset-x-0 top-0 z-50 border-b border-[rgba(139,21,56,0.12)] bg-white/95 backdrop-blur">
+        <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+            <a href="{{ route('home') }}" class="flex items-center gap-3 no-underline">
+                <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-paroquia">
                 <div class="brand-text">
                     <span class="brand-titulo">Paróquia São Paulo Apóstolo</span>
-                    <small class="brand-subtitulo d-block">Diocese de Umuarama</small>
+                    <small class="brand-subtitulo block">Diocese de Umuarama</small>
                 </div>
             </a>
-            
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+
+            <button id="mobile-menu-toggle" type="button" class="inline-flex items-center justify-center rounded-md border border-[var(--sp-vermelho-manto)] p-2 text-[var(--sp-vermelho-manto)] lg:hidden" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menu">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
             </button>
-            
-            <div class="navbar-collapse collapse d-lg-flex" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                            <i class="bi bi-house me-1"></i>Início
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('masses') ? 'active' : '' }}" href="{{ route('masses') }}">
-                            <i class="bi bi-clock me-1"></i>Horários de Missa
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('groups') ? 'active' : '' }}" href="{{ route('groups') }}">
-                            <i class="bi bi-people me-1"></i>Pastorais
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('events') ? 'active' : '' }}" href="{{ route('events') }}">
-                            <i class="bi bi-calendar-event me-1"></i>Eventos
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}" href="{{ route('news') }}">
-                            <i class="bi bi-newspaper me-1"></i>Notícias
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contato">
-                            <i class="bi bi-envelope me-1"></i>Contato
-                        </a>
-                    </li>
+
+            <div id="navbarNav" class="hidden w-full flex-col gap-4 lg:flex lg:w-auto lg:flex-row lg:items-center lg:justify-end">
+                <ul class="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-2">
+                    <li><a class="sp-nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><span>🏠</span><span>Início</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('masses') ? 'active' : '' }}" href="{{ route('masses') }}"><span>⏰</span><span>Horários de Missa</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('groups') ? 'active' : '' }}" href="{{ route('groups') }}"><span>👥</span><span>Pastorais</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('events') ? 'active' : '' }}" href="{{ route('events') }}"><span>📅</span><span>Eventos</span></a></li>
+                    <li><a class="sp-nav-link {{ request()->routeIs('news') ? 'active' : '' }}" href="{{ route('news') }}"><span>📰</span><span>Notícias</span></a></li>
+                    <li><a class="sp-nav-link" href="#contato"><span>✉️</span><span>Contato</span></a></li>
                 </ul>
-                
-                <div class="d-flex gap-2">
-                    <a href="#doacoes" class="btn btn-warning">
-                        <i class="bi bi-heart me-1"></i>Apoiar a Paróquia
+
+                <div class="flex flex-col gap-2 lg:ml-3 lg:flex-row">
+                    <a href="#doacoes" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--sp-gold)] px-4 py-2 font-semibold text-[var(--sp-red-900)] transition hover:brightness-95">
+                        <span>❤️</span><span>Apoiar a Paróquia</span>
                     </a>
                     @auth
-                        <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="btn btn-primary">
-                            <i class="bi bi-gear me-1"></i>Admin
+                        <a href="{{ \App\Helpers\DashboardHelper::getDashboardRoute(auth()->user()->role) }}" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--sp-vermelho-manto)] px-4 py-2 font-semibold text-white transition hover:bg-[var(--sp-vermelho-bordô)]">
+                            <span>⚙️</span><span>Admin</span>
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-outline-light">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Painel
+                        <a href="{{ route('login') }}" class="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--sp-vermelho-manto)] px-4 py-2 font-semibold text-[var(--sp-vermelho-manto)] transition hover:bg-[var(--sp-vermelho-manto)] hover:text-white">
+                            <span>🔐</span><span>Painel</span>
                         </a>
                     @endauth
                 </div>
@@ -96,104 +64,71 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main>
         @yield('content')
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light mt-5">
-        <div class="container py-5">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="d-flex align-items-center gap-3 mb-3">
+    <footer class="mt-16 bg-[var(--sp-vermelho-manto)] text-white" id="contato">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div>
+                    <div class="mb-3 flex items-center gap-3">
                         <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-footer">
                         <div>
-                            <h5 class="mb-0">Paróquia São Paulo Apóstolo</h5>
-                            <small>Diocese de Umuarama - PR</small>
+                            <h5 class="mb-0 text-lg font-semibold text-white">Paróquia São Paulo Apóstolo</h5>
+                            <small class="text-white/80">Diocese de Umuarama - PR</small>
                         </div>
                     </div>
-                    <p class="mb-3">
-                        Uma comunidade de fé, esperança e caridade,
-                        inspirada no exemplo do Apóstolo dos Gentios.
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="text-light" title="Facebook da Paróquia" aria-label="Facebook">
-                            <i class="bi bi-facebook fs-4"></i>
-                        </a>
-                        <a href="#" class="text-light" title="Instagram da Paróquia" aria-label="Instagram">
-                            <i class="bi bi-instagram fs-4"></i>
-                        </a>
-                        <a href="#" class="text-light" title="Canal do YouTube" aria-label="YouTube">
-                            <i class="bi bi-youtube fs-4"></i>
-                        </a>
+                    <p class="mb-3 text-white/90">Uma comunidade de fé, esperança e caridade, inspirada no exemplo do Apóstolo dos Gentios.</p>
+                    <div class="flex gap-4 text-xl">
+                        <a href="#" class="text-white/90 hover:text-white" title="Facebook da Paróquia" aria-label="Facebook">📘</a>
+                        <a href="#" class="text-white/90 hover:text-white" title="Instagram da Paróquia" aria-label="Instagram">📸</a>
+                        <a href="#" class="text-white/90 hover:text-white" title="Canal do YouTube" aria-label="YouTube">▶️</a>
                     </div>
                 </div>
-                
-                <div class="col-lg-2 col-md-4">
-                    <h6 class="mb-3">Navegação</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{{ route('home') }}" class="text-light text-decoration-none">Início</a></li>
-                        <li class="mb-2"><a href="{{ route('masses') }}" class="text-light text-decoration-none">Horários</a></li>
-                        <li class="mb-2"><a href="{{ route('groups') }}" class="text-light text-decoration-none">Pastorais</a></li>
-                        <li class="mb-2"><a href="#eventos" class="text-light text-decoration-none">Eventos</a></li>
+
+                <div>
+                    <h6 class="mb-3 text-base font-semibold text-white">Navegação</h6>
+                    <ul class="space-y-2">
+                        <li><a href="{{ route('home') }}" class="text-white/90 hover:text-white">Início</a></li>
+                        <li><a href="{{ route('masses') }}" class="text-white/90 hover:text-white">Horários</a></li>
+                        <li><a href="{{ route('groups') }}" class="text-white/90 hover:text-white">Pastorais</a></li>
+                        <li><a href="{{ route('events') }}" class="text-white/90 hover:text-white">Eventos</a></li>
                     </ul>
                 </div>
-                
-                <div class="col-lg-3 col-md-4">
-                    <h6 class="mb-3">Contato</h6>
-                    <div class="d-flex align-items-start gap-2 mb-2">
-                        <i class="bi bi-geo-alt mt-1"></i>
-                        <span>
-                            Av. General Mascarenhas de Morais, 4969<br>
-                            Umuarama - PR
-                        </span>
-                    </div>
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <i class="bi bi-telephone"></i>
-                        <a href="tel:+5544305540464" class="text-light text-decoration-none">(44) 3055-4464</a>
-                    </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="bi bi-envelope"></i>
-                        <a href="mailto:secretaria.pspaulo@hotmail.com" class="text-light text-decoration-none">secretaria.pspaulo@hotmail.com</a>
+
+                <div>
+                    <h6 class="mb-3 text-base font-semibold text-white">Contato</h6>
+                    <div class="space-y-2 text-white/90">
+                        <div class="flex items-start gap-2"><span>📍</span><span>Av. General Mascarenhas de Morais, 4969<br>Umuarama - PR</span></div>
+                        <div class="flex items-center gap-2"><span>☎️</span><a href="tel:+5544305540464" class="text-white/90 hover:text-white">(44) 3055-4464</a></div>
+                        <div class="flex items-center gap-2"><span>✉️</span><a href="mailto:secretaria.pspaulo@hotmail.com" class="text-white/90 hover:text-white">secretaria.pspaulo@hotmail.com</a></div>
                     </div>
                 </div>
-                
-                <div class="col-lg-3 col-md-4">
-                    <h6 class="mb-3">Horários de Missa</h6>
-                    <div>
-                        <div class="mb-1"><strong>Domingo:</strong> 09:30 e 18:00</div>
-                        <div class="mb-1"><strong>Quarta:</strong> 20:00</div>
-                        <div class="mb-1"><strong>Sábado:</strong> 19:30</div>
+
+                <div>
+                    <h6 class="mb-3 text-base font-semibold text-white">Horários de Missa</h6>
+                    <div class="space-y-1 text-white/90">
+                        <div><strong>Domingo:</strong> 09:30 e 18:00</div>
+                        <div><strong>Quarta:</strong> 20:00</div>
+                        <div><strong>Sábado:</strong> 19:30</div>
                     </div>
                 </div>
             </div>
-            
-            <hr class="my-4">
-            
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <small>
-                        © 2025 Paróquia São Paulo Apóstolo. Todos os direitos reservados.
-                    </small>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <small>
-                        Diocese de Umuarama - PR
-                    </small>
-                </div>
+
+            <hr class="my-8 border-white/30">
+
+            <div class="flex flex-col gap-2 text-sm text-white/90 md:flex-row md:items-center md:justify-between">
+                <small>© 2025 Paróquia São Paulo Apóstolo. Todos os direitos reservados.</small>
+                <small>Diocese de Umuarama - PR</small>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Lucide Icons Initialization -->
     <script>
         lucide.createIcons();
     </script>
-    
+
     @stack('scripts')
 </body>
 </html>

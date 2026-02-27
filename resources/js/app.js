@@ -1,5 +1,3 @@
-import './bootstrap';
-
 // ==========================================
 // FUNCIONALIDADES INTERATIVAS DA PARÓQUIA
 // ==========================================
@@ -7,7 +5,7 @@ import './bootstrap';
 document.addEventListener('DOMContentLoaded', function() {
     
     // Navbar scroll effect
-    const navbar = document.querySelector('.navbar');
+    const navbar = document.querySelector('.sp-topbar');
     if (navbar) {
         window.addEventListener('scroll', function() {
             if (window.scrollY > 50) {
@@ -59,16 +57,28 @@ document.addEventListener('DOMContentLoaded', function() {
         lucide.createIcons();
     }
     
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const navbarCollapse = document.getElementById('navbarNav');
+
+    if (mobileToggle && navbarCollapse) {
+        mobileToggle.addEventListener('click', () => {
+            const isHidden = navbarCollapse.classList.contains('hidden');
+            navbarCollapse.classList.toggle('hidden');
+            mobileToggle.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        });
+    }
+
     // Auto-close mobile menu on link click
-    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-    const navbarCollapse = document.querySelector('.navbar-collapse');
+    const navLinks = document.querySelectorAll('#navbarNav a');
     
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                    toggle: true
-                });
+            if (navbarCollapse && !navbarCollapse.classList.contains('hidden') && window.innerWidth < 1024) {
+                navbarCollapse.classList.add('hidden');
+                if (mobileToggle) {
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                }
             }
         });
     });
@@ -156,35 +166,29 @@ function atualizarProximaMissa() {
         });
         
         elemento.innerHTML = `
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <div class="proxima-missa-item">
-                        <i class="bi bi-calendar3"></i>
-                        <div>
-                            <strong>${diasSemana[proximaMissa.dia]}</strong>
-                            <br>
-                            <small>${dataFormatada}</small>
-                        </div>
+            <div class="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
+                <div class="proxima-missa-item">
+                    <span>📅</span>
+                    <div>
+                        <strong>${diasSemana[proximaMissa.dia]}</strong>
+                        <br>
+                        <small>${dataFormatada}</small>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="proxima-missa-item">
-                        <i class="bi bi-clock"></i>
-                        <div>
-                            <strong>${proximaMissa.horario}</strong>
-                            <br>
-                            <small>Horário</small>
-                        </div>
+                <div class="proxima-missa-item">
+                    <span>⏰</span>
+                    <div>
+                        <strong>${proximaMissa.horario}</strong>
+                        <br>
+                        <small>Horário</small>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="proxima-missa-item">
-                        <i class="bi bi-geo-alt"></i>
-                        <div>
-                            <strong>Igreja Matriz</strong>
-                            <br>
-                            <small>Local</small>
-                        </div>
+                <div class="proxima-missa-item">
+                    <span>📍</span>
+                    <div>
+                        <strong>Igreja Matriz</strong>
+                        <br>
+                        <small>Local</small>
                     </div>
                 </div>
             </div>

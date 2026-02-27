@@ -21,7 +21,8 @@
         gap: var(--space-4);
     }
     
-    .btn {
+    .sp-action-primary,
+    .sp-action-secondary {
         padding: var(--space-3) var(--space-4);
         border-radius: var(--radius-md);
         text-decoration: none;
@@ -32,15 +33,26 @@
         transition: all var(--duration-200) ease;
     }
     
-    .btn-primary {
+    .sp-action-primary {
         background: var(--sp-teal);
         color: var(--sp-white);
     }
     
-    .btn-primary:hover {
+    .sp-action-primary:hover {
         background: var(--sp-teal-dark);
         text-decoration: none;
         color: var(--sp-white);
+    }
+
+    .sp-action-secondary {
+        background: var(--sp-gray-100);
+        color: var(--sp-gray-700);
+    }
+
+    .sp-action-secondary:hover {
+        background: var(--sp-gray-200);
+        text-decoration: none;
+        color: var(--sp-gray-700);
     }
     
     .news-grid {
@@ -116,17 +128,6 @@
         gap: var(--space-2);
     }
     
-    .btn-secondary {
-        background: var(--sp-gray-100);
-        color: var(--sp-gray-700);
-    }
-    
-    .btn-secondary:hover {
-        background: var(--sp-gray-200);
-        text-decoration: none;
-        color: var(--sp-gray-700);
-    }
-    
     .empty-state {
         text-align: center;
         padding: var(--space-8);
@@ -157,7 +158,7 @@
 
 <div class="news-actions">
     <h2 style="margin: 0; color: var(--sp-teal-dark);">Lista de Notícias</h2>
-    <a href="{{ route('admin.coordinator.news.create') }}" class="btn btn-primary">
+    <a href="{{ route('admin.coordinator.news.create') }}" class="sp-action-primary">
         ➕ Nova Notícia
     </a>
 </div>
@@ -184,15 +185,15 @@
             </div>
             
             <div class="news-actions-card">
-                <a href="{{ route('admin.coordinator.news.edit', $item) }}" class="btn btn-secondary">
+                <a href="{{ route('admin.coordinator.news.edit', $item) }}" class="sp-action-secondary">
                     ✏️ Editar
                 </a>
                 @if($item->status === 'published')
-                    <span class="btn btn-secondary" style="opacity: 0.6; cursor: not-allowed;">
+                    <span class="sp-action-secondary" style="opacity: 0.6; cursor: not-allowed;">
                         👁️ Publicada
                     </span>
                 @else
-                    <span class="btn btn-secondary" style="opacity: 0.6; cursor: not-allowed;">
+                    <span class="sp-action-secondary" style="opacity: 0.6; cursor: not-allowed;">
                         📝 Rascunho
                     </span>
                 @endif
@@ -203,7 +204,7 @@
             <div class="empty-icon">📰</div>
             <h3>Nenhuma notícia encontrada</h3>
             <p>Você ainda não criou nenhuma notícia. Clique no botão acima para criar sua primeira notícia!</p>
-            <a href="{{ route('admin.coordinator.news.create') }}" class="btn btn-primary" style="margin-top: var(--space-4);">
+            <a href="{{ route('admin.coordinator.news.create') }}" class="sp-action-primary" style="margin-top: var(--space-4);">
                 ➕ Criar Primeira Notícia
             </a>
         </div>

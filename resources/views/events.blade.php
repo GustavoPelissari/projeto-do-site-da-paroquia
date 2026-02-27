@@ -10,27 +10,27 @@
     description="Celebrações especiais, encontros e atividades para toda a comunidade." />
 
 <section class="section-paroquia">
-    <div class="container">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         @if($events->count() > 0)
             <x-public.section-header
                 title="Próximos Eventos"
                 subtitle="Participe da vida pastoral da nossa comunidade através dos eventos programados." />
 
-            <div class="row g-4">
+            <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 @foreach($events as $event)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card-paroquia h-100">
+                    <div>
+                        <div class="card-paroquia h-full">
                             <div class="card-header-paroquia">
                                 <h5 class="mb-2">{{ $event->title }}</h5>
-                                <small class="text-muted d-block">
+                                <small class="block text-gray-600">
                                     <i data-lucide="calendar-days" class="icon-paroquia"></i>
                                     {{ $event->start_date->format('d/m/Y H:i') }}
                                 </small>
                             </div>
-                            <div class="card-body d-flex flex-column">
-                                <p class="text-muted flex-grow-1">{{ Str::limit(strip_tags($event->description ?? ''), 140) }}</p>
+                            <div class="card-body flex flex-col">
+                                <p class="grow text-gray-600">{{ Str::limit(strip_tags($event->description ?? ''), 140) }}</p>
                                 @if($event->location)
-                                    <p class="mb-0 text-muted"><i data-lucide="map-pin" class="icon-paroquia"></i>{{ $event->location }}</p>
+                                    <p class="mb-0 text-gray-600"><i data-lucide="map-pin" class="icon-paroquia"></i>{{ $event->location }}</p>
                                 @endif
                             </div>
                         </div>
@@ -39,7 +39,7 @@
             </div>
 
             @if($events->hasPages())
-                <div class="d-flex justify-content-center mt-5">
+                <div class="mt-5 flex justify-center">
                     {{ $events->links() }}
                 </div>
             @endif

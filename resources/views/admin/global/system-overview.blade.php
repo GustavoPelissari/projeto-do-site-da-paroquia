@@ -88,7 +88,8 @@
         flex-wrap: wrap;
     }
     
-    .btn {
+    .sp-action-primary,
+    .sp-action-secondary {
         padding: var(--space-3) var(--space-4);
         border-radius: var(--radius-md);
         text-decoration: none;
@@ -99,23 +100,23 @@
         transition: all var(--duration-200) ease;
     }
     
-    .btn-primary {
+    .sp-action-primary {
         background: var(--sp-red);
         color: var(--sp-white);
     }
     
-    .btn-primary:hover {
+    .sp-action-primary:hover {
         background: var(--sp-red-dark);
         text-decoration: none;
         color: var(--sp-white);
     }
     
-    .btn-secondary {
+    .sp-action-secondary {
         background: var(--sp-gray-100);
         color: var(--sp-gray-700);
     }
     
-    .btn-secondary:hover {
+    .sp-action-secondary:hover {
         background: var(--sp-gray-200);
         text-decoration: none;
         color: var(--sp-gray-700);
@@ -235,11 +236,11 @@
                 Ações de Manutenção
             </h2>
             <div class="action-buttons">
-                <button class="btn btn-primary">🧹 Limpar Cache</button>
-                <button class="btn btn-primary">🔄 Recarregar Configurações</button>
-                <button class="btn btn-secondary">📊 Relatório de Uso</button>
-                <button class="btn btn-secondary">🛠️ Modo de Manutenção</button>
-                <button class="btn btn-secondary">💾 Backup Manual</button>
+                <button class="sp-action-primary">🧹 Limpar Cache</button>
+                <button class="sp-action-primary">🔄 Recarregar Configurações</button>
+                <button class="sp-action-secondary">📊 Relatório de Uso</button>
+                <button class="sp-action-secondary">🛠️ Modo de Manutenção</button>
+                <button class="sp-action-secondary">💾 Backup Manual</button>
             </div>
         </div>
         

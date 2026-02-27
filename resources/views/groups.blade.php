@@ -10,8 +10,8 @@
     description="Seguindo o exemplo missionário de São Paulo Apóstolo, cada pastoral tem sua missão especial na construção do Reino de Deus." />
 
 <section class="section-paroquia section-bg-bege">
-    <div class="container">
-        <div class="d-flex flex-wrap justify-content-center gap-2" id="category-filters">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center gap-2" id="category-filters">
             <button class="btn-paroquia btn-outline-paroquia active" data-category="all"><i data-lucide="grid-3x3" class="icon-paroquia"></i>Todas</button>
             <button class="btn-paroquia btn-outline-paroquia" data-category="catequese"><i data-lucide="graduation-cap" class="icon-paroquia"></i>Catequese</button>
             <button class="btn-paroquia btn-outline-paroquia" data-category="liturgia"><i data-lucide="church" class="icon-paroquia"></i>Liturgia</button>
@@ -22,16 +22,16 @@
 </section>
 
 <section class="section-paroquia">
-    <div class="container">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         @if($groups->count() > 0)
             <x-public.section-header
                 title="Nossos Grupos Ativos"
                 subtitle="Cada grupo tem sua missão especial na construção do Reino de Deus. Encontre aquele que mais se alinha com seu carisma e chamado." />
 
-            <div class="row g-4" id="groups-container">
+            <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" id="groups-container">
                 @foreach($groups as $group)
-                    <div class="col-lg-4 col-md-6 group-card-item" data-category="{{ $group->category ?? 'geral' }}">
-                        <div class="card-paroquia h-100">
+                    <div class="group-card-item" data-category="{{ $group->category ?? 'geral' }}">
+                        <div class="card-paroquia h-full">
                             <div class="card-header-paroquia text-center">
                                 <div class="mb-3">
                                     @switch($group->category ?? 'geral')
@@ -43,13 +43,13 @@
                                     @endswitch
                                 </div>
                                 <h4 class="mb-0">{{ $group->name }}</h4>
-                                <small class="text-muted text-uppercase">{{ ucfirst($group->category ?? 'Pastoral') }}</small>
+                                <small class="text-gray-600 uppercase">{{ ucfirst($group->category ?? 'Pastoral') }}</small>
                             </div>
 
-                            <div class="card-body d-flex flex-column">
-                                <p class="text-muted flex-grow-1">{{ $group->description ?? 'Grupo ativo da nossa paróquia.' }}</p>
+                            <div class="card-body flex flex-col">
+                                <p class="grow text-gray-600">{{ $group->description ?? 'Grupo ativo da nossa paróquia.' }}</p>
                                 <div class="public-meta-box mb-3 text-center">
-                                    <small class="text-muted d-block">Coordenador(a):</small>
+                                    <small class="block text-gray-600">Coordenador(a):</small>
                                     <strong>{{ $group->coordinator->name ?? 'A definir' }}</strong>
                                 </div>
                                 <div class="text-center mt-auto">
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             groupCards.forEach((card) => {
                 const visible = category === 'all' || card.dataset.category === category;
-                card.classList.toggle('d-none', !visible);
+                card.classList.toggle('hidden', !visible);
             });
         });
     });

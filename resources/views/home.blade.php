@@ -7,20 +7,19 @@
 <!-- Hero Section -->
 <section class="hero-paroquia animate-on-scroll">
     <div class="hero-content">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-8">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-4xl text-center">
                     <h1 class="hero-title mb-4">
                         Bem-vindos à nossa paroquia
                     </h1>
-                    <p class="lead hero-subtitle mb-4">
+                    <p class="hero-subtitle mb-4 text-xl">
                         Igreja: lugar onde a cidade encontra a graça
                     </p>
                     <p class="hero-description mb-5">
                         Somos uma comunidade católica inspirada no exemplo de São Paulo Apóstolo, 
                         dedicada a evangelizar, acolher e servir com amor e esperança.
                     </p>
-                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <div class="flex flex-col justify-center gap-3 sm:flex-row">
                         <a href="{{ route('masses') }}" class="btn-hero btn-hero-primary">
                             <i data-lucide="clock"></i>
                             Ver Horários de Missa
@@ -30,7 +29,6 @@
                             Próxima Celebração
                         </a>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -38,9 +36,8 @@
 
 <!-- Próxima Missa -->
 <section id="proxima-missa" class="section-paroquia animate-on-scroll">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl">
                 <div class="card-paroquia text-center p-4">
                     <div class="card-header-paroquia mb-4">
                         <h3 class="mb-0">
@@ -50,10 +47,10 @@
                     </div>
                     <div id="proxima-missa-info">
                         <!-- Conteúdo será atualizado dinamicamente pelo JavaScript -->
-                        <div class="row text-center">
-                            <div class="col-md-4">
+                        <div class="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
+                            <div>
                                 <div class="proxima-missa-item">
-                                    <i class="bi bi-calendar3"></i>
+                                    <span>📅</span>
                                     <div>
                                         <strong>Carregando...</strong>
                                         <br>
@@ -61,9 +58,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div>
                                 <div class="proxima-missa-item">
-                                    <i class="bi bi-clock"></i>
+                                    <span>⏰</span>
                                     <div>
                                         <strong>--:--</strong>
                                         <br>
@@ -71,9 +68,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div>
                                 <div class="proxima-missa-item">
-                                    <i class="bi bi-geo-alt"></i>
+                                    <span>📍</span>
                                     <div>
                                         <strong>Igreja Matriz</strong>
                                         <br>
@@ -90,58 +87,55 @@
                         </a>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>
 
 <!-- Nossa Missão -->
 <section class="section-paroquia section-bg-bege animate-on-scroll">
-    <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-            <div class="col-lg-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-10 max-w-4xl text-center">
                 <h2 class="mb-4">Nossa Missão</h2>
-                <p class="lead text-muted">
+                <p class="text-lg text-gray-600">
                     Inspirados no exemplo de São Paulo Apóstolo, somos uma comunidade que 
                     acolhe, evangeliza e serve com amor fraterno.
                 </p>
-            </div>
         </div>
         
-        <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="card-paroquia h-100 text-center p-4">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div>
+                <div class="card-paroquia h-full text-center p-4">
                     <div class="mb-4">
                         <i data-lucide="book-open" class="icon-lg text-vermelho mb-3"></i>
                         <h4>Palavra de Deus</h4>
                     </div>
-                    <p class="text-muted">
+                    <p class="text-gray-600">
                         Aprofundamos nossa fé através do estudo das Escrituras e da tradição apostólica, 
                         seguindo o exemplo de São Paulo em suas cartas às primeiras comunidades.
                     </p>
                 </div>
             </div>
             
-            <div class="col-lg-4">
-                <div class="card-paroquia h-100 text-center p-4">
+            <div>
+                <div class="card-paroquia h-full text-center p-4">
                     <div class="mb-4">
                         <i data-lucide="heart" class="icon-lg text-vermelho mb-3"></i>
                         <h4>Caridade</h4>
                     </div>
-                    <p class="text-muted">
+                    <p class="text-gray-600">
                         Praticamos o amor ao próximo através de obras de misericórdia e serviço 
                         aos mais necessitados de nossa comunidade e além dela.
                     </p>
                 </div>
             </div>
             
-            <div class="col-lg-4">
-                <div class="card-paroquia h-100 text-center p-4">
+            <div>
+                <div class="card-paroquia h-full text-center p-4">
                     <div class="mb-4">
                         <i data-lucide="users" class="icon-lg text-vermelho mb-3"></i>
                         <h4>Comunhão</h4>
                     </div>
-                    <p class="text-muted">
+                    <p class="text-gray-600">
                         Vivemos em fraternidade, compartilhando a alegria do Evangelho e 
                         crescendo juntos na caminhada da fé como uma verdadeira família.
                     </p>
@@ -154,20 +148,18 @@
 <!-- Pastorais em Destaque -->
 @if(isset($groups) && $groups->count() > 0)
 <section class="section-paroquia animate-on-scroll">
-    <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-            <div class="col-lg-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-10 max-w-4xl text-center">
                 <h2 class="mb-4">Pastorais e Movimentos</h2>
-                <p class="lead text-muted">
+                <p class="text-lg text-gray-600">
                     Encontre seu lugar de serviço e crescimento espiritual em nossa comunidade
                 </p>
-            </div>
         </div>
         
-        <div class="row g-4">
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             @foreach($groups->take(6) as $group)
-            <div class="col-lg-4 col-md-6">
-                <div class="card-paroquia h-100">
+            <div>
+                <div class="card-paroquia h-full">
                     <div class="card-header-paroquia text-center">
                         <div class="mb-3">
                             <i data-lucide="users" class="icon-lg text-vermelho"></i>
@@ -175,7 +167,7 @@
                         <h5 class="mb-0">{{ $group->name }}</h5>
                     </div>
                     <div class="card-body">
-                        <p class="text-muted mb-3">{{ Str::limit($group->description ?? 'Grupo ativo da nossa paróquia', 100) }}</p>
+                        <p class="mb-3 text-gray-600">{{ Str::limit($group->description ?? 'Grupo ativo da nossa paróquia', 100) }}</p>
                         
                         <div class="text-center">
                             @auth
@@ -210,26 +202,24 @@
 <!-- Horários de Missa -->
 @if(isset($masses) && $masses->count() > 0)
 <section class="section-paroquia section-bg-verde animate-on-scroll">
-    <div class="container">
-        <div class="row justify-content-center text-center mb-5">
-            <div class="col-lg-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto mb-10 max-w-4xl text-center">
                 <h2 class="mb-4">Horários de Missas</h2>
-                <p class="lead text-muted">
+                <p class="text-lg text-gray-600">
                     Venha participar de nossas celebrações eucarísticas durante a semana
                 </p>
-            </div>
         </div>
         
-        <div class="row g-4 justify-content-center">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             @foreach($masses->take(6) as $mass)
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div>
                 <div class="card-paroquia text-center p-4">
                     <h5 class="text-vermelho mb-3">{{ ucfirst($mass->day_of_week) }}</h5>
                     <div class="mb-3">
                         <i data-lucide="clock" class="icon-lg text-dourado"></i>
                     </div>
                     <h4 class="mb-2">{{ $mass->time->format('H:i') }}</h4>
-                    <small class="text-muted">{{ $mass->type ?? 'Missa' }}</small>
+                    <small class="text-gray-600">{{ $mass->type ?? 'Missa' }}</small>
                 </div>
             </div>
             @endforeach
@@ -247,18 +237,17 @@
 
 <!-- Chamada Final -->
 <section class="section-paroquia animate-on-scroll">
-    <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center">
                 <div class="card-paroquia p-5">
                     <h3 class="mb-4 text-vermelho">Seja Parte da Nossa Família</h3>
-                    <p class="lead text-muted mb-4">
+                    <p class="mb-4 text-lg text-gray-600">
                         "Assim como o corpo é um só e tem muitos membros, e todos os membros do corpo, 
                         embora sejam muitos, formam um só corpo, assim também é Cristo."
                     </p>
-                    <p class="text-muted mb-4"><em>1 Coríntios 12:12</em></p>
+                    <p class="mb-4 text-gray-600"><em>1 Coríntios 12:12</em></p>
                     
-                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <div class="flex flex-col justify-center gap-3 sm:flex-row">
                         @guest
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="btn-paroquia btn-primary-paroquia">
@@ -278,7 +267,6 @@
                         @endguest
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>
