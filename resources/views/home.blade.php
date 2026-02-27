@@ -10,13 +10,13 @@
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-8">
-                    <h1 class="mb-4" style="font-size: 3rem; font-weight: 700; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+                    <h1 class="hero-title mb-4">
                         Bem-vindos à nossa paroquia
                     </h1>
-                    <p class="lead mb-4" style="font-size: 1.25rem; opacity: 0.95; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+                    <p class="lead hero-subtitle mb-4">
                         Igreja: lugar onde a cidade encontra a graça
                     </p>
-                    <p class="mb-5" style="font-size: 1.1rem; opacity: 0.9; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">
+                    <p class="hero-description mb-5">
                         Somos uma comunidade católica inspirada no exemplo de São Paulo Apóstolo, 
                         dedicada a evangelizar, acolher e servir com amor e esperança.
                     </p>
