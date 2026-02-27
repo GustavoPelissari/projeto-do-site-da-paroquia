@@ -53,6 +53,7 @@ body {
     background: #ffffff;
     min-height: 100vh;
     padding-top: 85px;
+    overflow-x: hidden;
 }
 
 /* ========================================== */
@@ -253,7 +254,7 @@ h3 {
 
 .hero-paroquia {
     position: relative;
-    min-height: 100vh;
+    min-height: calc(100vh - 85px);
     display: flex;
     align-items: center;
     background: 
@@ -282,7 +283,18 @@ h3 {
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 2rem 0;
+    width: 100%;
+    padding: clamp(3rem, 8vw, 6rem) 0;
+}
+
+.hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2.4vw, 1.45rem) !important;
+    line-height: 1.5;
 }
 
 .hero-paroquia h1 {
@@ -312,6 +324,12 @@ h3 {
     margin-right: auto;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
     animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.hero-description {
+    max-width: 44rem;
+    margin-inline: auto;
+    line-height: 1.7;
 }
 
 /* ========================================== */
@@ -604,12 +622,113 @@ footer a:hover {
 }
 
 /* ========================================== */
+/*              AUTH (LOGIN)                  */
+/* ========================================== */
+
+.auth-page-section {
+    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+    background: linear-gradient(180deg, #f8f7f4 0%, #fff 55%, #f8f7f4 100%);
+}
+
+.auth-card {
+    background: #fff;
+    border-radius: 1rem;
+    border: 1px solid rgba(139, 21, 56, 0.12);
+    box-shadow: 0 15px 40px rgba(139, 21, 56, 0.12);
+    overflow: hidden;
+}
+
+.auth-card-header {
+    padding: 2rem 2rem 1rem;
+}
+
+.auth-card-body {
+    padding: 0 2rem 2rem;
+}
+
+.auth-title {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    color: var(--sp-vermelho-manto);
+    text-shadow: none;
+}
+
+.auth-subtitle {
+    color: #6b7280;
+}
+
+.auth-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.auth-label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.auth-input {
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.65rem;
+    border: 1px solid #d1d5db;
+}
+
+.auth-input:focus {
+    border-color: var(--sp-vermelho-manto);
+    box-shadow: 0 0 0 0.2rem rgba(139, 21, 56, 0.15);
+}
+
+.auth-remember {
+    margin: 0.25rem 0;
+}
+
+.auth-submit-btn {
+    justify-content: center;
+    width: 100%;
+}
+
+.auth-links {
+    margin-top: 0.75rem;
+}
+
+.auth-inline-link {
+    color: var(--sp-vermelho-manto);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.auth-inline-link:hover {
+    color: var(--sp-vermelho-bordô);
+    text-decoration: underline;
+}
+
+.auth-register-block {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+}
+
+.auth-register-btn {
+    width: 100%;
+    border-radius: 999px;
+    padding: 0.7rem 1rem;
+    border-color: var(--sp-vermelho-manto);
+    color: var(--sp-vermelho-manto);
+}
+
+.auth-register-btn:hover {
+    background: var(--sp-vermelho-manto);
+    color: #fff;
+    border-color: var(--sp-vermelho-manto);
+}
+
+/* ========================================== */
 /*              RESPONSIVIDADE                */
 /* ========================================== */
 
 @media (max-width: 768px) {
     .hero-paroquia {
-        min-height: 80vh;
+        min-height: calc(100vh - 70px);
     }
     
     .section-paroquia {
@@ -659,6 +778,12 @@ footer a:hover {
     .btn-hero {
         width: 100%;
         margin-bottom: 1rem;
+    }
+
+    .auth-card-header,
+    .auth-card-body {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
 }
 
