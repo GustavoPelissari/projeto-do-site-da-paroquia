@@ -7,7 +7,7 @@
 <!-- Hero Section -->
 <section class="hero-paroquia animate-on-scroll">
     <div class="hero-content">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="sp-page-container">
             <div class="mx-auto max-w-4xl text-center">
                     <h1 class="hero-title mb-4">
                         Bem-vindos à nossa paroquia
@@ -36,7 +36,7 @@
 
 <!-- Próxima Missa -->
 <section id="proxima-missa" class="section-paroquia animate-on-scroll">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <div class="mx-auto max-w-4xl">
                 <div class="card-paroquia text-center p-4">
                     <div class="card-header-paroquia mb-4">
@@ -93,7 +93,7 @@
 
 <!-- Nossa Missão -->
 <section class="section-paroquia section-bg-bege animate-on-scroll">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <div class="mx-auto mb-10 max-w-4xl text-center">
                 <h2 class="mb-4">Nossa Missão</h2>
                 <p class="text-lg text-gray-600">
@@ -148,7 +148,7 @@
 <!-- Pastorais em Destaque -->
 @if(isset($groups) && $groups->count() > 0)
 <section class="section-paroquia animate-on-scroll">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <div class="mx-auto mb-10 max-w-4xl text-center">
                 <h2 class="mb-4">Pastorais e Movimentos</h2>
                 <p class="text-lg text-gray-600">
@@ -202,7 +202,7 @@
 <!-- Horários de Missa -->
 @if(isset($masses) && $masses->count() > 0)
 <section class="section-paroquia section-bg-verde animate-on-scroll">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <div class="mx-auto mb-10 max-w-4xl text-center">
                 <h2 class="mb-4">Horários de Missas</h2>
                 <p class="text-lg text-gray-600">
@@ -237,7 +237,7 @@
 
 <!-- Chamada Final -->
 <section class="section-paroquia animate-on-scroll">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <div class="mx-auto max-w-4xl text-center">
                 <div class="card-paroquia p-5">
                     <h3 class="mb-4 text-vermelho">Seja Parte da Nossa Família</h3>

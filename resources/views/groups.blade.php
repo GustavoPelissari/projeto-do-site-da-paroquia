@@ -10,7 +10,7 @@
     description="Seguindo o exemplo missionário de São Paulo Apóstolo, cada pastoral tem sua missão especial na construção do Reino de Deus." />
 
 <section class="section-paroquia section-bg-bege">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <div class="flex flex-wrap justify-center gap-2" id="category-filters">
             <button class="btn-paroquia btn-outline-paroquia active" data-category="all"><i data-lucide="grid-3x3" class="icon-paroquia"></i>Todas</button>
             <button class="btn-paroquia btn-outline-paroquia" data-category="catequese"><i data-lucide="graduation-cap" class="icon-paroquia"></i>Catequese</button>
@@ -22,7 +22,7 @@
 </section>
 
 <section class="section-paroquia">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         @if($groups->count() > 0)
             <x-public.section-header
                 title="Nossos Grupos Ativos"

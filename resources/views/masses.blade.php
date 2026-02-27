@@ -10,7 +10,7 @@
     description='"Fazei isto em memória de mim" - Venha participar da mesa eucarística e fortalecer sua fé em comunidade.' />
 
 <section class="section-paroquia">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="sp-page-container">
         <x-public.section-header
             title="Horários Regulares"
             subtitle="Nossas celebrações semanais estão organizadas para atender toda a comunidade." />
@@ -20,7 +20,7 @@
                 @foreach($masses as $mass)
                     <div>
                         <div class="card-paroquia h-full p-4 text-center">
-                            <h5 class="text-vermelho mb-3 text-capitalize">{{ $mass->day_of_week }}</h5>
+                            <h5 class="text-vermelho mb-3 capitalize">{{ $mass->day_of_week }}</h5>
                             <i data-lucide="clock" class="icon-lg text-dourado mb-3"></i>
                             <h4 class="mb-2">{{ $mass->time->format('H:i') }}</h4>
                             <small class="text-gray-600">{{ $mass->type ?? 'Missa' }}</small>

@@ -21,12 +21,12 @@
 </head>
 <body>
     <nav class="sp-topbar fixed inset-x-0 top-0 z-50 border-b border-[rgba(139,21,56,0.12)] bg-white/95 backdrop-blur">
-        <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-            <a href="{{ route('home') }}" class="flex items-center gap-3 no-underline">
+        <div class="sp-page-container flex items-center gap-4 py-3">
+            <a href="{{ route('home') }}" class="flex min-w-0 items-center gap-3 no-underline">
                 <img src="{{ asset('images/sao-paulo-logo.png') }}" alt="Logo São Paulo Apóstolo" class="logo-paroquia">
-                <div class="brand-text">
+                <div class="brand-text min-w-0">
                     <span class="brand-titulo">Paróquia São Paulo Apóstolo</span>
-                    <small class="brand-subtitulo block">Diocese de Umuarama</small>
+                    <small class="brand-subtitulo block">Diocese de Morama</small>
                 </div>
             </a>
 
@@ -46,7 +46,7 @@
                     <li><a class="sp-nav-link" href="#contato"><i data-lucide="mail" class="sp-nav-icon" aria-hidden="true"></i><span>Contato</span></a></li>
                 </ul>
 
-                <div class="flex flex-col gap-2 lg:ml-3 lg:flex-row">
+                <div class="flex flex-col gap-2 lg:ml-4 lg:flex-row">
                     <a href="#doacoes" class="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--sp-gold)] px-4 py-2 font-semibold text-[var(--sp-red-900)] transition hover:brightness-95">
                         <i data-lucide="heart" class="sp-nav-icon" aria-hidden="true"></i><span>Apoiar a Paróquia</span>
                     </a>
@@ -69,7 +69,7 @@
     </main>
 
     <footer class="mt-16 bg-[var(--sp-vermelho-manto)] text-white" id="contato">
-        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="sp-page-container py-12">
             <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <div>
                     <div class="mb-3 flex items-center gap-3">
