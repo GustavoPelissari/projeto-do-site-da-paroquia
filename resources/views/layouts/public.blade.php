@@ -36,8 +36,8 @@
                 </svg>
             </button>
 
-            <div id="navbarNav" class="hidden w-full flex-col gap-4 lg:ml-6 lg:flex lg:w-auto lg:flex-row lg:items-center">
-                <ul class="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-1">
+            <div id="navbarNav" class="hidden w-full flex-col gap-4 lg:flex lg:w-auto lg:flex-row lg:items-center lg:justify-end">
+                <ul class="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-2">
                     <li><a class="sp-nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}"><i data-lucide="house" class="sp-nav-icon" aria-hidden="true"></i><span>Início</span></a></li>
                     <li><a class="sp-nav-link {{ request()->routeIs('masses') ? 'active' : '' }}" href="{{ route('masses') }}"><i data-lucide="clock-3" class="sp-nav-icon" aria-hidden="true"></i><span>Horários de Missa</span></a></li>
                     <li><a class="sp-nav-link {{ request()->routeIs('groups') ? 'active' : '' }}" href="{{ route('groups') }}"><i data-lucide="users" class="sp-nav-icon" aria-hidden="true"></i><span>Pastorais</span></a></li>
